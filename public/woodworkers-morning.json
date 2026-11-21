@@ -1,0 +1,850 @@
+{
+  "type": "yohaku-reform-save",
+  "version": 1,
+  "slot": {
+    "id": "1yt8m11-11wskqo-7d4pqx",
+    "name": "カヤ・スイの暮らし",
+    "game": {
+      "version": 1,
+      "actors": [
+        {
+          "person": {
+            "id": "person-1",
+            "name": "カヤ",
+            "appearance": {
+              "face": "round",
+              "skin": "peach",
+              "hair": "crop",
+              "hairColor": "ink",
+              "age": "young",
+              "build": "medium",
+              "eyes": "soft",
+              "mark": "scar",
+              "clothing": "wrap",
+              "dye": "rust"
+            },
+            "personality": "quiet",
+            "body": "sturdy",
+            "background": "artisan",
+            "likes": "cook",
+            "dislikes": "wood",
+            "talent": "cook",
+            "skills": {
+              "wood": 7,
+              "cook": 1,
+              "care": 1,
+              "trade": 1
+            }
+          },
+          "location": "forest",
+          "room": "living",
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "reason": "朝を迎え、最初の予定を待っています。",
+          "task": null,
+          "mood": 68,
+          "injury": 0,
+          "memories": [],
+          "relations": {
+            "person-2": {
+              "kind": "friend",
+              "trust": 28,
+              "affection": 8
+            }
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "experience": 0,
+          "level": 1,
+          "specialty": null,
+          "priority": null,
+          "cargo": {
+            "wood": 0,
+            "food": 0,
+            "ingredients": 0,
+            "coins": 0
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "strainUntil": 0,
+          "nextShift": 0,
+          "practicedOn": 0,
+          "danger": false
+        },
+        {
+          "person": {
+            "id": "person-2",
+            "name": "スイ",
+            "appearance": {
+              "face": "oval",
+              "skin": "peach",
+              "hair": "knot",
+              "hairColor": "ink",
+              "age": "adult",
+              "build": "broad",
+              "eyes": "straight",
+              "mark": "freckles",
+              "clothing": "wrap",
+              "dye": "flax"
+            },
+            "personality": "curious",
+            "body": "sturdy",
+            "background": "local",
+            "likes": "wood",
+            "dislikes": null,
+            "talent": "wood",
+            "skills": {
+              "wood": 1,
+              "cook": 2,
+              "care": 1,
+              "trade": 1
+            }
+          },
+          "location": "forest",
+          "room": "living",
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "reason": "朝を迎え、最初の予定を待っています。",
+          "task": null,
+          "mood": 68,
+          "injury": 0,
+          "memories": [],
+          "relations": {
+            "person-1": {
+              "kind": "friend",
+              "trust": 28,
+              "affection": 8
+            }
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "experience": 0,
+          "level": 1,
+          "specialty": null,
+          "priority": null,
+          "cargo": {
+            "wood": 0,
+            "food": 0,
+            "ingredients": 0,
+            "coins": 0
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "strainUntil": 0,
+          "nextShift": 0,
+          "practicedOn": 0,
+          "danger": false
+        }
+      ],
+      "world": {
+        "config": {
+          "seed": 5317,
+          "climate": "mild",
+          "woods": 2,
+          "roads": 2,
+          "river": "river",
+          "townName": "白露の町",
+          "millName": "水車の里",
+          "pinnedTownSeed": null,
+          "rules": [
+            {
+              "id": "apothecary",
+              "name": "北の薬師組合",
+              "npc": "ナギ",
+              "kind": "guild",
+              "required": true,
+              "preference": "forest",
+              "anchor": "village",
+              "reach": 75
+            }
+          ]
+        },
+        "sites": [
+          {
+            "id": "village",
+            "name": "白露の町",
+            "x": 27,
+            "y": 79,
+            "biome": "meadow",
+            "water": 4,
+            "market": 0,
+            "frost": 23
+          },
+          {
+            "id": "landing",
+            "name": "柳の渡し",
+            "x": 38,
+            "y": 53,
+            "biome": "shore",
+            "water": 1,
+            "market": 20,
+            "frost": 21
+          },
+          {
+            "id": "forest",
+            "name": "雑木の森",
+            "x": 27,
+            "y": 23,
+            "biome": "forest",
+            "water": 7,
+            "market": 38,
+            "frost": 19
+          },
+          {
+            "id": "mill",
+            "name": "水車の里",
+            "x": 76,
+            "y": 76,
+            "biome": "shore",
+            "water": 2,
+            "market": 59,
+            "frost": 23
+          },
+          {
+            "id": "orchard",
+            "name": "対岸の果樹園",
+            "x": 71,
+            "y": 50,
+            "biome": "meadow",
+            "water": 8,
+            "market": 41,
+            "frost": 21
+          },
+          {
+            "id": "pass",
+            "name": "風見の峠",
+            "x": 79,
+            "y": 20,
+            "biome": "ridge",
+            "water": 15,
+            "market": 69,
+            "frost": 16
+          }
+        ],
+        "routes": [
+          {
+            "a": "village",
+            "b": "landing",
+            "kind": "road",
+            "minutes": 20
+          },
+          {
+            "a": "landing",
+            "b": "forest",
+            "kind": "road",
+            "minutes": 25
+          },
+          {
+            "a": "village",
+            "b": "forest",
+            "kind": "road",
+            "minutes": 38
+          },
+          {
+            "a": "mill",
+            "b": "orchard",
+            "kind": "road",
+            "minutes": 18
+          },
+          {
+            "a": "orchard",
+            "b": "pass",
+            "kind": "road",
+            "minutes": 28
+          },
+          {
+            "a": "pass",
+            "b": "mill",
+            "kind": "road",
+            "minutes": 52
+          },
+          {
+            "a": "landing",
+            "b": "orchard",
+            "kind": "ferry",
+            "minutes": 21
+          },
+          {
+            "a": "village",
+            "b": "mill",
+            "kind": "bridge",
+            "minutes": 14
+          }
+        ],
+        "landmarks": [
+          {
+            "id": "apothecary",
+            "name": "北の薬師組合",
+            "npc": "ナギ",
+            "kind": "guild",
+            "required": true,
+            "preference": "forest",
+            "anchor": "village",
+            "reach": 75,
+            "placeId": "pass",
+            "trust": 0,
+            "lastVisit": 0
+          }
+        ],
+        "bridge": false,
+        "trade": {
+          "day": 1,
+          "ferry": 0,
+          "bridge": 0,
+          "road": [
+            "mill",
+            "orchard",
+            "landing",
+            "village"
+          ],
+          "stock": 4,
+          "millStock": 5,
+          "deliveries": 0,
+          "deliveredDay": 0
+        }
+      },
+      "house": {
+        "rooms": [
+          {
+            "id": "living",
+            "name": "居間",
+            "width": 4,
+            "height": 3,
+            "walls": [],
+            "doors": [],
+            "fixtures": [
+              {
+                "id": "hearth-1",
+                "kind": "hearth",
+                "cell": 3
+              },
+              {
+                "id": "bench-1",
+                "kind": "bench",
+                "cell": 5
+              },
+              {
+                "id": "window-1",
+                "kind": "window",
+                "cell": 11
+              }
+            ]
+          },
+          {
+            "id": "bedroom",
+            "name": "寝室",
+            "width": 4,
+            "height": 3,
+            "walls": [],
+            "doors": [],
+            "fixtures": [
+              {
+                "id": "mat-1",
+                "kind": "mat",
+                "cell": 10
+              }
+            ]
+          },
+          {
+            "id": "yard",
+            "name": "裏庭",
+            "width": 4,
+            "height": 3,
+            "walls": [],
+            "doors": [],
+            "fixtures": [
+              {
+                "id": "latrine-1",
+                "kind": "latrine",
+                "cell": 3
+              },
+              {
+                "id": "basin-1",
+                "kind": "basin",
+                "cell": 11
+              }
+            ]
+          }
+        ],
+        "links": [
+          [
+            "living",
+            "bedroom"
+          ],
+          [
+            "bedroom",
+            "yard"
+          ]
+        ],
+        "nextId": 1
+      },
+      "home": "forest",
+      "time": 480,
+      "wood": 18,
+      "coins": 8,
+      "food": 7,
+      "ingredients": 9,
+      "log": [
+        "1日目 08時00分　雑木の森で、新しい暮らしが始まった。"
+      ],
+      "foodTarget": {
+        "low": 4,
+        "high": 9
+      },
+      "stocking": false,
+      "insulated": false,
+      "rng": 5317
+    },
+    "origin": {
+      "version": 1,
+      "actors": [
+        {
+          "person": {
+            "id": "person-1",
+            "name": "カヤ",
+            "appearance": {
+              "face": "round",
+              "skin": "peach",
+              "hair": "crop",
+              "hairColor": "ink",
+              "age": "young",
+              "build": "medium",
+              "eyes": "soft",
+              "mark": "scar",
+              "clothing": "wrap",
+              "dye": "rust"
+            },
+            "personality": "quiet",
+            "body": "sturdy",
+            "background": "artisan",
+            "likes": "cook",
+            "dislikes": "wood",
+            "talent": "cook",
+            "skills": {
+              "wood": 7,
+              "cook": 1,
+              "care": 1,
+              "trade": 1
+            }
+          },
+          "location": "forest",
+          "room": "living",
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "reason": "朝を迎え、最初の予定を待っています。",
+          "task": null,
+          "mood": 68,
+          "injury": 0,
+          "memories": [],
+          "relations": {
+            "person-2": {
+              "kind": "friend",
+              "trust": 28,
+              "affection": 8
+            }
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "experience": 0,
+          "level": 1,
+          "specialty": null,
+          "priority": null,
+          "cargo": {
+            "wood": 0,
+            "food": 0,
+            "ingredients": 0,
+            "coins": 0
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "strainUntil": 0,
+          "nextShift": 0,
+          "practicedOn": 0,
+          "danger": false
+        },
+        {
+          "person": {
+            "id": "person-2",
+            "name": "スイ",
+            "appearance": {
+              "face": "oval",
+              "skin": "peach",
+              "hair": "knot",
+              "hairColor": "ink",
+              "age": "adult",
+              "build": "broad",
+              "eyes": "straight",
+              "mark": "freckles",
+              "clothing": "wrap",
+              "dye": "flax"
+            },
+            "personality": "curious",
+            "body": "sturdy",
+            "background": "local",
+            "likes": "wood",
+            "dislikes": null,
+            "talent": "wood",
+            "skills": {
+              "wood": 1,
+              "cook": 2,
+              "care": 1,
+              "trade": 1
+            }
+          },
+          "location": "forest",
+          "room": "living",
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "reason": "朝を迎え、最初の予定を待っています。",
+          "task": null,
+          "mood": 68,
+          "injury": 0,
+          "memories": [],
+          "relations": {
+            "person-1": {
+              "kind": "friend",
+              "trust": 28,
+              "affection": 8
+            }
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "experience": 0,
+          "level": 1,
+          "specialty": null,
+          "priority": null,
+          "cargo": {
+            "wood": 0,
+            "food": 0,
+            "ingredients": 0,
+            "coins": 0
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "strainUntil": 0,
+          "nextShift": 0,
+          "practicedOn": 0,
+          "danger": false
+        }
+      ],
+      "world": {
+        "config": {
+          "seed": 5317,
+          "climate": "mild",
+          "woods": 2,
+          "roads": 2,
+          "river": "river",
+          "townName": "白露の町",
+          "millName": "水車の里",
+          "pinnedTownSeed": null,
+          "rules": [
+            {
+              "id": "apothecary",
+              "name": "北の薬師組合",
+              "npc": "ナギ",
+              "kind": "guild",
+              "required": true,
+              "preference": "forest",
+              "anchor": "village",
+              "reach": 75
+            }
+          ]
+        },
+        "sites": [
+          {
+            "id": "village",
+            "name": "白露の町",
+            "x": 27,
+            "y": 79,
+            "biome": "meadow",
+            "water": 4,
+            "market": 0,
+            "frost": 23
+          },
+          {
+            "id": "landing",
+            "name": "柳の渡し",
+            "x": 38,
+            "y": 53,
+            "biome": "shore",
+            "water": 1,
+            "market": 20,
+            "frost": 21
+          },
+          {
+            "id": "forest",
+            "name": "雑木の森",
+            "x": 27,
+            "y": 23,
+            "biome": "forest",
+            "water": 7,
+            "market": 38,
+            "frost": 19
+          },
+          {
+            "id": "mill",
+            "name": "水車の里",
+            "x": 76,
+            "y": 76,
+            "biome": "shore",
+            "water": 2,
+            "market": 59,
+            "frost": 23
+          },
+          {
+            "id": "orchard",
+            "name": "対岸の果樹園",
+            "x": 71,
+            "y": 50,
+            "biome": "meadow",
+            "water": 8,
+            "market": 41,
+            "frost": 21
+          },
+          {
+            "id": "pass",
+            "name": "風見の峠",
+            "x": 79,
+            "y": 20,
+            "biome": "ridge",
+            "water": 15,
+            "market": 69,
+            "frost": 16
+          }
+        ],
+        "routes": [
+          {
+            "a": "village",
+            "b": "landing",
+            "kind": "road",
+            "minutes": 20
+          },
+          {
+            "a": "landing",
+            "b": "forest",
+            "kind": "road",
+            "minutes": 25
+          },
+          {
+            "a": "village",
+            "b": "forest",
+            "kind": "road",
+            "minutes": 38
+          },
+          {
+            "a": "mill",
+            "b": "orchard",
+            "kind": "road",
+            "minutes": 18
+          },
+          {
+            "a": "orchard",
+            "b": "pass",
+            "kind": "road",
+            "minutes": 28
+          },
+          {
+            "a": "pass",
+            "b": "mill",
+            "kind": "road",
+            "minutes": 52
+          },
+          {
+            "a": "landing",
+            "b": "orchard",
+            "kind": "ferry",
+            "minutes": 21
+          },
+          {
+            "a": "village",
+            "b": "mill",
+            "kind": "bridge",
+            "minutes": 14
+          }
+        ],
+        "landmarks": [
+          {
+            "id": "apothecary",
+            "name": "北の薬師組合",
+            "npc": "ナギ",
+            "kind": "guild",
+            "required": true,
+            "preference": "forest",
+            "anchor": "village",
+            "reach": 75,
+            "placeId": "pass",
+            "trust": 0,
+            "lastVisit": 0
+          }
+        ],
+        "bridge": false,
+        "trade": {
+          "day": 1,
+          "ferry": 0,
+          "bridge": 0,
+          "road": [
+            "mill",
+            "orchard",
+            "landing",
+            "village"
+          ],
+          "stock": 4,
+          "millStock": 5,
+          "deliveries": 0,
+          "deliveredDay": 0
+        }
+      },
+      "house": {
+        "rooms": [
+          {
+            "id": "living",
+            "name": "居間",
+            "width": 4,
+            "height": 3,
+            "walls": [],
+            "doors": [],
+            "fixtures": [
+              {
+                "id": "hearth-1",
+                "kind": "hearth",
+                "cell": 3
+              },
+              {
+                "id": "bench-1",
+                "kind": "bench",
+                "cell": 5
+              },
+              {
+                "id": "window-1",
+                "kind": "window",
+                "cell": 11
+              }
+            ]
+          },
+          {
+            "id": "bedroom",
+            "name": "寝室",
+            "width": 4,
+            "height": 3,
+            "walls": [],
+            "doors": [],
+            "fixtures": [
+              {
+                "id": "mat-1",
+                "kind": "mat",
+                "cell": 10
+              }
+            ]
+          },
+          {
+            "id": "yard",
+            "name": "裏庭",
+            "width": 4,
+            "height": 3,
+            "walls": [],
+            "doors": [],
+            "fixtures": [
+              {
+                "id": "latrine-1",
+                "kind": "latrine",
+                "cell": 3
+              },
+              {
+                "id": "basin-1",
+                "kind": "basin",
+                "cell": 11
+              }
+            ]
+          }
+        ],
+        "links": [
+          [
+            "living",
+            "bedroom"
+          ],
+          [
+            "bedroom",
+            "yard"
+          ]
+        ],
+        "nextId": 1
+      },
+      "home": "forest",
+      "time": 480,
+      "wood": 18,
+      "coins": 8,
+      "food": 7,
+      "ingredients": 9,
+      "log": [
+        "1日目 08時00分　雑木の森で、新しい暮らしが始まった。"
+      ],
+      "foodTarget": {
+        "low": 4,
+        "high": 9
+      },
+      "stocking": false,
+      "insulated": false,
+      "rng": 5317
+    }
+  }
+}
