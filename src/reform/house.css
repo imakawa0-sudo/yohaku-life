@@ -1,0 +1,222 @@
+.yh-house {
+  --house-rule: #dcdccf;
+  --house-ink: #424a38;
+  color: var(--house-ink);
+  line-height: 1.55;
+  min-width: 0;
+}
+.yh-house button,
+.yh-house summary {
+  touch-action: manipulation;
+}
+.yh-house-head,
+.yh-house-floorhead,
+.yh-house-links,
+.yh-house-head h2,
+.yh-house h3,
+.yh-house h4,
+.yh-house summary {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.yh-house-head {
+  margin: 0.25rem 0 1.1rem;
+}
+.yh-house-head h2,
+.yh-house h3 {
+  font-family: var(--serif, serif);
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+.yh-house-head h2 {
+  font-size: 1.5rem;
+}
+.yh-house-rooms,
+.yh-house-furniture,
+.yh-house-minor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.yh-house-rooms {
+  margin: 0 0 0.9rem;
+}
+.yh-house button {
+  border: 1px solid var(--house-rule);
+  border-radius: 0.45rem;
+  padding: 0.48rem 0.68rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.38rem;
+  font-size: 0.96em;
+  background: #fffdf5;
+  min-height: 36px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.yh-house .yh-house-rooms button[aria-pressed="true"] {
+  background: #56634b;
+  border-color: #56634b;
+  color: #fffef5;
+}
+.yh-house .yh-house-furniture button[aria-pressed="true"] {
+  border-color: #8a9678;
+  background: #eceddf;
+}
+.yh-house-floor {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--house-rule);
+  border-radius: 0.6rem;
+  background: #f5f4e9;
+}
+.yh-house-floorhead {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.yh-house-floorhead h3 {
+  font-size: 1.18rem;
+}
+.yh-house-floorhead > span,
+.yh-house-links,
+.yh-house-furniture > span {
+  color: #636955;
+  font-size: 0.94em;
+}
+.yh-house-links,
+.yh-house-furniture {
+  margin-top: 0.65rem;
+}
+.yh-house-metrics {
+  margin: 1rem 0;
+}
+.yh-house h4 {
+  font-weight: 550;
+  font-size: 1em;
+}
+.yh-house dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(77px, 1fr));
+  gap: 0.35rem;
+  margin: 0.45rem 0;
+}
+.yh-house dl div {
+  padding: 0.3rem 0.55rem;
+  border-left: 2px solid #c7cbb6;
+}
+.yh-house dt {
+  font-size: 0.85em;
+  color: #67705c;
+}
+.yh-house dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.yh-house-edit {
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--house-rule);
+}
+.yh-house summary {
+  justify-content: flex-start;
+  cursor: pointer;
+  font-weight: 550;
+  list-style: none;
+  min-height: 32px;
+}
+.yh-house summary::-webkit-details-marker {
+  display: none;
+}
+.yh-house summary:after {
+  content: "＋";
+  margin-left: auto;
+  font-weight: 400;
+  color: #69755b;
+}
+.yh-house details[open] > summary:after {
+  content: "−";
+}
+.yh-house-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+.yh-house-controls label {
+  display: grid;
+  gap: 0.18rem;
+  flex: 1 1 145px;
+  min-width: 0;
+  color: #636954;
+  font-size: 0.93em;
+}
+.yh-house input,
+.yh-house select {
+  border: 1px solid var(--house-rule);
+  border-radius: 0.38rem;
+  padding: 0.48rem;
+  background: #fffdf7;
+  color: var(--house-ink);
+  min-height: 38px;
+  width: 100%;
+}
+.yh-house-minor {
+  margin-top: 0.65rem;
+}
+.yh-house .yh-house-blueprint {
+  display: grid;
+  gap: 2px;
+  padding: 0.38rem;
+  border: 1px solid #c6c8b3;
+  border-radius: 0.3rem;
+  margin: 0.6rem 0;
+  max-width: 360px;
+  background: #d5d7c5;
+}
+.yh-house .yh-house-blueprint button {
+  min-width: 0;
+  min-height: 42px;
+  padding: 0.22rem 0.1rem;
+  gap: 1px;
+  flex-direction: column;
+  border: 0;
+  border-radius: 0;
+  font-size: 0.78em;
+}
+.yh-house .yh-house-blueprint button[aria-pressed="true"] {
+  outline: 2px solid #69794b;
+  outline-offset: -2px;
+}
+.yh-house .yh-house-blueprint .yh-cell-wall {
+  background: repeating-linear-gradient(
+    135deg,
+    #898b78,
+    #898b78 2px,
+    #767c66 2px,
+    #767c66 5px
+  );
+  color: white;
+}
+.yh-house .yh-house-blueprint .yh-cell-door,
+.yh-house .yh-house-blueprint .yh-cell-entry {
+  background: #ebdfc7;
+}
+.yh-house .yh-house-blueprint .yh-cell-fixture {
+  background: #e4e8d8;
+}
+.yh-house-error {
+  color: #834b3b;
+  margin: 0.6rem 0;
+}
+@media (max-width: 560px) {
+  .yh-house button,
+  .yh-house summary,
+  .yh-house input,
+  .yh-house select {
+    min-height: 44px;
+  }
+  .yh-house .yh-house-blueprint button {
+    min-height: 44px;
+  }
+}

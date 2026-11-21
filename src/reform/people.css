@@ -1,0 +1,327 @@
+.yp-editor {
+  color: #485043;
+  min-width: 0;
+}
+.yp-editor button,
+.yp-editor input,
+.yp-editor select {
+  font: inherit;
+}
+.yp-editor button,
+.yp-editor select,
+.yp-editor input:not([type="checkbox"]) {
+  border: 1px solid #c9cdbb;
+  border-radius: 5px;
+  background: #fffdf5;
+  color: #404b3d;
+}
+.yp-editor button {
+  cursor: pointer;
+}
+.yp-editor button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.yp-editor p {
+  margin: 0;
+}
+.yp-portrait {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 48/56;
+  image-rendering: pixelated;
+}
+.yp-mini .yp-portrait {
+  height: 100%;
+  object-fit: cover;
+  object-position: center 34%;
+}
+.yp-scene {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3/1;
+  overflow: hidden;
+  isolation: isolate;
+  background: #c4c6a8;
+}
+.yp-scene .yp-landscape {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+.yp-scene .yp-walker {
+  position: absolute;
+  height: 33.333333%;
+  width: auto;
+  transform: translate(-50%, -100%);
+  image-rendering: pixelated;
+}
+.yp-scene[data-light="morning"] .yp-landscape {
+  filter: brightness(1.09) saturate(0.93);
+}
+.yp-scene[data-light="day"] .yp-landscape {
+  filter: brightness(1.15) saturate(0.92);
+}
+.yp-scene[data-light="dusk"] {
+  filter: sepia(0.15) saturate(1.15);
+}
+.yp-scene[data-light="night"] .yp-landscape {
+  filter: brightness(0.86) saturate(0.78);
+}
+.yp-scene[data-light="night"] .yp-walker {
+  filter: brightness(0.86) saturate(0.78);
+}
+.yp-scene[data-light="night"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: #778eb4;
+  opacity: 0.83;
+  mix-blend-mode: multiply;
+}
+.yp-roster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 12px;
+}
+.yp-roster button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 3px 10px 3px 4px;
+  font-size: 0.84rem;
+}
+.yp-roster .is-selected {
+  background: #e6ebdb;
+  border-color: #879477;
+}
+.yp-roster .yp-add {
+  padding: 4px 10px;
+  border-style: dashed;
+}
+.yp-mini {
+  width: 26px;
+  height: 26px;
+  overflow: hidden;
+  border-radius: 100%;
+  flex-shrink: 0;
+}
+.yp-roster button > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 13ch;
+  white-space: nowrap;
+}
+.yp-sheet {
+  min-width: 0;
+}
+.yp-intro {
+  display: grid;
+  grid-template-columns: clamp(86px, 19%, 135px) minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+}
+.yp-cover {
+  border: 1px solid #c8c9b4;
+  border-radius: 45% 45% 5px 5px;
+  overflow: hidden;
+}
+.yp-namebox {
+  min-width: 0;
+}
+.yp-namebox > input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 39px;
+  padding: 5px 9px;
+  font-size: 1rem;
+}
+.yp-namebox > p,
+.yp-feedback {
+  color: #65705e;
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+.yp-namebox > p {
+  margin: 5px 0;
+}
+.yp-tools,
+.yp-skillhead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.yp-tools button,
+.yp-skillhead button {
+  padding: 4px 8px;
+  min-height: 32px;
+  font-size: 0.76rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.yp-editor .yp-remove {
+  color: #805f50;
+}
+.yp-editor .yp-feedback {
+  margin: 7px 0 0;
+}
+.yp-customize {
+  margin-top: 12px;
+  border-top: 1px solid #d8dbce;
+}
+.yp-customize > summary {
+  min-height: 40px;
+  cursor: pointer;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.yp-customize > summary::marker {
+  content: "";
+}
+.yp-customize > summary::-webkit-details-marker {
+  display: none;
+}
+.yp-customize > summary svg:last-child {
+  margin-left: auto;
+}
+.yp-customize[open] > summary svg:last-child {
+  transform: rotate(180deg);
+}
+.yp-customize section {
+  padding: 10px 0 12px;
+  border-top: 1px solid #d8dbce;
+}
+.yp-section-heading,
+.yp-skillhead {
+  display: flex;
+  justify-content: space-between;
+  gap: 7px;
+  align-items: center;
+  margin: 0 0 5px;
+}
+.yp-section-heading h4,
+.yp-section-heading > label:first-child,
+.yp-skillhead strong {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0;
+}
+.yp-lock {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.72rem;
+  color: #616e58;
+  cursor: pointer;
+}
+.yp-lock input {
+  width: 15px;
+  height: 15px;
+  accent-color: #687b54;
+  margin: 0;
+}
+.yp-look,
+.yp-skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(138px, 100%), 1fr));
+  gap: 8px 12px;
+}
+.yp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.yp-field > span {
+  font-size: 0.76rem;
+  color: #64705c;
+}
+.yp-field select {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 37px;
+  padding: 4px 7px;
+  font-size: 0.91rem;
+}
+.yp-skillhead {
+  margin: 13px 0 6px;
+}
+.yp-skills label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  border-bottom: 1px solid #d8dbce;
+  padding: 5px 0;
+  font-size: 0.85rem;
+}
+.yp-skills small {
+  display: block;
+  color: #68735f;
+  font-size: 0.69rem;
+}
+.yp-skills select {
+  height: 34px;
+  padding: 0 4px;
+  font-size: 0.9rem;
+}
+@media (max-width: 460px) {
+  .yp-intro {
+    grid-template-columns: 77px minmax(0, 1fr);
+    gap: 10px;
+  }
+  .yp-tools {
+    gap: 4px;
+  }
+  .yp-look {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.yp-appearance {
+  display: grid;
+  grid-template-columns: clamp(76px, 17%, 122px) minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+}
+.yp-standing-preview {
+  display: grid;
+  place-items: center;
+  padding: 10px 0 8px;
+  border: 1px solid #d8d5c0;
+  border-radius: 5px;
+  background: #f2eddb;
+}
+.yp-full-length {
+  display: block;
+  width: auto;
+  height: 120px;
+  image-rendering: pixelated;
+}
+@media (max-width: 460px) {
+  .yp-appearance {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .yp-appearance .yp-look {
+    display: contents;
+  }
+  .yp-standing-preview {
+    grid-row: span 2;
+    padding: 4px 0;
+  }
+}
