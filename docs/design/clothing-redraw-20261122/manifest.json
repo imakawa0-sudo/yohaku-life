@@ -1,0 +1,259 @@
+{
+  "baseline_revision": "a90b0a6",
+  "baseline_label": "a90b0a6",
+  "old_renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+  "new_renderer_sha256": "ed6cc890095716c6885f5302aca7fc7ebb9b1ea27144c136221504178d672e17",
+  "case_definition_method": "Exact TypeScript AST extraction of fixedAppearance, outfits, builds, and people from the clothing comparison; medium cases exported",
+  "width": 48,
+  "height": 56,
+  "viewBox": "0 0 48 56",
+  "svg_files": 8,
+  "geometry": "One editable rectangle per horizontally continuous span of the same RGBA colour, height exactly 1",
+  "source_canvas_operations": [
+    "fillStyle",
+    "fillRect"
+  ],
+  "source_constraints_checked": "Integer rectangles and opaque six-digit sRGB hex colours; no approximated unsupported operations",
+  "background": [
+    {
+      "color": "#f2e9cd",
+      "rect": [
+        0,
+        0,
+        48,
+        56
+      ]
+    },
+    {
+      "color": "#e4ddbc",
+      "rect": [
+        0,
+        32,
+        48,
+        24
+      ]
+    },
+    {
+      "color": "#d4ceac",
+      "rect": [
+        0,
+        43,
+        48,
+        13
+      ]
+    }
+  ],
+  "svg_rectangles_reconstructed_to_exact_rgba": true,
+  "renderer_inputs_unchanged_during_export": true,
+  "browser_or_figma_visual_verification": "Not performed by this export; root and Figma agent review the actual display",
+  "cases": [
+    {
+      "case_id": "shirt",
+      "case_label": "襟つきシャツ / 中肉",
+      "appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "fixed_body_build": "medium",
+      "variants": {
+        "old": {
+          "file": "shirt-old.svg",
+          "filename": "shirt-old.svg",
+          "svg_sha256": "cb11d5d458579eaf616f807c4efe6bcb7211324f72a81837e5d5621f4c3da7f7",
+          "rgba_sha256": "7bce7afa4125943d16e657ad88fae9352d1676724acea9da2c9038b54225bdb5",
+          "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+          "bytes": 35550,
+          "rect_count": 591,
+          "colors": 22,
+          "fill_rect_calls": 461
+        },
+        "new": {
+          "file": "shirt-new.svg",
+          "filename": "shirt-new.svg",
+          "svg_sha256": "857e575269ced22281f4eddd0d4dcea84f79cb226a2f667b04ee311f7b0759d6",
+          "rgba_sha256": "7bce7afa4125943d16e657ad88fae9352d1676724acea9da2c9038b54225bdb5",
+          "renderer_sha256": "ed6cc890095716c6885f5302aca7fc7ebb9b1ea27144c136221504178d672e17",
+          "bytes": 35550,
+          "rect_count": 591,
+          "colors": 22,
+          "fill_rect_calls": 461
+        }
+      },
+      "changed_pixels": 0
+    },
+    {
+      "case_id": "apron",
+      "case_label": "仕事着と前掛け / 中肉",
+      "appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "apron",
+        "dye": "brick"
+      },
+      "fixed_body_build": "medium",
+      "variants": {
+        "old": {
+          "file": "apron-old.svg",
+          "filename": "apron-old.svg",
+          "svg_sha256": "0ae9167594dbd1538ca623e3b6380746574343b27a2b69108916d49c835e090e",
+          "rgba_sha256": "33a0a88bbeecdfd81a23b2b2eef44e1e60ec78a445b19f2d264ffb64c873b36b",
+          "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+          "bytes": 40231,
+          "rect_count": 669,
+          "colors": 26,
+          "fill_rect_calls": 534
+        },
+        "new": {
+          "file": "apron-new.svg",
+          "filename": "apron-new.svg",
+          "svg_sha256": "97a904c6972705789c63abf3379bb04620662a0820ca493253590cc7de565ae1",
+          "rgba_sha256": "da1b07ea1cff627178c950ee80fcf855e2a3d60ba0b6609ff5ad495cd4751f1c",
+          "renderer_sha256": "ed6cc890095716c6885f5302aca7fc7ebb9b1ea27144c136221504178d672e17",
+          "bytes": 38911,
+          "rect_count": 647,
+          "colors": 26,
+          "fill_rect_calls": 534
+        }
+      },
+      "changed_pixels": 136
+    },
+    {
+      "case_id": "wrap",
+      "case_label": "巻き襟の上着 / 中肉",
+      "appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "wrap",
+        "dye": "indigo"
+      },
+      "fixed_body_build": "medium",
+      "variants": {
+        "old": {
+          "file": "wrap-old.svg",
+          "filename": "wrap-old.svg",
+          "svg_sha256": "307500aaa8f018b43046b15115a26c06752619f1c997f949702e635c84515c3e",
+          "rgba_sha256": "d719077afbe814dd22a621c04747df65cf276ee330089821b73df2bf891bf8d9",
+          "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+          "bytes": 36809,
+          "rect_count": 612,
+          "colors": 23,
+          "fill_rect_calls": 473
+        },
+        "new": {
+          "file": "wrap-new.svg",
+          "filename": "wrap-new.svg",
+          "svg_sha256": "eaebe6d100a353a8a1e1c382b0db146ddb70493c65f2880f4cea5d332b7d5707",
+          "rgba_sha256": "6554442c1d04874d7485ac06bcaed436a8155174334b8e35ae8fb9b64adf535b",
+          "renderer_sha256": "ed6cc890095716c6885f5302aca7fc7ebb9b1ea27144c136221504178d672e17",
+          "bytes": 38009,
+          "rect_count": 632,
+          "colors": 23,
+          "fill_rect_calls": 486
+        }
+      },
+      "changed_pixels": 38
+    },
+    {
+      "case_id": "coat",
+      "case_label": "旅の外套 / 中肉",
+      "appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "coat",
+        "dye": "plum"
+      },
+      "fixed_body_build": "medium",
+      "variants": {
+        "old": {
+          "file": "coat-old.svg",
+          "filename": "coat-old.svg",
+          "svg_sha256": "ed1dad95f44b8290b2ebaf4b81ff2ae579a2ec4a5ede6e16ac9d7264c3a8427e",
+          "rgba_sha256": "c6a1e3e413936a734165f3e7e83431a6713278a63c010c50a66447a5b107f9ae",
+          "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+          "bytes": 35604,
+          "rect_count": 592,
+          "colors": 22,
+          "fill_rect_calls": 473
+        },
+        "new": {
+          "file": "coat-new.svg",
+          "filename": "coat-new.svg",
+          "svg_sha256": "74145b1805c493e705135f93fc8cfcf82200e5ee70603038f88ce3fac05afa3e",
+          "rgba_sha256": "3c3c323fb5b07b40f5ecb3fed59b4c32272f434bc4044113179afbe5af854bee",
+          "renderer_sha256": "ed6cc890095716c6885f5302aca7fc7ebb9b1ea27144c136221504178d672e17",
+          "bytes": 35604,
+          "rect_count": 592,
+          "colors": 22,
+          "fill_rect_calls": 470
+        }
+      },
+      "changed_pixels": 18
+    }
+  ],
+  "case_definition_origin": {
+    "filename": "clothing-comparison.ts",
+    "sha256": "a45fd41e63b0a26bd9083ce650253e11b24d60fb62a708957c1bd3df50bf67eb"
+  },
+  "comparison_html": {
+    "file": "../../diagnostics/clothing-comparison-20261122.html",
+    "sha256": "f76234467be30a1ec2ac94cd14d5cb21bc2a9ac11d8d7a0b5476a0f3e4a258f5"
+  },
+  "current_renderer": {
+    "file": "../../../src/reform/pixelFigure.ts",
+    "sha256": "ed6cc890095716c6885f5302aca7fc7ebb9b1ea27144c136221504178d672e17"
+  },
+  "body_preservation": {
+    "common_body_neck_shadow_code": "Root confirmed byte-identical restoration from baseline",
+    "shirt_rgba_identical_builds": 3,
+    "alpha_silhouette_identical_cases": 11,
+    "total_cases": 12,
+    "accepted_exception": {
+      "case": "apron/slight",
+      "pixel": [
+        36,
+        42
+      ],
+      "change": "Removal of one old strap pixel protruding beyond the shoulder",
+      "before_rgba": [
+        81,
+        72,
+        76,
+        255
+      ],
+      "current_rgba": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "root_accepted": true
+    },
+    "outside_clothing_renderer_code_byte_identical": true
+  }
+}

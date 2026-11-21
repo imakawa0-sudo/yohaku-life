@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-11-22",
+  "time_zone": "Asia/Taipei",
+  "candidate": "clothing-detail-correction",
+  "baseline": {
+    "revision_label": "a90b0a6",
+    "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab"
+  },
+  "current_renderer": {
+    "file": "../../src/reform/pixelFigure.ts",
+    "sha256": "ed6cc890095716c6885f5302aca7fc7ebb9b1ea27144c136221504178d672e17"
+  },
+  "source_inputs": {
+    "count": 256,
+    "aggregate_sha256": "83d25d8e0284c0ee19a37c17c317babb506648546f271c531ad6b447f1b11758",
+    "unchanged_during_svg_unit_build_and_static_checks": true
+  },
+  "unit": {
+    "command": "node --import tsx --test --test-reporter=tap tests/*.test.ts",
+    "tests": 750,
+    "pass": 750,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "full_log_sha256": "41296137be44f3039b805b7e501e3398bd623843f8edd32aebdb9713b1d631bd",
+    "run_count_for_final_candidate": 1
+  },
+  "build": {
+    "command": "npm run build",
+    "exit_code": 0,
+    "run_count_for_final_candidate": 1,
+    "output_name": "dist/yohaku.html",
+    "bytes": 559203,
+    "sha256": "d6bd2eec6c1daf6c53ce6c4a8a1c29680b25d039c44c4c1d5f6e1b71b5b1ea99",
+    "full_log_sha256": "9704c83688f6983f845813f2e5acee763382eafbfcf57879a3aa3faf5fcec35a",
+    "preview_originals_byte_identical": true
+  },
+  "body_preservation": {
+    "background": "transparent, no background rectangles",
+    "portrait_native_size": [
+      48,
+      56
+    ],
+    "total_cases": 12,
+    "common_body_neck_shadow_statement_text_identical": true,
+    "common_statement_count": 14,
+    "outside_clothing_renderer_code_byte_identical": true,
+    "outside_clothing_scope": "Includes palettes, face, hair, portrait orchestration and standing figure code",
+    "shirt_complete_rgba_identical_cases": 3,
+    "alpha_silhouette_identical_cases": 11,
+    "accepted_exception": {
+      "case": "apron/slight",
+      "pixel": [
+        36,
+        42
+      ],
+      "description": "Removal of an old strap pixel protruding beyond the shoulder",
+      "accepted_by_root": true
+    },
+    "exception_before_rgba": [
+      81,
+      72,
+      76,
+      255
+    ],
+    "exception_current_rgba": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "case_differences": [
+      {
+        "clothing": "shirt",
+        "build": "slight",
+        "alpha_pixels": 0,
+        "rgba_pixels": 0
+      },
+      {
+        "clothing": "shirt",
+        "build": "medium",
+        "alpha_pixels": 0,
+        "rgba_pixels": 0
+      },
+      {
+        "clothing": "shirt",
+        "build": "broad",
+        "alpha_pixels": 0,
+        "rgba_pixels": 0
+      },
+      {
+        "clothing": "apron",
+        "build": "slight",
+        "alpha_pixels": 1,
+        "rgba_pixels": 146
+      },
+      {
+        "clothing": "apron",
+        "build": "medium",
+        "alpha_pixels": 0,
+        "rgba_pixels": 136
+      },
+      {
+        "clothing": "apron",
+        "build": "broad",
+        "alpha_pixels": 0,
+        "rgba_pixels": 141
+      },
+      {
+        "clothing": "wrap",
+        "build": "slight",
+        "alpha_pixels": 0,
+        "rgba_pixels": 38
+      },
+      {
+        "clothing": "wrap",
+        "build": "medium",
+        "alpha_pixels": 0,
+        "rgba_pixels": 38
+      },
+      {
+        "clothing": "wrap",
+        "build": "broad",
+        "alpha_pixels": 0,
+        "rgba_pixels": 38
+      },
+      {
+        "clothing": "coat",
+        "build": "slight",
+        "alpha_pixels": 0,
+        "rgba_pixels": 18
+      },
+      {
+        "clothing": "coat",
+        "build": "medium",
+        "alpha_pixels": 0,
+        "rgba_pixels": 18
+      },
+      {
+        "clothing": "coat",
+        "build": "broad",
+        "alpha_pixels": 0,
+        "rgba_pixels": 18
+      }
+    ]
+  },
+  "standing_sprite_static_check": {
+    "method": "Execute old/current drawWalker into integer fillRect RGBA buffers",
+    "native_size": [
+      26,
+      60
+    ],
+    "total_cases": 12,
+    "identical_cases": 12,
+    "different_pixels": 0,
+    "full_result_sha256": "987ca525284ecda119df8d617e4519f19541e8c32afb3c04f9e05c393d4a8002",
+    "cases": [
+      {
+        "id": "shirt-slight",
+        "before_rgba_sha256": "fe50dcc2d08072ecc07fdc5e5c5b0c7e8ac0e8c63c91e1c79ae15ada563ed1b8",
+        "current_rgba_sha256": "fe50dcc2d08072ecc07fdc5e5c5b0c7e8ac0e8c63c91e1c79ae15ada563ed1b8",
+        "different_pixels": 0
+      },
+      {
+        "id": "shirt-medium",
+        "before_rgba_sha256": "ad1d864ac86679b49b72d40bc23efd625e73dd52bfcb7722e2449cb5341d0896",
+        "current_rgba_sha256": "ad1d864ac86679b49b72d40bc23efd625e73dd52bfcb7722e2449cb5341d0896",
+        "different_pixels": 0
+      },
+      {
+        "id": "shirt-broad",
+        "before_rgba_sha256": "b6aa87f30acc396c4621ab3945d8d1571c29b1e506bb8d9ff4bb708e2d821311",
+        "current_rgba_sha256": "b6aa87f30acc396c4621ab3945d8d1571c29b1e506bb8d9ff4bb708e2d821311",
+        "different_pixels": 0
+      },
+      {
+        "id": "apron-slight",
+        "before_rgba_sha256": "4fbcaa9e3636a51b4adb3d00e942f90189b58f5c6da4488886f6741bfb029923",
+        "current_rgba_sha256": "4fbcaa9e3636a51b4adb3d00e942f90189b58f5c6da4488886f6741bfb029923",
+        "different_pixels": 0
+      },
+      {
+        "id": "apron-medium",
+        "before_rgba_sha256": "ea0dbd050498c02ce2f94c85ac1a8b146fd2d95ca04913314c8708a9a6be1788",
+        "current_rgba_sha256": "ea0dbd050498c02ce2f94c85ac1a8b146fd2d95ca04913314c8708a9a6be1788",
+        "different_pixels": 0
+      },
+      {
+        "id": "apron-broad",
+        "before_rgba_sha256": "f015bb2601102a4683538ff14207268707a4d0103b78d874ec06dcbefee461e1",
+        "current_rgba_sha256": "f015bb2601102a4683538ff14207268707a4d0103b78d874ec06dcbefee461e1",
+        "different_pixels": 0
+      },
+      {
+        "id": "wrap-slight",
+        "before_rgba_sha256": "e3153fb8a94584acfd32fa654fe83531ddea447f8898c1fde7a2ca6055c141ae",
+        "current_rgba_sha256": "e3153fb8a94584acfd32fa654fe83531ddea447f8898c1fde7a2ca6055c141ae",
+        "different_pixels": 0
+      },
+      {
+        "id": "wrap-medium",
+        "before_rgba_sha256": "9b295632d2604f34c38b9e7344d360dc536be70dce6a3bbedbd0727355645434",
+        "current_rgba_sha256": "9b295632d2604f34c38b9e7344d360dc536be70dce6a3bbedbd0727355645434",
+        "different_pixels": 0
+      },
+      {
+        "id": "wrap-broad",
+        "before_rgba_sha256": "4c109f25a5ad7cdede1490fba87b4280e9bcf7b38d80e6d6b0692f0c40144117",
+        "current_rgba_sha256": "4c109f25a5ad7cdede1490fba87b4280e9bcf7b38d80e6d6b0692f0c40144117",
+        "different_pixels": 0
+      },
+      {
+        "id": "coat-slight",
+        "before_rgba_sha256": "5a321dcbc05e16f45be0b469e35e4241b81e6633e2a5f8ac0155a2150e58ad66",
+        "current_rgba_sha256": "5a321dcbc05e16f45be0b469e35e4241b81e6633e2a5f8ac0155a2150e58ad66",
+        "different_pixels": 0
+      },
+      {
+        "id": "coat-medium",
+        "before_rgba_sha256": "b73cab520ffd50734f7e60f33946034cf2c8a50bfe6f444e887108162d6b6446",
+        "current_rgba_sha256": "b73cab520ffd50734f7e60f33946034cf2c8a50bfe6f444e887108162d6b6446",
+        "different_pixels": 0
+      },
+      {
+        "id": "coat-broad",
+        "before_rgba_sha256": "a519b383d83f7fb78b1e445127f271052f1153c6fb2dade1d1a1c087dcaf5613",
+        "current_rgba_sha256": "a519b383d83f7fb78b1e445127f271052f1153c6fb2dade1d1a1c087dcaf5613",
+        "different_pixels": 0
+      }
+    ]
+  },
+  "comparison": {
+    "file": "clothing-comparison-20261122.html",
+    "sha256": "f76234467be30a1ec2ac94cd14d5cb21bc2a9ac11d8d7a0b5476a0f3e4a258f5",
+    "self_contained": true,
+    "cases": 12,
+    "matrix": "shirt/apron/wrap/coat × slight/medium/broad",
+    "large_size_css_px": [
+      192,
+      224
+    ],
+    "medium_profile_size_css_px": [
+      96,
+      112
+    ],
+    "root_visual_review": "All 12 accepted-candidate comparisons reviewed; common body retained with only garment detail corrections."
+  },
+  "svg_assets": {
+    "manifest": "../design/clothing-redraw-20261122/manifest.json",
+    "manifest_sha256": "558441379ece1f1c958f4074dd8e4d56da34cc6139b6939712c3727b866a0c4f",
+    "files": 8,
+    "case_selection": "medium build for each of four clothing types, old and new",
+    "native_size": [
+      48,
+      56
+    ],
+    "svg_to_rgba_roundtrip_exact": true
+  },
+  "actual_game_ui": {
+    "status": "completed by root using Cloud CUA",
+    "candidate_html_sha256": "d6bd2eec6c1daf6c53ce6c4a8a1c29680b25d039c44c4c1d5f6e1b71b5b1ea99",
+    "desktop": {
+      "resident": "Kaya",
+      "body_build": "slight",
+      "outfits_selected": [
+        "apron",
+        "wrap",
+        "coat"
+      ],
+      "checked": [
+        "Profile portrait",
+        "Resident list",
+        "Pre-start preview"
+      ]
+    },
+    "mobile": {
+      "iframe_size_css_px": [
+        320,
+        844
+      ],
+      "resident": "Sui",
+      "body_build": "broad",
+      "clothing": "apron",
+      "profile_size_css_px": [
+        96,
+        112
+      ],
+      "document_client_width": 305,
+      "document_scroll_width": 305,
+      "horizontal_overflow": false
+    },
+    "return_and_reload": {
+      "action": "Both drafts returned using 今の暮らしに戻る; desktop then reloaded",
+      "clock": "08:25",
+      "stock_values_in_reported_ui_order": [
+        7,
+        9,
+        22,
+        8
+      ],
+      "original_game_preserved": true
+    }
+  },
+  "figma": {
+    "status": "Completed; root visually reviewed the result",
+    "comparison_board_node": "34:19783",
+    "native_eight_svg_node": "34:13637",
+    "existing_designs_preserved": true
+  },
+  "screenshots": [
+    {
+      "file": "../screenshots/clothing-redraw-20261122/comparison-apron.jpg",
+      "bytes": 84845,
+      "sha256": "bdbfa2d85bce72cc159d4b2820e3d7bbe58d8dc3d648e634629bc202c0ac93d6"
+    },
+    {
+      "file": "../screenshots/clothing-redraw-20261122/comparison-coat.jpg",
+      "bytes": 81030,
+      "sha256": "9222278bd0a76ae60e5b4a1d5138dfa9a0ec7879d0d84648dc86a30b33d4d9b6"
+    },
+    {
+      "file": "../screenshots/clothing-redraw-20261122/comparison-wrap.jpg",
+      "bytes": 84684,
+      "sha256": "390cefa97bc1fed023e617cca96b452aa281b65d9dcaf257a0512fffdf23d4d6"
+    },
+    {
+      "file": "../screenshots/clothing-redraw-20261122/game-desktop.jpg",
+      "bytes": 91465,
+      "sha256": "807b2d63d0b16dee412ddff4dd943e9799a4f94bc20aa37c1cd3935b87a0e89f"
+    },
+    {
+      "file": "../screenshots/clothing-redraw-20261122/game-profile-320.jpg",
+      "bytes": 51150,
+      "sha256": "e949861e961209596d37f0ba9f46742f669cd143046a72fee2251ac778feabeb"
+    },
+    {
+      "file": "../screenshots/clothing-redraw-20261122/game-profile-apron.jpg",
+      "bytes": 122969,
+      "sha256": "dce3680a9eb6da1638f724c1d443f1db7f43276f24fc7aa8d4736fe8bb34419e"
+    }
+  ],
+  "limits": [
+    "Static RGBA/source checks are not browser UI tests.",
+    "Mobile layout was checked in a desktop-browser iframe, not on physical iOS/Android devices."
+  ],
+  "references": "Paths in this file are relative to docs/diagnostics; SVG file paths are relative to their manifest."
+}
