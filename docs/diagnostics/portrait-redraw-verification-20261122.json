@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-11-22",
+  "time_zone": "Asia/Taipei",
+  "baseline_revision": "ddc5de0f1669e1e28f1f970b9ee306879b0cb9d2",
+  "old_renderer_sha256": "7df2e13c53ba36e94bc069641da3e4d5240971208da05c7217e7f6275b64f7cf",
+  "current_renderer": {
+    "file": "../../src/reform/pixelFigure.ts",
+    "sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab"
+  },
+  "source_inputs": {
+    "count": 256,
+    "aggregate_sha256": "d617695bf490a3b701574d8c6a62c0413c169d92e393c7ff03bfa3c238b3ad73",
+    "unchanged_during_svg_unit_build": true,
+    "changes_since_last_tested_candidate": [
+      "src/reform/pixelFigure.ts"
+    ]
+  },
+  "unit": {
+    "command": "node --import tsx --test --test-reporter=tap tests/*.test.ts",
+    "tests": 750,
+    "suites": 0,
+    "pass": 750,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "reused": false,
+    "full_log_sha256": "15e8ed8fa9094a517b2580fe90076cd16cea37d30d26032d2a65a2874edb19c5"
+  },
+  "build": {
+    "command": "npm run build",
+    "exit_code": 0,
+    "full_log_sha256": "6c418f93092596b0a5fe9c5ddf97022c16cfe72b1d06770cb2302511e95f01a4",
+    "output_name": "dist/yohaku.html",
+    "bytes": 558961,
+    "sha256": "0ef40bc986e5aa2fa605c3b2bdd118fc75efa8d1d1d6df57f6f5458fc4662aee",
+    "preview_originals_byte_identical": true,
+    "capture_only_adds_figma_capture_script": true
+  },
+  "comparison": {
+    "file": "portrait-redraw-comparison-20261122.html",
+    "sha256": "91168bb3a352788ef82d924adedf3333d63fcc1add2fcc6e5cd4b8742b0f295d",
+    "bytes": 32353,
+    "self_contained": true,
+    "cases": 9,
+    "native_size": [
+      48,
+      56
+    ],
+    "large_size_css_px": [
+      192,
+      224
+    ],
+    "roster_crop_css_px": [
+      40,
+      40
+    ],
+    "same_scale_and_crop_on_both_sides": true
+  },
+  "svg_assets": {
+    "manifest": "../design/portrait-redraw-20261122/manifest.json",
+    "manifest_sha256": "758387acf41aa0be228864d275f43ccc3e90042a7e6fa31fbe53a167041f2f30",
+    "files": 18,
+    "native_size": [
+      48,
+      56
+    ],
+    "svg_to_rgba_roundtrip_exact": true
+  },
+  "standing_sprite_static_check": {
+    "method": "Execute old/current drawWalker into integer fillRect RGBA buffers.",
+    "native_size": [
+      26,
+      60
+    ],
+    "background": "transparent",
+    "total_cases": 9,
+    "identical_cases": 9,
+    "different_pixels": 0,
+    "full_result_sha256": "06176235ce605aed34f0185a258e7ab775b36ef9c963d3324dfe4d1de391f686",
+    "cases": [
+      {
+        "id": "A",
+        "rgba_sha256_before": "c8716f1a7f0aae13c85557669b1259cc589219c4865eb313637e0d511e55548f",
+        "rgba_sha256_after": "c8716f1a7f0aae13c85557669b1259cc589219c4865eb313637e0d511e55548f",
+        "painted_pixels": 704,
+        "different_pixels": 0
+      },
+      {
+        "id": "B",
+        "rgba_sha256_before": "3c1fda1e64e25755c5260f39265c8c2894de9a64ad12e3beebc7f2840bce6589",
+        "rgba_sha256_after": "3c1fda1e64e25755c5260f39265c8c2894de9a64ad12e3beebc7f2840bce6589",
+        "painted_pixels": 673,
+        "different_pixels": 0
+      },
+      {
+        "id": "C",
+        "rgba_sha256_before": "688fc388bcf1f2111d3ced00fdd43e75e3a81693427a483121d22c347cf04e29",
+        "rgba_sha256_after": "688fc388bcf1f2111d3ced00fdd43e75e3a81693427a483121d22c347cf04e29",
+        "painted_pixels": 721,
+        "different_pixels": 0
+      },
+      {
+        "id": "D",
+        "rgba_sha256_before": "ca1b95952fec2844bee8df5e82670cb22272ff1c44a2223227219e7108939246",
+        "rgba_sha256_after": "ca1b95952fec2844bee8df5e82670cb22272ff1c44a2223227219e7108939246",
+        "painted_pixels": 781,
+        "different_pixels": 0
+      },
+      {
+        "id": "E",
+        "rgba_sha256_before": "573253a1e1529dc99ea95765eaa4a4b8a11f1199024dd848f301b2594037ed9a",
+        "rgba_sha256_after": "573253a1e1529dc99ea95765eaa4a4b8a11f1199024dd848f301b2594037ed9a",
+        "painted_pixels": 722,
+        "different_pixels": 0
+      },
+      {
+        "id": "F",
+        "rgba_sha256_before": "4bd2c52a43c137ec19945bf168efd914222cc6a0de4e33f098e9729691b1a17e",
+        "rgba_sha256_after": "4bd2c52a43c137ec19945bf168efd914222cc6a0de4e33f098e9729691b1a17e",
+        "painted_pixels": 701,
+        "different_pixels": 0
+      },
+      {
+        "id": "G",
+        "rgba_sha256_before": "c8716f1a7f0aae13c85557669b1259cc589219c4865eb313637e0d511e55548f",
+        "rgba_sha256_after": "c8716f1a7f0aae13c85557669b1259cc589219c4865eb313637e0d511e55548f",
+        "painted_pixels": 704,
+        "different_pixels": 0
+      },
+      {
+        "id": "H",
+        "rgba_sha256_before": "11dd0323068a037bf1cde036a42ab60653d5d07005e02e3bbcd2ebeaf12d2daf",
+        "rgba_sha256_after": "11dd0323068a037bf1cde036a42ab60653d5d07005e02e3bbcd2ebeaf12d2daf",
+        "painted_pixels": 706,
+        "different_pixels": 0
+      },
+      {
+        "id": "I",
+        "rgba_sha256_before": "1c69f32e1362b87f2eb7d4f5bf2ecd3f9302a16565e743b48d17d2066eb27344",
+        "rgba_sha256_after": "1c69f32e1362b87f2eb7d4f5bf2ecd3f9302a16565e743b48d17d2066eb27344",
+        "painted_pixels": 706,
+        "different_pixels": 0
+      }
+    ]
+  },
+  "root_ui_review": {
+    "environment": "Cloud CUA desktop browser; 390/320 widths tested inside responsive iframe harness",
+    "art_comparison": {
+      "scope": "All nine equal-scale art cases reviewed; final straight-eyes case C and A/B rechecked after last key correction.",
+      "evidence": [
+        "comparison-ab.jpg",
+        "comparison-cd.jpg"
+      ]
+    },
+    "desktop": {
+      "checks": [
+        "Main Kaya/Sui portraits",
+        "Draft profile with straight eyes and glasses"
+      ],
+      "evidence": [
+        "game-desktop.jpg",
+        "profile-desktop.jpg"
+      ]
+    },
+    "width_390": {
+      "frame_css_width": 390,
+      "document_client_width": 375,
+      "document_scroll_width": 375,
+      "horizontal_overflow": false,
+      "evidence": [
+        "game-390.jpg"
+      ]
+    },
+    "width_320": {
+      "frame_css_width": 320,
+      "document_client_width": 305,
+      "document_scroll_width": 305,
+      "horizontal_overflow": false,
+      "profile": "Sui",
+      "profile_css_size": [
+        96,
+        112
+      ],
+      "evidence": [
+        "profile-320.jpg"
+      ]
+    },
+    "original_game_restored": "08:25",
+    "save_files_included": false
+  },
+  "screenshots": [
+    {
+      "name": "comparison-ab.jpg",
+      "file": "../screenshots/portrait-redraw-20261122/comparison-ab.jpg",
+      "bytes": 84533,
+      "sha256": "2d197110b7c3f5afbe4dc678973cac40060996e45495ba6313d66f62074448b9",
+      "image_dimensions": [
+        1348,
+        926
+      ]
+    },
+    {
+      "name": "comparison-cd.jpg",
+      "file": "../screenshots/portrait-redraw-20261122/comparison-cd.jpg",
+      "bytes": 84959,
+      "sha256": "51c4e493018a9e6cf505afcd5812b896e8b2293322785f72a5234109ae9d9b8f",
+      "image_dimensions": [
+        1348,
+        926
+      ]
+    },
+    {
+      "name": "game-desktop.jpg",
+      "file": "../screenshots/portrait-redraw-20261122/game-desktop.jpg",
+      "bytes": 91181,
+      "sha256": "bb915d02e3bf34d759f36d3739a957d3f9749b210e859479f63b519a88229852",
+      "image_dimensions": [
+        1348,
+        926
+      ]
+    },
+    {
+      "name": "profile-desktop.jpg",
+      "file": "../screenshots/portrait-redraw-20261122/profile-desktop.jpg",
+      "bytes": 123002,
+      "sha256": "1e708135d74d6fbf3aac21cf6ff21868644d54666a0e013fa073ec6a4ef36004",
+      "image_dimensions": [
+        1348,
+        926
+      ]
+    },
+    {
+      "name": "game-390.jpg",
+      "file": "../screenshots/portrait-redraw-20261122/game-390.jpg",
+      "bytes": 66311,
+      "sha256": "87f4a1116960f69e8085ffb0bc8847fede8a00fdb2f3a688e450e5300cc5b14a",
+      "image_dimensions": [
+        1348,
+        926
+      ]
+    },
+    {
+      "name": "profile-320.jpg",
+      "file": "../screenshots/portrait-redraw-20261122/profile-320.jpg",
+      "bytes": 50486,
+      "sha256": "f37d8ca98d62d364495de576c1db3b7ff50062df53ad33cd41323acea7ab108a",
+      "image_dimensions": [
+        1348,
+        926
+      ]
+    }
+  ],
+  "limits": [
+    "Static pixel checks do not verify browser layout, scaling, compositing, or interaction.",
+    "Mobile widths were checked in a desktop-browser iframe, not physical iOS/Android devices."
+  ],
+  "references": "File references are relative to this diagnostics directory; SVG variant file references are relative to their manifest."
+}

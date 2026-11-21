@@ -519,10 +519,9 @@ function backHair(ctx: CanvasRenderingContext2D, a: Appearance, h: Ramp) {
 
 const fringe: Record<Appearance["hair"], Path> = {
   crop: [
-    9, 24, 7, 20, 7, 17, 6, 18, 8, 13, 8, 11, 10, 7, 9, 7, 14, 5, 13, 4, 18, 3,
-    24, 4, 26, 3, 31, 5, 34, 7, 37, 12, 37, 15, 39, 18, 35, 16, 35, 19, 30, 15,
-    31, 18, 26, 16, 28, 19, 22, 17, 19, 19, 21, 16, 17, 18, 15, 22, 13, 21, 12,
-    26,
+    10, 24, 8, 21, 8, 16, 9, 12, 11, 8, 15, 5, 19, 4, 24, 5, 27, 4,
+    32, 6, 35, 9, 37, 14, 36, 17, 33, 16, 31, 15, 31, 17,
+    27, 15, 25, 17, 22, 16, 19, 18, 17, 18, 15, 22, 13, 21, 12, 25,
   ],
   bob: [
     8, 28, 7, 23, 7, 15, 8, 11, 11, 7, 15, 5, 21, 4, 27, 4, 32, 6, 35, 9, 37,
@@ -842,278 +841,85 @@ function portraitFace(
   h: Ramp,
 ) {
   const p = (color: string, ...points: number[]) => patch(ctx, color, points);
-  const cheek = a.face === "round" ? 36 : 35;
-  const chin = a.face === "oval" ? 38 : a.face === "angular" ? 36 : 35;
-  p(
-    s[0],
-    10,
-    19,
-    11,
-    12,
-    17,
-    8,
-    26,
-    7,
-    33,
-    10,
-    35,
-    14,
-    36,
-    20,
-    35,
-    24,
-    37,
-    26,
-    cheek,
-    28,
-    cheek,
-    30,
-    33,
-    33,
-    31,
-    chin - 1,
-    27,
-    chin,
-    24,
-    chin,
-    19,
-    chin - 3,
-    16,
-    31,
-    14,
-    29,
-    11,
-    29,
-    9,
-    26,
-  );
-  p(
-    s[1],
-    11,
-    19,
-    12,
-    13,
-    18,
-    9,
-    26,
-    8,
-    32,
-    10,
-    34,
-    14,
-    35,
-    20,
-    34,
-    24,
-    36,
-    26,
-    cheek - 1,
-    28,
-    cheek - 1,
-    30,
-    32,
-    33,
-    30,
-    chin - 1,
-    25,
-    chin - 1,
-    19,
-    chin - 4,
-    16,
-    30,
-    14,
-    28,
-    12,
-    28,
-    10,
-    25,
-  );
-  p(
-    s[2],
-    14,
-    19,
-    18,
-    12,
-    26,
-    10,
-    31,
-    11,
-    33,
-    15,
-    34,
-    19,
-    33,
-    22,
-    35,
-    25,
-    35,
-    26,
-    33,
-    27,
-    34,
-    29,
-    32,
-    32,
-    29,
-    chin - 2,
-    25,
-    chin - 2,
-    20,
-    chin - 5,
-    18,
-    30,
-    16,
-    27,
-    14,
-    26,
-  );
-  p(
-    s[3],
-    18,
-    20,
-    21,
-    14,
-    26,
-    11,
-    31,
-    12,
-    33,
-    17,
-    32,
-    20,
-    31,
-    20,
-    31,
-    22,
-    32,
-    23,
-    33,
-    25,
-    31,
-    26,
-    28,
-    25,
-    25,
-    26,
-    23,
-    26,
-    21,
-    24,
-    19,
-    23,
-  );
-  p(
-    s[3],
-    19,
-    25,
-    22,
-    25,
-    24,
-    26,
-    28,
-    26,
-    30,
-    27,
-    32,
-    28,
-    32,
-    29,
-    29,
-    30,
-    30,
-    31,
-    29,
-    33,
-    25,
-    33,
-    21,
-    30,
-  );
-  p(s[4], 20, 25, 22, 25, 24, 26, 21, 26);
-  p(s[4], 28, 23, 29, 21, 30, 21, 30, 23, 31, 24, 30, 25, 28, 25);
-  p(s[1], 26, 25, 29, 26, 31, 26, 32, 25, 33, 26, 31, 27, 28, 27);
-  // A visible ear and the near eye carry the three-quarter orientation.
-  stamp(
-    ctx,
-    10,
-    21,
-    [".ssss.", "smmmms", "smlms.", "smss..", ".smms.", "..sss."],
-    { s: s[1], m: s[2], l: s[4] },
-  );
-  const eyeInk = "#3e343d",
-    iris = "#796355";
+  const chin = { oval: 37, round: 35, angular: 36 }[a.face];
+  const jawLeft = { oval: 19, round: 18, angular: 17 }[a.face];
+  const jawRight = a.face === "oval" ? 33 : 34;
+
+  // One quiet three-quarter face: the cheek stays behind the nose instead of
+  // forming a second nose-shaped bump in the silhouette.
+  p(s[0], 14,16, 16,12, 20,9, 27,8, 32,10, 34,14, 35,19,
+    35,26, jawRight,31, 30,chin-1, 28,chin, 24,chin,
+    jawLeft,chin-4, 16,30, 14,26);
+  p(s[2], 15,16, 17,12, 21,10, 27,9, 31,11, 33,14, 34,19,
+    34,26, jawRight-1,30, 29,chin-2, 27,chin-1, 24,chin-1,
+    jawLeft+1,chin-4, 17,29, 15,25);
+  // Broad connected planes leave room for eyes and lips to read as features.
+  p(s[1], 15,16, 18,13, 18,20, 17,24, 18,29,
+    22,chin-2, jawLeft,chin-4, 16,30, 14,26);
+  p(s[3], 21,13, 27,11, 31,12, 33,16, 33,21, 32,24,
+    33,27, 30,29, 25,29, 20,27, 19,23, 20,18);
+  p(s[3], 23,31, 29,31, 30,32, 27,chin-2, 25,chin-2);
+  // The ear is a single connected shape, level with the eyes and nose.
+  stamp(ctx, 11, 21, [
+    ".sss.", "smmms", "smlls", "smsms", ".smms", "..ss.",
+  ], { s: s[1], m: s[2], l: s[3] });
+
+  const eyeInk = "#403942";
+  const eyeWhite = "#f7e8ce";
+  const iris = "#7c6654";
+  const eyeY = 21;
+  const eyePalette = { d: eyeInk, w: eyeWhite, i: iris };
+  // Both eyes share a baseline and gaze. The far eye is narrower, rather than
+  // being lifted into the eyebrow. All pixels belong to a connected cluster.
   if (a.eyes === "open") {
-    stamp(ctx, 18, 21, [".ddddd.", "dwiidd.", "..dd..."], {
-      d: eyeInk,
-      w: s[4],
-      i: iris,
-    });
-    stamp(ctx, 30, 20, [".ddd", "wiid", ".dd."], {
-      d: eyeInk,
-      w: s[4],
-      i: iris,
-    });
-    pixels(ctx, "#faedd0", [21, 22, 32, 21]);
-  } else if (a.eyes === "soft") {
-    stamp(ctx, 18, 21, [".....d.", ".dddd..", "d.wid..", "....d.."], {
-      d: eyeInk,
-      w: s[4],
-      i: iris,
-    });
-    stamp(ctx, 30, 21, [".ddd", "w.id"], { d: eyeInk, w: s[4], i: iris });
+    stamp(ctx, 20, eyeY, [".ddd.", "wwidd", ".ddd."], eyePalette);
+    stamp(ctx, 29, eyeY, [".dd.", "widd", ".dd."], eyePalette);
+  } else if (a.eyes === "straight") {
+    stamp(ctx, 20, eyeY, ["ddddd", "..id."], eyePalette);
+    stamp(ctx, 29, eyeY, ["dddd", ".id."], eyePalette);
   } else {
-    stamp(ctx, 18, 21, [".....dd", "ddddd..", "..wid.."], {
-      d: eyeInk,
-      w: s[4],
-      i: iris,
-    });
-    stamp(ctx, 30, 20, ["...d", ".dd.", "wid."], {
-      d: eyeInk,
-      w: s[4],
-      i: iris,
-    });
+    stamp(ctx, 20, eyeY, ["dddd.", "wwid."], eyePalette);
+    stamp(ctx, 29, eyeY, ["ddd.", "wid."], eyePalette);
   }
-  p(h[1], 18, 20, 19, 18, 23, 18, 25, 19, 24, 20, 22, 19);
-  p(h[1], 30, 19, 31, 17, 34, 17, 34, 19, 33, 18);
-  p(s[0], 25, 30, 27, 30, 29, 29, 32, 29, 32, 30, 30, 31, 27, 31);
-  pixels(ctx, s[4], [27, 32, 28, 32]);
-  if (a.age !== "young") {
-    pixels(ctx, s[1], [17, 24, 18, 25, 32, 27]);
-    pixels(ctx, s[2], [21, 27, 24, 29]);
+  const browY = a.mark === "glasses" ? 17 : 18;
+  pixels(ctx, h[1], [20,browY, 21,browY, 22,browY, 23,browY,
+    29,browY, 30,browY, 31,browY]);
+  if (a.eyes === "straight") {
+    pixels(ctx, h[1], [24,browY+1, 28,browY+1]);
   }
-  if (a.age === "elder") {
-    pixels(
-      ctx,
-      s[1],
-      [
-        15, 23, 16, 24, 18, 25, 19, 26, 20, 26, 31, 27, 30, 28, 29, 28, 23, 30,
-        23, 31, 24, 32, 31, 32, 30, 33,
-      ],
-    );
-    pixels(ctx, s[3], [18, 26, 21, 27, 24, 31, 29, 34]);
-    pixels(ctx, s[2], [22, 18, 23, 17, 24, 17, 28, 17, 29, 16]);
+
+  // Nose, mouth and chin share x≈27. No white teeth/lip stripe and no dark
+  // cheek-to-mouth hook: these had made every face look like a strained grin.
+  pixels(ctx, s[1], [28,24, 28,25, 29,26]);
+  pixels(ctx, s[2], [27,26, 28,27]);
+  pixels(ctx, s[4], [27,24]);
+  pixels(ctx, s[1], [25,30, 26,30, 27,30, 28,30]);
+  pixels(ctx, s[2], [26,31, 27,31]);
+
+  if (a.age === "adult") {
+    pixels(ctx, s[2], [20,24, 21,24, 31,24]);
+  } else if (a.age === "elder") {
+    pixels(ctx, s[1], [18,23, 19,24, 32,24, 32,28, 31,29, 22,30]);
+    pixels(ctx, s[2], [20,25, 21,25, 23,32, 24,33, 29,33]);
   }
   if (a.mark === "freckles") {
-    pixels(ctx, s[1], [17, 26, 19, 25, 21, 26, 23, 25, 25, 26, 32, 24, 33, 24]);
+    pixels(ctx, s[1], [19,26, 21,26, 23,27, 31,26, 33,25]);
   } else if (a.mark === "scar") {
-    pixels(ctx, s[1], [16, 25, 17, 26, 18, 27, 19, 28, 20, 29]);
-    pixels(ctx, s[4], [16, 26, 18, 28, 19, 29]);
+    pixels(ctx, s[1], [18,25, 19,26, 20,27]);
+    pixels(ctx, s[3], [18,26, 19,27]);
   } else if (a.mark === "glasses") {
-    stamp(
-      ctx,
-      13,
-      19,
-      [
-        ".....bbbb.......bbb.",
-        "....b....b.....b...b",
-        "bbbb.....bb...b....b",
-        "....b....b.bbb.b...b",
-        "....b....b.....b..b.",
-        ".....bbbb.......bb..",
-      ],
-      { b: "#62534c" },
-    );
-    pixels(ctx, "#e6cfa8", [18, 19, 19, 19, 30, 19, 31, 19]);
+    // Lens centres register to the eyes (22,22) and (31,22); the bridge lives
+    // between them. The frames never move the eyes or cover their pupils.
+    const frame = { f: "#6d5c50" };
+    stamp(ctx, 18, 19, [
+      "..ffff..", ".f....f.", "f......f", "f......f",
+      "f......f", ".f....f.", "..ffff..",
+    ], frame);
+    stamp(ctx, 28, 19, [
+      ".ffff.", "f....f", "f....f", "f....f", "f....f", ".ffff.",
+    ], frame);
+    pixels(ctx, frame.f, [14,21, 15,21, 16,20, 17,20, 26,21, 27,21]);
+    pixels(ctx, "#c7ad85", [20,19, 21,19, 30,19]);
   }
 }
 

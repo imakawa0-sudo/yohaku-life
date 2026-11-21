@@ -1,0 +1,442 @@
+{
+  "baseline_revision": "ddc5de0f1669e1e28f1f970b9ee306879b0cb9d2",
+  "baseline_label": "ddc5de0",
+  "old_renderer_sha256": "7df2e13c53ba36e94bc069641da3e4d5240971208da05c7217e7f6275b64f7cf",
+  "new_renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+  "case_definition_method": "Exact TypeScript AST extraction of firstSix, controlledFaces, appearances, and people from the comparison page",
+  "width": 48,
+  "height": 56,
+  "viewBox": "0 0 48 56",
+  "svg_files": 18,
+  "geometry": "One editable rectangle per horizontally continuous span of the same RGBA colour, height exactly 1",
+  "source_canvas_operations": [
+    "fillStyle",
+    "fillRect"
+  ],
+  "source_constraints_checked": "Integer rectangles and opaque six-digit sRGB hex colours; no approximated unsupported operations",
+  "background": [
+    {
+      "color": "#f2e9cd",
+      "rect": [
+        0,
+        0,
+        48,
+        56
+      ]
+    },
+    {
+      "color": "#e4ddbc",
+      "rect": [
+        0,
+        32,
+        48,
+        24
+      ]
+    },
+    {
+      "color": "#d4ceac",
+      "rect": [
+        0,
+        43,
+        48,
+        13
+      ]
+    }
+  ],
+  "svg_rectangles_reconstructed_to_exact_rgba": true,
+  "renderer_inputs_unchanged_during_export": true,
+  "browser_or_figma_visual_verification": "Not performed by this export; root and Figma agent review the actual display",
+  "cases": [
+    {
+      "case_id": "A",
+      "case_label": "A 短髪",
+      "appearance": {
+        "face": "oval",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "controlled_face_only": false,
+      "variants": {
+        "old": {
+          "file": "A-old.svg",
+          "filename": "A-old.svg",
+          "svg_sha256": "56280ae2ce929fb6ddf469b59764e71331f7c718ee4ff0387d397bc45b2e4690",
+          "rgba_sha256": "7aa9efb401eaa5d7c7d15204e033c0262234f246dcb7f07526c562cd5ea275de",
+          "renderer_sha256": "7df2e13c53ba36e94bc069641da3e4d5240971208da05c7217e7f6275b64f7cf",
+          "bytes": 37610,
+          "rect_count": 626,
+          "colors": 21,
+          "fill_rect_calls": 477
+        },
+        "new": {
+          "file": "A-new.svg",
+          "filename": "A-new.svg",
+          "svg_sha256": "5df59012f790f41d03661181c9309366d644c0b0db31d35162f05ff3018874af",
+          "rgba_sha256": "aaf1a6f80707877e15222b7342699f25fa5958a27bb85df7527da6384c9aa8b0",
+          "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+          "bytes": 35232,
+          "rect_count": 586,
+          "colors": 22,
+          "fill_rect_calls": 453
+        }
+      },
+      "changed_pixels": 290
+    },
+    {
+      "case_id": "B",
+      "case_label": "B おかっぱ",
+      "appearance": {
+        "face": "round",
+        "skin": "peach",
+        "hair": "bob",
+        "hairColor": "chestnut",
+        "age": "adult",
+        "build": "slight",
+        "eyes": "open",
+        "mark": "freckles",
+        "clothing": "apron",
+        "dye": "brick"
+      },
+      "controlled_face_only": false,
+      "variants": {
+        "old": {
+          "file": "B-old.svg",
+          "filename": "B-old.svg",
+          "svg_sha256": "b201a63bc52620e187224523725806c9f7d40b842fb494aba409f6f0188204ae",
+          "rgba_sha256": "8421b5b90b0f1b711299192f3bdc0c289d7390339c8b82a7ac500832dfb662fb",
+          "renderer_sha256": "7df2e13c53ba36e94bc069641da3e4d5240971208da05c7217e7f6275b64f7cf",
+          "bytes": 44262,
+          "rect_count": 737,
+          "colors": 26,
+          "fill_rect_calls": 656
+        },
+        "new": {
+          "file": "B-new.svg",
+          "filename": "B-new.svg",
+          "svg_sha256": "ac02959305c2c418b6f9ae59c42a70fe2020517e076f7693546489f49bd8fa5d",
+          "rgba_sha256": "dbb2e5af97be2c389fc7b2d8c09e3fba1639292c471d92d4eb46d0fe89aa0685",
+          "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+          "bytes": 43903,
+          "rect_count": 731,
+          "colors": 26,
+          "fill_rect_calls": 637
+        }
+      },
+      "changed_pixels": 162
+    },
+    {
+      "case_id": "C",
+      "case_label": "C 長い髪",
+      "appearance": {
+        "face": "angular",
+        "skin": "wheat",
+        "hair": "wave",
+        "hairColor": "ash",
+        "age": "young",
+        "build": "slight",
+        "eyes": "straight",
+        "mark": "scar",
+        "clothing": "wrap",
+        "dye": "indigo"
+      },
+      "controlled_face_only": false,
+      "variants": {
+        "old": {
+          "file": "C-old.svg",
+          "filename": "C-old.svg",
+          "svg_sha256": "d968ccd96c2786d59dd7e1214f348f177f5e86345a1248e0165f0eb35458e8d6",
+          "rgba_sha256": "7eeb682868b475cdcb684514190429fefaa1ee1c2ef955f7862d352d1a50392e",
+          "renderer_sha256": "7df2e13c53ba36e94bc069641da3e4d5240971208da05c7217e7f6275b64f7cf",
+          "bytes": 43494,
+          "rect_count": 725,
+          "colors": 22,
+          "fill_rect_calls": 607
+        },
+        "new": {
+          "file": "C-new.svg",
+          "filename": "C-new.svg",
+          "svg_sha256": "bc0759eea01be6582e16534af35f707aad2dd15db4dcab7ed091a6aef69db1b5",
+          "rgba_sha256": "ba3286b46dff483e8a067597bf4361a80ca135dfb2aea55ec536a326a93524f9",
+          "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+          "bytes": 43014,
+          "rect_count": 717,
+          "colors": 22,
+          "fill_rect_calls": 594
+        }
+      },
+      "changed_pixels": 185
+    },
+    {
+      "case_id": "D",
+      "case_label": "D まとめ髪",
+      "appearance": {
+        "face": "oval",
+        "skin": "bronze",
+        "hair": "knot",
+        "hairColor": "silver",
+        "age": "elder",
+        "build": "broad",
+        "eyes": "soft",
+        "mark": "glasses",
+        "clothing": "coat",
+        "dye": "plum"
+      },
+      "controlled_face_only": false,
+      "variants": {
+        "old": {
+          "file": "D-old.svg",
+          "filename": "D-old.svg",
+          "svg_sha256": "e1224fbeb949e89c7dffc538b574a5fc107b97ccc083c1c0ed0e4f00abbdef88",
+          "rgba_sha256": "db19d27988585927e260959cd7f968f58142f2e582469e35e907077bd8f79c17",
+          "renderer_sha256": "7df2e13c53ba36e94bc069641da3e4d5240971208da05c7217e7f6275b64f7cf",
+          "bytes": 41790,
+          "rect_count": 697,
+          "colors": 24,
+          "fill_rect_calls": 578
+        },
+        "new": {
+          "file": "D-new.svg",
+          "filename": "D-new.svg",
+          "svg_sha256": "991834cb8f17b68ae47d863c3a3863c23e58ea7f3977bd3287d032269d12712a",
+          "rgba_sha256": "ee30375a83ce45611668ebdf881654c8402d9aa08346e527d0c919b38564ca53",
+          "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+          "bytes": 39698,
+          "rect_count": 662,
+          "colors": 25,
+          "fill_rect_calls": 552
+        }
+      },
+      "changed_pixels": 261
+    },
+    {
+      "case_id": "E",
+      "case_label": "E 三つ編み",
+      "appearance": {
+        "face": "round",
+        "skin": "umber",
+        "hair": "braid",
+        "hairColor": "honey",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "apron",
+        "dye": "rust"
+      },
+      "controlled_face_only": false,
+      "variants": {
+        "old": {
+          "file": "E-old.svg",
+          "filename": "E-old.svg",
+          "svg_sha256": "bb8cf67632900a6ffc47f466ebbc2df556ce2c776dbb47f78b6d7c4eef9a48a6",
+          "rgba_sha256": "80c9cfa4b462b92174492c01194eab9136cb9a35afeb47656e8ccacf259a1e4d",
+          "renderer_sha256": "7df2e13c53ba36e94bc069641da3e4d5240971208da05c7217e7f6275b64f7cf",
+          "bytes": 44480,
+          "rect_count": 741,
+          "colors": 27,
+          "fill_rect_calls": 594
+        },
+        "new": {
+          "file": "E-new.svg",
+          "filename": "E-new.svg",
+          "svg_sha256": "3f02966f991b27d2854e4d73d089106b7c3cfb52629978f777854d58f051b5cf",
+          "rgba_sha256": "d19575da46db20f5fac3cba749aba560d656025efc27e83d0c6eea1fdc3ef902",
+          "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+          "bytes": 43523,
+          "rect_count": 725,
+          "colors": 27,
+          "fill_rect_calls": 577
+        }
+      },
+      "changed_pixels": 176
+    },
+    {
+      "case_id": "F",
+      "case_label": "F 短髪",
+      "appearance": {
+        "face": "oval",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "elder",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "glasses",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "controlled_face_only": false,
+      "variants": {
+        "old": {
+          "file": "F-old.svg",
+          "filename": "F-old.svg",
+          "svg_sha256": "60d479c75e26f2dc4a072d07ffaab91d58b20f874325b4c38cd389af465886a7",
+          "rgba_sha256": "1a9c9e273db70282530596902b84cad2372f86c03e9e38e7911eb6b946f47aac",
+          "renderer_sha256": "7df2e13c53ba36e94bc069641da3e4d5240971208da05c7217e7f6275b64f7cf",
+          "bytes": 40547,
+          "rect_count": 675,
+          "colors": 24,
+          "fill_rect_calls": 549
+        },
+        "new": {
+          "file": "F-new.svg",
+          "filename": "F-new.svg",
+          "svg_sha256": "5596dfa44ecbcd1284c2af7e7b04ea220b9e2e57445f269d0c0e394fe5cacb8f",
+          "rgba_sha256": "677d5a14be39b90620507ff6432c4582ab6485a874739d36dc828a1a2d311ddd",
+          "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+          "bytes": 37569,
+          "rect_count": 625,
+          "colors": 25,
+          "fill_rect_calls": 512
+        }
+      },
+      "changed_pixels": 332
+    },
+    {
+      "case_id": "G",
+      "case_label": "G 輪郭のみ：面長",
+      "appearance": {
+        "face": "oval",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "controlled_face_only": true,
+      "variants": {
+        "old": {
+          "file": "G-old.svg",
+          "filename": "G-old.svg",
+          "svg_sha256": "d264cd5c9179ee40ba782c293ff6e8bdde7f3337465693a722353e4fb8077a69",
+          "rgba_sha256": "7aa9efb401eaa5d7c7d15204e033c0262234f246dcb7f07526c562cd5ea275de",
+          "renderer_sha256": "7df2e13c53ba36e94bc069641da3e4d5240971208da05c7217e7f6275b64f7cf",
+          "bytes": 37625,
+          "rect_count": 626,
+          "colors": 21,
+          "fill_rect_calls": 477
+        },
+        "new": {
+          "file": "G-new.svg",
+          "filename": "G-new.svg",
+          "svg_sha256": "cce5b412917eb0e9d5b7bf2d70c33b9475cf5d5ce303880de4a255b6cce8183f",
+          "rgba_sha256": "aaf1a6f80707877e15222b7342699f25fa5958a27bb85df7527da6384c9aa8b0",
+          "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+          "bytes": 35247,
+          "rect_count": 586,
+          "colors": 22,
+          "fill_rect_calls": 453
+        }
+      },
+      "changed_pixels": 290
+    },
+    {
+      "case_id": "H",
+      "case_label": "H 輪郭のみ：丸顔",
+      "appearance": {
+        "face": "round",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "controlled_face_only": true,
+      "variants": {
+        "old": {
+          "file": "H-old.svg",
+          "filename": "H-old.svg",
+          "svg_sha256": "7b13929bff850890f97ad9deb060c5cf6a22906c5b5a6d0e6f51e1f6486c27a1",
+          "rgba_sha256": "19481ab9165cd232791f68b59b61da684fd3e664210dde9dd3ee301d77c85a4c",
+          "renderer_sha256": "7df2e13c53ba36e94bc069641da3e4d5240971208da05c7217e7f6275b64f7cf",
+          "bytes": 37445,
+          "rect_count": 623,
+          "colors": 21,
+          "fill_rect_calls": 468
+        },
+        "new": {
+          "file": "H-new.svg",
+          "filename": "H-new.svg",
+          "svg_sha256": "52bfc4e1c739edfec63194432c47a67b1f44d88c3fc5e557d96dad896835d61e",
+          "rgba_sha256": "9a232c31fabe4218b560ea24974c4d983b32e3c9c3655f246a2eb0532dd5034b",
+          "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+          "bytes": 34948,
+          "rect_count": 581,
+          "colors": 22,
+          "fill_rect_calls": 445
+        }
+      },
+      "changed_pixels": 274
+    },
+    {
+      "case_id": "I",
+      "case_label": "I 輪郭のみ：角張った輪郭",
+      "appearance": {
+        "face": "angular",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "controlled_face_only": true,
+      "variants": {
+        "old": {
+          "file": "I-old.svg",
+          "filename": "I-old.svg",
+          "svg_sha256": "62b5a6f8d02e060a137fb6724bb7e0c4015117188c4e0098cd3ac463e0f60311",
+          "rgba_sha256": "ee6f0116be703dcf8ac5342920a8b5e8e02cbd29f6a1c11d54397617b94cf3f6",
+          "renderer_sha256": "7df2e13c53ba36e94bc069641da3e4d5240971208da05c7217e7f6275b64f7cf",
+          "bytes": 37636,
+          "rect_count": 626,
+          "colors": 21,
+          "fill_rect_calls": 471
+        },
+        "new": {
+          "file": "I-new.svg",
+          "filename": "I-new.svg",
+          "svg_sha256": "4540d75647400433f9a882cc54168b6599ed5095f19a69861343aa6334489150",
+          "rgba_sha256": "da09468730f4d660ebe32cfe4cf03e1983c1b101c4c61137c6c0c7fca8a92372",
+          "renderer_sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab",
+          "bytes": 35259,
+          "rect_count": 586,
+          "colors": 22,
+          "fill_rect_calls": 449
+        }
+      },
+      "changed_pixels": 270
+    }
+  ],
+  "case_definition_origin": {
+    "filename": "portrait-redraw-comparison.ts",
+    "sha256": "5a581ef39172fb6964f833ef04fce170ed8265c957572fa114f4022fdb0e0279",
+    "note": "All nine appearances are included below; compiled cases are also preserved in the standalone comparison."
+  },
+  "comparison_html": {
+    "file": "../../diagnostics/portrait-redraw-comparison-20261122.html",
+    "sha256": "91168bb3a352788ef82d924adedf3333d63fcc1add2fcc6e5cd4b8742b0f295d"
+  },
+  "current_renderer": {
+    "file": "../../../src/reform/pixelFigure.ts",
+    "sha256": "4720bca847b0e18daeaeb6040d948e198dd86561ce17adaa86f644f73adba5ab"
+  }
+}
