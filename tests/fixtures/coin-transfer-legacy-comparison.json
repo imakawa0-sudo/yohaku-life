@@ -1,0 +1,31 @@
+{
+  "source": "/workspace/research/stage4f-handoff/baseline/run/genuine-mio-shopping-final-bird-and-shared-medicine.json",
+  "sourceSha256": "f6a71f1fa78debdce4a7e5a2869320bb3720c85dc2f38dc3fd8271db5fe411a4",
+  "oldHtmlSha256": "8c4b431661a5dfbd5bef832879371a1aadd534ab59b8d7e76247b8286f893248",
+  "oldPublishedVersion": 44,
+  "projection": "Remove logs/currency/region.receipts; adjust new branch base.scrap down by1 because the new branch retains one scrap. Keep nextId, all jobs/life IDs, bodies, inventory, region stock/trust etc. Old logs/receipts prefix are checked separately.",
+  "projectedWorldSha256": "9933f9f1df2d1b38933e9ed02effd33412c49a20b49793fba13224f91924cb4e",
+  "minutes": 1112,
+  "nextId": 75,
+  "base": {
+    "food": 10,
+    "ingredients": 14,
+    "medicine": 3,
+    "scrap": 1
+  },
+  "logCount": 37,
+  "regionReceiptCount": 7,
+  "craft": {
+    "id": 64,
+    "authorId": "aki",
+    "createdAt": 1050,
+    "createdLocation": "home",
+    "design": "bird"
+  },
+  "shopCash": 4,
+  "wallets": {
+    "aki": 2,
+    "mio": 0,
+    "ren": 0
+  }
+}

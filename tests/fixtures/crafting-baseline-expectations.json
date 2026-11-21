@@ -1,0 +1,56 @@
+{
+  "format": 1,
+  "sourceHtmlSha256": "2914a10d5d31d43ca103e060d260d8b5aa14de04693e056bd0f07c1563ce96af",
+  "input": {
+    "path": "tests/fixtures/crafting-home-ready-v3.json",
+    "sha256": "f973af9cffd5a2ce6b17df0c4eb93a1731aec3d23652aa0cd2e8297b55b3f9d8",
+    "minutes": 602
+  },
+  "withoutTools": {
+    "worldSha256": "459016fbc04ba7e3fbb18812092d3da6a00f2f871701866d82a292fe8cfa1c72",
+    "minutes": 732,
+    "base": {
+      "food": 12,
+      "ingredients": 14,
+      "medicine": 3,
+      "scrap": 2
+    },
+    "crafts": [
+      {
+        "id": 18,
+        "authorId": "aki",
+        "createdAt": 598,
+        "createdLocation": "home",
+        "design": "bird"
+      },
+      {
+        "id": 30,
+        "authorId": "aki",
+        "createdAt": 645,
+        "createdLocation": "home",
+        "design": "flower"
+      },
+      {
+        "id": 36,
+        "authorId": "aki",
+        "createdAt": 690,
+        "createdLocation": "home",
+        "design": "bird"
+      },
+      {
+        "id": 39,
+        "authorId": "aki",
+        "createdAt": 732,
+        "createdLocation": "home",
+        "design": "flower"
+      }
+    ],
+    "craftSkill": 4.700000000000001,
+    "durations": [
+      43,
+      45,
+      42
+    ],
+    "equipmentPreviewAtInsufficientStock": "料理道具を整える\n一つだけ\n\n使いやすい調理道具を、この場所に揃える。共同の食事を少し早く用意できる。\n\nこの場所で新しく始める料理の時間を25%短縮。食材と完成数は同じ。\n\n材料\n資材 3\n担当\nアキ\n所要時間\n37分\n設置場所\n共同の居間\n\n料理道具を整えるには、未予約の資材3個が必要です。\n\nこの制作を予約する"
+  }
+}

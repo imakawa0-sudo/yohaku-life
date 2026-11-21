@@ -1,0 +1,450 @@
+{
+  "version": 3,
+  "minutes": 553,
+  "seed": 20261119,
+  "residents": [
+    {
+      "id": "aki",
+      "name": "アキ",
+      "role": "あなた",
+      "traits": [
+        "好奇心旺盛",
+        "手仕事が好き"
+      ],
+      "wish": "自分の窓辺に、手作りのものを置きたい",
+      "skills": {
+        "cooking": 2,
+        "combat": 2,
+        "craft": 4
+      },
+      "weapon": "knife",
+      "armor": false,
+      "location": "home",
+      "hp": 100,
+      "hunger": 96.8099999999996,
+      "energy": 86.62899999999995,
+      "mood": 80,
+      "policy": "balanced",
+      "action": null,
+      "suspended": null,
+      "relations": {
+        "mio": {
+          "closeness": 28,
+          "trust": 31
+        },
+        "ren": {
+          "closeness": 28,
+          "trust": 31
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "support",
+        "home": "home",
+        "leisure": "quiet"
+      },
+      "wishKind": "display"
+    },
+    {
+      "id": "mio",
+      "name": "ミオ",
+      "role": "料理と暮らし",
+      "traits": [
+        "世話好き",
+        "おしゃべり"
+      ],
+      "wish": "みんなで温かい食事を囲みたい",
+      "skills": {
+        "cooking": 6.12,
+        "combat": 2,
+        "craft": 2
+      },
+      "weapon": "staff",
+      "armor": false,
+      "location": "home",
+      "hp": 100,
+      "hunger": 96.8099999999996,
+      "energy": 85.93599999999992,
+      "mood": 93,
+      "policy": "cook",
+      "action": null,
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 37,
+          "trust": 31
+        },
+        "ren": {
+          "closeness": 37,
+          "trust": 31
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "cook",
+        "home": "home",
+        "leisure": "social"
+      },
+      "wishKind": "household-meal"
+    },
+    {
+      "id": "ren",
+      "name": "レン",
+      "role": "探索と護衛",
+      "traits": [
+        "慎重",
+        "静かな場所が好き"
+      ],
+      "wish": "無理をせず、明日の物資を見つけたい",
+      "skills": {
+        "cooking": 1,
+        "combat": 6,
+        "craft": 3
+      },
+      "weapon": "spear",
+      "armor": true,
+      "location": "garden",
+      "hp": 100,
+      "hunger": 96.8099999999996,
+      "energy": 84.94599999999988,
+      "mood": 88,
+      "policy": "gather",
+      "action": null,
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 28,
+          "trust": 39
+        },
+        "mio": {
+          "closeness": 28,
+          "trust": 39
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "gather",
+        "home": "bedroom",
+        "leisure": "quiet"
+      },
+      "wishKind": "safe-return"
+    }
+  ],
+  "resources": {
+    "food": 6,
+    "ingredients": 12,
+    "medicine": 3,
+    "scrap": 4
+  },
+  "logs": [
+    {
+      "id": 1,
+      "time": 480,
+      "type": "life",
+      "title": "三人の朝",
+      "text": "窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 2,
+      "time": 480,
+      "type": "social",
+      "title": "ミオのひとこと",
+      "text": "「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 7,
+      "time": 495,
+      "type": "social",
+      "title": "同じ食卓で",
+      "text": "アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 10,
+      "time": 498,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが裏庭に着いた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 12,
+      "time": 517,
+      "type": "work",
+      "title": "温かい食事ができた",
+      "text": "ミオが食材2個で食事を3食作った。鍋から、やさしい湯気が立ちのぼる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 14,
+      "time": 523,
+      "type": "work",
+      "title": "裏庭の収穫",
+      "text": "レンは食べられる葉と根を集めた。食材を3個持ち帰った。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 17,
+      "time": 548,
+      "type": "work",
+      "title": "裏庭の収穫",
+      "text": "レンは食べられる葉と根を集めた。食材を3個持ち帰った。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    }
+  ],
+  "enemy": {
+    "hp": 80,
+    "location": "ruins",
+    "defeated": false
+  },
+  "flags": {
+    "decorated": false,
+    "hobbyFinished": false,
+    "suppliesRecovered": false,
+    "safeSuppliesRecovered": false
+  },
+  "nextId": 18,
+  "ended": false,
+  "autoCombat": false,
+  "life": {
+    "version": 1,
+    "crafts": [],
+    "wishes": {
+      "mio": {
+        "completedAt": 495,
+        "eventId": 6
+      },
+      "ren": {
+        "completedAt": 523,
+        "eventId": 13
+      }
+    },
+    "events": [
+      {
+        "id": 6,
+        "time": 495,
+        "kind": "meal",
+        "location": "home",
+        "actors": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "食事をとった",
+        "text": "アキとミオとレンが、同じ場所で温かい食事を囲んだ。"
+      },
+      {
+        "id": 13,
+        "time": 523,
+        "kind": "supply",
+        "location": "garden",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが裏庭で、明日の食事に使える食材を集めた。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      },
+      {
+        "id": 16,
+        "time": 548,
+        "kind": "supply",
+        "location": "garden",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが裏庭で、明日の食事に使える食材を集めた。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      }
+    ],
+    "reflections": [],
+    "meals": [
+      {
+        "residentId": "aki",
+        "time": 495,
+        "location": "home"
+      },
+      {
+        "residentId": "mio",
+        "time": 495,
+        "location": "home"
+      },
+      {
+        "residentId": "ren",
+        "time": 495,
+        "location": "home"
+      }
+    ]
+  },
+  "trade": {
+    "version": 1,
+    "nextArrival": 2160,
+    "receipts": []
+  },
+  "region": {
+    "version": 1,
+    "stockDay": 1,
+    "stock": {
+      "food": 6,
+      "medicine": 3
+    },
+    "trust": {
+      "village-trader": {},
+      "village-guide": {}
+    },
+    "talked": {
+      "village-trader": [],
+      "village-guide": []
+    },
+    "knownRoute": false,
+    "routeKnownBy": [],
+    "harvests": [],
+    "receipts": []
+  },
+  "inventory": {
+    "version": 1,
+    "packs": {
+      "aki": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "mio": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "ren": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      }
+    },
+    "ground": {},
+    "baseGear": {
+      "knife": 1,
+      "spear": 1,
+      "staff": 1,
+      "armor": 3
+    }
+  },
+  "autonomy": {
+    "version": 1,
+    "leisure": {},
+    "manualStays": {},
+    "conversations": {},
+    "mealPairs": {
+      "aki:mio": {
+        "time": 495,
+        "location": "home",
+        "eventId": 6
+      },
+      "aki:ren": {
+        "time": 495,
+        "location": "home",
+        "eventId": 6
+      },
+      "mio:ren": {
+        "time": 495,
+        "location": "home",
+        "eventId": 6
+      }
+    }
+  }
+}

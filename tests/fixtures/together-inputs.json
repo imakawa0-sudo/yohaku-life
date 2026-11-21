@@ -1,0 +1,99 @@
+{
+  "status": "prepared",
+  "source": {
+    "role": "genuine-village",
+    "path": "tests/fixtures/together-genuine-village-622-v4.json",
+    "sha256": "cd98d0037b396e971de2ae675472d72ee76a44a0d43d1d91c8e6e575e38d5df3",
+    "bytes": 12902,
+    "version": 4,
+    "minutes": 622,
+    "classification": "genuine-old50-UI-export",
+    "source": "/workspace/research/stage5f-together-scoping/baseline/run-1/common-village-preparation/common-village-light-mio-heavy-ren.json",
+    "fieldEdits": false
+  },
+  "inputs": [
+    {
+      "role": "genuine-village",
+      "path": "tests/fixtures/together-genuine-village-622-v4.json",
+      "sha256": "cd98d0037b396e971de2ae675472d72ee76a44a0d43d1d91c8e6e575e38d5df3",
+      "bytes": 12902,
+      "version": 4,
+      "minutes": 622,
+      "classification": "genuine-old50-UI-export",
+      "source": "/workspace/research/stage5f-together-scoping/baseline/run-1/common-village-preparation/common-village-light-mio-heavy-ren.json",
+      "fieldEdits": false
+    },
+    {
+      "role": "paired-zero",
+      "path": "tests/fixtures/together-control-paired-zero-v5.json",
+      "sha256": "6d1996b9a351f8d3645169e5b940985d56589b0b34681e66a216e129d3497f6f",
+      "bytes": 13872,
+      "version": 5,
+      "minutes": 622,
+      "classification": "controlled-public-command-positive-advance-from-genuine622",
+      "source": "tests/fixtures/together-genuine-village-622-v4.json",
+      "fieldEdits": false
+    },
+    {
+      "role": "paired-one",
+      "path": "tests/fixtures/together-control-paired-one-v5.json",
+      "sha256": "c3155561f68bf819ad0e6cd2d162d5e94af670c2448c8716dd92d5c6d39dc325",
+      "bytes": 13872,
+      "version": 5,
+      "minutes": 623,
+      "classification": "controlled-public-command-positive-advance-from-genuine622",
+      "source": "tests/fixtures/together-genuine-village-622-v4.json",
+      "fieldEdits": false
+    },
+    {
+      "role": "paired-with-held",
+      "path": "tests/fixtures/together-control-paired-with-held-v5.json",
+      "sha256": "5f9f10ef3e5b14d80d6eeffad767e36eac405b422b0bf502a3665b53f9f95a8d",
+      "bytes": 14147,
+      "version": 5,
+      "minutes": 622,
+      "classification": "controlled-public-command-positive-advance-from-genuine622",
+      "source": "tests/fixtures/together-genuine-village-622-v4.json",
+      "fieldEdits": false
+    }
+  ],
+  "expectedIndividualSafeActions": {
+    "mio": {
+      "id": 29,
+      "kind": "move",
+      "label": "共同の居間へ移動",
+      "progress": 0,
+      "duration": 51,
+      "target": "home",
+      "automatic": false,
+      "origin": "village",
+      "path": [
+        "meadow",
+        "road",
+        "home"
+      ],
+      "segment": 0,
+      "segmentProgress": 0,
+      "segmentDuration": 18
+    },
+    "ren": {
+      "id": 29,
+      "kind": "move",
+      "label": "共同の居間へ移動",
+      "progress": 0,
+      "duration": 65,
+      "target": "home",
+      "automatic": false,
+      "origin": "village",
+      "path": [
+        "meadow",
+        "road",
+        "home"
+      ],
+      "segment": 0,
+      "segmentProgress": 0,
+      "segmentDuration": 23
+    }
+  },
+  "preparation": "tests/fixtures/together-preparation.json"
+}

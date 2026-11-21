@@ -1,0 +1,121 @@
+{
+  "classification": "CONTROLLED public API preparation, separate from normal actual UI contexts. No valid state field edits; body, wounds, items, IDs, enemy and position only changed through genuine existing progression and public commands.",
+  "source": "/workspace/research/stage4f-handoff/default-regression/genuine-rescue-in-progress.json",
+  "sourceSha256": "c8197c82fb5d035001c4b3ee1dc264a282cac909e1ddbbb572d6bc752839380f",
+  "initialMinutes": 3412,
+  "output": "/workspace/sites/yohaku-life/tests/fixtures/route-work-controlled-weak-patient-before-rescue-v3.json",
+  "outputSha256": "d6399915ced762227b74a1973c92debb44d9ea06a976f80400f1d6814f5d7f89",
+  "outputMinutes": 3569,
+  "sourceHashes": {
+    "src/game/engine.ts": "9c414c24a3be644f16903e519f05cbb3cc5d28d3b898d179e6f9b8c4885135bb",
+    "src/game/route-works.ts": "0c76754a834e642a2e329de6046ab907797a221d1477721d1a6559bf5e3dc140",
+    "src/game/inventory.ts": "590607fcf58da054068dea465ab1f9d35102f393330262cd760e97fed8581f21",
+    "src/game/types.ts": "f22c6c3d694e4270f982fb6bec77c860878fe70b35fb04bf25d76b830c9cf80f"
+  },
+  "fieldEdits": false,
+  "browserCommands": false,
+  "storageWrites": false,
+  "steps": [
+    {
+      "label": "Finish genuine existing rescue",
+      "method": "positive-public-advance",
+      "requestedMinutes": 60,
+      "beforeMinutes": 3412,
+      "afterMinutes": 3448,
+      "beforeSha256": "8564b4a86c010e92431df1d3f08d9c32d06ff3b0697349c3c44c793c67e874d6",
+      "afterSha256": "7f6448f1364e4ae12797ce8a19d42657bc3b06e8aa09e678d645cad6bf37b9c9"
+    },
+    {
+      "label": "Natural home recovery, no body edit",
+      "method": "positive-public-advance",
+      "requestedMinutes": 1,
+      "beforeMinutes": 3448,
+      "afterMinutes": 3449,
+      "beforeSha256": "7f6448f1364e4ae12797ce8a19d42657bc3b06e8aa09e678d645cad6bf37b9c9",
+      "afterSha256": "eecc521d795daf5737739312e44b42a69098c0e6e53765c9fd384c92a18c3793"
+    },
+    {
+      "label": "Actual public transfer from base to Aki pack",
+      "method": "public-command",
+      "command": {
+        "type": "transfer",
+        "residentId": "aki",
+        "from": "base",
+        "to": "aki",
+        "resource": "scrap",
+        "amount": 2
+      },
+      "beforeMinutes": 3449,
+      "afterMinutes": 3449,
+      "beforeSha256": "eecc521d795daf5737739312e44b42a69098c0e6e53765c9fd384c92a18c3793",
+      "afterSha256": "d5f8317fd688a43f12b1f0da78d02c9d3677fd13b66a73e0dd27077aa6cac9fb"
+    },
+    {
+      "label": "Ordinary travel with genuine leg wounds",
+      "method": "public-command",
+      "command": {
+        "type": "assign",
+        "residentIds": [
+          "aki",
+          "mio"
+        ],
+        "kind": "move",
+        "target": "meadow"
+      },
+      "beforeMinutes": 3449,
+      "afterMinutes": 3449,
+      "beforeSha256": "d5f8317fd688a43f12b1f0da78d02c9d3677fd13b66a73e0dd27077aa6cac9fb",
+      "afterSha256": "282e29041ec5076217c3e38d420280cc5c4746ad9fbd164ac650a5d3b102c704"
+    },
+    {
+      "label": "Positive travel progression",
+      "method": "positive-public-advance",
+      "requestedMinutes": 60,
+      "beforeMinutes": 3449,
+      "afterMinutes": 3509,
+      "beforeSha256": "282e29041ec5076217c3e38d420280cc5c4746ad9fbd164ac650a5d3b102c704",
+      "afterSha256": "8413ddec911761e0ab7ed2f33571d73b31357845e1fc8bb594053bc6231f51d4"
+    },
+    {
+      "label": "Positive travel progression",
+      "method": "positive-public-advance",
+      "requestedMinutes": 60,
+      "beforeMinutes": 3509,
+      "afterMinutes": 3569,
+      "beforeSha256": "8413ddec911761e0ab7ed2f33571d73b31357845e1fc8bb594053bc6231f51d4",
+      "afterSha256": "a510c59cc15795aed28f276003494cffb5828f6aff1c8baa18f09f6fbf6f9b3b"
+    },
+    {
+      "label": "Reserve older ordinary move at meadow",
+      "method": "public-command",
+      "command": {
+        "type": "assign",
+        "residentIds": [
+          "aki"
+        ],
+        "kind": "move",
+        "target": "village"
+      },
+      "beforeMinutes": 3569,
+      "afterMinutes": 3569,
+      "beforeSha256": "a510c59cc15795aed28f276003494cffb5828f6aff1c8baa18f09f6fbf6f9b3b",
+      "afterSha256": "826aa222515492b169939409e106c0af660a3b709518c1e006b9c8638bb4d57a"
+    },
+    {
+      "label": "Reserve local road work, retain old move",
+      "method": "public-command",
+      "command": {
+        "type": "assign",
+        "residentIds": [
+          "aki"
+        ],
+        "kind": "repair-route",
+        "target": "river-path-v1"
+      },
+      "beforeMinutes": 3569,
+      "afterMinutes": 3569,
+      "beforeSha256": "826aa222515492b169939409e106c0af660a3b709518c1e006b9c8638bb4d57a",
+      "afterSha256": "09fe70e61015d49a64327f9b53ad2e9517e9342934095dfeaf054047aecada10"
+    }
+  ]
+}

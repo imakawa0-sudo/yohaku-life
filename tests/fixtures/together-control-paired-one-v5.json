@@ -1,0 +1,619 @@
+{
+  "version": 5,
+  "minutes": 623,
+  "seed": 250338697,
+  "residents": [
+    {
+      "id": "aki",
+      "name": "アキ",
+      "role": "あなた",
+      "traits": [
+        "好奇心旺盛",
+        "手仕事が好き"
+      ],
+      "wish": "自分の窓辺に、手作りのものを置きたい",
+      "skills": {
+        "cooking": 2,
+        "combat": 2,
+        "craft": 4
+      },
+      "weapon": "knife",
+      "armor": false,
+      "location": "home",
+      "hp": 100,
+      "hunger": 65.13499999999902,
+      "energy": 86.25099999999993,
+      "mood": 80,
+      "policy": "balanced",
+      "action": {
+        "id": 28,
+        "kind": "hobby",
+        "label": "木彫りをする",
+        "progress": 1,
+        "duration": 45,
+        "automatic": false,
+        "origin": "home"
+      },
+      "suspended": null,
+      "relations": {
+        "mio": {
+          "closeness": 29,
+          "trust": 31
+        },
+        "ren": {
+          "closeness": 25,
+          "trust": 30
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 08:42｜アキとミオは、同じ場所でこれからの暮らしを少し話した。それぞれの過ごし方を確かめる、穏やかな時間になった。"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "support",
+        "home": "home",
+        "leisure": "quiet"
+      },
+      "wishKind": "display"
+    },
+    {
+      "id": "mio",
+      "name": "ミオ",
+      "role": "料理と暮らし",
+      "traits": [
+        "世話好き",
+        "おしゃべり"
+      ],
+      "wish": "みんなで温かい食事を囲みたい",
+      "skills": {
+        "cooking": 6.12,
+        "combat": 2,
+        "craft": 2
+      },
+      "weapon": "staff",
+      "armor": false,
+      "location": "village",
+      "hp": 100,
+      "hunger": 65.13499999999902,
+      "energy": 83.24799999999982,
+      "mood": 85,
+      "policy": "balanced",
+      "action": {
+        "id": 29,
+        "kind": "move",
+        "label": "共同の居間へ移動",
+        "progress": 1,
+        "duration": 65,
+        "target": "home",
+        "automatic": false,
+        "origin": "village",
+        "path": [
+          "meadow",
+          "road",
+          "home"
+        ],
+        "segment": 0,
+        "segmentProgress": 1,
+        "segmentDuration": 23,
+        "together": {
+          "peerResidentId": "ren",
+          "peerActionId": 30
+        }
+      },
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 38,
+          "trust": 31
+        },
+        "ren": {
+          "closeness": 34,
+          "trust": 30
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 08:42｜アキとミオは、同じ場所でこれからの暮らしを少し話した。それぞれの過ごし方を確かめる、穏やかな時間になった。"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "cook",
+        "home": "home",
+        "leisure": "social"
+      },
+      "wishKind": "household-meal"
+    },
+    {
+      "id": "ren",
+      "name": "レン",
+      "role": "探索と護衛",
+      "traits": [
+        "慎重",
+        "静かな場所が好き"
+      ],
+      "wish": "無理をせず、明日の物資を見つけたい",
+      "skills": {
+        "cooking": 1,
+        "combat": 6,
+        "craft": 3
+      },
+      "weapon": "spear",
+      "armor": true,
+      "location": "village",
+      "hp": 93,
+      "hunger": 65.13499999999902,
+      "energy": 82.44799999999982,
+      "mood": 72,
+      "policy": "balanced",
+      "action": {
+        "id": 30,
+        "kind": "move",
+        "label": "共同の居間へ移動",
+        "progress": 1,
+        "duration": 65,
+        "target": "home",
+        "automatic": false,
+        "origin": "village",
+        "path": [
+          "meadow",
+          "road",
+          "home"
+        ],
+        "segment": 0,
+        "segmentProgress": 1,
+        "segmentDuration": 23,
+        "together": {
+          "peerResidentId": "mio",
+          "peerActionId": 29
+        }
+      },
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 25,
+          "trust": 38
+        },
+        "mio": {
+          "closeness": 25,
+          "trust": 38
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 09:21｜レンが尾根の人影へ近づくと、見張りが道へ出てきた。相手の出方を確かめ、戦うか、退路を選べる。"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "gather",
+        "home": "bedroom",
+        "leisure": "quiet"
+      },
+      "wishKind": "safe-return"
+    }
+  ],
+  "resources": {
+    "food": 3,
+    "ingredients": 4,
+    "medicine": 2,
+    "scrap": 0
+  },
+  "logs": [
+    {
+      "id": 1,
+      "time": 480,
+      "type": "life",
+      "title": "三人の朝",
+      "text": "窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 2,
+      "time": 480,
+      "type": "social",
+      "title": "ミオのひとこと",
+      "text": "「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 3,
+      "time": 480,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "レンが拠点倉庫からレンへ食事1を移した。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 4,
+      "time": 480,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "レンが拠点倉庫からレンへ食事1を移した。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 5,
+      "time": 480,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "レンが拠点倉庫からレンへ手当用品1を移した。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 8,
+      "time": 502,
+      "type": "work",
+      "title": "温かい食事ができた",
+      "text": "ミオが食材2個で食事を3食作った。鍋から、やさしい湯気が立ちのぼる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 11,
+      "time": 522,
+      "type": "social",
+      "title": "少しだけ、近くに",
+      "text": "アキとミオは、同じ場所でこれからの暮らしを少し話した。それぞれの過ごし方を確かめる、穏やかな時間になった。",
+      "actors": [
+        "aki",
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 12,
+      "time": 531,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが近隣の集落に着いた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 14,
+      "time": 541,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが尾根の近道に着いた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 16,
+      "time": 561,
+      "type": "explore",
+      "title": "尾根の見張り",
+      "text": "レンが尾根の人影へ近づくと、見張りが道へ出てきた。相手の出方を確かめ、戦うか、退路を選べる。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ],
+      "encounter": {
+        "id": "ridge-watch",
+        "location": "ridge"
+      }
+    },
+    {
+      "id": 18,
+      "time": 562,
+      "type": "combat",
+      "title": "尾根での交戦",
+      "text": "一行は相手の動きをうかがう。レンは7のダメージを受けた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ],
+      "encounter": {
+        "id": "ridge-watch",
+        "location": "ridge"
+      }
+    },
+    {
+      "id": 19,
+      "time": 571,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが近隣の集落に着いた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 20,
+      "time": 571,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "ミオが拠点倉庫からミオへ資材4を移した。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 21,
+      "time": 571,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "ミオが拠点倉庫からミオへ食事4を移した。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 22,
+      "time": 571,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "ミオが拠点倉庫からミオへ食材2を移した。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 24,
+      "time": 622,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "ミオが近隣の集落に着いた。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 25,
+      "time": 622,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "ミオがミオからレンへ資材4を移した。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 26,
+      "time": 622,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "ミオがミオからレンへ食事4を移した。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 27,
+      "time": 622,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "ミオがミオからレンへ食材2を移した。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "mio",
+        "ren"
+      ]
+    }
+  ],
+  "enemy": {
+    "hp": 80,
+    "location": "ruins",
+    "defeated": false
+  },
+  "flags": {
+    "decorated": false,
+    "hobbyFinished": false,
+    "suppliesRecovered": false,
+    "safeSuppliesRecovered": false
+  },
+  "nextId": 31,
+  "ended": false,
+  "autoCombat": false,
+  "life": {
+    "version": 1,
+    "crafts": [],
+    "wishes": {},
+    "events": [
+      {
+        "id": 10,
+        "time": 522,
+        "kind": "conversation",
+        "location": "home",
+        "actors": [
+          "aki",
+          "mio"
+        ],
+        "witnesses": [
+          "aki",
+          "mio"
+        ],
+        "title": "言葉を交わした",
+        "text": "アキとミオが、同じ場所でこれからの暮らしを話した。"
+      }
+    ],
+    "reflections": [],
+    "meals": []
+  },
+  "trade": {
+    "version": 1,
+    "nextArrival": 2160,
+    "receipts": []
+  },
+  "region": {
+    "version": 1,
+    "stockDay": 1,
+    "stock": {
+      "food": 6,
+      "medicine": 3
+    },
+    "trust": {
+      "village-trader": {},
+      "village-guide": {}
+    },
+    "talked": {
+      "village-trader": [],
+      "village-guide": []
+    },
+    "knownRoute": false,
+    "routeKnownBy": [],
+    "harvests": [],
+    "receipts": []
+  },
+  "inventory": {
+    "version": 1,
+    "packs": {
+      "aki": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "mio": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "ren": {
+        "food": 6,
+        "ingredients": 2,
+        "medicine": 1,
+        "scrap": 4
+      }
+    },
+    "ground": {},
+    "baseGear": {
+      "knife": 1,
+      "spear": 1,
+      "staff": 1,
+      "armor": 3
+    }
+  },
+  "autonomy": {
+    "version": 1,
+    "leisure": {
+      "mio": {
+        "day": 1,
+        "startedAt": 503,
+        "kind": "social",
+        "actionId": 9
+      }
+    },
+    "manualStays": {},
+    "conversations": {
+      "aki:mio": {
+        "day": 1,
+        "count": 1,
+        "time": 522,
+        "eventId": 10
+      }
+    },
+    "mealPairs": {}
+  },
+  "secondaryEncounter": {
+    "version": 1,
+    "hp": 60,
+    "defeated": false,
+    "alerted": true,
+    "introducedAt": 561,
+    "actorId": "ren",
+    "logId": 16
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "common": {
+    "file": "coin-transfer-genuine-common-current-five-v3.json",
+    "sha256": "067b97de7cbd26fe678a0f6be72805787f4c132c41a01c9d2bd722ab44e8c8d5",
+    "method": "Genuine old44 UI export, copied byte-for-byte.",
+    "minutes": 1010,
+    "source": "/workspace/research/stage4f-handoff/baseline/run/genuine-home-aki-hobby-current-five-wallet-two.json"
+  },
+  "sleep": {
+    "file": "coin-transfer-controlled-sleeping-peer-v3.json",
+    "sha256": "39e725697cc6ede2fe6d1d89243489f6ff7186141c54f8af2a56258ea2299d55",
+    "method": "Controlled valid public-command/positive-advance extension of genuine1010; no direct state edits.",
+    "minutes": 1010,
+    "source": "boundaries/prep/provenance.json"
+  },
+  "ko": {
+    "file": "coin-transfer-controlled-ko-peer-v3.json",
+    "sha256": "7cb487befe1737a9a252b30543cff53add8da0beb9229618ae4a60e0ea35604a",
+    "method": "Controlled valid public-command/positive-advance extension of genuine1010; no direct state edits.",
+    "minutes": 1063,
+    "source": "boundaries/prep/provenance.json"
+  },
+  "heldZero": {
+    "file": "coin-transfer-controlled-held-threshold-zero-v3.json",
+    "sha256": "bdfca4d982771f4cc23bcbb9aa8ab84e0acadc6d8a98558ac09857580f1b0c22",
+    "method": "Controlled valid public-command/positive-advance extension of genuine1010; no direct state edits.",
+    "minutes": 1010,
+    "source": "boundaries/prep/provenance.json"
+  },
+  "heldOne": {
+    "file": "coin-transfer-controlled-held-threshold-one-v3.json",
+    "sha256": "ac1e4169c4adcd3020cf22dd28be743b91ebb741e5813b45dcf0a0f45b41bc20",
+    "method": "Controlled valid public-command/positive-advance extension of genuine1010; no direct state edits.",
+    "minutes": 1011,
+    "source": "boundaries/prep/provenance.json"
+  },
+  "carried": {
+    "file": "coin-transfer-controlled-active-carried-peer-v3.json",
+    "sha256": "6f1f72e5b114fd4ab608678696774152aefa8befa9abb56c347d76dd3720c9fb",
+    "method": "Controlled valid public-command/positive-advance extension of genuine1010; no direct state edits.",
+    "minutes": 1066,
+    "source": "boundaries/prep/provenance.json"
+  },
+  "joined": {
+    "file": "coin-transfer-controlled-recruited-peer-valid-gift-v3.json",
+    "sha256": "15f70ccc6a64ba5a1c7d8e485a681f386818a9f1a6ad37a3753a5b77eeb72bd0",
+    "method": "Controlled valid public-command/positive-advance extension of genuine1010; no direct state edits.",
+    "minutes": 1061,
+    "source": "boundaries/prep/provenance.json"
+  }
+}

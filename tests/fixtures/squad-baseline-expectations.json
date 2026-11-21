@@ -1,0 +1,483 @@
+{
+  "format": 1,
+  "sourceHtmlSha256": "739476bf46018d6db9b46e3ea82a9d9045dd7cdf6f61b30593ef3e8ec66fd463",
+  "method": "Expected full-world hashes from actual normal UI on the baseline HTML; selectionPresets is the sole excluded optional extension in the replay.",
+  "inputs": [
+    {
+      "scenario": "dispersed-life",
+      "path": "tests/fixtures/two-night-evening-v3.json",
+      "sha256": "d87bf5c6657b1dcc3beccc2d1b99662d7cd01561eae07a209c5ec71d215cc112",
+      "minutes": 2520
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "path": "tests/fixtures/two-night-morning-v3.json",
+      "sha256": "8a056e7045f2125d17577bf042f84c56ff178a2b6d8a256e01ea26e77044d532",
+      "minutes": 3360
+    }
+  ],
+  "operations": [
+    {
+      "scenario": "dispersed-life",
+      "label": "留守番ミオが拠点食材2の料理を予約",
+      "minutes": 2520,
+      "worldSha256": "0927c80d67adf203101da7046debb302a6b518fd4567e64565175a019aa3a7df"
+    },
+    {
+      "scenario": "dispersed-life",
+      "label": "集落アキが携行食1の食事を予約",
+      "minutes": 2520,
+      "worldSha256": "81d06beedaf7ef8c3c9fe8c3abe84e26f98da0817b5187c204ceabf703c6310f"
+    },
+    {
+      "scenario": "dispersed-life",
+      "label": "三人の共通時計を5分進める",
+      "minutes": 2525,
+      "worldSha256": "0dde2d37451f5d092da39d7a2b204e0f9c808244a135dddc3a91e7239bcacefb"
+    },
+    {
+      "scenario": "dispersed-life",
+      "label": "アキの途中食事を材料予約ごと保持して中断",
+      "minutes": 2525,
+      "worldSha256": "36cb609f067fc5fd355b00fa5a478a09e5344b5ee2142ab281a3fb5f2941e9e0"
+    },
+    {
+      "scenario": "dispersed-life",
+      "label": "renが川沿いの採集地へ移動予約",
+      "minutes": 2525,
+      "worldSha256": "5049c0299baae8b199ca543860f4a81ac86c4fe9c9d961daf23d81f7811c0057"
+    },
+    {
+      "scenario": "dispersed-life",
+      "label": "川沿いの採集地へ実移動",
+      "minutes": 2541,
+      "worldSha256": "1acff4be1d4d1f41117b6fee9614ddf58931a170fcadc77f021b5fbe6a3fa7b4"
+    },
+    {
+      "scenario": "dispersed-life",
+      "label": "川沿いの採集地へ実移動",
+      "minutes": 2543,
+      "worldSha256": "484eb3d984bcdc71e999a56a7f7dd7fe4c9ab6df51637110878fe6f0e2a6425d"
+    },
+    {
+      "scenario": "dispersed-life",
+      "label": "renが木陰の迂回路へ移動予約",
+      "minutes": 2543,
+      "worldSha256": "9c7f5d2288d926151b846eedfd177646a06dfd2cae87a56938913bb941f64e4b"
+    },
+    {
+      "scenario": "dispersed-life",
+      "label": "木陰の迂回路へ実移動",
+      "minutes": 2544,
+      "worldSha256": "7b0f5d2fccb79473e6735a6f2830fd704a3125967d4df24d09afbb213f911ea3"
+    },
+    {
+      "scenario": "dispersed-life",
+      "label": "木陰の迂回路へ実移動",
+      "minutes": 2569,
+      "worldSha256": "4f528524e4c4a13d024e3207ebf623b35032aa7f427a9d92fac083803a1be263"
+    },
+    {
+      "scenario": "dispersed-life",
+      "label": "迂回路レンが単独で睡眠を予約",
+      "minutes": 2569,
+      "worldSha256": "fca752788bd7b9b97346c746df151e7e11fcc9eb070a430715cf2a3ddda97eda"
+    },
+    {
+      "scenario": "dispersed-life",
+      "label": "拠点ミオが食事を予約",
+      "minutes": 2569,
+      "worldSha256": "15a7dd802450e622fb44f99d405a3a9992b843662c7277fabe57ec274d218234"
+    },
+    {
+      "scenario": "dispersed-life",
+      "label": "集落アキの途中食事を同じIDで再開",
+      "minutes": 2569,
+      "worldSha256": "809c7dcbe49021bacd319a28a7fbbcdc68e91a8c3729cc9fafa59d906bad2ed7"
+    },
+    {
+      "scenario": "dispersed-life",
+      "label": "三地点の異なる仕事を5分だけ進める",
+      "minutes": 2574,
+      "worldSha256": "06fc16fe11c2b9e965a0941314a85f755d323b3cd4eb16b3da999514f2e23f6a"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "akiが旧い資材置き場へ移動予約",
+      "minutes": 3360,
+      "worldSha256": "237cde4ba6a62f26cc243fd6c609f960a5bf4866f78c9b0faf5326e4cd3e30b4"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "旧い資材置き場へ実移動",
+      "minutes": 3378,
+      "worldSha256": "93fb6b8f8441bd686ac77606b358d950f001f92e1840eba5d6cbc82d74cd09ef"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "アキ交戦中でもミオの拠点料理を無時間で予約",
+      "minutes": 3378,
+      "worldSha256": "66ea190427a43102e6d7a8c030cfa5ac6a22da756524eb6b8b1c02d3b222f62e"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "ミオの画面から戦闘刻み1分を進める",
+      "minutes": 3379,
+      "worldSha256": "e2408abaf8859cd19cf993248493e019adf8dae706dc15d9eced409fa635372b"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "退避指示を出さない実戦闘で負傷境界まで1分進める",
+      "minutes": 3380,
+      "worldSha256": "a8b2631d1e9e08de587d4bdf2d9e0a891767bb80bb944131085c8f6582d0360d"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "退避指示を出さない実戦闘で負傷境界まで1分進める",
+      "minutes": 3381,
+      "worldSha256": "12cfa596f662393dc70b0f420abde1fafde451ea0969e24fc9737c82b9e45c4d"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "退避指示を出さない実戦闘で負傷境界まで1分進める",
+      "minutes": 3382,
+      "worldSha256": "c81ec4b08933cb85b02131692b3d3c063423f94fa977514de2a463c1f9ad8f0e"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "退避指示を出さない実戦闘で負傷境界まで1分進める",
+      "minutes": 3383,
+      "worldSha256": "c4660cbcd663df708f5130568308a5a9440d425974275493b87e3733fd0620dd"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "退避指示を出さない実戦闘で負傷境界まで1分進める",
+      "minutes": 3384,
+      "worldSha256": "cec4073c3ff96455f69c8a419c27a37a5f15562d8d6e91fc48cbb46e80ab58b4"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "退避指示を出さない実戦闘で負傷境界まで1分進める",
+      "minutes": 3385,
+      "worldSha256": "0ab1373166ac030abd5ca778cacaa31f13e802beea6b2a0a3c070ee0e7c4a84a"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "renが旧い資材置き場へ移動予約",
+      "minutes": 3385,
+      "worldSha256": "68a55cd296d4d4275622c0cce7412cd89a19a644cbc3b3211a58cb52a149f6c3"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "旧い資材置き場へ実移動",
+      "minutes": 3399,
+      "worldSha256": "2a02328afbe1262a3b6683e8aa18677cde6792e17b0e635dd5dbad5e4cdb5c10"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "旧い資材置き場へ実移動",
+      "minutes": 3402,
+      "worldSha256": "d3104df6b1a2ff295c62ec537e454277a8007188beef3eb97f48378d637a71ea"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "旧い資材置き場へ実移動",
+      "minutes": 3403,
+      "worldSha256": "b62c30f369cc3c36e0e40306764f1512c18ab4f7444d75f5ac59587f85f273e8"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "到着したレンが救援のため攻撃を予約",
+      "minutes": 3403,
+      "worldSha256": "4121eab205954948107a00149d725c5395285dc1d5defa1ae3aadbf550c053bc"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "レンの実攻撃を1分ずつ進める",
+      "minutes": 3404,
+      "worldSha256": "58ce5d25e233b6a40127d14d8bb49ecab813419bf83c6d3b7ff745ad649773f5"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "レンの実攻撃を1分ずつ進める",
+      "minutes": 3405,
+      "worldSha256": "a0f8a390d625b4827c3bbee23bd274bad5b70b26a85400f6e3c2deecf3efcb3e"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "レンの実攻撃を1分ずつ進める",
+      "minutes": 3406,
+      "worldSha256": "4a6585e3df5084e5b49d8ae9ec1774b9c228e0a070cb23c0ef00ba88d5de61ea"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "レンの実攻撃を1分ずつ進める",
+      "minutes": 3407,
+      "worldSha256": "eab92cc30e1d7d1adc4008f6436cdd541543c14bedaa991a457f4e23a7418571"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "レンが同所の倒れたアキの救助を予約",
+      "minutes": 3407,
+      "worldSha256": "457b1b0ee8d0eca8c4cc1e322e4e05ef400e30668aaf8126683dfc54fe8c391e"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "ミオ操作中に実際の救助を5分進める",
+      "minutes": 3412,
+      "worldSha256": "74e5a7c4b21154b67290498b8d3c8303d7fd62575bcc09390eb021f3fd180dab"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "実経路でアキを運んで帰還",
+      "minutes": 3427,
+      "worldSha256": "10704ac17ec5b3d4c32146b7e2e00a3915c9e9888fcb23e2927cdb864d3fbdcc"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "実経路でアキを運んで帰還",
+      "minutes": 3430,
+      "worldSha256": "09a25cf8204410c9170b62e575d46bf9680ce6f8addb9525ed223fcd65b0bd10"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "実経路でアキを運んで帰還",
+      "minutes": 3448,
+      "worldSha256": "6c1e0d0dd9727e1a905eaf38dcf59eda15ac265683c13e890f0a67d8c3078e54"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "留守番ミオが帰還したアキの手当を予約",
+      "minutes": 3448,
+      "worldSha256": "e04aa3fd229c5c52ab1195afad3350adae1eeb4d78030fe5978e7fbb1fba0ff6"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "ミオが実際の時間と薬でアキを手当",
+      "minutes": 3449,
+      "worldSha256": "e409a2fab2411a10bd222d3a4f8af90b1e1831e2868a72005078ebff0941b4cb"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "ミオが実際の時間と薬でアキを手当",
+      "minutes": 3451,
+      "worldSha256": "0f1628702f54d0f6a7f3336b57336b637983d3699d891822082dc9f94e2e54ef"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "label": "ミオが実際の時間と薬でアキを手当",
+      "minutes": 3468,
+      "worldSha256": "d66cffb22cd3bb4f1703442a8b7c2fc3321497f4ef90a6f4c53b633c4db6034e"
+    }
+  ],
+  "checkpoints": [
+    {
+      "scenario": "dispersed-life",
+      "name": "genuine-current-and-held-reservations",
+      "minutes": 2525,
+      "worldSha256": "36cb609f067fc5fd355b00fa5a478a09e5344b5ee2142ab281a3fb5f2941e9e0"
+    },
+    {
+      "scenario": "dispersed-life",
+      "name": "genuine-three-places-current-jobs",
+      "minutes": 2574,
+      "worldSha256": "06fc16fe11c2b9e965a0941314a85f755d323b3cd4eb16b3da999514f2e23f6a"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "name": "genuine-natural-encounter",
+      "minutes": 3378,
+      "worldSha256": "93fb6b8f8441bd686ac77606b358d950f001f92e1840eba5d6cbc82d74cd09ef"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "name": "genuine-natural-casualty",
+      "minutes": 3385,
+      "worldSha256": "0ab1373166ac030abd5ca778cacaa31f13e802beea6b2a0a3c070ee0e7c4a84a"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "name": "genuine-rescue-in-progress",
+      "minutes": 3412,
+      "worldSha256": "74e5a7c4b21154b67290498b8d3c8303d7fd62575bcc09390eb021f3fd180dab"
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "name": "genuine-rescue-and-care-complete",
+      "minutes": 3468,
+      "worldSha256": "d66cffb22cd3bb4f1703442a8b7c2fc3321497f4ef90a6f4c53b633c4db6034e"
+    }
+  ],
+  "selections": [
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "アキ",
+        "レン"
+      ],
+      "toFocus": "レン",
+      "clicks": 1
+    },
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "ミオ"
+      ],
+      "toFocus": "ミオ",
+      "clicks": 3
+    },
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "アキ"
+      ],
+      "toFocus": "アキ",
+      "clicks": 2
+    },
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "ミオ"
+      ],
+      "toFocus": "ミオ",
+      "clicks": 2
+    },
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "アキ",
+        "レン"
+      ],
+      "toFocus": "レン",
+      "clicks": 3
+    },
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "ミオ"
+      ],
+      "toFocus": "ミオ",
+      "clicks": 3
+    },
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "アキ"
+      ],
+      "toFocus": "アキ",
+      "clicks": 2
+    },
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "レン"
+      ],
+      "toFocus": "レン",
+      "clicks": 2
+    },
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "レン"
+      ],
+      "toFocus": "レン",
+      "clicks": 0
+    },
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "ミオ"
+      ],
+      "toFocus": "ミオ",
+      "clicks": 2
+    },
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "アキ"
+      ],
+      "toFocus": "アキ",
+      "clicks": 2
+    },
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "ミオ"
+      ],
+      "toFocus": "ミオ",
+      "clicks": 2
+    },
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "レン"
+      ],
+      "toFocus": "レン",
+      "clicks": 2
+    },
+    {
+      "scenario": "dispersed-life",
+      "to": [
+        "アキ",
+        "レン"
+      ],
+      "toFocus": "レン",
+      "clicks": 3
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "to": [
+        "アキ"
+      ],
+      "toFocus": "アキ",
+      "clicks": 0
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "to": [
+        "ミオ"
+      ],
+      "toFocus": "ミオ",
+      "clicks": 2
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "to": [
+        "レン"
+      ],
+      "toFocus": "レン",
+      "clicks": 2
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "to": [
+        "ミオ"
+      ],
+      "toFocus": "ミオ",
+      "clicks": 2
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "to": [
+        "レン"
+      ],
+      "toFocus": "レン",
+      "clicks": 2
+    },
+    {
+      "scenario": "actual-encounter-and-rescue",
+      "to": [
+        "ミオ"
+      ],
+      "toFocus": "ミオ",
+      "clicks": 2
+    }
+  ],
+  "baselineMetrics": {
+    "rosterClicks": 39,
+    "selectionChanges": 18,
+    "viewChanges": 17,
+    "operations": 42,
+    "checkpoints": 6
+  }
+}

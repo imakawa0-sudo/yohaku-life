@@ -1,0 +1,46 @@
+{
+  "format": 1,
+  "sourceHtmlSha256": "c8f8a62bc82c10738d320b44d88e78714488f89aad1801e3ba79b1ad9e97d0e7",
+  "manualComparison": {
+    "minutes": 597,
+    "base": {
+      "food": 12,
+      "ingredients": 11,
+      "medicine": 3,
+      "scrap": 4
+    },
+    "worldSha256": "7dfc7827d63c374eeff303825be75481783e3560865f0778c6a71fe12cd9ae65",
+    "topLevelHashes": {
+      "version": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+      "minutes": "fcf1e4bf9cc9c1083647b91463e86f49c6961406c37055c7eb8ad13937a519db",
+      "seed": "bf4d4b6c1f3d43ae7a98449d731a45a1d2426eebebcd9364db359151014281d4",
+      "residents": "9da9af2b28365c46a837ee56783f2d3ec703fcfe73f870fb35a59cf4ef8f7bf4",
+      "resources": "3b2533af3cb9ba8392d31951440c1eac51c967d7a11ae52f2f71c2ec372de014",
+      "logs": "4b9172d8cd9e3cdb6c3963e84acb550ad7ddf71197408fc230452b76255874fc",
+      "enemy": "7cac9ad298f00fede718c0b96e190feffcfabe53028461e5fd2d6b328b2b5371",
+      "flags": "d3619a34a6e18f956d174679297b9d5f086124cb745c10d7d5149ea938244bf6",
+      "nextId": "5f9c4ab08cac7457e9111a30e4664920607ea2c115a1433d7be98e97e64244ca",
+      "ended": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+      "autoCombat": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+      "life": "6c9ecfc888193fb31522713ef4b172d071e15f50e1884d3138cf930888d49e45",
+      "trade": "f2b7652bac9ec4e6f23045f91795e8b8e0e87fed28f584ccfd1392c390716c55",
+      "region": "4438f929dec11783bd564cea194a40cb9dca95a6c6af3b2e5a24c7aacbb5d4d0",
+      "inventory": "f24cf18b840eb312d54da5d488415361d7fa98a867a6f7fde173b722b299e488",
+      "autonomy": "98e8cf5c74b61390304227b4710134869209bc22097bbbb47a78a36ee238234e"
+    },
+    "manualExtraCookOrders": 2,
+    "cookingMinutes": 44
+  },
+  "inputs": [
+    {
+      "path": "tests/fixtures/production-six-meals-idle-v3.json",
+      "sha256": "233360a400242a53adfb70c0cfec30119a6556dc23c4963eed30e869ea59499c",
+      "minutes": 553
+    },
+    {
+      "path": "tests/fixtures/production-three-meals-in-progress-v3.json",
+      "sha256": "b67c14755d5e81e02f36029e626bf183687eb39c43e2d97dbd064f5fc18b009d",
+      "minutes": 485
+    }
+  ]
+}

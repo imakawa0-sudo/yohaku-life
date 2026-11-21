@@ -1,0 +1,30 @@
+[
+  {
+    "role": "held-after-defeat",
+    "path": "tests/fixtures/combat-resume-control-held-after-defeat-v3.json",
+    "sha256": "2cb3c16f3a6c7ab9707ec34384620581cdae933507c289d14092fda850a29841",
+    "bytes": 37273,
+    "classification": "controlled-public-command-from-genuine-old47",
+    "sourceVersion": 47,
+    "sourceHtmlSha256": "4f8e0d429094ff81f8ddaeb087fce7e00aef01ab1d4348006f1b9cdd155cc907",
+    "sourceEvidence": "stage5c-scoping/combat-ended-held-attack-before-resume.json",
+    "preparationEvidence": "stage5c-scoping/check-combat-resume.ts and combat-resume-result.json",
+    "minutes": 2019,
+    "fieldEdits": false,
+    "provenance": "Genuine UI encounter at minute1943; Mio ordered attack, paused and retreated; Ren travelled and defeated the guard; Mio revisited ruins. Only public commands and positive advances, no field edits."
+  },
+  {
+    "role": "legacy-current-after-defeat",
+    "path": "tests/fixtures/combat-resume-legacy-current-after-defeat-v3.json",
+    "sha256": "24ab1abc4f51d9231ea851301bfe3d560c784eca6cc8573f0a3d31a443c809e5",
+    "bytes": 37273,
+    "classification": "legacy47-current-ghost-public-command-control",
+    "sourceVersion": 47,
+    "sourceHtmlSha256": "4f8e0d429094ff81f8ddaeb087fce7e00aef01ab1d4348006f1b9cdd155cc907",
+    "sourceEvidence": "stage5c-scoping/combat-ended-held-attack-after60.json",
+    "preparationEvidence": "stage5c-scoping/check-combat-resume.ts and combat-resume-result.json",
+    "minutes": 2079,
+    "fieldEdits": false,
+    "provenance": "The same old47 public-command continuation accepted resume and advanced60 minutes. This legitimate old-format current attack is preserved to verify codec compatibility and explicit manual recovery; automatic repair is outside scope."
+  }
+]

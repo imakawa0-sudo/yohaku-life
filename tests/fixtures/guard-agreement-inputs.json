@@ -1,0 +1,61 @@
+[
+  {
+    "role": "home",
+    "path": "tests/fixtures/guard-agreement-genuine-home-1920-v3.json",
+    "sha256": "7986851527df732086ac19821caa28021ae60ff5df5b636cccbe726511d7d5d3",
+    "classification": "normal-genuine",
+    "source": "/workspace/sites/yohaku-life/tests/fixtures/route-work-genuine-next-morning-1920-v3.json",
+    "minutes": 1920,
+    "fieldEdits": false
+  },
+  {
+    "role": "joint-two-people",
+    "path": "tests/fixtures/guard-agreement-control-joint-two-people-v3.json",
+    "sha256": "bde16f8121c70b97c44ea949cc4514471ce0773383bdd7579c369d0973a48daa",
+    "classification": "controlled-public-api-old46",
+    "source": "/workspace/research/stage5b-agreement/controlled-prep/outputs/joint-two-people.json",
+    "minutes": 1943,
+    "fieldEdits": false,
+    "frozenSourceCommit": "8f778bcd500c6e286e123da3867dfab42a3c9dc6"
+  },
+  {
+    "role": "remote-held-defend",
+    "path": "tests/fixtures/guard-agreement-control-remote-held-defend-v3.json",
+    "sha256": "0b427351e05b6841327a459f16c4d7fed0d937c73a82bfacd81049a8f42ab3db",
+    "classification": "controlled-public-api-old46",
+    "source": "/workspace/research/stage5b-agreement/controlled-prep/outputs/remote-held-defend.json",
+    "minutes": 1992,
+    "fieldEdits": false,
+    "frozenSourceCommit": "8f778bcd500c6e286e123da3867dfab42a3c9dc6"
+  },
+  {
+    "role": "current-cargo-zero",
+    "path": "tests/fixtures/guard-agreement-control-current-cargo-zero-v3.json",
+    "sha256": "516aded69e777cc8c839b632b0b2ef531ba305daca3df375012f0d9103268254",
+    "classification": "controlled-public-api-old46",
+    "source": "/workspace/research/stage5b-agreement/controlled-prep/outputs/current-cargo-zero.json",
+    "minutes": 1943,
+    "fieldEdits": false,
+    "frozenSourceCommit": "8f778bcd500c6e286e123da3867dfab42a3c9dc6"
+  },
+  {
+    "role": "held-cargo-one",
+    "path": "tests/fixtures/guard-agreement-control-held-cargo-one-v3.json",
+    "sha256": "7dfc236e751957885a3b52015cc975e5a7184b8da1ef1b5eb4baaf6f2a7fe9e2",
+    "classification": "controlled-public-api-old46",
+    "source": "/workspace/research/stage5b-agreement/controlled-prep/outputs/held-cargo-one.json",
+    "minutes": 1944,
+    "fieldEdits": false,
+    "frozenSourceCommit": "8f778bcd500c6e286e123da3867dfab42a3c9dc6"
+  },
+  {
+    "role": "held-rescuer",
+    "path": "tests/fixtures/guard-agreement-control-held-rescuer-v3.json",
+    "sha256": "e3393473f1dcff4550e9cea212ac59ca87b23987cead82163bc81d02593a56bf",
+    "classification": "controlled-public-api-old46",
+    "source": "/workspace/research/stage5b-agreement/controlled-prep/outputs/held-rescuer.json",
+    "minutes": 1952,
+    "fieldEdits": false,
+    "frozenSourceCommit": "8f778bcd500c6e286e123da3867dfab42a3c9dc6"
+  }
+]

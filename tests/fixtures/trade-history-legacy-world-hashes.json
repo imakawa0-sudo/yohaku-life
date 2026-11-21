@@ -1,0 +1,24 @@
+{
+  "htmlSha256": "44df01b6f68fb1598daa7b54049581021d0d084b936648e6b7c7b3b7d059793e",
+  "worlds": {
+    "merchant:initial-import": "7ab4ccef148e6105221ca05b5f03bd652536061084cf0500d0af1f5509ad57ac",
+    "merchant:manual-cook": "beac7e60d351742772549612f621b068d9ffd10f8f784067a7658a2bc4ae9cce",
+    "merchant:cook-five-minutes": "8b29bf5db70cb19175bd79bc73b8184e7aca263d813f41067e08568066a5a65a",
+    "merchant:hold-cook": "b30a36ff2f7a0509fbd5d28134b931f4266da4ad42c79e8c3913f33ca07da93f",
+    "merchant:medicine-exchange": "0a34509043faabb96fdd2d7e28ba551cf567cfe827b810fb6f5529e79693e897",
+    "village:initial-import": "2b251a773ed8c144630d938b2c6c849fbad8cdd6db76cf681b9e3533aff206aa",
+    "village:ordinary-safe-return": "74c9870482e9be14e52b267462a2498cc207d2a09d6d35862c446c5dcdf34449",
+    "village:ordinary-return-progress-1": "5114ad4b10988b0cf184de1b8415ba53985f2a117f2c377bae7a0e804c73b11b",
+    "village:withdraw-own-scrap-one": "af9f11fb1ee621d6539bccbaf23031bdc8e68c9c37bef7115cf481a512279282",
+    "village:ordinary-safe-village": "ac267bedace81d3370a86000def3d5b50d471a0ad7a9cc41e9271230ba588086",
+    "village:ordinary-village-progress-1": "7706a78aafc5a31a59997d0f01545ba8189645f4bafc2f2c8ab78bed26fa60f0",
+    "village:village-medicine-exchange": "ed0659fc9d91af339e584ebaead8edaf715d474a7aa93229b01849b5774127c4",
+    "village:talk-guide": "1d73003c572709d2e0184a8f7ea9f5e85dee2587285bd94925b5dc00e703f2b9",
+    "village:deliver-food-to-guide": "859b467c90b8a43993646d7c534be66869487cf044f893c17400705be994cc8e",
+    "arrival:initial-import": "c09ccd2c036753ea1afcef03e672648e99fb36ba9ba675c2e9b7edaefd44d036",
+    "arrival:positive-arrival-hour-1": "6107dae7ce5f0f028125b216df8d56f8b69abbce48e5cb761e5a8121991b034f",
+    "arrival:positive-arrival-hour-2": "e4b3d9ff07c49a1f46cb340008161f728c6933c706a1a977b7039b36c4b24846",
+    "arrival:positive-arrival-hour-3": "d2a9541d5ec463d44e5af72b0a275a8a3b6b9e169541c198fc2be9181baa00e2",
+    "arrival:positive-arrival-hour-4": "29c3d8218f7fd7ad43a6bddebba23eba896f997102adf837642504f5815ec8ad"
+  }
+}

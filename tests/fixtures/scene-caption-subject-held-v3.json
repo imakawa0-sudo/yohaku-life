@@ -1,0 +1,414 @@
+{
+  "version": 3,
+  "minutes": 601,
+  "seed": 20261119,
+  "residents": [
+    {
+      "id": "aki",
+      "name": "アキ",
+      "role": "あなた",
+      "traits": [
+        "好奇心旺盛",
+        "手仕事が好き"
+      ],
+      "wish": "自分の窓辺に、手作りのものを置きたい",
+      "skills": {
+        "cooking": 2,
+        "combat": 2,
+        "craft": 4
+      },
+      "weapon": "knife",
+      "armor": false,
+      "location": "home",
+      "hp": 100,
+      "hunger": 66.34499999999917,
+      "energy": 84.20499999999986,
+      "mood": 72,
+      "policy": "balanced",
+      "action": null,
+      "suspended": {
+        "id": 14,
+        "kind": "hobby",
+        "label": "木陰の迂回路を題材に小鳥を彫る",
+        "progress": 5,
+        "duration": 34,
+        "automatic": false,
+        "origin": "home",
+        "subjectEventId": 6,
+        "craftingToolsId": 11
+      },
+      "relations": {
+        "mio": {
+          "closeness": 25,
+          "trust": 30
+        },
+        "ren": {
+          "closeness": 25,
+          "trust": 30
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 08:43｜アキは木陰の迂回路で、景色を眺めて過ごした。",
+        "第1日 09:56｜ミオが回収材3個で、この場所の手仕事台を整えた。この場所で新しく始める小鳥・花・設備制作の時間を25%短縮。材料と完成数は同じ。"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "support",
+        "home": "home",
+        "leisure": "quiet"
+      },
+      "wishKind": "display"
+    },
+    {
+      "id": "mio",
+      "name": "ミオ",
+      "role": "料理と暮らし",
+      "traits": [
+        "世話好き",
+        "おしゃべり"
+      ],
+      "wish": "みんなで温かい食事を囲みたい",
+      "skills": {
+        "cooking": 6,
+        "combat": 2,
+        "craft": 2.2
+      },
+      "weapon": "staff",
+      "armor": false,
+      "location": "home",
+      "hp": 100,
+      "hunger": 66.34499999999917,
+      "energy": 85.8979999999999,
+      "mood": 84,
+      "policy": "rest",
+      "action": {
+        "id": 15,
+        "kind": "rest",
+        "label": "ひと息つく",
+        "progress": 5,
+        "duration": 30,
+        "automatic": true,
+        "origin": "home",
+        "autonomyReason": {
+          "code": "recovery",
+          "text": "体調と活力を整えるため、ひと息つく",
+          "decidedAt": 597
+        }
+      },
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 34,
+          "trust": 30
+        },
+        "ren": {
+          "closeness": 34,
+          "trust": 30
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 09:56｜ミオが回収材3個で、この場所の手仕事台を整えた。この場所で新しく始める小鳥・花・設備制作の時間を25%短縮。材料と完成数は同じ。"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "cook",
+        "home": "home",
+        "leisure": "social"
+      },
+      "wishKind": "household-meal"
+    },
+    {
+      "id": "ren",
+      "name": "レン",
+      "role": "探索と護衛",
+      "traits": [
+        "慎重",
+        "静かな場所が好き"
+      ],
+      "wish": "無理をせず、明日の物資を見つけたい",
+      "skills": {
+        "cooking": 1,
+        "combat": 6,
+        "craft": 3
+      },
+      "weapon": "spear",
+      "armor": true,
+      "location": "home",
+      "hp": 100,
+      "hunger": 66.34499999999917,
+      "energy": 86.54799999999994,
+      "mood": 72,
+      "policy": "rest",
+      "action": null,
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 25,
+          "trust": 38
+        },
+        "mio": {
+          "closeness": 25,
+          "trust": 38
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 09:56｜ミオが回収材3個で、この場所の手仕事台を整えた。この場所で新しく始める小鳥・花・設備制作の時間を25%短縮。材料と完成数は同じ。"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "gather",
+        "home": "bedroom",
+        "leisure": "quiet"
+      },
+      "wishKind": "safe-return"
+    }
+  ],
+  "resources": {
+    "food": 6,
+    "ingredients": 8,
+    "medicine": 3,
+    "scrap": 1
+  },
+  "logs": [
+    {
+      "id": 1,
+      "time": 480,
+      "type": "life",
+      "title": "三人の朝",
+      "text": "窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 2,
+      "time": 480,
+      "type": "social",
+      "title": "ミオのひとこと",
+      "text": "「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 4,
+      "time": 503,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "アキが木陰の迂回路に着いた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 7,
+      "time": 523,
+      "type": "explore",
+      "title": "景色を眺めて",
+      "text": "アキは木陰の迂回路で、景色を眺めて過ごした。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 10,
+      "time": 546,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "アキが共同の居間に着いた。見慣れた家の灯りに、肩の力が抜ける。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 13,
+      "time": 596,
+      "type": "work",
+      "title": "手仕事台を整える",
+      "text": "ミオが回収材3個で、この場所の手仕事台を整えた。この場所で新しく始める小鳥・花・設備制作の時間を25%短縮。材料と完成数は同じ。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    }
+  ],
+  "enemy": {
+    "hp": 80,
+    "location": "ruins",
+    "defeated": false
+  },
+  "flags": {
+    "decorated": false,
+    "hobbyFinished": false,
+    "suppliesRecovered": false,
+    "safeSuppliesRecovered": false
+  },
+  "nextId": 16,
+  "ended": false,
+  "autoCombat": false,
+  "life": {
+    "version": 1,
+    "crafts": [],
+    "wishes": {},
+    "events": [
+      {
+        "id": 6,
+        "time": 523,
+        "kind": "quiet",
+        "location": "shelter",
+        "actors": [
+          "aki"
+        ],
+        "witnesses": [
+          "aki"
+        ],
+        "title": "静かな時間を過ごした",
+        "text": "アキは木陰の迂回路で、景色を眺めて過ごした。"
+      },
+      {
+        "id": 9,
+        "time": 546,
+        "kind": "return",
+        "location": "home",
+        "actors": [
+          "aki"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "拠点へ帰った",
+        "text": "アキが拠点へ帰り着いた。今日の外出を終え、暮らしへ戻れる。"
+      },
+      {
+        "id": 12,
+        "time": 596,
+        "kind": "project",
+        "location": "home",
+        "actors": [
+          "mio"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "暮らしの道具を整えた",
+        "text": "ミオが、この場所で「手仕事台を整える」を仕上げた。暮らしの中で使えるようになった。",
+        "projectId": 11
+      }
+    ],
+    "reflections": [],
+    "meals": [],
+    "upgrades": [
+      {
+        "id": 11,
+        "recipeId": "crafting-tools",
+        "creatorId": "mio",
+        "location": "home",
+        "completedAt": 596
+      }
+    ]
+  },
+  "trade": {
+    "version": 1,
+    "nextArrival": 2160,
+    "receipts": []
+  },
+  "region": {
+    "version": 1,
+    "stockDay": 1,
+    "stock": {
+      "food": 6,
+      "medicine": 3
+    },
+    "trust": {
+      "village-trader": {},
+      "village-guide": {}
+    },
+    "talked": {
+      "village-trader": [],
+      "village-guide": []
+    },
+    "knownRoute": false,
+    "routeKnownBy": [],
+    "harvests": [],
+    "receipts": []
+  },
+  "inventory": {
+    "version": 1,
+    "packs": {
+      "aki": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "mio": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "ren": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      }
+    },
+    "ground": {},
+    "baseGear": {
+      "knife": 1,
+      "spear": 1,
+      "staff": 1,
+      "armor": 3
+    }
+  }
+}

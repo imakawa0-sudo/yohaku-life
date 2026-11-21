@@ -1,0 +1,36 @@
+[
+  {
+    "role": "primary",
+    "path": "tests/fixtures/route-work-genuine-next-morning-1920-v3.json",
+    "sha256": "7986851527df732086ac19821caa28021ae60ff5df5b636cccbe726511d7d5d3",
+    "minutes": 1920,
+    "method": "Byte-exact existing genuine actual UI export, copied without field edits. Primary and locks have different provenance; do not compare their bodies as one experiment.",
+    "origin": "/workspace/research/stage5a-roadwork/inputs/primary-genuine-handoff-next-morning-1920.json"
+  },
+  {
+    "role": "locks",
+    "path": "tests/fixtures/route-work-genuine-retreated-cache-stored-v3.json",
+    "sha256": "4409ec5981d8512f472a0a2087febe2c157d9e877867639852e24141290f4698",
+    "minutes": 3450,
+    "method": "Byte-exact existing genuine actual UI export, copied without field edits. Primary and locks have different provenance; do not compare their bodies as one experiment.",
+    "origin": "/workspace/research/stage5a-roadwork/inputs/locks-genuine-retreated-cache-stored.json"
+  },
+  {
+    "role": "controlled-rescue",
+    "path": "tests/fixtures/route-work-controlled-weak-patient-before-rescue-v3.json",
+    "sha256": "d6399915ced762227b74a1973c92debb44d9ea06a976f80400f1d6814f5d7f89",
+    "minutes": 3569,
+    "classification": "controlled public API preparation",
+    "origin": "/workspace/research/stage5a-roadwork/controlled-prep/preparation.json",
+    "fieldEdits": false
+  },
+  {
+    "role": "controlled-source",
+    "path": "tests/fixtures/route-work-controlled-rescue-source-v3.json",
+    "sha256": "c8197c82fb5d035001c4b3ee1dc264a282cac909e1ddbbb572d6bc752839380f",
+    "minutes": 3412,
+    "classification": "genuine source for controlled public API preparation",
+    "origin": "/workspace/research/stage4f-handoff/default-regression/genuine-rescue-in-progress.json",
+    "fieldEdits": false
+  }
+]

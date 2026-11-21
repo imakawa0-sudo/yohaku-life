@@ -1,0 +1,1753 @@
+{
+  "version": 3,
+  "minutes": 3498,
+  "seed": 20261119,
+  "residents": [
+    {
+      "id": "aki",
+      "name": "アキ",
+      "role": "あなた",
+      "traits": [
+        "好奇心旺盛",
+        "手仕事が好き"
+      ],
+      "wish": "自分の窓辺に、手作りのものを置きたい",
+      "skills": {
+        "cooking": 2,
+        "combat": 2,
+        "craft": 5.050000000000002
+      },
+      "weapon": "knife",
+      "armor": false,
+      "location": "home",
+      "hp": 100,
+      "hunger": 93.23499999999916,
+      "energy": 92.81799999999973,
+      "mood": 100,
+      "policy": "balanced",
+      "action": null,
+      "suspended": null,
+      "relations": {
+        "mio": {
+          "closeness": 40,
+          "trust": 35
+        },
+        "ren": {
+          "closeness": 40,
+          "trust": 35
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第1日 09:58｜アキが掌にのる小鳥を彫った。少し不揃いだけれど、ここで暮らした時間の形だ。今は手元にある。飾る場所を選ぼう。",
+        "第1日 10:57｜ミオが回収材3個で、この場所の手仕事台を整えた。この場所で新しく始める小鳥・花・設備制作の時間を25%短縮。材料と完成数は同じ。",
+        "第1日 11:37｜アキが掌にのる小鳥を彫った。少し不揃いだけれど、ここで暮らした時間の形だ。今は手元にある。飾る場所を選ぼう。",
+        "第1日 12:11｜アキが掌にのる小鳥を彫った。少し不揃いだけれど、ここで暮らした時間の形だ。今は手元にある。飾る場所を選ぼう。",
+        "第1日 12:43｜アキが回収材1個から、一輪の花を彫った。今は手元にあり、窓辺へ飾る場所を選べる。",
+        "第1日 14:26｜アキが回収材3個で、この場所の料理道具を整えた。この場所で新しく始める料理の時間を25%短縮。食材と完成数は同じ。",
+        "第1日 18:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第2日 08:00｜朝の光が家に差し込む。食事12食、食材12個。今日は何に時間を使おう。",
+        "第2日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第2日 18:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第3日 08:00｜朝の光が家に差し込む。食事12食、食材8個。今日は何に時間を使おう。",
+        "第3日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第3日 10:18｜アキが回収材3個で、この場所の静かな休憩場所を整えた。この場所での休息完了時、活力をさらに8、体力をさらに2回復。"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "support",
+        "home": "home",
+        "leisure": "quiet"
+      },
+      "wishKind": "display"
+    },
+    {
+      "id": "mio",
+      "name": "ミオ",
+      "role": "料理と暮らし",
+      "traits": [
+        "世話好き",
+        "おしゃべり"
+      ],
+      "wish": "みんなで温かい食事を囲みたい",
+      "skills": {
+        "cooking": 6.840000000000001,
+        "combat": 2,
+        "craft": 2.2
+      },
+      "weapon": "staff",
+      "armor": false,
+      "location": "home",
+      "hp": 100,
+      "hunger": 93.23499999999916,
+      "energy": 92.75199999999973,
+      "mood": 100,
+      "policy": "balanced",
+      "action": null,
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 49,
+          "trust": 35
+        },
+        "ren": {
+          "closeness": 49,
+          "trust": 35
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第1日 09:58｜アキが掌にのる小鳥を彫った。少し不揃いだけれど、ここで暮らした時間の形だ。今は手元にある。飾る場所を選ぼう。",
+        "第1日 10:57｜ミオが回収材3個で、この場所の手仕事台を整えた。この場所で新しく始める小鳥・花・設備制作の時間を25%短縮。材料と完成数は同じ。",
+        "第1日 11:37｜アキが掌にのる小鳥を彫った。少し不揃いだけれど、ここで暮らした時間の形だ。今は手元にある。飾る場所を選ぼう。",
+        "第1日 12:11｜アキが掌にのる小鳥を彫った。少し不揃いだけれど、ここで暮らした時間の形だ。今は手元にある。飾る場所を選ぼう。",
+        "第1日 12:43｜アキが回収材1個から、一輪の花を彫った。今は手元にあり、窓辺へ飾る場所を選べる。",
+        "第1日 14:26｜アキが回収材3個で、この場所の料理道具を整えた。この場所で新しく始める料理の時間を25%短縮。食材と完成数は同じ。",
+        "第1日 18:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第2日 08:00｜朝の光が家に差し込む。食事12食、食材12個。今日は何に時間を使おう。",
+        "第2日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第2日 18:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第3日 08:00｜朝の光が家に差し込む。食事12食、食材8個。今日は何に時間を使おう。",
+        "第3日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第3日 10:18｜アキが回収材3個で、この場所の静かな休憩場所を整えた。この場所での休息完了時、活力をさらに8、体力をさらに2回復。"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "cook",
+        "home": "home",
+        "leisure": "social"
+      },
+      "wishKind": "household-meal"
+    },
+    {
+      "id": "ren",
+      "name": "レン",
+      "role": "探索と護衛",
+      "traits": [
+        "慎重",
+        "静かな場所が好き"
+      ],
+      "wish": "無理をせず、明日の物資を見つけたい",
+      "skills": {
+        "cooking": 1,
+        "combat": 6,
+        "craft": 3
+      },
+      "weapon": "spear",
+      "armor": true,
+      "location": "home",
+      "hp": 100,
+      "hunger": 93.23499999999916,
+      "energy": 90.54099999999964,
+      "mood": 100,
+      "policy": "gather",
+      "action": null,
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 40,
+          "trust": 43
+        },
+        "mio": {
+          "closeness": 40,
+          "trust": 43
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第1日 13:35｜レンが木陰の迂回路で物資を回収した。回収材3個と食材2個を確保した。",
+        "第1日 14:26｜アキが回収材3個で、この場所の料理道具を整えた。この場所で新しく始める料理の時間を25%短縮。食材と完成数は同じ。",
+        "第1日 18:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第2日 08:00｜朝の光が家に差し込む。食事12食、食材12個。今日は何に時間を使おう。",
+        "第2日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第2日 18:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第3日 08:00｜朝の光が家に差し込む。食事12食、食材8個。今日は何に時間を使おう。",
+        "第3日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第3日 10:18｜アキが回収材3個で、この場所の静かな休憩場所を整えた。この場所での休息完了時、活力をさらに8、体力をさらに2回復。"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "gather",
+        "home": "bedroom",
+        "leisure": "quiet"
+      },
+      "wishKind": "safe-return"
+    }
+  ],
+  "resources": {
+    "food": 12,
+    "ingredients": 6,
+    "medicine": 3,
+    "scrap": 0
+  },
+  "logs": [
+    {
+      "id": 1,
+      "time": 480,
+      "type": "life",
+      "title": "三人の朝",
+      "text": "窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 2,
+      "time": 480,
+      "type": "social",
+      "title": "ミオのひとこと",
+      "text": "「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 7,
+      "time": 495,
+      "type": "social",
+      "title": "同じ食卓で",
+      "text": "アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 10,
+      "time": 498,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが裏庭に着いた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 12,
+      "time": 517,
+      "type": "work",
+      "title": "温かい食事ができた",
+      "text": "ミオが食材2個で食事を3食作った。鍋から、やさしい湯気が立ちのぼる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 14,
+      "time": 523,
+      "type": "work",
+      "title": "裏庭の収穫",
+      "text": "レンは食べられる葉と根を集めた。食材を3個持ち帰った。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 17,
+      "time": 548,
+      "type": "work",
+      "title": "裏庭の収穫",
+      "text": "レンは食べられる葉と根を集めた。食材を3個持ち帰った。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 21,
+      "time": 575,
+      "type": "work",
+      "title": "温かい食事ができた",
+      "text": "ミオが食材2個で食事を3食作った。鍋から、やさしい湯気が立ちのぼる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 24,
+      "time": 578,
+      "type": "work",
+      "title": "裏庭の収穫",
+      "text": "レンは食べられる葉と根を集めた。食材を3個持ち帰った。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 26,
+      "time": 597,
+      "type": "work",
+      "title": "温かい食事ができた",
+      "text": "ミオが食材2個で食事を3食作った。鍋から、やさしい湯気が立ちのぼる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 28,
+      "time": 598,
+      "type": "life",
+      "title": "小さな木彫り",
+      "text": "アキが掌にのる小鳥を彫った。少し不揃いだけれど、ここで暮らした時間の形だ。今は手元にある。飾る場所を選ぼう。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 32,
+      "time": 603,
+      "type": "work",
+      "title": "裏庭の収穫",
+      "text": "レンは食べられる葉と根を集めた。食材を3個持ち帰った。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 35,
+      "time": 657,
+      "type": "work",
+      "title": "手仕事台を整える",
+      "text": "ミオが回収材3個で、この場所の手仕事台を整えた。この場所で新しく始める小鳥・花・設備制作の時間を25%短縮。材料と完成数は同じ。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 37,
+      "time": 697,
+      "type": "life",
+      "title": "小さな木彫り",
+      "text": "アキが掌にのる小鳥を彫った。少し不揃いだけれど、ここで暮らした時間の形だ。今は手元にある。飾る場所を選ぼう。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 40,
+      "time": 731,
+      "type": "life",
+      "title": "小さな木彫り",
+      "text": "アキが掌にのる小鳥を彫った。少し不揃いだけれど、ここで暮らした時間の形だ。今は手元にある。飾る場所を選ぼう。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 43,
+      "time": 763,
+      "type": "life",
+      "title": "木彫りの花",
+      "text": "アキが回収材1個から、一輪の花を彫った。今は手元にあり、窓辺へ飾る場所を選べる。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 46,
+      "time": 766,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "アキが小さな台所に着いた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 49,
+      "time": 769,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "アキが共同の居間に着いた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 51,
+      "time": 795,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが木陰の迂回路に着いた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 54,
+      "time": 815,
+      "type": "explore",
+      "title": "争わずに得たもの",
+      "text": "レンが木陰の迂回路で物資を回収した。回収材3個と食材2個を確保した。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 57,
+      "time": 838,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが共同の居間に着いた。見慣れた家の灯りに、肩の力が抜ける。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 58,
+      "time": 838,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "レンがレンから拠点倉庫へ資材3を移した。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 61,
+      "time": 866,
+      "type": "work",
+      "title": "料理道具を整える",
+      "text": "アキが回収材3個で、この場所の料理道具を整えた。この場所で新しく始める料理の時間を25%短縮。食材と完成数は同じ。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 64,
+      "time": 896,
+      "type": "life",
+      "title": "ひと息ついて",
+      "text": "アキは風の通る窓辺で休んだ。体力と気力が戻ってきた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 65,
+      "time": 899,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが川沿いの採集地に着いた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 68,
+      "time": 929,
+      "type": "explore",
+      "title": "川沿いの収穫",
+      "text": "レンが川沿いで食材3個と資材1個を集め、レンの荷物に収めた。今日の収穫はここまで。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 71,
+      "time": 962,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが共同の居間に着いた。見慣れた家の灯りに、肩の力が抜ける。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 72,
+      "time": 962,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "レンがレンから拠点倉庫へ資材1を移した。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 77,
+      "time": 1095,
+      "type": "social",
+      "title": "同じ食卓で",
+      "text": "アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 81,
+      "time": 1575,
+      "type": "life",
+      "title": "眠りから覚めた",
+      "text": "アキは眠りから覚めた。体調を確かめて、次の過ごし方を選べる。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 82,
+      "time": 1575,
+      "type": "life",
+      "title": "眠りから覚めた",
+      "text": "ミオは眠りから覚めた。体調を確かめて、次の過ごし方を選べる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 83,
+      "time": 1575,
+      "type": "life",
+      "title": "眠りから覚めた",
+      "text": "レンは眠りから覚めた。体調を確かめて、次の過ごし方を選べる。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 85,
+      "time": 1591,
+      "type": "work",
+      "title": "温かい食事ができた",
+      "text": "ミオが食材2個で食事を3食作った。鍋から、やさしい湯気が立ちのぼる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 87,
+      "time": 1920,
+      "type": "social",
+      "title": "アキの朝",
+      "text": "昨日は三人で食卓を囲んだ。今日は、自分の時間も一緒の時間も作りたい。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 88,
+      "time": 1920,
+      "type": "social",
+      "title": "ミオの朝",
+      "text": "昨日は三人で温かい食事を囲めた。今日も顔を合わせる時間があると嬉しい。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 89,
+      "time": 1920,
+      "type": "social",
+      "title": "レンの朝",
+      "text": "昨日見つけた物資が、今日の暮らしを少し支えてくれる。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 90,
+      "time": 1920,
+      "type": "life",
+      "title": "第2日の朝",
+      "text": "朝の光が家に差し込む。食事12食、食材12個。今日は何に時間を使おう。",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 95,
+      "time": 1935,
+      "type": "social",
+      "title": "同じ食卓で",
+      "text": "アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 98,
+      "time": 1951,
+      "type": "work",
+      "title": "温かい食事ができた",
+      "text": "ミオが食材2個で食事を3食作った。鍋から、やさしい湯気が立ちのぼる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 99,
+      "time": 1968,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが川沿いの採集地に着いた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 102,
+      "time": 1998,
+      "type": "explore",
+      "title": "川沿いの収穫",
+      "text": "レンが川沿いで食材3個と資材1個を集め、レンの荷物に収めた。今日の収穫はここまで。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 105,
+      "time": 2031,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが共同の居間に着いた。見慣れた家の灯りに、肩の力が抜ける。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 106,
+      "time": 2031,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "レンがレンから拠点倉庫へ資材1を移した。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 107,
+      "time": 2160,
+      "type": "system",
+      "title": "昼の行商",
+      "text": "小さな荷車が居間の入口へ着いた。行商は16時まで、食事や食材と資材・手当用品を交換してくれる。",
+      "actors": [],
+      "witnesses": []
+    },
+    {
+      "id": 108,
+      "time": 2400,
+      "type": "system",
+      "title": "行商の出発",
+      "text": "行商は荷車を引いて出発した。次は翌日の12時に立ち寄る予定だ。",
+      "actors": [],
+      "witnesses": []
+    },
+    {
+      "id": 113,
+      "time": 2535,
+      "type": "social",
+      "title": "同じ食卓で",
+      "text": "アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 117,
+      "time": 3015,
+      "type": "life",
+      "title": "眠りから覚めた",
+      "text": "アキは眠りから覚めた。体調を確かめて、次の過ごし方を選べる。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 118,
+      "time": 3015,
+      "type": "life",
+      "title": "眠りから覚めた",
+      "text": "ミオは眠りから覚めた。体調を確かめて、次の過ごし方を選べる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 119,
+      "time": 3015,
+      "type": "life",
+      "title": "眠りから覚めた",
+      "text": "レンは眠りから覚めた。体調を確かめて、次の過ごし方を選べる。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 121,
+      "time": 3031,
+      "type": "work",
+      "title": "温かい食事ができた",
+      "text": "ミオが食材2個で食事を3食作った。鍋から、やさしい湯気が立ちのぼる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 123,
+      "time": 3360,
+      "type": "social",
+      "title": "アキの朝",
+      "text": "昨日は三人で食卓を囲んだ。今日は、自分の時間も一緒の時間も作りたい。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 124,
+      "time": 3360,
+      "type": "social",
+      "title": "ミオの朝",
+      "text": "昨日は三人で温かい食事を囲めた。今日も顔を合わせる時間があると嬉しい。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 125,
+      "time": 3360,
+      "type": "social",
+      "title": "レンの朝",
+      "text": "昨日は三人で食事をとった。今日は無理のない予定を考えたい。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 126,
+      "time": 3360,
+      "type": "life",
+      "title": "第3日の朝",
+      "text": "朝の光が家に差し込む。食事12食、食材8個。今日は何に時間を使おう。",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 131,
+      "time": 3375,
+      "type": "social",
+      "title": "同じ食卓で",
+      "text": "アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 134,
+      "time": 3390,
+      "type": "work",
+      "title": "温かい食事ができた",
+      "text": "ミオが食材2個で食事を3食作った。鍋から、やさしい湯気が立ちのぼる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 135,
+      "time": 3408,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが川沿いの採集地に着いた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 138,
+      "time": 3438,
+      "type": "explore",
+      "title": "川沿いの収穫",
+      "text": "レンが川沿いで食材3個と資材1個を集め、レンの荷物に収めた。今日の収穫はここまで。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 141,
+      "time": 3471,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが共同の居間に着いた。見慣れた家の灯りに、肩の力が抜ける。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 142,
+      "time": 3471,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "レンがレンから拠点倉庫へ資材1を移した。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 145,
+      "time": 3498,
+      "type": "work",
+      "title": "静かな休憩場所",
+      "text": "アキが回収材3個で、この場所の静かな休憩場所を整えた。この場所での休息完了時、活力をさらに8、体力をさらに2回復。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    }
+  ],
+  "enemy": {
+    "hp": 80,
+    "location": "ruins",
+    "defeated": false
+  },
+  "flags": {
+    "decorated": false,
+    "hobbyFinished": true,
+    "suppliesRecovered": false,
+    "safeSuppliesRecovered": true
+  },
+  "nextId": 146,
+  "ended": false,
+  "autoCombat": false,
+  "life": {
+    "version": 1,
+    "crafts": [
+      {
+        "id": 18,
+        "authorId": "aki",
+        "createdAt": 598,
+        "createdLocation": "home",
+        "design": "bird"
+      },
+      {
+        "id": 30,
+        "authorId": "aki",
+        "createdAt": 697,
+        "createdLocation": "home",
+        "design": "bird"
+      },
+      {
+        "id": 38,
+        "authorId": "aki",
+        "createdAt": 731,
+        "createdLocation": "home",
+        "design": "bird"
+      },
+      {
+        "id": 41,
+        "authorId": "aki",
+        "createdAt": 763,
+        "createdLocation": "home",
+        "design": "flower"
+      }
+    ],
+    "wishes": {
+      "mio": {
+        "completedAt": 495,
+        "eventId": 6
+      },
+      "ren": {
+        "completedAt": 523,
+        "eventId": 13
+      }
+    },
+    "events": [
+      {
+        "id": 6,
+        "time": 495,
+        "kind": "meal",
+        "location": "home",
+        "actors": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "食事をとった",
+        "text": "アキとミオとレンが、同じ場所で温かい食事を囲んだ。"
+      },
+      {
+        "id": 13,
+        "time": 523,
+        "kind": "supply",
+        "location": "garden",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが裏庭で、明日の食事に使える食材を集めた。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      },
+      {
+        "id": 16,
+        "time": 548,
+        "kind": "supply",
+        "location": "garden",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが裏庭で、明日の食事に使える食材を集めた。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      },
+      {
+        "id": 23,
+        "time": 578,
+        "kind": "supply",
+        "location": "garden",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが裏庭で、明日の食事に使える食材を集めた。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      },
+      {
+        "id": 27,
+        "time": 598,
+        "kind": "craft",
+        "location": "home",
+        "actors": [
+          "aki"
+        ],
+        "witnesses": [
+          "aki",
+          "mio"
+        ],
+        "title": "木彫りができた",
+        "text": "アキが自分の小鳥の木彫りを仕上げた。まだ手元にあり、飾る場所を選べる。",
+        "craftId": 18
+      },
+      {
+        "id": 31,
+        "time": 603,
+        "kind": "supply",
+        "location": "garden",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが裏庭で、明日の食事に使える食材を集めた。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      },
+      {
+        "id": 34,
+        "time": 657,
+        "kind": "project",
+        "location": "home",
+        "actors": [
+          "mio"
+        ],
+        "witnesses": [
+          "aki",
+          "mio"
+        ],
+        "title": "暮らしの道具を整えた",
+        "text": "ミオが、この場所で「手仕事台を整える」を仕上げた。暮らしの中で使えるようになった。",
+        "projectId": 33
+      },
+      {
+        "id": 36,
+        "time": 697,
+        "kind": "craft",
+        "location": "home",
+        "actors": [
+          "aki"
+        ],
+        "witnesses": [
+          "aki",
+          "mio"
+        ],
+        "title": "木彫りができた",
+        "text": "アキが自分の小鳥の木彫りを仕上げた。まだ手元にあり、飾る場所を選べる。",
+        "craftId": 30
+      },
+      {
+        "id": 39,
+        "time": 731,
+        "kind": "craft",
+        "location": "home",
+        "actors": [
+          "aki"
+        ],
+        "witnesses": [
+          "aki",
+          "mio"
+        ],
+        "title": "木彫りができた",
+        "text": "アキが自分の小鳥の木彫りを仕上げた。まだ手元にあり、飾る場所を選べる。",
+        "craftId": 38
+      },
+      {
+        "id": 42,
+        "time": 763,
+        "kind": "craft",
+        "location": "home",
+        "actors": [
+          "aki"
+        ],
+        "witnesses": [
+          "aki",
+          "mio"
+        ],
+        "title": "木彫りができた",
+        "text": "アキが自分の木彫りの花を仕上げた。まだ手元にあり、飾る場所を選べる。",
+        "craftId": 41
+      },
+      {
+        "id": 53,
+        "time": 815,
+        "kind": "supply",
+        "location": "shelter",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが木陰の迂回路で物資を回収した。回収材3個と食材2個を確保した。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      },
+      {
+        "id": 56,
+        "time": 838,
+        "kind": "return",
+        "location": "home",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "拠点へ帰った",
+        "text": "レンが拠点へ帰り着いた。今日の外出を終え、暮らしへ戻れる。"
+      },
+      {
+        "id": 60,
+        "time": 866,
+        "kind": "project",
+        "location": "home",
+        "actors": [
+          "aki"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "暮らしの道具を整えた",
+        "text": "アキが、この場所で「料理道具を整える」を仕上げた。暮らしの中で使えるようになった。",
+        "projectId": 59
+      },
+      {
+        "id": 67,
+        "time": 929,
+        "kind": "supply",
+        "location": "meadow",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが川沿いで食材3個と資材1個を集め、レンの荷物に収めた。今日の収穫はここまで。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      },
+      {
+        "id": 70,
+        "time": 962,
+        "kind": "return",
+        "location": "home",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "拠点へ帰った",
+        "text": "レンが拠点へ帰り着いた。今日の外出を終え、暮らしへ戻れる。"
+      },
+      {
+        "id": 76,
+        "time": 1095,
+        "kind": "meal",
+        "location": "home",
+        "actors": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "食事をとった",
+        "text": "アキとミオとレンが、同じ場所で温かい食事を囲んだ。"
+      },
+      {
+        "id": 94,
+        "time": 1935,
+        "kind": "meal",
+        "location": "home",
+        "actors": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "食事をとった",
+        "text": "アキとミオとレンが、同じ場所で温かい食事を囲んだ。"
+      },
+      {
+        "id": 101,
+        "time": 1998,
+        "kind": "supply",
+        "location": "meadow",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが川沿いで食材3個と資材1個を集め、レンの荷物に収めた。今日の収穫はここまで。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      },
+      {
+        "id": 104,
+        "time": 2031,
+        "kind": "return",
+        "location": "home",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "拠点へ帰った",
+        "text": "レンが拠点へ帰り着いた。今日の外出を終え、暮らしへ戻れる。"
+      },
+      {
+        "id": 112,
+        "time": 2535,
+        "kind": "meal",
+        "location": "home",
+        "actors": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "食事をとった",
+        "text": "アキとミオとレンが、同じ場所で温かい食事を囲んだ。"
+      },
+      {
+        "id": 130,
+        "time": 3375,
+        "kind": "meal",
+        "location": "home",
+        "actors": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "食事をとった",
+        "text": "アキとミオとレンが、同じ場所で温かい食事を囲んだ。"
+      },
+      {
+        "id": 137,
+        "time": 3438,
+        "kind": "supply",
+        "location": "meadow",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが川沿いで食材3個と資材1個を集め、レンの荷物に収めた。今日の収穫はここまで。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      },
+      {
+        "id": 140,
+        "time": 3471,
+        "kind": "return",
+        "location": "home",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "拠点へ帰った",
+        "text": "レンが拠点へ帰り着いた。今日の外出を終え、暮らしへ戻れる。"
+      },
+      {
+        "id": 144,
+        "time": 3498,
+        "kind": "project",
+        "location": "home",
+        "actors": [
+          "aki"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "暮らしの道具を整えた",
+        "text": "アキが、この場所で「静かな休憩場所」を仕上げた。暮らしの中で使えるようになった。",
+        "projectId": 143
+      }
+    ],
+    "reflections": [
+      {
+        "residentId": "aki",
+        "day": 2,
+        "time": 1920,
+        "eventId": 76,
+        "text": "昨日は三人で食卓を囲んだ。今日は、自分の時間も一緒の時間も作りたい。"
+      },
+      {
+        "residentId": "mio",
+        "day": 2,
+        "time": 1920,
+        "eventId": 6,
+        "text": "昨日は三人で温かい食事を囲めた。今日も顔を合わせる時間があると嬉しい。"
+      },
+      {
+        "residentId": "ren",
+        "day": 2,
+        "time": 1920,
+        "eventId": 13,
+        "text": "昨日見つけた物資が、今日の暮らしを少し支えてくれる。"
+      },
+      {
+        "residentId": "aki",
+        "day": 3,
+        "time": 3360,
+        "eventId": 112,
+        "text": "昨日は三人で食卓を囲んだ。今日は、自分の時間も一緒の時間も作りたい。"
+      },
+      {
+        "residentId": "mio",
+        "day": 3,
+        "time": 3360,
+        "eventId": 112,
+        "text": "昨日は三人で温かい食事を囲めた。今日も顔を合わせる時間があると嬉しい。"
+      },
+      {
+        "residentId": "ren",
+        "day": 3,
+        "time": 3360,
+        "eventId": 112,
+        "text": "昨日は三人で食事をとった。今日は無理のない予定を考えたい。"
+      }
+    ],
+    "meals": [
+      {
+        "residentId": "aki",
+        "time": 3375,
+        "location": "home"
+      },
+      {
+        "residentId": "mio",
+        "time": 3375,
+        "location": "home"
+      },
+      {
+        "residentId": "ren",
+        "time": 3375,
+        "location": "home"
+      }
+    ],
+    "upgrades": [
+      {
+        "id": 33,
+        "recipeId": "crafting-tools",
+        "creatorId": "mio",
+        "location": "home",
+        "completedAt": 657
+      },
+      {
+        "id": 59,
+        "recipeId": "kitchen-tools",
+        "creatorId": "aki",
+        "location": "home",
+        "completedAt": 866
+      },
+      {
+        "id": 143,
+        "recipeId": "rest-corner",
+        "creatorId": "aki",
+        "location": "home",
+        "completedAt": 3498
+      }
+    ]
+  },
+  "trade": {
+    "version": 1,
+    "nextArrival": 3600,
+    "receipts": [],
+    "visit": {
+      "id": 2160,
+      "arrivesAt": 2160,
+      "leavesAt": 2400,
+      "status": "departed",
+      "stock": {
+        "scrap": 3,
+        "medicine": 1
+      }
+    }
+  },
+  "region": {
+    "version": 1,
+    "stockDay": 1,
+    "stock": {
+      "food": 6,
+      "medicine": 3
+    },
+    "trust": {
+      "village-trader": {},
+      "village-guide": {}
+    },
+    "talked": {
+      "village-trader": [],
+      "village-guide": []
+    },
+    "knownRoute": false,
+    "routeKnownBy": [],
+    "harvests": [
+      {
+        "actorId": "ren",
+        "day": 1,
+        "time": 929
+      },
+      {
+        "actorId": "ren",
+        "day": 2,
+        "time": 1998
+      },
+      {
+        "actorId": "ren",
+        "day": 3,
+        "time": 3438
+      }
+    ],
+    "receipts": []
+  },
+  "inventory": {
+    "version": 1,
+    "packs": {
+      "aki": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "mio": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "ren": {
+        "food": 0,
+        "ingredients": 11,
+        "medicine": 0,
+        "scrap": 0
+      }
+    },
+    "ground": {},
+    "baseGear": {
+      "knife": 1,
+      "spear": 1,
+      "staff": 1,
+      "armor": 3
+    }
+  },
+  "autonomy": {
+    "version": 1,
+    "leisure": {
+      "mio": {
+        "day": 3,
+        "startedAt": 3360,
+        "kind": "social",
+        "actionId": 122
+      }
+    },
+    "manualStays": {
+      "ren": {
+        "time": 3471,
+        "location": "home",
+        "source": "arrival"
+      }
+    },
+    "conversations": {},
+    "mealPairs": {
+      "aki:mio": {
+        "time": 3375,
+        "location": "home",
+        "eventId": 130
+      },
+      "aki:ren": {
+        "time": 3375,
+        "location": "home",
+        "eventId": 130
+      },
+      "mio:ren": {
+        "time": 3375,
+        "location": "home",
+        "eventId": 130
+      }
+    }
+  },
+  "foodProduction": {
+    "version": 1,
+    "target": 12
+  }
+}

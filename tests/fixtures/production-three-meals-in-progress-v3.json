@@ -1,0 +1,310 @@
+{
+  "version": 3,
+  "minutes": 485,
+  "seed": 20261119,
+  "residents": [
+    {
+      "id": "aki",
+      "name": "アキ",
+      "role": "あなた",
+      "traits": [
+        "好奇心旺盛",
+        "手仕事が好き"
+      ],
+      "wish": "自分の窓辺に、手作りのものを置きたい",
+      "skills": {
+        "cooking": 2,
+        "combat": 2,
+        "craft": 4
+      },
+      "weapon": "knife",
+      "armor": false,
+      "location": "home",
+      "hp": 100,
+      "hunger": 72.72499999999997,
+      "energy": 87.77499999999999,
+      "mood": 72,
+      "policy": "balanced",
+      "action": {
+        "id": 3,
+        "kind": "eat",
+        "label": "食事をとる",
+        "progress": 5,
+        "duration": 15,
+        "automatic": false,
+        "origin": "home",
+        "reserved": {
+          "food": 1
+        },
+        "reservationSource": "base"
+      },
+      "suspended": null,
+      "relations": {
+        "mio": {
+          "closeness": 25,
+          "trust": 30
+        },
+        "ren": {
+          "closeness": 25,
+          "trust": 30
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "support",
+        "home": "home",
+        "leisure": "quiet"
+      },
+      "wishKind": "display"
+    },
+    {
+      "id": "mio",
+      "name": "ミオ",
+      "role": "料理と暮らし",
+      "traits": [
+        "世話好き",
+        "おしゃべり"
+      ],
+      "wish": "みんなで温かい食事を囲みたい",
+      "skills": {
+        "cooking": 6,
+        "combat": 2,
+        "craft": 2
+      },
+      "weapon": "staff",
+      "armor": false,
+      "location": "home",
+      "hp": 100,
+      "hunger": 72.72499999999997,
+      "energy": 87.77499999999999,
+      "mood": 72,
+      "policy": "cook",
+      "action": {
+        "id": 4,
+        "kind": "eat",
+        "label": "食事をとる",
+        "progress": 5,
+        "duration": 15,
+        "automatic": false,
+        "origin": "home",
+        "reserved": {
+          "food": 1
+        },
+        "reservationSource": "base"
+      },
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 34,
+          "trust": 30
+        },
+        "ren": {
+          "closeness": 34,
+          "trust": 30
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "cook",
+        "home": "home",
+        "leisure": "social"
+      },
+      "wishKind": "household-meal"
+    },
+    {
+      "id": "ren",
+      "name": "レン",
+      "role": "探索と護衛",
+      "traits": [
+        "慎重",
+        "静かな場所が好き"
+      ],
+      "wish": "無理をせず、明日の物資を見つけたい",
+      "skills": {
+        "cooking": 1,
+        "combat": 6,
+        "craft": 3
+      },
+      "weapon": "spear",
+      "armor": true,
+      "location": "home",
+      "hp": 100,
+      "hunger": 72.72499999999997,
+      "energy": 87.77499999999999,
+      "mood": 72,
+      "policy": "gather",
+      "action": {
+        "id": 5,
+        "kind": "eat",
+        "label": "食事をとる",
+        "progress": 5,
+        "duration": 15,
+        "automatic": false,
+        "origin": "home",
+        "reserved": {
+          "food": 1
+        },
+        "reservationSource": "base"
+      },
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 25,
+          "trust": 38
+        },
+        "mio": {
+          "closeness": 25,
+          "trust": 38
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "gather",
+        "home": "bedroom",
+        "leisure": "quiet"
+      },
+      "wishKind": "safe-return"
+    }
+  ],
+  "resources": {
+    "food": 6,
+    "ingredients": 8,
+    "medicine": 3,
+    "scrap": 4
+  },
+  "logs": [
+    {
+      "id": 1,
+      "time": 480,
+      "type": "life",
+      "title": "三人の朝",
+      "text": "窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 2,
+      "time": 480,
+      "type": "social",
+      "title": "ミオのひとこと",
+      "text": "「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    }
+  ],
+  "enemy": {
+    "hp": 80,
+    "location": "ruins",
+    "defeated": false
+  },
+  "flags": {
+    "decorated": false,
+    "hobbyFinished": false,
+    "suppliesRecovered": false,
+    "safeSuppliesRecovered": false
+  },
+  "nextId": 6,
+  "ended": false,
+  "autoCombat": false,
+  "life": {
+    "version": 1,
+    "crafts": [],
+    "wishes": {},
+    "events": [],
+    "reflections": [],
+    "meals": []
+  },
+  "trade": {
+    "version": 1,
+    "nextArrival": 2160,
+    "receipts": []
+  },
+  "region": {
+    "version": 1,
+    "stockDay": 1,
+    "stock": {
+      "food": 6,
+      "medicine": 3
+    },
+    "trust": {
+      "village-trader": {},
+      "village-guide": {}
+    },
+    "talked": {
+      "village-trader": [],
+      "village-guide": []
+    },
+    "knownRoute": false,
+    "routeKnownBy": [],
+    "harvests": [],
+    "receipts": []
+  },
+  "inventory": {
+    "version": 1,
+    "packs": {
+      "aki": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "mio": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "ren": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      }
+    },
+    "ground": {},
+    "baseGear": {
+      "knife": 1,
+      "spear": 1,
+      "staff": 1,
+      "armor": 3
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "oldPublishedVersion": 43,
+  "oldHtmlSha256": "c3e82d910e534c0ff24d95c9a57fda276ef9285e45aaa2883e7b33486bd87959",
+  "projection": "Remove only nextId, logs and region.receipts; compare every other field. Check previous logs/receipts are unchanged separately; expose operation/log/nextId differences explicitly.",
+  "sources": [
+    {
+      "file": "currency-genuine-day-one-medicine-ready-v3.json",
+      "source": "/workspace/research/stage4e-currency/baseline/run/genuine-village-day-one-scrap-one-before-medicine.json",
+      "sha256": "e5762bb33991ab7c282e0aa81c73e9d73b1325bb65a441ddb41dc670904d9ab4",
+      "minutes": 954,
+      "method": "Genuine ordinary UI export from old43 baseline; copied byte-for-byte, no direct state edits."
+    },
+    {
+      "file": "currency-genuine-day-two-one-scrap-v3.json",
+      "source": "/workspace/research/stage4e-currency/baseline/run/genuine-village-day-two-scrap-one-before-food.json",
+      "sha256": "c1efc1168de4ef59d2025f47d7b1831d391f5cf14525e1c2c5e7412e31ae4c0c",
+      "minutes": 1971,
+      "method": "Genuine ordinary UI export from old43 baseline; copied byte-for-byte, no direct state edits."
+    },
+    {
+      "file": "currency-genuine-day-two-food-ready-v3.json",
+      "source": "/workspace/research/stage4e-currency/baseline/run/genuine-village-day-two-scrap-two-food-ready.json",
+      "sha256": "2e4f8affe3a1a46b2b19e31acff4edb6dc4176e53fb6eb791b9c1eae154c8015",
+      "minutes": 2073,
+      "method": "Genuine ordinary UI export from old43 baseline; copied byte-for-byte, no direct state edits."
+    }
+  ],
+  "oracles": {
+    "medicine": {
+      "source": "/workspace/research/stage4e-currency/baseline/run/genuine-village-existing-barter-medicine-bought.json",
+      "sourceSha256": "06d894d145ef7a6ce0fd761e0561db6560f6829ae7f74df55af5cc845168bfa8",
+      "physicalWorldSha256": "a1b9d456d439f39f63109c1530885bb99ec58ce1e3b6da0b537932a67200d18e",
+      "nextId": 60,
+      "logCount": 30,
+      "regionReceiptCount": 6,
+      "minutes": 954
+    },
+    "food": {
+      "source": "/workspace/research/stage4e-currency/baseline/run/genuine-village-existing-barter-food-bought.json",
+      "sourceSha256": "906f0b4edf62d619b87a39000a70d48f4b32fdf1e962225d0cdb297fbf201748",
+      "physicalWorldSha256": "feb8a0960d956ab0c9c7f079c51834b0fb5c1b3c33b92ba6a8d03e717768587d",
+      "nextId": 82,
+      "logCount": 42,
+      "regionReceiptCount": 7,
+      "minutes": 2073
+    }
+  }
+}

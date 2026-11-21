@@ -1,0 +1,1157 @@
+{
+  "version": 3,
+  "minutes": 1063,
+  "seed": 2794791588,
+  "residents": [
+    {
+      "id": "aki",
+      "name": "アキ",
+      "role": "あなた",
+      "traits": [
+        "好奇心旺盛",
+        "手仕事が好き"
+      ],
+      "wish": "自分の窓辺に、手作りのものを置きたい",
+      "skills": {
+        "cooking": 2,
+        "combat": 2,
+        "craft": 4
+      },
+      "weapon": "knife",
+      "armor": false,
+      "location": "ruins",
+      "hp": 0,
+      "hunger": 68.75999999999613,
+      "energy": 60.52099999999919,
+      "mood": 80,
+      "policy": "balanced",
+      "action": null,
+      "suspended": null,
+      "relations": {
+        "mio": {
+          "closeness": 28,
+          "trust": 31
+        },
+        "ren": {
+          "closeness": 28,
+          "trust": 31
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第1日 11:46｜アキが木陰の迂回路で物資を回収した。回収材3個と食材2個を確保した。",
+        "第1日 17:13｜アキの前に流れ者が立った。「ここの物資には触るな」引き返す、援護を待つ、戦う。まだ選べる。"
+      ],
+      "wounds": {
+        "arm": 1,
+        "leg": 3,
+        "body": 2
+      },
+      "routine": {
+        "workRole": "support",
+        "home": "home",
+        "leisure": "quiet"
+      },
+      "wishKind": "display"
+    },
+    {
+      "id": "mio",
+      "name": "ミオ",
+      "role": "料理と暮らし",
+      "traits": [
+        "世話好き",
+        "おしゃべり"
+      ],
+      "wish": "みんなで温かい食事を囲みたい",
+      "skills": {
+        "cooking": 6.36,
+        "combat": 2,
+        "craft": 2
+      },
+      "weapon": "staff",
+      "armor": false,
+      "location": "ruins",
+      "hp": 100,
+      "hunger": 68.75999999999613,
+      "energy": 77.6049999999996,
+      "mood": 100,
+      "policy": "cook",
+      "action": null,
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 37,
+          "trust": 31
+        },
+        "ren": {
+          "closeness": 37,
+          "trust": 31
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+        "第1日 17:43｜ミオの前に流れ者が立った。「ここの物資には触るな」引き返す、援護を待つ、戦う。まだ選べる。"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "cook",
+        "home": "home",
+        "leisure": "social"
+      },
+      "wishKind": "household-meal"
+    },
+    {
+      "id": "ren",
+      "name": "レン",
+      "role": "探索と護衛",
+      "traits": [
+        "慎重",
+        "静かな場所が好き"
+      ],
+      "wish": "無理をせず、明日の物資を見つけたい",
+      "skills": {
+        "cooking": 1,
+        "combat": 6,
+        "craft": 3
+      },
+      "weapon": "spear",
+      "armor": true,
+      "location": "garden",
+      "hp": 100,
+      "hunger": 68.75999999999613,
+      "energy": 77.24199999999959,
+      "mood": 88,
+      "policy": "gather",
+      "action": null,
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 28,
+          "trust": 39
+        },
+        "mio": {
+          "closeness": 28,
+          "trust": 39
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 08:15｜アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "gather",
+        "home": "bedroom",
+        "leisure": "quiet"
+      },
+      "wishKind": "safe-return"
+    }
+  ],
+  "resources": {
+    "food": 10,
+    "ingredients": 14,
+    "medicine": 2,
+    "scrap": 2
+  },
+  "logs": [
+    {
+      "id": 1,
+      "time": 480,
+      "type": "life",
+      "title": "三人の朝",
+      "text": "窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 2,
+      "time": 480,
+      "type": "social",
+      "title": "ミオのひとこと",
+      "text": "「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 7,
+      "time": 495,
+      "type": "social",
+      "title": "同じ食卓で",
+      "text": "アキとミオとレンは同じ場所で食事をとった。「こういう時間があると、ほっとするね」",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 10,
+      "time": 498,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが裏庭に着いた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 12,
+      "time": 517,
+      "type": "work",
+      "title": "温かい食事ができた",
+      "text": "ミオが食材2個で食事を3食作った。鍋から、やさしい湯気が立ちのぼる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 14,
+      "time": 523,
+      "type": "work",
+      "title": "裏庭の収穫",
+      "text": "レンは食べられる葉と根を集めた。食材を3個持ち帰った。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 17,
+      "time": 548,
+      "type": "work",
+      "title": "裏庭の収穫",
+      "text": "レンは食べられる葉と根を集めた。食材を3個持ち帰った。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 20,
+      "time": 575,
+      "type": "work",
+      "title": "温かい食事ができた",
+      "text": "ミオが食材2個で食事を3食作った。鍋から、やさしい湯気が立ちのぼる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 23,
+      "time": 578,
+      "type": "work",
+      "title": "裏庭の収穫",
+      "text": "レンは食べられる葉と根を集めた。食材を3個持ち帰った。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 25,
+      "time": 597,
+      "type": "work",
+      "title": "温かい食事ができた",
+      "text": "ミオが食材2個で食事を3食作った。鍋から、やさしい湯気が立ちのぼる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 26,
+      "time": 597,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "アキが拠点倉庫からアキへ食事2を移した。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 27,
+      "time": 597,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "アキが拠点倉庫からアキへ手当用品1を移した。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 30,
+      "time": 603,
+      "type": "work",
+      "title": "裏庭の収穫",
+      "text": "レンは食べられる葉と根を集めた。食材を3個持ち帰った。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 31,
+      "time": 630,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "アキが川沿いの採集地に着いた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 34,
+      "time": 660,
+      "type": "explore",
+      "title": "川沿いの収穫",
+      "text": "アキが川沿いで食材3個と資材1個を集め、アキの荷物に収めた。今日の収穫はここまで。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 36,
+      "time": 686,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "アキが木陰の迂回路に着いた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 39,
+      "time": 706,
+      "type": "explore",
+      "title": "争わずに得たもの",
+      "text": "アキが木陰の迂回路で物資を回収した。回収材3個と食材2個を確保した。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 41,
+      "time": 750,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "アキが近隣の集落に着いた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 42,
+      "time": 750,
+      "type": "social",
+      "title": "資材2個を食事3食に交換",
+      "text": "アキが携えてきた資材2個を渡し、食事3食を受け取った。",
+      "actors": [
+        "aki",
+        "village-trader"
+      ],
+      "witnesses": [
+        "aki",
+        "village-trader"
+      ]
+    },
+    {
+      "id": 43,
+      "time": 750,
+      "type": "social",
+      "title": "資材2個を食事3食に交換",
+      "text": "アキが携えてきた資材2個を渡し、食事3食を受け取った。",
+      "actors": [
+        "aki",
+        "village-trader"
+      ],
+      "witnesses": [
+        "aki",
+        "village-trader"
+      ]
+    },
+    {
+      "id": 46,
+      "time": 801,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "アキが共同の居間に着いた。見慣れた家の灯りに、肩の力が抜ける。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 47,
+      "time": 801,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "アキが拠点倉庫からアキへ資材1を移した。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 49,
+      "time": 852,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "アキが近隣の集落に着いた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 50,
+      "time": 852,
+      "type": "social",
+      "title": "資材1個を手当用品1個に交換",
+      "text": "アキが携えてきた資材1個を渡し、手当用品1個を受け取った。",
+      "actors": [
+        "aki",
+        "village-trader"
+      ],
+      "witnesses": [
+        "aki",
+        "village-trader"
+      ]
+    },
+    {
+      "id": 51,
+      "time": 852,
+      "type": "social",
+      "title": "話を聞く",
+      "text": "アキは、尾根の近道が旧い資材置き場を通ると聞いた。川沿いの道は少し遠いが、置き場を避けられる。次の外出で使える道順を覚えた。",
+      "actors": [
+        "aki",
+        "village-guide"
+      ],
+      "witnesses": [
+        "aki",
+        "village-guide"
+      ]
+    },
+    {
+      "id": 52,
+      "time": 852,
+      "type": "social",
+      "title": "食事3食を届ける",
+      "text": "アキが携えてきた食事3食を届け、手当用品2個を受け取った。道を知る住民との信用が増えた。頼みごとはこれで完了した。",
+      "actors": [
+        "aki",
+        "village-guide"
+      ],
+      "witnesses": [
+        "aki",
+        "village-guide"
+      ]
+    },
+    {
+      "id": 55,
+      "time": 903,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "アキが共同の居間に着いた。見慣れた家の灯りに、肩の力が抜ける。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 56,
+      "time": 903,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "アキが拠点倉庫からアキへ資材1を移した。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 58,
+      "time": 954,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "アキが近隣の集落に着いた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 60,
+      "time": 954,
+      "type": "social",
+      "title": "資材1個を売って銀貨2枚",
+      "text": "アキが携えてきた資材1個を売り、銀貨2枚を受け取った。銀貨は本人が持っている。",
+      "actors": [
+        "aki",
+        "village-trader"
+      ],
+      "witnesses": [
+        "aki",
+        "village-trader"
+      ],
+      "coinTrade": {
+        "choice": "sell-scrap",
+        "termsId": "village-coins-v1"
+      }
+    },
+    {
+      "id": 63,
+      "time": 1005,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "アキが共同の居間に着いた。見慣れた家の灯りに、肩の力が抜ける。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki",
+        "mio"
+      ]
+    },
+    {
+      "id": 66,
+      "time": 1033,
+      "type": "explore",
+      "title": "入口の人影",
+      "text": "アキの前に流れ者が立った。「ここの物資には触るな」引き返す、援護を待つ、戦う。まだ選べる。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 67,
+      "time": 1033,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "アキが旧い資材置き場に着いた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 68,
+      "time": 1034,
+      "type": "combat",
+      "title": "資材置き場での交戦",
+      "text": "一行は相手の動きをうかがう。アキは13のダメージを受けた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 69,
+      "time": 1035,
+      "type": "combat",
+      "title": "資材置き場での交戦",
+      "text": "一行は相手の動きをうかがう。アキは17のダメージを受けた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 70,
+      "time": 1036,
+      "type": "combat",
+      "title": "資材置き場での交戦",
+      "text": "一行は相手の動きをうかがう。アキは16のダメージを受けた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 71,
+      "time": 1037,
+      "type": "combat",
+      "title": "資材置き場での交戦",
+      "text": "一行は相手の動きをうかがう。アキは15のダメージを受けた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 72,
+      "time": 1038,
+      "type": "combat",
+      "title": "資材置き場での交戦",
+      "text": "一行は相手の動きをうかがう。アキは17のダメージを受けた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 73,
+      "time": 1039,
+      "type": "combat",
+      "title": "資材置き場での交戦",
+      "text": "一行は相手の動きをうかがう。アキは13のダメージを受けた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": [
+        "aki"
+      ]
+    },
+    {
+      "id": 74,
+      "time": 1040,
+      "type": "combat",
+      "title": "資材置き場での交戦",
+      "text": "一行は相手の動きをうかがう。アキは17のダメージを受けた。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": []
+    },
+    {
+      "id": 75,
+      "time": 1040,
+      "type": "combat",
+      "title": "アキが倒れた",
+      "text": "アキは意識を失った。近くの仲間は救助できる。拠点の住民も引き続き操作できる。",
+      "actors": [
+        "aki"
+      ],
+      "witnesses": []
+    },
+    {
+      "id": 77,
+      "time": 1063,
+      "type": "explore",
+      "title": "入口の人影",
+      "text": "ミオの前に流れ者が立った。「ここの物資には触るな」引き返す、援護を待つ、戦う。まだ選べる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "mio"
+      ]
+    },
+    {
+      "id": 78,
+      "time": 1063,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "ミオが旧い資材置き場に着いた。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "mio"
+      ]
+    }
+  ],
+  "enemy": {
+    "hp": 80,
+    "location": "ruins",
+    "defeated": false,
+    "alerted": true
+  },
+  "flags": {
+    "decorated": false,
+    "hobbyFinished": false,
+    "suppliesRecovered": false,
+    "safeSuppliesRecovered": true
+  },
+  "nextId": 79,
+  "ended": false,
+  "autoCombat": false,
+  "life": {
+    "version": 1,
+    "crafts": [],
+    "wishes": {
+      "mio": {
+        "completedAt": 495,
+        "eventId": 6
+      },
+      "ren": {
+        "completedAt": 523,
+        "eventId": 13
+      }
+    },
+    "events": [
+      {
+        "id": 6,
+        "time": 495,
+        "kind": "meal",
+        "location": "home",
+        "actors": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "witnesses": [
+          "aki",
+          "mio",
+          "ren"
+        ],
+        "title": "食事をとった",
+        "text": "アキとミオとレンが、同じ場所で温かい食事を囲んだ。"
+      },
+      {
+        "id": 13,
+        "time": 523,
+        "kind": "supply",
+        "location": "garden",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが裏庭で、明日の食事に使える食材を集めた。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      },
+      {
+        "id": 16,
+        "time": 548,
+        "kind": "supply",
+        "location": "garden",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが裏庭で、明日の食事に使える食材を集めた。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      },
+      {
+        "id": 22,
+        "time": 578,
+        "kind": "supply",
+        "location": "garden",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが裏庭で、明日の食事に使える食材を集めた。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      },
+      {
+        "id": 29,
+        "time": 603,
+        "kind": "supply",
+        "location": "garden",
+        "actors": [
+          "ren"
+        ],
+        "witnesses": [
+          "ren"
+        ],
+        "title": "物資を回収した",
+        "text": "レンが裏庭で、明日の食事に使える食材を集めた。",
+        "health": 100,
+        "healthByActor": {
+          "ren": 100
+        }
+      },
+      {
+        "id": 33,
+        "time": 660,
+        "kind": "supply",
+        "location": "meadow",
+        "actors": [
+          "aki"
+        ],
+        "witnesses": [
+          "aki"
+        ],
+        "title": "物資を回収した",
+        "text": "アキが川沿いで食材3個と資材1個を集め、アキの荷物に収めた。今日の収穫はここまで。",
+        "health": 100,
+        "healthByActor": {
+          "aki": 100
+        }
+      },
+      {
+        "id": 38,
+        "time": 706,
+        "kind": "supply",
+        "location": "shelter",
+        "actors": [
+          "aki"
+        ],
+        "witnesses": [
+          "aki"
+        ],
+        "title": "物資を回収した",
+        "text": "アキが木陰の迂回路で物資を回収した。回収材3個と食材2個を確保した。",
+        "health": 100,
+        "healthByActor": {
+          "aki": 100
+        }
+      },
+      {
+        "id": 45,
+        "time": 801,
+        "kind": "return",
+        "location": "home",
+        "actors": [
+          "aki"
+        ],
+        "witnesses": [
+          "aki",
+          "mio"
+        ],
+        "title": "拠点へ帰った",
+        "text": "アキが拠点へ帰り着いた。今日の外出を終え、暮らしへ戻れる。"
+      },
+      {
+        "id": 54,
+        "time": 903,
+        "kind": "return",
+        "location": "home",
+        "actors": [
+          "aki"
+        ],
+        "witnesses": [
+          "aki",
+          "mio"
+        ],
+        "title": "拠点へ帰った",
+        "text": "アキが拠点へ帰り着いた。今日の外出を終え、暮らしへ戻れる。"
+      },
+      {
+        "id": 62,
+        "time": 1005,
+        "kind": "return",
+        "location": "home",
+        "actors": [
+          "aki"
+        ],
+        "witnesses": [
+          "aki",
+          "mio"
+        ],
+        "title": "拠点へ帰った",
+        "text": "アキが拠点へ帰り着いた。今日の外出を終え、暮らしへ戻れる。"
+      }
+    ],
+    "reflections": [],
+    "meals": [
+      {
+        "residentId": "aki",
+        "time": 495,
+        "location": "home"
+      },
+      {
+        "residentId": "mio",
+        "time": 495,
+        "location": "home"
+      },
+      {
+        "residentId": "ren",
+        "time": 495,
+        "location": "home"
+      }
+    ]
+  },
+  "trade": {
+    "version": 1,
+    "nextArrival": 2160,
+    "receipts": []
+  },
+  "region": {
+    "version": 1,
+    "stockDay": 1,
+    "stock": {
+      "food": 0,
+      "medicine": 2
+    },
+    "trust": {
+      "village-trader": {
+        "aki": 0
+      },
+      "village-guide": {
+        "aki": 3
+      }
+    },
+    "talked": {
+      "village-trader": [],
+      "village-guide": [
+        "aki"
+      ]
+    },
+    "knownRoute": true,
+    "routeKnownBy": [
+      "aki"
+    ],
+    "harvests": [
+      {
+        "actorId": "aki",
+        "day": 1,
+        "time": 660
+      }
+    ],
+    "receipts": [
+      {
+        "actorId": "aki",
+        "npcId": "village-trader",
+        "time": 750,
+        "choice": "trade-food",
+        "paid": {
+          "scrap": 2
+        },
+        "received": {
+          "food": 3
+        },
+        "trustGain": 0
+      },
+      {
+        "actorId": "aki",
+        "npcId": "village-trader",
+        "time": 750,
+        "choice": "trade-food",
+        "paid": {
+          "scrap": 2
+        },
+        "received": {
+          "food": 3
+        },
+        "trustGain": 0
+      },
+      {
+        "actorId": "aki",
+        "npcId": "village-trader",
+        "time": 852,
+        "choice": "trade-medicine",
+        "paid": {
+          "scrap": 1
+        },
+        "received": {
+          "medicine": 1
+        },
+        "trustGain": 0,
+        "termsId": "village-barter-v1"
+      },
+      {
+        "actorId": "aki",
+        "npcId": "village-guide",
+        "time": 852,
+        "choice": "talk",
+        "paid": {},
+        "received": {},
+        "trustGain": 1
+      },
+      {
+        "actorId": "aki",
+        "npcId": "village-guide",
+        "time": 852,
+        "choice": "deliver",
+        "paid": {
+          "food": 3
+        },
+        "received": {
+          "medicine": 2
+        },
+        "trustGain": 2
+      },
+      {
+        "actorId": "aki",
+        "npcId": "village-trader",
+        "time": 954,
+        "choice": "sell-scrap",
+        "paid": {
+          "scrap": 1
+        },
+        "received": {},
+        "trustGain": 0,
+        "termsId": "village-coins-v1",
+        "coinsPaid": 0,
+        "coinsReceived": 2,
+        "logId": 60
+      }
+    ],
+    "request": {
+      "deliveredBy": "aki",
+      "time": 852
+    }
+  },
+  "inventory": {
+    "version": 1,
+    "packs": {
+      "aki": {
+        "food": 5,
+        "ingredients": 5,
+        "medicine": 4,
+        "scrap": 0
+      },
+      "mio": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "ren": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      }
+    },
+    "ground": {},
+    "baseGear": {
+      "knife": 1,
+      "spear": 1,
+      "staff": 1,
+      "armor": 3
+    }
+  },
+  "autonomy": {
+    "version": 1,
+    "leisure": {},
+    "manualStays": {},
+    "conversations": {},
+    "mealPairs": {
+      "aki:mio": {
+        "time": 495,
+        "location": "home",
+        "eventId": 6
+      },
+      "aki:ren": {
+        "time": 495,
+        "location": "home",
+        "eventId": 6
+      },
+      "mio:ren": {
+        "time": 495,
+        "location": "home",
+        "eventId": 6
+      }
+    }
+  },
+  "pauseReason": "ミオが流れ者と遭遇しました。戦闘・防御・撤退を選んでください。"
+}

@@ -1,0 +1,416 @@
+{
+  "version": 4,
+  "minutes": 562,
+  "seed": 2050583757,
+  "residents": [
+    {
+      "id": "aki",
+      "name": "アキ",
+      "role": "あなた",
+      "traits": [
+        "好奇心旺盛",
+        "手仕事が好き"
+      ],
+      "wish": "自分の窓辺に、手作りのものを置きたい",
+      "skills": {
+        "cooking": 2,
+        "combat": 2,
+        "craft": 4
+      },
+      "weapon": "knife",
+      "armor": false,
+      "location": "home",
+      "hp": 100,
+      "hunger": 68.48999999999944,
+      "energy": 86.98299999999996,
+      "mood": 72,
+      "policy": "rest",
+      "action": {
+        "id": 11,
+        "kind": "cook",
+        "label": "料理をする",
+        "progress": 1,
+        "duration": 34,
+        "automatic": false,
+        "origin": "home",
+        "reserved": {
+          "ingredients": 2
+        },
+        "reservationSource": "base"
+      },
+      "suspended": null,
+      "relations": {
+        "mio": {
+          "closeness": 25,
+          "trust": 30
+        },
+        "ren": {
+          "closeness": 25,
+          "trust": 30
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "support",
+        "home": "home",
+        "leisure": "quiet"
+      },
+      "wishKind": "display"
+    },
+    {
+      "id": "mio",
+      "name": "ミオ",
+      "role": "料理と暮らし",
+      "traits": [
+        "世話好き",
+        "おしゃべり"
+      ],
+      "wish": "みんなで温かい食事を囲みたい",
+      "skills": {
+        "cooking": 6,
+        "combat": 2,
+        "craft": 2
+      },
+      "weapon": "staff",
+      "armor": false,
+      "location": "ruins",
+      "hp": 83,
+      "hunger": 68.48999999999944,
+      "energy": 85.42399999999994,
+      "mood": 72,
+      "policy": "rest",
+      "action": {
+        "id": 12,
+        "kind": "attack",
+        "label": "攻撃を続ける",
+        "progress": 1,
+        "duration": 2,
+        "automatic": false,
+        "origin": "ruins"
+      },
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 34,
+          "trust": 30
+        },
+        "ren": {
+          "closeness": 34,
+          "trust": 30
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 09:21｜ミオの前に流れ者が立った。「ここの物資には触るな」引き返す、援護を待つ、戦う。まだ選べる。"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "cook",
+        "home": "home",
+        "leisure": "social"
+      },
+      "wishKind": "household-meal"
+    },
+    {
+      "id": "ren",
+      "name": "レン",
+      "role": "探索と護衛",
+      "traits": [
+        "慎重",
+        "静かな場所が好き"
+      ],
+      "wish": "無理をせず、明日の物資を見つけたい",
+      "skills": {
+        "cooking": 1,
+        "combat": 6,
+        "craft": 3
+      },
+      "weapon": "spear",
+      "armor": true,
+      "location": "home",
+      "hp": 92,
+      "hunger": 68.48999999999944,
+      "energy": 83.50999999999986,
+      "mood": 72,
+      "policy": "rest",
+      "action": {
+        "id": 13,
+        "kind": "attack",
+        "label": "攻撃を続ける",
+        "progress": 1,
+        "duration": 2,
+        "automatic": false,
+        "origin": "ridge",
+        "encounterId": "ridge-watch"
+      },
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 25,
+          "trust": 38
+        },
+        "mio": {
+          "closeness": 25,
+          "trust": 38
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+        "第1日 09:21｜レンが尾根の人影へ近づくと、見張りが道へ出てきた。相手の出方を確かめ、戦うか、退路を選べる。"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      },
+      "routine": {
+        "workRole": "gather",
+        "home": "bedroom",
+        "leisure": "quiet"
+      },
+      "wishKind": "safe-return"
+    }
+  ],
+  "resources": {
+    "food": 3,
+    "ingredients": 8,
+    "medicine": 3,
+    "scrap": 4
+  },
+  "logs": [
+    {
+      "id": 1,
+      "time": 480,
+      "type": "life",
+      "title": "三人の朝",
+      "text": "窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 2,
+      "time": 480,
+      "type": "social",
+      "title": "ミオのひとこと",
+      "text": "「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 3,
+      "time": 480,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "ミオが拠点倉庫からミオへ食事3を移した。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 6,
+      "time": 541,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが尾根の近道に着いた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 8,
+      "time": 561,
+      "type": "explore",
+      "title": "入口の人影",
+      "text": "ミオの前に流れ者が立った。「ここの物資には触るな」引き返す、援護を待つ、戦う。まだ選べる。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "mio"
+      ]
+    },
+    {
+      "id": 9,
+      "time": 561,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "ミオが旧い資材置き場に着いた。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "mio"
+      ]
+    },
+    {
+      "id": 10,
+      "time": 561,
+      "type": "explore",
+      "title": "尾根の見張り",
+      "text": "レンが尾根の人影へ近づくと、見張りが道へ出てきた。相手の出方を確かめ、戦うか、退路を選べる。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ],
+      "encounter": {
+        "id": "ridge-watch",
+        "location": "ridge"
+      }
+    },
+    {
+      "id": 14,
+      "time": 562,
+      "type": "combat",
+      "title": "資材置き場での交戦",
+      "text": "ミオが相手に9の打撃。ミオは17のダメージを受けた。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "mio"
+      ]
+    },
+    {
+      "id": 15,
+      "time": 562,
+      "type": "combat",
+      "title": "尾根での交戦",
+      "text": "レンが相手に20の打撃。レンは8のダメージを受けた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ],
+      "encounter": {
+        "id": "ridge-watch",
+        "location": "ridge"
+      }
+    }
+  ],
+  "enemy": {
+    "hp": 71.2,
+    "location": "ruins",
+    "defeated": false,
+    "alerted": true
+  },
+  "flags": {
+    "decorated": false,
+    "hobbyFinished": false,
+    "suppliesRecovered": false,
+    "safeSuppliesRecovered": false
+  },
+  "nextId": 16,
+  "ended": false,
+  "autoCombat": false,
+  "life": {
+    "version": 1,
+    "crafts": [],
+    "wishes": {},
+    "events": [],
+    "reflections": [],
+    "meals": []
+  },
+  "trade": {
+    "version": 1,
+    "nextArrival": 2160,
+    "receipts": []
+  },
+  "region": {
+    "version": 1,
+    "stockDay": 1,
+    "stock": {
+      "food": 6,
+      "medicine": 3
+    },
+    "trust": {
+      "village-trader": {},
+      "village-guide": {}
+    },
+    "talked": {
+      "village-trader": [],
+      "village-guide": []
+    },
+    "knownRoute": false,
+    "routeKnownBy": [],
+    "harvests": [],
+    "receipts": []
+  },
+  "inventory": {
+    "version": 1,
+    "packs": {
+      "aki": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "mio": {
+        "food": 3,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "ren": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      }
+    },
+    "ground": {},
+    "baseGear": {
+      "knife": 1,
+      "spear": 1,
+      "staff": 1,
+      "armor": 3
+    }
+  },
+  "secondaryEncounter": {
+    "version": 1,
+    "hp": 39.6,
+    "defeated": false,
+    "alerted": true,
+    "introducedAt": 561,
+    "actorId": "ren",
+    "logId": 10
+  }
+}

@@ -1,0 +1,429 @@
+{
+  "version": 2,
+  "minutes": 531,
+  "seed": 20261119,
+  "residents": [
+    {
+      "id": "aki",
+      "name": "アキ",
+      "role": "あなた",
+      "traits": [
+        "好奇心旺盛",
+        "手仕事が好き"
+      ],
+      "wish": "自分の窓辺に、手作りのものを置きたい",
+      "skills": {
+        "cooking": 2,
+        "combat": 2,
+        "craft": 4
+      },
+      "weapon": "knife",
+      "armor": false,
+      "location": "home",
+      "hp": 100,
+      "hunger": 70.19499999999965,
+      "energy": 87.38799999999998,
+      "mood": 72,
+      "policy": "balanced",
+      "action": null,
+      "suspended": null,
+      "relations": {
+        "mio": {
+          "closeness": 25,
+          "trust": 30
+        },
+        "ren": {
+          "closeness": 25,
+          "trust": 30
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      }
+    },
+    {
+      "id": "mio",
+      "name": "ミオ",
+      "role": "料理と暮らし",
+      "traits": [
+        "世話好き",
+        "おしゃべり"
+      ],
+      "wish": "みんなで温かい食事を囲みたい",
+      "skills": {
+        "cooking": 6,
+        "combat": 2,
+        "craft": 2
+      },
+      "weapon": "staff",
+      "armor": false,
+      "location": "village",
+      "hp": 100,
+      "hunger": 70.19499999999965,
+      "energy": 85.70499999999991,
+      "mood": 72,
+      "policy": "balanced",
+      "action": null,
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 34,
+          "trust": 30
+        },
+        "ren": {
+          "closeness": 34,
+          "trust": 30
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      }
+    },
+    {
+      "id": "ren",
+      "name": "レン",
+      "role": "探索と護衛",
+      "traits": [
+        "慎重",
+        "静かな場所が好き"
+      ],
+      "wish": "無理をせず、明日の物資を見つけたい",
+      "skills": {
+        "cooking": 1.12,
+        "combat": 6,
+        "craft": 3
+      },
+      "weapon": "spear",
+      "armor": true,
+      "location": "bedroom",
+      "hp": 100,
+      "hunger": 70.19499999999965,
+      "energy": 88.33399999999996,
+      "mood": 74,
+      "policy": "balanced",
+      "action": {
+        "id": 9,
+        "kind": "rest",
+        "label": "ひと息つく",
+        "progress": 11,
+        "duration": 30,
+        "automatic": true,
+        "origin": "bedroom",
+        "autonomyReason": {
+          "code": "quiet",
+          "text": "静かな場所で、自分の時間を過ごす",
+          "decidedAt": 521
+        }
+      },
+      "suspended": null,
+      "relations": {
+        "aki": {
+          "closeness": 25,
+          "trust": 38
+        },
+        "mio": {
+          "closeness": 25,
+          "trust": 38
+        }
+      },
+      "memories": [
+        "第1日 08:00｜窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+        "第1日 08:00｜「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」"
+      ],
+      "wounds": {
+        "arm": 0,
+        "leg": 0,
+        "body": 0
+      }
+    }
+  ],
+  "resources": {
+    "food": 6,
+    "ingredients": 6,
+    "medicine": 3,
+    "scrap": 4
+  },
+  "logs": [
+    {
+      "id": 1,
+      "time": 480,
+      "type": "life",
+      "title": "三人の朝",
+      "text": "窓を開けると、草の匂いがした。食卓には三つの器。今日は、どんな一日にしよう。",
+      "actors": [
+        "aki",
+        "mio",
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 2,
+      "time": 480,
+      "type": "social",
+      "title": "ミオのひとこと",
+      "text": "「お昼は一緒に食べよう。外に出るなら、何か温かいものを用意しておくね」",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 3,
+      "time": 480,
+      "type": "work",
+      "title": "荷物の受渡し",
+      "text": "ミオが拠点倉庫からミオへ食事3を移した。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "aki",
+        "mio",
+        "ren"
+      ]
+    },
+    {
+      "id": 6,
+      "time": 517,
+      "type": "work",
+      "title": "温かい食事ができた",
+      "text": "レンが食材2個で食事を3食作った。鍋から、やさしい湯気が立ちのぼる。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "aki",
+        "ren"
+      ]
+    },
+    {
+      "id": 8,
+      "time": 520,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "レンが寝床と私室に着いた。",
+      "actors": [
+        "ren"
+      ],
+      "witnesses": [
+        "ren"
+      ]
+    },
+    {
+      "id": 10,
+      "time": 531,
+      "type": "explore",
+      "title": "移動を終えて",
+      "text": "ミオが近隣の集落に着いた。",
+      "actors": [
+        "mio"
+      ],
+      "witnesses": [
+        "mio"
+      ]
+    },
+    {
+      "id": 11,
+      "time": 531,
+      "type": "social",
+      "title": "話を聞く",
+      "text": "ミオは、尾根の近道が旧い資材置き場を通ると聞いた。川沿いの道は少し遠いが、置き場を避けられる。次の外出で使える道順を覚えた。",
+      "actors": [
+        "mio",
+        "village-guide"
+      ],
+      "witnesses": [
+        "mio",
+        "village-guide"
+      ]
+    },
+    {
+      "id": 12,
+      "time": 531,
+      "type": "social",
+      "title": "食事3食を届ける",
+      "text": "ミオが携えてきた食事3食を届け、手当用品2個を受け取った。道を知る住民との信用が増えた。頼みごとはこれで完了した。",
+      "actors": [
+        "mio",
+        "village-guide"
+      ],
+      "witnesses": [
+        "mio",
+        "village-guide"
+      ]
+    },
+    {
+      "id": 13,
+      "time": 531,
+      "type": "social",
+      "title": "話を聞く",
+      "text": "ミオは、資材を食事や手当用品と交換できると聞いた。店の品は一日分で、旅先では持ってきた品だけを渡せる。",
+      "actors": [
+        "mio",
+        "village-trader"
+      ],
+      "witnesses": [
+        "mio",
+        "village-trader"
+      ]
+    }
+  ],
+  "enemy": {
+    "hp": 80,
+    "location": "ruins",
+    "defeated": false
+  },
+  "flags": {
+    "decorated": false,
+    "hobbyFinished": false,
+    "suppliesRecovered": false,
+    "safeSuppliesRecovered": false
+  },
+  "nextId": 14,
+  "ended": false,
+  "autoCombat": false,
+  "life": {
+    "version": 1,
+    "crafts": [],
+    "wishes": {},
+    "events": [],
+    "reflections": [],
+    "meals": []
+  },
+  "trade": {
+    "version": 1,
+    "nextArrival": 2160,
+    "receipts": []
+  },
+  "region": {
+    "version": 1,
+    "stockDay": 1,
+    "stock": {
+      "food": 6,
+      "medicine": 3
+    },
+    "trust": {
+      "village-trader": {
+        "mio": 1
+      },
+      "village-guide": {
+        "mio": 3
+      }
+    },
+    "talked": {
+      "village-trader": [
+        "mio"
+      ],
+      "village-guide": [
+        "mio"
+      ]
+    },
+    "knownRoute": true,
+    "routeKnownBy": [
+      "mio"
+    ],
+    "harvests": [],
+    "receipts": [
+      {
+        "actorId": "mio",
+        "npcId": "village-guide",
+        "time": 531,
+        "choice": "talk",
+        "paid": {},
+        "received": {},
+        "trustGain": 1
+      },
+      {
+        "actorId": "mio",
+        "npcId": "village-guide",
+        "time": 531,
+        "choice": "deliver",
+        "paid": {
+          "food": 3
+        },
+        "received": {
+          "medicine": 2
+        },
+        "trustGain": 2
+      },
+      {
+        "actorId": "mio",
+        "npcId": "village-trader",
+        "time": 531,
+        "choice": "talk",
+        "paid": {},
+        "received": {},
+        "trustGain": 1
+      }
+    ],
+    "request": {
+      "deliveredBy": "mio",
+      "time": 531
+    }
+  },
+  "inventory": {
+    "version": 1,
+    "packs": {
+      "aki": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      },
+      "mio": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 2,
+        "scrap": 0
+      },
+      "ren": {
+        "food": 0,
+        "ingredients": 0,
+        "medicine": 0,
+        "scrap": 0
+      }
+    },
+    "ground": {},
+    "baseGear": {
+      "knife": 1,
+      "spear": 1,
+      "staff": 1,
+      "armor": 3
+    }
+  },
+  "autonomy": {
+    "version": 1,
+    "leisure": {
+      "ren": {
+        "day": 1,
+        "startedAt": 521,
+        "kind": "quiet",
+        "actionId": 9
+      }
+    },
+    "manualStays": {},
+    "conversations": {},
+    "mealPairs": {}
+  }
+}

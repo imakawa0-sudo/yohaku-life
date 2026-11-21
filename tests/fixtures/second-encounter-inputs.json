@@ -1,0 +1,89 @@
+[
+  {
+    "role": "dual-manual",
+    "path": "tests/fixtures/second-encounter-public-dual-v4.json",
+    "sha256": "a32dfa3bad5e51e59981bfafbd7d33faa9e401e3cef4c59c02c4c95bd508438d",
+    "bytes": 9562,
+    "classification": "controlled-public-commands-from-fresh-createGame",
+    "fieldEdits": false,
+    "source": "/workspace/research/stage5e-second-encounter/control-prep/run-1/two-fields-manual-before-minute.json",
+    "preparation": "/workspace/research/stage5e-second-encounter/control-prep/run-1/public-command-trail.json",
+    "sourceHtmlSHA256": "bdc7a05a8c09d01533b1392f2a678318d5dc3c2ebe4fd072fe7bc0942cf47e1b"
+  },
+  {
+    "role": "dual-expected",
+    "path": "tests/fixtures/second-encounter-public-expected-minute-v4.json",
+    "sha256": "0a27054465d29edc3781fb978567daa87b98733199638355c3368eef3599d0a0",
+    "bytes": 10253,
+    "classification": "controlled-public-commands-from-fresh-createGame",
+    "fieldEdits": false,
+    "source": "/workspace/research/stage5e-second-encounter/control-prep/run-1/two-fields-manual-expected-next-minute.json",
+    "preparation": "/workspace/research/stage5e-second-encounter/control-prep/run-1/public-command-trail.json",
+    "sourceHtmlSHA256": "bdc7a05a8c09d01533b1392f2a678318d5dc3c2ebe4fd072fe7bc0942cf47e1b"
+  },
+  {
+    "role": "agreement",
+    "path": "tests/fixtures/second-encounter-public-agreement-two-slots-v4.json",
+    "sha256": "707a3f21a3fa238fbdfed91c9d0eda73b28d5b4be0d8f00286de85e13d8eb4ca",
+    "bytes": 9870,
+    "classification": "controlled-public-commands-from-fresh-createGame",
+    "fieldEdits": false,
+    "source": "/workspace/research/stage5e-second-encounter/control-prep/run-1/first-agreement-second-manual-slots.json",
+    "preparation": "/workspace/research/stage5e-second-encounter/control-prep/run-1/public-command-trail.json",
+    "sourceHtmlSHA256": "bdc7a05a8c09d01533b1392f2a678318d5dc3c2ebe4fd072fe7bc0942cf47e1b"
+  },
+  {
+    "role": "local-retreat",
+    "path": "tests/fixtures/second-encounter-public-local-retreat-v4.json",
+    "sha256": "3f19722d3cdf0441dbd7345664aca9106c3aa87ea9cc395ac9ab0cc188499f0d",
+    "bytes": 9637,
+    "classification": "controlled-public-commands-from-fresh-createGame",
+    "fieldEdits": false,
+    "source": "/workspace/research/stage5e-second-encounter/control-prep/run-1/second-retreat-first-still-present.json",
+    "preparation": "/workspace/research/stage5e-second-encounter/control-prep/run-1/public-command-trail.json",
+    "sourceHtmlSHA256": "bdc7a05a8c09d01533b1392f2a678318d5dc3c2ebe4fd072fe7bc0942cf47e1b"
+  },
+  {
+    "role": "invalid-current-away",
+    "path": "tests/fixtures/second-encounter-invalid-current-away-v4.json",
+    "sha256": "038a3ad37663254e804be0779cc2c3fa711d40fa282f3f4e7e308fc3d50b8dc8",
+    "bytes": 9562,
+    "classification": "intentionally-invalid-field-edited-save",
+    "fieldEdits": true,
+    "source": "tests/fixtures/second-encounter-public-dual-v4.json",
+    "sourceSHA256": "a32dfa3bad5e51e59981bfafbd7d33faa9e401e3cef4c59c02c4c95bd508438d",
+    "edits": [
+      {
+        "path": "residents[ren].location",
+        "from": "ridge",
+        "to": "home"
+      }
+    ],
+    "expected": "UI import must reject and keep complete existing valid world unchanged",
+    "note": "This is an intentional invalid-input boundary; it is not valid-state preparation or ordinary gameplay."
+  },
+  {
+    "role": "invalid-current-after-defeat",
+    "path": "tests/fixtures/second-encounter-invalid-current-after-defeat-v4.json",
+    "sha256": "30b5f39c0b85ef80eebe2a668119ed2b6a4e247fa0e45e9cddee6323a70dec9b",
+    "bytes": 9560,
+    "classification": "intentionally-invalid-field-edited-save",
+    "fieldEdits": true,
+    "source": "tests/fixtures/second-encounter-public-dual-v4.json",
+    "sourceSHA256": "a32dfa3bad5e51e59981bfafbd7d33faa9e401e3cef4c59c02c4c95bd508438d",
+    "edits": [
+      {
+        "path": "secondaryEncounter.hp",
+        "from": 39.6,
+        "to": 18
+      },
+      {
+        "path": "secondaryEncounter.defeated",
+        "from": false,
+        "to": true
+      }
+    ],
+    "expected": "UI import must reject and keep complete existing valid world unchanged",
+    "note": "This is an intentional invalid-input boundary; it is not valid-state preparation or ordinary gameplay."
+  }
+]
