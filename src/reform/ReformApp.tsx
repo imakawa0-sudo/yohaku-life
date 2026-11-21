@@ -213,7 +213,7 @@ export default function ReformApp() {
     if (!file) return;
     try {
       if (file.size > 8_000_000)
-        throw new Error("8MB以内の改革版の保存を選んでください。");
+        throw new Error("8MB以内の新版の保存を選んでください。");
       const entry = importSlot(await file.text());
       if (save(appendSlot(current.current, entry))) {
         setSelected(entry.game.actors[0].person.id);
@@ -257,16 +257,18 @@ export default function ReformApp() {
       </header>
       {game && activeView !== "setup" && (
         <nav className="rf-navigation" aria-label="暮らしの画面">
-          {pages.map(({ id, label, Icon }) => (
-            <button
-              key={id}
-              aria-current={activeView === id ? "page" : undefined}
-              onClick={() => show(id)}
-            >
-              <Icon size={17} />
-              {label}
-            </button>
-          ))}
+          <div className="rf-navigation-inner">
+            {pages.map(({ id, label, Icon }) => (
+              <button
+                key={id}
+                aria-current={activeView === id ? "page" : undefined}
+                onClick={() => show(id)}
+              >
+                <Icon size={17} />
+                {label}
+              </button>
+            ))}
+          </div>
         </nav>
       )}
       {warning && (
@@ -287,7 +289,7 @@ export default function ReformApp() {
         />
       )}
       {activeView === "life" && game && actor && (
-        <main className="rf-main">
+        <main className="rf-main rf-main-life">
           <Life
             game={game}
             selected={actor.person.id}
@@ -297,7 +299,7 @@ export default function ReformApp() {
         </main>
       )}
       {activeView === "house" && game && (
-        <main className="rf-main rf-page">
+        <main className="rf-main rf-page rf-main-house">
           <div className="rf-page-title">
             <div>
               <p>{places(game.world).find((p) => p.id === game.home)?.name}</p>
@@ -315,7 +317,7 @@ export default function ReformApp() {
         </main>
       )}
       {activeView === "world" && game && actor && (
-        <main className="rf-main rf-page">
+        <main className="rf-main rf-page rf-main-world">
           <div className="rf-page-title">
             <div>
               <p>旅と地域の営み</p>
@@ -418,6 +420,7 @@ export default function ReformApp() {
               {library.slots.map((s) => (
                 <li key={s.id}>
                   <button
+                    aria-current={s.id === slot?.id ? "true" : undefined}
                     onClick={() => {
                       if (save({ ...current.current, activeId: s.id })) {
                         setSelected(s.game.actors[0].person.id);
@@ -448,7 +451,7 @@ export default function ReformApp() {
               ref={input}
               type="file"
               accept=".json,application/json"
-              aria-label="改革版の保存ファイル"
+              aria-label="新版の保存ファイル"
               hidden
               onChange={readFile}
             />
@@ -458,7 +461,11 @@ export default function ReformApp() {
           </a>
         </main>
       )}
-      <footer className="rf-foot">
+      <footer
+        className={
+          activeView === "life" && game ? "rf-foot rf-foot-life" : "rf-foot"
+        }
+      >
         <span>余白の暮らし</span>
         <a href="./yohaku-v53.html">公開53</a>
       </footer>

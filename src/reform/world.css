@@ -1,6 +1,6 @@
 .rf-region-editor,
 .rf-region-play {
-  color: #414a3c;
+  color: var(--rf-ink, #42483b);
   min-width: 0;
 }
 .rf-map-head,
@@ -15,7 +15,11 @@
   gap: 8px;
 }
 .rf-map-head {
-  margin: 0 0 0.7rem;
+  margin: 0 0 10px;
+}
+.rf-map-head h3 {
+  margin: 0;
+  font-size: 18px;
 }
 .rf-map-head h3,
 .rf-place-strip strong {
@@ -27,27 +31,27 @@
 .rf-regional-work button,
 .rf-world-go,
 .rf-rule-foot button {
-  border: 1px solid #cdd3c4;
-  border-radius: 6px;
+  border: 1px solid var(--rf-control-line, #cbd2bd);
+  border-radius: 7px;
   padding: 0.55rem 0.8rem;
-  min-height: 36px;
+  min-height: 44px;
   display: inline-flex;
   gap: 0.45em;
   align-items: center;
-  background: #fbfcf5;
-  color: #46583f;
+  background: var(--rf-surface, #fffef9);
+  color: var(--rf-accent, #65754f);
 }
 .rf-map-head span,
 .rf-map-note,
 .rf-place-strip span,
 .rf-site-facts dt,
 .rf-world-totals {
-  font-size: 0.9em;
-  color: #657064;
+  font-size: max(12px, 0.9em);
+  color: var(--rf-muted, #68735d);
 }
 .rf-map {
   height: clamp(205px, 28vw, 295px);
-  border: 1px solid #ced2c0;
+  border: 1px solid var(--rf-line, #e6e7dd);
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -71,18 +75,19 @@
   line-height: 1.2;
   min-height: 30px;
   padding: 3px 7px;
-  font-size: 0.86em;
+  font-size: max(12px, 0.86em);
   font-weight: 570;
-  color: #425741;
-  background: #fbfaedeb;
-  border: 1px solid #bcc6ae;
-  border-radius: 4px;
+  color: var(--rf-ink, #42483b);
+  background: #fffef9eb;
+  border: 1px solid var(--rf-control-line, #cbd2bd);
+  border-radius: 7px;
   overflow-wrap: anywhere;
 }
-.rf-map-pin[aria-pressed="true"] {
-  background: #506343;
-  color: #fffdf0;
-  border-color: #425139;
+.rf-map-pin[aria-pressed="true"],
+.rf-map-pin[aria-pressed="true"]:hover:not(:disabled) {
+  background: var(--rf-accent, #65754f);
+  color: var(--rf-surface, #fffef9);
+  border-color: var(--rf-accent, #65754f);
   z-index: 1;
 }
 .rf-north {
@@ -90,9 +95,9 @@
   top: 9px;
   right: 10px;
   font-family: serif;
-  color: #68735d;
+  color: var(--rf-muted, #68735d);
   letter-spacing: 0.08em;
-  font-size: 0.8em;
+  font-size: 12px;
 }
 .rf-place-strip {
   justify-content: flex-start;
@@ -112,7 +117,7 @@
   gap: 8px;
 }
 .rf-site-facts div {
-  border-left: 2px solid #cfd6bf;
+  border-left: 2px solid var(--rf-control-line, #cbd2bd);
   padding-left: 8px;
 }
 .rf-site-facts dt,
@@ -130,14 +135,15 @@
 }
 .rf-world-fold {
   margin: 10px 0;
-  border-top: 1px solid #dfe2d5;
+  border-top: 1px solid var(--rf-line, #e6e7dd);
 }
 .rf-world-fold summary {
   cursor: pointer;
-  padding: 0.8rem 0.1rem;
+  min-height: 44px;
+  padding: 8px 0;
   line-height: 1.4;
   font-weight: 550;
-  color: #4b5846;
+  color: var(--rf-ink, #42483b);
 }
 .rf-world-fields {
   display: grid;
@@ -147,16 +153,16 @@
 .rf-world-fields label {
   display: grid;
   gap: 3px;
-  font-size: 0.92em;
+  font-size: max(12px, 0.92em);
 }
 .rf-world-fields input,
 .rf-world-fields select {
   color: inherit;
   width: 100%;
-  background: #fffef8;
-  border: 1px solid #ccd0c1;
-  border-radius: 5px;
-  min-height: 37px;
+  background: var(--rf-surface, #fffef9);
+  border: 1px solid var(--rf-control-line, #cbd2bd);
+  border-radius: 7px;
+  min-height: 44px;
   padding: 5px 8px;
 }
 .rf-check {
@@ -164,18 +170,18 @@
   align-items: center;
   gap: 6px;
   margin: 0.7rem 0;
-  font-size: 0.92em;
+  font-size: max(12px, 0.92em);
 }
 .rf-check input[type="checkbox"] {
   width: 17px;
   height: 17px;
   min-height: 0;
-  accent-color: #617950;
+  accent-color: var(--rf-accent, #65754f);
 }
 .rf-landmark {
   padding: 10px;
-  border: 1px solid #d5d9ca;
-  border-radius: 6px;
+  border: 1px solid var(--rf-line, #e6e7dd);
+  border-radius: 8px;
   margin: 4px 0 12px;
   min-width: 0;
 }
@@ -185,8 +191,11 @@
 }
 .rf-rule-foot button {
   padding: 2px 8px;
-  min-height: 28px;
-  font-size: 0.85em;
+  min-height: 44px;
+  font-size: max(12px, 0.85em);
+}
+.rf-rule-foot small {
+  font-size: max(12px, 0.9em);
 }
 .rf-world-add {
   margin: 0 0 7px;
@@ -194,12 +203,14 @@
 .rf-regional-work {
   margin: 0.65rem 0;
   padding: 0.72rem;
-  background: #f5f5ea;
-  border-radius: 5px;
+  border: 1px solid var(--rf-line, #e6e7dd);
+  background: var(--rf-bg, #f7f6f0);
+  border-radius: 7px;
 }
 .rf-regional-work small {
   display: block;
-  color: #68735f;
+  font-size: max(12px, 0.9em);
+  color: var(--rf-muted, #68735d);
   margin-top: 0.16rem;
 }
 .rf-world-totals {
@@ -211,7 +222,7 @@
 }
 @media (max-width: 480px) {
   .rf-map-pin {
-    font-size: 0.78em;
+    font-size: 12px;
     max-width: 36%;
     padding: 3px 4px;
   }
@@ -230,13 +241,15 @@
   align-items: center;
   gap: 0.6em;
   margin: 0.55em 0;
-  font-size: 0.92em;
+  font-size: max(12px, 0.92em);
 }
 .rf-map-select select {
   color: inherit;
-  min-height: 37px;
-  border: 1px solid #ccd0c1;
-  border-radius: 5px;
-  background: #fffef8;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--rf-control-line, #cbd2bd);
+  border-radius: 7px;
+  background: var(--rf-surface, #fffef9);
   padding: 3px 8px;
 }

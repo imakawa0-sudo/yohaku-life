@@ -1,6 +1,6 @@
 # 余白の暮らし：開発の方針
 
-日本語のテキスト中心の生活・探索・部隊戦闘ゲーム。通常の入口は人物・土地・住まいを作れる改革版。公開53は専用HTMLと保存枠で併設する。元の依頼資料は [docs/SOURCE_PLAN.md](docs/SOURCE_PLAN.md)、現在の規則は [docs/DESIGN.md](docs/DESIGN.md) を参照する。
+日本語のテキスト中心の生活・探索・部隊戦闘ゲーム。通常の入口は人物・土地・住まいを作れる新版。公開53は専用HTMLと保存枠で併設する。元の依頼資料は [docs/SOURCE_PLAN.md](docs/SOURCE_PLAN.md)、現在の規則は [docs/DESIGN.md](docs/DESIGN.md) を参照する。
 
 - 主人公と仲間、生活と戦闘で、人物・身体・位置・物資・時計を共有する。
 - 主人公の不在や気絶だけを理由に、仲間と拠点の操作を止めない。
@@ -15,6 +15,8 @@
 - 変更後は必要な範囲で `npm test` と `npm run build` を実行し、実際の確認と未確認を分けて日本語で報告する。
 
 起動・操作は [README.md](README.md)、工程は [docs/ROADMAP.md](docs/ROADMAP.md)、試遊記録は [docs/PLAYTEST.md](docs/PLAYTEST.md)。
+
+現行UIの仕様は [docs/UI_RESTYLE_2026-11-22.md](docs/UI_RESTYLE_2026-11-22.md) を参照する。本文はPC14px・スマートフォン13pxを基本とし、画面下の時刻を中央に大きく、右に日付・時間帯・初霜の情報を置く。時間送りは「5分・15分・1時間・次の完了・朝まで」。新版のゲームシステム、4タブ名、ドット絵の画風を維持する。
 
 ## 実装後の試遊と納品
 

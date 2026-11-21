@@ -60,7 +60,7 @@ export function importSlot(json: string): Slot {
     value.version !== 1 ||
     !isSlot(value.slot)
   ) {
-    throw new Error("改革版の手帳から書き出した保存を選んでください。");
+    throw new Error("新版の手帳から書き出した保存を選んでください。");
   }
   return { ...value.slot, id: newId(), name: value.slot.name.slice(0, 80) };
 }

@@ -1,6 +1,6 @@
 .yh-house {
-  --house-rule: #dcdccf;
-  --house-ink: #424a38;
+  --house-rule: var(--rf-line, #e6e7dd);
+  --house-ink: var(--rf-ink, #42483b);
   color: var(--house-ink);
   line-height: 1.55;
   min-width: 0;
@@ -21,7 +21,7 @@
   gap: 0.55rem;
 }
 .yh-house-head {
-  margin: 0.25rem 0 1.1rem;
+  margin: 0 0 12px;
 }
 .yh-house-head h2,
 .yh-house h3 {
@@ -30,7 +30,8 @@
   letter-spacing: 0.025em;
 }
 .yh-house-head h2 {
-  font-size: 1.5rem;
+  font-size: 20px;
+  margin: 0;
 }
 .yh-house-rooms,
 .yh-house-furniture,
@@ -43,33 +44,33 @@
   margin: 0 0 0.9rem;
 }
 .yh-house button {
-  border: 1px solid var(--house-rule);
+  border: 1px solid var(--rf-control-line, #cbd2bd);
   border-radius: 0.45rem;
   padding: 0.48rem 0.68rem;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   gap: 0.38rem;
-  font-size: 0.96em;
-  background: #fffdf5;
-  min-height: 36px;
+  font-size: max(12px, 0.96em);
+  background: var(--rf-surface, #fffef9);
+  min-height: 44px;
   max-width: 100%;
   overflow-wrap: anywhere;
 }
 .yh-house .yh-house-rooms button[aria-pressed="true"] {
-  background: #56634b;
-  border-color: #56634b;
-  color: #fffef5;
+  background: var(--rf-accent, #65754f);
+  border-color: var(--rf-accent, #65754f);
+  color: var(--rf-surface, #fffef9);
 }
 .yh-house .yh-house-furniture button[aria-pressed="true"] {
-  border-color: #8a9678;
-  background: #eceddf;
+  border-color: var(--rf-accent, #65754f);
+  background: var(--rf-accent-soft, #eef1e5);
 }
 .yh-house-floor {
   padding: 0.85rem 1rem;
   border: 1px solid var(--house-rule);
-  border-radius: 0.6rem;
-  background: #f5f4e9;
+  border-radius: 8px;
+  background: var(--rf-bg, #f7f6f0);
 }
 .yh-house-floorhead {
   justify-content: space-between;
@@ -77,23 +78,26 @@
 }
 .yh-house-floorhead h3 {
   font-size: 1.18rem;
+  margin: 0;
 }
 .yh-house-floorhead > span,
 .yh-house-links,
 .yh-house-furniture > span {
-  color: #636955;
-  font-size: 0.94em;
+  color: var(--rf-muted, #68735d);
+  font-size: max(12px, 0.94em);
 }
 .yh-house-links,
 .yh-house-furniture {
   margin-top: 0.65rem;
 }
 .yh-house-metrics {
-  margin: 1rem 0;
+  margin: 12px 0;
 }
 .yh-house h4 {
+  font-family: var(--serif, serif);
   font-weight: 550;
   font-size: 1em;
+  margin: 0 0 6px;
 }
 .yh-house dl {
   display: grid;
@@ -103,18 +107,18 @@
 }
 .yh-house dl div {
   padding: 0.3rem 0.55rem;
-  border-left: 2px solid #c7cbb6;
+  border-left: 2px solid var(--rf-control-line, #cbd2bd);
 }
 .yh-house dt {
-  font-size: 0.85em;
-  color: #67705c;
+  font-size: max(12px, 0.85em);
+  color: var(--rf-muted, #68735d);
 }
 .yh-house dd {
   margin: 0;
   font-variant-numeric: tabular-nums;
 }
 .yh-house-edit {
-  padding: 0.7rem 0;
+  padding: 6px 0;
   border-top: 1px solid var(--house-rule);
 }
 .yh-house summary {
@@ -122,7 +126,7 @@
   cursor: pointer;
   font-weight: 550;
   list-style: none;
-  min-height: 32px;
+  min-height: 44px;
 }
 .yh-house summary::-webkit-details-marker {
   display: none;
@@ -131,7 +135,7 @@
   content: "＋";
   margin-left: auto;
   font-weight: 400;
-  color: #69755b;
+  color: var(--rf-accent, #65754f);
 }
 .yh-house details[open] > summary:after {
   content: "−";
@@ -148,17 +152,17 @@
   gap: 0.18rem;
   flex: 1 1 145px;
   min-width: 0;
-  color: #636954;
-  font-size: 0.93em;
+  color: var(--rf-muted, #68735d);
+  font-size: max(12px, 0.93em);
 }
 .yh-house input,
 .yh-house select {
-  border: 1px solid var(--house-rule);
-  border-radius: 0.38rem;
+  border: 1px solid var(--rf-control-line, #cbd2bd);
+  border-radius: 7px;
   padding: 0.48rem;
-  background: #fffdf7;
+  background: var(--rf-surface, #fffef9);
   color: var(--house-ink);
-  min-height: 38px;
+  min-height: 44px;
   width: 100%;
 }
 .yh-house-minor {
@@ -182,7 +186,7 @@
   flex-direction: column;
   border: 0;
   border-radius: 0;
-  font-size: 0.78em;
+  font-size: 12px;
 }
 .yh-house .yh-house-blueprint button[aria-pressed="true"] {
   outline: 2px solid #69794b;

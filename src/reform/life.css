@@ -1,135 +1,179 @@
 .lf-page {
-  --lf-ink: #374635;
-  --lf-soft: #646f5c;
-  --lf-line: #dce1d1;
-  --lf-green: #54694b;
-  --lf-paper: #fffcf5;
-  display: grid;
-  gap: 16px;
+  --lf-ink: var(--rf-ink, #42483b);
+  --lf-soft: var(--rf-muted, #68735d);
+  --lf-line: var(--rf-line, #e6e7dd);
+  --lf-green: var(--rf-accent, #65754f);
+  --lf-paper: var(--rf-surface, #fffef9);
+  --lf-serif: "Noto Serif JP", "Noto Serif CJK JP", "Yu Mincho", serif;
   color: var(--lf-ink);
   min-width: 0;
+  font-family:
+    "Noto Sans JP", "Noto Sans CJK JP", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic", sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  letter-spacing: 0.02em;
+}
+.lf-page p {
+  margin: 0;
 }
 .lf-page button,
 .lf-page input,
 .lf-page select {
   font: inherit;
+  letter-spacing: inherit;
 }
 .lf-page button,
 .lf-page summary {
   touch-action: manipulation;
 }
-.lf-clock,
+.lf-page button:disabled {
+  opacity: 1;
+  color: var(--lf-soft);
+}
+.lf-columns {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr) 210px;
+  grid-template-areas: "roster main side" "roster diary side";
+  gap: 14px 16px;
+  align-items: start;
+  min-width: 0;
+}
+.lf-main-column {
+  grid-area: main;
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.lf-side {
+  grid-area: side;
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.lf-diary {
+  grid-area: diary;
+  min-width: 0;
+}
 .lf-person,
 .lf-panel,
 .lf-fold {
   border: 1px solid var(--lf-line);
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--lf-paper);
+  min-width: 0;
 }
-.lf-clock {
+
+/* A single selected person, with place and activity kept beside the portrait. */
+.lf-roster-panel {
+  grid-area: roster;
+  min-width: 0;
+}
+.lf-roster-heading {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
-  gap: 16px;
-  padding: 14px 21px;
-  background: #f0f2e8;
+  gap: 8px;
+  margin: 0 0 8px;
 }
-.lf-clock-face {
-  display: flex;
-  align-items: center;
-  gap: 13px;
+.lf-roster-heading h2 {
+  margin: 0;
+  font: 500 14px/1.6 var(--lf-serif);
+  letter-spacing: 0.055em;
 }
-.lf-clock-icon {
-  width: 47px;
-  height: 47px;
+.lf-roster-heading > span {
+  color: var(--lf-soft);
+  font-size: 12px;
+}
+.lf-roster {
   display: grid;
-  place-items: center;
-  border: 1px solid #d5dcc8;
-  background: #e8edde;
-  border-radius: 50%;
-  color: #69734e;
-}
-.lf-day {
-  font-size: 0.85rem;
-  color: #617057;
-  line-height: 1.4;
-}
-.lf-clock-face strong {
-  font:
-    500 clamp(1.7rem, 3vw, 2.2rem)/1.15 Georgia,
-    serif;
-  font-variant-numeric: tabular-nums;
-}
-.lf-clock-actions,
-.lf-roster,
-.lf-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.lf-clock-actions button,
-.lf-pills button,
-.lf-soft-button {
-  min-height: 40px;
-  padding: 6px 13px;
-  background: #fafbf4;
-  color: #405239;
-  border: 1px solid #c8d2bd;
-  border-radius: 7px;
-  font-weight: 600;
-}
-.lf-clock-actions button:first-child {
-  color: #fff;
-  background: var(--lf-green);
-  border-color: var(--lf-green);
-}
-.lf-clock-actions button:hover:not(:disabled),
-.lf-pills button:hover:not(:disabled),
-.lf-soft-button:hover:not(:disabled),
-.lf-command button:hover:not(:disabled) {
-  color: #384c31;
-  background: #e9eddf;
-}
-.lf-clock-actions button:first-child:hover {
-  color: white;
-  background: #435a3b;
+  gap: 10px;
 }
 .lf-roster button {
-  padding: 7px 17px;
-  min-height: 40px;
-  border-radius: 30px;
-  border: 1px solid #d8dfcf;
-  color: #596451;
-  background: var(--lf-paper);
-  font-weight: 600;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  align-items: center;
+  gap: 6px 8px;
+  width: 100%;
+  min-height: 76px;
+  padding: 8px 10px;
+  border: 1px solid #e1e5d8;
+  border-radius: 7px;
+  background: #fafbf5;
+  color: var(--lf-ink);
+  text-align: left;
 }
 .lf-roster button[aria-pressed="true"] {
-  color: #3e5337;
-  background: #e5ebdb;
-  border-color: #a0af8e;
+  background: #eef1e5;
+  border-color: #b8c4a5;
+  box-shadow: inset 3px 0 #718557;
 }
+.lf-roster button:hover:not(:disabled) {
+  background: #edf0e3;
+}
+.lf-roster-portrait,
+.lf-roster-info {
+  min-width: 0;
+}
+.lf-roster-portrait .yp-portrait {
+  display: block;
+  width: 30px;
+  height: 35px;
+  border: 1px solid #d0d7c3;
+  border-radius: 3px;
+}
+.lf-roster-info > strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.lf-roster-place {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  margin-top: 3px;
+  color: var(--lf-soft);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.lf-roster-place svg {
+  flex: none;
+  align-self: center;
+}
+.lf-roster-place > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.lf-roster-activity {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #59644e;
+  overflow-wrap: anywhere;
+}
+
+/* The existing pixel scene keeps its own 3:1 geometry and rendering. */
 .lf-person {
   display: grid;
-  grid-template-columns: minmax(0, 1.65fr) minmax(240px, 1fr);
-  align-items: center;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: stretch;
   overflow: hidden;
 }
 .lf-portrait {
+  display: flex;
+  align-items: center;
   min-width: 0;
   width: 100%;
-}
-.lf-name .yp-portrait {
-  width: 42px;
-  height: 49px;
-  flex: none;
-  border: 1px solid #c6c8ae;
-  border-radius: 3px;
+  background: #edf0e3;
+  border-right: 1px solid var(--lf-line);
 }
 .lf-person-copy {
-  padding: 19px 24px;
+  padding: 10px 12px;
   min-width: 0;
-  align-self: center;
 }
+.lf-person-heading,
 .lf-name,
 .lf-place,
 .lf-mood,
@@ -140,40 +184,75 @@
   align-items: center;
   gap: 8px;
 }
-.lf-place {
-  color: var(--lf-soft);
-  font-size: 0.91rem;
+.lf-person-heading {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 3px 12px;
 }
 .lf-name {
-  gap: 12px;
-  margin: 3px 0 2px;
   flex-wrap: wrap;
+  gap: 9px;
 }
 .lf-name h2 {
   margin: 0;
-  font: 600 clamp(1.55rem, 3.3vw, 2.25rem)/1.45 var(--serif, serif);
-  letter-spacing: 0.06em;
+  font: 600 16px/1.5 var(--lf-serif);
+  letter-spacing: 0.05em;
+  overflow-wrap: anywhere;
 }
 .lf-name > span {
-  color: #69775b;
+  color: var(--lf-soft);
   font-variant-numeric: tabular-nums;
-  font-size: 0.82rem;
+  font-size: 12px;
+}
+.lf-place {
+  color: var(--lf-soft);
+  font-size: 12px;
+  line-height: 1.65;
+  min-width: 0;
+}
+.lf-place svg {
+  flex: none;
+}
+.lf-place > span {
+  overflow-wrap: anywhere;
 }
 .lf-mood {
-  font-size: 0.91rem;
   flex-wrap: wrap;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #59644e;
 }
-.lf-injury,
+.lf-page .lf-injury,
 .lf-feedback {
-  color: #8d4c3d;
+  color: #82503b;
+}
+.lf-person-danger {
+  border-color: #cfb8a0;
+}
+.lf-person-danger .lf-task {
+  padding: 10px 12px;
+  border: 1px solid #e1cfb8;
+  border-radius: 5px;
+  background: #fcf5e9;
 }
 .lf-task {
-  margin-top: 12px;
-  padding-top: 10px;
+  margin-top: 6px;
+  padding-top: 6px;
   border-top: 1px solid var(--lf-line);
 }
+.lf-task-label {
+  display: flex;
+  gap: 5px 8px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
 .lf-task strong {
-  font-weight: 650;
+  font-size: 13px;
+  font-weight: 600;
+}
+.lf-task-label small {
+  color: var(--lf-soft);
+  font-size: 12px;
 }
 .lf-task p,
 .lf-note,
@@ -184,45 +263,96 @@
 }
 .lf-task p,
 .lf-note {
-  font-size: 0.93rem;
-  line-height: 1.65;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.lf-task p {
+  margin-top: 2px;
 }
 .lf-task-progress {
-  margin-top: 6px;
-  font-size: 0.82rem;
+  flex-wrap: wrap;
+  margin-top: 7px;
+  font-size: 12px;
   color: var(--lf-soft);
 }
 .lf-task-progress progress {
-  width: min(160px, 55%);
-}
-.lf-columns {
-  display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(235px, 1fr);
-  gap: 14px;
-  align-items: start;
-}
-.lf-main-column,
-.lf-side {
-  display: grid;
-  gap: 12px;
-  min-width: 0;
+  width: min(180px, 55%);
 }
 .lf-panel {
-  padding: 18px 20px;
+  padding: 12px;
 }
 .lf-section-title {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   color: var(--lf-green);
+}
+.lf-section-title svg {
+  flex: none;
 }
 .lf-section-title h3 {
   margin: 0;
   color: var(--lf-ink);
-  font: 600 1.17rem/1.45 var(--serif, serif);
+  font: 500 16px/1.5 var(--lf-serif);
+  letter-spacing: 0.04em;
 }
+
+/* Short stock summary; carried supplies remain explicitly separate. */
+.lf-supplies {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: center;
+  gap: 6px 14px;
+  padding: 8px 12px;
+}
+.lf-supplies .lf-section-title {
+  margin-bottom: 0;
+  gap: 6px;
+}
+.lf-supplies .lf-section-title h3 {
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--lf-soft);
+}
+.lf-supplies .lf-section-title svg {
+  width: 15px;
+  height: 15px;
+}
+.lf-resources {
+  display: flex;
+  align-items: baseline;
+  gap: 5px 16px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+.lf-resources > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.lf-resources b {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.lf-resources svg {
+  color: var(--lf-green);
+}
+.lf-page .lf-cargo {
+  grid-column: 1 / -1;
+  margin-top: 2px;
+  padding-top: 7px;
+  border-top: 1px solid var(--lf-line);
+  color: #59644e;
+  font-size: 12px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+/* All six needs remain visible, including on narrow screens. */
 .lf-needs {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 11px 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 12px;
 }
 .lf-need > div,
 .lf-row {
@@ -233,12 +363,12 @@
   flex-wrap: wrap;
 }
 .lf-need > div {
-  font-size: 0.92rem;
-  line-height: 1.4;
+  font-size: 12px;
+  line-height: 1.6;
 }
 .lf-need span {
   color: var(--lf-soft);
-  font-size: 0.83rem;
+  font-variant-numeric: tabular-nums;
 }
 .lf-page progress {
   appearance: none;
@@ -246,25 +376,25 @@
   height: 5px;
   border: 0;
   border-radius: 99px;
-  background: #e6e9dc;
-  color: #82976a;
+  background: #e7ebdf;
+  color: #93a67e;
 }
 .lf-page progress::-webkit-progress-bar {
-  background: #e6e9dc;
+  background: #e7ebdf;
   border-radius: 99px;
 }
 .lf-page progress::-webkit-progress-value {
-  background: #82976a;
+  background: #93a67e;
   border-radius: 99px;
 }
 .lf-page progress::-moz-progress-bar {
-  background: #82976a;
+  background: #93a67e;
   border-radius: 99px;
 }
 .lf-need progress,
 .lf-skills progress {
   width: 100%;
-  margin: 4px 0;
+  margin: 5px 0 0;
 }
 .lf-need.lf-low progress::-webkit-progress-value {
   background: #a5664f;
@@ -273,121 +403,123 @@
   background: #a5664f;
 }
 .lf-need.lf-low span {
-  color: #914e38;
-  font-weight: bold;
+  color: #82503b;
+  font-weight: 600;
 }
+
+/* The four existing command groups and their descriptions stay together. */
 .lf-segment {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 4px;
-  flex-wrap: wrap;
   border-bottom: 1px solid var(--lf-line);
-  margin: 0 0 12px;
+  margin: 0 0 8px;
 }
 .lf-segment button {
-  min-height: 40px;
-  padding: 6px 12px;
+  min-width: 0;
+  min-height: 44px;
+  padding: 6px;
   color: var(--lf-soft);
+  background: transparent;
+  border: 0;
   border-bottom: 2px solid transparent;
-  font-weight: 550;
   border-radius: 0;
+  font-size: 13px;
+  font-weight: 500;
 }
 .lf-segment [aria-pressed="true"] {
-  color: #42573b;
-  border-bottom-color: #71865d;
+  color: #596e43;
+  border-bottom-color: #73845b;
+  font-weight: 600;
 }
 .lf-command-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 7px;
+  gap: 9px 10px;
 }
 .lf-command {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  min-width: 0;
 }
 .lf-command button {
   flex: 1;
   width: 100%;
   padding: 8px 10px;
-  min-height: 42px;
+  min-height: 44px;
   text-align: left;
-  line-height: 1.55;
-  border: 1px solid #dce1d1;
-  background: #fafaf2;
-  border-radius: 6px;
+  line-height: 1.6;
+  border: 1px solid #dbe1d0;
+  background: #fafbf5;
+  border-radius: 5px;
   color: #48573e;
-  font-weight: 550;
+  font-size: 13px;
+  font-weight: 500;
   overflow-wrap: anywhere;
 }
 .lf-command button:disabled {
-  opacity: 0.66;
-  color: #61695b;
-  background: #f6f5ef;
+  color: #5f6856;
+  background: #f3f3ec;
+  border-style: dashed;
 }
 .lf-command small {
-  font-size: 0.8rem;
-  margin: 3px 5px 1px;
-  line-height: 1.5;
+  display: block;
+  font-size: 12px;
+  margin: 5px 3px 0;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
 }
 .lf-command-list > p {
-  grid-column: 1/-1;
+  grid-column: 1 / -1;
 }
 .lf-cancel {
-  padding: 8px 0 0;
-  margin-top: 5px;
-  font-size: 0.9rem;
+  min-height: 44px;
+  padding: 8px 0;
+  margin-top: 8px;
+  font-size: 13px;
   color: #7a5549;
+  background: transparent;
+  border: 0;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.lf-resources {
-  display: flex;
-  align-items: baseline;
-  gap: 8px 14px;
-  flex-wrap: wrap;
-}
-.lf-resources span,
-.lf-cargo {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-.lf-resources span {
-  white-space: nowrap;
-}
-.lf-cargo {
-  font-size: 0.87rem;
+.lf-clock-hint {
+  padding: 0 3px;
   color: var(--lf-soft);
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 9px;
-  padding-top: 8px;
-  border-top: 1px solid var(--lf-line);
+  font-size: 12px;
+  line-height: 1.8;
 }
+
+/* Secondary information remains available in the existing folds. */
 .lf-fold {
   overflow: hidden;
 }
 .lf-fold summary {
-  min-height: 47px;
-  padding: 9px 15px;
+  min-height: 44px;
+  padding: 8px 10px;
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 7px;
   list-style: none;
   cursor: pointer;
   color: var(--lf-green);
+  font-size: 12px;
+}
+.lf-fold summary > svg {
+  flex: none;
 }
 .lf-fold summary span {
   color: var(--lf-ink);
-  font-weight: 600;
+  font-weight: 500;
 }
 .lf-fold summary::-webkit-details-marker {
   display: none;
 }
 .lf-fold summary:focus-visible {
-  outline: 2px solid #7f946a;
+  outline: 2px solid #8a9c6b;
   outline-offset: -3px;
-  border-radius: 8px;
+  border-radius: 7px;
 }
 .lf-fold-arrow {
   margin-left: auto;
@@ -397,192 +529,478 @@
   transform: rotate(180deg);
 }
 .lf-fold-body {
-  padding: 0 15px 14px;
+  padding: 0 10px 12px;
 }
 .lf-skills {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 9px 16px;
-  margin: 11px 0;
+  gap: 12px;
+  margin: 12px 0;
+  font-size: 12px;
+}
+.lf-skills small,
+.lf-bond small {
+  font-size: 12px;
+  line-height: 1.7;
 }
 .lf-subtitle {
-  margin: 12px 0 5px;
-  font-size: 0.97rem;
+  margin: 14px 0 7px;
+  font-size: 13px;
+  font-weight: 600;
 }
 .lf-bond,
 .lf-memory {
-  padding: 5px 0;
+  padding: 8px 0;
   border-bottom: 1px solid var(--lf-line);
+  font-size: 12px;
 }
 .lf-memory {
   display: flex;
   justify-content: space-between;
-  gap: 8px;
+  gap: 4px 8px;
   align-items: baseline;
   flex-wrap: wrap;
 }
 .lf-memory span:last-child {
   color: var(--lf-soft);
-  font-size: 0.84rem;
+  font-size: 12px;
 }
 .lf-policy,
 .lf-stock-fields label {
   display: grid;
-  gap: 5px;
-  font-size: 0.93rem;
+  gap: 6px;
+  font-size: 12px;
   color: var(--lf-soft);
 }
 .lf-stock-fields {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 10px;
 }
 .lf-policy select,
 .lf-stock input {
   color: var(--lf-ink);
-  min-height: 40px;
-  padding: 5px 8px;
+  min-height: 44px;
+  min-width: 0;
+  padding: 6px 8px;
   border: 1px solid var(--lf-line);
   border-radius: 5px;
   width: 100%;
-  background: #fffef8;
+  background: var(--lf-paper);
+  font-size: 16px;
+}
+.lf-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.lf-pills button,
+.lf-soft-button {
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid #d7ddcb;
+  border-radius: 5px;
+  background: #fafbf4;
+  color: #4e6040;
+  font-size: 12px;
+  line-height: 1.6;
 }
 .lf-stock .lf-soft-button {
-  margin-top: 8px;
+  width: 100%;
+  margin-top: 10px;
+}
+.lf-feedback {
+  padding-top: 8px;
+  font-size: 12px;
+  line-height: 1.8;
 }
 .lf-metrics {
   margin: 0;
+  font-size: 12px;
 }
 .lf-metrics > div {
   display: flex;
   justify-content: space-between;
-  padding: 3px 0;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 5px 0;
 }
 .lf-metrics dd {
   margin: 0;
   font-variant-numeric: tabular-nums;
 }
+.lf-note + .lf-note {
+  margin-top: 7px;
+}
 .lf-journal {
   display: grid;
-  gap: 6px;
+  gap: 10px;
   list-style: none;
   margin: 0;
   padding: 0;
-  max-height: 22rem;
+  max-height: 280px;
   overflow: auto;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.9;
 }
 .lf-journal li {
   border-bottom: 1px solid var(--lf-line);
-  padding-bottom: 6px;
+  padding-bottom: 10px;
 }
-@media (max-width: 740px) {
-  .lf-columns {
-    grid-template-columns: 1fr;
-  }
-  .lf-person-copy {
-    padding: 14px 15px;
-  }
-  .lf-clock {
-    padding: 12px 15px;
-  }
-  .lf-panel {
-    padding: 15px;
-  }
+.lf-page .lf-latest {
+  margin-bottom: 10px;
+  padding: 0 3px;
+  color: var(--lf-soft);
+  font-size: 13px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
 }
-@media (max-width: 520px) {
-  .lf-page {
-    gap: 11px;
-  }
-  .lf-clock {
-    flex-wrap: wrap;
-    gap: 9px;
+
+/* The clock stays centered; day information uses the selected place's data. */
+.lf-clock {
+  position: fixed;
+  z-index: 30;
+  inset: auto 0 0;
+  padding: 0 max(28px, env(safe-area-inset-left)) env(safe-area-inset-bottom);
+  border-top: 1px solid #dfe3d3;
+  background: #fcfcf6f5;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 -4px 20px #5b654508;
+}
+.lf-clock-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 116px minmax(0, 1fr);
+  grid-template-areas: "actions time details";
+  align-items: center;
+  min-height: 80px;
+  width: 100%;
+  max-width: 1424px;
+  margin: 0 auto;
+}
+.lf-clock-face {
+  grid-area: time;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+.lf-clock-face strong {
+  font:
+    500 40px/1.1 Georgia,
+    serif;
+  font-variant-numeric: tabular-nums;
+  color: #59624c;
+  letter-spacing: 0.025em;
+}
+.lf-clock-details {
+  grid-area: details;
+  display: grid;
+  align-content: center;
+  gap: 3px;
+  min-width: 0;
+  padding-left: 24px;
+}
+.lf-day {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #59644e;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.lf-day svg {
+  flex: none;
+}
+.lf-day-note {
+  color: var(--lf-soft);
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.lf-clock-actions {
+  grid-area: actions;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) 1.35fr 1fr;
+  gap: 5px;
+  justify-self: end;
+  width: min(100%, 390px);
+  padding-right: 24px;
+}
+.lf-clock-actions button {
+  min-width: 0;
+  min-height: 44px;
+  padding: 7px 4px;
+  border: 1px solid #d7ddcb;
+  border-radius: 5px;
+  background: var(--lf-paper);
+  color: #596e43;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.lf-clock-actions .lf-next-time:not(:disabled) {
+  color: #fffef7;
+  background: #74865b;
+  border-color: #74865b;
+}
+.lf-clock-actions .lf-next-time:hover:not(:disabled) {
+  color: #fffef7;
+  background: #607447;
+}
+.lf-clock-actions button:disabled {
+  color: #68735d;
+  background: #f0f0e9;
+  border-style: dashed;
+}
+@media (max-width: 1000px) {
+  .lf-clock-inner {
+    grid-template-areas: ". time details" "actions actions actions";
+    gap: 5px 0;
+    min-height: 106px;
+    padding-block: 5px 7px;
   }
   .lf-clock-actions {
-    flex: 1 1 100%;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    justify-self: center;
+    width: min(100%, 440px);
+    padding-right: 0;
   }
-  .lf-clock-actions button {
-    padding: 6px 5px;
-    font-size: 0.95rem;
+}
+
+@media (max-width: 1100px) and (min-width: 761px) {
+  .lf-columns {
+    grid-template-columns: 190px minmax(0, 1fr);
+    grid-template-areas: "roster main" "side main" "side diary";
+    gap: 14px 16px;
+  }
+  .lf-side .lf-panel {
+    padding: 10px;
+  }
+}
+@media (max-width: 760px) {
+  .lf-page {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  .lf-columns {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "roster" "main" "side" "diary";
+    gap: 14px;
+  }
+  .lf-main-column {
+    gap: 10px;
+  }
+  .lf-side {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .lf-side > .lf-panel,
+  .lf-side > .lf-fold[open] {
+    grid-column: 1 / -1;
+  }
+  .lf-side .lf-fold summary {
+    padding: 7px 8px;
+    gap: 5px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .lf-roster-panel {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+  }
+  .lf-roster-heading {
+    display: block;
+    margin: 0;
+  }
+  .lf-roster-heading h2 {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .lf-roster-heading > span {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+  }
+  .lf-roster {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 7px;
+    padding: 2px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: 2px;
+  }
+  .lf-roster button {
+    flex: 0 0 116px;
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 2px 6px;
+    min-height: 60px;
+    padding: 4px 8px;
+    scroll-snap-align: start;
+  }
+  .lf-roster-portrait .yp-portrait {
+    width: 24px;
+    height: 28px;
+  }
+  .lf-roster-info > strong {
+    font-size: 12px;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lf-roster-place {
+    margin-top: 0;
+  }
+  .lf-roster-place > span,
+  .lf-roster-activity {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    line-height: 1.35;
   }
   .lf-person {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lf-portrait {
+    border-right: 0;
+    border-bottom: 1px solid var(--lf-line);
   }
   .lf-person-copy {
-    padding: 11px;
+    padding: 7px 10px 8px;
   }
-  .lf-place {
-    align-items: flex-start;
-    font-size: 0.82rem;
+  .lf-name h2 {
+    font-size: 16px;
+    line-height: 1.5;
   }
-  .lf-place svg {
-    flex-shrink: 0;
-    margin-top: 3px;
+  .lf-place,
+  .lf-mood {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .lf-mood {
+    margin-top: 2px;
+  }
+  .lf-person-heading {
+    gap: 2px 9px;
   }
   .lf-task {
-    margin-top: 7px;
-    padding-top: 6px;
+    margin-top: 4px;
+    padding-top: 4px;
   }
-  .lf-need > div {
-    font-size: 0.9rem;
+  .lf-task strong {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .lf-task p {
+    margin-top: 1px;
+    line-height: 1.75;
+  }
+  .lf-panel {
+    padding: 10px;
+  }
+  .lf-supplies {
+    display: block;
+    padding: 6px 10px;
+  }
+  .lf-supplies .lf-section-title {
+    margin-bottom: 2px;
+  }
+  .lf-supplies .lf-section-title h3 {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .lf-supplies .lf-section-title svg {
+    width: 13px;
+    height: 13px;
+  }
+  .lf-resources {
+    gap: 4px 12px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .lf-resources svg {
+    display: none;
+  }
+  .lf-resources b {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .lf-section-title {
+    margin-bottom: 7px;
+  }
+  .lf-section-title h3 {
+    font-size: 14px;
+  }
+  .lf-segment {
+    gap: 2px;
+    margin-bottom: 10px;
+  }
+  .lf-segment button {
+    font-size: 12px;
+  }
+  .lf-command-list {
+    gap: 10px 8px;
+  }
+  .lf-command button {
+    padding: 8px;
+    font-size: 13px;
+  }
+  .lf-command small {
+    margin-inline: 1px;
   }
   .lf-needs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 16px;
   }
-  .lf-segment button {
-    flex: 1;
-    padding: 4px;
+  .lf-skills,
+  .lf-stock-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
   }
-  .lf-command-list {
-    gap: 6px;
+  .lf-fold summary {
+    font-size: 13px;
   }
-  .lf-command button {
-    padding: 7px;
+  .lf-fold-body {
+    padding-inline: 14px;
+  }
+  .lf-clock {
+    padding-inline: max(12px, env(safe-area-inset-left));
+  }
+  .lf-clock-inner {
+    grid-template-columns: minmax(0, 1fr) 96px minmax(0, 1fr);
+  }
+  .lf-clock-face strong {
+    font-size: 32px;
+  }
+  .lf-clock-details {
+    gap: 1px;
+    padding-left: 20px;
+  }
+  .lf-day {
+    font-size: 12px;
+  }
+  .lf-day svg {
+    display: none;
+  }
+  .lf-clock-actions {
+    gap: 4px;
+    width: 100%;
+  }
+  .lf-clock-actions button {
+    width: 100%;
+    padding: 6px 2px;
+    font-size: 12px;
   }
 }
-@media (max-width: 700px) {
-  .lf-person {
-    grid-template-columns: 1fr;
-  }
-  .lf-person-copy {
-    padding: 12px 15px 14px;
+@media (max-width: 360px) {
+  .lf-clock-details {
+    padding-left: 12px;
   }
 }
-.lf-clock:has(.lf-clock-hint) {
-  flex-wrap: wrap;
-}
-.lf-clock-hint {
-  flex-basis: 100%;
-  border-top: 1px solid #d7dfcc;
-  padding-top: 7px;
-  color: var(--lf-soft);
-  font-size: 0.88rem;
-}
-.lf-task-label {
-  display: flex;
-  gap: 7px;
-  align-items: baseline;
-  flex-wrap: wrap;
-}
-.lf-task-label small {
-  font-size: 0.77rem;
-  color: var(--lf-soft);
-}
-.lf-latest {
-  padding: 1px 4px 7px;
-  color: var(--lf-soft);
-  font-size: 0.88rem;
-}
-.lf-page p {
-  margin: 0;
-}
-.lf-task p {
-  margin-top: 3px;
-}
-.lf-note + .lf-note {
-  margin-top: 5px;
-}
-.lf-page .lf-latest {
-  margin-bottom: 2px;
+@media (prefers-reduced-motion: reduce) {
+  .lf-fold-arrow {
+    transition: none;
+  }
 }

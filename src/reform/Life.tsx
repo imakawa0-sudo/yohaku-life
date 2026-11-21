@@ -293,13 +293,29 @@ export function Life({
   const day = Math.floor(game.time / 1440) + 1;
   const hour = Math.floor((game.time % 1440) / 60);
   const DayIcon = hour < 5 || hour >= 19 ? Moon : hour < 10 ? Sunrise : Sun;
+  const period =
+    hour < 5 || hour >= 19
+      ? "夜"
+      : hour < 10
+        ? "朝"
+        : hour < 16
+          ? "昼"
+          : "夕暮れ";
   const untilMorning = (480 - (game.time % 1440) + 1440) % 1440 || 1440;
   const tasks = game.actors.flatMap((a) =>
     a.task && a.task.remaining > 0 ? [a.task.remaining] : [],
   );
   const next = tasks.length ? Math.min(...tasks) : 0;
-  const place = places(game.world).find((place) => place.id === actor.location);
+  const locations = places(game.world);
+  const place = locations.find((place) => place.id === actor.location);
   const region = place?.name ?? actor.location;
+  const frostNote = place
+    ? day < place.frost
+      ? `初霜まで${place.frost - day}日`
+      : day === place.frost
+        ? "初霜の日"
+        : `初霜から${day - place.frost}日`
+    : null;
   const atHome = actor.location === game.home;
   const setting = settingFor(place, atHome, actor.room);
   const company = game.actors
@@ -320,166 +336,137 @@ export function Life({
 
   return (
     <div className="lf-page">
-      <section className="lf-clock" aria-label="時計">
-        <div className="lf-clock-face">
-          <div className="lf-clock-icon">
-            <DayIcon size={30} strokeWidth={1.45} />
-          </div>
-          <div>
-            <div className="lf-day">{day}日目</div>
-            <strong aria-label={"現在時刻 " + timeOfDay(game.time)}>
-              {timeOfDay(game.time)}
-            </strong>
-          </div>
-        </div>
-        <div className="lf-clock-actions">
-          <button
-            type="button"
-            aria-label="15分進める"
-            onClick={() => changeTime(15)}
-          >
-            15分
-          </button>
-          <button
-            type="button"
-            aria-label="1時間進める"
-            onClick={() => changeTime(60)}
-          >
-            1時間
-          </button>
-          <button
-            type="button"
-            aria-label="次の行動完了まで進める"
-            disabled={!next}
-            onClick={() => changeTime(next)}
-          >
-            次の完了
-          </button>
-          <button
-            type="button"
-            aria-label="翌朝まで進める"
-            onClick={() => changeTime(untilMorning)}
-          >
-            朝まで
-          </button>
-        </div>
-        {game.time === 480 && !tasks.length && (
-          <p className="lf-clock-hint">
-            時計を進めると住民が自分で動きます。先に「行動の指示」で予定を決めることもできます。
-          </p>
-        )}
-      </section>
-
-      {game.actors.length > 1 && (
-        <div className="lf-roster" role="group" aria-label="住民を選ぶ">
-          {game.actors.map((a) => (
-            <button
-              key={a.person.id}
-              type="button"
-              aria-pressed={person.id === a.person.id}
-              onClick={() => onSelect(a.person.id)}
-            >
-              {a.person.name}
-            </button>
-          ))}
-        </div>
-      )}
-
-      <article className="lf-person" aria-label={person.name + "の近況"}>
-        <div className="lf-portrait">
-          <PixelScene
-            person={person}
-            company={company}
-            setting={setting}
-            minutes={game.time}
-          />
-        </div>
-        <div className="lf-person-copy">
-          <div className="lf-place">
-            <MapPin size={15} />
-            {localName}
-          </div>
-          <div className="lf-name">
-            <Portrait person={person} />
-            <h2>{person.name}</h2>
-            <span>Lv. {actor.level}</span>
-          </div>
-          <div className="lf-mood">
-            <Heart size={15} />
-            <span>
-              気分 {moodLabel(actor.mood)} · {bound(actor.mood)}
-            </span>
-            {actor.injury > 0 && (
-              <span className="lf-injury">負傷 {Math.ceil(actor.injury)}</span>
-            )}
-          </div>
-          <div className="lf-task">
-            <div className="lf-task-label">
-              <strong>
-                {actor.task?.label ??
-                  (actor.danger ? "道の人影と対峙している" : "手が空いている")}
-              </strong>
-              {actor.task && (
-                <small>
-                  {actor.task.mode === "direct" ? "直接指示" : "自主行動"}
-                </small>
-              )}
-            </div>
-            {actor.danger && !actor.task ? (
-              <p className="lf-injury">
-                「野外」で交渉・応戦・撤退を選べます。
-              </p>
-            ) : (
-              <p>{actor.reason}</p>
-            )}
-            {actor.task && (
-              <div className="lf-task-progress">
-                <progress
-                  value={Math.max(0, actor.task.total - actor.task.remaining)}
-                  max={Math.max(1, actor.task.total)}
-                  aria-label="行動の進み具合"
-                />
-                <span>あと{span(actor.task.remaining)}</span>
-              </div>
-            )}
-          </div>
-        </div>
-      </article>
-
       <div className="lf-columns">
-        <div className="lf-main-column">
-          <section className="lf-panel" aria-label="生活の欲求">
-            <div className="lf-section-title">
-              <Sprout size={20} />
-              <h3>生活の欲求</h3>
-            </div>
-            <div className="lf-needs">
-              {needKeys.map((key) => {
-                const value = bound(actor.needs[key]);
-                return (
-                  <div
-                    key={key}
-                    className={"lf-need" + (value < 30 ? " lf-low" : "")}
+        <aside className="lf-roster-panel" aria-label="世帯の住民">
+          <div className="lf-roster-heading">
+            <h2>暮らす人</h2>
+            <span>{game.actors.length}人</span>
+          </div>
+          <div className="lf-roster" role="group" aria-label="住民を選ぶ">
+            {game.actors.map((a) => {
+              const location =
+                a.location === game.home
+                  ? roomName(game.house, a.room)
+                  : (locations.find((item) => item.id === a.location)?.name ??
+                    a.location);
+              const activity =
+                a.task?.label ??
+                (a.danger ? "道の人影と対峙している" : "手が空いている");
+              return (
+                <button
+                  key={a.person.id}
+                  type="button"
+                  aria-label={a.person.name}
+                  aria-pressed={person.id === a.person.id}
+                  aria-describedby={
+                    "lf-roster-place-" +
+                    a.person.id +
+                    " lf-roster-task-" +
+                    a.person.id
+                  }
+                  onClick={() => onSelect(a.person.id)}
+                >
+                  <span className="lf-roster-portrait" aria-hidden="true">
+                    <Portrait person={a.person} />
+                  </span>
+                  <span className="lf-roster-info">
+                    <strong>{a.person.name}</strong>
+                    <span
+                      className="lf-roster-place"
+                      id={"lf-roster-place-" + a.person.id}
+                      title={location}
+                    >
+                      <MapPin size={12} aria-hidden="true" />
+                      <span>{location}</span>
+                    </span>
+                  </span>
+                  <span
+                    className={
+                      "lf-roster-activity" + (a.danger ? " lf-injury" : "")
+                    }
+                    id={"lf-roster-task-" + a.person.id}
+                    title={activity}
                   >
-                    <div>
-                      <label htmlFor={"lf-need-" + key}>{needNames[key]}</label>
-                      <span>{value}</span>
-                    </div>
-                    <progress id={"lf-need-" + key} value={value} max={100} />
-                  </div>
-                );
-              })}
+                    {activity}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </aside>
+        <div className="lf-main-column">
+          <article
+            className={"lf-person" + (actor.danger ? " lf-person-danger" : "")}
+            aria-label={person.name + "の近況"}
+          >
+            <div className="lf-portrait">
+              <PixelScene
+                person={person}
+                company={company}
+                setting={setting}
+                minutes={game.time}
+              />
             </div>
-          </section>
-          <ActionPanel
-            key={person.id}
-            game={game}
-            actor={actor}
-            onGame={onGame}
-          />
-        </div>
+            <div className="lf-person-copy">
+              <div className="lf-person-heading">
+                <div className="lf-name">
+                  <h2>{person.name}</h2>
+                  <span>Lv. {actor.level}</span>
+                </div>
+                <div className="lf-place">
+                  <MapPin size={15} aria-hidden="true" />
+                  <span>{localName}</span>
+                </div>
+              </div>
+              <div className="lf-mood">
+                <Heart size={15} />
+                <span>
+                  気分 {moodLabel(actor.mood)} · {bound(actor.mood)}
+                </span>
+                {actor.injury > 0 && (
+                  <span className="lf-injury">
+                    負傷 {Math.ceil(actor.injury)}
+                  </span>
+                )}
+              </div>
+              <div className="lf-task">
+                <div className="lf-task-label">
+                  <strong>
+                    {actor.task?.label ??
+                      (actor.danger
+                        ? "道の人影と対峙している"
+                        : "手が空いている")}
+                  </strong>
+                  {actor.task && (
+                    <small>
+                      {actor.task.mode === "direct" ? "直接指示" : "自主行動"}
+                    </small>
+                  )}
+                </div>
+                {actor.danger && !actor.task ? (
+                  <p className="lf-injury">
+                    「野外」で交渉・応戦・撤退を選べます。
+                  </p>
+                ) : (
+                  <p>{actor.reason}</p>
+                )}
+                {actor.task && (
+                  <div className="lf-task-progress">
+                    <progress
+                      value={Math.max(
+                        0,
+                        actor.task.total - actor.task.remaining,
+                      )}
+                      max={Math.max(1, actor.task.total)}
+                      aria-label="行動の進み具合"
+                    />
+                    <span>あと{span(actor.task.remaining)}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </article>
 
-        <div className="lf-side">
           <section className="lf-panel lf-supplies" aria-label="世帯の備蓄">
             <div className="lf-section-title">
               <Backpack size={19} />
@@ -517,6 +504,47 @@ export function Life({
               </p>
             )}
           </section>
+
+          <ActionPanel
+            key={person.id}
+            game={game}
+            actor={actor}
+            onGame={onGame}
+          />
+          {game.time === 480 && !tasks.length && (
+            <p className="lf-clock-hint">
+              時計を進めると住民が自分で動きます。先に「行動の指示」で予定を決めることもできます。
+            </p>
+          )}
+        </div>
+        <aside
+          className="lf-side"
+          aria-label={person.name + "の状態と詳しい情報"}
+        >
+          <section className="lf-panel" aria-label="生活の欲求">
+            <div className="lf-section-title">
+              <Sprout size={20} />
+              <h3>生活の欲求</h3>
+            </div>
+            <div className="lf-needs">
+              {needKeys.map((key) => {
+                const value = bound(actor.needs[key]);
+                return (
+                  <div
+                    key={key}
+                    className={"lf-need" + (value < 30 ? " lf-low" : "")}
+                  >
+                    <div>
+                      <label htmlFor={"lf-need-" + key}>{needNames[key]}</label>
+                      <span>{value}</span>
+                    </div>
+                    <progress id={"lf-need-" + key} value={value} max={100} />
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
           <Fold title="技能と専門" icon={<Sparkles size={18} />}>
             <p className="lf-note">
               {backgroundNames[person.background]}の出身。
@@ -672,20 +700,85 @@ export function Life({
               ))}
             </dl>
           </Fold>
+        </aside>
+        <div className="lf-diary">
+          <p className="lf-latest" role="status">
+            {game.log[0]}
+          </p>
+          <Fold title="暮らしの日誌" icon={<BookOpen size={19} />}>
+            <ol className="lf-journal">
+              {game.log.map((line, i) => (
+                <li key={i}>{line}</li>
+              ))}
+            </ol>
+          </Fold>
         </div>
       </div>
-      <div className="lf-diary">
-        <p className="lf-latest" role="status">
-          {game.log[0]}
-        </p>
-        <Fold title="暮らしの日誌" icon={<BookOpen size={19} />}>
-          <ol className="lf-journal">
-            {game.log.map((line, i) => (
-              <li key={i}>{line}</li>
-            ))}
-          </ol>
-        </Fold>
-      </div>
+      <section className="lf-clock" aria-label="時計">
+        <div className="lf-clock-inner">
+          <div className="lf-clock-face">
+            <strong aria-label={"現在時刻 " + timeOfDay(game.time)}>
+              {timeOfDay(game.time)}
+            </strong>
+          </div>
+          <div className="lf-clock-details">
+            <div className="lf-day">
+              <DayIcon size={17} strokeWidth={1.5} aria-hidden="true" />
+              <span>
+                {day}日目 · {period}
+              </span>
+            </div>
+            {frostNote && (
+              <span
+                className="lf-day-note"
+                aria-label={region + "：" + frostNote}
+                title={region + "の初霜は" + place!.frost + "日目"}
+              >
+                {frostNote}
+              </span>
+            )}
+          </div>
+          <div className="lf-clock-actions">
+            <button
+              type="button"
+              aria-label="5分進める"
+              onClick={() => changeTime(5)}
+            >
+              5分
+            </button>
+            <button
+              type="button"
+              aria-label="15分進める"
+              onClick={() => changeTime(15)}
+            >
+              15分
+            </button>
+            <button
+              type="button"
+              aria-label="1時間進める"
+              onClick={() => changeTime(60)}
+            >
+              1時間
+            </button>
+            <button
+              type="button"
+              className="lf-next-time"
+              aria-label="次の行動完了まで進める"
+              disabled={!next}
+              onClick={() => changeTime(next)}
+            >
+              次の完了
+            </button>
+            <button
+              type="button"
+              aria-label="翌朝まで進める"
+              onClick={() => changeTime(untilMorning)}
+            >
+              朝まで
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
