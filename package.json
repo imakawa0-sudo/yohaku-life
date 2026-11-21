@@ -1,0 +1,52 @@
+{
+  "name": "yohaku-life",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build && node scripts/build-standalone.mjs",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "tsx --test tests/*.test.ts",
+    "test:ui": "node scripts/verify-ui.mjs",
+    "test:standalone": "node scripts/verify-reform.mjs --desktop",
+    "test:ui:standalone": "node scripts/verify-reform.mjs --mobile",
+    "test:daytrip": "node scripts/verify-daytrip.mjs",
+    "test:recruitment": "node scripts/verify-recruitment.mjs",
+    "test:overnight": "node scripts/verify-overnight.mjs",
+    "test:plans": "node scripts/verify-plans.mjs",
+    "test:squads": "node scripts/verify-squads.mjs",
+    "test:production": "node scripts/verify-production.mjs",
+    "test:crafting": "node scripts/verify-crafting.mjs",
+    "test:captions": "node scripts/verify-captions.mjs",
+    "test:cargo": "node scripts/verify-cargo.mjs",
+    "test:trade-history": "node scripts/verify-trade-history.mjs",
+    "test:currency": "node scripts/verify-currency.mjs",
+    "test:coin-transfer": "node scripts/verify-coin-transfer.mjs",
+    "test:route-works": "node scripts/verify-route-works.mjs",
+    "test:guard-agreement": "node scripts/verify-guard-agreement.mjs",
+    "test:combat-resume": "node scripts/verify-combat-resume.mjs",
+    "test:second-encounter": "node scripts/verify-second-encounter.mjs",
+    "test:together": "node scripts/verify-together.mjs",
+    "test:week": "node scripts/verify-week.mjs",
+    "test:art": "node scripts/verify-pixel-art.mjs",
+    "test:reform:weeks": "node scripts/verify-reform.mjs --weeks",
+    "test:legacy:standalone": "node scripts/verify-standalone.mjs && node scripts/verify-ui.mjs --standalone"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^5.1.0",
+    "prettier": "^3.10.1",
+    "tsx": "^4.20.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.2"
+  }
+}
