@@ -33,9 +33,10 @@
   image-rendering: pixelated;
 }
 .yp-mini .yp-portrait {
-  height: 100%;
-  object-fit: cover;
-  object-position: center 34%;
+  width: 48px;
+  height: 56px;
+  max-width: none;
+  transform: translate(-1px, -1px);
 }
 .yp-scene {
   position: relative;
@@ -109,10 +110,11 @@
   border-style: dashed;
 }
 .yp-mini {
-  width: 26px;
-  height: 26px;
+  width: 40px;
+  height: 40px;
   overflow: hidden;
-  border-radius: 100%;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px #d0d7c3;
   flex-shrink: 0;
 }
 .yp-roster button > span:last-child {
@@ -126,14 +128,20 @@
 }
 .yp-intro {
   display: grid;
-  grid-template-columns: clamp(86px, 19%, 135px) minmax(0, 1fr);
+  grid-template-columns: 98px minmax(0, 1fr);
   gap: 14px;
   align-items: center;
 }
 .yp-cover {
+  width: 98px;
   border: 1px solid #c8c9b4;
-  border-radius: 45% 45% 5px 5px;
+  border-radius: 3px;
   overflow: hidden;
+}
+.yp-cover .yp-portrait {
+  width: 96px;
+  height: 112px;
+  max-width: none;
 }
 .yp-namebox {
   min-width: 0;
@@ -281,7 +289,7 @@
 }
 @media (max-width: 460px) {
   .yp-intro {
-    grid-template-columns: 77px minmax(0, 1fr);
+    grid-template-columns: 98px minmax(0, 1fr);
     gap: 10px;
   }
   .yp-tools {

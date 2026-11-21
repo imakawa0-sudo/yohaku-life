@@ -242,9 +242,7 @@ export default function ReformApp() {
             </span>
             余白の暮らし
           </div>
-          {activeView !== "setup" && game ? (
-            <span className="rf-mast-date">{date(game.time)}</span>
-          ) : (
+          {(activeView === "setup" || !game) && (
             <button
               className="rf-book-link"
               onClick={() => show(activeView === "book" ? "setup" : "book")}

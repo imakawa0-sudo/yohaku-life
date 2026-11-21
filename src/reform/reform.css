@@ -140,12 +140,6 @@ select {
 .rf-book-link {
   font-size: max(12px, 0.9rem);
 }
-.rf-mast-date {
-  color: var(--rf-muted);
-  font-variant-numeric: tabular-nums;
-  font-size: max(12px, 0.88rem);
-  white-space: nowrap;
-}
 .rf-setup,
 .rf-main {
   width: 100%;
@@ -271,10 +265,11 @@ select {
   overflow: hidden;
 }
 .rf-portraits .yp-portrait {
-  max-height: 104px;
+  width: 48px;
+  height: 56px;
+  flex: 0 0 48px;
   min-width: 0;
-  width: auto;
-  max-width: 30%;
+  max-width: none;
   object-fit: contain;
   border-radius: 4px;
 }
@@ -619,9 +614,6 @@ select {
   .rf-seal {
     width: 24px;
   }
-  .rf-mast-date {
-    font-size: 12px;
-  }
   .rf-page-title {
     align-items: flex-start;
   }
@@ -660,9 +652,6 @@ select {
     gap: 4px;
     font-size: 18px;
     letter-spacing: 0.02em;
-  }
-  .rf-mast-date {
-    font-size: 12px;
   }
   .rf-settings,
   .rf-paper,

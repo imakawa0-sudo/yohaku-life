@@ -1,0 +1,95 @@
+{
+  "review_date": "2026-11-22",
+  "candidate": "portrait-and-clock-followup",
+  "state": "built; 750 unit tests passed; targeted Cloud Browser review completed",
+  "source_sha256": "8ad69581b622dae6fd3decdbc297e22f56785e62cdddd6fcf52088fc884447d4",
+  "source_bytes": 559364,
+  "input_sha256": "f24566de7890049cf4ec572994f107a1a21dcb91e2e1bd7e5a27395ac4644d0a",
+  "input_files": 256,
+  "inputs_unchanged_during_checks": true,
+  "changed_since_density_v3": [
+    "src/reform/ReformApp.tsx",
+    "src/reform/life.css",
+    "src/reform/people.css",
+    "src/reform/reform.css"
+  ],
+  "unit_result_reused": false,
+  "unit_command": "node --import tsx --test --test-reporter=tap tests/*.test.ts",
+  "unit_summary": {
+    "tests": 750,
+    "suites": 0,
+    "pass": 750,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "unit_log_sha256": "4fca48f8f7661c63793754a00f1b8bcb4b1d86b91ee9474a19f72dceaca48e1c",
+  "build_command": "npm run build",
+  "build_exit_code": 0,
+  "build_log_sha256": "5faa4c0ba7e3422958bc1d2d42d4dcc16203be2adb3d1c8cec7146a61f6a065e",
+  "preview_originals_match": true,
+  "comparison_renderer_sources_match_current_candidate": true,
+  "comparison_browser_review": "Root reported six people and four conditions visually checked; 40px crop accepted.",
+  "browser_review": {
+    "browser": "Cloud Browser Chrome",
+    "device_scope": "Desktop and 390px/320px iframe widths; not physical phones",
+    "clock_px": {
+      "desktop": 36,
+      "mobile": 30
+    },
+    "clock_center": {
+      "standalone_1348": 674,
+      "iframe_inner_375": 187.5,
+      "iframe_inner_305": 152.5
+    },
+    "document_widths_mobile": [
+      {
+        "client": 375,
+        "scroll": 375
+      },
+      {
+        "client": 305,
+        "scroll": 305
+      }
+    ],
+    "portrait_css_and_intrinsic": [
+      48,
+      56
+    ],
+    "portrait_frame": [
+      40,
+      40
+    ],
+    "portrait_border_px": 0,
+    "profile_css": [
+      96,
+      112
+    ],
+    "setup_preview_css": [
+      48,
+      56
+    ],
+    "narrow_profile_name_input_px": 155,
+    "selection_does_not_advance_time": true,
+    "five_minute_ui_check": {
+      "save": "画面確認用の長い名前のカヤ・スイの暮らし",
+      "before": "09:00",
+      "after": "09:05",
+      "remaining_minutes": [
+        17,
+        12
+      ]
+    },
+    "original_save_restored": "カヤ・スイの暮らし 1日目08:25; food7 ingredients9 wood22 coins8",
+    "screenshots": [
+      "docs/screenshots/ui-icons-2026-11-22-desktop.jpg",
+      "docs/screenshots/ui-icons-2026-11-22-phone-390.jpg",
+      "docs/screenshots/ui-icons-2026-11-22-phone-320.jpg",
+      "docs/screenshots/ui-icons-2026-11-22-profile-320.jpg",
+      "docs/screenshots/ui-icons-2026-11-22-portrait-comparison.jpg"
+    ],
+    "figma": "Professional plan / Collab seat MCP call limit; read failed before editing; no Figma changes this followup",
+    "sites_deployed": false
+  }
+}
