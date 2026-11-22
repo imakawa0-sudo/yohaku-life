@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-23",
+  "timezone": "Asia/Taipei",
+  "request": "確認しました！\nでもなんか絵柄が初回試作の方がいいですね😂\n全員分の初回原画のキャラクターの特徴や髪型を初回試作の絵柄で反映させたいですね！",
+  "folderUrl": "https://www.canva.com/folder/FAHbqQaqt5Q",
+  "provider": "Canva",
+  "quotaReached": true,
+  "productionReady": false,
+  "gameChanged": false,
+  "records": [
+    {
+      "file": "style-reference-first-trial.png",
+      "media": "MAHbqXP_R7E",
+      "role": "adopted-style-reference",
+      "url": "https://www.canva.com/M/MAHbqXP_R7E?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened"
+    },
+    {
+      "file": "all-characters-style-v1.png",
+      "media": "MAHbqdIzjzg",
+      "role": "review-candidate-v1",
+      "url": "https://www.canva.com/M/MAHbqdIzjzg?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened"
+    },
+    {
+      "file": "all-characters-style-v2.png",
+      "media": "MAHbqbhOmFM",
+      "role": "review-candidate-v2",
+      "url": "https://www.canva.com/M/MAHbqbhOmFM?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened"
+    },
+    {
+      "file": "detail-C.png",
+      "media": "MAHbqZ3KWzA",
+      "role": "candidate-C-top-center-only",
+      "url": "https://www.canva.com/M/MAHbqZ3KWzA?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened"
+    },
+    {
+      "file": "detail-Kaya.png",
+      "media": "MAHbqaiQfH8",
+      "role": "candidate-Kaya-top-left-only",
+      "url": "https://www.canva.com/M/MAHbqaiQfH8?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened"
+    },
+    {
+      "file": "detail-F.png",
+      "media": "MAHbqYMWhE4",
+      "role": "rejected-identity-mismatch",
+      "url": "https://www.canva.com/M/MAHbqYMWhE4?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened"
+    }
+  ]
+}

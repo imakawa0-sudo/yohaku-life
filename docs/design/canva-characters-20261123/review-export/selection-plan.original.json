@@ -1,0 +1,2831 @@
+{
+  "schema_version": 2,
+  "date": "2026-11-23",
+  "timezone": "Asia/Taipei",
+  "purpose": "全16枠のCanvaレビュー候補と機械的切り出し座標。特徴未解決を明示し、完成品・ゲーム採用として扱わない。",
+  "coordinate_convention": "元PNGの実画素。左上原点。crop_box=[left,top,right,bottom]、right/bottomは含まない（Pillow cropと同じ）。",
+  "reference_manifest": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/reference/manifest.json",
+  "source_images": {
+    "v1": {
+      "path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v1.png",
+      "width": 1536,
+      "height": 1536,
+      "mode": "RGB",
+      "sha256": "3984258069f8caaa231def09475dd9b9583355886836bbc9cc08f614efed60e3",
+      "background": "生成画像の紙色背景。透過ではない。"
+    },
+    "v2": {
+      "path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "width": 2048,
+      "height": 2416,
+      "mode": "RGB",
+      "sha256": "d50e2d30ee67ac826da9f5c9ee393ef62039644524e1a562d98962c8396c5ff4",
+      "background": "生成画像の紙色背景。透過ではない。"
+    },
+    "detail_c": {
+      "path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/detail-C.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB",
+      "sha256": "92aa2204bb841c06a57b231eeb97f1b275b533613ef1ef589cbf9e849026a9dd",
+      "background": "生成画像の紙色背景。透過ではない。",
+      "note": "採用範囲は上段中央のCだけ。他の人物と説明文は対象外。",
+      "rejected": false
+    },
+    "detail_kaya": {
+      "path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/detail-Kaya.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB",
+      "sha256": "9b340df13ee015e4a24297dfe358854dc376c93db2b3dd63a1cc1b5eadc74cb8",
+      "background": "生成画像の紙色背景。透過ではない。",
+      "note": "採用範囲は左上のカヤだけ。他の人物と名前ラベルは対象外。",
+      "rejected": false
+    },
+    "detail_f": {
+      "path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/detail-F.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB",
+      "sha256": "1e13e332465c743bf9059c0523d813a2c751ec4cf8c8c4f03d6536e9381967bd",
+      "background": "生成画像の紙色背景。透過ではない。",
+      "note": "不採用。Fとされた人物が灰色の髪と白い服・前掛けに変化。元の墨黒の短髪・苔色シャツと一致しない。",
+      "rejected": true
+    }
+  },
+  "selection_summary": {
+    "total_review_slots": 16,
+    "review_export_allowed_slots": 16,
+    "game_adopted_slots": 0,
+    "unfinished_ids": [
+      "portrait-F",
+      "walker-kaya",
+      "walker-sui"
+    ],
+    "source_slot_counts": {
+      "v2": 13,
+      "detail_c": 1,
+      "v1": 1,
+      "detail_kaya": 1
+    },
+    "duplicate_control": "portrait-G reuses portrait-A source and crop exactly",
+    "additional_caveats": [
+      "H/Iの輪郭差は弱く、輪郭以外の共通性も完全ではない。",
+      "服4種でV1 shirtとV2の他3服を混在させるため、顔・髪・肌の同一人物性に未解決差がある。",
+      "全候補はレビュー用で、人物全員の特徴が完成したとは扱わない。"
+    ]
+  },
+  "measurement_method": "目視でラベル・罫線を避けた各枠のart_roiを指定し、RGB最小値<190の画素の外接矩形を測定。上下左右8pxの余白を付け、画像内に制限。人物の厳密な透過マスクではない。",
+  "mechanical_processing_rules": [
+    "全16枠はレビュー候補としてのみ切り出し・比較可能。完成・ゲーム採用とは扱わない。",
+    "人物のRGBを変更しない。描き足し、色調変更、欠けた部分の補完、生成を行わない。",
+    "crop_boxは紙色背景を含む。背景除去・透過化はこの担当では行っていない。",
+    "横縦を別倍率で引き伸ばさない。後工程で48×56胸像/26×60全身へ収める場合は縦横比を維持し、縮小後の特徴を別途確認する。",
+    "V2と個別画像の文字ラベルは切り抜き対象外。ラベルに書かれた特徴は画像の一致を保証しない。",
+    "F/カヤ全身/スイ全身はunfinished。H/I輪郭と衣服4種の同一人物性にも注意を残す。",
+    "AとGは同じ元画像・同じ座標を再利用する。",
+    "atlas-manifestの順序を使用し、旧contact-sheetの最下段順序を使わない。"
+  ],
+  "known_layout_difference": "V1/V2の最下段はcoat→カヤ胸像→カヤ全身→スイ全身。元contact-sheet-current.pngの最下段はcoat→カヤ全身→スイ全身→カヤ胸像。",
+  "items": [
+    {
+      "id": "portrait-A",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "status": "review_candidate_with_identity_caveat",
+      "selected_candidate": "v2:portrait-A",
+      "selected_crop_box": [
+        115,
+        124,
+        391,
+        481
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:portrait-A",
+        "v2:portrait-A"
+      ],
+      "notes": [
+        "V2は参照の短髪・苔色シャツに近い。柔らかな細い目は丸く開いた目へ変化している。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": false
+    },
+    {
+      "id": "portrait-B",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "round",
+        "skin": "peach",
+        "hair": "bob",
+        "hairColor": "chestnut",
+        "age": "adult",
+        "build": "slight",
+        "eyes": "open",
+        "mark": "freckles",
+        "clothing": "apron",
+        "dye": "brick"
+      },
+      "status": "review_candidate",
+      "selected_candidate": "v2:portrait-B",
+      "selected_crop_box": [
+        625,
+        124,
+        887,
+        481
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:portrait-B",
+        "v2:portrait-B"
+      ],
+      "notes": [
+        "V2で短い前髪のおかっぱとそばかすが復帰。V1より人物条件に近い。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": false
+    },
+    {
+      "id": "portrait-C",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "angular",
+        "skin": "wheat",
+        "hair": "wave",
+        "hairColor": "ash",
+        "age": "young",
+        "build": "slight",
+        "eyes": "straight",
+        "mark": "scar",
+        "clothing": "wrap",
+        "dye": "indigo"
+      },
+      "status": "review_candidate",
+      "selected_candidate": "detail_c:portrait-C",
+      "selected_crop_box": [
+        401,
+        91,
+        615,
+        373
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:portrait-C",
+        "v2:portrait-C",
+        "detail_c:portrait-C"
+      ],
+      "notes": [
+        "個別結果の上段中央で、頬の傷・灰褐色の長髪・藍色の巻き襟を目視確認。V1/V2より人物条件に近いためレビュー用に選ぶ。",
+        "元設定の切れ長の目・角張った輪郭はなお柔らかめ。ゲーム採用前の縮小レビューが必要。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": false
+    },
+    {
+      "id": "portrait-D",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "bronze",
+        "hair": "knot",
+        "hairColor": "silver",
+        "age": "elder",
+        "build": "broad",
+        "eyes": "soft",
+        "mark": "glasses",
+        "clothing": "coat",
+        "dye": "plum"
+      },
+      "status": "review_candidate",
+      "selected_candidate": "v2:portrait-D",
+      "selected_crop_box": [
+        1637,
+        112,
+        1925,
+        481
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:portrait-D",
+        "v2:portrait-D"
+      ],
+      "notes": [
+        "V2はV1より老年の顔、肌色、外套の折り返しが明瞭。がっしりした体格の強さは縮小後に確認。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": false
+    },
+    {
+      "id": "portrait-E",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "round",
+        "skin": "umber",
+        "hair": "braid",
+        "hairColor": "honey",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "apron",
+        "dye": "rust"
+      },
+      "status": "review_candidate",
+      "selected_candidate": "v2:portrait-E",
+      "selected_crop_box": [
+        105,
+        697,
+        390,
+        1060
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:portrait-E",
+        "v2:portrait-E"
+      ],
+      "notes": [
+        "V2で深い褐色の肌が復帰。亜麻色の三つ編みと前掛けも維持。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": false
+    },
+    {
+      "id": "portrait-F",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "elder",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "glasses",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "status": "unfinished",
+      "selected_candidate": "v2:portrait-F",
+      "selected_crop_box": [
+        624,
+        697,
+        903,
+        1060
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:portrait-F",
+        "v2:portrait-F"
+      ],
+      "notes": [
+        "個別detail-Fは灰色の髪と白い服・前掛けに変化したため不採用。黒い短髪・丸眼鏡・苔色シャツを保つV2を残す。",
+        "V2は老年の年齢感が不足しておりunfinished。レビュー用の切り出しのみ可、完成やゲーム採用と扱わない。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": true
+    },
+    {
+      "id": "portrait-G",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "status": "review_candidate_with_identity_caveat",
+      "selected_candidate": "v2:portrait-A",
+      "selected_crop_box": [
+        115,
+        124,
+        391,
+        481
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": "portrait-A",
+      "candidate_ids": [
+        "v1:portrait-G",
+        "v2:portrait-G",
+        "v2:portrait-A"
+      ],
+      "notes": [
+        "Aと同じ設定のため、V2のAの切り抜きをそのまま再利用。独立生成されたG枠を使わない。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": false
+    },
+    {
+      "id": "portrait-H",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "round",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "status": "review_candidate_with_identity_caveat",
+      "selected_candidate": "v2:portrait-H",
+      "selected_crop_box": [
+        1642,
+        697,
+        1917,
+        1060
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:portrait-H",
+        "v2:portrait-H"
+      ],
+      "notes": [
+        "V2を暫定推奨するが、丸顔の差はまだ小さい。G/H/Iで髪・肌・目が完全同一とは確認できていない。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": false
+    },
+    {
+      "id": "portrait-I",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "angular",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "status": "review_candidate_with_identity_caveat",
+      "selected_candidate": "v2:portrait-I",
+      "selected_crop_box": [
+        114,
+        1275,
+        391,
+        1635
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:portrait-I",
+        "v2:portrait-I"
+      ],
+      "notes": [
+        "V2を暫定推奨。V1より角張った顎を読み取りやすいが、輪郭だけが違うという条件は縮小後にも確認。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": false
+    },
+    {
+      "id": "clothing-shirt",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "status": "review_candidate_with_identity_caveat",
+      "selected_candidate": "v1:clothing-shirt",
+      "selected_crop_box": [
+        438,
+        819,
+        703,
+        1172
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:clothing-shirt",
+        "v2:clothing-shirt"
+      ],
+      "notes": [
+        "V2のSHIRT枠は前掛けへ変化しているため不採用。緑の襟つきシャツが描かれたV1を選ぶ。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": false
+    },
+    {
+      "id": "clothing-apron",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "apron",
+        "dye": "brick"
+      },
+      "status": "review_candidate_with_identity_caveat",
+      "selected_candidate": "v2:clothing-apron",
+      "selected_crop_box": [
+        1121,
+        1269,
+        1421,
+        1635
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:clothing-apron",
+        "v2:clothing-apron"
+      ],
+      "notes": [
+        "V2は肩ひも・胸当てが明瞭。服4種の同一人物性はV1 shirtとの組合せで再確認が必要。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": false
+    },
+    {
+      "id": "clothing-wrap",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "wrap",
+        "dye": "indigo"
+      },
+      "status": "review_candidate_with_identity_caveat",
+      "selected_candidate": "v2:clothing-wrap",
+      "selected_crop_box": [
+        1633,
+        1274,
+        1922,
+        1635
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:clothing-wrap",
+        "v2:clothing-wrap"
+      ],
+      "notes": [
+        "V1は前髪と髪の長さが他の服見本と異なる。V2は黒い短髪に戻り、同一人物として近い。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": false
+    },
+    {
+      "id": "clothing-coat",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "coat",
+        "dye": "plum"
+      },
+      "status": "review_candidate_with_identity_caveat",
+      "selected_candidate": "v2:clothing-coat",
+      "selected_crop_box": [
+        106,
+        1846,
+        403,
+        2219
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:clothing-coat",
+        "v2:clothing-coat"
+      ],
+      "notes": [
+        "V2はV1より外套の襟の折り返しが明瞭。葡萄色も維持。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": false
+    },
+    {
+      "id": "portrait-kaya",
+      "kind": "portrait",
+      "expected_appearance": {
+        "face": "round",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "scar",
+        "clothing": "wrap",
+        "dye": "rust"
+      },
+      "status": "review_candidate",
+      "selected_candidate": "detail_kaya:portrait-kaya",
+      "selected_crop_box": [
+        32,
+        62,
+        243,
+        345
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:portrait-kaya",
+        "v2:portrait-kaya",
+        "detail_kaya:portrait-kaya"
+      ],
+      "notes": [
+        "個別結果の左上で、頬の傷・黒い短髪・黄土色の巻き襟を目視確認。V1/V2より特徴が揃うためレビュー用に選ぶ。",
+        "V2全身との顔・傷・頭身の一致は未完了。胸像単独の改善を人物全体の完成と扱わない。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": false
+    },
+    {
+      "id": "walker-kaya",
+      "kind": "walker",
+      "expected_appearance": {
+        "face": "round",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "scar",
+        "clothing": "wrap",
+        "dye": "rust"
+      },
+      "status": "unfinished",
+      "selected_candidate": "v2:walker-kaya",
+      "selected_crop_box": [
+        1181,
+        1841,
+        1358,
+        2226
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:walker-kaya",
+        "v2:walker-kaya"
+      ],
+      "notes": [
+        "V2は足元まで画像内に収まるためレビュー用に選ぶ。V1は足元が画像下端に接し、欠けの可能性がある。",
+        "V2は元より頭が大きく脚が短く見え、若い子どものような頭身に寄っている。傷も判別しにくい。unfinished、ゲーム採用不可。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": true
+    },
+    {
+      "id": "walker-sui",
+      "kind": "walker",
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "knot",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "broad",
+        "eyes": "straight",
+        "mark": "freckles",
+        "clothing": "wrap",
+        "dye": "flax"
+      },
+      "status": "unfinished",
+      "selected_candidate": "v2:walker-sui",
+      "selected_crop_box": [
+        1686,
+        1840,
+        1872,
+        2226
+      ],
+      "fallback_comparison_candidate": null,
+      "final_export_allowed": false,
+      "reuse_selection_of": null,
+      "candidate_ids": [
+        "v1:walker-sui",
+        "v2:walker-sui"
+      ],
+      "notes": [
+        "V2は足元まで画像内に収まり、黒いまとめ髪・生成りの巻き襟を保つためレビュー用に選ぶ。",
+        "そばかす、壮年の顔、がっしりした体格が十分に表れていない。カヤと同様に頭身が幼く見える。unfinished、ゲーム採用不可。"
+      ],
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "export_scope": "review_only",
+      "unfinished": true
+    }
+  ],
+  "candidates": {
+    "v1:portrait-A": {
+      "source": "v1",
+      "grid_position": {
+        "row": 1,
+        "column": 1
+      },
+      "art_roi": [
+        20,
+        0,
+        364,
+        390
+      ],
+      "detected_content_bbox": [
+        68,
+        47,
+        321,
+        382
+      ],
+      "crop_box": [
+        60,
+        39,
+        329,
+        390
+      ],
+      "crop_size": [
+        269,
+        351
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:portrait-B": {
+      "source": "v1",
+      "grid_position": {
+        "row": 1,
+        "column": 2
+      },
+      "art_roi": [
+        404,
+        0,
+        748,
+        390
+      ],
+      "detected_content_bbox": [
+        445,
+        47,
+        688,
+        382
+      ],
+      "crop_box": [
+        437,
+        39,
+        696,
+        390
+      ],
+      "crop_size": [
+        259,
+        351
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:portrait-C": {
+      "source": "v1",
+      "grid_position": {
+        "row": 1,
+        "column": 3
+      },
+      "art_roi": [
+        788,
+        0,
+        1132,
+        390
+      ],
+      "detected_content_bbox": [
+        836,
+        47,
+        1078,
+        382
+      ],
+      "crop_box": [
+        828,
+        39,
+        1086,
+        390
+      ],
+      "crop_size": [
+        258,
+        351
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:portrait-D": {
+      "source": "v1",
+      "grid_position": {
+        "row": 1,
+        "column": 4
+      },
+      "art_roi": [
+        1172,
+        0,
+        1516,
+        390
+      ],
+      "detected_content_bbox": [
+        1212,
+        47,
+        1468,
+        382
+      ],
+      "crop_box": [
+        1204,
+        39,
+        1476,
+        390
+      ],
+      "crop_size": [
+        272,
+        351
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:portrait-E": {
+      "source": "v1",
+      "grid_position": {
+        "row": 2,
+        "column": 1
+      },
+      "art_roi": [
+        20,
+        390,
+        364,
+        780
+      ],
+      "detected_content_bbox": [
+        80,
+        442,
+        326,
+        772
+      ],
+      "crop_box": [
+        72,
+        434,
+        334,
+        780
+      ],
+      "crop_size": [
+        262,
+        346
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:portrait-F": {
+      "source": "v1",
+      "grid_position": {
+        "row": 2,
+        "column": 2
+      },
+      "art_roi": [
+        404,
+        390,
+        748,
+        780
+      ],
+      "detected_content_bbox": [
+        446,
+        442,
+        692,
+        772
+      ],
+      "crop_box": [
+        438,
+        434,
+        700,
+        780
+      ],
+      "crop_size": [
+        262,
+        346
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:portrait-G": {
+      "source": "v1",
+      "grid_position": {
+        "row": 2,
+        "column": 3
+      },
+      "art_roi": [
+        788,
+        390,
+        1132,
+        780
+      ],
+      "detected_content_bbox": [
+        833,
+        442,
+        1077,
+        772
+      ],
+      "crop_box": [
+        825,
+        434,
+        1085,
+        780
+      ],
+      "crop_size": [
+        260,
+        346
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:portrait-H": {
+      "source": "v1",
+      "grid_position": {
+        "row": 2,
+        "column": 4
+      },
+      "art_roi": [
+        1172,
+        390,
+        1516,
+        780
+      ],
+      "detected_content_bbox": [
+        1215,
+        442,
+        1460,
+        772
+      ],
+      "crop_box": [
+        1207,
+        434,
+        1468,
+        780
+      ],
+      "crop_size": [
+        261,
+        346
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:portrait-I": {
+      "source": "v1",
+      "grid_position": {
+        "row": 3,
+        "column": 1
+      },
+      "art_roi": [
+        20,
+        780,
+        364,
+        1170
+      ],
+      "detected_content_bbox": [
+        68,
+        827,
+        314,
+        1164
+      ],
+      "crop_box": [
+        60,
+        819,
+        322,
+        1172
+      ],
+      "crop_size": [
+        262,
+        353
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:clothing-shirt": {
+      "source": "v1",
+      "grid_position": {
+        "row": 3,
+        "column": 2
+      },
+      "art_roi": [
+        404,
+        780,
+        748,
+        1170
+      ],
+      "detected_content_bbox": [
+        446,
+        827,
+        695,
+        1164
+      ],
+      "crop_box": [
+        438,
+        819,
+        703,
+        1172
+      ],
+      "crop_size": [
+        265,
+        353
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:clothing-apron": {
+      "source": "v1",
+      "grid_position": {
+        "row": 3,
+        "column": 3
+      },
+      "art_roi": [
+        788,
+        780,
+        1132,
+        1170
+      ],
+      "detected_content_bbox": [
+        833,
+        827,
+        1084,
+        1164
+      ],
+      "crop_box": [
+        825,
+        819,
+        1092,
+        1172
+      ],
+      "crop_size": [
+        267,
+        353
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:clothing-wrap": {
+      "source": "v1",
+      "grid_position": {
+        "row": 3,
+        "column": 4
+      },
+      "art_roi": [
+        1172,
+        780,
+        1516,
+        1170
+      ],
+      "detected_content_bbox": [
+        1226,
+        827,
+        1467,
+        1164
+      ],
+      "crop_box": [
+        1218,
+        819,
+        1475,
+        1172
+      ],
+      "crop_size": [
+        257,
+        353
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:clothing-coat": {
+      "source": "v1",
+      "grid_position": {
+        "row": 4,
+        "column": 1
+      },
+      "art_roi": [
+        20,
+        1170,
+        364,
+        1536
+      ],
+      "detected_content_bbox": [
+        73,
+        1215,
+        314,
+        1536
+      ],
+      "crop_box": [
+        65,
+        1207,
+        322,
+        1536
+      ],
+      "crop_size": [
+        257,
+        329
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": true,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:portrait-kaya": {
+      "source": "v1",
+      "grid_position": {
+        "row": 4,
+        "column": 2
+      },
+      "art_roi": [
+        404,
+        1170,
+        748,
+        1536
+      ],
+      "detected_content_bbox": [
+        457,
+        1215,
+        692,
+        1536
+      ],
+      "crop_box": [
+        449,
+        1207,
+        700,
+        1536
+      ],
+      "crop_size": [
+        251,
+        329
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": true,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v1:walker-kaya": {
+      "source": "v1",
+      "grid_position": {
+        "row": 4,
+        "column": 3
+      },
+      "art_roi": [
+        788,
+        1170,
+        1132,
+        1536
+      ],
+      "detected_content_bbox": [
+        897,
+        1202,
+        1018,
+        1536
+      ],
+      "crop_box": [
+        889,
+        1194,
+        1026,
+        1536
+      ],
+      "crop_size": [
+        137,
+        342
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": true,
+      "labels_in_crop": false,
+      "warnings": [
+        "全身の足元が元画像の下端に接触。切り出しで欠けを復元できないため最終採用不可。"
+      ]
+    },
+    "v1:walker-sui": {
+      "source": "v1",
+      "grid_position": {
+        "row": 4,
+        "column": 4
+      },
+      "art_roi": [
+        1172,
+        1170,
+        1516,
+        1536
+      ],
+      "detected_content_bbox": [
+        1262,
+        1208,
+        1390,
+        1536
+      ],
+      "crop_box": [
+        1254,
+        1200,
+        1398,
+        1536
+      ],
+      "crop_size": [
+        144,
+        336
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": true,
+      "labels_in_crop": false,
+      "warnings": [
+        "全身の足元が元画像の下端に接触。切り出しで欠けを復元できないため最終採用不可。"
+      ]
+    },
+    "v2:portrait-A": {
+      "source": "v2",
+      "grid_position": {
+        "row": 1,
+        "column": 1
+      },
+      "art_roi": [
+        20,
+        110,
+        492,
+        485
+      ],
+      "detected_content_bbox": [
+        123,
+        132,
+        383,
+        473
+      ],
+      "crop_box": [
+        115,
+        124,
+        391,
+        481
+      ],
+      "crop_size": [
+        276,
+        357
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:portrait-B": {
+      "source": "v2",
+      "grid_position": {
+        "row": 1,
+        "column": 2
+      },
+      "art_roi": [
+        532,
+        110,
+        1004,
+        485
+      ],
+      "detected_content_bbox": [
+        633,
+        132,
+        879,
+        473
+      ],
+      "crop_box": [
+        625,
+        124,
+        887,
+        481
+      ],
+      "crop_size": [
+        262,
+        357
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:portrait-C": {
+      "source": "v2",
+      "grid_position": {
+        "row": 1,
+        "column": 3
+      },
+      "art_roi": [
+        1044,
+        110,
+        1516,
+        485
+      ],
+      "detected_content_bbox": [
+        1145,
+        132,
+        1396,
+        473
+      ],
+      "crop_box": [
+        1137,
+        124,
+        1404,
+        481
+      ],
+      "crop_size": [
+        267,
+        357
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:portrait-D": {
+      "source": "v2",
+      "grid_position": {
+        "row": 1,
+        "column": 4
+      },
+      "art_roi": [
+        1556,
+        110,
+        2028,
+        485
+      ],
+      "detected_content_bbox": [
+        1645,
+        120,
+        1917,
+        473
+      ],
+      "crop_box": [
+        1637,
+        112,
+        1925,
+        481
+      ],
+      "crop_size": [
+        288,
+        369
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:portrait-E": {
+      "source": "v2",
+      "grid_position": {
+        "row": 2,
+        "column": 1
+      },
+      "art_roi": [
+        20,
+        690,
+        492,
+        1065
+      ],
+      "detected_content_bbox": [
+        113,
+        705,
+        382,
+        1052
+      ],
+      "crop_box": [
+        105,
+        697,
+        390,
+        1060
+      ],
+      "crop_size": [
+        285,
+        363
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:portrait-F": {
+      "source": "v2",
+      "grid_position": {
+        "row": 2,
+        "column": 2
+      },
+      "art_roi": [
+        532,
+        690,
+        1004,
+        1065
+      ],
+      "detected_content_bbox": [
+        632,
+        705,
+        895,
+        1052
+      ],
+      "crop_box": [
+        624,
+        697,
+        903,
+        1060
+      ],
+      "crop_size": [
+        279,
+        363
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:portrait-G": {
+      "source": "v2",
+      "grid_position": {
+        "row": 2,
+        "column": 3
+      },
+      "art_roi": [
+        1044,
+        690,
+        1516,
+        1065
+      ],
+      "detected_content_bbox": [
+        1141,
+        706,
+        1402,
+        1052
+      ],
+      "crop_box": [
+        1133,
+        698,
+        1410,
+        1060
+      ],
+      "crop_size": [
+        277,
+        362
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:portrait-H": {
+      "source": "v2",
+      "grid_position": {
+        "row": 2,
+        "column": 4
+      },
+      "art_roi": [
+        1556,
+        690,
+        2028,
+        1065
+      ],
+      "detected_content_bbox": [
+        1650,
+        705,
+        1909,
+        1052
+      ],
+      "crop_box": [
+        1642,
+        697,
+        1917,
+        1060
+      ],
+      "crop_size": [
+        275,
+        363
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:portrait-I": {
+      "source": "v2",
+      "grid_position": {
+        "row": 3,
+        "column": 1
+      },
+      "art_roi": [
+        20,
+        1260,
+        492,
+        1640
+      ],
+      "detected_content_bbox": [
+        122,
+        1283,
+        383,
+        1627
+      ],
+      "crop_box": [
+        114,
+        1275,
+        391,
+        1635
+      ],
+      "crop_size": [
+        277,
+        360
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:clothing-shirt": {
+      "source": "v2",
+      "grid_position": {
+        "row": 3,
+        "column": 2
+      },
+      "art_roi": [
+        532,
+        1260,
+        1004,
+        1640
+      ],
+      "detected_content_bbox": [
+        626,
+        1282,
+        895,
+        1627
+      ],
+      "crop_box": [
+        618,
+        1274,
+        903,
+        1635
+      ],
+      "crop_size": [
+        285,
+        361
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:clothing-apron": {
+      "source": "v2",
+      "grid_position": {
+        "row": 3,
+        "column": 3
+      },
+      "art_roi": [
+        1044,
+        1260,
+        1516,
+        1640
+      ],
+      "detected_content_bbox": [
+        1129,
+        1277,
+        1413,
+        1627
+      ],
+      "crop_box": [
+        1121,
+        1269,
+        1421,
+        1635
+      ],
+      "crop_size": [
+        300,
+        366
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:clothing-wrap": {
+      "source": "v2",
+      "grid_position": {
+        "row": 3,
+        "column": 4
+      },
+      "art_roi": [
+        1556,
+        1260,
+        2028,
+        1640
+      ],
+      "detected_content_bbox": [
+        1641,
+        1282,
+        1914,
+        1627
+      ],
+      "crop_box": [
+        1633,
+        1274,
+        1922,
+        1635
+      ],
+      "crop_size": [
+        289,
+        361
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:clothing-coat": {
+      "source": "v2",
+      "grid_position": {
+        "row": 4,
+        "column": 1
+      },
+      "art_roi": [
+        20,
+        1835,
+        492,
+        2230
+      ],
+      "detected_content_bbox": [
+        114,
+        1854,
+        395,
+        2211
+      ],
+      "crop_box": [
+        106,
+        1846,
+        403,
+        2219
+      ],
+      "crop_size": [
+        297,
+        373
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:portrait-kaya": {
+      "source": "v2",
+      "grid_position": {
+        "row": 4,
+        "column": 2
+      },
+      "art_roi": [
+        532,
+        1835,
+        1004,
+        2230
+      ],
+      "detected_content_bbox": [
+        619,
+        1854,
+        902,
+        2211
+      ],
+      "crop_box": [
+        611,
+        1846,
+        910,
+        2219
+      ],
+      "crop_size": [
+        299,
+        373
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:walker-kaya": {
+      "source": "v2",
+      "grid_position": {
+        "row": 4,
+        "column": 3
+      },
+      "art_roi": [
+        1044,
+        1835,
+        1516,
+        2230
+      ],
+      "detected_content_bbox": [
+        1189,
+        1849,
+        1350,
+        2218
+      ],
+      "crop_box": [
+        1181,
+        1841,
+        1358,
+        2226
+      ],
+      "crop_size": [
+        177,
+        385
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "v2:walker-sui": {
+      "source": "v2",
+      "grid_position": {
+        "row": 4,
+        "column": 4
+      },
+      "art_roi": [
+        1556,
+        1835,
+        2028,
+        2230
+      ],
+      "detected_content_bbox": [
+        1694,
+        1848,
+        1864,
+        2218
+      ],
+      "crop_box": [
+        1686,
+        1840,
+        1872,
+        2226
+      ],
+      "crop_size": [
+        186,
+        386
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "detail_c:portrait-C": {
+      "source": "detail_c",
+      "location": "上段中央",
+      "art_roi": [
+        350,
+        80,
+        650,
+        375
+      ],
+      "detected_content_bbox": [
+        409,
+        99,
+        607,
+        365
+      ],
+      "crop_box": [
+        401,
+        91,
+        615,
+        373
+      ],
+      "crop_size": [
+        214,
+        282
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    },
+    "detail_kaya:portrait-kaya": {
+      "source": "detail_kaya",
+      "location": "左上",
+      "art_roi": [
+        15,
+        45,
+        250,
+        345
+      ],
+      "detected_content_bbox": [
+        40,
+        70,
+        235,
+        337
+      ],
+      "crop_box": [
+        32,
+        62,
+        243,
+        345
+      ],
+      "crop_size": [
+        211,
+        283
+      ],
+      "padding_requested_px": 8,
+      "source_bottom_contact": false,
+      "labels_in_crop": false,
+      "warnings": []
+    }
+  },
+  "validation": {
+    "source_dimensions_verified": true,
+    "all_boxes_inside_source": true,
+    "all_boxes_contain_measured_subject": true,
+    "labels_excluded_by_visual_roi": true,
+    "images_written_or_modified": false,
+    "game_source_modified": false,
+    "external_write_performed": false,
+    "candidate_count": 34,
+    "review_cells_count": 16,
+    "all_selected_cells_have_crop": true,
+    "all_selected_cells_allow_review_only": true,
+    "A_G_source_and_crop_identical": true,
+    "atlas_manifest_order_used": true
+  },
+  "atlas_order": [
+    "portrait-A",
+    "portrait-B",
+    "portrait-C",
+    "portrait-D",
+    "portrait-E",
+    "portrait-F",
+    "portrait-G",
+    "portrait-H",
+    "portrait-I",
+    "clothing-shirt",
+    "clothing-apron",
+    "clothing-wrap",
+    "clothing-coat",
+    "portrait-kaya",
+    "walker-kaya",
+    "walker-sui"
+  ],
+  "atlas_order_reference": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/reference/atlas-manifest.json",
+  "overall_status": "review_candidates_unfinished",
+  "review_export_allowed": true,
+  "game_adoption_allowed": false,
+  "generation_status": {
+    "additional_generation": "stopped",
+    "reason": "Canva quota reached（親担当からの報告）。追加生成や再試行は行わない。"
+  },
+  "individual_result_decisions": [
+    {
+      "source": "detail_c",
+      "selected_case": "portrait-C",
+      "decision": "review_crop_selected",
+      "candidate": "detail_c:portrait-C"
+    },
+    {
+      "source": "detail_kaya",
+      "selected_case": "portrait-kaya",
+      "decision": "review_crop_selected",
+      "candidate": "detail_kaya:portrait-kaya"
+    },
+    {
+      "source": "detail_f",
+      "selected_case": null,
+      "decision": "rejected_identity_mismatch",
+      "reason": "Fの年齢表現はあるが、髪が灰色、服が白いシャツと前掛けへ変更されている。墨黒の短髪・苔色のシャツと一致しない。"
+    }
+  ],
+  "sources": {
+    "v1": {
+      "path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v1.png",
+      "width": 1536,
+      "height": 1536,
+      "mode": "RGB",
+      "sha256": "3984258069f8caaa231def09475dd9b9583355886836bbc9cc08f614efed60e3",
+      "background": "生成画像の紙色背景。透過ではない。",
+      "source_id": "v1"
+    },
+    "v2": {
+      "path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "width": 2048,
+      "height": 2416,
+      "mode": "RGB",
+      "sha256": "d50e2d30ee67ac826da9f5c9ee393ef62039644524e1a562d98962c8396c5ff4",
+      "background": "生成画像の紙色背景。透過ではない。",
+      "source_id": "v2"
+    },
+    "detail_c": {
+      "path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/detail-C.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB",
+      "sha256": "92aa2204bb841c06a57b231eeb97f1b275b533613ef1ef589cbf9e849026a9dd",
+      "background": "生成画像の紙色背景。透過ではない。",
+      "note": "採用範囲は上段中央のCだけ。他の人物と説明文は対象外。",
+      "rejected": false,
+      "source_id": "detail_c"
+    },
+    "detail_kaya": {
+      "path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/detail-Kaya.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB",
+      "sha256": "9b340df13ee015e4a24297dfe358854dc376c93db2b3dd63a1cc1b5eadc74cb8",
+      "background": "生成画像の紙色背景。透過ではない。",
+      "note": "採用範囲は左上のカヤだけ。他の人物と名前ラベルは対象外。",
+      "rejected": false,
+      "source_id": "detail_kaya"
+    },
+    "detail_f": {
+      "path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/detail-F.png",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB",
+      "sha256": "1e13e332465c743bf9059c0523d813a2c751ec4cf8c8c4f03d6536e9381967bd",
+      "background": "生成画像の紙色背景。透過ではない。",
+      "note": "不採用。Fとされた人物が灰色の髪と白い服・前掛けに変化。元の墨黒の短髪・苔色シャツと一致しない。",
+      "rejected": true,
+      "source_id": "detail_f"
+    }
+  },
+  "cells": [
+    {
+      "index": 0,
+      "case_id": "portrait-A",
+      "kind": "portrait",
+      "source_id": "v2",
+      "source": "v2",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "candidate_id": "v2:portrait-A",
+      "crop_box": [
+        115,
+        124,
+        391,
+        481
+      ],
+      "crop_box_xyxy": [
+        115,
+        124,
+        391,
+        481
+      ],
+      "crop_size": [
+        276,
+        357
+      ],
+      "detected_content_bbox_xyxy": [
+        123,
+        132,
+        383,
+        473
+      ],
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2は参照の短髪・苔色シャツに近い。柔らかな細い目は丸く開いた目へ変化している。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 1,
+      "case_id": "portrait-B",
+      "kind": "portrait",
+      "source_id": "v2",
+      "source": "v2",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "candidate_id": "v2:portrait-B",
+      "crop_box": [
+        625,
+        124,
+        887,
+        481
+      ],
+      "crop_box_xyxy": [
+        625,
+        124,
+        887,
+        481
+      ],
+      "crop_size": [
+        262,
+        357
+      ],
+      "detected_content_bbox_xyxy": [
+        633,
+        132,
+        879,
+        473
+      ],
+      "expected_appearance": {
+        "face": "round",
+        "skin": "peach",
+        "hair": "bob",
+        "hairColor": "chestnut",
+        "age": "adult",
+        "build": "slight",
+        "eyes": "open",
+        "mark": "freckles",
+        "clothing": "apron",
+        "dye": "brick"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "review_candidate",
+      "unfinished": false,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2で短い前髪のおかっぱとそばかすが復帰。V1より人物条件に近い。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 2,
+      "case_id": "portrait-C",
+      "kind": "portrait",
+      "source_id": "detail_c",
+      "source": "detail_c",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/detail-C.png",
+      "candidate_id": "detail_c:portrait-C",
+      "crop_box": [
+        401,
+        91,
+        615,
+        373
+      ],
+      "crop_box_xyxy": [
+        401,
+        91,
+        615,
+        373
+      ],
+      "crop_size": [
+        214,
+        282
+      ],
+      "detected_content_bbox_xyxy": [
+        409,
+        99,
+        607,
+        365
+      ],
+      "expected_appearance": {
+        "face": "angular",
+        "skin": "wheat",
+        "hair": "wave",
+        "hairColor": "ash",
+        "age": "young",
+        "build": "slight",
+        "eyes": "straight",
+        "mark": "scar",
+        "clothing": "wrap",
+        "dye": "indigo"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "review_candidate",
+      "unfinished": false,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "個別結果の上段中央で、頬の傷・灰褐色の長髪・藍色の巻き襟を目視確認。V1/V2より人物条件に近いためレビュー用に選ぶ。",
+        "元設定の切れ長の目・角張った輪郭はなお柔らかめ。ゲーム採用前の縮小レビューが必要。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 3,
+      "case_id": "portrait-D",
+      "kind": "portrait",
+      "source_id": "v2",
+      "source": "v2",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "candidate_id": "v2:portrait-D",
+      "crop_box": [
+        1637,
+        112,
+        1925,
+        481
+      ],
+      "crop_box_xyxy": [
+        1637,
+        112,
+        1925,
+        481
+      ],
+      "crop_size": [
+        288,
+        369
+      ],
+      "detected_content_bbox_xyxy": [
+        1645,
+        120,
+        1917,
+        473
+      ],
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "bronze",
+        "hair": "knot",
+        "hairColor": "silver",
+        "age": "elder",
+        "build": "broad",
+        "eyes": "soft",
+        "mark": "glasses",
+        "clothing": "coat",
+        "dye": "plum"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "review_candidate",
+      "unfinished": false,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2はV1より老年の顔、肌色、外套の折り返しが明瞭。がっしりした体格の強さは縮小後に確認。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 4,
+      "case_id": "portrait-E",
+      "kind": "portrait",
+      "source_id": "v2",
+      "source": "v2",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "candidate_id": "v2:portrait-E",
+      "crop_box": [
+        105,
+        697,
+        390,
+        1060
+      ],
+      "crop_box_xyxy": [
+        105,
+        697,
+        390,
+        1060
+      ],
+      "crop_size": [
+        285,
+        363
+      ],
+      "detected_content_bbox_xyxy": [
+        113,
+        705,
+        382,
+        1052
+      ],
+      "expected_appearance": {
+        "face": "round",
+        "skin": "umber",
+        "hair": "braid",
+        "hairColor": "honey",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "apron",
+        "dye": "rust"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "review_candidate",
+      "unfinished": false,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2で深い褐色の肌が復帰。亜麻色の三つ編みと前掛けも維持。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 5,
+      "case_id": "portrait-F",
+      "kind": "portrait",
+      "source_id": "v2",
+      "source": "v2",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "candidate_id": "v2:portrait-F",
+      "crop_box": [
+        624,
+        697,
+        903,
+        1060
+      ],
+      "crop_box_xyxy": [
+        624,
+        697,
+        903,
+        1060
+      ],
+      "crop_size": [
+        279,
+        363
+      ],
+      "detected_content_bbox_xyxy": [
+        632,
+        705,
+        895,
+        1052
+      ],
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "elder",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "glasses",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "unfinished",
+      "unfinished": true,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "個別detail-Fは灰色の髪と白い服・前掛けに変化したため不採用。黒い短髪・丸眼鏡・苔色シャツを保つV2を残す。",
+        "V2は老年の年齢感が不足しておりunfinished。レビュー用の切り出しのみ可、完成やゲーム採用と扱わない。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 6,
+      "case_id": "portrait-G",
+      "kind": "portrait",
+      "source_id": "v2",
+      "source": "v2",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "candidate_id": "v2:portrait-A",
+      "crop_box": [
+        115,
+        124,
+        391,
+        481
+      ],
+      "crop_box_xyxy": [
+        115,
+        124,
+        391,
+        481
+      ],
+      "crop_size": [
+        276,
+        357
+      ],
+      "detected_content_bbox_xyxy": [
+        123,
+        132,
+        383,
+        473
+      ],
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "Aと同じ設定のため、V2のAの切り抜きをそのまま再利用。独立生成されたG枠を使わない。"
+      ],
+      "reuse_selection_of": "portrait-A"
+    },
+    {
+      "index": 7,
+      "case_id": "portrait-H",
+      "kind": "portrait",
+      "source_id": "v2",
+      "source": "v2",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "candidate_id": "v2:portrait-H",
+      "crop_box": [
+        1642,
+        697,
+        1917,
+        1060
+      ],
+      "crop_box_xyxy": [
+        1642,
+        697,
+        1917,
+        1060
+      ],
+      "crop_size": [
+        275,
+        363
+      ],
+      "detected_content_bbox_xyxy": [
+        1650,
+        705,
+        1909,
+        1052
+      ],
+      "expected_appearance": {
+        "face": "round",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2を暫定推奨するが、丸顔の差はまだ小さい。G/H/Iで髪・肌・目が完全同一とは確認できていない。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 8,
+      "case_id": "portrait-I",
+      "kind": "portrait",
+      "source_id": "v2",
+      "source": "v2",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "candidate_id": "v2:portrait-I",
+      "crop_box": [
+        114,
+        1275,
+        391,
+        1635
+      ],
+      "crop_box_xyxy": [
+        114,
+        1275,
+        391,
+        1635
+      ],
+      "crop_size": [
+        277,
+        360
+      ],
+      "detected_content_bbox_xyxy": [
+        122,
+        1283,
+        383,
+        1627
+      ],
+      "expected_appearance": {
+        "face": "angular",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2を暫定推奨。V1より角張った顎を読み取りやすいが、輪郭だけが違うという条件は縮小後にも確認。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 9,
+      "case_id": "clothing-shirt",
+      "kind": "portrait",
+      "source_id": "v1",
+      "source": "v1",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v1.png",
+      "candidate_id": "v1:clothing-shirt",
+      "crop_box": [
+        438,
+        819,
+        703,
+        1172
+      ],
+      "crop_box_xyxy": [
+        438,
+        819,
+        703,
+        1172
+      ],
+      "crop_size": [
+        265,
+        353
+      ],
+      "detected_content_bbox_xyxy": [
+        446,
+        827,
+        695,
+        1164
+      ],
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2のSHIRT枠は前掛けへ変化しているため不採用。緑の襟つきシャツが描かれたV1を選ぶ。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 10,
+      "case_id": "clothing-apron",
+      "kind": "portrait",
+      "source_id": "v2",
+      "source": "v2",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "candidate_id": "v2:clothing-apron",
+      "crop_box": [
+        1121,
+        1269,
+        1421,
+        1635
+      ],
+      "crop_box_xyxy": [
+        1121,
+        1269,
+        1421,
+        1635
+      ],
+      "crop_size": [
+        300,
+        366
+      ],
+      "detected_content_bbox_xyxy": [
+        1129,
+        1277,
+        1413,
+        1627
+      ],
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "apron",
+        "dye": "brick"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2は肩ひも・胸当てが明瞭。服4種の同一人物性はV1 shirtとの組合せで再確認が必要。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 11,
+      "case_id": "clothing-wrap",
+      "kind": "portrait",
+      "source_id": "v2",
+      "source": "v2",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "candidate_id": "v2:clothing-wrap",
+      "crop_box": [
+        1633,
+        1274,
+        1922,
+        1635
+      ],
+      "crop_box_xyxy": [
+        1633,
+        1274,
+        1922,
+        1635
+      ],
+      "crop_size": [
+        289,
+        361
+      ],
+      "detected_content_bbox_xyxy": [
+        1641,
+        1282,
+        1914,
+        1627
+      ],
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "wrap",
+        "dye": "indigo"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V1は前髪と髪の長さが他の服見本と異なる。V2は黒い短髪に戻り、同一人物として近い。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 12,
+      "case_id": "clothing-coat",
+      "kind": "portrait",
+      "source_id": "v2",
+      "source": "v2",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "candidate_id": "v2:clothing-coat",
+      "crop_box": [
+        106,
+        1846,
+        403,
+        2219
+      ],
+      "crop_box_xyxy": [
+        106,
+        1846,
+        403,
+        2219
+      ],
+      "crop_size": [
+        297,
+        373
+      ],
+      "detected_content_bbox_xyxy": [
+        114,
+        1854,
+        395,
+        2211
+      ],
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "coat",
+        "dye": "plum"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2はV1より外套の襟の折り返しが明瞭。葡萄色も維持。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 13,
+      "case_id": "portrait-kaya",
+      "kind": "portrait",
+      "source_id": "detail_kaya",
+      "source": "detail_kaya",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/detail-Kaya.png",
+      "candidate_id": "detail_kaya:portrait-kaya",
+      "crop_box": [
+        32,
+        62,
+        243,
+        345
+      ],
+      "crop_box_xyxy": [
+        32,
+        62,
+        243,
+        345
+      ],
+      "crop_size": [
+        211,
+        283
+      ],
+      "detected_content_bbox_xyxy": [
+        40,
+        70,
+        235,
+        337
+      ],
+      "expected_appearance": {
+        "face": "round",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "scar",
+        "clothing": "wrap",
+        "dye": "rust"
+      },
+      "native_target_size": [
+        48,
+        56
+      ],
+      "status": "review_candidate",
+      "unfinished": false,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "個別結果の左上で、頬の傷・黒い短髪・黄土色の巻き襟を目視確認。V1/V2より特徴が揃うためレビュー用に選ぶ。",
+        "V2全身との顔・傷・頭身の一致は未完了。胸像単独の改善を人物全体の完成と扱わない。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 14,
+      "case_id": "walker-kaya",
+      "kind": "walker",
+      "source_id": "v2",
+      "source": "v2",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "candidate_id": "v2:walker-kaya",
+      "crop_box": [
+        1181,
+        1841,
+        1358,
+        2226
+      ],
+      "crop_box_xyxy": [
+        1181,
+        1841,
+        1358,
+        2226
+      ],
+      "crop_size": [
+        177,
+        385
+      ],
+      "detected_content_bbox_xyxy": [
+        1189,
+        1849,
+        1350,
+        2218
+      ],
+      "expected_appearance": {
+        "face": "round",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "scar",
+        "clothing": "wrap",
+        "dye": "rust"
+      },
+      "native_target_size": [
+        26,
+        60
+      ],
+      "status": "unfinished",
+      "unfinished": true,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2は足元まで画像内に収まるためレビュー用に選ぶ。V1は足元が画像下端に接し、欠けの可能性がある。",
+        "V2は元より頭が大きく脚が短く見え、若い子どものような頭身に寄っている。傷も判別しにくい。unfinished、ゲーム採用不可。"
+      ],
+      "reuse_selection_of": null
+    },
+    {
+      "index": 15,
+      "case_id": "walker-sui",
+      "kind": "walker",
+      "source_id": "v2",
+      "source": "v2",
+      "source_path": "/workspace/scratch/399dd7144fae/canva-art-redraw-20261123/canva-originals/all-characters-style-v2.png",
+      "candidate_id": "v2:walker-sui",
+      "crop_box": [
+        1686,
+        1840,
+        1872,
+        2226
+      ],
+      "crop_box_xyxy": [
+        1686,
+        1840,
+        1872,
+        2226
+      ],
+      "crop_size": [
+        186,
+        386
+      ],
+      "detected_content_bbox_xyxy": [
+        1694,
+        1848,
+        1864,
+        2218
+      ],
+      "expected_appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "knot",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "broad",
+        "eyes": "straight",
+        "mark": "freckles",
+        "clothing": "wrap",
+        "dye": "flax"
+      },
+      "native_target_size": [
+        26,
+        60
+      ],
+      "status": "unfinished",
+      "unfinished": true,
+      "review_export_allowed": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2は足元まで画像内に収まり、黒いまとめ髪・生成りの巻き襟を保つためレビュー用に選ぶ。",
+        "そばかす、壮年の顔、がっしりした体格が十分に表れていない。カヤと同様に頭身が幼く見える。unfinished、ゲーム採用不可。"
+      ],
+      "reuse_selection_of": null
+    }
+  ]
+}

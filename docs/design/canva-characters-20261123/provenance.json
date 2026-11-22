@@ -1,0 +1,415 @@
+{
+  "date": "2026-11-23",
+  "timezone": "Asia/Taipei",
+  "status": "review_candidates_with_unfinished_items_not_game_assets",
+  "production_ready": false,
+  "game_integration_done": false,
+  "image_generated_names_gender_age_and_description_labels_adopted": false,
+  "authoritative_character_appearance": "original-appearance.json",
+  "appearance_metadata_and_visual_conformance_are_separate": true,
+  "canva_provenance": {
+    "file": "canva-provenance.json",
+    "sha256": "ce116241161eb9bd9380d391ea930b4b3252649748271dd2e6bd81018d4fe874"
+  },
+  "canva_folder": "https://www.canva.com/folder/FAHbqQaqt5Q",
+  "quota_reached": true,
+  "base_main_commit": "b9838db6d9c45acde3fc288773f7504e333e3dad",
+  "base_main_tree": "db91d1b847bc5f0c67fef3319025b847fb8a2d8f",
+  "original_renderer_sha256": "ed6cc890095716c6885f5302aca7fc7ebb9b1ea27144c136221504178d672e17",
+  "original_canva_pngs": [
+    {
+      "original_file": "style-reference-first-trial.png",
+      "file": "review-export/sources/style-reference-first-trial.png",
+      "media_id": "MAHbqXP_R7E",
+      "role": "adopted-style-reference",
+      "bytes": 808997,
+      "sha256": "b070a595a24dc34591a9f85f88f826168d283b51e5f7c28675290c9b7950959f",
+      "size": [
+        768,
+        896
+      ],
+      "mode": "RGB",
+      "has_alpha_channel": false,
+      "byte_identical_copy_verified": true,
+      "used_in_review_candidates": false,
+      "game_adopted": false
+    },
+    {
+      "original_file": "all-characters-style-v1.png",
+      "file": "review-export/sources/v1.png",
+      "media_id": "MAHbqdIzjzg",
+      "role": "review-candidate-v1",
+      "bytes": 2027430,
+      "sha256": "3984258069f8caaa231def09475dd9b9583355886836bbc9cc08f614efed60e3",
+      "size": [
+        1536,
+        1536
+      ],
+      "mode": "RGB",
+      "has_alpha_channel": false,
+      "byte_identical_copy_verified": true,
+      "used_in_review_candidates": true,
+      "game_adopted": false
+    },
+    {
+      "original_file": "all-characters-style-v2.png",
+      "file": "review-export/sources/v2.png",
+      "media_id": "MAHbqbhOmFM",
+      "role": "review-candidate-v2",
+      "bytes": 4157426,
+      "sha256": "d50e2d30ee67ac826da9f5c9ee393ef62039644524e1a562d98962c8396c5ff4",
+      "size": [
+        2048,
+        2416
+      ],
+      "mode": "RGB",
+      "has_alpha_channel": false,
+      "byte_identical_copy_verified": true,
+      "used_in_review_candidates": true,
+      "game_adopted": false
+    },
+    {
+      "original_file": "detail-C.png",
+      "file": "review-export/sources/detail_c.png",
+      "media_id": "MAHbqZ3KWzA",
+      "role": "candidate-C-top-center-only",
+      "bytes": 1101368,
+      "sha256": "92aa2204bb841c06a57b231eeb97f1b275b533613ef1ef589cbf9e849026a9dd",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGB",
+      "has_alpha_channel": false,
+      "byte_identical_copy_verified": true,
+      "used_in_review_candidates": true,
+      "game_adopted": false
+    },
+    {
+      "original_file": "detail-Kaya.png",
+      "file": "review-export/sources/detail_kaya.png",
+      "media_id": "MAHbqaiQfH8",
+      "role": "candidate-Kaya-top-left-only",
+      "bytes": 1299718,
+      "sha256": "9b340df13ee015e4a24297dfe358854dc376c93db2b3dd63a1cc1b5eadc74cb8",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGB",
+      "has_alpha_channel": false,
+      "byte_identical_copy_verified": true,
+      "used_in_review_candidates": true,
+      "game_adopted": false
+    },
+    {
+      "original_file": "detail-F.png",
+      "file": "review-export/sources/detail-F.png",
+      "media_id": "MAHbqYMWhE4",
+      "role": "rejected-identity-mismatch",
+      "bytes": 1192324,
+      "sha256": "1e13e332465c743bf9059c0523d813a2c751ec4cf8c8c4f03d6536e9381967bd",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGB",
+      "has_alpha_channel": false,
+      "byte_identical_copy_verified": true,
+      "used_in_review_candidates": false,
+      "game_adopted": false
+    }
+  ],
+  "original_canva_png_total_bytes": 10587263,
+  "selection_plan": "selection-plan.json",
+  "mechanical_conversion_manifest": "review-export/manifest.json",
+  "reproduction_plan": "review-export/crop-plan.json",
+  "reproduction_script": "review-export/prepare_game_art.py",
+  "review_sheet": {
+    "file": "review-export/review-sheet.png",
+    "mediaId": "MAHbqtibyQM",
+    "name": "余白の暮らし_原画レビュー候補16点_要修正3点_20261123",
+    "folderUrl": "https://www.canva.com/folder/FAHbqQaqt5Q",
+    "size": [
+      1100,
+      1562
+    ],
+    "sha256": "66f1aebc62ab1daebd67c6ff0a61e1c6d4310a97f8bc137c05d1b68e1d0c1cd8",
+    "kind": "Mechanical review sheet composed from cropped and resized Canva-generated candidates; not an original generated artwork",
+    "saved_in_canva_and_visually_confirmed": true,
+    "confirmation_source": "Parent observed the uploaded sheet in the Canva folder"
+  },
+  "review_sheet_script": "review-export/build-review-sheet.py",
+  "review_candidate_count": 16,
+  "unfinished_cases": [
+    "portrait-F",
+    "walker-kaya",
+    "walker-sui"
+  ],
+  "candidates": [
+    {
+      "case_id": "portrait-A",
+      "source_id": "v2",
+      "crop_box_xyxy": [
+        115,
+        124,
+        391,
+        481
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2は参照の短髪・苔色シャツに近い。柔らかな細い目は丸く開いた目へ変化している。"
+      ]
+    },
+    {
+      "case_id": "portrait-B",
+      "source_id": "v2",
+      "crop_box_xyxy": [
+        625,
+        124,
+        887,
+        481
+      ],
+      "status": "review_candidate",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2で短い前髪のおかっぱとそばかすが復帰。V1より人物条件に近い。"
+      ]
+    },
+    {
+      "case_id": "portrait-C",
+      "source_id": "detail_c",
+      "crop_box_xyxy": [
+        401,
+        91,
+        615,
+        373
+      ],
+      "status": "review_candidate",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "notes": [
+        "個別結果の上段中央で、頬の傷・灰褐色の長髪・藍色の巻き襟を目視確認。V1/V2より人物条件に近いためレビュー用に選ぶ。",
+        "元設定の切れ長の目・角張った輪郭はなお柔らかめ。ゲーム採用前の縮小レビューが必要。"
+      ]
+    },
+    {
+      "case_id": "portrait-D",
+      "source_id": "v2",
+      "crop_box_xyxy": [
+        1637,
+        112,
+        1925,
+        481
+      ],
+      "status": "review_candidate",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2はV1より老年の顔、肌色、外套の折り返しが明瞭。がっしりした体格の強さは縮小後に確認。"
+      ]
+    },
+    {
+      "case_id": "portrait-E",
+      "source_id": "v2",
+      "crop_box_xyxy": [
+        105,
+        697,
+        390,
+        1060
+      ],
+      "status": "review_candidate",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2で深い褐色の肌が復帰。亜麻色の三つ編みと前掛けも維持。"
+      ]
+    },
+    {
+      "case_id": "portrait-F",
+      "source_id": "v2",
+      "crop_box_xyxy": [
+        624,
+        697,
+        903,
+        1060
+      ],
+      "status": "unfinished",
+      "unfinished": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "個別detail-Fは灰色の髪と白い服・前掛けに変化したため不採用。黒い短髪・丸眼鏡・苔色シャツを保つV2を残す。",
+        "V2は老年の年齢感が不足しておりunfinished。レビュー用の切り出しのみ可、完成やゲーム採用と扱わない。"
+      ]
+    },
+    {
+      "case_id": "portrait-G",
+      "source_id": "v2",
+      "crop_box_xyxy": [
+        115,
+        124,
+        391,
+        481
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "notes": [
+        "Aと同じ設定のため、V2のAの切り抜きをそのまま再利用。独立生成されたG枠を使わない。"
+      ]
+    },
+    {
+      "case_id": "portrait-H",
+      "source_id": "v2",
+      "crop_box_xyxy": [
+        1642,
+        697,
+        1917,
+        1060
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2を暫定推奨するが、丸顔の差はまだ小さい。G/H/Iで髪・肌・目が完全同一とは確認できていない。"
+      ]
+    },
+    {
+      "case_id": "portrait-I",
+      "source_id": "v2",
+      "crop_box_xyxy": [
+        114,
+        1275,
+        391,
+        1635
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2を暫定推奨。V1より角張った顎を読み取りやすいが、輪郭だけが違うという条件は縮小後にも確認。"
+      ]
+    },
+    {
+      "case_id": "clothing-shirt",
+      "source_id": "v1",
+      "crop_box_xyxy": [
+        438,
+        819,
+        703,
+        1172
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2のSHIRT枠は前掛けへ変化しているため不採用。緑の襟つきシャツが描かれたV1を選ぶ。"
+      ]
+    },
+    {
+      "case_id": "clothing-apron",
+      "source_id": "v2",
+      "crop_box_xyxy": [
+        1121,
+        1269,
+        1421,
+        1635
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2は肩ひも・胸当てが明瞭。服4種の同一人物性はV1 shirtとの組合せで再確認が必要。"
+      ]
+    },
+    {
+      "case_id": "clothing-wrap",
+      "source_id": "v2",
+      "crop_box_xyxy": [
+        1633,
+        1274,
+        1922,
+        1635
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V1は前髪と髪の長さが他の服見本と異なる。V2は黒い短髪に戻り、同一人物として近い。"
+      ]
+    },
+    {
+      "case_id": "clothing-coat",
+      "source_id": "v2",
+      "crop_box_xyxy": [
+        106,
+        1846,
+        403,
+        2219
+      ],
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2はV1より外套の襟の折り返しが明瞭。葡萄色も維持。"
+      ]
+    },
+    {
+      "case_id": "portrait-kaya",
+      "source_id": "detail_kaya",
+      "crop_box_xyxy": [
+        32,
+        62,
+        243,
+        345
+      ],
+      "status": "review_candidate",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "notes": [
+        "個別結果の左上で、頬の傷・黒い短髪・黄土色の巻き襟を目視確認。V1/V2より特徴が揃うためレビュー用に選ぶ。",
+        "V2全身との顔・傷・頭身の一致は未完了。胸像単独の改善を人物全体の完成と扱わない。"
+      ]
+    },
+    {
+      "case_id": "walker-kaya",
+      "source_id": "v2",
+      "crop_box_xyxy": [
+        1181,
+        1841,
+        1358,
+        2226
+      ],
+      "status": "unfinished",
+      "unfinished": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2は足元まで画像内に収まるためレビュー用に選ぶ。V1は足元が画像下端に接し、欠けの可能性がある。",
+        "V2は元より頭が大きく脚が短く見え、若い子どものような頭身に寄っている。傷も判別しにくい。unfinished、ゲーム採用不可。"
+      ]
+    },
+    {
+      "case_id": "walker-sui",
+      "source_id": "v2",
+      "crop_box_xyxy": [
+        1686,
+        1840,
+        1872,
+        2226
+      ],
+      "status": "unfinished",
+      "unfinished": true,
+      "game_adoption_allowed": false,
+      "notes": [
+        "V2は足元まで画像内に収まり、黒いまとめ髪・生成りの巻き襟を保つためレビュー用に選ぶ。",
+        "そばかす、壮年の顔、がっしりした体格が十分に表れていない。カヤと同様に頭身が幼く見える。unfinished、ゲーム採用不可。"
+      ]
+    }
+  ],
+  "transparency": "Original RGB paper backgrounds remain opaque. Only added output padding may be transparent.",
+  "mechanical_transform": "Unmodified explicit crops; each requested size fitted directly from its original crop with nearest-neighbor resampling.",
+  "rejected_detail_f": "Preserved for provenance only. Grey hair and white clothing/apron differ from F black short hair and green shirt; no crop from this PNG is selected."
+}

@@ -1,0 +1,182 @@
+{
+  "status": "passed",
+  "review_only": true,
+  "game_adoption_allowed": false,
+  "cells": 16,
+  "portraits": 14,
+  "full_body": 2,
+  "source_pngs": 4,
+  "crop_pngs": 16,
+  "derived_pngs": 46,
+  "owned_png_count": 66,
+  "owned_png_bytes": 11048524,
+  "unfinished": [
+    "portrait-F",
+    "walker-kaya",
+    "walker-sui"
+  ],
+  "a_g_identical": true,
+  "background_removal": false,
+  "rows": [
+    {
+      "case_id": "portrait-A",
+      "source": "v2",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "portrait-B",
+      "source": "v2",
+      "status": "review_candidate",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "portrait-C",
+      "source": "detail_c",
+      "status": "review_candidate",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "portrait-D",
+      "source": "v2",
+      "status": "review_candidate",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "portrait-E",
+      "source": "v2",
+      "status": "review_candidate",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "portrait-F",
+      "source": "v2",
+      "status": "unfinished",
+      "unfinished": true,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "portrait-G",
+      "source": "v2",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "portrait-H",
+      "source": "v2",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "portrait-I",
+      "source": "v2",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "clothing-shirt",
+      "source": "v1",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "clothing-apron",
+      "source": "v2",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "clothing-wrap",
+      "source": "v2",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "clothing-coat",
+      "source": "v2",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "portrait-kaya",
+      "source": "detail_kaya",
+      "status": "review_candidate",
+      "unfinished": false,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 3,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "walker-kaya",
+      "source": "v2",
+      "status": "unfinished",
+      "unfinished": true,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 2,
+      "rgb_source_background_preserved": true
+    },
+    {
+      "case_id": "walker-sui",
+      "source": "v2",
+      "status": "unfinished",
+      "unfinished": true,
+      "game_adoption_allowed": false,
+      "crop_pixels_unchanged": true,
+      "direct_source_outputs_verified": 2,
+      "rgb_source_background_preserved": true
+    }
+  ]
+}

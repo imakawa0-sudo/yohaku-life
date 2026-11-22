@@ -1,0 +1,106 @@
+{
+  "file": "review-sheet.png",
+  "size": [
+    1100,
+    1562
+  ],
+  "purpose": "review-only",
+  "cells": [
+    {
+      "case_id": "portrait-A",
+      "crop": "crops/portrait-a.png",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false
+    },
+    {
+      "case_id": "portrait-B",
+      "crop": "crops/portrait-b.png",
+      "status": "review_candidate",
+      "unfinished": false
+    },
+    {
+      "case_id": "portrait-C",
+      "crop": "crops/portrait-c.png",
+      "status": "review_candidate",
+      "unfinished": false
+    },
+    {
+      "case_id": "portrait-D",
+      "crop": "crops/portrait-d.png",
+      "status": "review_candidate",
+      "unfinished": false
+    },
+    {
+      "case_id": "portrait-E",
+      "crop": "crops/portrait-e.png",
+      "status": "review_candidate",
+      "unfinished": false
+    },
+    {
+      "case_id": "portrait-F",
+      "crop": "crops/portrait-f.png",
+      "status": "unfinished",
+      "unfinished": true
+    },
+    {
+      "case_id": "portrait-G",
+      "crop": "crops/portrait-g.png",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false
+    },
+    {
+      "case_id": "portrait-H",
+      "crop": "crops/portrait-h.png",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false
+    },
+    {
+      "case_id": "portrait-I",
+      "crop": "crops/portrait-i.png",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false
+    },
+    {
+      "case_id": "clothing-shirt",
+      "crop": "crops/clothing-shirt.png",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false
+    },
+    {
+      "case_id": "clothing-apron",
+      "crop": "crops/clothing-apron.png",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false
+    },
+    {
+      "case_id": "clothing-wrap",
+      "crop": "crops/clothing-wrap.png",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false
+    },
+    {
+      "case_id": "clothing-coat",
+      "crop": "crops/clothing-coat.png",
+      "status": "review_candidate_with_identity_caveat",
+      "unfinished": false
+    },
+    {
+      "case_id": "portrait-kaya",
+      "crop": "crops/portrait-kaya.png",
+      "status": "review_candidate",
+      "unfinished": false
+    },
+    {
+      "case_id": "walker-kaya",
+      "crop": "crops/walker-kaya.png",
+      "status": "unfinished",
+      "unfinished": true
+    },
+    {
+      "case_id": "walker-sui",
+      "crop": "crops/walker-sui.png",
+      "status": "unfinished",
+      "unfinished": true
+    }
+  ]
+}
