@@ -119,12 +119,12 @@ H1-Aの人物運搬は、対象が自身、既に運搬中、点にいない、�
 - `SpatialRouteResult`は`physical: boolean`と、使用可能なら`{ok:true, steps:SpatialStep[], minutes:number}`、不可なら`{ok:false, reason:SpatialReason}`を持つ。物理経路が存在し入室規則で遮られる場合は`physical:true / entry-denied`。物理経路自体がない場合は`physical:false / physical-block`。複合原因を一つの道の不存在へ置き換えない。
 - Produces: `canEnterSpatialStep(state: SpatialState, actorId: string, step: SpatialStep): {ok:true} | {ok:false;reason:SpatialReason}`。現在の地形、gate/connectionの状態、進入先の許可を検査する。
 
-- [ ] **失敗する試験を書く。** `shortest_route_is_two_minutes`で0→2の所要2、`closed_gate_uses_four_minute_detour`で戸口の辺を使わず所要4、`permission_is_not_a_wall`で物理到達可・entry-deniedを検査する。入力の深い写しと照会後が一致することを全ケースで確認する。
-- [ ] **最初の失敗を確認する。** `node --import tsx --test tests/reform-spatial-route.test.ts`。未実装の公開関数による失敗であり、挙動不良の証拠とは分けて記録する。
-- [ ] **型と経路照会を実装する。** 上下左右の隣接と明示接続を経路候補へまとめる。現時点で通れない辺を除外し、同距離の選択を安定させる。表示や階層だけから接続を生成しない。
-- [ ] **通過を確認する。** 上記コマンドがexit 0。`same_inputs_same_route`でオブジェクト挿入順が異なる同じ小世界も同じ経路を返す。
-- [ ] **区間種別の衝突を確認する。** `same_id_different_step_kind`で同じ文字のID・同じ両端・同じ時間の歩行と明示接続を置き、一方だけを閉鎖しても他方を誤って閉鎖しない。kindとidで進入条件を選ぶことを検査する。
-- [ ] **独立レビューと保存。** 規則のない点と空の許可配列の違い、所属と接続の分離を確認し、対応する型・実装・試験を同じ変更単位にする。
+- [x] **失敗する試験を書く。** `shortest_route_is_two_minutes`で0→2の所要2、`closed_gate_uses_four_minute_detour`で戸口の辺を使わず所要4、`permission_is_not_a_wall`で物理到達可・entry-deniedを検査する。入力の深い写しと照会後が一致することを全ケースで確認する。
+- [x] **最初の失敗を確認する。** `node --import tsx --test tests/reform-spatial-route.test.ts`。未実装の公開関数による失敗であり、挙動不良の証拠とは分けて記録する。
+- [x] **型と経路照会を実装する。** 上下左右の隣接と明示接続を経路候補へまとめる。現時点で通れない辺を除外し、同距離の選択を安定させる。表示や階層だけから接続を生成しない。
+- [x] **通過を確認する。** 上記コマンドがexit 0。`same_inputs_same_route`でオブジェクト挿入順が異なる同じ小世界も同じ経路を返す。
+- [x] **区間種別の衝突を確認する。** `same_id_different_step_kind`で同じ文字のID・同じ両端・同じ時間の歩行と明示接続を置き、一方だけを閉鎖しても他方を誤って閉鎖しない。kindとidで進入条件を選ぶことを検査する。
+- [x] **独立レビューと保存。** 規則のない点と空の許可配列の違い、所属と接続の分離を確認し、対応する型・実装・試験を同じ変更単位にする。
 
 ## Task 2: 到着・設備利用・運搬・取消
 
@@ -139,14 +139,14 @@ H1-Aの人物運搬は、対象が自身、既に運搬中、点にいない、�
 - Produces: `locateSpatial(state: SpatialState, target: SpatialRef): SpatialPosition`。carriedを辿った最終の実位置を返し、循環はErrorにする。返す値を変更して入力へ漏れない。
 - Produces: `setSpatialGate(state: SpatialState, gateId: string, open: boolean): SpatialState`、`setSpatialEntryRule(state: SpatialState, point: SpatialPoint, allowedActorIds: string[] | null): SpatialState`。nullは規則を除く。既存の接続開閉も`setSpatialConnection(state, connectionId, open): SpatialState`で行う。
 
-- [ ] **失敗する行動試験を書く。** `order_does_not_advance_or_arrive`で時計・位置が不変、`use_starts_after_arrival`で0から2へ2分到着→利用2分→時刻4でuse-completedが一度だけ出ることを確認。到着tickを利用の最初の1分へ二重計上しない。
-- [ ] **競合・変更・搬送の失敗試験を加える。** `slot_is_exclusive`で同じ枠の二人目はreserved。`permission_revoked_before_entry`では次区間へ入らない。`admitted_segment_finishes`ではroad進入後の閉鎖でも残り2分だけ進み、新たな進入は拒否。`pickup_requires_actual_colocation`ではPがFの地点へ到着するまでFの位置が不変。`handling_revoked_before_pickup`では予約があっても持ち出さない。
-- [ ] **運ばれる人物の競合を試験する。** `busy_patient_is_not_picked_up`でQの利用中の仕事と予約を保持して運搬を拒否する。`patient_starts_work_during_approach`で受付後に仕事を始めたQを引き取らない。`carried_actor_cannot_start_order`で運ばれるQ自身への指示を拒否し、所在を上書きしない。`moved_payload_waits_at_saved_pickup`で対象が移った際に保存した引取り地点で待つ。
-- [ ] **取消の失敗試験を書く。** 点にいる時はその点で停止し、運搬中の対象は同じ点へ置く。区間途中では保存される段階`exiting-after-cancel`へ移し、現在区間の終点まで退出する行動だけを残す。終点で対象を下ろして全予約を一度だけ解放し、`cancelled`だけを一度発行する。取消による退出を`arrived`・`delivered`・`use-completed`へ混ぜない。新しい目的地や遠い元の場所へ戻さない。取消直後は時刻不変、再取消は無変化。試験名は`cancel_mid_segment_finishes_only_that_segment`。
-- [ ] **失敗を確認する。** `node --import tsx --test tests/reform-spatial-actions.test.ts`。期待する未実装境界による失敗を記録する。
-- [ ] **指示・進行・取消を実装する。** 同じtick内では人物IDの安定順で処理する。到着前に利用効果・引取り・配達を出さない。対象の移動や許可取消は引取り直前にも確認する。区間途中での閉鎖要求は既に進入した者の退出を待つ扱いとする。
-- [ ] **通過と分割進行を確認する。** 上記コマンドとTask 1のコマンドがexit 0。`advance_partition_is_equivalent`で連続10分と3分＋7分の最終状態・連結イベントが一致する。途中の照会を挟んでも同じであることを含める。
-- [ ] **独立レビューと保存。** 残時間、予約解除、対象所在がそれぞれ一つの正本を持つか確認する。物資消費、会話、治療効果をこの核へ追加しない。
+- [x] **失敗する行動試験を書く。** `order_does_not_advance_or_arrive`で時計・位置が不変、`use_starts_after_arrival`で0から2へ2分到着→利用2分→時刻4でuse-completedが一度だけ出ることを確認。到着tickを利用の最初の1分へ二重計上しない。
+- [x] **競合・変更・搬送の失敗試験を加える。** `slot_is_exclusive`で同じ枠の二人目はreserved。`permission_revoked_before_entry`では次区間へ入らない。`admitted_segment_finishes`ではroad進入後の閉鎖でも残り2分だけ進み、新たな進入は拒否。`pickup_requires_actual_colocation`ではPがFの地点へ到着するまでFの位置が不変。`handling_revoked_before_pickup`では予約があっても持ち出さない。
+- [x] **運ばれる人物の競合を試験する。** `busy_patient_is_not_picked_up`でQの利用中の仕事と予約を保持して運搬を拒否する。`patient_starts_work_during_approach`で受付後に仕事を始めたQを引き取らない。`carried_actor_cannot_start_order`で運ばれるQ自身への指示を拒否し、所在を上書きしない。`moved_payload_waits_at_saved_pickup`で対象が移った際に保存した引取り地点で待つ。
+- [x] **取消の失敗試験を書く。** 点にいる時はその点で停止し、運搬中の対象は同じ点へ置く。区間途中では保存される段階`exiting-after-cancel`へ移し、現在区間の終点まで退出する行動だけを残す。終点で対象を下ろして全予約を一度だけ解放し、`cancelled`だけを一度発行する。取消による退出を`arrived`・`delivered`・`use-completed`へ混ぜない。新しい目的地や遠い元の場所へ戻さない。取消直後は時刻不変、再取消は無変化。試験名は`cancel_mid_segment_finishes_only_that_segment`。
+- [x] **失敗を確認する。** `node --import tsx --test tests/reform-spatial-actions.test.ts`。期待する未実装境界による失敗を記録する。
+- [x] **指示・進行・取消を実装する。** 同じtick内では人物IDの安定順で処理する。到着前に利用効果・引取り・配達を出さない。対象の移動や許可取消は引取り直前にも確認する。区間途中での閉鎖要求は既に進入した者の退出を待つ扱いとする。
+- [x] **通過と分割進行を確認する。** 上記コマンドとTask 1のコマンドがexit 0。`advance_partition_is_equivalent`で連続10分と3分＋7分の最終状態・連結イベントが一致する。途中の照会を挟んでも同じであることを含める。
+- [x] **独立レビューと保存。** 残時間、予約解除、対象所在がそれぞれ一つの正本を持つか確認する。物資消費、会話、治療効果をこの核へ追加しない。
 
 ## Task 3: 保存・再開と不正入力の検証
 
@@ -159,13 +159,13 @@ H1-Aの人物運搬は、対象が自身、既に運搬中、点にいない、�
 - Produces: `serializeSpatialState(state: SpatialState): string`。保存前にも同じ整合を確認する。
 - Produces: `isSpatialState(value: unknown): value is SpatialState`。型の形だけでなく、参照・残時間・予約の整合も検査する。
 
-- [ ] **失敗する保存試験を書く。** `resume_on_road`で3分接続の残り2を往復して保持、`resume_carried_payload`で人物/物品の運搬参照と予約を保持、`resume_waiting`で許可待ちの再開、`completed_event_is_not_replayed`で完了後保存→再進行に同じ完了が出ないことを検査する。
-- [ ] **途中取消と区間の識別を保存試験する。** `resume_after_cancel_mid_segment`で運搬中の取消直後に保存し、現在区間の終点で停止・下ろし・予約解除・cancelled一回となることを確認する。再取消・再読込みで元の仕事を復活させない。`step_kind_survives_roundtrip`で同じ文字のIDの歩行と明示接続のkindが保持される。`pickup_point_survives_roundtrip`で対象が動いた後も元の引取り地点で待つ。
-- [ ] **不正入力の失敗試験を書く。** `reject_bad_version_or_refs`（未対応version、欠損domain/actor/slot、範囲外cell）、`reject_invalid_progress`（負の時刻、0以下の区間時間、区間総時間を超えるremaining、利用残時間不正）、`reject_duplicate_reservation`、`reject_carry_cycle`。正常な通行不能状態は受け入れる。
-- [ ] **失敗を確認する。** `node --import tsx --test tests/reform-spatial-save.test.ts`。
-- [ ] **codecを実装する。** 未知の外部データへ型assertionだけを当てず、全参照先を検査する。利用中の予約と行動、carried対象と運搬仕事の対応も検査する。先に一部を修復して保存する処理を入れない。
-- [ ] **通過を確認する。** Task 1〜3の3試験ファイルを同じコマンドへ渡してexit 0。再開後と未保存継続の状態・イベントが一致する。
-- [ ] **独立レビューと保存。** parserの通過が本体のV1セーブ移行成功を意味しないことを文書に残す。
+- [x] **失敗する保存試験を書く。** `resume_on_road`で3分接続の残り2を往復して保持、`resume_carried_payload`で人物/物品の運搬参照と予約を保持、`resume_waiting`で許可待ちの再開、`completed_event_is_not_replayed`で完了後保存→再進行に同じ完了が出ないことを検査する。
+- [x] **途中取消と区間の識別を保存試験する。** `resume_after_cancel_mid_segment`で運搬中の取消直後に保存し、現在区間の終点で停止・下ろし・予約解除・cancelled一回となることを確認する。再取消・再読込みで元の仕事を復活させない。`step_kind_survives_roundtrip`で同じ文字のIDの歩行と明示接続のkindが保持される。`pickup_point_survives_roundtrip`で対象が動いた後も元の引取り地点で待つ。
+- [x] **不正入力の失敗試験を書く。** `reject_bad_version_or_refs`（未対応version、欠損domain/actor/slot、範囲外cell）、`reject_invalid_progress`（負の時刻、0以下の区間時間、区間総時間を超えるremaining、利用残時間不正）、`reject_duplicate_reservation`、`reject_carry_cycle`。正常な通行不能状態は受け入れる。
+- [x] **失敗を確認する。** `node --import tsx --test tests/reform-spatial-save.test.ts`。
+- [x] **codecを実装する。** 未知の外部データへ型assertionだけを当てず、全参照先を検査する。利用中の予約と行動、carried対象と運搬仕事の対応も検査する。先に一部を修復して保存する処理を入れない。
+- [x] **通過を確認する。** Task 1〜3の3試験ファイルを同じコマンドへ渡してexit 0。再開後と未保存継続の状態・イベントが一致する。
+- [x] **独立レビューと保存。** parserの通過が本体のV1セーブ移行成功を意味しないことを文書に残す。
 
 ## Task 4: 旧game/originの非破壊投影と統合前の確認
 
@@ -178,13 +178,14 @@ H1-Aの人物運搬は、対象が自身、既に運搬中、点にいない、�
 - `LegacySpatialView`は旧Roomを変更せず参照するroom対応表、家具ID→旧room/cell、人物ID→旧location/room（`kind:"legacy-unspecified"`）、旧linksの両端入口0、旧来の部屋間移動単位3分を持つ。room IDを別の部屋名から再生成せず、旧doorsは室内マスの情報として保つ。
 - source内に残る旧Taskを実行・再分解しない。`SpatialState`への変換やadvanceSpatialへの投入を行わない。
 
-- [ ] **旧データの失敗試験を書く。** `legacy_layout_is_not_rearranged`で部屋幅/壁/doors/fixtures/任意linksが一致。`legacy_positions_stay_unspecified`で入口へ勝手に配置されない。`legacy_work_is_preserved_without_recharge`で途中料理等のTask、予約量、在庫、rngが原値と一致する。
-- [ ] **開始時と現在の違いを試験する。** `game_and_origin_are_distinct`で異なる2状態を保持し、投影側を変更しても入力へ漏れない。`invalid_origin_rejects_all`でgame正常/origin破損が全体失敗、入力不変。標本は既存testの生成関数を使うか架空状態から生成し、利用者の実セーブを持ち込まない。
-- [ ] **失敗を確認する。** `node --import tsx --test tests/reform-spatial-legacy.test.ts`。
-- [ ] **読み取り投影を実装する。** 現行importSlotは新IDを発行するため、読取り専用の投影へ流用しない。旧Taskが新同席の証拠になるようなフィールドを捏造しない。
-- [ ] **限定試験と全体を確認する。** 新4試験、`npm test`、`npm run build`を実行する。本体の全テストはここで一度まとめて確認し、具体的な失敗がなければ繰り返さない。
-- [ ] **既存の配布物を回帰確認する。** AGENTS.mdの確認経路に従い、最終ビルドの`dist/yohaku.html`に対し`npm run test:standalone`と`npm run test:ui:standalone`を実行する。結果のHTML SHA-256と最終配布物が一致することを記録する。このUI確認は既存ゲームの回帰確認で、新しい住居画面の試遊でも実機スマホ確認でもない。
-- [ ] **最終レビュー、記録、GitHub保存。** この単位の実行結果と未実装範囲を記録し、設計・計画との差を直す。書込み直前のmainを確認し、既存履歴へ通常の子コミットとして保存して内容を読み戻す。現行仕様へは「空間核の追加」の範囲だけ反映する。
+- [x] **旧データの失敗試験を書く。** `legacy_layout_is_not_rearranged`で部屋幅/壁/doors/fixtures/任意linksが一致。`legacy_positions_stay_unspecified`で入口へ勝手に配置されない。`legacy_work_is_preserved_without_recharge`で途中料理等のTask、予約量、在庫、rngが原値と一致する。
+- [x] **開始時と現在の違いを試験する。** `game_and_origin_are_distinct`で異なる2状態を保持し、投影側を変更しても入力へ漏れない。`invalid_origin_rejects_all`でgame正常/origin破損が全体失敗、入力不変。標本は既存testの生成関数を使うか架空状態から生成し、利用者の実セーブを持ち込まない。
+- [x] **失敗を確認する。** `node --import tsx --test tests/reform-spatial-legacy.test.ts`。
+- [x] **読み取り投影を実装する。** 現行importSlotは新IDを発行するため、読取り専用の投影へ流用しない。旧Taskが新同席の証拠になるようなフィールドを捏造しない。
+- [x] **限定試験と全体を確認する。** 新4試験、`npm test`、`npm run build`を実行する。本体の全テストはここで一度まとめて確認し、具体的な失敗がなければ繰り返さない。
+- [x] **既存の配布物を回帰確認する。** AGENTS.mdの確認経路に従い、最終ビルドの`dist/yohaku.html`に対し`npm run test:standalone`と`npm run test:ui:standalone`を実行する。結果のHTML SHA-256と最終配布物が一致することを記録する。このUI確認は既存ゲームの回帰確認で、新しい住居画面の試遊でも実機スマホ確認でもない。
+- [x] **最終レビュー、記録、GitHub保存。** この単位の実行結果と未実装範囲を記録し、設計・計画との差を直す。書込み直前のmainを確認し、既存履歴へ通常の子コミットとして保存して内容を読み戻す。現行仕様へは「空間核の追加」の範囲だけ反映する。
+
 
 ## 完了条件と次の段階
 
@@ -196,6 +197,12 @@ H1-Bでは、最新の参考資料とコードを再確認した上で、現行T
 
 作成時点で、設計7章のH1-A固定契約をTask 1〜4へ割り当てた。物理と許可はTask 1、到着・予約・運搬・取消はTask 2、保存・参照検証はTask 3、旧game/origin保持はTask 4が担当する。Review Focusの五項目は各タスクの明示した試験へ対応する。
 
-この計画のチェック欄はすべて未着手。研究用試作の通過結果は、この実装計画のタスク完了へ繰り上げない。
+作成時は全項目未着手。現在のチェック欄は本体用モジュールの実装・試験・独立レビューの結果を反映する。研究用試作36件の通過結果を、この計画のタスク完了へ繰り上げてはいない。実装中の判断は[H1-A判断記録](../../research/housing-h1a-2026-11-23/decisions.md)に残す。
 
 独立レビューで、区間種別の識別、運搬対象人物の進行中仕事、途中取消の保存について計画上の不足が見つかった。公開契約とTask 1〜3の試験へ反映した。これらは実装済みの不具合を修正した記録ではない。
+
+## 実施記録（2026-11-23）
+
+Task 1〜4の本体用モジュールと個別レビューを完了。新規64件を含む全818件の試験とビルドが成功した。標準の単体HTMLの2スクリプトはChromium起動前のsocket拒否で開始できず、最終成果物と同一ハッシュの内部プレビューによる実操作を代替確認とする。標準スクリプトの成功とは扱わない。詳細な実行経路と限界は[検証記録](../../research/housing-h1a-2026-11-23/verification.md)、数値と識別値は[検証データ](../../research/housing-h1a-2026-11-23/validation.json)を参照する。
+
+全体レビューで見つかった重要4件・軽微1件を一括修正し、修正範囲の独立再レビューは全5件対応済み。修正版に対して全818件とビルドを再確認した。確定したGitHubコミットと読戻しの結果は、Notionの27｜住居H0・H1のH1-A実装結果へ記録する。

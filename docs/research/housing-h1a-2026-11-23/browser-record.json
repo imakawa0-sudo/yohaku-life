@@ -1,0 +1,117 @@
+{
+  "standaloneSha256": "576d2ea33c123847adcb2da04ada00c9ecdc512512d3e9f1f451563a9b39ba51",
+  "method": "Managed internal HTTP preview; Cloud Browser UI; existing preview origin and separate new QA slot",
+  "appearanceChoices": [
+    {
+      "label": "顔の輪郭",
+      "options": 3,
+      "value": "round"
+    },
+    {
+      "label": "肌の色",
+      "options": 5,
+      "value": "peach"
+    },
+    {
+      "label": "髪形",
+      "options": 5,
+      "value": "braid"
+    },
+    {
+      "label": "髪色",
+      "options": 5,
+      "value": "silver"
+    },
+    {
+      "label": "年代",
+      "options": 3,
+      "value": "young"
+    },
+    {
+      "label": "体格",
+      "options": 3,
+      "value": "medium"
+    },
+    {
+      "label": "目元",
+      "options": 3,
+      "value": "soft"
+    },
+    {
+      "label": "顔の特徴",
+      "options": 4,
+      "value": "glasses"
+    },
+    {
+      "label": "服装",
+      "options": 4,
+      "value": "wrap"
+    },
+    {
+      "label": "服の色",
+      "options": 6,
+      "value": "rust"
+    }
+  ],
+  "changedAppearance": [
+    "braid",
+    "silver",
+    "glasses"
+  ],
+  "meal": {
+    "issuedAt": "08:00",
+    "issuedStock": 6,
+    "midTime": "08:15",
+    "remaining": 8,
+    "completion": "08:23",
+    "completedStock": 6
+  },
+  "reloadExportEqual": true,
+  "originalRestoredByteIdentical": true,
+  "desktop": {
+    "clientWidth": 1348,
+    "scrollWidth": 1348
+  },
+  "iframe390": {
+    "clientWidth": 375,
+    "scrollWidth": 375
+  },
+  "iframe320": {
+    "clientWidth": 305,
+    "scrollWidth": 305
+  },
+  "limits": [
+    "Existing preview origin, not isolated browser context",
+    "320/390 px iframes, not physical mobile or touch devices",
+    "Existing game regression only; H1-A core not connected to UI"
+  ],
+  "logs": {
+    "observed": 46,
+    "applicationErrors": 0,
+    "extensionErrors": 46
+  },
+  "record_date": "2026-11-23",
+  "date_context": "Asia/Taipei client date",
+  "screenshots": [
+    {
+      "name": "setup-desktop.jpg",
+      "bytes": 126062,
+      "sha256": "6bd0aae4dfc6a49c6d788c52be55aebb4869a621ab4416871aceae22ca042fee"
+    },
+    {
+      "name": "life-desktop.jpg",
+      "bytes": 95030,
+      "sha256": "9f3757b3c099446df9d7e3402967fafff3df0d48071e4303c5ddd6a64c8c0947"
+    },
+    {
+      "name": "life-390.jpg",
+      "bytes": 67437,
+      "sha256": "c427f3730d7032e7a2eb5f43e6f354de54cfa93b0b67435c5d0f9ce92733e649"
+    },
+    {
+      "name": "life-320.jpg",
+      "bytes": 60263,
+      "sha256": "89fbcf6b9c4be0ed9400c0aff4cfd850d01a9db10954e70c5eac2c445de505fd"
+    }
+  ]
+}

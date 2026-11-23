@@ -1,0 +1,140 @@
+{
+  "date": "2026-11-23",
+  "dateContext": "Asia/Taipei client date",
+  "githubBase": "9e990947de72600a0f7711e51d1f12aa856a5949",
+  "localReviewedCodeCommit": "98f8be42f0a4d5eb487f38e55d5fcf6f96ff466b",
+  "localCommitNote": "This is review-only local history, not GitHub main ancestry; remote saving must preserve the latest GitHub parent.",
+  "focusedTests": {
+    "route": 15,
+    "actions": 23,
+    "save": 21,
+    "legacy": 5,
+    "total": 64
+  },
+  "baselineTests": 754,
+  "unit": [
+    {
+      "name": "npm-test",
+      "command": "npm test",
+      "exitCode": 1,
+      "durationSeconds": 0.418,
+      "outputTail": "Error: listen EPERM: operation not permitted /tmp/tsx-1000/18.pipe; tsx CLI stopped before tests started.",
+      "environmentBlock": "EPERM before test/browser startup"
+    },
+    {
+      "name": "unit-loader",
+      "command": "node --import tsx --test tests/*.test.ts",
+      "exitCode": 0,
+      "durationSeconds": 7.473,
+      "outputTail": "✔ The confirmation names the selected piece and identical titles have distinct options (3.219448ms)\n✔ A traveller can leave a carving in the village, hear back on another day and choose a second landscape (54.681597ms)\n✔ Only the author in contact with the shopkeeper can show a piece or receive a reply (13.491323ms)\n✔ An unthemed carving can open an artist's shelf, while a witness cannot submit or answer for them (27.750208ms)\n✔ Positive fractional vitals stay distinct from unconscious zero in meters, roster, attention and landscape (105.572056ms)\n✔ The landscape distinguishes actual wounds from low health without changing either (1.183939ms)\n✔ Original worlds retain three founders; solo and trading starts retain their own starting inventory and old save validation (14.416903ms)\n✔ The lone traveler can carry a real request to the guide and recruit a housemate (12.804125ms)\n✔ The trader can sell stock, buy provisions and resume without inventing an initial coin balance (1.259052ms)\n✔ A morning reflection does not turn yesterday's solitary meal into a group meal (1.575147ms)\nℹ tests 818\nℹ suites 0\nℹ pass 818\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 7362.505362",
+      "tests": {
+        "tests": 818,
+        "pass": 818,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    }
+  ],
+  "build": {
+    "name": "build",
+    "command": "npm run build",
+    "exitCode": 0,
+    "durationSeconds": 14.517,
+    "outputTail": "> yohaku-life@0.1.0 build\n> tsc -b && vite build && node scripts/build-standalone.mjs\n\nvite v7.3.8 building client environment for production...\ntransforming...\n✓ 1605 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.63 kB │ gzip:   0.45 kB\ndist/assets/index-DZ_iFYzt.css   38.44 kB │ gzip:   8.44 kB\ndist/assets/index-DVrm412U.js   549.07 kB │ gzip: 244.96 kB\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n✓ built in 2.15s\nStandalone game: dist/yohaku.html",
+    "standalone": {
+      "bytes": 587906,
+      "sha256": "576d2ea33c123847adcb2da04ada00c9ecdc512512d3e9f1f451563a9b39ba51"
+    }
+  },
+  "standardUi": [
+    {
+      "name": "ui-desktop",
+      "command": "npm run test:standalone",
+      "exitCode": 1,
+      "durationSeconds": 0.723,
+      "outputTail": "FATAL:chrome/browser/process_singleton_posix.cc:297 Check failed: socket() failed: Operation not permitted (1). Chromium terminated before the game page opened.",
+      "status": "blocked-before-page-launch",
+      "environmentBlock": "Chromium process socket denied"
+    },
+    {
+      "name": "ui-mobile",
+      "command": "npm run test:ui:standalone",
+      "exitCode": 1,
+      "durationSeconds": 0.56,
+      "outputTail": "FATAL:chrome/browser/process_singleton_posix.cc:297 Check failed: socket() failed: Operation not permitted (1). Chromium terminated before the game page opened.",
+      "status": "blocked-before-page-launch",
+      "environmentBlock": "Chromium process socket denied"
+    }
+  ],
+  "browserFallback": {
+    "record": "browser-record.json",
+    "sameStandaloneSha256": true,
+    "separateQaSlot": true,
+    "oldSaveRestoredByteIdentical": true,
+    "realMobile": false,
+    "isolatedBrowserContext": false
+  },
+  "protectedExistingFiles": {
+    "baselineLocal": "219eaad39046b8921a302bc983fa6558c6c7d1f5",
+    "protectedFiles": 262,
+    "changedExistingFiles": []
+  },
+  "newCodeManifest": [
+    {
+      "path": "src/reform/spatial/actions.ts",
+      "sha256": "1f57688a333d85e4a1fb81e75f984f93dbffc923d7724578177384e5839c20aa"
+    },
+    {
+      "path": "src/reform/spatial/codec.ts",
+      "sha256": "31adb7fe3fc45577459a168785b29a9e56666b96648351c82539c288b3d1d81f"
+    },
+    {
+      "path": "src/reform/spatial/legacy.ts",
+      "sha256": "645f47050beb819370e22d995cfcc21f035ec532d178e9e19de9dd0dfd09f78d"
+    },
+    {
+      "path": "src/reform/spatial/route.ts",
+      "sha256": "8dc30a9814ca663b88fa368481922f782f8e8e886f7f6265248cd02b8db8802a"
+    },
+    {
+      "path": "src/reform/spatial/types.ts",
+      "sha256": "102ffcd3f8f9d60b7de514dc3b8c0a85e4ccb0d7abf0272a5e84d622d3f08f6e"
+    },
+    {
+      "path": "tests/reform-spatial-actions.test.ts",
+      "sha256": "b374d1695770663114a6516d43c8a0401a210fd855a75b5f93b1586403ee2f9c"
+    },
+    {
+      "path": "tests/reform-spatial-legacy.test.ts",
+      "sha256": "1f7efefa817c3a86d8540b8967e22d3893644559f29fb213ada0ae48cb5756b4"
+    },
+    {
+      "path": "tests/reform-spatial-route.test.ts",
+      "sha256": "1e8c174ed96ed6ee7e784a188062953b31f268b9072ed047294fe982b6789ea0"
+    },
+    {
+      "path": "tests/reform-spatial-save.test.ts",
+      "sha256": "0d14f3c9ff0d1a9d04884d150e551797a16923ee2ab93cacecb63130a92ac3ee"
+    },
+    {
+      "path": "tests/fixtures/reform-spatial.ts",
+      "sha256": "785abfe444b11d718b38d90728ba3a14287f53a249d5f135ade06f1f7d992ad4"
+    }
+  ],
+  "reviews": {
+    "taskReviews": "passed",
+    "taskImportantFindingsFixed": 5,
+    "taskScopedRereviews": "passed",
+    "wholeBranch": "passed-after-fix",
+    "finalImportantFindingsFixed": 4,
+    "finalMinorFindingsFixed": 1,
+    "finalRegressionTestsAdded": 10,
+    "finalScopedRereview": "5/5 addressed; no new findings",
+    "unresolvedFindings": 0
+  },
+  "sitesPublished": false,
+  "liveGameMigration": false,
+  "standardUiArtifactNote": "Both standard commands were attempted on the exact same standalone SHA-256. The post-fix rebuild is byte-identical, so blocked browser startup was not retried."
+}
