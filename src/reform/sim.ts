@@ -2,6 +2,24 @@ import type { Persona, Skill } from "./peopleModel";
 import { isPersona, skillKeys, skillNames } from "./peopleModel";
 import { cookingStation, initialHouse, isHouse, service } from "./house";
 import type { House, Need } from "./house";
+import type { HousingTaskBinding, HousingRuntime } from "./housing/types";
+import { isHousingRuntime } from "./housing/runtime";
+import {
+  advanceHousingMinute,
+  cancelHousingTask,
+  housingInTransit,
+  housingTaskBoundary,
+  housingTogether,
+  planHousing,
+  safeExitReason,
+  type HousingProposal,
+} from "./housing/bridge";
+export {
+  enableHousing,
+  setHousingPassage,
+  setHousingRoomAccess,
+} from "./housing/bridge";
+export { nextCompletionMinutes } from "./housing/presentation";
 import {
   applyProject,
   dayWorld,
@@ -52,6 +70,7 @@ export interface Relationship {
   affection: number;
 }
 export interface Task {
+  spatial?: HousingTaskBinding;
   kind: string;
   label: string;
   target?: string;
@@ -90,6 +109,7 @@ export interface Actor {
   danger: boolean;
 }
 export interface Game extends Stock {
+  housing?: HousingRuntime;
   version: 1;
   actors: Actor[];
   world: World;
@@ -360,7 +380,12 @@ function moodOf(g: Game, a: Actor) {
     (75 * needKeys.length);
   let socialEffect = 0;
   for (const other of g.actors) {
-    if (a === other || a.location !== other.location || a.room !== other.room)
+    if (
+      a === other ||
+      a.location !== other.location ||
+      a.room !== other.room ||
+      (g.housing && a.location === g.home && !housingTogether(g, a, other))
+    )
       continue;
     const bond = a.relations[other.person.id];
     if (!bond) continue;
@@ -430,7 +455,32 @@ function reservation(
   return t;
 }
 const samePlace = (a: Actor, b: Actor) => a.location === b.location;
-function plan(g: Game, a: Actor, kind: string, target?: string): Task | string {
+function canTeachHere(g: Game, a: Actor, b: Actor) {
+  return (
+    a !== b &&
+    samePlace(a, b) &&
+    (!g.housing ||
+      a.location !== g.home ||
+      (b.injury < 70 && housingTogether(g, a, b)))
+  );
+}
+type Proposal = Task | HousingProposal;
+function proposedTask(p: Proposal): Task {
+  return "task" in p ? p.task : p;
+}
+function preview(p: Proposal | string) {
+  if (typeof p === "string") return { disabled: p };
+  return {
+    minutes: "task" in p ? p.minutes : p.total,
+    reserved: proposedTask(p).reserved,
+  };
+}
+function plan(
+  g: Game,
+  a: Actor,
+  kind: string,
+  target?: string,
+): Proposal | string {
   const atHome = a.location === g.home;
   const stock = account(g, a);
   const place = places(g.world).find((p) => p.id === a.location)!;
@@ -441,10 +491,32 @@ function plan(g: Game, a: Actor, kind: string, target?: string): Task | string {
     !["negotiate", "defend", "withdraw", "recover"].includes(kind)
   )
     return "道の人影に対して交渉・応戦・撤退を選んでください。";
+  if (kind === "home-move") {
+    if (!atHome || !g.housing)
+      return "自宅で住居の移動を使う暮らしを選んでください。";
+    return planHousing(
+      g,
+      a,
+      task(g, a, kind, "指定した地点へ移動", 1, "travel", target),
+    );
+  }
   if (kind === "need" && needKeys.includes(target as Need)) {
     const key = target as Need;
     if (key === "hunger" && stock.food < 1) return "手元に食事がありません。";
     if (atHome) {
+      if (g.housing) {
+        const t = task(
+          g,
+          a,
+          kind,
+          needActions[key],
+          1,
+          key === "fun" ? "free" : "care",
+          key,
+        );
+        if (key === "hunger") t.reserved = { food: 1 };
+        return planHousing(g, a, t, key, place.water);
+      }
       const busy = g.actors
         .filter((b) => b !== a && b.task?.station)
         .map((b) => b.task!.station!);
@@ -514,9 +586,11 @@ function plan(g: Game, a: Actor, kind: string, target?: string): Task | string {
     if (
       skill === "care" &&
       tier === "master" &&
-      !g.actors.some((b) => b !== a && samePlace(a, b) && b.injury < 70)
+      !g.actors.some((b) => canTeachHere(g, a, b) && b.injury < 70)
     )
-      return "同じ場所に教える相手が必要です。";
+      return g.housing && atHome
+        ? "家の中で同じ地点に教える相手が必要です。"
+        : "同じ場所に教える相手が必要です。";
     let minutes =
       { wood: 35, cook: 32, care: 30, trade: 27 }[skill] +
       (difficulty[tier] - 1) * 7;
@@ -529,6 +603,17 @@ function plan(g: Game, a: Actor, kind: string, target?: string): Task | string {
     const t = task(g, a, kind, jobNames[skill][tier], minutes, "work", target);
     if (skill === "cook") {
       if (atHome) {
+        if (g.housing) {
+          if (
+            !["cook", "cook:easy", "cook:hard", "cook:master"].includes(target!)
+          )
+            return "料理の種類を選んでください。";
+          const reserved = reservation(g, a, t, {
+            ingredients: tier === "easy" ? 2 : 3,
+          });
+          if (typeof reserved === "string") return reserved;
+          return planHousing(g, a, t, "hunger");
+        }
         const busy = g.actors
           .filter((b) => b !== a && b.task?.station)
           .map((b) => b.task!.station!);
@@ -677,6 +762,8 @@ function plan(g: Game, a: Actor, kind: string, target?: string): Task | string {
     const peer = find(g, target ?? "");
     if (!peer || peer === a || !samePlace(a, peer))
       return "相手と同じ場所にいる必要があります。";
+    if (atHome && g.housing && !housingTogether(g, a, peer))
+      return "家の中で、二人が同じ地点に立っている必要があります。";
     if (
       (peer.task && (peer.task.mode === "direct" || peer.task.partner)) ||
       peer.danger
@@ -743,9 +830,10 @@ function plan(g: Game, a: Actor, kind: string, target?: string): Task | string {
   return "今はその行動を選べません。";
 }
 
-function stop(g: Game, a: Actor): void {
+function stop(g: Game, a: Actor, spatialCancelled = false): void {
   const t = a.task;
   if (!t) return;
+  if (t.spatial && !spatialCancelled && !cancelHousingTask(g, a, t)) return;
   if (t.follower && t.partner) {
     const leader = find(g, t.partner);
     if (leader?.task?.partner === a.person.id) {
@@ -756,15 +844,29 @@ function stop(g: Game, a: Actor): void {
   const bag = account(g, a);
   for (const key of stocks) bag[key] += t.reserved[key] ?? 0;
   a.task = null;
+  housingTaskBoundary(g, a, t, "cancel");
   if (t.partner) {
     const b = find(g, t.partner);
     if (b?.task?.partner === a.person.id) {
+      const follower = b.task;
       b.task = null;
+      housingTaskBoundary(g, b, follower, "cancel");
       b.reason = "相手の予定が変わりました。";
     }
   }
 }
-function begin(g: Game, a: Actor, t: Task, why: string, auto = false) {
+function begin(
+  g: Game,
+  a: Actor,
+  proposal: Proposal,
+  why: string,
+  auto = false,
+) {
+  const t = proposedTask(proposal);
+  if ("task" in proposal) {
+    g.housing!.state = proposal.state;
+    delete g.housing!.unlocated[a.person.id];
+  }
   if (t.partner) {
     const peer = find(g, t.partner)!;
     if (peer.task) stop(g, peer);
@@ -776,13 +878,15 @@ function begin(g: Game, a: Actor, t: Task, why: string, auto = false) {
       reserved: {},
     };
     peer.reason = a.person.name + "と一緒に過ごします。";
-    if (a.location === g.home) peer.room = a.room;
+    if (a.location === g.home && !g.housing) peer.room = a.room;
+    housingTaskBoundary(g, peer, peer.task, "begin");
   }
   const bag = account(g, a);
   for (const key of stocks) bag[key] -= t.reserved[key] ?? 0;
   t.mode = auto ? "auto" : "direct";
   a.task = t;
   a.reason = why;
+  housingTaskBoundary(g, a, t, "begin");
 }
 export function order(
   g: Game,
@@ -793,8 +897,16 @@ export function order(
   if (!find(g, id)) return g;
   const next = structuredClone(g);
   const a = find(next, id)!;
+  if (kind !== "cancel" && housingInTransit(next, id)) {
+    notice(next, safeExitReason);
+    return next;
+  }
   if (a.task) stop(next, a);
   if (kind === "cancel") {
+    if (a.task?.spatial) {
+      a.reason = "この区間を出ると予定を取り消し、予約を返します。";
+      return next;
+    }
     a.reason = "指示を取り消しました。次の時間進行で自分の予定を選びます。";
     notice(next, a.person.name + "が予定を取り消した。");
     return next;
@@ -805,7 +917,7 @@ export function order(
     notice(unchanged, t);
     return unchanged;
   }
-  begin(next, a, t, "直接の指示で、" + t.label + "。");
+  begin(next, a, t, "直接の指示で、" + proposedTask(t).label + "。");
   return next;
 }
 export function inspectOrder(
@@ -816,19 +928,20 @@ export function inspectOrder(
 ): { minutes?: number; disabled?: string; reserved?: Partial<Stock> } {
   const current = find(g, id);
   if (!current) return { disabled: "住人が見つかりません。" };
+  if (g.housing && kind === "cancel")
+    return current.task ? {} : { disabled: "取り消す予定がありません。" };
+  if (housingInTransit(g, id)) return { disabled: safeExitReason };
   const snap = current.task ? structuredClone(g) : g;
   const a = find(snap, id)!;
   if (a.task) stop(snap, a);
-  const t = plan(snap, a, kind, target);
-  return typeof t === "string"
-    ? { disabled: t }
-    : { minutes: t.total, reserved: t.reserved };
+  return preview(plan(snap, a, kind, target));
 }
 export function options(g: Game, id: string): ActionOption[] {
   if (!find(g, id)) return [];
   const snap = find(g, id)!.task ? structuredClone(g) : g;
   const a = find(snap, id)!;
-  if (a.task) stop(snap, a);
+  const inTransit = housingInTransit(g, id);
+  if (a.task && !inTransit) stop(snap, a);
   const out: ActionOption[] = [];
   function add(
     kind: string,
@@ -836,19 +949,10 @@ export function options(g: Game, id: string): ActionOption[] {
     group: OptionGroup,
     target?: string,
   ) {
-    const t = plan(snap, a, kind, target);
-    out.push(
-      typeof t === "string"
-        ? { kind, label, target, group, disabled: t }
-        : {
-            kind,
-            label,
-            target,
-            group,
-            minutes: t.total,
-            reserved: t.reserved,
-          },
-    );
+    const details = inTransit
+      ? { disabled: safeExitReason }
+      : preview(plan(snap, a, kind, target));
+    out.push({ kind, label, target, group, ...details });
   }
   if (find(g, id)!.task)
     out.push({ kind: "cancel", label: "現在の予定を取り消す", group: "task" });
@@ -915,9 +1019,18 @@ function tryAuto(
 ): boolean {
   const t = plan(g, a, kind, target);
   if (typeof t === "string") return false;
-  if (free) t.metric = "free";
+  if (free) proposedTask(t).metric = "free";
   begin(g, a, t, reason, true);
   return true;
+}
+function autoPartners(g: Game, a: Actor, qualifies: (peer: Actor) => boolean) {
+  const candidates = g.actors.filter(
+    (peer) => peer !== a && samePlace(a, peer) && !peer.task && qualifies(peer),
+  );
+  // Old and regional decisions tried only the first matching resident.
+  return g.housing && a.location === g.home
+    ? candidates
+    : candidates.slice(0, 1);
 }
 function chooseShift(
   g: Game,
@@ -972,14 +1085,12 @@ function chooseShift(
       return work("wood", "easy", "次回の商いに備えて、売る木材を整えます。");
   }
   if (skill === "care") {
-    const patient = g.actors.find(
-      (b) => b !== a && b.location === a.location && b.injury > 0 && !b.task,
-    );
-    if (
-      patient &&
-      tryAuto(g, a, "aid", patient.person.id, "傷のある仲間を手当てします。")
-    )
-      return true;
+    for (const patient of autoPartners(g, a, (peer) => peer.injury > 0)) {
+      if (
+        tryAuto(g, a, "aid", patient.person.id, "傷のある仲間を手当てします。")
+      )
+        return true;
+    }
   }
   return work(skill, tier, reason);
 }
@@ -1058,26 +1169,24 @@ function selectAuto(g: Game, a: Actor) {
   const ready = daytime && g.time >= a.nextShift;
   if (ready && a.priority && chooseShift(g, a, a.priority, true)) return;
   if (a.person.personality === "social" && a.needs.social < 65) {
-    const companion = g.actors.find(
-      (b) =>
-        b !== a &&
-        samePlace(a, b) &&
-        !b.task &&
-        !b.danger &&
-        (a.relations[b.person.id]?.trust ?? 0) >= 0,
+    const companions = autoPartners(
+      g,
+      a,
+      (peer) => !peer.danger && (a.relations[peer.person.id]?.trust ?? 0) >= 0,
     );
-    if (
-      companion &&
-      tryAuto(
-        g,
-        a,
-        "talk",
-        companion.person.id,
-        companion.person.name + "と話して過ごしたいようです。",
-        true,
+    for (const companion of companions) {
+      if (
+        tryAuto(
+          g,
+          a,
+          "talk",
+          companion.person.id,
+          companion.person.name + "と話して過ごしたいようです。",
+          true,
+        )
       )
-    )
-      return;
+        return;
+    }
   }
   if (
     a.person.personality === "quiet" &&
@@ -1172,7 +1281,18 @@ function finishWork(g: Game, a: Actor, t: Task): string {
   if (skill === "care") {
     result = "手当ての手順を覚えた。";
     if (tier === "master") {
-      const pupil = g.actors.find((b) => b !== a && samePlace(a, b));
+      // A newly accepted home lesson requires a located teacher. Only an old
+      // lesson can finish at home with its teacher's position still unspecified.
+      const unlocated = g.housing?.unlocated;
+      const continuingLegacyLesson =
+        !!unlocated &&
+        Object.hasOwn(unlocated, a.person.id) &&
+        unlocated[a.person.id].reason === "legacy-unspecified";
+      const pupil = g.actors.find((b) =>
+        continuingLegacyLesson
+          ? b !== a && samePlace(a, b)
+          : canTeachHere(g, a, b),
+      );
       if (pupil) {
         skillGain(g, pupil, skill, 3, 12);
         result += pupil.person.name + "も手当てを学んだ。";
@@ -1210,14 +1330,39 @@ function finish(g: Game, a: Actor, t: Task) {
       fun: 47,
     };
     a.needs[n] = clamp(a.needs[n] + gain[n]);
-    if (n === "social" && t.label === "便りを書いて過ごす")
-      a.needs.social = clamp(a.needs.social - 15);
-    if (n === "social" && a.person.personality === "social")
-      memory(g, a, "人の声に元気づけられた", 4, 150);
+    if (n === "social") {
+      const spatial = t.spatial;
+      const solo = spatial
+        ? !spatial.socialCompany
+        : t.label === "便りを書いて過ごす";
+      if (solo) a.needs.social = clamp(a.needs.social - 15);
+      if (
+        a.person.personality === "social" &&
+        (!spatial || spatial.socialCompany)
+      )
+        memory(g, a, "人の声に元気づけられた", 4, 150);
+      if (spatial)
+        result = solo
+          ? "便りを書いて過ごしました。"
+          : "居合わせた人と語らいました。";
+    }
     if (n === "fun" && a.person.personality === "quiet")
       memory(g, a, "静かな自由時間", 6, 230);
     if (n === "energy") a.injury = clamp(a.injury - 2);
-    if (n === "hunger") {
+    if (n === "hunger" && g.housing) {
+      const companions = Object.keys(t.spatial?.mealPartners ?? {});
+      if (companions.length) a.needs.social = clamp(a.needs.social + 9);
+      for (const id of companions) {
+        const mate = find(g, id)!;
+        memory(
+          g,
+          a,
+          mate.person.name + "と囲んだ食卓",
+          (a.relations[id]?.trust ?? 0) >= 0 ? 4 : -4,
+          180,
+        );
+      }
+    } else if (n === "hunger") {
       const mate = g.actors.find(
         (b) =>
           b !== a &&
@@ -1413,6 +1558,8 @@ function finish(g: Game, a: Actor, t: Task) {
       result = "条件が変わったため、予約を解いた。";
     }
   }
+  housingTaskBoundary(g, a, t, "finish");
+  if (peer) housingTaskBoundary(g, peer, t, "finish");
   a.reason = result || "「" + t.label + "」を終えました。";
   if (t.kind !== "wait")
     notice(g, a.person.name + "　" + (result || t.label + "。"));
@@ -1446,11 +1593,14 @@ function advanceMinute(g: Game): boolean {
       }
     }
   }
+  const spatialMinutes = g.housing ? advanceHousingMinute(g) : undefined;
   const completed: { a: Actor; t: Task }[] = [];
   for (const a of g.actors) {
     const t = a.task;
-    a.metrics[t?.metric ?? "waiting"]++;
-    const moving = t?.metric === "travel";
+    const spatial = spatialMinutes?.get(a.person.id);
+    const metric = spatial?.metric ?? t?.metric ?? "waiting";
+    a.metrics[metric]++;
+    const moving = metric === "travel";
     const frost =
       day(g) >= places(g.world).find((p) => p.id === a.location)!.frost &&
       (a.location !== g.home || !g.insulated);
@@ -1465,14 +1615,22 @@ function advanceMinute(g: Game): boolean {
             : a.person.personality === "quiet"
               ? 0.72
               : 1;
-      if (t?.kind === "need" && t.target === k) rate *= 0.3;
+      if (t?.kind === "need" && t.target === k && (!spatial || spatial.used))
+        rate *= 0.3;
       a.needs[k] = clamp(a.needs[k] - rate);
     }
     a.memories = a.memories.filter((m) => m.until > g.time);
     a.mood = moodOf(g, a);
     if (t) {
-      t.remaining--;
-      if (t.remaining === 0 && !t.follower) completed.push({ a, t });
+      if (!spatial) t.remaining--;
+      if (spatial?.terminal === "cancel") {
+        stop(g, a, true);
+        a.reason = "区間の終点で予定を取り消し、予約を解除しました。";
+      } else if (
+        (spatial?.terminal === "finish" || (!spatial && t.remaining === 0)) &&
+        !t.follower
+      )
+        completed.push({ a, t });
       else if (
         t.mode === "auto" &&
         !t.partner &&
@@ -1483,13 +1641,14 @@ function advanceMinute(g: Game): boolean {
         stop(g, a);
         a.strainUntil = g.time + 180;
         memory(g, a, "無理をして疲れた", -4, 120);
-        tryAuto(
-          g,
-          a,
-          "need",
-          "energy",
-          "つらい気持ちが続き、仕事を中断して休みます。",
-        );
+        if (!a.task)
+          tryAuto(
+            g,
+            a,
+            "need",
+            "energy",
+            "つらい気持ちが続き、仕事を中断して休みます。",
+          );
       }
     }
   }
@@ -1538,6 +1697,7 @@ function hasKind(value: unknown): value is Skill {
 }
 const metrics: Metric[] = ["free", "work", "care", "travel", "waiting"];
 const actionKinds = [
+  "home-move",
   "need",
   "work",
   "buy",
@@ -1589,6 +1749,10 @@ export function isGame(value: unknown): value is Game {
     homes = new Set(house.rooms.map((r) => r.id));
   const siteIds = new Set(world.sites.map((site) => site.id));
   if (!short(value.home) || !siteIds.has(value.home)) return false;
+  const validRoomId = (id: unknown): id is string =>
+    value.housing === undefined
+      ? short(id)
+      : typeof id === "string" && id.length > 0;
   const actors = value.actors;
   const ids = new Set<string>();
   for (const a of actors) {
@@ -1608,7 +1772,7 @@ export function isGame(value: unknown): value is Game {
       !isPersona(a.person) ||
       !short(a.location) ||
       !siteIds.has(a.location) ||
-      !short(a.room) ||
+      !validRoomId(a.room) ||
       (a.location === value.home
         ? !homes.has(a.room)
         : a.room !== "outdoors") ||
@@ -1669,8 +1833,11 @@ export function isGame(value: unknown): value is Game {
       Object.entries(t.reserved).some(
         ([k, v]) => !(stocks as readonly string[]).includes(k) || !integer(v),
       ) ||
-      (t.target !== undefined && !short(t.target)) ||
-      (t.room !== undefined && (!short(t.room) || !homes.has(t.room))) ||
+      (t.target !== undefined &&
+        (t.kind === "home-move"
+          ? typeof t.target !== "string"
+          : !short(t.target))) ||
+      (t.room !== undefined && (!validRoomId(t.room) || !homes.has(t.room))) ||
       (t.partner !== undefined &&
         (!short(t.partner) ||
           !ids.has(t.partner) ||
@@ -1678,7 +1845,12 @@ export function isGame(value: unknown): value is Game {
       (t.follower !== undefined && typeof t.follower !== "boolean")
     )
       return false;
-    if (t.station !== undefined) {
+    if (
+      value.housing === undefined &&
+      (t.spatial !== undefined || t.kind === "home-move")
+    )
+      return false;
+    if (t.station !== undefined && t.spatial === undefined) {
       if (
         !short(t.station) ||
         stations.has(t.station) ||
@@ -1724,5 +1896,8 @@ export function isGame(value: unknown): value is Game {
         return false;
     }
   }
-  return true;
+  return (
+    value.housing === undefined ||
+    isHousingRuntime(value.housing, value as unknown as Game)
+  );
 }

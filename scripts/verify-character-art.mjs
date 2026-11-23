@@ -14,7 +14,7 @@ const output = resolve(
 const compatibilityPath =
   process.env.CHARACTER_ART_COMPAT_SAVE || "public/woodworkers-morning.json";
 const url = "http://character-art.offline.test/";
-const saveKey = "yohaku-reform-library-v1";
+const saveKey = "yohaku-reform-library-v2";
 const legacyKeys = ["yohaku-save-v1", "yohaku-autosave-v1"];
 const legacyValues = ["legacy-manual-sentinel", "legacy-auto-sentinel"];
 const pageErrors = [];
@@ -671,7 +671,7 @@ async function library(page) {
     return raw === null ? null : JSON.parse(raw);
   }, saveKey);
   assert.ok(data, "The normal UI wrote a reform library");
-  assert.equal(data.format, 1);
+  assert.equal(data.format, 2);
   assert.ok(Array.isArray(data.slots));
   assert.equal(
     JSON.stringify(data).includes("data:image/"),
@@ -824,7 +824,7 @@ async function exportImportReload(page, expected) {
   const serialized = await readFile(destination, "utf8");
   const exported = JSON.parse(serialized);
   assert.equal(exported.type, "yohaku-reform-save");
-  assert.equal(exported.version, 1);
+  assert.equal(exported.version, 2);
   assert.deepEqual(exported.slot, original);
   await page.getByLabel("新版の保存ファイル", { exact: true }).setInputFiles({
     name: "character-art-roundtrip-save.json",
@@ -870,7 +870,7 @@ async function exportImportReload(page, expected) {
   );
   await checkLegacy(page);
   report.saveChecks.push({
-    scenario: "version-1 export/import/reload/origin-branch",
+    scenario: "version-2 export/import/reload/origin-branch",
     type: exported.type,
     version: exported.version,
     gameAndOriginUnchanged: true,
@@ -880,7 +880,7 @@ async function exportImportReload(page, expected) {
       "Initial morning only; game equals origin. Advancing and origin selection are covered by verify-reform.mjs.",
   });
   record(
-    "version1の書出し→別枠取込→オフライン再読込で外見・描画・game/origin・元枠を保持。未進行の開始時点からの分岐も一致。",
+    "version2の書出し→別枠取込→オフライン再読込で外見・描画・game/origin・元枠を保持。未進行の開始時点からの分岐も一致。",
   );
 }
 

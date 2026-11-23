@@ -85,8 +85,9 @@ function extractMetrics(game) {
     })),
   };
 }
-const saveKey = "yohaku-reform-library-v1";
+const saveKey = "yohaku-reform-library-v2";
 async function library(page) {
+  await expect(page.locator(".rf-app")).toHaveAttribute("aria-busy","false");
   const saved = await page.evaluate(key => {
     const value = localStorage.getItem(key);
     return value === null ? null : JSON.parse(value);
@@ -131,6 +132,7 @@ async function placeBath(page) {
   const before = parseInt(await hygiene.innerText(), 10);
   await page.getByLabel("新しく置く設備", { exact: true }).selectOption("bath");
   await button(page, "この部屋に置く").click();
+  await expect(hygiene).not.toHaveText(before+"分");
   const after = parseInt(await hygiene.innerText(), 10);
   assert.ok(after < before, "浴槽の設置で身支度時間が短くなる");
   await expect(button(page, "給水付きの浴槽")).toBeVisible();
@@ -146,13 +148,18 @@ async function hygieneRun(page) {
   await tab(page,"暮らし");
   const panel=page.getByRole("region",{name:"行動の指示"});
   await button(panel,"生活").click();
-  await panel.locator('button[data-kind="need"][data-target="hygiene"]').click();
+  const command=panel.locator('button[data-kind="need"][data-target="hygiene"]');
+  const preview=await command.locator("..").locator("small").innerText();
+  const duration=/^(?:(\d+)時間)?(?:(\d+)分)?$/.exec(preview);
+  assert.ok(duration && (duration[1] || duration[2]), "本人の実位置から身支度を終えるまでの見込み");
+  await command.click();
   const ordered=await currentGame(page);
   const before=ordered.actors[0];
   assert.equal(before.task.kind,"need");
   await finish(page);
   const completed=await currentGame(page);
   assert.ok(completed.actors[0].needs.hygiene > before.needs.hygiene);
+  assert.equal(completed.time-ordered.time,Number(duration[1]||0)*60+Number(duration[2]||0));
   return completed.time-ordered.time;
 }
 async function doBasicWork(page) {
@@ -210,10 +217,25 @@ async function worldCreation(page) {
   await town.click();
   record("町の位置、薬房、重要人物を固定し、地形を三回変えても町内配置が成立した。");
 }
+async function approachIfApart(page, game, actor, peer) {
+  if (!game.housing || actor.location !== game.home || peer.location !== game.home) return;
+  const positions=game.housing.state.actors;
+  if (JSON.stringify(positions[actor.person.id]?.position)===JSON.stringify(positions[peer.person.id]?.position)) return;
+  await showSection(page,"住民の近くへ移動");
+  await button(page,peer.person.name+"の近くへ移動").click();
+  for(let i=0;i<30;i++){
+    await finish(page);
+    const now=await currentGame(page);
+    if(now.actors.find(a=>a.person.id===actor.person.id).task?.kind!=="home-move") return;
+  }
+  throw new Error("相手の地点に到着できませんでした。");
+}
 async function compareRelationships(page) {
   const panel = page.getByRole("region", {name:"行動の指示"});
   async function social(kind) {
     await tab(page,"暮らし");
+    const g=await currentGame(page);
+    await approachIfApart(page,g,g.actors[0],g.actors[1]);
     await button(panel,"交流").click();
     await panel.locator('button[data-kind="'+kind+'"]').first().click();
     await finish(page);
@@ -383,8 +405,7 @@ async function desktop() {
     assert.equal(house.wood,first.wood-8);
     const newMinutes=await hygieneRun(page);
     assert.ok(newMinutes<oldMinutes);
-    assert.equal(change.before,oldMinutes,"水汲みの往復を含めた工事前の所要時間が実行と一致");
-    assert.equal(change.after,newMinutes,"給水付き浴槽の所要時間が実行と一致");
+    assert.ok(change.after < change.before,"入口からの設備利用の目安も短くなる");
     report.outcomes.push({ home: "居間の身支度", ...change, oldMinutes, newMinutes });
     record("木材8で居間に浴槽を設置。身支度の実所要時間が"+oldMinutes+"分から"+newMinutes+"分に短縮。");
     await tab(page,"手帳");
@@ -470,6 +491,10 @@ async function fieldTrip() {
     async function action(id,kind,peer) {
       const actor=(await currentGame(page)).actors.find(a=>a.person.id===id);
       await button(roster,actor.person.name).click();
+      if(kind==="aid") {
+        const game=await currentGame(page);
+        await approachIfApart(page,game,actor,game.actors.find(a=>a.person.id===peer));
+      }
       const panel=page.getByRole("region",{name:"行動の指示"});
       await button(panel,"野外").click();
       let cmd=panel.locator('button[data-kind="'+kind+'"]');

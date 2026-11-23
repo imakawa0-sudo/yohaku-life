@@ -1,0 +1,79 @@
+{
+  "sourceCommit": "059f376b7e62eb5fb36b38e725231f59cee5c4e0",
+  "htmlSHA256": "098b631fd21f685e9c90ea512c6ede456f433e4d639843ab728ff2176cdd97d4",
+  "currentBefore": {
+    "legacyBytes": 77936,
+    "legacySHA256": "6ab258f7bcf2c569b4cc4f82bfa5eaf9438141de7015dd9efa787b167af9295e",
+    "newLibraryPresent": true,
+    "newLibraryBytes": 164668,
+    "newLibrarySHA256": "1fcacbac63b3252b051a0f3ee46a28cc6587d60df896db22bbd7485fc0765f08",
+    "slots": 16,
+    "activeName": "検証・旧方式の現在の料理"
+  },
+  "currentAfter": {
+    "legacyBytes": 77936,
+    "legacySHA256": "6ab258f7bcf2c569b4cc4f82bfa5eaf9438141de7015dd9efa787b167af9295e",
+    "newLibraryPresent": true,
+    "newLibraryBytes": 164668,
+    "newLibrarySHA256": "1fcacbac63b3252b051a0f3ee46a28cc6587d60df896db22bbd7485fc0765f08",
+    "slots": 16,
+    "activeName": "検証・旧方式の現在の料理"
+  },
+  "originBefore": {
+    "legacyBytes": 77936,
+    "legacySHA256": "6ab258f7bcf2c569b4cc4f82bfa5eaf9438141de7015dd9efa787b167af9295e",
+    "newLibraryPresent": true,
+    "newLibraryBytes": 171976,
+    "newLibrarySHA256": "f3c80440fd6bdd9810327aebf84e6852305397c1ab3efc0c2cd274d43b242656",
+    "slots": 17,
+    "activeName": "検証・旧方式の原点の料理"
+  },
+  "originAfter": {
+    "legacyBytes": 77936,
+    "legacySHA256": "6ab258f7bcf2c569b4cc4f82bfa5eaf9438141de7015dd9efa787b167af9295e",
+    "newLibraryPresent": true,
+    "newLibraryBytes": 171976,
+    "newLibrarySHA256": "f3c80440fd6bdd9810327aebf84e6852305397c1ab3efc0c2cd274d43b242656",
+    "slots": 17,
+    "activeName": "検証・旧方式の原点の料理"
+  },
+  "width320": {
+    "frameWidth": 320,
+    "contentWidth": 305,
+    "focusText": "\n    余白の暮らし暮らし住まい地域手帳「最初の朝」の記録を新しい住居方式へ引き継げません。この暮らしは旧方式のまま続けられます。保存と再開暮らしの手帳検証・旧方式の原点の料理1日目 08:00アサ",
+    "focusBottom": 2730.640625,
+    "focusVisible": false
+  },
+  "width390": {
+    "frameWidth": 390,
+    "contentWidth": 375,
+    "focusText": "\n    余白の暮らし暮らし住まい地域手帳「最初の朝」の記録を新しい住居方式へ引き継げません。この暮らしは旧方式のまま続けられます。保存と再開暮らしの手帳検証・旧方式の原点の料理1日目 08:00アサ",
+    "focusBottom": 2605.75,
+    "focusVisible": false
+  },
+  "desktopSize": {
+    "clientWidth": 1348,
+    "scrollWidth": 1348
+  },
+  "pairedScenes": {
+    "アサ": "アサの生活の挿絵。朝の川の渡し場。アサ、レン",
+    "レン": "レンの生活の挿絵。朝の川の渡し場。アサ、レン",
+    "ミオ": "ミオの生活の挿絵。朝の川の渡し場。ミオ"
+  },
+  "soloScenes": {
+    "アサ": "アサの生活の挿絵。朝の川の渡し場。アサ",
+    "レン": "レンの生活の挿絵。朝の川の渡し場。レン",
+    "ミオ": "ミオの生活の挿絵。朝の川の渡し場。ミオ"
+  },
+  "logsCount": 229,
+  "appLogs": [],
+  "finalAudit": {
+    "legacyBytes": 77936,
+    "legacySHA256": "6ab258f7bcf2c569b4cc4f82bfa5eaf9438141de7015dd9efa787b167af9295e",
+    "newLibraryPresent": true,
+    "newLibraryBytes": 321189,
+    "newLibrarySHA256": "024dd47e2b0fcec2b98635c15f060462cb4d1737210558669d3366a7ced7ce43",
+    "slots": 27,
+    "activeName": "検証・旧方式の現在の料理／住居の移動"
+  }
+}

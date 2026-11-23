@@ -19,8 +19,10 @@ import { Setup } from "./Setup";
 import { WorldView } from "./RegionView";
 import { places } from "./world";
 import { HouseEditor } from "./HouseEditor";
-import { houseValue, type House } from "./house";
-import { inspectOrder, order, type Game } from "./sim";
+import { applyHousingHouseEdit } from "./housing/runtime";
+import { HousingUpgrade } from "./HousingPanel";
+import { type House } from "./house";
+import { enableHousing, inspectOrder, order, type Game } from "./sim";
 import {
   appendSlot,
   branchSlot,
@@ -28,12 +30,16 @@ import {
   exportSlot,
   importSlot,
   LIBRARY_KEY,
+  LEGACY_LIBRARY_KEY,
   newId,
-  parseLibrary,
+  writeLocalCoordinated,
+  upgradeHousingSlot,
+  type LocalRead,
+  type Slot,
   readLocal,
   type Library,
-  type Slot,
 } from "./library";
+import { confirmHandbookWrite, handbookWarning } from "./handbookUi";
 import "./reform.css";
 
 type View = "setup" | "life" | "house" | "world" | "book";
@@ -57,10 +63,13 @@ function date(time: number) {
 export default function ReformApp() {
   const [initial] = useState(readLocal);
   const [library, setLibrary] = useState(initial.library),
-    [warning, setWarning] = useState(initial.warning);
-  const current = useRef(initial.library),
-    savedRaw = useRef(initial.raw),
-    blocked = useRef(initial.blocked);
+    [warning, setWarning] = useState(() =>
+      handbookWarning(initial, initial.library.activeId !== null),
+    );
+  const visible = useRef(initial.library);
+  const witness = useRef(initial);
+  const writing = useRef(false);
+  const [pending, setPending] = useState(false);
   const [view, setView] = useState<View>(
     initial.library.activeId ? "life" : "setup",
   );
@@ -77,132 +86,162 @@ export default function ReformApp() {
     window.scrollTo({ top: 0, behavior: "instant" });
   }
   function install(next: Library) {
-    current.current = next;
+    visible.current = next;
     setLibrary(next);
+  }
+  function recover(latest: LocalRead) {
+    // An unavailable read has no witnesses. Keep the displayed/exportable copy.
+    if (latest.raw === null && latest.legacyRaw === undefined) {
+      setWarning(handbookWarning(latest, visible.current.activeId !== null));
+      return;
+    }
+    witness.current = latest;
+    if (latest.blocked) {
+      setWarning(handbookWarning(latest, visible.current.activeId !== null));
+      return;
+    }
+    install(latest.library);
+    setWarning(
+      [
+        "別のタブで手帳が変更されました。最新の内容を確認してから、もう一度操作してください。",
+        latest.warning,
+      ]
+        .filter(Boolean)
+        .join(" "),
+    );
+    setNotice("");
   }
   useEffect(() => {
     function sync(e: StorageEvent) {
-      if (e.key !== LIBRARY_KEY || !e.newValue) return;
-      try {
-        const next = parseLibrary(e.newValue);
-        savedRaw.current = e.newValue;
-        blocked.current = false;
-        install(next);
-        setNotice("別のタブで保存した暮らしを読み込みました。");
-      } catch {
-        setWarning(
-          "別のタブの保存を確認できませんでした。この手帳は書き出して保管できます。",
-        );
-        blocked.current = true;
-      }
+      if (
+        e.key !== null &&
+        e.key !== LIBRARY_KEY &&
+        e.key !== LEGACY_LIBRARY_KEY
+      )
+        return;
+      const latest = readLocal();
+      if (e.key === LEGACY_LIBRARY_KEY && latest.raw !== null) return;
+      const previous = witness.current;
+      if (
+        latest.raw === previous.raw &&
+        latest.legacyRaw === previous.legacyRaw &&
+        latest.blocked === previous.blocked &&
+        latest.warning === previous.warning
+      )
+        return;
+      recover(latest);
     }
     window.addEventListener("storage", sync);
     return () => window.removeEventListener("storage", sync);
   }, []);
-  function save(next: Library): boolean {
-    if (!blocked.current) {
-      try {
-        const previous = localStorage.getItem(LIBRARY_KEY);
-        if (previous !== savedRaw.current) {
-          if (previous) {
-            const updated = parseLibrary(previous);
-            install(updated);
-            savedRaw.current = previous;
-          }
-          setWarning(
-            "別のタブの保存に切り替わりました。内容を確認してからもう一度操作してください。",
-          );
-          return false;
-        }
-        const json = JSON.stringify(next);
-        localStorage.setItem(LIBRARY_KEY, json);
-        savedRaw.current = json;
-        setWarning("");
-      } catch {
-        setWarning(
-          "端末に保存できませんでした。手帳の「保存を書き出す」からこの暮らしを保管してください。",
-        );
-      }
+  async function save(next: Library): Promise<boolean> {
+    // An event can arrive before React has committed the newest render.
+    if (writing.current) return false;
+    if (visible.current !== library) {
+      setNotice(
+        "手帳の内容が変わりました。最新の内容を確認して、もう一度操作してください。",
+      );
+      return false;
     }
-    install(next);
-    return true;
+    const expected = witness.current;
+    writing.current = true;
+    setPending(true);
+    try {
+      const result = confirmHandbookWrite(
+        await writeLocalCoordinated(next, expected.raw, expected.legacyRaw),
+      );
+      if (result.status === "saved") {
+        witness.current = {
+          library: next,
+          raw: result.raw,
+          warning: "",
+          blocked: false,
+        };
+        install(next);
+        setWarning(result.warning ?? "");
+        return true;
+      }
+      if (result.status === "invalid") setNotice(result.warning);
+      else if (result.status === "unavailable")
+        setWarning(
+          handbookWarning(
+            witness.current.blocked ? witness.current : "unavailable",
+            visible.current.activeId !== null,
+          ),
+        );
+      else recover(result.latest);
+      return false;
+    } finally {
+      writing.current = false;
+      setPending(false);
+    }
   }
-  function begin(g: Game, name: string) {
-    const created = { id: newId(), name, game: g, origin: structuredClone(g) };
-    if (save(appendSlot(current.current, created))) {
-      setSelected(g.actors[0].person.id);
+  async function begin(g: Game, name: string) {
+    const enabled = enableHousing(g, "new");
+    const created = {
+      id: newId(),
+      name,
+      game: enabled,
+      origin: structuredClone(enabled),
+    };
+    if (await save(appendSlot(library, created))) {
+      setSelected(enabled.actors[0].person.id);
       show("life");
     }
   }
-  function update(g: Game) {
-    if (!slot) return;
-    save({
-      ...current.current,
-      slots: current.current.slots.map((s) =>
+  async function update(g: Game) {
+    if (!slot) return false;
+    return save({
+      ...library,
+      slots: library.slots.map((s) =>
         s.id === slot.id ? { ...s, game: g } : s,
       ),
     });
   }
-  function build(house: House) {
+  async function build(house: House) {
     if (!game) return;
-    for (const resident of game.actors) {
-      const reserved = resident.task?.station?.split("#")[0];
-      if (!reserved) continue;
-      const before = game.house.rooms.find((r) =>
-        r.fixtures.some((f) => f.id === reserved),
-      );
-      const after = house.rooms.find((r) =>
-        r.fixtures.some((f) => f.id === reserved),
-      );
-      if (
-        before?.id !== after?.id ||
-        before?.fixtures.find((f) => f.id === reserved)?.cell !==
-          after?.fixtures.find((f) => f.id === reserved)?.cell
-      ) {
-        setNotice(
-          resident.person.name +
-            "がこの設備を使用中です。終えてから移設できます。",
-        );
-        return;
-      }
+    const result = applyHousingHouseEdit(game, house);
+    if (result.error) {
+      setNotice(result.error);
+      return;
     }
-    const cost = Math.max(0, houseValue(house) - houseValue(game.house));
-    if (cost > game.wood) {
+    if (await update(result.game)) {
+      const cost = game.wood - result.game.wood;
       setNotice(
-        "工事には木材" +
-          cost +
-          "が必要です。共同の備蓄は" +
-          game.wood +
-          "です。",
+        cost
+          ? "住まいを整えました。木材" + cost + "を使いました。"
+          : "間取りに反映しました。",
+      );
+    }
+  }
+  async function upgrade() {
+    if (!slot || slot.game.housing) return;
+    let entry: Slot;
+    try {
+      entry = upgradeHousingSlot(slot, slot.name + "／住居の移動");
+    } catch (error) {
+      setNotice(
+        error instanceof Error
+          ? error.message
+          : "元の暮らしを旧方式で続けてください。",
       );
       return;
     }
-    const g = {
-      ...game,
-      house,
-      wood: game.wood - cost,
-      log: [
-        date(game.time) +
-          "　住まいを整えた" +
-          (cost ? "（木材" + cost + "）" : ""),
-        ...game.log,
-      ].slice(0, 100),
-    };
-    update(g);
-    setNotice(
-      cost
-        ? "住まいを整えました。木材" + cost + "を使いました。"
-        : "間取りに反映しました。",
-    );
+    if (await save(appendSlot(library, entry))) {
+      show("life");
+      setNotice(
+        "元の暮らしを手帳に残しました。新しい指示から家の中を移動します。",
+      );
+    }
   }
-  function branch(origin: boolean) {
+  async function branch(origin: boolean) {
     if (!slot) return;
     const entry = branchSlot(
       slot,
       origin,
       slot.name.split("／")[0] + "／分岐" + (library.slots.length + 1),
     );
-    if (save(appendSlot(current.current, entry))) {
+    if (await save(appendSlot(library, entry))) {
       show("life");
       setNotice("元の暮らしを手帳に残し、別の暮らしを開きました。");
     }
@@ -215,7 +254,7 @@ export default function ReformApp() {
       if (file.size > 8_000_000)
         throw new Error("8MB以内の新版の保存を選んでください。");
       const entry = importSlot(await file.text());
-      if (save(appendSlot(current.current, entry))) {
+      if (await save(appendSlot(library, entry))) {
         setSelected(entry.game.actors[0].person.id);
         show("life");
         setNotice("手帳に保存を追加しました。");
@@ -233,7 +272,12 @@ export default function ReformApp() {
   const activeView =
     view !== "setup" && view !== "book" && !game ? "setup" : view;
   return (
-    <div className="rf-app">
+    <fieldset className="rf-app" disabled={pending} aria-busy={pending}>
+      {pending && (
+        <div role="status" className="rf-saving">
+          手帳に保存しています…
+        </div>
+      )}
       <header className="rf-mast">
         <div className="rf-mast-inner">
           <div className="rf-brand">
@@ -341,15 +385,13 @@ export default function ReformApp() {
             preview={(kind, target) =>
               inspectOrder(game, actor.person.id, kind, target)
             }
-            onTravel={(id) => {
+            onTravel={async (id) => {
               const g = order(game, actor.person.id, "travel", id);
-              update(g);
-              show("life");
+              if (await update(g)) show("life");
             }}
-            onProject={(cmd) => {
+            onProject={async (cmd) => {
               const g = order(game, actor.person.id, "project", cmd);
-              update(g);
-              show("life");
+              if (await update(g)) show("life");
             }}
           />
         </main>
@@ -380,6 +422,7 @@ export default function ReformApp() {
                   今の時点から分岐
                 </button>
               </div>
+              <HousingUpgrade game={slot.game} onUpgrade={upgrade} />
               <p className="rf-hint">
                 分岐前の暮らしも、この手帳から再開できます。
               </p>
@@ -419,8 +462,8 @@ export default function ReformApp() {
                 <li key={s.id}>
                   <button
                     aria-current={s.id === slot?.id ? "true" : undefined}
-                    onClick={() => {
-                      if (save({ ...current.current, activeId: s.id })) {
+                    onClick={async () => {
+                      if (await save({ ...library, activeId: s.id })) {
                         setSelected(s.game.actors[0].person.id);
                         show("life");
                       }
@@ -467,6 +510,6 @@ export default function ReformApp() {
         <span>余白の暮らし</span>
         <a href="./yohaku-v53.html">公開53</a>
       </footer>
-    </div>
+    </fieldset>
   );
 }

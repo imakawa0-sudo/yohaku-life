@@ -177,7 +177,7 @@ export function HouseEditor({
       <div className="yh-house-metrics">
         <h4>
           <Footprints size={15} />
-          {room.name}からの所要時間
+          {room.name}の入口からの設備利用の目安
         </h4>
         <dl>
           {needs.map((need: Need) => {
@@ -276,7 +276,7 @@ export function HouseEditor({
               neighbor && build({ type: "link", a: room.id, b: neighbor.id })
             }
           >
-            {connected ? "通路を閉じる" : "通路を開く（木材2）"}
+            {connected ? "通路を取り外す" : "通路をつなぐ（木材2）"}
           </button>
         </div>
         <div className="yh-house-controls">

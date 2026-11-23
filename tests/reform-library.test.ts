@@ -33,7 +33,9 @@ test("A new morning, an in-progress branch and an imported save each retain thei
   let book = appendSlot(emptyLibrary(), slot);
   for (const entry of [morning, now, importSlot(exportSlot(slot))])
     book = appendSlot(book, entry);
+  assert.equal(book.format, 2);
   assert.deepEqual(parseLibrary(JSON.stringify(book)), book);
+  assert.deepEqual(parseLibrary(JSON.stringify({ ...book, format: 1 })), book);
   assert.equal(morning.game.time, 480);
   assert.equal(now.game.time, 481);
   assert.deepEqual(advance(slot.game, 50), advance(now.game, 50));

@@ -29,6 +29,9 @@ import {
   skillNames,
 } from "./peopleModel";
 import type { Skill } from "./peopleModel";
+import { HousingPanel, housingStageNames } from "./HousingPanel";
+import { housingTogether } from "./housing/bridge";
+import { housingStatus, nextCompletionMinutes } from "./housing/presentation";
 import { roomName } from "./house";
 import type { Need } from "./house";
 import { places } from "./world";
@@ -195,6 +198,14 @@ function ActionPanel({
   const commands = options(game, actor.person.id);
   const selected = commands.filter((command) => command.group === group);
   const cancel = commands.find((command) => command.kind === "cancel");
+  const cancelling =
+    !!actor.task?.spatial &&
+    game.housing?.state.actors[actor.person.id]?.order?.phase ===
+      "exiting-after-cancel";
+  const reserved = Object.entries(actor.task?.reserved ?? {})
+    .filter(([, n]) => n > 0)
+    .map(([key, n]) => stockNames[key as keyof typeof stockNames] + n)
+    .join("・");
   return (
     <section className="lf-panel lf-orders" aria-label="行動の指示">
       <div className="lf-section-title">
@@ -224,7 +235,9 @@ function ActionPanel({
                 stockNames[resource as keyof typeof stockNames] + count,
             );
           const preview =
-            command.disabled ||
+            (cancelling
+              ? "取り消し中です。今の区間を出てから新しい指示を選べます。"
+              : command.disabled) ||
             [command.minutes ? span(command.minutes) : "", ...materials]
               .filter(Boolean)
               .join(" · ");
@@ -259,17 +272,28 @@ function ActionPanel({
         )}
       </div>
       {cancel && (
-        <button
-          className="lf-cancel"
-          type="button"
-          data-kind="cancel"
-          disabled={!!cancel.disabled}
-          onClick={() =>
-            onGame(order(game, actor.person.id, cancel.kind, cancel.target))
-          }
-        >
-          {cancel.label}
-        </button>
+        <>
+          <button
+            className="lf-cancel"
+            type="button"
+            data-kind="cancel"
+            disabled={!!cancel.disabled || cancelling}
+            aria-describedby={reserved || cancelling ? "lf-refund" : undefined}
+            onClick={() =>
+              onGame(order(game, actor.person.id, cancel.kind, cancel.target))
+            }
+          >
+            {cancel.label}
+          </button>
+          {(reserved || cancelling) && (
+            <p className="lf-note" id="lf-refund">
+              {reserved && "取り置き中　" + reserved + "。"}
+              {actor.task?.spatial
+                ? "取り消すと予約を解除します。通路を移動中は、今の区間を出てから取り置きした物が戻ります。"
+                : "取り消すと取り置きした物が戻ります。"}
+            </p>
+          )}
+        </>
       )}
     </section>
   );
@@ -302,10 +326,9 @@ export function Life({
           ? "昼"
           : "夕暮れ";
   const untilMorning = (480 - (game.time % 1440) + 1440) % 1440 || 1440;
-  const tasks = game.actors.flatMap((a) =>
-    a.task && a.task.remaining > 0 ? [a.task.remaining] : [],
-  );
-  const next = tasks.length ? Math.min(...tasks) : 0;
+  const next = nextCompletionMinutes(game);
+  const hasTasks = game.actors.some((a) => a.task);
+  const status = game.housing ? housingStatus(game, person.id) : null;
   const locations = places(game.world);
   const place = locations.find((place) => place.id === actor.location);
   const region = place?.name ?? actor.location;
@@ -319,17 +342,26 @@ export function Life({
   const atHome = actor.location === game.home;
   const setting = settingFor(place, atHome, actor.room);
   const company = game.actors
-    .filter(
-      (a) =>
-        a.person.id !== person.id &&
-        a.location === actor.location &&
-        (!atHome || a.room === actor.room),
-    )
+    .filter((a) => {
+      if (a.person.id === person.id || a.location !== actor.location)
+        return false;
+      if (!game.housing) return !atHome || a.room === actor.room;
+      if (atHome) return housingTogether(game, actor, a);
+      const t = actor.task;
+      return (
+        game.housing.unlocated[person.id]?.reason === "outside" &&
+        !!t &&
+        t.partner === a.person.id &&
+        a.task?.partner === person.id &&
+        a.task.kind === t.kind
+      );
+    })
     .map((a) => a.person);
   const localName =
-    actor.location === game.home
+    status?.location ??
+    (actor.location === game.home
       ? region + "の家 · " + roomName(game.house, actor.room)
-      : region;
+      : region);
   const peers = game.actors.filter((a) => a.person.id !== person.id);
   const memories = actor.memories.filter((memory) => memory.until > game.time);
   const changeTime = (minutes: number) => onGame(advance(game, minutes));
@@ -344,8 +376,9 @@ export function Life({
           </div>
           <div className="lf-roster" role="group" aria-label="住民を選ぶ">
             {game.actors.map((a) => {
-              const location =
-                a.location === game.home
+              const location = game.housing
+                ? housingStatus(game, a.person.id).location
+                : a.location === game.home
                   ? roomName(game.house, a.room)
                   : (locations.find((item) => item.id === a.location)?.name ??
                     a.location);
@@ -448,9 +481,13 @@ export function Life({
                     「野外」で交渉・応戦・撤退を選べます。
                   </p>
                 ) : (
-                  <p>{actor.reason}</p>
+                  <p>
+                    {status && actor.task?.spatial
+                      ? housingStageNames[status.phase]
+                      : actor.reason}
+                  </p>
                 )}
-                {actor.task && (
+                {actor.task && !actor.task.spatial && (
                   <div className="lf-task-progress">
                     <progress
                       value={Math.max(
@@ -511,7 +548,20 @@ export function Life({
             actor={actor}
             onGame={onGame}
           />
-          {game.time === 480 && !tasks.length && (
+          {status && (
+            <HousingPanel
+              game={game}
+              actor={actor}
+              status={status}
+              onGame={onGame}
+            />
+          )}
+          {hasTasks && next === null && (
+            <p id="lf-next-wait" className="lf-clock-hint">
+              待機中や通れない経路の予定は完了時刻を見積もれません。
+            </p>
+          )}
+          {game.time === 480 && !hasTasks && (
             <p className="lf-clock-hint">
               時計を進めると住民が自分で動きます。先に「行動の指示」で予定を決めることもできます。
             </p>
@@ -764,8 +814,11 @@ export function Life({
               type="button"
               className="lf-next-time"
               aria-label="次の行動完了まで進める"
-              disabled={!next}
-              onClick={() => changeTime(next)}
+              disabled={next === null}
+              aria-describedby={
+                hasTasks && next === null ? "lf-next-wait" : undefined
+              }
+              onClick={() => next !== null && changeTime(next)}
             >
               次の完了
             </button>
