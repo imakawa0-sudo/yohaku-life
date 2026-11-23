@@ -1,0 +1,307 @@
+{
+  "research_date": "2026-11-23",
+  "timezone": "Asia/Taipei",
+  "scope": "H0/H1 primary-source research and design comparison; no source-game playtest",
+  "method": "Firecrawl primary retrieval; Parallel fallback after quota; root verification of key claims with official-site web retrieval",
+  "sources": [
+    {
+      "id": "R1",
+      "title": "Patch Note Archive",
+      "publisher": "Lo-Fi Games",
+      "url": "https://lofigames.com/patch-notes/",
+      "published_at": "2022-02-15T15:28:56+00:00",
+      "modified_at": "2022-02-22T16:35:37+00:00",
+      "date_basis": "HTML article metadata; archive compilation dates, not individual patch release dates",
+      "target_version": "Kenshi historical versions 0.30.0, 0.95.15, 0.95.30, 0.98.48",
+      "age_note": "1年以上前の古い資料",
+      "scope": "Historical developer patch entries; not complete current-build verification",
+      "verified_facts": [
+        "0.30.0: Added paid sleeping facilities in some towns.",
+        "0.95.15: Added reusable sleeping bags/camp beds and differentiated their healing benefit from ordinary beds.",
+        "0.95.30: Fixed food fetching while in owned buildings in other towns.",
+        "0.98.48: Player-owned buildings no longer erased when world reaction events destroy the town."
+      ],
+      "unknowns": [
+        "Individual original patch publication dates",
+        "Current recovery multipliers and food-fetching range",
+        "Long-term room leases or shared-workshop institutions"
+      ],
+      "scrape": "01a2078e-b309-7258-8804-14e6bcf5c72f"
+    },
+    {
+      "id": "R2",
+      "title": "Announcing Odyssey and update 1.6!",
+      "publisher": "Ludeon Studios",
+      "author": "Tia Young",
+      "url": "https://ludeon.com/blog/2025/06/announcing-odyssey-and-update-1-6/",
+      "published_at": "2025-06-11",
+      "target_version": "RimWorld base game free update 1.6 preview; distinct from Odyssey sections",
+      "age_note": "1年以上前の古い資料",
+      "scope": "Pre-release 1.6 design overview; exact current formulas unverified",
+      "verified_facts": [
+        "Temporary caravan camps provide an active map for eating, stabilizing and regrouping; prolonged stay attracts enemies.",
+        "Immediate caravan departure may leave unpacked goods, animals or downed colonists.",
+        "Room logic was adjusted to reduce single medical beds turning barracks into hospitals; some work facilities benefit from a suitable room.",
+        "Plans gained color, copy/paste, rotation and names; certain buildings can be upgraded through replacement blueprints."
+      ],
+      "unknowns": [
+        "Current precise camp timers",
+        "Room classification and productivity formulas"
+      ],
+      "scrape": "01a2078e-b32c-73b6-87e5-34bd2049a1ec"
+    },
+    {
+      "id": "R3",
+      "title": "Odyssey preview #2: Gravships and space",
+      "publisher": "Ludeon Studios",
+      "author": "Tia Young",
+      "url": "https://ludeon.com/blog/2025/06/odyssey-preview-2-gravships-and-space/",
+      "published_at": "2025-06-27",
+      "target_version": "RimWorld Odyssey pre-release overview",
+      "age_note": "1年以上前の古い資料",
+      "scope": "DLC-specific feature descriptions; do not attribute to base game",
+      "verified_facts": [
+        "Gravships move a colony with its rooms, people, animals and gear.",
+        "Expansion uses rare gravcores found in dangerous locations; fuel and upgrades matter.",
+        "Shuttles support rescue and trade; a stationary colony using only shuttles is explicitly offered as a playstyle.",
+        "Space habitation ties physical boundaries to life support, power and external equipment."
+      ],
+      "unknowns": [
+        "Exact present capacity and fuel formula",
+        "Multiple-ship restrictions",
+        "Unoccupied-map lifecycle"
+      ],
+      "scrape": "01a2078f-0ba4-7111-a17e-1c8402b134b8"
+    },
+    {
+      "id": "R4",
+      "title": "Update 1.6.4850 released",
+      "publisher": "Ludeon Studios",
+      "author": "Tia Young",
+      "url": "https://ludeon.com/blog/2026/06/update-1-6-4850-released/",
+      "published_at": "2026-06-08",
+      "target_version": "RimWorld 1.6.4850; base game and expansion fixes mixed",
+      "age_note": "1年以内",
+      "scope": "Versioned fixes demonstrate observed boundary failures, not internal implementation",
+      "verified_facts": [
+        "Fixed buildings remaining connected to the prior map's power networks after launch.",
+        "Fixed gravship jumps interrupting deathrest.",
+        "Fixed babies born during shuttle flight being deleted.",
+        "Added zero-market-value ancient bridge variants to avoid wealth spikes when landing near generated ruins."
+      ],
+      "unknowns": [
+        "Internal data structures",
+        "Whether every ongoing activity continues across movement",
+        "Current wealth and threat formulas"
+      ],
+      "scrape": "01a2078f-0dd8-73ab-8ed6-b1d3546d563f"
+    },
+    {
+      "id": "R5",
+      "title": "Announcing the Waylith Engine and Update 1.7",
+      "publisher": "Ludeon Studios",
+      "author": "Tia Young",
+      "url": "https://ludeon.com/blog/2026/10/announcing-the-waylith-engine-and-update-1-7/",
+      "published_at": "2026-10-12",
+      "target_version": "RimWorld 1.7 unstable announcement",
+      "age_note": "1年以内",
+      "scope": "Article-time version context only; no latest-build assertion as of research date",
+      "verified_facts": [
+        "The announcement says the visible gameplay remains the same while the engine and performance change.",
+        "As of this article, 1.7 was available on the unstable branch and the main branch remained on 1.6."
+      ],
+      "unknowns": [
+        "Latest build number on each branch as of research day",
+        "Whether any individual 1.6 rule changed later"
+      ],
+      "scrape": "01a2078f-75cd-7017-8af6-25eca7fc76c3"
+    },
+    {
+      "id": "L1",
+      "role": "Sims 4 primary; refreshed existing S2",
+      "title": "How to create Residential Rentals in The Sims 4 For Rent",
+      "url": "https://help.ea.com/en/articles/the-sims/the-sims-4/for-rent-residential-rentals-guide/",
+      "publisher": "Electronic Arts",
+      "source_type": "official_help",
+      "scope": "The Sims 4 For Rent expansion pack",
+      "checked_on": "2026-11-23",
+      "source_date": {
+        "display": "Updated 7 months ago",
+        "exact_date": null,
+        "older_than_one_year": false,
+        "caution": "Relative update label; exact date not established."
+      },
+      "retrieval": {
+        "tool": "Firecrawl scrape",
+        "live_fetch_requested": true,
+        "status": 200
+      },
+      "facts_ja": [
+        "住戸への割当は部屋単位で行い、既存住戸・新住戸・共有空間を選べる。",
+        "同じ賃貸敷地の住戸ごとに情報、特性、課題を扱える。",
+        "家主は借主と同じ敷地にも別敷地にも住める。所有物件は管理パネルにまとめられ、電話による管理と現地への訪問を区別する。",
+        "共有空間の活動・設備・家具や、借主との交流は住戸評価の改善項目に含まれる。"
+      ],
+      "unverified_ja": [
+        "非表示住戸や別敷地の継続シミュレーションの精度。",
+        "訪問時のロード、経路探索、戸口通過、隣室から聞こえる音の仕様。",
+        "本作の住戸数・世帯数・地域数の上限への適用。"
+      ],
+      "design_uses": [
+        "H0共同生活",
+        "H0複数拠点",
+        "H1物理階層と所有・住戸の別レイヤー"
+      ]
+    },
+    {
+      "id": "L2",
+      "role": "Sims 4 primary; refreshed existing S3",
+      "title": "How to set up a Small Business in The Sims 4 Businesses & Hobbies",
+      "url": "https://help.ea.com/en/articles/the-sims/the-sims-4/how-to-set-up-a-small-business/",
+      "publisher": "Electronic Arts",
+      "source_type": "official_help",
+      "scope": "The Sims 4 Businesses & Hobbies expansion pack",
+      "checked_on": "2026-11-23",
+      "source_date": {
+        "display": "Updated 7 months ago",
+        "exact_date": null,
+        "older_than_one_year": false,
+        "caution": "Relative update label; exact date not established."
+      },
+      "retrieval": {
+        "tool": "Firecrawl scrape",
+        "live_fetch_requested": true,
+        "status": 200
+      },
+      "facts_ja": [
+        "自宅、購入した事業用敷地、既存の公共敷地という営業場所が説明される。",
+        "自宅営業では居住用・公開・従業員専用の区画を設定でき、それぞれ客と従業員の入場可否が異なる。",
+        "事業の活動設定は来訪者の行動を促す。",
+        "従業員へ設定した仕事は、出勤して到着した際に自主的に進めると説明される。"
+      ],
+      "unverified_ja": [
+        "到着途中の経路探索、予約と実作業の厳密な更新タイミング。",
+        "療養・患者支援の直接の根拠ではない。",
+        "Simsの従業員数や同時営業数の制限を本作へ採用しない。"
+      ],
+      "design_uses": [
+        "H0制作・商い",
+        "H0療養・支援への役割分離の類推",
+        "H1入場権と配置の分離"
+      ]
+    },
+    {
+      "id": "L3",
+      "role": "Sims 4 primary; new evidence",
+      "title": "Bug Bash and Maker Packs",
+      "url": "https://www.ea.com/games/the-sims/the-sims-4/news/update-3-17-2026",
+      "publisher": "Electronic Arts / The Sims 4 Team",
+      "source_type": "official_patch_notes",
+      "scope": "2026-03-17 update: PC 1.122.205.1030 / Mac 1.122.205.1230",
+      "checked_on": "2026-11-23",
+      "source_date": {
+        "exact_date": "2026-03-17",
+        "older_than_one_year": false,
+        "caution": "A dated release note, not a verification of all later versions."
+      },
+      "retrieval": {
+        "tool": "Firecrawl search with scrape",
+        "live_fetch_requested": true,
+        "status": 200
+      },
+      "facts_ja": [
+        "自律的な会話相手の選択は、良好な関係のある知人を優先し、知らない相手への自発的接触を減らすよう変更されたと公表される。",
+        "自律的な家具・設備利用を繰り返しすぎないための待機時間が複数の行動に導入された。",
+        "好み、特性、現在の場の活動、操作対象世帯かどうか等により、一部の待機時間の適用が異なる。"
+      ],
+      "unverified_ja": [
+        "すべての対象や条件に共通の意思決定式。",
+        "2026-03-17以降の全変更・全機種での同一動作。",
+        "公式パッチノートの改善が実際の全状況で達成されたか。"
+      ],
+      "design_uses": [
+        "H0単身",
+        "H0共同生活",
+        "H0療養・支援",
+        "H1アクセス可能な設備と選びたい設備の分離"
+      ]
+    },
+    {
+      "id": "L4",
+      "role": "Sims 4 primary; new evidence",
+      "title": "How to rotate objects in The Sims 4",
+      "url": "https://help.ea.com/en/articles/the-sims/the-sims-4/how-to-rotate-sims-4/",
+      "publisher": "Electronic Arts",
+      "source_type": "official_help",
+      "scope": "PC/Mac and console object rotation guide; free rotation excerpt specifically PC/Mac",
+      "checked_on": "2026-11-23",
+      "source_date": {
+        "exact_date": null,
+        "older_than_one_year": "unknown",
+        "caution": "Publication/update date not returned. Parallel content acquired on 2026-11-16."
+      },
+      "retrieval": {
+        "tool": "Parallel web_fetch after Firecrawl credit-limit error",
+        "allow_live_fetch": true,
+        "acquired_at": "2026-11-16T00:00:00Z",
+        "coverage": "focused excerpts, not complete page",
+        "extract_id": "extract_edcf430f376e93c4f94b8dd9547b853b"
+      },
+      "facts_ja": [
+        "PC/Macでマウス操作を使う場合、グリッドに吸着しない自由回転が説明される。",
+        "move objectsチートにより、グリッドへの吸着なしで物体を重ねることができると説明される。"
+      ],
+      "unverified_ja": [
+        "配置できた物体が必ず利用できる、という意味ではない。",
+        "ゲーム内部の経路探索がどの粒度・方式で行われるかはこの操作ガイドから判断できない。",
+        "自由回転操作の全機種での同一動作。"
+      ],
+      "design_uses": [
+        "H1建築操作の細かさと内部シミュレーション表現を混同しない"
+      ]
+    },
+    {
+      "id": "V1",
+      "role": "optional supporting primary source",
+      "title": "Versu—A Simulationist Storytelling System",
+      "authors": [
+        "Richard Evans",
+        "Emily Short"
+      ],
+      "url": "https://cs.uky.edu/~sgware/reading/papers/evans2014versu.pdf",
+      "official_index": "https://versu.com/about/how-versu-works/",
+      "doi": "10.1109/TCIAIG.2013.2287297",
+      "source_type": "authors' published paper, hosted copy at University of Kentucky",
+      "scope": "Historical Versu architecture, not a current product feature claim",
+      "checked_on": "2026-11-23",
+      "source_date": {
+        "publication": "2013-10-25",
+        "current_version_in_paper": "2014-06-12",
+        "older_than_one_year": true,
+        "caution": "Old historical primary source; current availability and current versions are not claimed."
+      },
+      "retrieval": {
+        "tool": "Firecrawl search with scrape",
+        "coverage": "18-page paper text; machine extracted",
+        "cached_at": "2026-11-22T14:49:54.706Z",
+        "official_index_tool": "Parallel web_fetch",
+        "official_index_acquired_at": "2026-10-26T00:00:00Z"
+      },
+      "facts_ja": [
+        "繰り返し起こる社会的な場面が、その場の役割に応じた行動候補を各人物へ提示するが、行動選択は各人物が行う。",
+        "食事と会話のように複数の場面を同時に進め、プレイヤーの行動候補を場面ごとにまとめて状態を理解しやすくする。",
+        "感情の表示では誰に対するものか、何がきっかけかを説明する。",
+        "挨拶のコード例では、二人が同じ場所にいることを行動の前提条件にしている。"
+      ],
+      "unverified_ja": [
+        "本作規模での多数人物、複数拠点、空間粒度への性能・適性。",
+        "本文のThe Sims一般への比較をThe Sims 4の現行仕様の根拠にしない。"
+      ],
+      "design_uses": [
+        "H0人物の主体性と場の役割",
+        "H1同席・到着の前提条件",
+        "文章による理由説明と場面別選択肢"
+      ]
+    }
+  ]
+}
