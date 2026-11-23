@@ -1,0 +1,374 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "Asia/Taipei",
+  "base_commit": "e25f2641e6585c1ba30af53a00a15a661fc118fd",
+  "standalone": {
+    "bytes": 587906,
+    "sha256": "576d2ea33c123847adcb2da04ada00c9ecdc512512d3e9f1f451563a9b39ba51",
+    "final_rebuild_byte_identical": true
+  },
+  "method": "Cloud Browser Playwright UI through a managed internal HTTP preview of the exact standalone HTML. Existing preview origin; new QA save slots, no production data.",
+  "standard_isolated_chromium_script": {
+    "status": "blocked_before_launch",
+    "reason": "socket creation EPERM; sandbox escalation rejected by approval policy"
+  },
+  "field_choices": [
+    {
+      "field": "顔の輪郭",
+      "value": "oval",
+      "pass": true
+    },
+    {
+      "field": "顔の輪郭",
+      "value": "round",
+      "pass": true
+    },
+    {
+      "field": "顔の輪郭",
+      "value": "angular",
+      "pass": true
+    },
+    {
+      "field": "肌の色",
+      "value": "ivory",
+      "pass": true
+    },
+    {
+      "field": "肌の色",
+      "value": "peach",
+      "pass": true
+    },
+    {
+      "field": "肌の色",
+      "value": "wheat",
+      "pass": true
+    },
+    {
+      "field": "肌の色",
+      "value": "bronze",
+      "pass": true
+    },
+    {
+      "field": "肌の色",
+      "value": "umber",
+      "pass": true
+    },
+    {
+      "field": "髪形",
+      "value": "crop",
+      "pass": true
+    },
+    {
+      "field": "髪形",
+      "value": "bob",
+      "pass": true
+    },
+    {
+      "field": "髪形",
+      "value": "wave",
+      "pass": true
+    },
+    {
+      "field": "髪形",
+      "value": "knot",
+      "pass": true
+    },
+    {
+      "field": "髪形",
+      "value": "braid",
+      "pass": true
+    },
+    {
+      "field": "髪色",
+      "value": "ink",
+      "pass": true
+    },
+    {
+      "field": "髪色",
+      "value": "chestnut",
+      "pass": true
+    },
+    {
+      "field": "髪色",
+      "value": "ash",
+      "pass": true
+    },
+    {
+      "field": "髪色",
+      "value": "honey",
+      "pass": true
+    },
+    {
+      "field": "髪色",
+      "value": "silver",
+      "pass": true
+    },
+    {
+      "field": "年代",
+      "value": "young",
+      "pass": true
+    },
+    {
+      "field": "年代",
+      "value": "adult",
+      "pass": true
+    },
+    {
+      "field": "年代",
+      "value": "elder",
+      "pass": true
+    },
+    {
+      "field": "体格",
+      "value": "slight",
+      "pass": true
+    },
+    {
+      "field": "体格",
+      "value": "medium",
+      "pass": true
+    },
+    {
+      "field": "体格",
+      "value": "broad",
+      "pass": true
+    },
+    {
+      "field": "目元",
+      "value": "soft",
+      "pass": true
+    },
+    {
+      "field": "目元",
+      "value": "straight",
+      "pass": true
+    },
+    {
+      "field": "目元",
+      "value": "open",
+      "pass": true
+    },
+    {
+      "field": "顔の特徴",
+      "value": "none",
+      "pass": true
+    },
+    {
+      "field": "顔の特徴",
+      "value": "freckles",
+      "pass": true
+    },
+    {
+      "field": "顔の特徴",
+      "value": "scar",
+      "pass": true
+    },
+    {
+      "field": "顔の特徴",
+      "value": "glasses",
+      "pass": true
+    },
+    {
+      "field": "服装",
+      "value": "shirt",
+      "pass": true
+    },
+    {
+      "field": "服装",
+      "value": "apron",
+      "pass": true
+    },
+    {
+      "field": "服装",
+      "value": "wrap",
+      "pass": true
+    },
+    {
+      "field": "服装",
+      "value": "coat",
+      "pass": true
+    },
+    {
+      "field": "服の色",
+      "value": "moss",
+      "pass": true
+    },
+    {
+      "field": "服の色",
+      "value": "indigo",
+      "pass": true
+    },
+    {
+      "field": "服の色",
+      "value": "brick",
+      "pass": true
+    },
+    {
+      "field": "服の色",
+      "value": "rust",
+      "pass": true
+    },
+    {
+      "field": "服の色",
+      "value": "plum",
+      "pass": true
+    },
+    {
+      "field": "服の色",
+      "value": "flax",
+      "pass": true
+    }
+  ],
+  "checks": {
+    "all_41_choices_selectable": true,
+    "other_nine_values_preserved": true,
+    "portrait_native_size": [
+      48,
+      56
+    ],
+    "walker_native_size": [
+      26,
+      60
+    ],
+    "appearance_lock_during_randomize": true,
+    "name_change_preserves_appearance": true,
+    "resident_switch_preserves_each_appearance": true,
+    "composite_game_started": true,
+    "meal_completed_at": "day 1 08:23",
+    "food_after_meal": 6,
+    "view_switch_and_reload_export_byte_identical": true,
+    "import_game_and_origin_equal": true,
+    "old_v1_save_appearance_equal": true,
+    "prior_active_preview_save_restored_byte_identical": true
+  },
+  "screens": {
+    "desktop": {
+      "bodyWidth": 1348,
+      "clientWidth": 1348,
+      "scrollWidth": 1348
+    },
+    "iframe_320": {
+      "bodyWidth": 305,
+      "canvases": [
+        {
+          "height": "56",
+          "role": "カヤのプロフィール画",
+          "width": "48"
+        },
+        {
+          "height": "56",
+          "role": "スイのプロフィール画",
+          "width": "48"
+        },
+        {
+          "height": "60",
+          "role": null,
+          "width": "26"
+        },
+        {
+          "height": "60",
+          "role": null,
+          "width": "26"
+        }
+      ],
+      "clientWidth": 305,
+      "scrollWidth": 305
+    },
+    "iframe_390": {
+      "bodyWidth": 375,
+      "clientWidth": 375,
+      "scrollWidth": 375
+    },
+    "setup_320": {
+      "clientWidth": 305,
+      "scrollWidth": 305
+    },
+    "setup_390": {
+      "clientWidth": 375,
+      "scrollWidth": 375
+    },
+    "mobile_method": "320/390px-wide iframe, 844px high; browser scrollbars reduce content width by 15px; not mobile-device or touch emulation"
+  },
+  "logs": {
+    "observed_error_entries": 163,
+    "application_error_entries": 0,
+    "extension_error_entries_excluded": 163
+  },
+  "screenshots": [
+    "screenshots/setup-desktop.jpg",
+    "screenshots/life-desktop.jpg",
+    "screenshots/setup-320.jpg",
+    "screenshots/setup-390.jpg",
+    "screenshots/life-320.jpg",
+    "screenshots/life-390.jpg"
+  ],
+  "limits": [
+    "The standard isolated browser scripts did not run; this was a separate UI test workflow.",
+    "The existing preview origin was reused with new QA save slots.",
+    "Not exhaustive across 972000 appearance combinations.",
+    "No Sites production deployment, real iPhone/Android, touch, or Safari testing."
+  ],
+  "screenshot_inventory": [
+    {
+      "path": "screenshots/setup-desktop.jpg",
+      "bytes": 126646,
+      "sha256": "285d7301533772c524e3984e368eeeb807c2e0c7a3d6ed0caf4c313d653b1656",
+      "format": "JPEG",
+      "size": [
+        1348,
+        926
+      ]
+    },
+    {
+      "path": "screenshots/life-desktop.jpg",
+      "bytes": 91375,
+      "sha256": "d6ba938ec830c96e6459362002ec5f7ea2e95164d0b8725e4ac254d5be429686",
+      "format": "JPEG",
+      "size": [
+        1348,
+        926
+      ]
+    },
+    {
+      "path": "screenshots/setup-320.jpg",
+      "bytes": 46571,
+      "sha256": "53647876bb1add2dffe9d9bc34e46ba43e6b2aa253d0f0811e42d48239e861d7",
+      "format": "JPEG",
+      "size": [
+        1363,
+        936
+      ]
+    },
+    {
+      "path": "screenshots/setup-390.jpg",
+      "bytes": 53493,
+      "sha256": "bbe8ad3a03f92f732284d150d38a8de17068cb9fd96e4e1d380b6beae44e5cef",
+      "format": "JPEG",
+      "size": [
+        1363,
+        936
+      ]
+    },
+    {
+      "path": "screenshots/life-320.jpg",
+      "bytes": 61018,
+      "sha256": "77d2932cfd62ef811d723185b7253ffe79867c1353d8ebc70de514a91eef9d04",
+      "format": "JPEG",
+      "size": [
+        1363,
+        936
+      ]
+    },
+    {
+      "path": "screenshots/life-390.jpg",
+      "bytes": 65962,
+      "sha256": "90cc284193fa24df021b3f9946d9fce2deb315d9729cb19ae2f10ea5c3a3f384",
+      "format": "JPEG",
+      "size": [
+        1363,
+        936
+      ]
+    }
+  ]
+}

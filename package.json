@@ -30,6 +30,8 @@
     "test:together": "node scripts/verify-together.mjs",
     "test:week": "node scripts/verify-week.mjs",
     "test:art": "node scripts/verify-pixel-art.mjs",
+    "test:characters": "node scripts/verify-character-art.mjs",
+    "test:characters:unit": "node --import tsx --test tests/character-art.test.ts",
     "test:reform:weeks": "node scripts/verify-reform.mjs --weeks",
     "test:legacy:standalone": "node scripts/verify-standalone.mjs && node scripts/verify-ui.mjs --standalone"
   },

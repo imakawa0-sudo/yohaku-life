@@ -1,0 +1,1051 @@
+{
+  "schema_version": 1,
+  "recipe_version": 1,
+  "purpose": "原画16条件の機械的な小サイズ変換。全選択肢を再合成するランタイム用レイヤーとは別の参照画像。",
+  "source_manifest": "docs/design/chatgpt-characters-20261123/manifest.json",
+  "source_manifest_sha256": "4c5515aa48fdbf4b951efb5e0f0454f97e4046fac48f90d6c73d6048f39abc26",
+  "pillow_version": "13.0.0",
+  "source_originals_modified": false,
+  "counts": {
+    "cases": 16,
+    "portrait_files": 14,
+    "walker_files": 2,
+    "independent_images": 15
+  },
+  "recipe": {
+    "source_alpha_cutoff": 16,
+    "alpha_rule": "派生画像のalphaが16未満の画素をRGBA=(0,0,0,0)へ。16以上の元色とalphaは維持。原本は変更しない。縮小後にも同じ閾値を適用。",
+    "crop_rule": "alphaが16以上の全画素を囲む矩形。A/G/H/Iと衣装4種はそれぞれ共通の外接矩形を使用。右端・下端は含まない。",
+    "fit_rule": "縦横比を保って縦横各2px小さい枠へ収める。寸法だけ整数へ丸め、横は中央、下端は1px余白で揃える。",
+    "native_margin_pixels": 1,
+    "resampling": "nearest",
+    "decision": "48×56・26×60の4倍表示でnearestとarea(BOX)を比較。nearestが目・輪郭・服の細部を明瞭に保ったため、最終変換はnearestを選択。",
+    "no_manual_retouch_or_feature_addition": true,
+    "no_palette_quantization": true,
+    "png_encoding": {
+      "compress_level": 9,
+      "optimize": false
+    }
+  },
+  "limits": [
+    "小さい顔では傷・そばかす・年齢の細線・目の差が弱くなる。全身26×60では特に判別しにくい。",
+    "この直接縮小画像は原画全体の参照用。10項目の全選択肢を表現するランタイムは別のレイヤーと小ドットの部品で構成する。",
+    "RGBを描き足したり形を変更したりしていない。完全な二値alphaへ変換していない。"
+  ],
+  "review": {
+    "path": "docs/design/character-runtime-20261123/native-review-4x.png",
+    "scale": 4,
+    "method": "nearest",
+    "sha256": "d2fbbc077eb3ad9cc55eae4ebdd38363918471a1706a516f2301a15e857ef546"
+  },
+  "files": [
+    {
+      "case_id": "portrait-A",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/portrait-a.png",
+        "sha256": "26fd915aa03bd25776b6a2990373a0666451f268ce16621f123402d58f080331",
+        "bytes": 935143,
+        "size": [
+          1161,
+          1354
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        79,
+        35,
+        1071,
+        1314
+      ],
+      "shared_crop_group": "face-shape-comparison",
+      "method": "nearest",
+      "fit_scale": 0.04222048475371384,
+      "fitted_size": [
+        42,
+        54
+      ],
+      "offset": [
+        3,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/portrait-a.png",
+      "bytes": 4051,
+      "sha256": "ba8ea042deece568c6b24858a57ff336a1df4bb32cccfa78dfc175046c6234a1",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 1212,
+      "partially_transparent_pixels": 1472,
+      "opaque_pixels": 4,
+      "nontransparent_bbox": [
+        3,
+        1,
+        45,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        3,
+        1,
+        45,
+        55
+      ],
+      "rgba_sha256": "8218053f62dd076d30a6c691d2b26c906b14a4174db18b31c317c5333fcf8bd0",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "portrait-B",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/portrait-b.png",
+        "sha256": "9a883fcccf044eb462f7ec238dfa7bd7e71ec69a50f70d5249cf7c396503e3a9",
+        "bytes": 1253567,
+        "size": [
+          1078,
+          1460
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        45,
+        39,
+        1043,
+        1420
+      ],
+      "shared_crop_group": null,
+      "method": "nearest",
+      "fit_scale": 0.0391020999275887,
+      "fitted_size": [
+        39,
+        54
+      ],
+      "offset": [
+        4,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/portrait-b.png",
+      "bytes": 4449,
+      "sha256": "038cf6275d6aa5be6997ffd0ae130adb2bcfe42c63b226907d86051eae06b793",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        253
+      ],
+      "fully_transparent_pixels": 1122,
+      "partially_transparent_pixels": 1566,
+      "opaque_pixels": 0,
+      "nontransparent_bbox": [
+        4,
+        1,
+        43,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        4,
+        1,
+        43,
+        55
+      ],
+      "rgba_sha256": "9812fa400ade8b287984cdb9384a135f0f319186a1a35bf64d09c9270bf6210f",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "portrait-C",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/portrait-c.png",
+        "sha256": "ab808a3e1cf97f62c089036a00abccef2f19a93362156110b7dfcbb43733ed4a",
+        "bytes": 1269519,
+        "size": [
+          1093,
+          1439
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        52,
+        40,
+        1048,
+        1400
+      ],
+      "shared_crop_group": null,
+      "method": "nearest",
+      "fit_scale": 0.039705882352941174,
+      "fitted_size": [
+        40,
+        54
+      ],
+      "offset": [
+        4,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/portrait-c.png",
+      "bytes": 4905,
+      "sha256": "f78bd7a3c6f8680cca41659bf7b71602d2dce252e4f1f55791cf30e5461674fb",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "fully_transparent_pixels": 1059,
+      "partially_transparent_pixels": 1629,
+      "opaque_pixels": 0,
+      "nontransparent_bbox": [
+        4,
+        1,
+        44,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        4,
+        1,
+        44,
+        55
+      ],
+      "rgba_sha256": "e32522f42e566c4793bec169a0d3d763982c592706d2ef124d0b03ba10acbc73",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "portrait-D",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/portrait-d.png",
+        "sha256": "876b60da339460ae2c426b027cb5485442f8da9f7af1838c918fec41c16e260b",
+        "bytes": 1297249,
+        "size": [
+          1108,
+          1420
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        10,
+        38,
+        1099,
+        1367
+      ],
+      "shared_crop_group": null,
+      "method": "nearest",
+      "fit_scale": 0.040632054176072234,
+      "fitted_size": [
+        44,
+        54
+      ],
+      "offset": [
+        2,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/portrait-d.png",
+      "bytes": 5024,
+      "sha256": "8433b0bb0292b27bb4bcee10fd01aa69ea4acbf0c296820d4af52f04f98f9c33",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 1040,
+      "partially_transparent_pixels": 1647,
+      "opaque_pixels": 1,
+      "nontransparent_bbox": [
+        2,
+        1,
+        46,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        2,
+        1,
+        46,
+        55
+      ],
+      "rgba_sha256": "ac0b9026884d410c6e1f696378f8e883ed288b7a75c303318e0166ae8d3d1510",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "portrait-E",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/portrait-e.png",
+        "sha256": "a76dc2cbf43918e75a5cd35c7fb7c87e4d10d20665b077359eac8a6570e7482f",
+        "bytes": 1217691,
+        "size": [
+          1111,
+          1415
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        39,
+        33,
+        1077,
+        1368
+      ],
+      "shared_crop_group": null,
+      "method": "nearest",
+      "fit_scale": 0.04044943820224719,
+      "fitted_size": [
+        42,
+        54
+      ],
+      "offset": [
+        3,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/portrait-e.png",
+      "bytes": 4667,
+      "sha256": "5f06314106f817486f946d24a8ca404b6ebb87d1700a1c4aa183518f013ef3fc",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        253
+      ],
+      "fully_transparent_pixels": 1098,
+      "partially_transparent_pixels": 1590,
+      "opaque_pixels": 0,
+      "nontransparent_bbox": [
+        3,
+        1,
+        45,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        3,
+        1,
+        45,
+        55
+      ],
+      "rgba_sha256": "2e62e672da105af60910a28372a33d070162f026af5932e45082f220e1022e83",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "portrait-F",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/portrait-f.png",
+        "sha256": "7e7f03a3ba65c4fc154176c29c11c1c421df249a1ab5c631cdcc6968d8cdf4eb",
+        "bytes": 985108,
+        "size": [
+          1161,
+          1354
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        50,
+        27,
+        1117,
+        1326
+      ],
+      "shared_crop_group": null,
+      "method": "nearest",
+      "fit_scale": 0.04157043879907621,
+      "fitted_size": [
+        44,
+        54
+      ],
+      "offset": [
+        2,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/portrait-f.png",
+      "bytes": 4473,
+      "sha256": "89d2a86eaed8782db40d5f11f83b880db82375ebf7ce7e5b566d1d57076d0ac1",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "fully_transparent_pixels": 1189,
+      "partially_transparent_pixels": 1499,
+      "opaque_pixels": 0,
+      "nontransparent_bbox": [
+        2,
+        1,
+        46,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        2,
+        1,
+        46,
+        55
+      ],
+      "rgba_sha256": "b08c0ce0f4bbb57298612f68f350269a39130d24de7e037c7c63a94aa30aa41b",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "portrait-G",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/portrait-g.png",
+        "sha256": "26fd915aa03bd25776b6a2990373a0666451f268ce16621f123402d58f080331",
+        "bytes": 935143,
+        "size": [
+          1161,
+          1354
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        79,
+        35,
+        1071,
+        1314
+      ],
+      "shared_crop_group": "face-shape-comparison",
+      "method": "nearest",
+      "fit_scale": 0.04222048475371384,
+      "fitted_size": [
+        42,
+        54
+      ],
+      "offset": [
+        3,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/portrait-g.png",
+      "bytes": 4051,
+      "sha256": "ba8ea042deece568c6b24858a57ff336a1df4bb32cccfa78dfc175046c6234a1",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 1212,
+      "partially_transparent_pixels": 1472,
+      "opaque_pixels": 4,
+      "nontransparent_bbox": [
+        3,
+        1,
+        45,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        3,
+        1,
+        45,
+        55
+      ],
+      "rgba_sha256": "8218053f62dd076d30a6c691d2b26c906b14a4174db18b31c317c5333fcf8bd0",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": "portrait-A"
+    },
+    {
+      "case_id": "portrait-H",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/portrait-h.png",
+        "sha256": "7fcd66261a52065f1939b979bf91770dc3cb33862552ffd9f7107f945284f641",
+        "bytes": 921492,
+        "size": [
+          1161,
+          1354
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        79,
+        35,
+        1071,
+        1314
+      ],
+      "shared_crop_group": "face-shape-comparison",
+      "method": "nearest",
+      "fit_scale": 0.04222048475371384,
+      "fitted_size": [
+        42,
+        54
+      ],
+      "offset": [
+        3,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/portrait-h.png",
+      "bytes": 4035,
+      "sha256": "4f8faa024b083711dd035f5917c93b621946e82524515b0882e9f5a20cda9dfb",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 1203,
+      "partially_transparent_pixels": 1483,
+      "opaque_pixels": 2,
+      "nontransparent_bbox": [
+        3,
+        1,
+        45,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        3,
+        1,
+        45,
+        55
+      ],
+      "rgba_sha256": "f1a272c8d6c31877067b10b35db3dbe24469e111b1644f2b33fcace8808ae024",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "portrait-I",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/portrait-i.png",
+        "sha256": "651adbdc14e00cf00c1fab1f43f70d70ca372dcadb6011a811745ca98cc32439",
+        "bytes": 968834,
+        "size": [
+          1161,
+          1354
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        79,
+        35,
+        1071,
+        1314
+      ],
+      "shared_crop_group": "face-shape-comparison",
+      "method": "nearest",
+      "fit_scale": 0.04222048475371384,
+      "fitted_size": [
+        42,
+        54
+      ],
+      "offset": [
+        3,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/portrait-i.png",
+      "bytes": 4058,
+      "sha256": "d1bbbd9aeb420ff02a4f581af7bd4fd0bc6ccdc306e24e4b61a4c826ce7e8e93",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 1195,
+      "partially_transparent_pixels": 1492,
+      "opaque_pixels": 1,
+      "nontransparent_bbox": [
+        3,
+        1,
+        45,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        3,
+        1,
+        45,
+        55
+      ],
+      "rgba_sha256": "1aee8328a353a5d5b40e327e25713b52d86be53cb7d554ac5f71b23cde2b318e",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "clothing-shirt",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/clothing-shirt.png",
+        "sha256": "30010b03daf1b91abc527d800ab5be1e4b2d7e92bf6255e9bcf95246cf96f8cf",
+        "bytes": 1119492,
+        "size": [
+          1087,
+          1447
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        42,
+        34,
+        1046,
+        1416
+      ],
+      "shared_crop_group": "clothing-comparison",
+      "method": "nearest",
+      "fit_scale": 0.03907380607814761,
+      "fitted_size": [
+        39,
+        54
+      ],
+      "offset": [
+        4,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/clothing-shirt.png",
+      "bytes": 4002,
+      "sha256": "bc172ab402b8dc4966c64cd07df7e4bf700715a6b80f58bee007949a5d282fc5",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 1295,
+      "partially_transparent_pixels": 1392,
+      "opaque_pixels": 1,
+      "nontransparent_bbox": [
+        4,
+        1,
+        43,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        4,
+        1,
+        43,
+        55
+      ],
+      "rgba_sha256": "20a75fadcbdaae7f234555ddeb6472e59123a908ec424411303ee7751f79635b",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "clothing-apron",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/clothing-apron.png",
+        "sha256": "b23ea54cf168553606529c554d572b1f91ee2910053c3267db79a0a6ecefeae5",
+        "bytes": 1035217,
+        "size": [
+          1087,
+          1446
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        42,
+        34,
+        1046,
+        1416
+      ],
+      "shared_crop_group": "clothing-comparison",
+      "method": "nearest",
+      "fit_scale": 0.03907380607814761,
+      "fitted_size": [
+        39,
+        54
+      ],
+      "offset": [
+        4,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/clothing-apron.png",
+      "bytes": 4069,
+      "sha256": "65c75de1198ece3eb92d4a44344f7d7fe19a97df396e91154bcef5b52f709501",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 1300,
+      "partially_transparent_pixels": 1386,
+      "opaque_pixels": 2,
+      "nontransparent_bbox": [
+        4,
+        1,
+        43,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        4,
+        1,
+        43,
+        55
+      ],
+      "rgba_sha256": "8282071243f121f18dcafd5180add4aa477693db565f7497659f8601de84513b",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "clothing-wrap",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/clothing-wrap.png",
+        "sha256": "5ac3e9352bc051a4b0e22a72d9bfa1835b633ae21db54b6b8251f906e9a58d80",
+        "bytes": 1030258,
+        "size": [
+          1087,
+          1446
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        42,
+        34,
+        1046,
+        1416
+      ],
+      "shared_crop_group": "clothing-comparison",
+      "method": "nearest",
+      "fit_scale": 0.03907380607814761,
+      "fitted_size": [
+        39,
+        54
+      ],
+      "offset": [
+        4,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/clothing-wrap.png",
+      "bytes": 4032,
+      "sha256": "5aa3d3ac5b4242bcc41a3ec270b9275cb4431b4e5407992cef491c5838a19d57",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 1299,
+      "partially_transparent_pixels": 1388,
+      "opaque_pixels": 1,
+      "nontransparent_bbox": [
+        4,
+        1,
+        43,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        4,
+        1,
+        43,
+        55
+      ],
+      "rgba_sha256": "a2b20dd7e5f90ee34a1404343b99cf29a5064e82a2f87f7127224c124071d009",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "clothing-coat",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/clothing-coat.png",
+        "sha256": "159b06190024b4267236ca29102a864a8a547774774e04e085bc2538de44c7da",
+        "bytes": 974631,
+        "size": [
+          1087,
+          1446
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        42,
+        34,
+        1046,
+        1416
+      ],
+      "shared_crop_group": "clothing-comparison",
+      "method": "nearest",
+      "fit_scale": 0.03907380607814761,
+      "fitted_size": [
+        39,
+        54
+      ],
+      "offset": [
+        4,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/clothing-coat.png",
+      "bytes": 3961,
+      "sha256": "6b4ccd7ebdf3865fb640e508268d151144f59e0cb077a81a834491487944138b",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 1287,
+      "partially_transparent_pixels": 1396,
+      "opaque_pixels": 5,
+      "nontransparent_bbox": [
+        4,
+        1,
+        43,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        4,
+        1,
+        43,
+        55
+      ],
+      "rgba_sha256": "bd024a6d7dfa0eb68cdff8690984f8a2aa74283fea3372a1f85305f0cc2c63aa",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "portrait-kaya",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/portrait-kaya.png",
+        "sha256": "af0b632bbb1ed58f0582e454bf5b3dd658744432eb8fc52eab50a4285a5617cb",
+        "bytes": 1000320,
+        "size": [
+          1083,
+          1452
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        43,
+        41,
+        1042,
+        1398
+      ],
+      "shared_crop_group": null,
+      "method": "nearest",
+      "fit_scale": 0.0397936624907885,
+      "fitted_size": [
+        40,
+        54
+      ],
+      "offset": [
+        4,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/portrait-kaya.png",
+      "bytes": 4060,
+      "sha256": "e1506f589c510439f74464aa0c259995e451c21d56f630df6f99a6cd9cebc83b",
+      "mode": "RGBA",
+      "size": [
+        48,
+        56
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 1318,
+      "partially_transparent_pixels": 1369,
+      "opaque_pixels": 1,
+      "nontransparent_bbox": [
+        4,
+        1,
+        44,
+        55
+      ],
+      "visible_bbox_alpha_128": [
+        4,
+        1,
+        44,
+        55
+      ],
+      "rgba_sha256": "cf27ce762549b074a9af7a64faee81622f0751aceace0ecc657ddd0b70219188",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "walker-kaya",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/walker-kaya.png",
+        "sha256": "f0d116a018a7f7d01c96c1bc4756bfb1ad6e3f114bc31e6f0735b6ef166cf97a",
+        "bytes": 725203,
+        "size": [
+          887,
+          1774
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        169,
+        19,
+        710,
+        1760
+      ],
+      "shared_crop_group": null,
+      "method": "nearest",
+      "fit_scale": 0.03331418724870764,
+      "fitted_size": [
+        18,
+        58
+      ],
+      "offset": [
+        4,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/walker-kaya.png",
+      "bytes": 2402,
+      "sha256": "1ca19e0096ed14430510aaf4340cf7ab17594722cd1fefdfa17102ac3bf7b943",
+      "mode": "RGBA",
+      "size": [
+        26,
+        60
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 929,
+      "partially_transparent_pixels": 630,
+      "opaque_pixels": 1,
+      "nontransparent_bbox": [
+        4,
+        1,
+        22,
+        59
+      ],
+      "visible_bbox_alpha_128": [
+        4,
+        1,
+        22,
+        59
+      ],
+      "rgba_sha256": "b6b08efbf71bba5084894cb6f67f3b208ab7fa1cbb68858022f82419c17f5cb2",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    },
+    {
+      "case_id": "walker-sui",
+      "source": {
+        "path": "docs/design/chatgpt-characters-20261123/originals/walker-sui.png",
+        "sha256": "f2a1554e5aae60859193c43cea6db64e327ee58112f1492625b85f5bb979a347",
+        "bytes": 844963,
+        "size": [
+          887,
+          1774
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ]
+      },
+      "crop_left_top_right_bottom_exclusive": [
+        134,
+        41,
+        761,
+        1733
+      ],
+      "shared_crop_group": null,
+      "method": "nearest",
+      "fit_scale": 0.034278959810874705,
+      "fitted_size": [
+        21,
+        58
+      ],
+      "offset": [
+        2,
+        1
+      ],
+      "output": "docs/design/character-runtime-20261123/native/walker-sui.png",
+      "bytes": 2822,
+      "sha256": "5eb46224c911dca328e8b2406d446938aed0778c55453e2031b2b573f5b6e9ed",
+      "mode": "RGBA",
+      "size": [
+        26,
+        60
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 808,
+      "partially_transparent_pixels": 749,
+      "opaque_pixels": 3,
+      "nontransparent_bbox": [
+        2,
+        1,
+        23,
+        59
+      ],
+      "visible_bbox_alpha_128": [
+        2,
+        1,
+        23,
+        59
+      ],
+      "rgba_sha256": "c863740299ec310b417247808d0af4277fdfc41b81c3db902422ffe4db6b9c78",
+      "transparent_pixels_have_zero_rgb": true,
+      "same_output_as": null
+    }
+  ]
+}

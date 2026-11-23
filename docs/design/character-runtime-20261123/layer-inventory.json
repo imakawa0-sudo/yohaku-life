@@ -1,0 +1,34 @@
+{
+  "source_folder": "docs/design/chatgpt-characters-20261123/originals",
+  "method": "alpha >=128; common A/H/I and garment crops; nearest sampling; spatial masks; 8-shade material palettes",
+  "portrait_grid": [
+    48,
+    56
+  ],
+  "walker_grid": [
+    26,
+    60
+  ],
+  "note": "The direct native references and runtime compositing atlas are separate. Features, missing covered forehead and outfit variants are completed on the native grid by characterArt.ts.",
+  "sources": {
+    "portrait-a.png": "26fd915aa03bd25776b6a2990373a0666451f268ce16621f123402d58f080331",
+    "portrait-h.png": "7fcd66261a52065f1939b979bf91770dc3cb33862552ffd9f7107f945284f641",
+    "portrait-i.png": "651adbdc14e00cf00c1fab1f43f70d70ca372dcadb6011a811745ca98cc32439",
+    "portrait-b.png": "9a883fcccf044eb462f7ec238dfa7bd7e71ec69a50f70d5249cf7c396503e3a9",
+    "portrait-c.png": "ab808a3e1cf97f62c089036a00abccef2f19a93362156110b7dfcbb43733ed4a",
+    "portrait-d.png": "876b60da339460ae2c426b027cb5485442f8da9f7af1838c918fec41c16e260b",
+    "portrait-e.png": "a76dc2cbf43918e75a5cd35c7fb7c87e4d10d20665b077359eac8a6570e7482f",
+    "portrait-f.png": "7e7f03a3ba65c4fc154176c29c11c1c421df249a1ab5c631cdcc6968d8cdf4eb",
+    "clothing-shirt.png": "30010b03daf1b91abc527d800ab5be1e4b2d7e92bf6255e9bcf95246cf96f8cf",
+    "clothing-apron.png": "b23ea54cf168553606529c554d572b1f91ee2910053c3267db79a0a6ecefeae5",
+    "clothing-wrap.png": "5ac3e9352bc051a4b0e22a72d9bfa1835b633ae21db54b6b8251f906e9a58d80",
+    "clothing-coat.png": "159b06190024b4267236ca29102a864a8a547774774e04e085bc2538de44c7da",
+    "walker-kaya.png": "f0d116a018a7f7d01c96c1bc4756bfb1ad6e3f114bc31e6f0735b6ef166cf97a",
+    "walker-sui.png": "f2a1554e5aae60859193c43cea6db64e327ee58112f1492625b85f5bb979a347"
+  },
+  "atlas": {
+    "path": "src/reform/art/characters/layers.json",
+    "bytes": 39905,
+    "sha256": "e4d7c032b79a0d261ad2e131f11c307f17b939745582341746b4a74aa5d6dbc7"
+  }
+}

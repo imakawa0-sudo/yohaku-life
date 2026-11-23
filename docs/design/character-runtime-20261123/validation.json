@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-23",
+  "timezone": "Asia/Taipei",
+  "base_commit": "e25f2641e6585c1ba30af53a00a15a661fc118fd",
+  "tests": {
+    "command": "node --import tsx --test tests/*.test.ts",
+    "total": 754,
+    "pass": 754,
+    "fail": 0,
+    "skip": 0,
+    "duration_ms": 6171.814227
+  },
+  "build": {
+    "command": "npm run build",
+    "success": true,
+    "standalone_bytes": 587906,
+    "standalone_sha256": "576d2ea33c123847adcb2da04ada00c9ecdc512512d3e9f1f451563a9b39ba51",
+    "same_bytes_as_ui_test": true
+  },
+  "reproducibility": {
+    "native_png_and_inventory_check": true,
+    "atlas_and_inventory_check": true,
+    "source_art_png_modified": false,
+    "A_G_identical": true
+  },
+  "source_files": {
+    "src/reform/characterArt.ts": {
+      "bytes": 13155,
+      "sha256": "c933a6e59de30ce0f351b8347af66a45d23fd5ccad6cf3bd9de2f6742708b40f"
+    },
+    "src/reform/pixelFigure.ts": {
+      "bytes": 486,
+      "sha256": "2e49a153ac57516b4e445e01c29e0c5dc1a088bdb8cc5f5e22c28dc34eb842fd"
+    },
+    "src/reform/art/characters/layers.json": {
+      "bytes": 39905,
+      "sha256": "e4d7c032b79a0d261ad2e131f11c307f17b939745582341746b4a74aa5d6dbc7"
+    },
+    "scripts/convert-character-originals.py": {
+      "bytes": 13803,
+      "sha256": "c2d7b8cfbeb9f3e5d65612cd0fa529d6ee6336e4c9172693c656d9773c863d68"
+    },
+    "scripts/build-character-layers.py": {
+      "bytes": 12429,
+      "sha256": "42e325b24f97316c484ce8532e54ff9d4e4f16b0d78472471759983ffc0c2280"
+    },
+    "tests/character-art.test.ts": {
+      "bytes": 7576,
+      "sha256": "bbb216da63fb189915be520240c5a72dd17b40eda644cad9e3577af5010e20e9"
+    },
+    "scripts/verify-character-art.mjs": {
+      "bytes": 31561,
+      "sha256": "1c9ca357dc8d7a9c8d556ab19440985009b7eff10fa4ce531881e8f63b25cd91"
+    }
+  },
+  "standard_isolated_browser_test": "Not executed successfully: Chromium socket EPERM. Separate Cloud Browser UI results are recorded in browser-qa.json."
+}

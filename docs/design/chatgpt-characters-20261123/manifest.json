@@ -23,12 +23,13 @@
     "source_art_visual_qa_complete": true,
     "transparency_verified_from_actual_pixels": true,
     "required_source_art_corrections_remaining": [],
-    "native_size_exports_created": false,
-    "native_size_visual_qa_complete": false,
-    "runtime_integrated": false,
-    "runtime_playtest_performed_for_this_set": false,
+    "native_size_exports_created": true,
+    "native_size_visual_qa_complete": true,
+    "runtime_integrated": true,
+    "runtime_playtest_performed_for_this_set": true,
     "production_ready": false,
-    "published_to_sites": false
+    "published_to_sites": false,
+    "production_ready_note": "小サイズ変換・GitHub組み込み・内部プレビューでの範囲を限定した試遊まで完了。通常の独立Chromium自動画面試験とSites公開後確認は未完了。"
   },
   "invariants": {
     "portrait_A_G_byte_identical": true,
@@ -41,10 +42,11 @@
     "generated_pngs_reencoded_or_edited_in_code": false
   },
   "technical_limits": [
-    "生成PNGの寸法は項目により異なる。ランタイム用の固定サイズへ変換した素材ではない。",
-    "背景は実alphaで透明だが、外周にごく低いalphaの色画素や半透明境界がある。透明度は0と255だけではない。",
-    "原寸の属性・画風・透明性を検証。縮小後の識別性とゲーム内表示は未検証。",
-    "16条件は代表例。顔・肌・髪・髪色・年齢・体格・目・特徴・服・染色の全組み合わせを網羅しない。"
+    "このフォルダの原画PNGは生成時の寸法と画素を保持する。固定サイズの派生画像とランタイム部品は../character-runtime-20261123/を参照。",
+    "原画の背景は実alphaで透明だが、外周にごく低いalphaの色画素や半透明境界がある。原画は二値alphaではない。",
+    "原寸と縮小後の代表条件を検証。全身26×60では顔の細かな違いが胸像より小さい。全組み合わせの目視確認ではない。",
+    "16条件は代表例。ゲームでは10項目41値を組み合わせて描画し、972,000通り全ての総当たり検証は行っていない。",
+    "通常の独立Chromium自動画面試験は実行環境のソケット制限で開始できなかった。内部プレビューでの実操作は別記録。Sites本番・実機・Safariは未確認。"
   ],
   "archived_revisions": [
     {
@@ -89,7 +91,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "portrait-a",
       "generation_sequence": 2,
       "same_image_as": null,
@@ -110,7 +112,8 @@
       "source_art_qa_note": "元の穏やかな細い目を表現。H/Iの基準。Gと同一画像。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/portrait-a.png"
     },
     {
       "case_id": "portrait-B",
@@ -132,7 +135,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "portrait-b",
       "generation_sequence": 12,
       "same_image_as": null,
@@ -153,7 +156,8 @@
       "source_art_qa_note": "栗色のおかっぱ、丸顔、そばかす、桃肌、赤茶下衣と淡いクリーム色の前掛けを保持。背景透過。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/portrait-b.png"
     },
     {
       "case_id": "portrait-C",
@@ -175,7 +179,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "portrait-c",
       "generation_sequence": 9,
       "same_image_as": null,
@@ -196,7 +200,8 @@
       "source_art_qa_note": "角張った輪郭・切れ長の目・画面左頬の斜め傷・灰褐色の長いウェーブ髪・藍の合わせ服。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/portrait-c.png"
     },
     {
       "case_id": "portrait-D",
@@ -218,7 +223,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "portrait-d",
       "generation_sequence": 10,
       "same_image_as": null,
@@ -239,7 +244,8 @@
       "source_art_qa_note": "銀のまとめ髪と丸眼鏡を保持し、老年の顔と厚みのある首・肩・上半身を確認。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/portrait-d.png"
     },
     {
       "case_id": "portrait-E",
@@ -261,7 +267,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "portrait-e",
       "generation_sequence": 13,
       "same_image_as": null,
@@ -282,7 +288,8 @@
       "source_art_qa_note": "深い褐色肌・金系の三つ編み・成人の顔・錆色下衣とクリーム色の前掛けを保持。背景透過。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/portrait-e.png"
     },
     {
       "case_id": "portrait-F",
@@ -304,7 +311,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "portrait-f",
       "generation_sequence": 1,
       "same_image_as": null,
@@ -325,7 +332,8 @@
       "source_art_qa_note": "黒い短髪・丸眼鏡・苔色シャツを維持し、額・目尻・頬・首で老年らしさを表現。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/portrait-f.png"
     },
     {
       "case_id": "portrait-G",
@@ -347,7 +355,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "portrait-a",
       "generation_sequence": 2,
       "same_image_as": "portrait-A",
@@ -368,7 +376,8 @@
       "source_art_qa_note": "Aから無加工で複製。ファイルのSHA-256およびGit blob SHAがAと同一。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/portrait-g.png"
     },
     {
       "case_id": "portrait-H",
@@ -390,7 +399,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "portrait-h",
       "generation_sequence": 4,
       "same_image_as": null,
@@ -411,7 +420,8 @@
       "source_art_qa_note": "Aと主要な顔・髪・服を保ち、頬の丸みと丸い下顔部を表現。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/portrait-h.png"
     },
     {
       "case_id": "portrait-I",
@@ -433,7 +443,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "portrait-i",
       "generation_sequence": 5,
       "same_image_as": null,
@@ -454,7 +464,8 @@
       "source_art_qa_note": "Aと主要な顔・髪・服を保ち、直線的な顎と角のある顎先を表現。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/portrait-i.png"
     },
     {
       "case_id": "clothing-shirt",
@@ -476,7 +487,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "clothing-shirt",
       "generation_sequence": 3,
       "same_image_as": null,
@@ -497,7 +508,8 @@
       "source_art_qa_note": "桃肌・成人・丸く開いた目の衣装比較基準。Aとは異なる外見条件。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/clothing-shirt.png"
     },
     {
       "case_id": "clothing-apron",
@@ -519,7 +531,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "clothing-apron",
       "generation_sequence": 6,
       "same_image_as": null,
@@ -540,7 +552,8 @@
       "source_art_qa_note": "shirtと同一人物性を目視確認。赤茶の下衣に淡いクリーム色の前掛け。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/clothing-apron.png"
     },
     {
       "case_id": "clothing-wrap",
@@ -562,7 +575,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "clothing-wrap",
       "generation_sequence": 7,
       "same_image_as": null,
@@ -583,7 +596,8 @@
       "source_art_qa_note": "shirtと同一人物性を目視確認。藍色の合わせ服と淡い縁取り。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/clothing-wrap.png"
     },
     {
       "case_id": "clothing-coat",
@@ -605,7 +619,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "clothing-coat",
       "generation_sequence": 8,
       "same_image_as": null,
@@ -626,7 +640,8 @@
       "source_art_qa_note": "shirtと同一人物性を目視確認。葡萄色の外套、折り返し襟、前開き。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/clothing-coat.png"
     },
     {
       "case_id": "walker-kaya",
@@ -648,7 +663,7 @@
         26,
         60
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "walker-kaya",
       "generation_sequence": 15,
       "same_image_as": null,
@@ -669,7 +684,8 @@
       "source_art_qa_note": "胸像と同じ顔・髪・目・左頬の傷・衣装。成人の標準体格、約5頭身。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/walker-kaya.png"
     },
     {
       "case_id": "walker-sui",
@@ -691,7 +707,7 @@
         26,
         60
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "walker-sui-v2",
       "generation_sequence": 16,
       "same_image_as": null,
@@ -712,7 +728,8 @@
       "source_art_qa_note": "v2を最終版とする。髷を除いて約5頭身。肩・胴・腕・脚の厚み、成人の顔・そばかす・黒結い髪・生成りの服を確認。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/walker-sui.png"
     },
     {
       "case_id": "portrait-kaya",
@@ -734,7 +751,7 @@
         48,
         56
       ],
-      "native_runtime_export_created": false,
+      "native_runtime_export_created": true,
       "generation_key": "portrait-kaya",
       "generation_sequence": 11,
       "same_image_as": null,
@@ -755,7 +772,8 @@
       "source_art_qa_note": "丸顔・穏やかな細い目・黒短髪・桃肌・左頬の斜め傷・黄土色の合わせ服を全身と照合。",
       "required_source_art_corrections_remaining": [],
       "runtime_integrated": false,
-      "production_ready": false
+      "production_ready": false,
+      "native_runtime_export_path": "../character-runtime-20261123/native/portrait-kaya.png"
     }
   ],
   "github_persistence": {
@@ -768,5 +786,24 @@
     "package_file_count": 25,
     "verification_method": "保存前に各Git blob SHAと元ファイルのGit blob SHAを照合し、main更新後に25ファイルのpath・mode・blob SHAと差分を再確認する。",
     "completion_record": "このmanifestを含むmain上のコミットと、その保存後の照合結果を納品時に報告する。コミット自身のSHAは循環参照を避けるため埋め込まない。"
+  },
+  "runtime_integration": {
+    "date": "2026-11-23",
+    "base_repository_commit": "e25f2641e6585c1ba30af53a00a15a661fc118fd",
+    "documentation": "../character-runtime-20261123/README.md",
+    "source_originals_modified": false,
+    "native_portrait_size": [
+      48,
+      56
+    ],
+    "native_walker_size": [
+      26,
+      60
+    ],
+    "appearance_field_count": 10,
+    "appearance_option_count": 41,
+    "appearance_combination_count": 972000,
+    "runtime_strategy": "原画由来の部品・独立した素材色・小ドットの特徴を合成。人物名やIDで固定画像を選ばない。",
+    "all_combinations_exhaustively_tested": false
   }
 }
