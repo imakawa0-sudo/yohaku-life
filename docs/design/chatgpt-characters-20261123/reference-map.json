@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "existing_repository": "imakawa0-sudo/yohaku-life",
+  "existing_reference_commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+  "generated_paths_are_relative_to_this_folder": true,
+  "references": [
+    {
+      "input_file_name": "portrait-f.png",
+      "type": "existing_repository_file",
+      "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-f.png",
+      "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+      "sha256": "fe4a700b5097815783a41aa43d0aff1c3aa5c714d170b880f5ada01e2fa8ba46",
+      "git_blob_sha": "2b4a652f74008294d5d1d9f5f194b17b66261e66"
+    },
+    {
+      "input_file_name": "style-reference-first-trial.png",
+      "type": "existing_repository_file",
+      "repository_path": "docs/design/canva-characters-20261123/review-export/sources/style-reference-first-trial.png",
+      "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+      "sha256": "b070a595a24dc34591a9f85f88f826168d283b51e5f7c28675290c9b7950959f",
+      "git_blob_sha": "986307d1fb1f1e22f13c8c975633af0b86237c02"
+    },
+    {
+      "input_file_name": "portrait-a.png",
+      "type": "existing_repository_file",
+      "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-a.png",
+      "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+      "sha256": "c213283814d3778b1bf4bcf5f768341fb5ef5bfde9a22a51578320933abcda90",
+      "git_blob_sha": "b67c089625ea982b30d042d188c6f319cb31b081"
+    },
+    {
+      "input_file_name": "clothing-shirt.png",
+      "type": "existing_repository_file",
+      "repository_path": "docs/design/canva-characters-20261123/review-export/crops/clothing-shirt.png",
+      "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+      "sha256": "9e4379b3ed6ec4a2aa3f43c5f8cad6eeba44c19fb229f6054656cbf8ca3838be",
+      "git_blob_sha": "bc497d5a20c6289005f293356b5efe22e210d258"
+    },
+    {
+      "input_file_name": "exec-b61726af-4a78-47c6-8afc-a0dd956b0ef6.png",
+      "type": "generated_master",
+      "path": "originals/portrait-a.png",
+      "generation_key": "portrait-a",
+      "sha256": "26fd915aa03bd25776b6a2990373a0666451f268ce16621f123402d58f080331",
+      "git_blob_sha": "b02acf1728aa9c034433f321ce572226fcad10aa"
+    },
+    {
+      "input_file_name": "exec-3c8d687c-1052-4520-9f53-d4495ab3b971.png",
+      "type": "generated_master",
+      "path": "originals/clothing-shirt.png",
+      "generation_key": "clothing-shirt",
+      "sha256": "30010b03daf1b91abc527d800ab5be1e4b2d7e92bf6255e9bcf95246cf96f8cf",
+      "git_blob_sha": "aed309fbb3865fd78c3cded5ef7ad2491fcaa49d"
+    },
+    {
+      "input_file_name": "portrait-c.png",
+      "type": "existing_repository_file",
+      "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-c.png",
+      "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+      "sha256": "00dffff85563eef9e8e73b99f28dd45f1d643e949cb2eda42a3903cd77cc5c5c",
+      "git_blob_sha": "e4391a5e88a5f0c7e78ae2d772138d9106e8db0d"
+    },
+    {
+      "input_file_name": "portrait-d.png",
+      "type": "existing_repository_file",
+      "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-d.png",
+      "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+      "sha256": "fd4622635050f2ee91cd0269e8f6ea444505e215a0981ae28750bba25d4795d9",
+      "git_blob_sha": "1fdb56d6eb7ce17fcfcff6156fe6c2b051c622f3"
+    },
+    {
+      "input_file_name": "portrait-kaya.png",
+      "type": "existing_repository_file",
+      "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-kaya.png",
+      "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+      "sha256": "da73bf1fbf08d5dda33b68a3f061d186e3c8c6132cb08faf0cf6bf3e2996e239",
+      "git_blob_sha": "5cc1a8ca938c9d32d6d140ab60387c5a32c790cf"
+    },
+    {
+      "input_file_name": "portrait-b.png",
+      "type": "existing_repository_file",
+      "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-b.png",
+      "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+      "sha256": "694e1c362b9ac70407f58fe3a674b7e0abc9f921081d2966377e657db77984df",
+      "git_blob_sha": "855967c1234b96940502bf744d1e94d17f63fea4"
+    },
+    {
+      "input_file_name": "portrait-e.png",
+      "type": "existing_repository_file",
+      "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-e.png",
+      "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+      "sha256": "4b7a33772090a1268ab0303cc9e1a9ae93000b7ec7108d21126bbf40ab91bc78",
+      "git_blob_sha": "4b569e95c49b4cc28ee4cd810e63611886c8383a"
+    },
+    {
+      "input_file_name": "walker-sui.png",
+      "type": "existing_repository_file",
+      "repository_path": "docs/design/canva-characters-20261123/review-export/crops/walker-sui.png",
+      "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+      "sha256": "1c65e744b63ca37431dabd8c82567bb2f33db3b7622a8b673ac21f707969b1c3",
+      "git_blob_sha": "2512c8c834422a7d4ad83eb44b833b034fc7b943"
+    },
+    {
+      "input_file_name": "style-preview.png",
+      "type": "existing_repository_file",
+      "repository_path": "public/yohaku-style-preview.png",
+      "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+      "sha256": "3f0d009e656ea6324135f1d320b23db02739d5ba9419ad078c6fb1f96479a7f1",
+      "git_blob_sha": "0934adb1ef526d440dc42ea775ff9bfbb8c604a4"
+    },
+    {
+      "input_file_name": "exec-781a68e6-9815-46a1-9da3-dd388c55346b.png",
+      "type": "generated_master",
+      "path": "originals/portrait-kaya.png",
+      "generation_key": "portrait-kaya",
+      "sha256": "af0b632bbb1ed58f0582e454bf5b3dd658744432eb8fc52eab50a4285a5617cb",
+      "git_blob_sha": "03207cd1d860049d9f769703b217db80bb741632"
+    },
+    {
+      "input_file_name": "walker-kaya.png",
+      "type": "existing_repository_file",
+      "repository_path": "docs/design/canva-characters-20261123/review-export/crops/walker-kaya.png",
+      "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+      "sha256": "e649561614bbd77fc3dfb5b082572fbd9a454547fc5d073a5fe90f8957d46ca3",
+      "git_blob_sha": "252b8c35cac13e12e8c85fade19102ce7eeda2b1"
+    },
+    {
+      "input_file_name": "exec-e8304197-0398-497a-947f-0b8230576518.png",
+      "type": "generated_archive",
+      "path": "archive/walker-sui-v1.png",
+      "generation_key": "walker-sui",
+      "sha256": "899633ba0c88b2fed96e05f86e66f69607af4875d7b73c3f1c55abb91fd52c30",
+      "git_blob_sha": "4beaa5ac525d552eb9cbe209ad006dc0287c1334"
+    },
+    {
+      "input_file_name": "exec-35059ce2-6f77-446a-bad8-f500db5f1e62.png",
+      "type": "generated_master",
+      "path": "originals/walker-kaya.png",
+      "generation_key": "walker-kaya",
+      "sha256": "f0d116a018a7f7d01c96c1bc4756bfb1ad6e3f114bc31e6f0735b6ef166cf97a",
+      "git_blob_sha": "9cc91efceeb6a6628803601b243aa051e32f5bf6"
+    }
+  ]
+}

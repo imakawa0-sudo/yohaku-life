@@ -1,0 +1,355 @@
+{
+  "date": "2026-11-23",
+  "timezone": "Asia/Taipei",
+  "authority": "Original game reference appearance; generated image labels are not accepted as character settings",
+  "renderer_file": "../../../src/reform/pixelFigure.ts",
+  "renderer_sha256": "ed6cc890095716c6885f5302aca7fc7ebb9b1ea27144c136221504178d672e17",
+  "people_model_sha256": "a5faf455b44a757d66843f9923036d5dea793a3fcbe416123f99772bae6c777d",
+  "case_count": 16,
+  "cases": [
+    {
+      "case_id": "portrait-A",
+      "kind": "portrait",
+      "appearance": {
+        "face": "oval",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "4ababde03804b319155681cd9a51b0a950cb06effb3850a713c30488fa655bb6"
+    },
+    {
+      "case_id": "portrait-B",
+      "kind": "portrait",
+      "appearance": {
+        "face": "round",
+        "skin": "peach",
+        "hair": "bob",
+        "hairColor": "chestnut",
+        "age": "adult",
+        "build": "slight",
+        "eyes": "open",
+        "mark": "freckles",
+        "clothing": "apron",
+        "dye": "brick"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "c09735f2e81e47e073f47f9229e5597c3e0a80edc57e3443d016b82aa8465b2c"
+    },
+    {
+      "case_id": "portrait-C",
+      "kind": "portrait",
+      "appearance": {
+        "face": "angular",
+        "skin": "wheat",
+        "hair": "wave",
+        "hairColor": "ash",
+        "age": "young",
+        "build": "slight",
+        "eyes": "straight",
+        "mark": "scar",
+        "clothing": "wrap",
+        "dye": "indigo"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "e59c2a939e22526f2b94b1ac99005646fe875262c518727f898253c91c4ec2dd"
+    },
+    {
+      "case_id": "portrait-D",
+      "kind": "portrait",
+      "appearance": {
+        "face": "oval",
+        "skin": "bronze",
+        "hair": "knot",
+        "hairColor": "silver",
+        "age": "elder",
+        "build": "broad",
+        "eyes": "soft",
+        "mark": "glasses",
+        "clothing": "coat",
+        "dye": "plum"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "8bc6db20604eda66d49500381cdd2a8124274fe92de4df99e8b6b7333e4091d6"
+    },
+    {
+      "case_id": "portrait-E",
+      "kind": "portrait",
+      "appearance": {
+        "face": "round",
+        "skin": "umber",
+        "hair": "braid",
+        "hairColor": "honey",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "apron",
+        "dye": "rust"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "1213172fca6b9237d180678c08e21486cac8c3aa72af49dd9ad1a50784d43cc0"
+    },
+    {
+      "case_id": "portrait-F",
+      "kind": "portrait",
+      "appearance": {
+        "face": "oval",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "elder",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "glasses",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "3734040f70259a68f2662908d237ed5abc5ca5ed10b2fcb0af9f422760da95c7"
+    },
+    {
+      "case_id": "portrait-G",
+      "kind": "portrait",
+      "appearance": {
+        "face": "oval",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "4ababde03804b319155681cd9a51b0a950cb06effb3850a713c30488fa655bb6"
+    },
+    {
+      "case_id": "portrait-H",
+      "kind": "portrait",
+      "appearance": {
+        "face": "round",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "d55766a33e0201d9808a83121be0923c27fb90acb106f8d76cf3ac18f301f755"
+    },
+    {
+      "case_id": "portrait-I",
+      "kind": "portrait",
+      "appearance": {
+        "face": "angular",
+        "skin": "ivory",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "5a8eecb7400443a022d0b6712375c116817599330817c0c1b452a07b0336e0bb"
+    },
+    {
+      "case_id": "clothing-shirt",
+      "kind": "portrait",
+      "appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "shirt",
+        "dye": "moss"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "191fc5fd00eeef175374cb66f0c92cc40e4bb145684054387b21e7a780b6fc1c"
+    },
+    {
+      "case_id": "clothing-apron",
+      "kind": "portrait",
+      "appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "apron",
+        "dye": "brick"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "1637c6aea28a86aea628617542d59d2cc104a53d0eb4d85f0b777ca37dbcb635"
+    },
+    {
+      "case_id": "clothing-wrap",
+      "kind": "portrait",
+      "appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "wrap",
+        "dye": "indigo"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "7ed78c1114155fd132112dea69610882ac9ce810362da87afdf8bff1318fb3c7"
+    },
+    {
+      "case_id": "clothing-coat",
+      "kind": "portrait",
+      "appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "medium",
+        "eyes": "open",
+        "mark": "none",
+        "clothing": "coat",
+        "dye": "plum"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "459102365873d1b098508e8dbd87ba3e73cc69d1cf46a6c298c3a43bb20b21ba"
+    },
+    {
+      "case_id": "walker-kaya",
+      "kind": "walker",
+      "appearance": {
+        "face": "round",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "scar",
+        "clothing": "wrap",
+        "dye": "rust"
+      },
+      "native_size": [
+        26,
+        60
+      ],
+      "original_reference_rgba_sha256": "774a416f1e643671a4508dd593c6b644d14eba9b9bfddd6d53f8ad8cf30d2eef"
+    },
+    {
+      "case_id": "walker-sui",
+      "kind": "walker",
+      "appearance": {
+        "face": "oval",
+        "skin": "peach",
+        "hair": "knot",
+        "hairColor": "ink",
+        "age": "adult",
+        "build": "broad",
+        "eyes": "straight",
+        "mark": "freckles",
+        "clothing": "wrap",
+        "dye": "flax"
+      },
+      "native_size": [
+        26,
+        60
+      ],
+      "original_reference_rgba_sha256": "276e021d45a6ef4572903836c6a4eba2f3ac12b37fd39d52e32b19f82e20c87b"
+    },
+    {
+      "case_id": "portrait-kaya",
+      "kind": "portrait",
+      "appearance": {
+        "face": "round",
+        "skin": "peach",
+        "hair": "crop",
+        "hairColor": "ink",
+        "age": "young",
+        "build": "medium",
+        "eyes": "soft",
+        "mark": "scar",
+        "clothing": "wrap",
+        "dye": "rust"
+      },
+      "native_size": [
+        48,
+        56
+      ],
+      "original_reference_rgba_sha256": "8285f1a855ab03154db823b0bb757616acefadc3265ff65d25a60e4fef4e802b"
+    }
+  ],
+  "control_pair": {
+    "same_appearance": [
+      "portrait-A",
+      "portrait-G"
+    ],
+    "portrait-H": "same as A except round face",
+    "portrait-I": "same as A except angular face"
+  }
+}

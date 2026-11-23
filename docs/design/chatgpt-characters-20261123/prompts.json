@@ -1,0 +1,459 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "Asia/Taipei",
+  "provider": "ChatGPT image generation",
+  "source_records": "16 ordered generation records supplied by the generation operator; Sui v1 is retained as the historical reference used for Kaya and Sui v2.",
+  "output_case_count": 16,
+  "generated_files_are_unmodified_byte_copies": true,
+  "identical_copy_cases": [
+    {
+      "case_id": "portrait-G",
+      "output": "originals/portrait-g.png",
+      "copy_of_case": "portrait-A",
+      "copy_of": "originals/portrait-a.png",
+      "reason": "Original game appearance for A and G is identical; no independent generation."
+    }
+  ],
+  "generation_call_count": 16,
+  "final_independent_image_count": 15,
+  "archived_revision_count": 1,
+  "generations": [
+    {
+      "sequence_in_records": 1,
+      "case_id": "portrait-F",
+      "key": "portrait-f",
+      "output": "originals/portrait-f.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Game character portrait for 「余白の暮らし」, final separate transparent PNG.\nInput 1 is the edit target, F. Input 2 is the accepted pixel-art STYLE reference only; do not copy its other people.\nFix only the missing OLD AGE and background of F. Keep the exact short ink-black hairstyle, pale ivory skin, oval face, medium build, round glasses, moss-green collared button shirt, 3/4 view toward screen-right, framing and quiet warm personality.\nMake this unmistakably an elderly adult through facial anatomy: fine forehead creases, crow's feet, gently hooded soft narrow eyes inside the round glasses, mature nose, visible nasolabial creases, slightly softened sagging cheeks, age at neck. A dignified warm elder, not a young person with glasses. Absolutely keep hair BLACK, not silver/gray, no beard, no apron.\nMatch the accepted original reference's carefully shaded low-resolution pixel art: clean square pixel clusters, restrained warm muted palette, crisp stepped contours, subtle face shading; no smooth painting or vector treatment. Single head-and-shoulders bust filling a roughly 6:7 portrait canvas, full hair and shoulders visible, flat lower torso crop. Transparent empty background with real alpha; no paper, checkerboard drawing, backdrop, glow, ground shadow, label, frame, lettering, watermark or additional figures.",
+      "references": [
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-f.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "fe4a700b5097815783a41aa43d0aff1c3aa5c714d170b880f5ada01e2fa8ba46",
+          "git_blob_sha": "2b4a652f74008294d5d1d9f5f194b17b66261e66"
+        },
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/sources/style-reference-first-trial.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "b070a595a24dc34591a9f85f88f826168d283b51e5f7c28675290c9b7950959f",
+          "git_blob_sha": "986307d1fb1f1e22f13c8c975633af0b86237c02"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 2,
+      "case_id": "portrait-A",
+      "key": "portrait-a",
+      "output": "originals/portrait-a.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Final separate transparent game portrait PNG, reference case A (also used unchanged for G) for 「余白の暮らし」.\nInput 1 is target portrait A; input 2 is accepted pixel-art STYLE reference only.\nKeep the target's identity, young ADULT age, oval slightly long facial outline, pale ivory skin, short ink-black side-swept cropped hair, medium build, moss-green collared shirt, 3/4 view looking toward screen-right, gentle neutral smile, head/shoulder layout. Correct the eyes to visibly SOFT NARROW eyes with relaxed gently lowered upper eyelids; not round wide-open doll eyes. No glasses, scars or freckles. Do not make a child.\nMatch the first style reference's elegant friendly low-resolution pixel art with clean square pixel clusters, crisp stepped contour, subtle natural face shading and muted earthy palette. Keep the pixel scale and detail close to the input, not a high-detail painterly anime portrait. Single bust, full hair and shoulders, flat lower torso cut; approximately 6:7 portrait composition filling most of canvas with small safe margin. Real transparent alpha background; no cream paper, no backdrop, no drawn checkerboard, no shadow, no text, name, grid, frame or additional figures. This image is the master for controlled round/angular face variants, so retain all non-eye details.",
+      "references": [
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-a.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "c213283814d3778b1bf4bcf5f768341fb5ef5bfde9a22a51578320933abcda90",
+          "git_blob_sha": "b67c089625ea982b30d042d188c6f319cb31b081"
+        },
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/sources/style-reference-first-trial.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "b070a595a24dc34591a9f85f88f826168d283b51e5f7c28675290c9b7950959f",
+          "git_blob_sha": "986307d1fb1f1e22f13c8c975633af0b86237c02"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 3,
+      "case_id": "clothing-shirt",
+      "key": "clothing-shirt",
+      "output": "originals/clothing-shirt.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Final single transparent portrait asset, CLOTHING comparison master person, for 「余白の暮らし」.\nInput 1 is the existing SHIRT master and the identity to preserve. Input 2 is only the approved pixel-art style.\nRemove the paper background and finish this portrait in the accepted style while preserving their exact facial identity, haircut, pose, expression, shoulders, and clothing. This is a MATURE ADULT with warm peach skin, oval face, short ink-black side-swept cropped hair, medium average physique, OPEN round friendly eyes, no mark/glasses/scar/freckles, moss-green collared work shirt with buttons. Maintain a visibly mature adult face, distinct from the young ivory-skinned A character. No stubble, no added accessories. Relaxed 3/4 view toward screen-right, head-and-shoulders bust to upper torso, full hair and shoulders in frame, flat lower crop, small clear margins.\nCoherent hand-placed-looking pixel art: hard-edged square pixel clusters, crisp stepped outline, warm muted natural colors, understated shading like the provided first-trial sheet. No soft painted or vector style. One person only. This is the master whose EXACT same head, hair, expression, body and composition will be reused for three clothing-only edits. Real transparent alpha background, no paper, checkerboard drawing, background, ground shadow, text, labels, borders, or extra objects.",
+      "references": [
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/crops/clothing-shirt.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "9e4379b3ed6ec4a2aa3f43c5f8cad6eeba44c19fb229f6054656cbf8ca3838be",
+          "git_blob_sha": "bc497d5a20c6289005f293356b5efe22e210d258"
+        },
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/sources/style-reference-first-trial.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "b070a595a24dc34591a9f85f88f826168d283b51e5f7c28675290c9b7950959f",
+          "git_blob_sha": "986307d1fb1f1e22f13c8c975633af0b86237c02"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 4,
+      "case_id": "portrait-H",
+      "key": "portrait-h",
+      "output": "originals/portrait-h.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Controlled face-shape edit for the game 「余白の暮らし」. The attached transparent pixel portrait is the MASTER A image. Create ONE matching separate transparent PNG. Keep the same short ink-black hairstyle, ivory skin tone, young adult age, medium build, soft narrow relaxed eyes, eye placement, mouth and smile, nose, ears, moss-green collared shirt, 3/4 screen-right pose, canvas layout, scale, palette, exact pixel-art style. Preserve all these details as closely as possible. Only change the FACIAL OUTLINE specified below. No aging, new marks, glasses, hair edits, new clothing or wide round eyes. Preserve real alpha transparency; no background/paper/glow/shadow/text/frame/labels/extra people.\nFace outline H: a clearly ROUNDER face with fuller softly curved cheek contours and a short rounded chin, compared with A's longer oval. It must still obviously be the same young adult in the exact same pose with the same narrow soft eyes. Roundness only, not childlike proportions.",
+      "references": [
+        {
+          "type": "generated_master",
+          "path": "originals/portrait-a.png",
+          "generation_key": "portrait-a",
+          "sha256": "26fd915aa03bd25776b6a2990373a0666451f268ce16621f123402d58f080331",
+          "git_blob_sha": "b02acf1728aa9c034433f321ce572226fcad10aa"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 5,
+      "case_id": "portrait-I",
+      "key": "portrait-i",
+      "output": "originals/portrait-i.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Controlled face-shape edit for the game 「余白の暮らし」. The attached transparent pixel portrait is the MASTER A image. Create ONE matching separate transparent PNG. Keep the same short ink-black hairstyle, ivory skin tone, young adult age, medium build, soft narrow relaxed eyes, eye placement, mouth and smile, nose, ears, moss-green collared shirt, 3/4 screen-right pose, canvas layout, scale, palette, exact pixel-art style. Preserve all these details as closely as possible. Only change the FACIAL OUTLINE specified below. No aging, new marks, glasses, hair edits, new clothing or wide round eyes. Preserve real alpha transparency; no background/paper/glow/shadow/text/frame/labels/extra people.\nFace outline I: a clearly ANGULAR face, defined cheekbone angles, straighter side contours and a more squared angular jaw/chin, compared with A's smooth oval. It must still obviously be the same young adult, same narrow soft eyes and warm expression. Angular outline only, no scowl, masculinity exaggeration or aging.",
+      "references": [
+        {
+          "type": "generated_master",
+          "path": "originals/portrait-a.png",
+          "generation_key": "portrait-a",
+          "sha256": "26fd915aa03bd25776b6a2990373a0666451f268ce16621f123402d58f080331",
+          "git_blob_sha": "b02acf1728aa9c034433f321ce572226fcad10aa"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 6,
+      "case_id": "clothing-apron",
+      "key": "clothing-apron",
+      "output": "originals/clothing-apron.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Clothing-only edit for the same game character. Input is the FINAL SHIRT MASTER. Make exactly ONE single separate transparent pixel portrait. Treat the entire head, hair, ears, face, skin, neck, expression, head position, scale and all non-clothing pixels as locked: keep them unchanged. Same mature adult, oval face, peach skin, short black cropped hair, open friendly eyes, medium build, same 3/4 pose and silhouette and layout. Change only the garment below the neck as specified. Preserve master pixel-art technique, hard pixel clusters, warm muted palette and transparent alpha. Do not add accessories to head/face, no labels, borders, text, paper background, shadow, or extra figures.\nReplace ONLY the moss shirt outfit with a brick-red/burnt reddish-brown collared work shirt UNDER a light pale-cream linen bib APRON. The apron is a genuinely separate garment: two cream shoulder straps and a pale cream central bib covering chest, small subtle seam/pocket allowed if in framing. Red dye belongs to the underlying shirt and sleeves, NEVER the apron. Maintain the exact same torso volume and shoulder width.",
+      "references": [
+        {
+          "type": "generated_master",
+          "path": "originals/clothing-shirt.png",
+          "generation_key": "clothing-shirt",
+          "sha256": "30010b03daf1b91abc527d800ab5be1e4b2d7e92bf6255e9bcf95246cf96f8cf",
+          "git_blob_sha": "aed309fbb3865fd78c3cded5ef7ad2491fcaa49d"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 7,
+      "case_id": "clothing-wrap",
+      "key": "clothing-wrap",
+      "output": "originals/clothing-wrap.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Clothing-only edit for the same game character. Input is the FINAL SHIRT MASTER. Make exactly ONE single separate transparent pixel portrait. Treat the entire head, hair, ears, face, skin, neck, expression, head position, scale and all non-clothing pixels as locked: keep them unchanged. Same mature adult, oval face, peach skin, short black cropped hair, open friendly eyes, medium build, same 3/4 pose and silhouette and layout. Change only the garment below the neck as specified. Preserve master pixel-art technique, hard pixel clusters, warm muted palette and transparent alpha. Do not add accessories to head/face, no labels, borders, text, paper background, shadow, or extra figures.\nReplace ONLY the moss collared shirt with an INDIGO muted dark blue work tunic with an OVERLAPPING WRAP CROSS-COLLAR, cream linen binding along the diagonal crossing edges. The overlap is clearly readable, not a button-down shirt, not apron straps. Maintain exact body size, chest and shoulder proportions.",
+      "references": [
+        {
+          "type": "generated_master",
+          "path": "originals/clothing-shirt.png",
+          "generation_key": "clothing-shirt",
+          "sha256": "30010b03daf1b91abc527d800ab5be1e4b2d7e92bf6255e9bcf95246cf96f8cf",
+          "git_blob_sha": "aed309fbb3865fd78c3cded5ef7ad2491fcaa49d"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 8,
+      "case_id": "clothing-coat",
+      "key": "clothing-coat",
+      "output": "originals/clothing-coat.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Clothing-only edit for the same game character. Input is the FINAL SHIRT MASTER. Make exactly ONE single separate transparent pixel portrait. Treat the entire head, hair, ears, face, skin, neck, expression, head position, scale and all non-clothing pixels as locked: keep them unchanged. Same mature adult, oval face, peach skin, short black cropped hair, open friendly eyes, medium build, same 3/4 pose and silhouette and layout. Change only the garment below the neck as specified. Preserve master pixel-art technique, hard pixel clusters, warm muted palette and transparent alpha. Do not add accessories to head/face, no labels, borders, text, paper background, shadow, or extra figures.\nReplace ONLY the moss collared shirt with a PLUM muted dusky purple work COAT, a clearly structured turned-down coat collar, front opening and simple brass/cream buttons, pale understated inner collar visible at neck. Keep body scale and shoulder silhouette the same; coat fabric should not change the physique. No scarf, straps or apron.",
+      "references": [
+        {
+          "type": "generated_master",
+          "path": "originals/clothing-shirt.png",
+          "generation_key": "clothing-shirt",
+          "sha256": "30010b03daf1b91abc527d800ab5be1e4b2d7e92bf6255e9bcf95246cf96f8cf",
+          "git_blob_sha": "aed309fbb3865fd78c3cded5ef7ad2491fcaa49d"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 9,
+      "case_id": "portrait-C",
+      "key": "portrait-c",
+      "output": "originals/portrait-c.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Finish game portrait C for 「余白の暮らし」. Input 1 is target C; input 2 is style only.\nKeep this same young ADULT, slender build, wheat/tanned light-brown skin, long flowing ASH-BROWN hair with clear WAVES and side part, indigo blue wrap-front tunic and cream diagonal collar trim, three-quarter view toward screen-right. Correct C's face to a clearly ANGULAR outline with defined cheekbones, straighter side contours, an angular jaw/chin, and NARROW STRAIGHT eyes, not big round doll eyes. A short healed diagonal scar must remain on the cheek on the LEFT SIDE OF THE PICTURE, below the eye beside the visible ear. No other marks, no glasses. Quiet neutral warm expression; do not make angry, old, masculine, or a new person.\nMatch the accepted first-trial reference's quiet, carefully shaded PIXEL ART: clean square pixel clusters, hard stepped contours, warm restrained earthy colors, modest level of detail; not vector, smooth painting, 3D or glossy anime. One isolated character only. Genuine transparent alpha background; no paper, background, shadow, checkerboard drawing, border, frame, lettering, title or watermarks. Full hair and shoulders in frame with a small clear margin; head-and-shoulders bust to upper torso with flat bottom crop.",
+      "references": [
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-c.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "00dffff85563eef9e8e73b99f28dd45f1d643e949cb2eda42a3903cd77cc5c5c",
+          "git_blob_sha": "e4391a5e88a5f0c7e78ae2d772138d9106e8db0d"
+        },
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/sources/style-reference-first-trial.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "b070a595a24dc34591a9f85f88f826168d283b51e5f7c28675290c9b7950959f",
+          "git_blob_sha": "986307d1fb1f1e22f13c8c975633af0b86237c02"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 10,
+      "case_id": "portrait-D",
+      "key": "portrait-d",
+      "output": "originals/portrait-d.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Finish portrait D for 「余白の暮らし」. Input1 is D edit target, input2 is the approved style.\nPreserve D's identity: ELDERLY adult with an OVAL face, warm deep BRONZE/red-brown skin, SILVER hair swept back into one neat BUN, round glasses, soft gently hooded narrow eyes, plum-purple coat, pale inner collar, kind unforced small smile, 3/4 view screen-right. Make the broad sturdy build clearly readable: fuller substantial neck and broad strong shoulders/upper torso, not a thin neck or delicate shoulders. Keep recognizably elderly facial structure with forehead/eye/cheek/neck age lines, without caricature, gray-beige hair rather than brown. No apron, new accessories or labels. Same person, not a new design.\nMatch the accepted first-trial reference's quiet, carefully shaded PIXEL ART: clean square pixel clusters, hard stepped contours, warm restrained earthy colors, modest level of detail; not vector, smooth painting, 3D or glossy anime. One isolated character only. Genuine transparent alpha background; no paper, background, shadow, checkerboard drawing, border, frame, lettering, title or watermarks. Full hair and shoulders in frame with a small clear margin; head-and-shoulders bust to upper torso with flat bottom crop.",
+      "references": [
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-d.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "fd4622635050f2ee91cd0269e8f6ea444505e215a0981ae28750bba25d4795d9",
+          "git_blob_sha": "1fdb56d6eb7ce17fcfcff6156fe6c2b051c622f3"
+        },
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/sources/style-reference-first-trial.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "b070a595a24dc34591a9f85f88f826168d283b51e5f7c28675290c9b7950959f",
+          "git_blob_sha": "986307d1fb1f1e22f13c8c975633af0b86237c02"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 11,
+      "case_id": "portrait-kaya",
+      "key": "portrait-kaya",
+      "output": "originals/portrait-kaya.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Finish the KAYA portrait master for 「余白の暮らし」 and remove background. Input1 is Kaya, input2 accepted style only.\nKeep Kaya's exact characteristic short INK-BLACK cropped side-swept hair and recognizable identity, warm PEACH skin, ROUND facial outline, YOUNG ADULT age, MEDIUM average build, RUST/OCHRE overlapping wrap tunic with pale linen diagonal trim, 3/4 view toward screen-right. Restore SOFT NARROW relaxed eyes instead of round wide open eyes. Keep a clearly readable small healed diagonal scar on the cheek on the LEFT SIDE OF THE PICTURE, under the eye near the visible ear. It is a short scar, not freckles, facepaint or a blush patch. Warm calm slight smile, no glasses or facial hair. Keep adult facial anatomy, not a child. This master will determine the identical hair, face, scar, palette and clothing in a full-body counterpart.\nMatch the accepted first-trial reference's quiet, carefully shaded PIXEL ART: clean square pixel clusters, hard stepped contours, warm restrained earthy colors, modest level of detail; not vector, smooth painting, 3D or glossy anime. One isolated character only. Genuine transparent alpha background; no paper, background, shadow, checkerboard drawing, border, frame, lettering, title or watermarks. Full hair and shoulders in frame with a small clear margin; head-and-shoulders bust to upper torso with flat bottom crop.",
+      "references": [
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-kaya.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "da73bf1fbf08d5dda33b68a3f061d186e3c8c6132cb08faf0cf6bf3e2996e239",
+          "git_blob_sha": "5cc1a8ca938c9d32d6d140ab60387c5a32c790cf"
+        },
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/sources/style-reference-first-trial.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "b070a595a24dc34591a9f85f88f826168d283b51e5f7c28675290c9b7950959f",
+          "git_blob_sha": "986307d1fb1f1e22f13c8c975633af0b86237c02"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 12,
+      "case_id": "portrait-B",
+      "key": "portrait-b",
+      "output": "originals/portrait-b.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: background-extraction / identity-preserve. Finish existing portrait B as a single transparent game asset. Input 1 is the target. Its person is already accepted: preserve the SAME face, features, hair shape, pose, freckles and clothing as closely as possible. Input2 is style reference only.\nMATURE ADULT, ROUND face, PEACH skin, chestnut-brown chin-length BOB hair, SLIGHT slender shoulders, OPEN round eyes, visible cheek/nose FRECKLES, brick reddish-brown work shirt under a separate PALE CREAM bib apron with shoulder straps. Keep adult face, no childlike exaggeration. The apron must remain cream, with brick dye only on the shirt and sleeves. Remove all paper/background. Keep identity and clean pixel edges.\nMatch the accepted first-trial reference's quiet, carefully shaded PIXEL ART: clean square pixel clusters, hard stepped contours, warm restrained earthy colors, modest level of detail; not vector, smooth painting, 3D or glossy anime. One isolated character only. Genuine transparent alpha background; no paper, background, shadow, checkerboard drawing, border, frame, lettering, title or watermarks. Full hair and shoulders in frame with a small clear margin; head-and-shoulders bust to upper torso with flat bottom crop.",
+      "references": [
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-b.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "694e1c362b9ac70407f58fe3a674b7e0abc9f921081d2966377e657db77984df",
+          "git_blob_sha": "855967c1234b96940502bf744d1e94d17f63fea4"
+        },
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/sources/style-reference-first-trial.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "b070a595a24dc34591a9f85f88f826168d283b51e5f7c28675290c9b7950959f",
+          "git_blob_sha": "986307d1fb1f1e22f13c8c975633af0b86237c02"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 13,
+      "case_id": "portrait-E",
+      "key": "portrait-e",
+      "output": "originals/portrait-e.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: background-extraction / identity-preserve. Finish existing portrait E as one transparent game asset. Input1 is the target person, already accepted; input2 is style only. Preserve the SAME recognizable face, features, hair shape, braid, body, pose and outfit as closely as possible.\nMATURE ADULT, ROUND face, deep UMBER brown skin, HONEY-GOLDEN hair in a long thick BRAID over the shoulder on the picture-left, MEDIUM build, OPEN round eyes, NO skin marks or freckles/glasses/scar. Rust/ochre warm brown work shirt under a separate PALE CREAM bib apron and straps. Apron cream, underlying shirt rust, keep the rich brown skin distinct from ochre clothes and golden braid. Adult calm gentle expression, no new accessories. Remove all paper/background.\nMatch the accepted first-trial reference's quiet, carefully shaded PIXEL ART: clean square pixel clusters, hard stepped contours, warm restrained earthy colors, modest level of detail; not vector, smooth painting, 3D or glossy anime. One isolated character only. Genuine transparent alpha background; no paper, background, shadow, checkerboard drawing, border, frame, lettering, title or watermarks. Full hair and shoulders in frame with a small clear margin; head-and-shoulders bust to upper torso with flat bottom crop.",
+      "references": [
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/crops/portrait-e.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "4b7a33772090a1268ab0303cc9e1a9ae93000b7ec7108d21126bbf40ab91bc78",
+          "git_blob_sha": "4b569e95c49b4cc28ee4cd810e63611886c8383a"
+        },
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/sources/style-reference-first-trial.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "b070a595a24dc34591a9f85f88f826168d283b51e5f7c28675290c9b7950959f",
+          "git_blob_sha": "986307d1fb1f1e22f13c8c975633af0b86237c02"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 14,
+      "case_id": "walker-sui",
+      "key": "walker-sui",
+      "output": "archive/walker-sui-v1.png",
+      "output_role": "archived_reference_revision",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Correct and finish ONE full-body game character, SUI, for 「余白の暮らし」, transparent PNG.\nInput1 is the failed Sui full-body target for outfit, pose, hair, and identity. Input2 is the ORIGINAL APPROVED PROPORTION GUIDE; use the RIGHT column 公開57 (roughly FIVE heads tall with long legs). Input3 is the accepted pixel-art treatment only. DO NOT copy other identities or place sheets/text/backgrounds in the output.\nRequired correction: Sui is a MATURE ADULT with a BROAD STURDY physique, NOT a toddler/chibi or a small delicate girl. Body from crown to boots roughly 5 to 5.3 HEAD HEIGHTS tall, with long adult legs and modestly stylized head. Neck and shoulders strong and broad, chest/hips substantial, sturdy forearms and calves; face mature with an OVAL outline, warm peach skin, NARROW STRAIGHT eyes, readable small FRECKLES across nose/cheeks. Ink-black hair pulled into a neat BUN behind the crown, no golden hair.\nMaintain the original relaxed 3/4 screen-right standing pose: one hand at hip/belt, the other arm relaxed/bent down as in target; feet slightly offset, natural weight distribution. FLAX/LINEN beige wrap-front work tunic with restrained sage/cream diagonal edging and waist belt, dark charcoal work trousers, sturdy brown cuffed boots. Preserve target outfit details and stance while elongating the legs and reducing relative head size. Both hands, both boots, entire bun visible with space around silhouette. No bag, weapon or new prop.\nStyle: low-resolution hand-placed-looking pixel art with crisp square pixel clusters, hard stepped edges, warm muted earthy palette and thoughtful small shading like the reference. No smooth gradients, painterly texture, 3D or vector. Single character fills tall canvas; actual transparent alpha, no paper, environment, shadow, drawn checkerboard, grid, labels or text. The crucial requirements are clearly MATURE broad adult, freckles, and five-head proportions.",
+      "references": [
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/crops/walker-sui.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "1c65e744b63ca37431dabd8c82567bb2f33db3b7622a8b673ac21f707969b1c3",
+          "git_blob_sha": "2512c8c834422a7d4ad83eb44b833b034fc7b943"
+        },
+        {
+          "type": "existing_repository_file",
+          "repository_path": "public/yohaku-style-preview.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "3f0d009e656ea6324135f1d320b23db02739d5ba9419ad078c6fb1f96479a7f1",
+          "git_blob_sha": "0934adb1ef526d440dc42ea775ff9bfbb8c604a4"
+        },
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/sources/style-reference-first-trial.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "b070a595a24dc34591a9f85f88f826168d283b51e5f7c28675290c9b7950959f",
+          "git_blob_sha": "986307d1fb1f1e22f13c8c975633af0b86237c02"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths",
+      "superseded_by_generation_key": "walker-sui-v2"
+    },
+    {
+      "sequence_in_records": 15,
+      "case_id": "walker-kaya",
+      "key": "walker-kaya",
+      "output": "originals/walker-kaya.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Finish ONE full-body character game asset KAYA for 「余白の暮らし」 on genuine transparent alpha.\nREFERENCE ROLES:\n1. FINAL Kaya portrait = authoritative identical facial identity, hair, face color, expression, scar, garment color and collar.\n2. OLD Kaya full-body = only the original standing pose, clothing construction, belt, pants and boots. Its huge head and tiny legs are WRONG and must be corrected.\n3. Original approved proportion sheet = right column 公開57, roughly FIVE heads tall with long adult legs.\n4. Completed Sui full-body = consistent pixel-art treatment / scale of full-body detail. Kaya is medium build, less broad than Sui; do not copy Sui's face, hair, freckles or colors.\n\nKAYA: YOUNG ADULT, rounded face, warm peach skin, short ink-black cropped swept hair, SOFT NARROW eyes, MEDIUM physique, a SHORT DIAGONAL HEALED SCAR on the cheek on the LEFT SIDE OF THE PICTURE (same as ref1). Same gentle calm slight smile, no glasses, no freckles, no beard. Recognizably EXACTLY ref1 shown from head to toe.\nBody proportions: adult and stylish, about 5 to 5.3 heads high from hair crown to boot soles. The head occupies approximately one fifth of the figure; long adult legs, sensible neck and shoulder width, not 3-head chibi. Preserve stance: 3/4 toward screen-right, one hand resting on hip/belt and the other relaxed by waist like old target, weight naturally on one leg with the other offset. No action pose. Keep medium average build, no muscular exaggeration.\nOutfit: warm ochre/RUST wrap-front long-sleeve work tunic, pale linen diagonal collar edging EXACTLY matching the portrait, restrained sage-brown waist sash/belt as old target, dark charcoal work pants, cuffed sturdy brown boots. Clear wrap overlap and readable folds, full fingers/hands, both boots, all hair entirely inside canvas with safe margin. No backpack, weapon, tool or props.\n\nCoherent low-resolution pixel art using clean square pixel clusters, crisp stepped edges, muted warm colors, subtle shading like the final portraits and Sui. Do not render as smooth painted/anime/vector/3D. One isolated full figure filling a tall portrait canvas. Genuine transparent background: no paper, scene, ground shadow, drawn checkerboard, labels, borders or text. Preserve ref1 identity and cheek scar while correcting the old figure's toddler proportions.",
+      "references": [
+        {
+          "type": "generated_master",
+          "path": "originals/portrait-kaya.png",
+          "generation_key": "portrait-kaya",
+          "sha256": "af0b632bbb1ed58f0582e454bf5b3dd658744432eb8fc52eab50a4285a5617cb",
+          "git_blob_sha": "03207cd1d860049d9f769703b217db80bb741632"
+        },
+        {
+          "type": "existing_repository_file",
+          "repository_path": "docs/design/canva-characters-20261123/review-export/crops/walker-kaya.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "e649561614bbd77fc3dfb5b082572fbd9a454547fc5d073a5fe90f8957d46ca3",
+          "git_blob_sha": "252b8c35cac13e12e8c85fade19102ce7eeda2b1"
+        },
+        {
+          "type": "existing_repository_file",
+          "repository_path": "public/yohaku-style-preview.png",
+          "commit": "d7f4863751964bd04656271fbe8d00aa6912f2fe",
+          "sha256": "3f0d009e656ea6324135f1d320b23db02739d5ba9419ad078c6fb1f96479a7f1",
+          "git_blob_sha": "0934adb1ef526d440dc42ea775ff9bfbb8c604a4"
+        },
+        {
+          "type": "generated_archive",
+          "path": "archive/walker-sui-v1.png",
+          "generation_key": "walker-sui",
+          "sha256": "899633ba0c88b2fed96e05f86e66f69607af4875d7b73c3f1c55abb91fd52c30",
+          "git_blob_sha": "4beaa5ac525d552eb9cbe209ad006dc0287c1334"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths"
+    },
+    {
+      "sequence_in_records": 16,
+      "case_id": "walker-sui",
+      "key": "walker-sui-v2",
+      "output": "originals/walker-sui.png",
+      "output_role": "final_candidate",
+      "operation": "image_generation_or_edit_using_references",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: identity-preserve. Targeted final proportion correction to SUI for the game 「余白の暮らし」.\nIMAGE 1 is SUI, the only edit target: preserve this person's face, warm peach complexion, narrow straight mature eyes, subtle freckles, black hair in a bun, expression, three-quarter standing pose, hand-on-hip posture, flax-beige overlapping wrap tunic with sage collar edging, dark brown belt, charcoal trousers and cuffed brown boots, and transparent background. IMAGE 2 is KAYA, ONLY a guide for the APPROVED stylized ADULT BODY PROPORTIONS and coherent pixel rendering, not an identity to copy.\n\nChange Sui's proportions so the ANATOMICAL head (TOP OF MAIN SKULL HAIR to chin, EXCLUDING THE BUN that sticks above/behind) fits roughly FIVE to 5.2 times into crown-to-sole height. The current Sui has roughly six anatomical heads and looks too elongated compared with Kaya. Bring Sui to the SAME five-head visual language as Kaya without making a child/chibi.\nConcretely enlarge Sui's head relative to the full body by roughly 15–18 percent, keep the adult face and neck, and moderately shorten the excessive lower-body length while retaining well-proportioned long adult legs and visible knees. Keep all hair and both boots inside canvas.\nSui must also read as the BROAD/STURDY adult body option: noticeably fuller and wider shoulders, thicker upper arms and forearms, substantial chest and waist, sturdy hips and calves compared with Kaya's medium build. Naturally broad and robust, not obese, not bodybuilder, not tiny waist fashion model. Avoid smooth feminine hourglass exaggeration. Use grounded adult anatomy and the same relaxed pose.\nPreserve the original narrow straight eyes, freckles and all costume/skin/hair color details. Do not add Kaya's cheek scar or short haircut or ochre clothes. No new props.\nMatch exact quiet earthy pixel-art style, clean blocky pixel clusters and crisp stepped contours of both references. One full-body character on genuine transparent alpha, small safe margin. No backdrop, shadow, paper, checkerboard drawing, labels or frame. Priority: Sui identity and mature broad build, with actual approximately five anatomical heads excluding bun.",
+      "references": [
+        {
+          "type": "generated_archive",
+          "path": "archive/walker-sui-v1.png",
+          "generation_key": "walker-sui",
+          "sha256": "899633ba0c88b2fed96e05f86e66f69607af4875d7b73c3f1c55abb91fd52c30",
+          "git_blob_sha": "4beaa5ac525d552eb9cbe209ad006dc0287c1334"
+        },
+        {
+          "type": "generated_master",
+          "path": "originals/walker-kaya.png",
+          "generation_key": "walker-kaya",
+          "sha256": "f0d116a018a7f7d01c96c1bc4756bfb1ad6e3f114bc31e6f0735b6ef166cf97a",
+          "git_blob_sha": "9cc91efceeb6a6628803601b243aa051e32f5bf6"
+        }
+      ],
+      "transparent_background": true,
+      "reference_selection": "referenced_image_paths",
+      "revision_of_generation_key": "walker-sui"
+    }
+  ]
+}

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>余白の暮らし｜人物原画レビュー</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #f5f2eb;
+      --paper: #fffdf8;
+      --ink: #292f2b;
+      --muted: #626b60;
+      --line: #d9dfd2;
+      --accent: #465e47;
+      --stage: #f1eadc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--page);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--accent); text-underline-offset: 0.2em; }
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid #877129;
+      outline-offset: 4px;
+    }
+    .page { width: min(1320px, 100%); margin-inline: auto; padding: 38px 28px 30px; }
+    .eyebrow { margin: 0 0 8px; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.08em; }
+    h1 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.35rem); line-height: 1.4; font-weight: 700; }
+    .intro { max-width: 58em; margin: 15px 0 0; }
+    .status {
+      display: inline-block;
+      margin: 16px 0 0;
+      padding: 5px 12px;
+      border: 1px solid #cdd8c6;
+      border-radius: 5px;
+      background: #edf1e6;
+      color: #394e39;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-top: 25px;
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .controls-label { margin: 0; font-size: 0.92rem; font-weight: 650; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+    .background-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 7px 13px;
+      border: 1px solid #c8cfc2;
+      border-radius: 6px;
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .background-button[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+    .swatch { width: 17px; height: 17px; border: 1px solid #a6aea1; border-radius: 3px; }
+    .swatch-cream { background: #f1eadc; }
+    .swatch-dark { background: #26312d; }
+    .swatch-checker {
+      background-color: #fafaf7;
+      background-image: conic-gradient(#dce1d8 25%, transparent 0 50%, #dce1d8 0 75%, transparent 0);
+      background-size: 10px 10px;
+    }
+    .background-status { margin: 0; color: var(--muted); font-size: 0.83rem; }
+    .guide { margin: 16px 0 24px; color: var(--muted); font-size: 0.9rem; }
+    .gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px 18px; }
+    .card { min-width: 0; margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+    .art-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 6 / 7;
+      padding: 12px;
+      background: var(--stage);
+      text-decoration: none;
+    }
+    body[data-background="dark"] .art-stage { background: #26312d; }
+    body[data-background="checker"] .art-stage {
+      background-color: #fafaf7;
+      background-image: conic-gradient(#dce1d8 25%, transparent 0 50%, #dce1d8 0 75%, transparent 0);
+      background-size: 24px 24px;
+    }
+    .art-stage img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; object-position: center; }
+    figcaption { padding: 13px 15px 15px; }
+    .card-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 9px; }
+    .card-id { color: var(--muted); font-size: 0.72rem; letter-spacing: 0.04em; }
+    h2 { margin: 0; font-size: 1rem; line-height: 1.5; }
+    .caption { min-height: 4.8em; margin: 8px 0 10px; font-size: 0.84rem; line-height: 1.65; }
+    .original-link { display: inline-flex; align-items: center; min-height: 32px; font-size: 0.82rem; }
+    footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.87rem; }
+    footer p { margin: 0 0 8px; }
+    @media (max-width: 850px) {
+      .page { padding: 26px 18px; }
+      .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; }
+    }
+    @media (max-width: 430px) {
+      .page { padding: 22px 12px; }
+      .gallery { gap: 14px 10px; }
+      .art-stage { padding: 7px; }
+      figcaption { padding: 10px; }
+      h2 { font-size: 0.94rem; }
+      .caption { min-height: 0; font-size: 0.78rem; }
+      .controls { gap: 10px; }
+    }
+    @media print {
+      .page { width: 100%; padding: 0; }
+      .controls { display: none; }
+      .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+      .card { break-inside: avoid; }
+      .caption { min-height: 0; }
+    }
+  </style>
+</head>
+<body data-background="cream">
+  <main class="page">
+    <header>
+      <p class="eyebrow">余白の暮らし ／ 人物原画 ／ 2026.11.23</p>
+      <h1>人物原画を見比べる</h1>
+      <p class="intro">15点の独立した原画を、16の条件で確認する一覧です。AとGには同じ画像を使っています。背景を切り替えると、人物の輪郭や透明な部分を見比べられます。</p>
+      <p class="status">原画生成済み · 縮小確認とゲーム適用は別工程</p>
+    </header>
+
+    <section class="controls" aria-label="画像の背景設定">
+      <p class="controls-label">画像の背景</p>
+      <div class="buttons" role="group" aria-label="背景色を選ぶ">
+        <button class="background-button" type="button" data-set-background="cream" aria-pressed="true"><span class="swatch swatch-cream" aria-hidden="true"></span>生成り</button>
+        <button class="background-button" type="button" data-set-background="dark" aria-pressed="false"><span class="swatch swatch-dark" aria-hidden="true"></span>濃色</button>
+        <button class="background-button" type="button" data-set-background="checker" aria-pressed="false"><span class="swatch swatch-checker" aria-hidden="true"></span>チェック</button>
+      </div>
+      <p class="background-status" id="background-status" aria-live="polite">現在：生成り</p>
+    </section>
+
+    <p class="guide">画像か「元PNGを開く」を選ぶと、原寸のファイルが開きます。キャプションは元設定と比較の観点です。H・IはAとの輪郭差、衣装4種は同じ人物の服の違い、カヤは胸像と全身の一致を確認します。</p>
+    <noscript><p class="guide">背景の切り替えにはJavaScriptが必要です。原画の閲覧と元PNGのリンクはそのまま使えます。</p></noscript>
+
+    <section class="gallery" aria-label="人物原画16条件">
+      <figure class="card">
+        <a class="art-stage" href="originals/portrait-a.png" target="_blank" rel="noopener" aria-label="Aの元PNGを開く"><img src="originals/portrait-a.png" alt="A。黒い短髪、卵型の顔、柔らかな細い目、緑のシャツの胸像。" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">01 / PORTRAIT</span><h2>A · 基準</h2></div><p class="caption">卵型の輪郭と柔らかな細い目。Gはこの画像と同一。H・Iの比較基準です。</p><a class="original-link" href="originals/portrait-a.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/portrait-b.png" target="_blank" rel="noopener" aria-label="Bの元PNGを開く"><img src="originals/portrait-b.png" alt="B。栗色のおかっぱ、そばかす、赤茶の仕事着と淡いクリーム色の前掛けの胸像。" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">02 / PORTRAIT</span><h2>B</h2></div><p class="caption">栗色のおかっぱとそばかす。赤茶の仕事着に、淡いクリーム色の前掛け。</p><a class="original-link" href="originals/portrait-b.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/portrait-c.png" target="_blank" rel="noopener" aria-label="Cの元PNGを開く"><img src="originals/portrait-c.png" alt="C。灰褐色の長髪、角張った輪郭、頬の傷、藍色の巻き襟の胸像。" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">03 / PORTRAIT</span><h2>C</h2></div><p class="caption">灰褐色の長髪と角張った輪郭。切れ長の目、頬の傷、藍色の巻き襟を確認。</p><a class="original-link" href="originals/portrait-c.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/portrait-d.png" target="_blank" rel="noopener" aria-label="Dの元PNGを開く"><img src="originals/portrait-d.png" alt="D。銀髪のまとめ髪、丸眼鏡、がっしりした体格、紫色の外套を着た老年の胸像。" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">04 / PORTRAIT</span><h2>D</h2></div><p class="caption">老年の顔、銀色のまとめ髪と丸眼鏡。がっしりした体格と紫の外套。</p><a class="original-link" href="originals/portrait-d.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/portrait-e.png" target="_blank" rel="noopener" aria-label="Eの元PNGを開く"><img src="originals/portrait-e.png" alt="E。深い褐色の肌、蜂蜜色の三つ編み、淡いクリーム色の前掛けの胸像。" loading="lazy" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">05 / PORTRAIT</span><h2>E</h2></div><p class="caption">深い褐色の肌と蜂蜜色の三つ編み。仕事着の上に淡いクリーム色の前掛け。</p><a class="original-link" href="originals/portrait-e.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/portrait-f.png" target="_blank" rel="noopener" aria-label="Fの元PNGを開く"><img src="originals/portrait-f.png" alt="F。黒い短髪、丸眼鏡、緑のシャツを保った老年の胸像。" loading="lazy" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">06 / PORTRAIT</span><h2>F</h2></div><p class="caption">黒い短髪・丸眼鏡・緑のシャツを維持。顔のしわや輪郭で老年らしさを確認。</p><a class="original-link" href="originals/portrait-f.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/portrait-g.png" target="_blank" rel="noopener" aria-label="Gの元PNGを開く。Aと同一の画像です"><img src="originals/portrait-g.png" alt="G。Aと同一の画像を使った比較用の胸像。" loading="lazy" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">07 / PORTRAIT</span><h2>G · Aと同じ</h2></div><p class="caption">Aと同じ設定・同じ画像の対照例。別の人物や、新たな生成結果ではありません。</p><a class="original-link" href="originals/portrait-g.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/portrait-h.png" target="_blank" rel="noopener" aria-label="Hの元PNGを開く"><img src="originals/portrait-h.png" alt="H。Aを基準に、丸い顔の輪郭を比較する胸像。" loading="lazy" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">08 / FACE</span><h2>H · 丸い輪郭</h2></div><p class="caption">Aとの輪郭差を比較。髪・目・肌・表情・服が同じ条件を保つかも確認。</p><a class="original-link" href="originals/portrait-h.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/portrait-i.png" target="_blank" rel="noopener" aria-label="Iの元PNGを開く"><img src="originals/portrait-i.png" alt="I。Aを基準に、角張った顔の輪郭を比較する胸像。" loading="lazy" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">09 / FACE</span><h2>I · 角張った輪郭</h2></div><p class="caption">A・Hと顔の形を比較。輪郭以外の特徴や構図の一致も確認します。</p><a class="original-link" href="originals/portrait-i.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/clothing-shirt.png" target="_blank" rel="noopener" aria-label="シャツの元PNGを開く"><img src="originals/clothing-shirt.png" alt="衣装比較の基準。黒い短髪と開いた目の成人が緑のシャツを着た胸像。" loading="lazy" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">10 / CLOTHING</span><h2>シャツ</h2></div><p class="caption">衣装4種の基準となる人物。Aとは肌・年齢・目の設定が異なります。</p><a class="original-link" href="originals/clothing-shirt.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/clothing-apron.png" target="_blank" rel="noopener" aria-label="前掛けの元PNGを開く"><img src="originals/clothing-apron.png" alt="衣装比較と同じ人物。赤茶の仕事着に淡いクリーム色の前掛けを着た胸像。" loading="lazy" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">11 / CLOTHING</span><h2>前掛け</h2></div><p class="caption">シャツと同じ人物で衣装を比較。赤茶の仕事着に淡いクリーム色の前掛け。</p><a class="original-link" href="originals/clothing-apron.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/clothing-wrap.png" target="_blank" rel="noopener" aria-label="巻き襟の元PNGを開く"><img src="originals/clothing-wrap.png" alt="衣装比較と同じ人物。藍色の巻き襟を着た胸像。" loading="lazy" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">12 / CLOTHING</span><h2>巻き襟</h2></div><p class="caption">同じ顔・髪・体格のまま、藍色の巻き襟を比較。襟の重なりも確認。</p><a class="original-link" href="originals/clothing-wrap.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/clothing-coat.png" target="_blank" rel="noopener" aria-label="外套の元PNGを開く"><img src="originals/clothing-coat.png" alt="衣装比較と同じ人物。紫色の外套を着た胸像。" loading="lazy" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">13 / CLOTHING</span><h2>外套</h2></div><p class="caption">同じ人物に紫色の外套。服の形と色の違い、顔や表情の一致を確認。</p><a class="original-link" href="originals/clothing-coat.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/portrait-kaya.png" target="_blank" rel="noopener" aria-label="カヤ胸像の元PNGを開く"><img src="originals/portrait-kaya.png" alt="カヤの胸像。丸い輪郭、黒い短髪、頬の傷、黄土色の巻き襟。" loading="lazy" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">14 / PORTRAIT</span><h2>カヤ · 胸像</h2></div><p class="caption">黒い短髪と頬の傷。全身のカヤと、髪・顔・傷の位置・服を照合します。</p><a class="original-link" href="originals/portrait-kaya.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/walker-kaya.png" target="_blank" rel="noopener" aria-label="カヤ全身の元PNGを開く"><img src="originals/walker-kaya.png" alt="カヤの全身。黒い短髪、頬の傷、黄土色の巻き襟を保った若い成人。" loading="lazy" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">15 / FULL BODY</span><h2>カヤ · 全身</h2></div><p class="caption">胸像と同じ人物として照合。約5頭身の成人の身体と、元の姿勢を確認。</p><a class="original-link" href="originals/walker-kaya.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+      <figure class="card">
+        <a class="art-stage" href="originals/walker-sui.png" target="_blank" rel="noopener" aria-label="スイ全身の元PNGを開く"><img src="originals/walker-sui.png" alt="スイの全身。黒いまとめ髪、そばかす、がっしりした体格、亜麻色の巻き襟の成人。" loading="lazy" decoding="async"></a>
+        <figcaption><div class="card-heading"><span class="card-id">16 / FULL BODY</span><h2>スイ · 全身</h2></div><p class="caption">壮年の顔、そばかす、がっしりした体格。約5頭身の成人として確認。</p><a class="original-link" href="originals/walker-sui.png" target="_blank" rel="noopener">元PNGを開く ↗</a></figcaption>
+      </figure>
+    </section>
+
+    <footer>
+      <p><strong>このページは原画レビュー用で、ゲームの正式UIではありません。</strong> 元PNGを加工せずに表示し、表示領域の背景だけを切り替えます。</p>
+      <p>人物設定は元のゲーム参照と <code>original-appearance.json</code> に従います。初回Canva試作は画風の参照であり、MEI・HAYATOなどの生成された人物設定は採用していません。</p>
+      <p>ゲームは外見の各要素を組み合わせて人物を描画します。この16条件は代表例で、全ての外見の組み合わせを置き換える画像集ではありません。原画制作後の縮小確認・実装・ゲーム内確認・公開は別工程です。確認結果と残件は同梱のREADME・manifestを参照してください。</p>
+    </footer>
+  </main>
+  <script>
+    (() => {
+      "use strict";
+      const labels = { cream: "生成り", dark: "濃色", checker: "チェック" };
+      const buttons = document.querySelectorAll("[data-set-background]");
+      const status = document.getElementById("background-status");
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const choice = button.dataset.setBackground;
+          if (!Object.prototype.hasOwnProperty.call(labels, choice)) return;
+          document.body.dataset.background = choice;
+          buttons.forEach((item) => {
+            item.setAttribute("aria-pressed", String(item === button));
+          });
+          status.textContent = "現在：" + labels[choice];
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

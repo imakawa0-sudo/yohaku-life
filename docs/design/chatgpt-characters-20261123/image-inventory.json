@@ -1,0 +1,527 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "scope": "Read-only technical inventory of final candidates and archived reference revisions; not a visual QA or production adoption verdict.",
+  "generation_call_count": 16,
+  "final_case_file_count": 16,
+  "final_independent_image_count": 15,
+  "archived_revision_count": 1,
+  "file_count": 17,
+  "unique_image_sha256_count": 16,
+  "total_bytes": 17299792,
+  "final_total_bytes": 16513830,
+  "portrait_a_g_byte_identical": true,
+  "original_appearance_bytes_unchanged": true,
+  "files": [
+    {
+      "case_id": "clothing-apron",
+      "path": "originals/clothing-apron.png",
+      "role": "final_candidate",
+      "bytes": 1035217,
+      "sha256": "b23ea54cf168553606529c554d572b1f91ee2910053c3267db79a0a6ecefeae5",
+      "git_blob_sha": "4960f083a52a98c273fd11e47930c2705efe81b8",
+      "format": "PNG",
+      "size": [
+        1087,
+        1446
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 649538,
+      "partially_transparent_pixels": 920551,
+      "opaque_pixels": 1713,
+      "nontransparent_bbox": [
+        0,
+        32,
+        1067,
+        1446
+      ],
+      "rgba_sha256": "526229bdd550a1399c54a86751864cfeae23fbd8de341cd0452646d3810fe368",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "clothing-coat",
+      "path": "originals/clothing-coat.png",
+      "role": "final_candidate",
+      "bytes": 974631,
+      "sha256": "159b06190024b4267236ca29102a864a8a547774774e04e085bc2538de44c7da",
+      "git_blob_sha": "3367ce497e777a1c4a15b8fec60c763ed0ab0014",
+      "format": "PNG",
+      "size": [
+        1087,
+        1446
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 643190,
+      "partially_transparent_pixels": 926508,
+      "opaque_pixels": 2104,
+      "nontransparent_bbox": [
+        40,
+        31,
+        1045,
+        1417
+      ],
+      "rgba_sha256": "0687304cf35c999618e4f1dbf7f81f521eef7c5f69058678096c84e61abfe8dc",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "clothing-shirt",
+      "path": "originals/clothing-shirt.png",
+      "role": "final_candidate",
+      "bytes": 1119492,
+      "sha256": "30010b03daf1b91abc527d800ab5be1e4b2d7e92bf6255e9bcf95246cf96f8cf",
+      "git_blob_sha": "aed309fbb3865fd78c3cded5ef7ad2491fcaa49d",
+      "format": "PNG",
+      "size": [
+        1087,
+        1447
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 651567,
+      "partially_transparent_pixels": 919780,
+      "opaque_pixels": 1542,
+      "nontransparent_bbox": [
+        0,
+        10,
+        1067,
+        1418
+      ],
+      "rgba_sha256": "4890f29db403b2654af582f903779271ffba2994ffb455477abba16f7949ad68",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "clothing-wrap",
+      "path": "originals/clothing-wrap.png",
+      "role": "final_candidate",
+      "bytes": 1030258,
+      "sha256": "5ac3e9352bc051a4b0e22a72d9bfa1835b633ae21db54b6b8251f906e9a58d80",
+      "git_blob_sha": "de98709dc43bf2314d96e0fe71c4a8ba7028c6bb",
+      "format": "PNG",
+      "size": [
+        1087,
+        1446
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 649096,
+      "partially_transparent_pixels": 921207,
+      "opaque_pixels": 1499,
+      "nontransparent_bbox": [
+        23,
+        31,
+        1053,
+        1446
+      ],
+      "rgba_sha256": "a7403b9ba784805f5f21068173300a8a61919529e55786280f8510fbf02abd6f",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "portrait-A",
+      "path": "originals/portrait-a.png",
+      "role": "final_candidate",
+      "bytes": 935143,
+      "sha256": "26fd915aa03bd25776b6a2990373a0666451f268ce16621f123402d58f080331",
+      "git_blob_sha": "b02acf1728aa9c034433f321ce572226fcad10aa",
+      "format": "PNG",
+      "size": [
+        1161,
+        1354
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 730861,
+      "partially_transparent_pixels": 839297,
+      "opaque_pixels": 1836,
+      "nontransparent_bbox": [
+        0,
+        34,
+        1131,
+        1338
+      ],
+      "rgba_sha256": "991f7d1ad1ed2cf461d319c6d57df460ab30e5adaff7b2a2174a7dbb01984a30",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "portrait-B",
+      "path": "originals/portrait-b.png",
+      "role": "final_candidate",
+      "bytes": 1253567,
+      "sha256": "9a883fcccf044eb462f7ec238dfa7bd7e71ec69a50f70d5249cf7c396503e3a9",
+      "git_blob_sha": "5441164541ebce883332c0cc94223aee0592a03e",
+      "format": "PNG",
+      "size": [
+        1078,
+        1460
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 535676,
+      "partially_transparent_pixels": 1036962,
+      "opaque_pixels": 1242,
+      "nontransparent_bbox": [
+        0,
+        0,
+        1058,
+        1460
+      ],
+      "rgba_sha256": "b96c14dd2200e5ffe868dd94e700fdb32d7779ba57834f7b797c8a1eddd0b705",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "portrait-C",
+      "path": "originals/portrait-c.png",
+      "role": "final_candidate",
+      "bytes": 1269519,
+      "sha256": "ab808a3e1cf97f62c089036a00abccef2f19a93362156110b7dfcbb43733ed4a",
+      "git_blob_sha": "d024d10bc5d1dccee986e637f2e56ad0483307b9",
+      "format": "PNG",
+      "size": [
+        1093,
+        1439
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 537062,
+      "partially_transparent_pixels": 1034434,
+      "opaque_pixels": 1331,
+      "nontransparent_bbox": [
+        0,
+        15,
+        1090,
+        1417
+      ],
+      "rgba_sha256": "bf3f4315af3bb3ad666ca47007e22bbe0282e9a5ede026c58cc6bb5e5914d0ac",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "portrait-D",
+      "path": "originals/portrait-d.png",
+      "role": "final_candidate",
+      "bytes": 1297249,
+      "sha256": "876b60da339460ae2c426b027cb5485442f8da9f7af1838c918fec41c16e260b",
+      "git_blob_sha": "ab371f7cca1fb7ffb2808cebf75424bb8ccfe627",
+      "format": "PNG",
+      "size": [
+        1108,
+        1420
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 542388,
+      "partially_transparent_pixels": 1030065,
+      "opaque_pixels": 907,
+      "nontransparent_bbox": [
+        0,
+        7,
+        1108,
+        1420
+      ],
+      "rgba_sha256": "b603a8486c490bde89b0f201e57b5d5ad8f5fc4fef537f1c9361ec3e8604dee5",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "portrait-E",
+      "path": "originals/portrait-e.png",
+      "role": "final_candidate",
+      "bytes": 1217691,
+      "sha256": "a76dc2cbf43918e75a5cd35c7fb7c87e4d10d20665b077359eac8a6570e7482f",
+      "git_blob_sha": "786e6c64c76873096b4c5eb4b72c4b2880d10fc0",
+      "format": "PNG",
+      "size": [
+        1111,
+        1415
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 590231,
+      "partially_transparent_pixels": 979688,
+      "opaque_pixels": 2146,
+      "nontransparent_bbox": [
+        21,
+        3,
+        1080,
+        1415
+      ],
+      "rgba_sha256": "4f2ff35b308bfe2d0d21b5c1d0707da54b48fb6c9285883e00de4449248ee8e1",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "portrait-F",
+      "path": "originals/portrait-f.png",
+      "role": "final_candidate",
+      "bytes": 985108,
+      "sha256": "7e7f03a3ba65c4fc154176c29c11c1c421df249a1ab5c631cdcc6968d8cdf4eb",
+      "git_blob_sha": "a1549aacf34a09aae22e03f2919942e02dce943c",
+      "format": "PNG",
+      "size": [
+        1161,
+        1354
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 684212,
+      "partially_transparent_pixels": 886151,
+      "opaque_pixels": 1631,
+      "nontransparent_bbox": [
+        46,
+        18,
+        1143,
+        1354
+      ],
+      "rgba_sha256": "8c0d7ecc7e67a1f46180d831b334eb94ba95c1ae4d41ee4250c2f4b4c538c71d",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "portrait-G",
+      "path": "originals/portrait-g.png",
+      "role": "final_candidate",
+      "bytes": 935143,
+      "sha256": "26fd915aa03bd25776b6a2990373a0666451f268ce16621f123402d58f080331",
+      "git_blob_sha": "b02acf1728aa9c034433f321ce572226fcad10aa",
+      "format": "PNG",
+      "size": [
+        1161,
+        1354
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 730861,
+      "partially_transparent_pixels": 839297,
+      "opaque_pixels": 1836,
+      "nontransparent_bbox": [
+        0,
+        34,
+        1131,
+        1338
+      ],
+      "rgba_sha256": "991f7d1ad1ed2cf461d319c6d57df460ab30e5adaff7b2a2174a7dbb01984a30",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "portrait-H",
+      "path": "originals/portrait-h.png",
+      "role": "final_candidate",
+      "bytes": 921492,
+      "sha256": "7fcd66261a52065f1939b979bf91770dc3cb33862552ffd9f7107f945284f641",
+      "git_blob_sha": "25f4a85feeef9f850772ae2f1a4c5e06344a1ad1",
+      "format": "PNG",
+      "size": [
+        1161,
+        1354
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 722760,
+      "partially_transparent_pixels": 846670,
+      "opaque_pixels": 2564,
+      "nontransparent_bbox": [
+        0,
+        32,
+        1141,
+        1354
+      ],
+      "rgba_sha256": "32efc57b0d90b94a3fd5a89f095752aa99d29dc6178d3ecc99e141c4af2968e3",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "portrait-I",
+      "path": "originals/portrait-i.png",
+      "role": "final_candidate",
+      "bytes": 968834,
+      "sha256": "651adbdc14e00cf00c1fab1f43f70d70ca372dcadb6011a811745ca98cc32439",
+      "git_blob_sha": "a091e086aa1572d312ba63e0e305583dcc4f3965",
+      "format": "PNG",
+      "size": [
+        1161,
+        1354
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 727005,
+      "partially_transparent_pixels": 842821,
+      "opaque_pixels": 2168,
+      "nontransparent_bbox": [
+        31,
+        32,
+        1123,
+        1354
+      ],
+      "rgba_sha256": "a88521b1087d18fcbe9fce7f83abf2dba95c45e458e78c849968ae91d83f4703",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "portrait-kaya",
+      "path": "originals/portrait-kaya.png",
+      "role": "final_candidate",
+      "bytes": 1000320,
+      "sha256": "af0b632bbb1ed58f0582e454bf5b3dd658744432eb8fc52eab50a4285a5617cb",
+      "git_blob_sha": "03207cd1d860049d9f769703b217db80bb741632",
+      "format": "PNG",
+      "size": [
+        1083,
+        1452
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 694540,
+      "partially_transparent_pixels": 876471,
+      "opaque_pixels": 1505,
+      "nontransparent_bbox": [
+        0,
+        17,
+        1065,
+        1452
+      ],
+      "rgba_sha256": "c3336fe5dbf81c4b66f6153c6ea35df2b798cfbeaabdf85e38cbdbf3d1ecfaac",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "walker-kaya",
+      "path": "originals/walker-kaya.png",
+      "role": "final_candidate",
+      "bytes": 725203,
+      "sha256": "f0d116a018a7f7d01c96c1bc4756bfb1ad6e3f114bc31e6f0735b6ef166cf97a",
+      "git_blob_sha": "9cc91efceeb6a6628803601b243aa051e32f5bf6",
+      "format": "PNG",
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 991036,
+      "partially_transparent_pixels": 580478,
+      "opaque_pixels": 2024,
+      "nontransparent_bbox": [
+        17,
+        16,
+        873,
+        1774
+      ],
+      "rgba_sha256": "c2978e511a71f272cacef2551d5d96c4ed42505e5441457f1476ef3d5be10951",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "walker-sui",
+      "path": "originals/walker-sui.png",
+      "role": "final_candidate",
+      "bytes": 844963,
+      "sha256": "f2a1554e5aae60859193c43cea6db64e327ee58112f1492625b85f5bb979a347",
+      "git_blob_sha": "de2f3fb34d889e21571e62afcea3053615313aa0",
+      "format": "PNG",
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 905378,
+      "partially_transparent_pixels": 666213,
+      "opaque_pixels": 1947,
+      "nontransparent_bbox": [
+        49,
+        38,
+        819,
+        1740
+      ],
+      "rgba_sha256": "5e87d8b9e6352d411dbabed5adfce52f5a9512582b93cc44dc31a3f95fd9d196",
+      "image_reencoding_or_pixel_editing_performed": false
+    },
+    {
+      "case_id": "walker-sui",
+      "path": "archive/walker-sui-v1.png",
+      "role": "archived_reference_revision",
+      "bytes": 785962,
+      "sha256": "899633ba0c88b2fed96e05f86e66f69607af4875d7b73c3f1c55abb91fd52c30",
+      "git_blob_sha": "4beaa5ac525d552eb9cbe209ad006dc0287c1334",
+      "format": "PNG",
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 969817,
+      "partially_transparent_pixels": 601769,
+      "opaque_pixels": 1952,
+      "nontransparent_bbox": [
+        0,
+        6,
+        810,
+        1754
+      ],
+      "rgba_sha256": "04bef41153df6f8ab33d787c9494a151a6a5c41af1749d6ccef6ddc2d1d8c09d",
+      "image_reencoding_or_pixel_editing_performed": false
+    }
+  ]
+}
