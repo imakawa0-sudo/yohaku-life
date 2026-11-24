@@ -378,6 +378,7 @@ function tickActor(
   transition: SpatialTransition,
   actor: SpatialActor,
   order: SpatialOrder,
+  heldUseOrderIds?: ReadonlySet<string>,
 ) {
   if (order.phase === "waiting") {
     order.phase = order.resumePhase!;
@@ -387,6 +388,7 @@ function tickActor(
   if (order.phase === "use" && order.intent.kind === "use") {
     const reason = useFailure(transition.state, order, order.intent.slotId);
     if (reason) return wait(order, "use", reason);
+    if (heldUseOrderIds?.has(order.id)) return;
     order.useRemaining--;
     if (order.useRemaining === 0)
       finish(transition, actor, order, "use-completed");
@@ -456,9 +458,10 @@ function skipQuietMinutes(actors: SpatialActor[], available: number): number {
   return minutes;
 }
 
-export function advanceSpatial(
+function advanceSpatialTime(
   state: SpatialState,
   minutes: number,
+  heldUseOrderIds?: ReadonlySet<string>,
 ): SpatialTransition {
   const end = state.time + minutes;
   if (
@@ -480,17 +483,29 @@ export function advanceSpatial(
     const previousEvents = transition.events.length;
     transition.state.time++;
     for (const actor of actors) {
-      if (actor.order) tickActor(transition, actor, actor.order);
+      if (actor.order) tickActor(transition, actor, actor.order, heldUseOrderIds);
     }
     // A later actor may have released a payload after an earlier actor waited this tick.
-    if (transition.events.length === previousEvents) {
-      transition.state.time += skipQuietMinutes(
-        actors,
-        end - transition.state.time,
-      );
-    }
+    const remaining = end - transition.state.time;
+    if (remaining > 0 && transition.events.length === previousEvents)
+      transition.state.time += skipQuietMinutes(actors, remaining);
   }
   return transition;
+}
+
+export function advanceSpatial(
+  state: SpatialState,
+  minutes: number,
+): SpatialTransition {
+  return advanceSpatialTime(state, minutes);
+}
+
+/** Hold only use time. Movement, permission checks, and safe exits still run. */
+export function advanceSpatialMinute(
+  state: SpatialState,
+  heldUseOrderIds?: ReadonlySet<string>,
+): SpatialTransition {
+  return advanceSpatialTime(state, 1, heldUseOrderIds);
 }
 
 export function setSpatialGate(

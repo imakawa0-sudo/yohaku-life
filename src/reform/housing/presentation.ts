@@ -1,3 +1,5 @@
+import { nextGatheringCompletionMinutes } from "./gatheringForecast";
+export { nextGatheringCompletionMinutes } from "./gatheringForecast";
 import { cellName, furnishings, roomName } from "../house";
 import type { Game } from "../sim";
 import { locateSpatial } from "../spatial/actions";
@@ -140,8 +142,13 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
     };
     graph = {
       ...state,
-      ...buildHousingTopology(g.house, Object.keys(actors), h.controls, actors)
-        .geometry,
+      ...buildHousingTopology(
+        g.house,
+        Object.keys(actors),
+        h.controls,
+        actors,
+        h.layoutVersion,
+      ).geometry,
       actors,
     };
   }
@@ -190,9 +197,9 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
   };
 }
 export function nextCompletionMinutes(g: Game): number | null {
-  let next = Infinity;
+  let next = nextGatheringCompletionMinutes(g) ?? Infinity;
   for (const a of g.actors) {
-    if (!a.task) continue;
+    if (!a.task || a.task.spatial?.gatheringId) continue;
     const minutes = a.task.spatial
       ? housingStatus(g, a.person.id).minutes
       : a.task.remaining;

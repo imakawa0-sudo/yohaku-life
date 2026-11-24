@@ -1,6 +1,7 @@
 import { useId } from "react";
 import { Footprints } from "lucide-react";
 import { cellName, roomName } from "./house";
+import { GatheringPanel } from "./GatheringPanel";
 import { housingPointLabel } from "./housing/presentation";
 import {
   housingPoint,
@@ -61,6 +62,7 @@ export function HousingPanel({
   const prefix = useId();
   const h = game.housing!;
   const id = actor.person.id;
+  const gathering = !!actor.task?.spatial?.gatheringId;
   const people = game.actors.map((a) => a.person.id);
   function moveButton(
     label: string,
@@ -141,23 +143,25 @@ export function HousingPanel({
           <dt>現在地</dt>
           <dd>{status.location}</dd>
         </div>
-        <div>
-          <dt>段階</dt>
-          <dd>{housingStageNames[status.phase]}</dd>
-        </div>
+        {!gathering && (
+          <div>
+            <dt>段階</dt>
+            <dd>{housingStageNames[status.phase]}</dd>
+          </div>
+        )}
         {status.destination && (
           <div>
             <dt>行き先</dt>
             <dd>{status.destination}</dd>
           </div>
         )}
-        {status.useRemaining !== null && (
+        {!gathering && status.useRemaining !== null && (
           <div>
             <dt>設備の利用残り</dt>
             <dd>{status.useRemaining}分</dd>
           </div>
         )}
-        {actor.task && (
+        {actor.task && (!gathering || status.phase === "cancelling") && (
           <div>
             <dt>
               {status.phase === "cancelling"
@@ -172,17 +176,18 @@ export function HousingPanel({
           </div>
         )}
       </dl>
-      <p className="lf-note">{status.detail}</p>
+      {!gathering && <p className="lf-note">{status.detail}</p>}
       {unknown && actor.task && (
         <p className="lf-note">
           次に自宅で新しい指示が決まると、この部屋の入口から始めます。
         </p>
       )}
-      {status.phase === "waiting" && status.minutes === null && (
+      {!gathering && status.phase === "waiting" && status.minutes === null && (
         <p className="lf-note">
           設定や間取りを見直して時計を進めると、同じ予定を続けられるか確かめます。
         </p>
       )}
+      <GatheringPanel key={id} game={game} actorId={id} onGame={onGame} />
       <details open>
         <summary>部屋へ移動</summary>
         <div className="lf-command-list">

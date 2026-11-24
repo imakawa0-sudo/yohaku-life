@@ -31,6 +31,7 @@ import {
 import type { Skill } from "./peopleModel";
 import { HousingPanel, housingStageNames } from "./HousingPanel";
 import { housingTogether } from "./housing/bridge";
+import { gatheringPresence, gatheringStatus } from "./housing/gathering";
 import { housingStatus, nextCompletionMinutes } from "./housing/presentation";
 import { roomName } from "./house";
 import type { Need } from "./house";
@@ -329,6 +330,8 @@ export function Life({
   const next = nextCompletionMinutes(game);
   const hasTasks = game.actors.some((a) => a.task);
   const status = game.housing ? housingStatus(game, person.id) : null;
+  const gathering = gatheringStatus(game, person.id);
+  const gatheringCompany = gathering ? gatheringPresence(game, person.id) : [];
   const locations = places(game.world);
   const place = locations.find((place) => place.id === actor.location);
   const region = place?.name ?? actor.location;
@@ -345,6 +348,7 @@ export function Life({
     .filter((a) => {
       if (a.person.id === person.id || a.location !== actor.location)
         return false;
+      if (gathering) return gatheringCompany.includes(a.person.id);
       if (!game.housing) return !atHome || a.room === actor.room;
       if (atHome) return housingTogether(game, actor, a);
       const t = actor.task;
@@ -482,9 +486,10 @@ export function Life({
                   </p>
                 ) : (
                   <p>
-                    {status && actor.task?.spatial
-                      ? housingStageNames[status.phase]
-                      : actor.reason}
+                    {gathering?.detail ??
+                      (status && actor.task?.spatial
+                        ? housingStageNames[status.phase]
+                        : actor.reason)}
                   </p>
                 )}
                 {actor.task && !actor.task.spatial && (
@@ -558,7 +563,7 @@ export function Life({
           )}
           {hasTasks && next === null && (
             <p id="lf-next-wait" className="lf-clock-hint">
-              待機中や通れない経路の予定は完了時刻を見積もれません。
+              現在の通行・利用の条件では、次の完了時刻を見積もれません。
             </p>
           )}
           {game.time === 480 && !hasTasks && (

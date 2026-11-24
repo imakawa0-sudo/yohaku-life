@@ -1,7 +1,7 @@
 import { furnishings, type Need } from "../house";
 import type { Actor, Game, Task } from "../sim";
 import {
-  advanceSpatial,
+  advanceSpatialMinute,
   cancelSpatialOrder,
   issueSpatialOrder,
 } from "../spatial/actions";
@@ -39,6 +39,7 @@ function geometry(g: Game, h: HousingRuntime) {
     Object.keys(h.state.actors),
     h.controls,
     h.state.actors,
+    h.layoutVersion,
   );
 }
 function rebuild(g: Game, h: HousingRuntime) {
@@ -87,7 +88,12 @@ export function setHousingRoomAccess(
   rebuild(next, h);
   return next;
 }
-function locate(g: Game, h: HousingRuntime, id: string, point: SpatialPoint) {
+export function locateHousingActor(
+  g: Game,
+  h: HousingRuntime,
+  id: string,
+  point: SpatialPoint,
+) {
   delete h.unlocated[id];
   h.state.actors = {
     ...h.state.actors,
@@ -140,7 +146,7 @@ export function housingTaskBoundary(
       a.location === g.home &&
       (event === "finish" || previous?.departurePoint)
     ) {
-      locate(
+      locateHousingActor(
         g,
         h,
         id,
@@ -160,7 +166,7 @@ export function housingTaskBoundary(
     }
   } else if (previous) {
     if (event === "begin" && a.location === g.home) {
-      locate(g, h, id, housingPoint(a.room, 0));
+      locateHousingActor(g, h, id, housingPoint(a.room, 0));
     } else {
       previous.location = a.location;
       previous.room = a.room;
@@ -225,7 +231,7 @@ export function planHousing(
   let h = g.housing!;
   if (!Object.hasOwn(h.state.actors, id)) {
     h = structuredClone(h);
-    locate(g, h, id, housingPoint(a.room, 0));
+    locateHousingActor(g, h, id, housingPoint(a.room, 0));
   }
   const position = h.state.actors[id].position;
   if (position.kind !== "at") return safeExitReason;
@@ -323,16 +329,19 @@ export function cancelHousingTask(g: Game, a: Actor, t: Task) {
   );
 }
 
-type HousingMinute = {
+export type HousingMinute = {
   metric: Task["metric"];
   used: boolean;
   terminal?: "finish" | "cancel";
 };
 /** Read all users' actual use before applying any completion effects. */
-export function advanceHousingMinute(g: Game): Map<string, HousingMinute> {
+export function advanceHousingMinute(
+  g: Game,
+  heldUseOrderIds?: ReadonlySet<string>,
+): Map<string, HousingMinute> {
   const h = g.housing!;
   const previous = h.state;
-  const { state, events } = advanceSpatial(previous, 1);
+  const { state, events } = advanceSpatialMinute(previous, heldUseOrderIds);
   h.state = state;
   const result = new Map<string, HousingMinute>();
   const diners: { a: Actor; point: SpatialPoint }[] = [];

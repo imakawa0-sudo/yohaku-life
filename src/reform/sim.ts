@@ -1,8 +1,17 @@
+import {
+  cancelGatheringMember,
+  finishGatheringMinute,
+  heldGatheringOrders,
+} from "./housing/gatheringProgress";
 import type { Persona, Skill } from "./peopleModel";
 import { isPersona, skillKeys, skillNames } from "./peopleModel";
 import { cookingStation, initialHouse, isHouse, service } from "./house";
 import type { House, Need } from "./house";
-import type { HousingTaskBinding, HousingRuntime } from "./housing/types";
+import type {
+  GatheringKind,
+  HousingTaskBinding,
+  HousingRuntime,
+} from "./housing/types";
 import { isHousingRuntime } from "./housing/runtime";
 import {
   advanceHousingMinute,
@@ -60,6 +69,7 @@ export interface ActionOption {
   reserved?: Partial<Stock>;
 }
 export interface Memory {
+  gathering?: { kind: GatheringKind; peerId: string };
   label: string;
   value: number;
   until: number;
@@ -833,6 +843,10 @@ function plan(
 function stop(g: Game, a: Actor, spatialCancelled = false): void {
   const t = a.task;
   if (!t) return;
+  if (t.spatial?.gatheringId) {
+    cancelGatheringMember(g, a.person.id);
+    return;
+  }
   if (t.spatial && !spatialCancelled && !cancelHousingTask(g, a, t)) return;
   if (t.follower && t.partner) {
     const leader = find(g, t.partner);
@@ -1593,7 +1607,9 @@ function advanceMinute(g: Game): boolean {
       }
     }
   }
-  const spatialMinutes = g.housing ? advanceHousingMinute(g) : undefined;
+  const spatialMinutes = g.housing
+    ? advanceHousingMinute(g, heldGatheringOrders(g))
+    : undefined;
   const completed: { a: Actor; t: Task }[] = [];
   for (const a of g.actors) {
     const t = a.task;
@@ -1615,13 +1631,18 @@ function advanceMinute(g: Game): boolean {
             : a.person.personality === "quiet"
               ? 0.72
               : 1;
-      if (t?.kind === "need" && t.target === k && (!spatial || spatial.used))
+      if (
+        (t?.kind === "need" && t.target === k && (!spatial || spatial.used)) ||
+        (t?.kind === "home-gather" &&
+          spatial?.used &&
+          k === (t.target === "meal" ? "hunger" : "social"))
+      )
         rate *= 0.3;
       a.needs[k] = clamp(a.needs[k] - rate);
     }
     a.memories = a.memories.filter((m) => m.until > g.time);
     a.mood = moodOf(g, a);
-    if (t) {
+    if (t && !t.spatial?.gatheringId) {
       if (!spatial) t.remaining--;
       if (spatial?.terminal === "cancel") {
         stop(g, a, true);
@@ -1651,6 +1672,10 @@ function advanceMinute(g: Game): boolean {
           );
       }
     }
+  }
+  if (spatialMinutes && Object.keys(g.housing!.gatherings ?? {}).length) {
+    finishGatheringMinute(g, spatialMinutes);
+    for (const a of g.actors) a.mood = moodOf(g, a);
   }
   let encounter = false;
   for (const { a, t } of completed) {
@@ -1682,6 +1707,40 @@ function integer(v: unknown, min = 0, max = 1e9): v is number {
 function short(v: unknown, max = 320): v is string {
   return typeof v === "string" && v.length <= max;
 }
+function validMemories(
+  memories: unknown,
+  ownerId: string,
+  actorIds: ReadonlySet<string>,
+) {
+  if (!Array.isArray(memories) || memories.length > 100) return false;
+  const identities = new Set<string>();
+  for (const m of memories) {
+    if (
+      !object(m) ||
+      !short(m.label) ||
+      !number(m.value, -100, 100) ||
+      !integer(m.until)
+    )
+      return false;
+    if (!Object.hasOwn(m, "gathering")) continue;
+    const source = m.gathering;
+    if (
+      !object(source) ||
+      Object.keys(source).length !== 2 ||
+      !Object.hasOwn(source, "kind") ||
+      !Object.hasOwn(source, "peerId") ||
+      (source.kind !== "talk" && source.kind !== "meal") ||
+      typeof source.peerId !== "string" ||
+      !actorIds.has(source.peerId) ||
+      source.peerId === ownerId
+    )
+      return false;
+    const key = JSON.stringify([source.kind, source.peerId]);
+    if (identities.has(key)) return false;
+    identities.add(key);
+  }
+  return true;
+}
 function numericKeys(
   value: unknown,
   keys: readonly string[],
@@ -1697,6 +1756,7 @@ function hasKind(value: unknown): value is Skill {
 }
 const metrics: Metric[] = ["free", "work", "care", "travel", "waiting"];
 const actionKinds = [
+  "home-gather",
   "home-move",
   "need",
   "work",
@@ -1791,15 +1851,7 @@ export function isGame(value: unknown): value is Game {
       !numericKeys(a.metrics, metrics) ||
       (a.priority !== null && !hasKind(a.priority)) ||
       (a.specialty !== null && !hasKind(a.specialty)) ||
-      !Array.isArray(a.memories) ||
-      a.memories.length > 100 ||
-      !a.memories.every(
-        (m) =>
-          object(m) &&
-          short(m.label) &&
-          number(m.value, -100, 100) &&
-          integer(m.until),
-      ) ||
+      !validMemories(a.memories, a.person.id, ids) ||
       !object(a.relations) ||
       Object.keys(a.relations).length !== actors.length - 1
     )
@@ -1844,6 +1896,8 @@ export function isGame(value: unknown): value is Game {
           t.partner === a.person.id)) ||
       (t.follower !== undefined && typeof t.follower !== "boolean")
     )
+      return false;
+    if (t.kind === "home-gather" && (!value.housing || !t.spatial))
       return false;
     if (
       value.housing === undefined &&

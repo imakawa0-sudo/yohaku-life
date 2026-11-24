@@ -333,6 +333,7 @@ export default function ReformApp() {
       {activeView === "life" && game && actor && (
         <main className="rf-main rf-main-life">
           <Life
+            key={slot?.id}
             game={game}
             selected={actor.person.id}
             onSelect={setSelected}

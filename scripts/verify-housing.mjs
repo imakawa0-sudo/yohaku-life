@@ -12,6 +12,10 @@ const { initialHouse } = await tsImport(
   "../src/reform/house.ts",
   import.meta.url,
 );
+const { housingPoint } = await tsImport(
+  "../src/reform/housing/topology.ts",
+  import.meta.url,
+);
 const { makePersona } = await tsImport(
   "../src/reform/peopleModel.ts",
   import.meta.url,
@@ -277,6 +281,231 @@ async function twoResidents() {
     );
     report.normal.push(
       "二人の住民で室内扉・個別許可を時計を進めず変更し、部屋の入口と相手の現在地点まで移動",
+    );
+  } finally {
+    await ctx.close();
+  }
+}
+const gatheringPanel = (p) =>
+  p.getByRole("region", { name: "一緒に過ごす", exact: true });
+const startGathering = "集まりを指示する";
+const leaveGathering = "この集まりから離れる";
+const startReady = "揃った人で始める";
+const residents = (p) =>
+  gatheringPanel(p).getByRole("list", { name: "住民ごとの席と状況" });
+const homePicture = (p) => p.locator(".yp-scene");
+const activity = (g) => Object.values(g.housing.gatherings)[0];
+const choice = (p, name) =>
+  gatheringPanel(p).getByRole("checkbox", { name, exact: true });
+
+async function joinChoice(p, name) {
+  const input = choice(p, name);
+  await expect(input).not.toBeChecked();
+  await input.click();
+  await settled(p);
+  await expect(input).toBeChecked();
+}
+
+async function normalGatherings() {
+  const ctx = await context();
+  try {
+    const p = await open(ctx);
+    await click(p, "木工の二人");
+    await click(p, "この朝を始める");
+    const panel = gatheringPanel(p);
+    for (const [kind, label] of [
+      ["talk", "会話"],
+      ["meal", "食事"],
+    ]) {
+      const initialSlot = active(await library(p));
+      const initial = initialSlot.game;
+      const start = button(panel, startGathering);
+      await expect(start).toBeDisabled();
+      await expect(panel).toContainText("二人以上");
+      await button(panel, label).click();
+      await joinChoice(p, "スイ");
+      await expect(start).toBeEnabled();
+      for (const text of [
+        "会場の空き席2席",
+        "全員の到着まで1分",
+        "到着後の利用20分",
+        "所要時間の目安21分",
+      ]) {
+        await expect(panel).toContainText(text);
+      }
+      if (kind === "meal") {
+        await expect(panel).toContainText("必要な完成食2食");
+        await expect(panel).toContainText(
+          "共有備蓄の食事" + initial.food + "食",
+        );
+      }
+      assert.deepEqual(await game(p), initial);
+      await click(p, startGathering);
+
+      const ordered = await game(p);
+      assert.equal(ordered.time, initial.time);
+      assert.equal(ordered.food, initial.food - (kind === "meal" ? 2 : 0));
+      assert.equal(ordered.housing.nextGatheringId, 2);
+      assert.equal(activity(ordered).kind, kind);
+      assert.equal(new Set(ordered.actors.map((a) => a.task.station)).size, 2);
+      assert.equal(
+        new Set(ordered.actors.map((a) => a.task.spatial.orderId)).size,
+        2,
+      );
+      assert.deepEqual(active(await library(p)).origin, initialSlot.origin);
+      await expect(residents(p)).toContainText("カヤ居間・長椅子の席1");
+      await expect(residents(p)).toContainText("スイ居間・長椅子の席2");
+      await expect(homePicture(p)).not.toHaveAttribute("aria-label", /スイ/);
+      await expect(button(panel, startReady)).toBeDisabled();
+      await click(p, "5分進める");
+      const using = await game(p);
+      assert.equal(activity(using).startedAt, initial.time + 1);
+      assert.deepEqual(
+        activity(using).members.map((m) => m.usedMinutes),
+        [4, 4],
+      );
+      await expect(homePicture(p)).toHaveAttribute("aria-label", /カヤ、スイ/);
+      await p.reload();
+      await expect(residents(p)).toContainText("利用した時間 4分／20分");
+      assert.deepEqual(await game(p), using);
+
+      await click(p, leaveGathering);
+      const left = await game(p);
+      assert.equal(left.time, using.time);
+      assert.equal(left.food, using.food);
+      assert.equal(left.actors[0].task, null);
+      if (kind === "talk") {
+        assert.equal(left.actors[1].task, null);
+        await forkMorning(p);
+      } else {
+        assert.deepEqual(left.actors[1].task, using.actors[1].task);
+        await click(p, "スイ");
+        await expect(residents(p)).toContainText(
+          "カヤ居間・長椅子の席1離脱済み",
+        );
+        await expect(homePicture(p)).not.toHaveAttribute("aria-label", /カヤ/);
+        await click(p, finishName);
+        const done = await game(p);
+        assert.equal(done.time, left.time + 16);
+        assert.equal(done.actors[1].task, null);
+      }
+    }
+    report.normal.push(
+      "木工の二人の通常開始から会話と食事を指示。別々の席と到着・利用、利用中の再読込み、会話の二人条件、食事の個別離脱と残る一人の完了を確認",
+    );
+  } finally {
+    await ctx.close();
+  }
+}
+
+async function threeResidentGathering() {
+  const ctx = await context();
+  try {
+    const p = await open(ctx);
+    const house = initialHouse();
+    house.rooms[0].fixtures[1].kind = "table";
+    const people = ["カヤ", "スイ", name].map((label, index) => ({
+      ...makePersona(index, 23 + index),
+      name: label,
+    }));
+    const g = sim.enableHousing(
+      sim.createGame(
+        people,
+        generateWorld(defaultWorldConfig()),
+        "village",
+        house,
+      ),
+      "new",
+    );
+    for (const [i, [room, cell]] of [
+      ["living", 1],
+      ["bedroom", 0],
+      ["living", 6],
+    ].entries()) {
+      const actor = g.actors[i];
+      actor.room = room;
+      g.housing.state.actors[actor.person.id].position = {
+        kind: "at",
+        point: housingPoint(room, cell),
+      };
+    }
+    assert.ok(sim.isGame(g));
+    const id = "qa-three-gathering";
+    await p.evaluate(
+      ([k, v]) => localStorage.setItem(k, v),
+      [
+        key,
+        JSON.stringify({
+          format: 2,
+          activeId: id,
+          slots: [{ id, name: "検証用・丸卓と別室", game: g, origin: g }],
+        }),
+      ],
+    );
+    await p.reload();
+    const panel = gatheringPanel(p);
+    await joinChoice(p, "スイ");
+    await joinChoice(p, name);
+    await expect(panel).toContainText("会場の空き席3席");
+    await expect(panel).toContainText("全員の到着まで4分");
+    await expect(panel).toContainText("所要時間の目安24分");
+    await click(p, startGathering);
+    const ordered = await game(p);
+    assert.equal(new Set(ordered.actors.map((a) => a.task.station)).size, 3);
+    await expect(residents(p)).toContainText("予約した席へ向かっています");
+    await expect(panel).toContainText("集合期限まであと19分");
+    await expect(homePicture(p)).toHaveAttribute(
+      "aria-label",
+      new RegExp(name),
+    );
+    await expect(homePicture(p)).not.toHaveAttribute("aria-label", /スイ/);
+
+    const ready = button(panel, startReady);
+    await expect(ready).toBeEnabled();
+    for (const width of [1280, 390, 320]) {
+      await p.setViewportSize({ width, height: width < 600 ? 844 : 900 });
+      await ready.focus();
+      await expect(ready).toBeFocused();
+      const fit = await ready.evaluate((el) => {
+        el.scrollIntoView({ block: "center" });
+        const b = el.getBoundingClientRect();
+        return {
+          content: document.documentElement.scrollWidth,
+          left: b.left,
+          right: b.right,
+          bottom: b.bottom,
+          clock: document.querySelector(".lf-clock").getBoundingClientRect()
+            .top,
+        };
+      });
+      assert.ok(
+        fit.content <= width + 1 &&
+          fit.left >= 0 &&
+          fit.right <= width + 1 &&
+          fit.bottom <= fit.clock,
+        JSON.stringify(fit),
+      );
+      const file = "housing-gathering-" + width + ".png";
+      await p.screenshot({
+        path: resolve(output, file),
+        animations: "disabled",
+      });
+      report.screenshots.push(file);
+    }
+    await click(p, startReady);
+    const begun = await game(p);
+    assert.equal(begun.time, ordered.time);
+    assert.equal(activity(begun).startedAt, ordered.time);
+    assert.deepEqual(
+      activity(begun).members.map((m) => m.usedMinutes),
+      [0, 0, 0],
+    );
+    assert.equal(begun.actors[1].task, null);
+    await expect(residents(p)).toContainText("離脱済み");
+    await click(p, finishName);
+    assert.equal((await game(p)).time, begun.time + 20);
+    report.controlled.push(
+      "保存に検証用の丸卓と三人の初期位置を設定。別室と先着の居合わせ、長い名前でPC/390/320pxの操作枠、揃った二人だけでの開始と次の完了を確認",
     );
   } finally {
     await ctx.close();
@@ -677,6 +906,8 @@ try {
   });
   await normal();
   await twoResidents();
+  await normalGatherings();
+  await threeResidentGathering();
   await legacy();
   await firstCopyConflict();
   await renderBoundary();

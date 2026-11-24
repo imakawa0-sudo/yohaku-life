@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   advanceSpatial,
+  advanceSpatialMinute,
   cancelSpatialOrder,
   issueSpatialOrder,
   locateSpatial,
@@ -97,6 +98,103 @@ test("use_starts_after_arrival", () => {
   ]);
   assert.equal(done.state.actors.P.order, null);
   assert.deepEqual(done.state.reservations, {});
+});
+
+test("one minute holds a selected ready use order while another order completes", () => {
+  const source = createSpatialFixture();
+  source.actors.P.position = at(homePoint(2));
+  source.slots["other-seat"] = {
+    id: "other-seat",
+    point: homePoint(0),
+    allowedActorIds: null,
+  };
+  const state = issue(issue(source, use("P", 1)), {
+    kind: "use",
+    actorId: "Q",
+    slotId: "other-seat",
+    useMinutes: 1,
+  });
+  const p = state.actors.P.order!.id;
+  const q = state.actors.Q.order!.id;
+  const before = structuredClone(state);
+  const next = advanceSpatialMinute(state, new Set([p]));
+  assert.equal(next.state.time, 1);
+  assert.equal(next.state.actors.P.order?.useRemaining, 1);
+  assert.equal(next.state.actors.Q.order, null);
+  assert.deepEqual(next.events, [
+    { actorId: "Q", orderId: q, kind: "use-completed", atTime: 1 },
+  ]);
+  assert.deepEqual(next.state.reservations, {
+    [spatialReservationId({ kind: "slot", id: "desk-seat" })]:
+      state.reservations[spatialReservationId({ kind: "slot", id: "desk-seat" })],
+  });
+  assert.deepEqual(state, before);
+  assert.deepEqual(advanceSpatialMinute(next.state).events, [
+    { actorId: "P", orderId: p, kind: "use-completed", atTime: 2 },
+  ]);
+});
+
+test("a held use order still approaches its slot and arrival spends no use time", () => {
+  const state = issue(createSpatialFixture(), use());
+  const id = state.actors.P.order!.id;
+  const approach = advanceSpatialMinute(state, new Set([id]));
+  assert.deepEqual(approach.state.actors.P.position, at(homePoint(1)));
+  assert.deepEqual(approach.events, []);
+  const arrival = advanceSpatialMinute(approach.state);
+  assert.deepEqual(arrival.state.actors.P.position, at(homePoint(2)));
+  assert.equal(arrival.state.actors.P.order?.phase, "use");
+  assert.equal(arrival.state.actors.P.order?.useRemaining, 2);
+  assert.deepEqual(arrival.events, [
+    { actorId: "P", orderId: id, kind: "arrived", atTime: 2 },
+  ]);
+});
+
+test("a held order still checks permission and leaves permission wait after access returns", () => {
+  const state = advance(issue(createSpatialFixture(), use()), 2).state;
+  state.slots["desk-seat"].allowedActorIds = [];
+  const held = new Set([state.actors.P.order!.id]);
+  const denied = advanceSpatialMinute(state, held);
+  assert.equal(denied.state.actors.P.order?.phase, "waiting");
+  assert.equal(denied.state.actors.P.order?.waitReason, "use-denied");
+  assert.equal(denied.state.actors.P.order?.useRemaining, 2);
+  denied.state.slots["desk-seat"].allowedActorIds = ["P"];
+  const resumed = advanceSpatialMinute(denied.state, held);
+  assert.equal(resumed.state.actors.P.order?.phase, "use");
+  assert.equal(resumed.state.actors.P.order?.waitReason, null);
+  assert.equal(resumed.state.actors.P.order?.useRemaining, 2);
+});
+
+test("cancelling a held use order still finishes its admitted transit and releases the slot", () => {
+  const source = createSpatialFixture();
+  source.slots["desk-seat"].point = otherPoint(1);
+  const state = issue(source, use());
+  const id = state.actors.P.order!.id;
+  const held = new Set([id]);
+  const transit = advanceSpatialMinute(state, held).state;
+  assert.equal(transit.actors.P.position.kind, "transit");
+  const cancelled = cancelSpatialOrder(transit, "P");
+  const closed = setSpatialConnection(cancelled.state, "road", false);
+  const leaving = advanceSpatialMinute(closed, held);
+  assert.deepEqual(leaving.events, []);
+  const done = advanceSpatialMinute(leaving.state, held);
+  assert.deepEqual(done.events, [
+    { actorId: "P", orderId: id, kind: "cancelled", atTime: 3 },
+  ]);
+  assert.deepEqual(done.state.actors.P.position, at(otherPoint(0)));
+  assert.equal(done.state.actors.P.order, null);
+  assert.deepEqual(done.state.reservations, {});
+});
+
+test("successive unheld one-minute transitions match bulk advance and event order", () => {
+  const state = issue(issue(createSpatialFixture(), carry()), use("Q", 2));
+  const events = [];
+  let cursor = state;
+  for (let minute = 0; minute < 10; minute++) {
+    const step = advanceSpatialMinute(cursor);
+    cursor = step.state;
+    events.push(...step.events);
+  }
+  assert.deepEqual({ state: cursor, events }, advance(state, 10));
 });
 
 test("slot_is_exclusive", () => {

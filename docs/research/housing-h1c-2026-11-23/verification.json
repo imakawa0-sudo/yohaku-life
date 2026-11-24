@@ -1,0 +1,338 @@
+{
+  "sourceCommit": "54e95682fa25a6ff65e71fbb5cb7ca3db5208d1e",
+  "dateTaiwan": "2026-11-24",
+  "artifact": {
+    "bytes": 667642,
+    "sha256": "cca8bb577ed785749c9b5711de1be56a4d26d5b4ade20ad5b45e844fa365901a",
+    "equalsBrowserPreview": true
+  },
+  "tests": {
+    "focused": {
+      "pass": 80,
+      "fail": 0,
+      "skip": 0
+    },
+    "nodeImportTsx": {
+      "pass": 965,
+      "fail": 0,
+      "cancelled": 0,
+      "skip": 0,
+      "todo": 0
+    },
+    "build": "pass",
+    "npmTest": "blocked before tests: tsx IPC EPERM",
+    "standardBrowserScripts": {
+      "desktop": "blocked before page: Chromium process_singleton socket EPERM",
+      "mobile": "blocked before page: Chromium process_singleton socket EPERM",
+      "housing": "blocked before page: Chromium process_singleton socket EPERM"
+    }
+  },
+  "scopedReview": {
+    "addressed": 5,
+    "newCriticalImportant": 0,
+    "outOfScopeObservations": 0
+  },
+  "browserContext": "existing QA origin;5 additional slots;not a fresh independent browser context",
+  "desktop": {
+    "viewport": 1363,
+    "clientWidth": 1348,
+    "scrollWidth": 1348
+  },
+  "mobile": {
+    "320": {
+      "contentWidth": 305,
+      "panelWidth": 267,
+      "panelScrollWidth": 267
+    },
+    "390": {
+      "contentWidth": 375,
+      "panelWidth": 329,
+      "panelScrollWidth": 329
+    }
+  },
+  "controlledUI": {
+    "legacyConstructorImportReloadRendered": true,
+    "stoppedRemainingMinutes": [
+      1,
+      14,
+      14
+    ],
+    "zeroTimeRestoreClock": "08:16",
+    "restoredGuidance": [
+      "next minute",
+      "next minute",
+      "14 minutes left"
+    ],
+    "noRestoreNextCompletion": "08:17"
+  },
+  "savePreservation": {
+    "slotsBefore": 37,
+    "slotsAfter": 42,
+    "activeOriginalRestored": true,
+    "originalBytes": 26606,
+    "originalSHA256": "bcf84c71377ed51192e4612b2330a7d8ad7e3542a53a06a3d01f30dbfa68921c",
+    "originalExportByteIdentical": true,
+    "legacyBytes": 77936,
+    "legacySHA256": "6ab258f7bcf2c569b4cc4f82bfa5eaf9438141de7015dd9efa787b167af9295e",
+    "legacyUnchanged": true
+  },
+  "console": {
+    "total": 126,
+    "extension": 126,
+    "other": 0
+  },
+  "fullGameComparison": {
+    "ok": true,
+    "implementationCommit": "54e95682fa25a6ff65e71fbb5cb7ca3db5208d1e",
+    "htmlSha256": "cca8bb577ed785749c9b5711de1be56a4d26d5b4ade20ad5b45e844fa365901a",
+    "htmlBytes": 667642,
+    "checkedGameAndOriginAndImport": [
+      {
+        "file": "resume-departed-0817.json",
+        "time": 497,
+        "bytes": 38960,
+        "sha256": "fb43ef84de2a010f36414da58a9399ce8f143ae9f943bb3e6fbe3b1e151d72a6"
+      },
+      {
+        "file": "resume-continued-0821.json",
+        "time": 501,
+        "bytes": 39597,
+        "sha256": "69983d7a740b9b9f7f1abb5ed112e8014241efd7a6ba3db19d1eb2ad7b619fc9"
+      },
+      {
+        "file": "resume-restored-0816.json",
+        "time": 496,
+        "bytes": 40451,
+        "sha256": "a5e32266b682a7a15bf9f36bb8b367bda1112fa48c6d216e6e2af7d8180339de"
+      },
+      {
+        "file": "resume-normal-talk-0810.json",
+        "time": 490,
+        "bytes": 34995,
+        "sha256": "c457799214d555787c7e50d230e9a9ea36567a97e9156751e7459df44a2db4e8"
+      },
+      {
+        "file": "resume-normal-talk-0810-reload.json",
+        "time": 490,
+        "bytes": 34995,
+        "sha256": "c457799214d555787c7e50d230e9a9ea36567a97e9156751e7459df44a2db4e8"
+      },
+      {
+        "file": "resume-normal-talk-repeat-0815.json",
+        "time": 495,
+        "bytes": 35119,
+        "sha256": "f653d6feeb1ed7b1d6f334a6833af0ec87a7d5094f4ce5b59dc09433342f026b"
+      },
+      {
+        "file": "resume-normal-meal-0805.json",
+        "time": 485,
+        "bytes": 34476,
+        "sha256": "774998ac4a868d25a7eb4de04191107aacb62f8c90c0736610336c2b167be4f0"
+      },
+      {
+        "file": "resume-normal-meal-0805-reload.json",
+        "time": 485,
+        "bytes": 34476,
+        "sha256": "774998ac4a868d25a7eb4de04191107aacb62f8c90c0736610336c2b167be4f0"
+      },
+      {
+        "file": "resume-normal-meal-0821.json",
+        "time": 501,
+        "bytes": 31997,
+        "sha256": "72404b01e5fb461a0e5c340b202081dfd7baca20ceba37c59ad0d1a0a2a0041f"
+      },
+      {
+        "file": "resume-original-before.json",
+        "time": 566,
+        "bytes": 26606,
+        "sha256": "bcf84c71377ed51192e4612b2330a7d8ad7e3542a53a06a3d01f30dbfa68921c"
+      },
+      {
+        "file": "resume-original-after.json",
+        "time": 566,
+        "bytes": 26606,
+        "sha256": "bcf84c71377ed51192e4612b2330a7d8ad7e3542a53a06a3d01f30dbfa68921c"
+      }
+    ],
+    "publicCommandFullGameAndOriginalMorningMatch": [
+      "resume-departed-0817.json",
+      "resume-restored-0816.json",
+      "resume-continued-0821.json",
+      "resume-normal-talk-0810.json",
+      "resume-normal-talk-0810-reload.json",
+      "resume-normal-talk-repeat-0815.json",
+      "resume-normal-meal-0805.json",
+      "resume-normal-meal-0805-reload.json",
+      "resume-normal-meal-0821.json"
+    ],
+    "byteIdentical": [
+      {
+        "first": "resume-normal-talk-0810.json",
+        "second": "resume-normal-talk-0810-reload.json"
+      },
+      {
+        "first": "resume-normal-meal-0805.json",
+        "second": "resume-normal-meal-0805-reload.json"
+      },
+      {
+        "first": "resume-original-before.json",
+        "second": "resume-original-after.json"
+      }
+    ],
+    "changedSelection": "Transient UI selection is absent from Game. Slot IDs/names are envelope metadata. Full Game comparison makes no assertion about UI focus. Raw-pair checks include the entire envelope.",
+    "normalOrigin": "Unmodified morning from resume-normal-talk-0810.json. The meal fork is branchSlot(fromOrigin=true).",
+    "normalTalk": {
+      "recordsPerResident": 1,
+      "value": 4,
+      "kind": "talk",
+      "peerIds": [
+        "person-2",
+        "person-1"
+      ],
+      "untilAt0810": 636,
+      "untilAt0815": 645
+    },
+    "normalMeal": {
+      "foodMorning": 7,
+      "foodAt0805": 5,
+      "foodAt0821": 5,
+      "afterLeaveMinutesToFinish": 16,
+      "fifthJointMinuteReached": false,
+      "finalMemories": 0
+    },
+    "appearance": {
+      "residents": 2,
+      "normalStates": 6,
+      "allTenValuesPerResidentMatchTheirOrigin": true,
+      "firstResident": "H1-C再開最終確認のカヤ",
+      "customized": [
+        "braid",
+        "silver",
+        "glasses"
+      ]
+    },
+    "controlledTalk": {
+      "nextCompletionAfterRestoringAt0816": 5,
+      "departedUsed": 2,
+      "resumedUsedAt0821": [
+        7,
+        20,
+        15
+      ]
+    }
+  },
+  "priorCandidates": {
+    "sourceCommit": "b9e10238978000e2c738a9f4910007ec9992e9e2",
+    "dateTaiwan": "2026-11-24",
+    "artifact": {
+      "bytes": 666359,
+      "sha256": "7ec8353228b5b68b344a810b6c7d0d44e9abc154c966bc9bc952089b9bfe017a",
+      "equalsBrowserPreview": true
+    },
+    "tests": {
+      "nodeImportTsx": {
+        "pass": 953,
+        "fail": 0,
+        "skip": 0,
+        "exitCode": 0
+      },
+      "npmTest": "blocked_before_tests_tsx_IPC_EPERM",
+      "build": "passed",
+      "standardBrowserScripts": [
+        "desktop: blocked_before_page_Chromium_socket_EPERM",
+        "mobile: blocked_before_page_Chromium_socket_EPERM",
+        "housing: blocked_before_page_Chromium_socket_EPERM"
+      ]
+    },
+    "browserContext": "existing QA origin; synthetic slots; not a fresh independent browser context",
+    "mobile": {
+      "320": {
+        "contentWidth": 305,
+        "readyButtonFocused": true,
+        "readyButtonBottom": 411.15625,
+        "clockTop": 737
+      },
+      "390": {
+        "contentWidth": 375,
+        "readyButtonFocused": true,
+        "readyButtonBottom": 371.796875
+      }
+    },
+    "candidateArtifact": {
+      "commit": "ed9a8eca9851ac8471b7d08a2b9e9211fb4d0a94",
+      "bytes": 665934,
+      "sha256": "50625a4d18f71fd6690d9b44645a6440d5bab25d1e08632fa0bd7be8639238d9"
+    },
+    "candidateTalk": {
+      "reloadBytesEqual": true,
+      "talk5MinuteFullGameMatch": true,
+      "talkLeaveFullGameMatch": true,
+      "originUnchanged": true,
+      "appearanceSelectedPreserved": true,
+      "timeBefore": 485,
+      "timeAfter": 490,
+      "food": 7,
+      "memoriesAfter": [
+        1,
+        1
+      ],
+      "tasksAfter": [
+        null,
+        null
+      ]
+    },
+    "candidateBoundaries": {
+      "mealPartialFullGameMatch": true,
+      "mealSoloCompletionFullGameMatch": true,
+      "mealFinalTime": 501,
+      "mealFoodConsumedOnce": 5,
+      "threeStartFullGameMatch": true,
+      "threeExitFullGameMatch": true,
+      "threeNextCompletion": 2,
+      "refundDuringExit": 6,
+      "refundAfterExit": 7,
+      "refundFullGameMatch": true,
+      "deadlineFullGameMatch": true,
+      "deadlineNextCompletion": 1,
+      "deadlineFinalTime": 499,
+      "deadlineFood": 6,
+      "allOriginsUnchanged": true
+    },
+    "finalMeal": {
+      "artifactSHA256": "7ec8353228b5b68b344a810b6c7d0d44e9abc154c966bc9bc952089b9bfe017a",
+      "midTime": 485,
+      "doneTime": 501,
+      "allExportedStatesValid": true,
+      "partialFullGameMatches": true,
+      "reloadLeaveSoloCompletionFullGameMatches": true,
+      "originUnchanged": true,
+      "foodAfterFinish": 5,
+      "nextCompletionMinutes": 16
+    },
+    "finalSaveAndThree": {
+      "artifactSHA256": "7ec8353228b5b68b344a810b6c7d0d44e9abc154c966bc9bc952089b9bfe017a",
+      "threeEarlyStartAndNextExitFullGameMatch": true,
+      "threeTime": 483,
+      "threeOriginUnchanged": true,
+      "originalActiveSlotRestored": true,
+      "originalExportByteIdentical": true,
+      "originalExportBytes": 26606,
+      "originalExportSHA256": "bcf84c71377ed51192e4612b2330a7d8ad7e3542a53a06a3d01f30dbfa68921c",
+      "legacyKeyBytes": 77936,
+      "legacyKeySHA256": "6ab258f7bcf2c569b4cc4f82bfa5eaf9438141de7015dd9efa787b167af9295e"
+    },
+    "console": {
+      "total": 176,
+      "extension": 176,
+      "other": []
+    }
+  },
+  "limits": [
+    "No real mobile devices/touch/Safari",
+    "No fresh independent browser context",
+    "No full offline or Sites production test",
+    "Not all prior-candidate UI journeys repeated",
+    "No full accessibility audit or long-term balance proof",
+    "Invalid edited save cases covered by model/import/prewrite tests; not re-imported through final browser UI"
+  ]
+}

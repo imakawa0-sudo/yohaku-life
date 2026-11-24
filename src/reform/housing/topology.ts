@@ -107,6 +107,7 @@ export function buildHousingTopology(
   actorIds: string[],
   controls?: HousingControls,
   positions?: Record<string, SpatialActor>,
+  layoutVersion?: 2,
 ): HousingTopology {
   const settings = controlsForHouse(house, controls);
   const geometry: HousingTopology["geometry"] = {
@@ -164,11 +165,12 @@ export function buildHousingTopology(
         geometry.gates[id] = { id, a, b, open };
       }
     for (const fixture of room.fixtures) {
-      const [cell] = neighbors(room, fixture.cell)
+      const adjacentFloors = neighbors(room, fixture.cell)
         .filter((c) => Number.isFinite(distances[c]))
         .sort((a, b) => distances[a] - distances[b] || a - b);
-      if (cell === undefined) continue;
       for (let seat = 0; seat < furnishings[fixture.kind].seats; seat++) {
+        const cell = adjacentFloors[layoutVersion === 2 ? seat : 0];
+        if (cell === undefined) break;
         const id = housingSlotId(room.id, fixture.id, seat);
         slots[id] = {
           id,

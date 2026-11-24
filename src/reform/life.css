@@ -1077,3 +1077,67 @@
     display: flex;
   }
 }
+
+.lf-gathering {
+  margin-top: 0.8rem;
+  padding-block: 0.8rem;
+  border-top: 1px solid var(--lf-line);
+  min-width: 0;
+}
+.lf-gathering-form,
+.lf-gathering-activity {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+}
+.lf-gathering .lf-segment {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+.lf-gathering-form fieldset,
+.lf-gathering .lf-housing-status {
+  margin: 0;
+}
+.lf-gathering label.lf-gathering-venue {
+  min-height: 0;
+  margin: 0;
+}
+.lf-gathering select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  scroll-margin-block: 5rem 10rem;
+  padding: 0.45rem 0.65rem;
+  color: var(--lf-ink);
+  background: var(--lf-paper);
+  border: 1px solid var(--lf-line);
+  border-radius: 8px;
+}
+.lf-gathering label.lf-gathering-choice {
+  display: flex;
+  margin-right: 0;
+}
+.lf-gathering-choice small {
+  display: block;
+  color: var(--lf-soft);
+}
+.lf-gathering h4 {
+  margin: 0;
+}
+.lf-gathering-people {
+  display: grid;
+  gap: 0.45rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.lf-gathering-people li {
+  display: grid;
+  gap: 0.12rem;
+  border: 1px solid var(--lf-line);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+}
+.lf-gathering-people small {
+  color: var(--lf-soft);
+}

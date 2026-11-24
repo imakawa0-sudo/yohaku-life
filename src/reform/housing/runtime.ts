@@ -1,3 +1,4 @@
+import { validGatherings } from "./gatheringValidation";
 import { furnishings, houseValue, isHouse, type House } from "../house";
 import type { Actor, Game, Task } from "../sim";
 import { isSpatialState } from "../spatial/codec";
@@ -231,6 +232,7 @@ function validBinding(
       "kind",
       "mealPartners",
       "socialCompany",
+      "gatheringId",
     ]) ||
     !order ||
     order.id !== binding.orderId ||
@@ -243,6 +245,8 @@ function validBinding(
         actorIds.size < 2 ||
         task.remaining >= task.total))
   )
+    return false;
+  if (Object.hasOwn(binding, "gatheringId") !== (task.kind === "home-gather"))
     return false;
   const intent = order.intent;
   if (intent.kind === "move") {
@@ -268,6 +272,11 @@ function validBinding(
     task.remaining !== order.useRemaining
   )
     return false;
+  if (task.kind === "home-gather")
+    return (
+      onlyFields(binding, ["orderId", "kind", "gatheringId"]) &&
+      typeof binding.gatheringId === "string"
+    );
   const need = furnishings[slot.kind].need;
   if (task.kind === "work") {
     return (
@@ -313,12 +322,16 @@ export function isHousingRuntime(
     !record(value) ||
     !onlyFields(value, [
       "version",
+      "layoutVersion",
+      "gatherings",
+      "nextGatheringId",
       "controls",
       "state",
       "unlocated",
       "legacyStationPaths",
     ]) ||
     value.version !== 1 ||
+    (Object.hasOwn(value, "layoutVersion") && value.layoutVersion !== 2) ||
     !isSpatialState(value.state) ||
     !record(value.unlocated) ||
     !record(value.legacyStationPaths) ||
@@ -342,6 +355,7 @@ export function isHousingRuntime(
     located,
     controls,
     state.actors,
+    value.layoutVersion === 2 ? 2 : undefined,
   );
   if (
     !sameData(controls, topology.controls) ||
@@ -387,7 +401,7 @@ export function isHousingRuntime(
       occupied.add(physicalSeat);
     }
   }
-  return true;
+  return validGatherings(value as unknown as HousingRuntime, game);
 }
 
 /** Saved links form a simple path even after a new shortcut becomes the shortest route. */
@@ -551,8 +565,15 @@ export function applyHousingHouseEdit(
     located,
     runtime?.controls,
     actors,
+    runtime?.layoutVersion,
   );
-  const after = buildHousingTopology(house, located, runtime?.controls, actors);
+  const after = buildHousingTopology(
+    house,
+    located,
+    runtime?.controls,
+    actors,
+    runtime?.layoutVersion,
+  );
   const conflict = editConflict(game, house, before, after);
   if (conflict) return { game, error: conflict };
   const next = structuredClone(game);
