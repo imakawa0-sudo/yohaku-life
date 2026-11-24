@@ -1,0 +1,1024 @@
+{
+  "sourceCommit": "c3d1cbe5a5666440da4a6a275bbd144cc23537c2",
+  "branches": [
+    {
+      "name": "normal-created-morning",
+      "checks": [
+        {
+          "name": "constructed-room-and-two-shelves",
+          "htmlSha256": "5997cf97c9c76100642bf8f8908f605d92cc25b820a07554d9311f3e4cd4d627",
+          "time": 516,
+          "bytes": 33687,
+          "sha256": "f5c063cf52b545d00eff06310883d5df0245ed75ab8169bf37c7260878b2e121",
+          "gameSha256": "d4c8f70a6a6d0287ca968fbd1c9fd428d886b78bc51aeb87ad006ce6fc800bb8",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "work",
+              "target": "wood:hard",
+              "remaining": 3
+            },
+            {
+              "id": "person-2",
+              "kind": null
+            }
+          ]
+        },
+        {
+          "name": "normal-final-before-choice",
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164",
+          "time": 516,
+          "bytes": 33687,
+          "sha256": "f5c063cf52b545d00eff06310883d5df0245ed75ab8169bf37c7260878b2e121",
+          "gameSha256": "d4c8f70a6a6d0287ca968fbd1c9fd428d886b78bc51aeb87ad006ce6fc800bb8",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "work",
+              "target": "wood:hard",
+              "remaining": 3
+            },
+            {
+              "id": "person-2",
+              "kind": null
+            }
+          ]
+        },
+        {
+          "name": "normal-final-after-choice",
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164",
+          "time": 516,
+          "bytes": 33687,
+          "sha256": "f5c063cf52b545d00eff06310883d5df0245ed75ab8169bf37c7260878b2e121",
+          "gameSha256": "d4c8f70a6a6d0287ca968fbd1c9fd428d886b78bc51aeb87ad006ce6fc800bb8",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "work",
+              "target": "wood:hard",
+              "remaining": 3
+            },
+            {
+              "id": "person-2",
+              "kind": null
+            }
+          ]
+        },
+        {
+          "name": "normal-issued",
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164",
+          "time": 516,
+          "bytes": 34697,
+          "sha256": "82d2f635950f739e73a6ef415ddd785065e240e6b045e661703ec7c62c1877dd",
+          "gameSha256": "1dd6b5465dcc738058e5cdb44d461a096f8fa8405d34459d9dd558d36f806600",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 14
+            },
+            {
+              "id": "person-2",
+              "kind": null
+            }
+          ]
+        },
+        {
+          "name": "normal-travel-0841",
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164",
+          "time": 521,
+          "bytes": 35358,
+          "sha256": "4debf054d3881b3ba083a4170af84353ea15799824b5d7dc1a9212dadf49ce69",
+          "gameSha256": "92d72c6e61b2b024c1bee18ee1a52cec57baef180a7cb84254844df7ec2016ce",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 14
+            },
+            {
+              "id": "person-2",
+              "kind": "work",
+              "target": "wood",
+              "remaining": 27
+            }
+          ]
+        },
+        {
+          "name": "normal-travel-reloaded",
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164",
+          "time": 521,
+          "bytes": 35358,
+          "sha256": "4debf054d3881b3ba083a4170af84353ea15799824b5d7dc1a9212dadf49ce69",
+          "gameSha256": "92d72c6e61b2b024c1bee18ee1a52cec57baef180a7cb84254844df7ec2016ce",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 14
+            },
+            {
+              "id": "person-2",
+              "kind": "work",
+              "target": "wood",
+              "remaining": 27
+            }
+          ]
+        },
+        {
+          "name": "normal-use-0851",
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164",
+          "time": 531,
+          "bytes": 35011,
+          "sha256": "258568793940de043f89ca704ea0a0a859cd9887fb9c5f4ad8135c76d40aec5b",
+          "gameSha256": "dd23d759d1460b612d22e167760d2d97c9da8815a6a369f9ee2f198a0fd08f26",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 9
+            },
+            {
+              "id": "person-2",
+              "kind": "work",
+              "target": "wood",
+              "remaining": 17
+            }
+          ]
+        },
+        {
+          "name": "normal-use-reloaded",
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164",
+          "time": 531,
+          "bytes": 35011,
+          "sha256": "258568793940de043f89ca704ea0a0a859cd9887fb9c5f4ad8135c76d40aec5b",
+          "gameSha256": "dd23d759d1460b612d22e167760d2d97c9da8815a6a369f9ee2f198a0fd08f26",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 9
+            },
+            {
+              "id": "person-2",
+              "kind": "work",
+              "target": "wood",
+              "remaining": 17
+            }
+          ]
+        },
+        {
+          "name": "normal-completed-0900",
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164",
+          "time": 540,
+          "bytes": 33911,
+          "sha256": "1f492a58268d199cef8d84531f8de47a52b8fab43b78d1a3d9c84a1b76346601",
+          "gameSha256": "a3b07da4dede0a8b9f0a4fd806d87d7408402c849579fd811130a18e1b550177",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": null
+            },
+            {
+              "id": "person-2",
+              "kind": "work",
+              "target": "wood",
+              "remaining": 8
+            }
+          ]
+        },
+        {
+          "name": "normal-removed-0900",
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164",
+          "time": 540,
+          "bytes": 33496,
+          "sha256": "e8011994b0cd92756bd21196440f3b772fb5a41016b137a093cbb2eb79d45054",
+          "gameSha256": "02d805aff219bc92d585fd1d655ad7b220ad58a5310fb7d789fd858b284bcbb0",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": null
+            },
+            {
+              "id": "person-2",
+              "kind": "work",
+              "target": "wood",
+              "remaining": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "controlled-reservation-and-closed-path",
+      "checks": [
+        {
+          "name": "controlled-before-choice",
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164",
+          "time": 516,
+          "bytes": 33680,
+          "sha256": "6a4d481e55ca763b5339cd1f546279689b36d0ebe95de190e2399904ca248b53",
+          "gameSha256": "15f8bd027061bb6e99fcf1f6de7c238e05d606afab6d42ec07ee47ce4363738a",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "work",
+              "target": "wood:hard",
+              "remaining": 3
+            },
+            {
+              "id": "person-2",
+              "kind": null
+            }
+          ]
+        },
+        {
+          "name": "controlled-after-choice",
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164",
+          "time": 516,
+          "bytes": 33680,
+          "sha256": "6a4d481e55ca763b5339cd1f546279689b36d0ebe95de190e2399904ca248b53",
+          "gameSha256": "15f8bd027061bb6e99fcf1f6de7c238e05d606afab6d42ec07ee47ce4363738a",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "work",
+              "target": "wood:hard",
+              "remaining": 3
+            },
+            {
+              "id": "person-2",
+              "kind": null
+            }
+          ]
+        },
+        {
+          "name": "controlled-final-choice",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 516,
+          "bytes": 33680,
+          "sha256": "6a4d481e55ca763b5339cd1f546279689b36d0ebe95de190e2399904ca248b53",
+          "gameSha256": "15f8bd027061bb6e99fcf1f6de7c238e05d606afab6d42ec07ee47ce4363738a",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "work",
+              "target": "wood:hard",
+              "remaining": 3
+            },
+            {
+              "id": "person-2",
+              "kind": null
+            }
+          ]
+        },
+        {
+          "name": "controlled-kaya-issued",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 516,
+          "bytes": 34690,
+          "sha256": "ac0406e3641e40044b34e31910ca67973fc9088812e2a4afa71d4d238e44e5bb",
+          "gameSha256": "50bd718e16291f85a7758d71f9c883e29ff0e46306f8d429f8817754f9d79c8b",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 14
+            },
+            {
+              "id": "person-2",
+              "kind": null
+            }
+          ]
+        },
+        {
+          "name": "controlled-reservation-released",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 516,
+          "bytes": 33497,
+          "sha256": "99d1e11708268c5a8ea20cf2b341f2fcb089e0d0fe415c65cb09e9ee7975d136",
+          "gameSha256": "c4a3cb1c4fb67c1d39fb5d1c9ffe3696a59d3aa8e680c785e824381740f5fa32",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": null
+            },
+            {
+              "id": "person-2",
+              "kind": null
+            }
+          ]
+        },
+        {
+          "name": "controlled-sui-issued",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 516,
+          "bytes": 34819,
+          "sha256": "e500d6651e25e311d12b02a3f1406e4703eb50ae403206154113871c70b8a82a",
+          "gameSha256": "c97b1bfbe412305132c526363f6162944b522a538c797112d46f844a0f25e087",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": null
+            },
+            {
+              "id": "person-2",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 14
+            }
+          ]
+        },
+        {
+          "name": "controlled-sui-reissued",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 516,
+          "bytes": 34888,
+          "sha256": "eb4048f95e20272ddae796e1fc3bf303b563eda5673aad51b8206e2264ea34df",
+          "gameSha256": "40a9f30928cd6510dc462858fc3974fbaa29960bbc63c578126bed3b566e5383",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": null
+            },
+            {
+              "id": "person-2",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 14
+            }
+          ]
+        },
+        {
+          "name": "controlled-waiting-0841",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 521,
+          "bytes": 36218,
+          "sha256": "953e16394332a0c6fa2cfa290a7b8359909551a9ab2cce7b98c44966b2b5a3c1",
+          "gameSha256": "29a912224dec89e54e3c0d52e631d6659df36113596eb901ae6a97373576af57",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"living\",\"fixture-3\",0]",
+              "remaining": 10
+            },
+            {
+              "id": "person-2",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 14
+            }
+          ]
+        },
+        {
+          "name": "controlled-waiting-reloaded",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 521,
+          "bytes": 36218,
+          "sha256": "953e16394332a0c6fa2cfa290a7b8359909551a9ab2cce7b98c44966b2b5a3c1",
+          "gameSha256": "29a912224dec89e54e3c0d52e631d6659df36113596eb901ae6a97373576af57",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"living\",\"fixture-3\",0]",
+              "remaining": 10
+            },
+            {
+              "id": "person-2",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 14
+            }
+          ]
+        },
+        {
+          "name": "controlled-move-0846",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 526,
+          "bytes": 36148,
+          "sha256": "8f1dcab999f1bc49f693dc9f146ebe938b05c0ff3487c8e16fdfccc78b70cd93",
+          "gameSha256": "4c7bde08adaf616c59558c0574167cf8fa9ad3008c264cf846965a09a9892611",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"living\",\"fixture-3\",0]",
+              "remaining": 5
+            },
+            {
+              "id": "person-2",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 14
+            }
+          ]
+        },
+        {
+          "name": "controlled-use-0851",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 531,
+          "bytes": 35054,
+          "sha256": "d920ce6fa2e1297a46e27274ef228bc8219e08357f80f3e76e733ed0477498d1",
+          "gameSha256": "f59fe174db90d861034e4e3c7b6c614744464ff425819723ac79146cc3dc2dbd",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": null
+            },
+            {
+              "id": "person-2",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 10
+            }
+          ]
+        },
+        {
+          "name": "controlled-use-reloaded",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 531,
+          "bytes": 35054,
+          "sha256": "d920ce6fa2e1297a46e27274ef228bc8219e08357f80f3e76e733ed0477498d1",
+          "gameSha256": "f59fe174db90d861034e4e3c7b6c614744464ff425819723ac79146cc3dc2dbd",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": null
+            },
+            {
+              "id": "person-2",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 10
+            }
+          ]
+        },
+        {
+          "name": "controlled-completed-0901",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 541,
+          "bytes": 35158,
+          "sha256": "a3ba1caf8612e2e503e694419b470c41c0347c79d7cc8120d26cb7877b7570a9",
+          "gameSha256": "ab4f6b76e9f9cc9f055f2bf4a1f39ded05f4fafda6d01b0f0bebe2b85c07c50b",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 4,
+            "food": 7,
+            "ingredients": 7,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "work",
+              "target": "cook",
+              "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+              "remaining": 36
+            },
+            {
+              "id": "person-2",
+              "kind": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "same-name-room-identity",
+      "checks": [
+        {
+          "name": "duplicate-auto-issued",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 516,
+          "bytes": 35185,
+          "sha256": "31b22eec757468e4ada58b3bb2f8759cefe5c53de7a2ccfba9260b7574296a30",
+          "gameSha256": "441c950ce02ac84817688d38ba70884cda722f012e6e58784c68680967ee134c",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 0,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"living\",\"fixture-3\",0]",
+              "remaining": 14
+            },
+            {
+              "id": "person-2",
+              "kind": null
+            }
+          ]
+        },
+        {
+          "name": "duplicate-second-room-issued",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 516,
+          "bytes": 36497,
+          "sha256": "50e9f3d07e445bfa77a050265af1bf8cbe0a63b7817dac77426ba8f1d01674a1",
+          "gameSha256": "ed6fc004035f97fe8fcc9f1d6095193d18c2737e4134e6f39d271cc8e344f5a3",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 0,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"living\",\"fixture-3\",0]",
+              "remaining": 14
+            },
+            {
+              "id": "person-2",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 14
+            }
+          ]
+        },
+        {
+          "name": "duplicate-removed",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 516,
+          "bytes": 36109,
+          "sha256": "2a4837610fa5efbcc1962b3581afcc8266b3520742c4906bce7e6211afdba85f",
+          "gameSha256": "8fcd6013f28c0db6a780a4ddf3d45866e851e200ed3d0c0020c483408e557665",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 0,
+            "food": 7,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"living\",\"fixture-3\",0]",
+              "remaining": 14
+            },
+            {
+              "id": "person-2",
+              "kind": "need",
+              "target": "fun",
+              "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+              "remaining": 14
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "two-seat-dining",
+      "checks": [
+        {
+          "name": "dining-both-reserved",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 480,
+          "bytes": 33754,
+          "sha256": "2c6c846dd63e12c473811e8f1233e3437d2b4cc2517544cc039aad3514f9d686",
+          "gameSha256": "64c510ce8220da2023bfadc81e19f8232d5d726aaff897533678f7bf69dcf07f",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 10,
+            "food": 5,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "hunger",
+              "station": "[\"slot\",\"living\",\"fixture-1\",1]",
+              "remaining": 10
+            },
+            {
+              "id": "person-2",
+              "kind": "need",
+              "target": "hunger",
+              "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+              "remaining": 10
+            }
+          ]
+        },
+        {
+          "name": "dining-kaya-cancelled",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 480,
+          "bytes": 32513,
+          "sha256": "2ee4ea428629abdc74ce5b07e58fd045b23ac4b0b304c2a823fb3cc85c18228e",
+          "gameSha256": "0b29db2aaddcdc007ce13b70bdde727fc8b5f449c84bb0c2cacbece701765c60",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 10,
+            "food": 6,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": null
+            },
+            {
+              "id": "person-2",
+              "kind": "need",
+              "target": "hunger",
+              "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+              "remaining": 10
+            }
+          ]
+        },
+        {
+          "name": "dining-use-0805",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 485,
+          "bytes": 34101,
+          "sha256": "8fe7cb331d23807f63f30bb244a40756785ae764f0d1e994cf9d1f347b7c5514",
+          "gameSha256": "00af85c7d8e56cb156fbc171017397e9cc32ef5c704ae2987ebaa83be46275d4",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 10,
+            "food": 5,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "hunger",
+              "station": "[\"slot\",\"living\",\"fixture-1\",1]",
+              "remaining": 6
+            },
+            {
+              "id": "person-2",
+              "kind": "need",
+              "target": "hunger",
+              "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+              "remaining": 6
+            }
+          ]
+        },
+        {
+          "name": "dining-use-reloaded",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 485,
+          "bytes": 34101,
+          "sha256": "8fe7cb331d23807f63f30bb244a40756785ae764f0d1e994cf9d1f347b7c5514",
+          "gameSha256": "00af85c7d8e56cb156fbc171017397e9cc32ef5c704ae2987ebaa83be46275d4",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 10,
+            "food": 5,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": "need",
+              "target": "hunger",
+              "station": "[\"slot\",\"living\",\"fixture-1\",1]",
+              "remaining": 6
+            },
+            {
+              "id": "person-2",
+              "kind": "need",
+              "target": "hunger",
+              "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+              "remaining": 6
+            }
+          ]
+        },
+        {
+          "name": "dining-completed-0811",
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838",
+          "time": 491,
+          "bytes": 31701,
+          "sha256": "3e2002472709aed6c05a4d3506e2bdf67db5459a5baa81fc85e94ec8b1146fc9",
+          "gameSha256": "2f666e2aa39cd0437b580d84f84b84eaceef8b4ac9f32f1431ea3837a8a8cd8e",
+          "originSha256": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameMatches": true,
+          "originMatches": true,
+          "stock": {
+            "wood": 10,
+            "food": 5,
+            "ingredients": 9,
+            "coins": 8
+          },
+          "tasks": [
+            {
+              "id": "person-1",
+              "kind": null
+            },
+            {
+              "id": "person-2",
+              "kind": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "bytePairs": [
+    {
+      "name": "selection-and-navigation-do-not-change-save",
+      "identical": true,
+      "bytes": 33687,
+      "sha256": "f5c063cf52b545d00eff06310883d5df0245ed75ab8169bf37c7260878b2e121"
+    },
+    {
+      "name": "reload-mid-travel",
+      "identical": true,
+      "bytes": 35358,
+      "sha256": "4debf054d3881b3ba083a4170af84353ea15799824b5d7dc1a9212dadf49ce69"
+    },
+    {
+      "name": "reload-mid-use",
+      "identical": true,
+      "bytes": 35011,
+      "sha256": "258568793940de043f89ca704ea0a0a859cd9887fb9c5f4ad8135c76d40aec5b"
+    },
+    {
+      "name": "controlled-choice-keeps-save",
+      "identical": true,
+      "bytes": 33680,
+      "sha256": "6a4d481e55ca763b5339cd1f546279689b36d0ebe95de190e2399904ca248b53"
+    },
+    {
+      "name": "final-labels-do-not-change-save",
+      "identical": true,
+      "bytes": 33680,
+      "sha256": "6a4d481e55ca763b5339cd1f546279689b36d0ebe95de190e2399904ca248b53"
+    },
+    {
+      "name": "reload-waiting",
+      "identical": true,
+      "bytes": 36218,
+      "sha256": "953e16394332a0c6fa2cfa290a7b8359909551a9ab2cce7b98c44966b2b5a3c1"
+    },
+    {
+      "name": "reload-selected-furniture-use",
+      "identical": true,
+      "bytes": 35054,
+      "sha256": "d920ce6fa2e1297a46e27274ef228bc8219e08357f80f3e76e733ed0477498d1"
+    },
+    {
+      "name": "reload-dining-use",
+      "identical": true,
+      "bytes": 34101,
+      "sha256": "8fe7cb331d23807f63f30bb244a40756785ae764f0d1e994cf9d1f347b7c5514"
+    }
+  ],
+  "exportCount": 31
+}

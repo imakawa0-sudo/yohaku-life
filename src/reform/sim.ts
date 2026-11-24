@@ -11,12 +11,19 @@ import {
 } from "./housing/gatheringProgress";
 import type { Persona, Skill } from "./peopleModel";
 import { isPersona, skillKeys, skillNames } from "./peopleModel";
-import { cookingStation, initialHouse, isHouse, service } from "./house";
+import {
+  cookingStation,
+  furnishings,
+  initialHouse,
+  isHouse,
+  service,
+} from "./house";
 import type { House, Need } from "./house";
 import type {
   GatheringKind,
   HousingTaskBinding,
   HousingRuntime,
+  HousingUsePreview,
 } from "./housing/types";
 import { completeRoomConstruction, isHousingRuntime } from "./housing/runtime";
 import {
@@ -65,14 +72,17 @@ export type Bond = keyof typeof bondNames;
 type Stock = { wood: number; food: number; ingredients: number; coins: number };
 type Metric = "free" | "work" | "care" | "travel" | "waiting";
 type OptionGroup = "need" | "work" | "relation" | "field" | "task";
-export interface ActionOption {
+export type ActionPreview = {
+  disabled?: string;
+  minutes?: number;
+  reserved?: Partial<Stock>;
+  facility?: HousingUsePreview;
+};
+export interface ActionOption extends ActionPreview {
   kind: string;
   label: string;
   target?: string;
-  disabled?: string;
   group: OptionGroup;
-  minutes?: number;
-  reserved?: Partial<Stock>;
 }
 export interface Memory {
   gathering?: { kind: GatheringKind; peerId: string };
@@ -484,11 +494,12 @@ type Proposal = Task | HousingProposal;
 function proposedTask(p: Proposal): Task {
   return "task" in p ? p.task : p;
 }
-function preview(p: Proposal | string) {
+function preview(p: Proposal | string): ActionPreview {
   if (typeof p === "string") return { disabled: p };
   return {
     minutes: "task" in p ? p.minutes : p.total,
     reserved: proposedTask(p).reserved,
+    ...("task" in p && p.facility && { facility: p.facility }),
   };
 }
 function plan(
@@ -498,6 +509,18 @@ function plan(
   target?: string,
 ): Proposal | string {
   const atHome = a.location === g.home;
+  let fixtureId: string | undefined;
+  if (kind === "home-use") {
+    if (!atHome || !g.housing)
+      return "自宅で住居の移動を使う暮らしを選んでください。";
+    const fixture = g.house.rooms
+      .flatMap((room) => room.fixtures)
+      .find((f) => f.id === target);
+    if (!fixture) return "選んだ設備がありません。";
+    fixtureId = fixture.id;
+    kind = "need";
+    target = furnishings[fixture.kind].need;
+  }
   const stock = account(g, a);
   const place = places(g.world).find((p) => p.id === a.location)!;
   if (a.injury >= 70 && !["need", "recover", "withdraw"].includes(kind))
@@ -531,7 +554,7 @@ function plan(
           key,
         );
         if (key === "hunger") t.reserved = { food: 1 };
-        return planHousing(g, a, t, key, place.water);
+        return planHousing(g, a, t, key, place.water, fixtureId);
       }
       const busy = g.actors
         .filter((b) => b !== a && b.task?.station)
@@ -950,7 +973,7 @@ export function inspectOrder(
   id: string,
   kind: string,
   target?: string,
-): { minutes?: number; disabled?: string; reserved?: Partial<Stock> } {
+): ActionPreview {
   const current = find(g, id);
   if (!current) return { disabled: "住人が見つかりません。" };
   if (g.housing && kind === "cancel")

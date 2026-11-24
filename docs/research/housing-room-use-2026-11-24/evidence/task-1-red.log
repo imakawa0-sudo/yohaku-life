@@ -1,0 +1,235 @@
+✖ automatic and explicit reading preview and book their respective fixtures (11.417665ms)
+✖ replacement preview preserves a meal and predicts the booking after its refund (5.772077ms)
+✖ a two-seat fixture books its other seat and refuses a third resident without fallback (1.302182ms)
+✖ a blocked, forbidden, or missing fixture cannot fall back to reachable reading (11.918301ms)
+✖ cancelling an explicit meal refunds its one reserved meal at the safe exit (0.836287ms)
+✖ explicit meal import during travel and use preserves origin and completes exactly once (0.646985ms)
+✖ old games and actors away from home retain their old need orders (2.022015ms)
+✖ explicit rest follows the established injury, danger, and transit rules (0.878219ms)
+✖ the six explicit uses share the existing need task and save contract (1.134942ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 0
+ℹ fail 9
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 280.212862
+
+✖ failing tests:
+
+test at tests/reform-housing-facilities.test.ts:1:1665
+✖ automatic and explicit reading preview and book their respective fixtures (11.417665ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+  -   facility: {
+  -     fixtureCell: 4,
+  -     fixtureId: 'near-books',
+  -     fixtureKind: 'shelf',
+  -     moveMinutes: 0,
+  -     roomId: 'living',
+  -     useMinutes: 14
+  -   },
+      minutes: 14,
+      reserved: {}
+    }
+  
+      at TestContext.<anonymous> (/workspace/scratch/be33734a3f5c/yohaku-life-h1a/tests/reform-housing-facilities.test.ts:64:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { minutes: 14, reserved: {} },
+    expected: { minutes: 14, reserved: {}, facility: { fixtureId: 'near-books', roomId: 'living', fixtureKind: 'shelf', fixtureCell: 4, moveMinutes: 0, useMinutes: 14 } },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/reform-housing-facilities.test.ts:1:3213
+✖ replacement preview preserves a meal and predicts the booking after its refund (5.772077ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '今はその行動を選べません。'
+  - undefined
+  
+      at TestContext.<anonymous> (/workspace/scratch/be33734a3f5c/yohaku-life-h1a/tests/reform-housing-facilities.test.ts:133:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '今はその行動を選べません。',
+    expected: undefined,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/reform-housing-facilities.test.ts:1:4245
+✖ a two-seat fixture books its other seat and refuses a third resident without fallback (1.302182ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - '["slot","living","bench-1",0]'
+  
+      at TestContext.<anonymous> (/workspace/scratch/be33734a3f5c/yohaku-life-h1a/tests/reform-housing-facilities.test.ts:154:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: '["slot","living","bench-1",0]',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/reform-housing-facilities.test.ts:1:5119
+✖ a blocked, forbidden, or missing fixture cannot fall back to reachable reading (11.918301ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /通路/. Input:
+  
+  '今はその行動を選べません。'
+  
+      at assertRejected (/workspace/scratch/be33734a3f5c/yohaku-life-h1a/tests/reform-housing-facilities.test.ts:51:10)
+      at TestContext.<anonymous> (/workspace/scratch/be33734a3f5c/yohaku-life-h1a/tests/reform-housing-facilities.test.ts:188:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '今はその行動を選べません。',
+    expected: /通路/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/reform-housing-facilities.test.ts:1:5944
+✖ cancelling an explicit meal refunds its one reserved meal at the safe exit (0.836287ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + undefined
+  - {
+  -   food: 1
+  - }
+  
+      at TestContext.<anonymous> (/workspace/scratch/be33734a3f5c/yohaku-life-h1a/tests/reform-housing-facilities.test.ts:209:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { food: 1 },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/reform-housing-facilities.test.ts:1:6906
+✖ explicit meal import during travel and use preserves origin and completes exactly once (0.646985ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  undefined !== 18
+  
+      at TestContext.<anonymous> (/workspace/scratch/be33734a3f5c/yohaku-life-h1a/tests/reform-housing-facilities.test.ts:232:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 18,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/reform-housing-facilities.test.ts:1:8280
+✖ old games and actors away from home retain their old need orders (2.022015ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /自宅/. Input:
+  
+  '今はその行動を選べません。'
+  
+      at assertRejected (/workspace/scratch/be33734a3f5c/yohaku-life-h1a/tests/reform-housing-facilities.test.ts:51:10)
+      at TestContext.<anonymous> (/workspace/scratch/be33734a3f5c/yohaku-life-h1a/tests/reform-housing-facilities.test.ts:275:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '今はその行動を選べません。',
+    expected: /自宅/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at tests/reform-housing-facilities.test.ts:1:9042
+✖ explicit rest follows the established injury, danger, and transit rules (0.878219ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+  +   disabled: '重い傷のため、休息か仲間の救助が必要です。'
+  -   minutes: 61,
+  -   reserved: {}
+    }
+  
+      at TestContext.<anonymous> (/workspace/scratch/be33734a3f5c/yohaku-life-h1a/tests/reform-housing-facilities.test.ts:297:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { disabled: '重い傷のため、休息か仲間の救助が必要です。' },
+    expected: { minutes: 61, reserved: {} },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/reform-housing-facilities.test.ts:1:9762
+✖ the six explicit uses share the existing need task and save contract (1.134942ms)
+  AssertionError [ERR_ASSERTION]: hearth-1
+  + actual - expected
+  
+  + undefined
+  - 'need'
+  
+      at TestContext.<anonymous> (/workspace/scratch/be33734a3f5c/yohaku-life-h1a/tests/reform-housing-facilities.test.ts:324:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'need',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

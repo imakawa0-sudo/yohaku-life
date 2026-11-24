@@ -1,0 +1,50 @@
+{
+  "base_source": "e98bf0671ed34f7a5384a8b6bebd7579a8b0456a",
+  "new_source": "cdd3192f51f42d7c4db5749476a525278b0501bd",
+  "changed_output_fields": [
+    "/A/preview/facility",
+    "/B/preview/facility",
+    "/more/preview/facility"
+  ],
+  "all_other_recorded_values_identical": true,
+  "baseline_sha256": "aa9667a401efef3cf662e78eb50a7bf8a0ea0fc9a7c82fea79e3282a64aec720",
+  "new_sha256": "bf5998f955ff12f0d6229c6fc518554ecbf6e5ffdd61a7e27f12e2b889a087c9",
+  "new_previews": {
+    "A": {
+      "minutes": 21,
+      "reserved": {},
+      "facility": {
+        "fixtureId": "fixture-2",
+        "roomId": "room-1",
+        "fixtureKind": "shelf",
+        "fixtureCell": 2,
+        "moveMinutes": 7,
+        "useMinutes": 14
+      }
+    },
+    "B": {
+      "minutes": 15,
+      "reserved": {},
+      "facility": {
+        "fixtureId": "fixture-1",
+        "roomId": "living",
+        "fixtureKind": "shelf",
+        "fixtureCell": 2,
+        "moveMinutes": 1,
+        "useMinutes": 14
+      }
+    },
+    "both_fixtures": {
+      "minutes": 15,
+      "reserved": {},
+      "facility": {
+        "fixtureId": "fixture-3",
+        "roomId": "living",
+        "fixtureKind": "shelf",
+        "fixtureCell": 2,
+        "moveMinutes": 1,
+        "useMinutes": 14
+      }
+    }
+  }
+}

@@ -1,0 +1,464 @@
+{
+  "sourceCommit": "c3d1cbe5a5666440da4a6a275bbd144cc23537c2",
+  "branches": [
+    {
+      "name": "normal-created-morning",
+      "sourceFile": "normal-prepared.json",
+      "fromOrigin": true,
+      "checkpoints": [
+        {
+          "name": "constructed-room-and-two-shelves",
+          "file": "normal-prepared.json",
+          "operations": [
+            {
+              "type": "plan",
+              "input": {
+                "name": "読書室",
+                "neighborId": "bedroom",
+                "stagingCell": 2
+              }
+            },
+            {
+              "type": "reserve",
+              "id": "construction-1"
+            },
+            {
+              "type": "haul",
+              "id": "construction-1",
+              "actor": "person-2",
+              "direction": "deliver"
+            },
+            {
+              "type": "order",
+              "actor": "person-1",
+              "kind": "work",
+              "target": "wood:hard"
+            },
+            {
+              "type": "advance",
+              "minutes": 6
+            },
+            {
+              "type": "build",
+              "id": "construction-1",
+              "actor": "person-2"
+            },
+            {
+              "type": "advance",
+              "minutes": 30
+            },
+            {
+              "type": "edit",
+              "edit": {
+                "type": "build",
+                "room": "room-1",
+                "kind": "shelf"
+              }
+            },
+            {
+              "type": "edit",
+              "edit": {
+                "type": "build",
+                "room": "living",
+                "kind": "shelf"
+              }
+            }
+          ],
+          "htmlSha256": "5997cf97c9c76100642bf8f8908f605d92cc25b820a07554d9311f3e4cd4d627"
+        },
+        {
+          "name": "normal-final-before-choice",
+          "file": "normal-final-before-choice.json",
+          "operations": [],
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164"
+        },
+        {
+          "name": "normal-final-after-choice",
+          "file": "normal-final-after-choice.json",
+          "operations": [],
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164"
+        },
+        {
+          "name": "normal-issued",
+          "file": "normal-issued.json",
+          "operations": [
+            {
+              "type": "order",
+              "actor": "person-1",
+              "kind": "home-use",
+              "target": "fixture-2"
+            }
+          ],
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164"
+        },
+        {
+          "name": "normal-travel-0841",
+          "file": "normal-travel-0841.json",
+          "operations": [
+            {
+              "type": "advance",
+              "minutes": 5
+            }
+          ],
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164"
+        },
+        {
+          "name": "normal-travel-reloaded",
+          "file": "normal-travel-reloaded.json",
+          "operations": [],
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164"
+        },
+        {
+          "name": "normal-use-0851",
+          "file": "normal-use-0851.json",
+          "operations": [
+            {
+              "type": "advance",
+              "minutes": 5
+            },
+            {
+              "type": "advance",
+              "minutes": 5
+            }
+          ],
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164"
+        },
+        {
+          "name": "normal-use-reloaded",
+          "file": "normal-use-reloaded.json",
+          "operations": [],
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164"
+        },
+        {
+          "name": "normal-completed-0900",
+          "file": "normal-completed-0900.json",
+          "operations": [
+            {
+              "type": "advance",
+              "minutes": 9
+            }
+          ],
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164"
+        },
+        {
+          "name": "normal-removed-0900",
+          "file": "normal-removed-0900.json",
+          "operations": [
+            {
+              "type": "edit",
+              "edit": {
+                "type": "remove",
+                "id": "fixture-2"
+              }
+            }
+          ],
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164"
+        }
+      ]
+    },
+    {
+      "name": "controlled-reservation-and-closed-path",
+      "sourceFile": "room-use-shelves.json",
+      "fromOrigin": false,
+      "checkpoints": [
+        {
+          "name": "controlled-before-choice",
+          "file": "controlled-before-choice.json",
+          "operations": [],
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164"
+        },
+        {
+          "name": "controlled-after-choice",
+          "file": "controlled-after-choice.json",
+          "operations": [],
+          "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164"
+        },
+        {
+          "name": "controlled-final-choice",
+          "file": "controlled-final-choice.json",
+          "operations": [],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "controlled-kaya-issued",
+          "file": "controlled-kaya-issued.json",
+          "operations": [
+            {
+              "type": "order",
+              "actor": "person-1",
+              "kind": "home-use",
+              "target": "fixture-2"
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "controlled-reservation-released",
+          "file": "controlled-reservation-released.json",
+          "operations": [
+            {
+              "type": "order",
+              "actor": "person-1",
+              "kind": "cancel"
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "controlled-sui-issued",
+          "file": "controlled-sui-issued.json",
+          "operations": [
+            {
+              "type": "order",
+              "actor": "person-2",
+              "kind": "home-use",
+              "target": "fixture-2"
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "controlled-sui-reissued",
+          "file": "controlled-sui-reissued.json",
+          "operations": [
+            {
+              "type": "order",
+              "actor": "person-2",
+              "kind": "cancel"
+            },
+            {
+              "type": "order",
+              "actor": "person-2",
+              "kind": "home-use",
+              "target": "fixture-2"
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "controlled-waiting-0841",
+          "file": "controlled-waiting-0841.json",
+          "operations": [
+            {
+              "type": "passage",
+              "kind": "link",
+              "id": "[\"link\",\"bedroom\",\"room-1\"]",
+              "open": false
+            },
+            {
+              "type": "advance",
+              "minutes": 5
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "controlled-waiting-reloaded",
+          "file": "controlled-waiting-reloaded.json",
+          "operations": [],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "controlled-move-0846",
+          "file": "controlled-move-0846.json",
+          "operations": [
+            {
+              "type": "passage",
+              "kind": "link",
+              "id": "[\"link\",\"bedroom\",\"room-1\"]",
+              "open": true
+            },
+            {
+              "type": "advance",
+              "minutes": 5
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "controlled-use-0851",
+          "file": "controlled-use-0851.json",
+          "operations": [
+            {
+              "type": "advance",
+              "minutes": 5
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "controlled-use-reloaded",
+          "file": "controlled-use-reloaded.json",
+          "operations": [],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "controlled-completed-0901",
+          "file": "controlled-completed-0901.json",
+          "operations": [
+            {
+              "type": "advance",
+              "minutes": 10
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        }
+      ]
+    },
+    {
+      "name": "same-name-room-identity",
+      "sourceFile": "room-use-duplicate-labels.json",
+      "fromOrigin": false,
+      "checkpoints": [
+        {
+          "name": "duplicate-auto-issued",
+          "file": "duplicate-auto-issued.json",
+          "operations": [
+            {
+              "type": "order",
+              "actor": "person-1",
+              "kind": "need",
+              "target": "fun"
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "duplicate-second-room-issued",
+          "file": "duplicate-second-room-issued.json",
+          "operations": [
+            {
+              "type": "order",
+              "actor": "person-2",
+              "kind": "home-use",
+              "target": "fixture-2"
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "duplicate-removed",
+          "file": "duplicate-removed.json",
+          "operations": [
+            {
+              "type": "edit",
+              "edit": {
+                "type": "remove",
+                "id": "fixture-4"
+              }
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        }
+      ]
+    },
+    {
+      "name": "two-seat-dining",
+      "sourceFile": "room-use-dining.json",
+      "fromOrigin": false,
+      "checkpoints": [
+        {
+          "name": "dining-both-reserved",
+          "file": "dining-both-reserved.json",
+          "operations": [
+            {
+              "type": "order",
+              "actor": "person-1",
+              "kind": "home-use",
+              "target": "fixture-1"
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "dining-kaya-cancelled",
+          "file": "dining-kaya-cancelled.json",
+          "operations": [
+            {
+              "type": "order",
+              "actor": "person-1",
+              "kind": "cancel"
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "dining-use-0805",
+          "file": "dining-use-0805.json",
+          "operations": [
+            {
+              "type": "order",
+              "actor": "person-1",
+              "kind": "home-use",
+              "target": "fixture-1"
+            },
+            {
+              "type": "advance",
+              "minutes": 5
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "dining-use-reloaded",
+          "file": "dining-use-reloaded.json",
+          "operations": [],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        },
+        {
+          "name": "dining-completed-0811",
+          "file": "dining-completed-0811.json",
+          "operations": [
+            {
+              "type": "advance",
+              "minutes": 6
+            }
+          ],
+          "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+        }
+      ]
+    }
+  ],
+  "bytePairs": [
+    {
+      "name": "selection-and-navigation-do-not-change-save",
+      "first": "normal-final-before-choice.json",
+      "second": "normal-final-after-choice.json"
+    },
+    {
+      "name": "reload-mid-travel",
+      "first": "normal-travel-0841.json",
+      "second": "normal-travel-reloaded.json"
+    },
+    {
+      "name": "reload-mid-use",
+      "first": "normal-use-0851.json",
+      "second": "normal-use-reloaded.json"
+    },
+    {
+      "name": "controlled-choice-keeps-save",
+      "first": "controlled-before-choice.json",
+      "second": "controlled-after-choice.json"
+    },
+    {
+      "name": "final-labels-do-not-change-save",
+      "first": "controlled-before-choice.json",
+      "second": "controlled-final-choice.json"
+    },
+    {
+      "name": "reload-waiting",
+      "first": "controlled-waiting-0841.json",
+      "second": "controlled-waiting-reloaded.json"
+    },
+    {
+      "name": "reload-selected-furniture-use",
+      "first": "controlled-use-0851.json",
+      "second": "controlled-use-reloaded.json"
+    },
+    {
+      "name": "reload-dining-use",
+      "first": "dining-use-0805.json",
+      "second": "dining-use-reloaded.json"
+    }
+  ]
+}

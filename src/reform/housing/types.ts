@@ -51,6 +51,15 @@ export type HousingSlot = {
   point: SpatialPoint;
 };
 
+export type HousingUsePreview = {
+  fixtureId: string;
+  roomId: string;
+  fixtureKind: FixtureKind;
+  fixtureCell: number;
+  moveMinutes: number;
+  useMinutes: number;
+};
+
 export type HousingTopology = {
   geometry: Pick<
     SpatialState,

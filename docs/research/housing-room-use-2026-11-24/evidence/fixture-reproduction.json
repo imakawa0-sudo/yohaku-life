@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-24",
+  "timezone": "Asia/Taipei",
+  "generator": "make-fixtures.sh",
+  "inputs": [
+    {
+      "name": "room-use-shelves.json",
+      "bytes": 33679,
+      "sha256": "21e2804f21e10026d1215ea36f062dffaae683eb86a090d0e774a3675395d3cd",
+      "matches_browser_input_bytes": true
+    },
+    {
+      "name": "room-use-dining.json",
+      "bytes": 32408,
+      "sha256": "8dec3556c87b417e319ccdd886c545f3ed024e22e4dfe098c651663c846a6846",
+      "matches_browser_input_bytes": true
+    },
+    {
+      "name": "room-use-switch.json",
+      "bytes": 33678,
+      "sha256": "c5f7fe5823cddaaf10c84000d3cfdd0ea2adda6cf0008832545b47ab9bf4d265",
+      "matches_browser_input_bytes": true
+    },
+    {
+      "name": "room-use-duplicate-labels.json",
+      "bytes": 34177,
+      "sha256": "9c3e397036d02db934deff21fff02db576a9994b5b96d624c58607bdcb1e97ad",
+      "matches_browser_input_bytes": true
+    }
+  ],
+  "all_match": true
+}

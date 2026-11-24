@@ -480,6 +480,28 @@
   line-height: 1.75;
   overflow-wrap: anywhere;
 }
+.lf-facility-command {
+  gap: 4px;
+}
+.lf-facility-command label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.lf-facility-command select {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 6px 8px;
+  color: var(--lf-ink);
+  background: var(--lf-paper);
+  border: 1px solid var(--lf-line);
+  border-radius: 5px;
+}
+.lf-facility-command button,
+.lf-facility-command small {
+  font-size: inherit;
+}
 .lf-command-list > p {
   grid-column: 1 / -1;
 }
@@ -998,6 +1020,11 @@
     width: 100%;
     padding: 6px 2px;
     font-size: 12px;
+  }
+}
+@media (max-width: 420px) {
+  .lf-facility-command {
+    grid-column: 1 / -1;
   }
 }
 @media (max-width: 360px) {

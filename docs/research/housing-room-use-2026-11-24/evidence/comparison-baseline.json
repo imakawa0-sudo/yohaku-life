@@ -1,0 +1,2610 @@
+{
+  "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+  "origin": {
+    "time": 480,
+    "stock": {
+      "wood": 18,
+      "food": 7,
+      "ingredients": 9,
+      "coins": 8
+    },
+    "kaya": {
+      "position": {
+        "kind": "at",
+        "point": {
+          "domainId": "[\"room\",\"living\"]",
+          "cell": 0
+        }
+      },
+      "task": null,
+      "needs": {
+        "hunger": 73,
+        "bladder": 74,
+        "hygiene": 68,
+        "energy": 88,
+        "social": 61,
+        "fun": 57
+      },
+      "metrics": {
+        "free": 0,
+        "work": 0,
+        "care": 0,
+        "travel": 0,
+        "waiting": 0
+      },
+      "xp": {
+        "wood": 0,
+        "cook": 0,
+        "trade": 0,
+        "care": 0
+      },
+      "skills": {
+        "wood": 7,
+        "cook": 1,
+        "care": 1,
+        "trade": 1
+      },
+      "injury": 0,
+      "memories": []
+    },
+    "sui": {
+      "position": {
+        "kind": "at",
+        "point": {
+          "domainId": "[\"room\",\"living\"]",
+          "cell": 0
+        }
+      },
+      "task": null,
+      "needs": {
+        "hunger": 73,
+        "bladder": 74,
+        "hygiene": 68,
+        "energy": 88,
+        "social": 61,
+        "fun": 57
+      },
+      "metrics": {
+        "free": 0,
+        "work": 0,
+        "care": 0,
+        "travel": 0,
+        "waiting": 0
+      },
+      "xp": {
+        "wood": 0,
+        "cook": 0,
+        "trade": 0,
+        "care": 0
+      },
+      "skills": {
+        "wood": 1,
+        "cook": 2,
+        "care": 1,
+        "trade": 1
+      },
+      "injury": 0,
+      "memories": []
+    }
+  },
+  "control": "Both branches use original 08:00 public UI preset with friendships, 4x3 rooms, furniture cell 2, open passages. Kaya works same hard wood orders until 08:36 then uses fun from living threshold. A Sui hauls then builds, B Sui works wood once. After 08:36 Sui acts autonomously, after reading both act autonomously until 08:00 next day.",
+  "A": {
+    "events": [
+      {
+        "label": "plan",
+        "time": 480,
+        "stock": {
+          "wood": 18,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        }
+      },
+      {
+        "label": "reserve",
+        "time": 480,
+        "stock": {
+          "wood": 12,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        }
+      },
+      {
+        "label": "haul order",
+        "time": 480,
+        "stock": {
+          "wood": 12,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "home-haul",
+            "label": "工事用木材を仮置き場へ運ぶ",
+            "remaining": 1,
+            "mode": "direct",
+            "station": null
+          },
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        }
+      },
+      {
+        "label": "Kaya starts common wood",
+        "time": 480,
+        "stock": {
+          "wood": 12,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood:hard",
+            "label": "丈夫な建具を組む",
+            "remaining": 39,
+            "mode": "direct",
+            "station": null
+          },
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "home-haul",
+            "label": "工事用木材を仮置き場へ運ぶ",
+            "remaining": 1,
+            "mode": "direct",
+            "station": null
+          },
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        }
+      },
+      {
+        "label": "delivery arrived",
+        "time": 486,
+        "stock": {
+          "wood": 12,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood:hard",
+            "label": "丈夫な建具を組む",
+            "remaining": 33,
+            "mode": "direct",
+            "station": null
+          },
+          "needs": {
+            "hunger": 72.27999999999997,
+            "bladder": 73.04000000000002,
+            "hygiene": 67.61000000000001,
+            "energy": 87.43,
+            "social": 60.7624,
+            "fun": 56.58
+          },
+          "metrics": {
+            "free": 0,
+            "work": 6,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 2
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 72.27999999999997,
+            "bladder": 73.04000000000002,
+            "hygiene": 67.61000000000001,
+            "energy": 87.21625000000002,
+            "social": 60.67,
+            "fun": 56.58
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 5,
+            "waiting": 1
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        }
+      },
+      {
+        "label": "build order",
+        "time": 486,
+        "stock": {
+          "wood": 12,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood:hard",
+            "label": "丈夫な建具を組む",
+            "remaining": 33,
+            "mode": "direct",
+            "station": null
+          },
+          "needs": {
+            "hunger": 72.27999999999997,
+            "bladder": 73.04000000000002,
+            "hygiene": 67.61000000000001,
+            "energy": 87.43,
+            "social": 60.7624,
+            "fun": 56.58
+          },
+          "metrics": {
+            "free": 0,
+            "work": 6,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 2
+            }
+          },
+          "task": {
+            "kind": "home-build",
+            "label": "読書室を施工する",
+            "remaining": 30,
+            "mode": "direct",
+            "station": "[\"construction\",\"construction-1\"]"
+          },
+          "needs": {
+            "hunger": 72.27999999999997,
+            "bladder": 73.04000000000002,
+            "hygiene": 67.61000000000001,
+            "energy": 87.21625000000002,
+            "social": 60.67,
+            "fun": 56.58
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 5,
+            "waiting": 1
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        }
+      },
+      {
+        "label": "built",
+        "time": 516,
+        "stock": {
+          "wood": 12,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood:hard",
+            "label": "丈夫な建具を組む",
+            "remaining": 3,
+            "mode": "direct",
+            "station": null
+          },
+          "needs": {
+            "hunger": 68.67999999999984,
+            "bladder": 68.24000000000012,
+            "hygiene": 65.66000000000008,
+            "energy": 84.58000000000004,
+            "social": 59.5744,
+            "fun": 54.47999999999999
+          },
+          "metrics": {
+            "free": 0,
+            "work": 36,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 2
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 68.67999999999984,
+            "bladder": 68.24000000000012,
+            "hygiene": 65.66000000000008,
+            "energy": 84.36625000000005,
+            "social": 59.02000000000001,
+            "fun": 54.47999999999999
+          },
+          "metrics": {
+            "free": 0,
+            "work": 30,
+            "care": 0,
+            "travel": 5,
+            "waiting": 1
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        }
+      },
+      {
+        "label": "new shelf",
+        "time": 516,
+        "stock": {
+          "wood": 8,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood:hard",
+            "label": "丈夫な建具を組む",
+            "remaining": 3,
+            "mode": "direct",
+            "station": null
+          },
+          "needs": {
+            "hunger": 68.67999999999984,
+            "bladder": 68.24000000000012,
+            "hygiene": 65.66000000000008,
+            "energy": 84.58000000000004,
+            "social": 59.5744,
+            "fun": 54.47999999999999
+          },
+          "metrics": {
+            "free": 0,
+            "work": 36,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 2
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 68.67999999999984,
+            "bladder": 68.24000000000012,
+            "hygiene": 65.66000000000008,
+            "energy": 84.36625000000005,
+            "social": 59.02000000000001,
+            "fun": 54.47999999999999
+          },
+          "metrics": {
+            "free": 0,
+            "work": 30,
+            "care": 0,
+            "travel": 5,
+            "waiting": 1
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        }
+      },
+      {
+        "label": "ordered reading",
+        "time": 516,
+        "stock": {
+          "wood": 8,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "need",
+            "target": "fun",
+            "label": "本を開いて過ごす",
+            "remaining": 14,
+            "mode": "direct",
+            "station": "[\"slot\",\"room-1\",\"fixture-2\",0]"
+          },
+          "needs": {
+            "hunger": 68.67999999999984,
+            "bladder": 68.24000000000012,
+            "hygiene": 65.66000000000008,
+            "energy": 84.58000000000004,
+            "social": 59.5744,
+            "fun": 54.47999999999999
+          },
+          "metrics": {
+            "free": 0,
+            "work": 36,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 2
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 68.67999999999984,
+            "bladder": 68.24000000000012,
+            "hygiene": 65.66000000000008,
+            "energy": 84.36625000000005,
+            "social": 59.02000000000001,
+            "fun": 54.47999999999999
+          },
+          "metrics": {
+            "free": 0,
+            "work": 30,
+            "care": 0,
+            "travel": 5,
+            "waiting": 1
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        }
+      },
+      {
+        "label": "reading done",
+        "time": 537,
+        "stock": {
+          "wood": 8,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"room-1\"]",
+              "cell": 1
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 66.15999999999974,
+            "bladder": 64.8800000000002,
+            "hygiene": 64.29500000000013,
+            "energy": 82.28575000000008,
+            "social": 58.742799999999995,
+            "fun": 100
+          },
+          "metrics": {
+            "free": 14,
+            "work": 36,
+            "care": 0,
+            "travel": 7,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": [
+            {
+              "label": "静かな自由時間",
+              "value": 6,
+              "until": 767
+            }
+          ]
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 2
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood",
+            "label": "枝を削って木材を整える",
+            "remaining": 11,
+            "mode": "auto",
+            "station": null
+          },
+          "needs": {
+            "hunger": 66.15999999999974,
+            "bladder": 64.8800000000002,
+            "hygiene": 64.29500000000013,
+            "energy": 82.37125000000007,
+            "social": 57.865000000000016,
+            "fun": 53.009999999999984
+          },
+          "metrics": {
+            "free": 21,
+            "work": 30,
+            "care": 0,
+            "travel": 5,
+            "waiting": 1
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        }
+      },
+      {
+        "label": "autonomy begins after reading",
+        "time": 537,
+        "stock": {
+          "wood": 8,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"room-1\"]",
+              "cell": 1
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 66.15999999999974,
+            "bladder": 64.8800000000002,
+            "hygiene": 64.29500000000013,
+            "energy": 82.28575000000008,
+            "social": 58.742799999999995,
+            "fun": 100
+          },
+          "metrics": {
+            "free": 14,
+            "work": 36,
+            "care": 0,
+            "travel": 7,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": [
+            {
+              "label": "静かな自由時間",
+              "value": 6,
+              "until": 767
+            }
+          ]
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 2
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood",
+            "label": "枝を削って木材を整える",
+            "remaining": 11,
+            "mode": "auto",
+            "station": null
+          },
+          "needs": {
+            "hunger": 66.15999999999974,
+            "bladder": 64.8800000000002,
+            "hygiene": 64.29500000000013,
+            "energy": 82.37125000000007,
+            "social": 57.865000000000016,
+            "fun": 53.009999999999984
+          },
+          "metrics": {
+            "free": 21,
+            "work": 30,
+            "care": 0,
+            "travel": 5,
+            "waiting": 1
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        }
+      }
+    ],
+    "ticks": [
+      {
+        "time": 481,
+        "delta": {
+          "free": 0,
+          "work": 0,
+          "care": 0,
+          "travel": 0,
+          "waiting": 1
+        },
+        "phase": "approach",
+        "from": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "to": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "itemAfter": {
+          "kind": "carried",
+          "carrierId": "person-2"
+        }
+      },
+      {
+        "time": 482,
+        "delta": {
+          "free": 0,
+          "work": 0,
+          "care": 0,
+          "travel": 1,
+          "waiting": 0
+        },
+        "phase": "carry",
+        "from": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "to": {
+          "kind": "transit",
+          "step": {
+            "kind": "connection",
+            "id": "[\"link\",\"bedroom\",\"living\"]",
+            "from": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            },
+            "to": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 0
+            },
+            "minutes": 3
+          },
+          "remaining": 2
+        },
+        "itemAfter": {
+          "kind": "carried",
+          "carrierId": "person-2"
+        }
+      },
+      {
+        "time": 483,
+        "delta": {
+          "free": 0,
+          "work": 0,
+          "care": 0,
+          "travel": 1,
+          "waiting": 0
+        },
+        "phase": "carry",
+        "from": {
+          "kind": "transit",
+          "step": {
+            "kind": "connection",
+            "id": "[\"link\",\"bedroom\",\"living\"]",
+            "from": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            },
+            "to": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 0
+            },
+            "minutes": 3
+          },
+          "remaining": 2
+        },
+        "to": {
+          "kind": "transit",
+          "step": {
+            "kind": "connection",
+            "id": "[\"link\",\"bedroom\",\"living\"]",
+            "from": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            },
+            "to": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 0
+            },
+            "minutes": 3
+          },
+          "remaining": 1
+        },
+        "itemAfter": {
+          "kind": "carried",
+          "carrierId": "person-2"
+        }
+      },
+      {
+        "time": 484,
+        "delta": {
+          "free": 0,
+          "work": 0,
+          "care": 0,
+          "travel": 1,
+          "waiting": 0
+        },
+        "phase": "carry",
+        "from": {
+          "kind": "transit",
+          "step": {
+            "kind": "connection",
+            "id": "[\"link\",\"bedroom\",\"living\"]",
+            "from": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            },
+            "to": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 0
+            },
+            "minutes": 3
+          },
+          "remaining": 1
+        },
+        "to": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 0
+          }
+        },
+        "itemAfter": {
+          "kind": "carried",
+          "carrierId": "person-2"
+        }
+      },
+      {
+        "time": 485,
+        "delta": {
+          "free": 0,
+          "work": 0,
+          "care": 0,
+          "travel": 1,
+          "waiting": 0
+        },
+        "phase": "carry",
+        "from": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 0
+          }
+        },
+        "to": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 1
+          }
+        },
+        "itemAfter": {
+          "kind": "carried",
+          "carrierId": "person-2"
+        }
+      },
+      {
+        "time": 486,
+        "delta": {
+          "free": 0,
+          "work": 0,
+          "care": 0,
+          "travel": 1,
+          "waiting": 0
+        },
+        "phase": "carry",
+        "from": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 1
+          }
+        },
+        "to": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 2
+          }
+        },
+        "itemAfter": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 2
+          }
+        }
+      }
+    ],
+    "beforeRead": {
+      "time": 516,
+      "stock": {
+        "wood": 8,
+        "food": 7,
+        "ingredients": 9,
+        "coins": 8
+      },
+      "kaya": {
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "task": {
+          "kind": "work",
+          "target": "wood:hard",
+          "label": "丈夫な建具を組む",
+          "remaining": 3,
+          "mode": "direct",
+          "station": null
+        },
+        "needs": {
+          "hunger": 68.67999999999984,
+          "bladder": 68.24000000000012,
+          "hygiene": 65.66000000000008,
+          "energy": 84.58000000000004,
+          "social": 59.5744,
+          "fun": 54.47999999999999
+        },
+        "metrics": {
+          "free": 0,
+          "work": 36,
+          "care": 0,
+          "travel": 0,
+          "waiting": 0
+        },
+        "xp": {
+          "wood": 0,
+          "cook": 0,
+          "trade": 0,
+          "care": 0
+        },
+        "skills": {
+          "wood": 7,
+          "cook": 1,
+          "care": 1,
+          "trade": 1
+        },
+        "injury": 0,
+        "memories": []
+      },
+      "sui": {
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 2
+          }
+        },
+        "task": null,
+        "needs": {
+          "hunger": 68.67999999999984,
+          "bladder": 68.24000000000012,
+          "hygiene": 65.66000000000008,
+          "energy": 84.36625000000005,
+          "social": 59.02000000000001,
+          "fun": 54.47999999999999
+        },
+        "metrics": {
+          "free": 0,
+          "work": 30,
+          "care": 0,
+          "travel": 5,
+          "waiting": 1
+        },
+        "xp": {
+          "wood": 0,
+          "cook": 0,
+          "trade": 0,
+          "care": 0
+        },
+        "skills": {
+          "wood": 1,
+          "cook": 2,
+          "care": 1,
+          "trade": 1
+        },
+        "injury": 0,
+        "memories": []
+      }
+    },
+    "preview": {
+      "minutes": 21,
+      "reserved": {}
+    },
+    "selected": {
+      "location": "居間の入口",
+      "destination": "読書室・2列1行（本棚と読書椅子）",
+      "useRemaining": 14,
+      "phase": "move",
+      "minutes": 21,
+      "detail": "目的地へ向かっています。"
+    },
+    "useBudget": 14,
+    "reading": {
+      "elapsed": 21,
+      "kaya": {
+        "free": 14,
+        "work": 0,
+        "care": 0,
+        "travel": 7,
+        "waiting": 0
+      },
+      "sui": {
+        "free": 21,
+        "work": 0,
+        "care": 0,
+        "travel": 0,
+        "waiting": 0
+      },
+      "funAtStart": 54.47999999999999,
+      "funBeforeLast": 53.71699999999998,
+      "funDone": 100,
+      "quietMemory": [
+        {
+          "label": "静かな自由時間",
+          "value": 6,
+          "until": 767
+        }
+      ],
+      "doneAt": 537
+    },
+    "checkpoint": {
+      "time": 527,
+      "left": 10,
+      "station": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"room-1\\\",\\\"fixture-2\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"room-1\\\",\\\"fixture-2\\\",0]\"]",
+          "targetId": "[\"slot\",\"room-1\",\"fixture-2\",0]",
+          "actorId": "person-1",
+          "orderId": "order-3",
+          "kind": "slot"
+        }
+      },
+      "stock": {
+        "wood": 8,
+        "food": 7,
+        "ingredients": 9,
+        "coins": 8
+      },
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "matchedThroughCompletion": true
+    },
+    "morning": {
+      "time": 1920,
+      "stock": {
+        "wood": 12,
+        "food": 10,
+        "ingredients": 3,
+        "coins": 8
+      },
+      "kaya": {
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 2
+          }
+        },
+        "task": {
+          "kind": "leisure",
+          "label": "次に作りたい献立を考える",
+          "remaining": 27,
+          "mode": "auto",
+          "station": null
+        },
+        "needs": {
+          "hunger": 73.2399999999985,
+          "bladder": 43.520000000001204,
+          "hygiene": 40.493000000003136,
+          "energy": 82.17800000000022,
+          "social": 55.08480000000033,
+          "fun": 98.53000000000014
+        },
+        "metrics": {
+          "free": 824,
+          "work": 36,
+          "care": 446,
+          "travel": 134,
+          "waiting": 0
+        },
+        "xp": {
+          "wood": 0,
+          "cook": 8.5,
+          "trade": 0,
+          "care": 0
+        },
+        "skills": {
+          "wood": 7,
+          "cook": 2,
+          "care": 1,
+          "trade": 1
+        },
+        "injury": 0,
+        "memories": [
+          {
+            "label": "静かな自由時間",
+            "value": 5,
+            "until": 2020
+          },
+          {
+            "label": "好きな料理",
+            "value": 6,
+            "until": 2079
+          }
+        ]
+      },
+      "sui": {
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"yard\"]",
+            "cell": 7
+          }
+        },
+        "task": {
+          "kind": "need",
+          "target": "hygiene",
+          "label": "水を汲んで身を清める",
+          "remaining": 1,
+          "mode": "auto",
+          "station": "[\"slot\",\"yard\",\"basin-1\",0]"
+        },
+        "needs": {
+          "hunger": 73.23999999999867,
+          "bladder": 51.68000000000103,
+          "hygiene": 40.037500000002034,
+          "energy": 91.34550000000013,
+          "social": 59.1100000000001,
+          "fun": 85.5800000000014
+        },
+        "metrics": {
+          "free": 784,
+          "work": 30,
+          "care": 511,
+          "travel": 114,
+          "waiting": 1
+        },
+        "xp": {
+          "wood": 39,
+          "cook": 0,
+          "trade": 0,
+          "care": 0
+        },
+        "skills": {
+          "wood": 1,
+          "cook": 2,
+          "care": 1,
+          "trade": 1
+        },
+        "injury": 0,
+        "memories": []
+      }
+    }
+  },
+  "B": {
+    "events": [
+      {
+        "label": "existing shelf, Sui starts wood",
+        "time": 480,
+        "stock": {
+          "wood": 14,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood",
+            "label": "枝を削って木材を整える",
+            "remaining": 32,
+            "mode": "direct",
+            "station": null
+          },
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        }
+      },
+      {
+        "label": "Kaya starts common wood",
+        "time": 480,
+        "stock": {
+          "wood": 14,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood:hard",
+            "label": "丈夫な建具を組む",
+            "remaining": 39,
+            "mode": "direct",
+            "station": null
+          },
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood",
+            "label": "枝を削って木材を整える",
+            "remaining": 32,
+            "mode": "direct",
+            "station": null
+          },
+          "needs": {
+            "hunger": 73,
+            "bladder": 74,
+            "hygiene": 68,
+            "energy": 88,
+            "social": 61,
+            "fun": 57
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        }
+      },
+      {
+        "label": "Sui wood job done",
+        "time": 512,
+        "stock": {
+          "wood": 16,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood:hard",
+            "label": "丈夫な建具を組む",
+            "remaining": 7,
+            "mode": "direct",
+            "station": null
+          },
+          "needs": {
+            "hunger": 69.15999999999985,
+            "bladder": 68.88000000000011,
+            "hygiene": 65.92000000000007,
+            "energy": 84.96000000000004,
+            "social": 59.7328,
+            "fun": 54.75999999999999
+          },
+          "metrics": {
+            "free": 0,
+            "work": 32,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 69.15999999999985,
+            "bladder": 68.88000000000011,
+            "hygiene": 65.92000000000007,
+            "energy": 84.96000000000004,
+            "social": 59.24000000000001,
+            "fun": 64.75999999999999
+          },
+          "metrics": {
+            "free": 0,
+            "work": 32,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 19.5,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": [
+            {
+              "label": "好きな木工",
+              "value": 6,
+              "until": 692
+            }
+          ]
+        }
+      },
+      {
+        "label": "ordered reading",
+        "time": 516,
+        "stock": {
+          "wood": 16,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "need",
+            "target": "fun",
+            "label": "本を開いて過ごす",
+            "remaining": 14,
+            "mode": "direct",
+            "station": "[\"slot\",\"living\",\"fixture-1\",0]"
+          },
+          "needs": {
+            "hunger": 68.67999999999984,
+            "bladder": 68.24000000000012,
+            "hygiene": 65.66000000000008,
+            "energy": 84.58000000000004,
+            "social": 59.5744,
+            "fun": 54.47999999999999
+          },
+          "metrics": {
+            "free": 0,
+            "work": 36,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": []
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood",
+            "label": "枝を削って木材を整える",
+            "remaining": 28,
+            "mode": "auto",
+            "station": null
+          },
+          "needs": {
+            "hunger": 68.67999999999984,
+            "bladder": 68.24000000000012,
+            "hygiene": 65.66000000000008,
+            "energy": 84.58000000000004,
+            "social": 59.02000000000001,
+            "fun": 64.48000000000002
+          },
+          "metrics": {
+            "free": 4,
+            "work": 32,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 19.5,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": [
+            {
+              "label": "好きな木工",
+              "value": 6,
+              "until": 692
+            }
+          ]
+        }
+      },
+      {
+        "label": "reading done",
+        "time": 531,
+        "stock": {
+          "wood": 16,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 1
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 66.87999999999977,
+            "bladder": 65.84000000000017,
+            "hygiene": 64.68500000000012,
+            "energy": 83.11225000000006,
+            "social": 58.980399999999996,
+            "fun": 100
+          },
+          "metrics": {
+            "free": 14,
+            "work": 36,
+            "care": 0,
+            "travel": 1,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": [
+            {
+              "label": "静かな自由時間",
+              "value": 6,
+              "until": 761
+            }
+          ]
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood",
+            "label": "枝を削って木材を整える",
+            "remaining": 13,
+            "mode": "auto",
+            "station": null
+          },
+          "needs": {
+            "hunger": 66.87999999999977,
+            "bladder": 65.84000000000017,
+            "hygiene": 64.68500000000012,
+            "energy": 83.15500000000006,
+            "social": 58.195000000000014,
+            "fun": 63.43000000000006
+          },
+          "metrics": {
+            "free": 19,
+            "work": 32,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 19.5,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": [
+            {
+              "label": "好きな木工",
+              "value": 6,
+              "until": 692
+            }
+          ]
+        }
+      },
+      {
+        "label": "autonomy begins after reading",
+        "time": 531,
+        "stock": {
+          "wood": 16,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "kaya": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 1
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 66.87999999999977,
+            "bladder": 65.84000000000017,
+            "hygiene": 64.68500000000012,
+            "energy": 83.11225000000006,
+            "social": 58.980399999999996,
+            "fun": 100
+          },
+          "metrics": {
+            "free": 14,
+            "work": 36,
+            "care": 0,
+            "travel": 1,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 0,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 7,
+            "cook": 1,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": [
+            {
+              "label": "静かな自由時間",
+              "value": 6,
+              "until": 761
+            }
+          ]
+        },
+        "sui": {
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "task": {
+            "kind": "work",
+            "target": "wood",
+            "label": "枝を削って木材を整える",
+            "remaining": 13,
+            "mode": "auto",
+            "station": null
+          },
+          "needs": {
+            "hunger": 66.87999999999977,
+            "bladder": 65.84000000000017,
+            "hygiene": 64.68500000000012,
+            "energy": 83.15500000000006,
+            "social": 58.195000000000014,
+            "fun": 63.43000000000006
+          },
+          "metrics": {
+            "free": 19,
+            "work": 32,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "xp": {
+            "wood": 19.5,
+            "cook": 0,
+            "trade": 0,
+            "care": 0
+          },
+          "skills": {
+            "wood": 1,
+            "cook": 2,
+            "care": 1,
+            "trade": 1
+          },
+          "injury": 0,
+          "memories": [
+            {
+              "label": "好きな木工",
+              "value": 6,
+              "until": 692
+            }
+          ]
+        }
+      }
+    ],
+    "ticks": [],
+    "beforeRead": {
+      "time": 516,
+      "stock": {
+        "wood": 16,
+        "food": 7,
+        "ingredients": 9,
+        "coins": 8
+      },
+      "kaya": {
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "task": {
+          "kind": "work",
+          "target": "wood:hard",
+          "label": "丈夫な建具を組む",
+          "remaining": 3,
+          "mode": "direct",
+          "station": null
+        },
+        "needs": {
+          "hunger": 68.67999999999984,
+          "bladder": 68.24000000000012,
+          "hygiene": 65.66000000000008,
+          "energy": 84.58000000000004,
+          "social": 59.5744,
+          "fun": 54.47999999999999
+        },
+        "metrics": {
+          "free": 0,
+          "work": 36,
+          "care": 0,
+          "travel": 0,
+          "waiting": 0
+        },
+        "xp": {
+          "wood": 0,
+          "cook": 0,
+          "trade": 0,
+          "care": 0
+        },
+        "skills": {
+          "wood": 7,
+          "cook": 1,
+          "care": 1,
+          "trade": 1
+        },
+        "injury": 0,
+        "memories": []
+      },
+      "sui": {
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "task": {
+          "kind": "work",
+          "target": "wood",
+          "label": "枝を削って木材を整える",
+          "remaining": 28,
+          "mode": "auto",
+          "station": null
+        },
+        "needs": {
+          "hunger": 68.67999999999984,
+          "bladder": 68.24000000000012,
+          "hygiene": 65.66000000000008,
+          "energy": 84.58000000000004,
+          "social": 59.02000000000001,
+          "fun": 64.48000000000002
+        },
+        "metrics": {
+          "free": 4,
+          "work": 32,
+          "care": 0,
+          "travel": 0,
+          "waiting": 0
+        },
+        "xp": {
+          "wood": 19.5,
+          "cook": 0,
+          "trade": 0,
+          "care": 0
+        },
+        "skills": {
+          "wood": 1,
+          "cook": 2,
+          "care": 1,
+          "trade": 1
+        },
+        "injury": 0,
+        "memories": [
+          {
+            "label": "好きな木工",
+            "value": 6,
+            "until": 692
+          }
+        ]
+      }
+    },
+    "preview": {
+      "minutes": 15,
+      "reserved": {}
+    },
+    "selected": {
+      "location": "居間の入口",
+      "destination": "居間・2列1行（本棚と読書椅子）",
+      "useRemaining": 14,
+      "phase": "move",
+      "minutes": 15,
+      "detail": "目的地へ向かっています。"
+    },
+    "useBudget": 14,
+    "reading": {
+      "elapsed": 15,
+      "kaya": {
+        "free": 14,
+        "work": 0,
+        "care": 0,
+        "travel": 1,
+        "waiting": 0
+      },
+      "sui": {
+        "free": 15,
+        "work": 0,
+        "care": 0,
+        "travel": 0,
+        "waiting": 0
+      },
+      "funAtStart": 54.47999999999999,
+      "funBeforeLast": 54.13699999999998,
+      "funDone": 100,
+      "quietMemory": [
+        {
+          "label": "静かな自由時間",
+          "value": 6,
+          "until": 761
+        }
+      ],
+      "doneAt": 531
+    },
+    "checkpoint": {
+      "time": 521,
+      "left": 10,
+      "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"living\",\"fixture-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-1",
+          "kind": "slot"
+        }
+      },
+      "stock": {
+        "wood": 16,
+        "food": 7,
+        "ingredients": 9,
+        "coins": 8
+      },
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "matchedThroughCompletion": true
+    },
+    "morning": {
+      "time": 1920,
+      "stock": {
+        "wood": 20,
+        "food": 10,
+        "ingredients": 3,
+        "coins": 8
+      },
+      "kaya": {
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 7
+          }
+        },
+        "task": {
+          "kind": "leisure",
+          "label": "次に作りたい献立を考える",
+          "remaining": 33,
+          "mode": "auto",
+          "station": null
+        },
+        "needs": {
+          "hunger": 73.23999999999894,
+          "bladder": 45.280000000001166,
+          "hygiene": 40.493000000003136,
+          "energy": 83.05200000000022,
+          "social": 55.08480000000024,
+          "fun": 98.9500000000001
+        },
+        "metrics": {
+          "free": 740,
+          "work": 114,
+          "care": 446,
+          "travel": 140,
+          "waiting": 0
+        },
+        "xp": {
+          "wood": 0,
+          "cook": 8.5,
+          "trade": 0,
+          "care": 0
+        },
+        "skills": {
+          "wood": 7,
+          "cook": 2,
+          "care": 1,
+          "trade": 1
+        },
+        "injury": 0,
+        "memories": [
+          {
+            "label": "静かな自由時間",
+            "value": 5,
+            "until": 1955
+          },
+          {
+            "label": "好きな料理",
+            "value": 6,
+            "until": 2085
+          }
+        ]
+      },
+      "sui": {
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"yard\"]",
+            "cell": 7
+          }
+        },
+        "task": {
+          "kind": "need",
+          "target": "hygiene",
+          "label": "水を汲んで身を清める",
+          "remaining": 20,
+          "mode": "auto",
+          "station": "[\"slot\",\"yard\",\"basin-1\",0]"
+        },
+        "needs": {
+          "hunger": 73.23999999999859,
+          "bladder": 39.0400000000013,
+          "hygiene": 39.628000000002075,
+          "energy": 96.15250000000006,
+          "social": 59.109999999999665,
+          "fun": 86.77000000000129
+        },
+        "metrics": {
+          "free": 784,
+          "work": 32,
+          "care": 492,
+          "travel": 132,
+          "waiting": 0
+        },
+        "xp": {
+          "wood": 8.5,
+          "cook": 0,
+          "trade": 0,
+          "care": 0
+        },
+        "skills": {
+          "wood": 2,
+          "cook": 2,
+          "care": 1,
+          "trade": 1
+        },
+        "injury": 0,
+        "memories": []
+      }
+    }
+  },
+  "earliestB": {
+    "location": "居間の入口",
+    "destination": "居間・2列1行（本棚と読書椅子）",
+    "useRemaining": 14,
+    "phase": "move",
+    "minutes": 15,
+    "detail": "目的地へ向かっています。"
+  },
+  "more": {
+    "multipleShelves": [
+      {
+        "room": "living",
+        "id": "fixture-3",
+        "cell": 2
+      },
+      {
+        "room": "room-1",
+        "id": "fixture-2",
+        "cell": 2
+      }
+    ],
+    "selected": {
+      "location": "居間の入口",
+      "destination": "居間・2列1行（本棚と読書椅子）",
+      "useRemaining": 14,
+      "phase": "move",
+      "minutes": 15,
+      "detail": "目的地へ向かっています。"
+    },
+    "preview": {
+      "minutes": 15,
+      "reserved": {}
+    }
+  },
+  "workshop": {
+    "wood": {
+      "kind": "work",
+      "target": "wood",
+      "label": "枝を削って木材を整える",
+      "remaining": 25,
+      "mode": "direct",
+      "station": null
+    },
+    "wood:hard": {
+      "kind": "work",
+      "target": "wood:hard",
+      "label": "丈夫な建具を組む",
+      "remaining": 39,
+      "mode": "direct",
+      "station": null
+    },
+    "wood:master": {
+      "kind": "work",
+      "target": "wood:master",
+      "label": "断熱雨戸を製作する",
+      "remaining": 53,
+      "mode": "direct",
+      "station": null
+    },
+    "cook": {
+      "kind": "work",
+      "target": "cook",
+      "label": "野菜を煮て食事を作る",
+      "remaining": 39,
+      "mode": "direct",
+      "station": "[\"slot\",\"living\",\"hearth-1\",0]"
+    }
+  }
+}

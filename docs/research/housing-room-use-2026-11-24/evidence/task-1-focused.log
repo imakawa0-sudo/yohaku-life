@@ -1,0 +1,17 @@
+✔ automatic and explicit reading preview and book their respective fixtures (14.446985ms)
+✔ replacement preview preserves a meal and predicts the booking after its refund (5.423263ms)
+✔ a two-seat fixture books its other seat and refuses a third resident without fallback (6.974992ms)
+✔ a blocked, forbidden, or missing fixture cannot fall back to reachable reading (3.462514ms)
+✔ cancelling an explicit meal refunds its one reserved meal at the safe exit (4.846918ms)
+✔ explicit meal import during travel and use preserves origin and completes exactly once (23.146188ms)
+✔ old games and actors away from home retain their old need orders (2.791122ms)
+✔ explicit rest follows the established injury, danger, and transit rules (4.574331ms)
+✔ the six explicit uses share the existing need task and save contract (16.81748ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 384.668279

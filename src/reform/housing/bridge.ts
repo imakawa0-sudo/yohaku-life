@@ -27,7 +27,7 @@ import {
   housingSourcePoint,
   legacyHousingStation,
 } from "./topology";
-import type { HousingRuntime, HousingSlot } from "./types";
+import type { HousingRuntime, HousingSlot, HousingUsePreview } from "./types";
 
 export function enableHousing(g: Game, mode: "new" | "legacy"): Game {
   if (g.housing) return g;
@@ -214,17 +214,19 @@ export type HousingProposal = {
   task: Task;
   minutes: number;
   state: SpatialState;
+  facility?: HousingUsePreview;
 };
 function accept(
   h: HousingRuntime,
   t: Task,
   intent: Exclude<SpatialIntent, { kind: "carry" }>,
   minutes: number,
+  facility?: HousingUsePreview,
 ): HousingProposal | string {
   const result = issueSpatialOrder(h.state, intent);
   if (!result.ok) return spatialReasonText(result.reason);
   t.spatial = { orderId: result.orderId, kind: intent.kind };
-  return { task: t, minutes, state: result.state };
+  return { task: t, minutes, state: result.state, ...(facility && { facility }) };
 }
 /** Planning an unknown position uses a detached trial. Only begin publishes the result. */
 export function planHousing(
@@ -233,6 +235,7 @@ export function planHousing(
   t: Task,
   need?: Need,
   water = 0,
+  fixtureId?: string,
 ): HousingProposal | string {
   const id = a.person.id;
   let h = g.housing!;
@@ -266,6 +269,7 @@ export function planHousing(
   const reasons = new Set<SpatialReason>();
   let best: { slot: HousingSlot; minutes: number; use: number } | undefined;
   for (const slot of Object.values(slots)) {
+    if (fixtureId !== undefined && slot.fixtureId !== fixtureId) continue;
     const f = furnishings[slot.kind];
     if (f.need !== need || (cooking && slot.seat !== 0)) continue;
     if (
@@ -316,11 +320,21 @@ export function planHousing(
       need === "social"
         ? furnishings[slot.kind].name + "で過ごす"
         : furnishings[slot.kind].use;
+  const room = g.house.rooms.find((r) => r.id === slot.roomId)!;
+  const fixture = room.fixtures.find((f) => f.id === slot.fixtureId)!;
   return accept(
     h,
     t,
     { kind: "use", actorId: id, slotId: slot.id, useMinutes: use },
     minutes,
+    {
+      fixtureId: slot.fixtureId,
+      roomId: slot.roomId,
+      fixtureKind: slot.kind,
+      fixtureCell: fixture.cell,
+      moveMinutes: minutes - use,
+      useMinutes: use,
+    },
   );
 }
 

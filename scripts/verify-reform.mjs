@@ -150,8 +150,10 @@ async function hygieneRun(page) {
   await button(panel,"生活").click();
   const command=panel.locator('button[data-kind="need"][data-target="hygiene"]');
   const preview=await command.locator("..").locator("small").innerText();
+  const facilityTotal=/（合計(\d+)分）/.exec(preview);
   const duration=/^(?:(\d+)時間)?(?:(\d+)分)?$/.exec(preview);
-  assert.ok(duration && (duration[1] || duration[2]), "本人の実位置から身支度を終えるまでの見込み");
+  assert.ok(facilityTotal || (duration && (duration[1] || duration[2])), "本人の実位置から身支度を終えるまでの見込み");
+  const minutes=facilityTotal ? Number(facilityTotal[1]) : Number(duration[1]||0)*60+Number(duration[2]||0);
   await command.click();
   const ordered=await currentGame(page);
   const before=ordered.actors[0];
@@ -159,7 +161,7 @@ async function hygieneRun(page) {
   await finish(page);
   const completed=await currentGame(page);
   assert.ok(completed.actors[0].needs.hygiene > before.needs.hygiene);
-  assert.equal(completed.time-ordered.time,Number(duration[1]||0)*60+Number(duration[2]||0));
+  assert.equal(completed.time-ordered.time,minutes);
   return completed.time-ordered.time;
 }
 async function doBasicWork(page) {

@@ -1,0 +1,111 @@
+{
+  "originalActiveSave": {
+    "unchanged": true,
+    "bytes": 26606,
+    "sha256": "bcf84c71377ed51192e4612b2330a7d8ad7e3542a53a06a3d01f30dbfa68921c"
+  },
+  "legacy": {
+    "unchanged": true,
+    "bytes": 77936,
+    "sha256": "6ab258f7bcf2c569b4cc4f82bfa5eaf9438141de7015dd9efa787b167af9295e"
+  },
+  "slotsBefore": 56,
+  "slotsAfter": 61,
+  "activeNameRestored": true,
+  "allPreexistingSlotsIndividuallyCompared": false,
+  "widths": [
+    {
+      "file": "final-width-320.json",
+      "frameWidth": 320,
+      "contentWidth": 305,
+      "facilityWidth": 267,
+      "facilityScrollWidth": 267,
+      "focusVisible": false,
+      "focusBottom": 2313.203125,
+      "clockTop": 737
+    },
+    {
+      "file": "final-width-390.json",
+      "frameWidth": 390,
+      "contentWidth": 375,
+      "facilityWidth": 329,
+      "facilityScrollWidth": 329,
+      "focusVisible": false,
+      "focusBottom": 2397.109375,
+      "clockTop": 737
+    },
+    {
+      "file": "final-width-1280.json",
+      "frameWidth": 1280,
+      "contentWidth": 1265,
+      "facilityWidth": 370.5,
+      "facilityScrollWidth": 371,
+      "focusVisible": false,
+      "focusBottom": 1961,
+      "clockTop": 763
+    },
+    {
+      "file": "final-duplicate-width-320.json",
+      "frameWidth": 320,
+      "contentWidth": 305,
+      "facilityWidth": 267,
+      "facilityScrollWidth": 267,
+      "focusVisible": false,
+      "focusBottom": 2518.953125,
+      "clockTop": 737
+    }
+  ],
+  "console": {
+    "game": {
+      "count": 421,
+      "extension": 421,
+      "applicationOrigin": 0,
+      "other": 0
+    },
+    "wrapper": {
+      "count": 76,
+      "extension": 76,
+      "applicationOrigin": 0,
+      "other": 0
+    }
+  },
+  "consoleLimitEach": 500,
+  "screenshots": [
+    {
+      "file": "final-busy-320.jpg",
+      "bytes": 58079,
+      "sha256": "c446c06c0a1dd38c17bfd8afc9f4519bd41e2d97c7d95a0cc17820771fcb5172",
+      "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+    },
+    {
+      "file": "final-choice-1280.jpg",
+      "bytes": 89632,
+      "sha256": "3cf0ebdb31c7e432704db9ccca1ee740392584c8df4531385c362f470ac57108",
+      "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+    },
+    {
+      "file": "final-choice-390.jpg",
+      "bytes": 58449,
+      "sha256": "a3178ac35deb18daf5aa045b51bd6c63d30181e76d1c95f8020c453db7774a3b",
+      "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+    },
+    {
+      "file": "final-choice-desktop.jpg",
+      "bytes": 89832,
+      "sha256": "aa60ae0c41c47144b935aa99c4236fad1a532587e87a2138ebc18ab6e877fe18",
+      "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+    },
+    {
+      "file": "final-duplicate-320.jpg",
+      "bytes": 55809,
+      "sha256": "fd456f9fdd749795bc4622eab967215fad52ec8e54258dcad8214a1f83d3f399",
+      "htmlSha256": "a329cc14a07c21364321666b983eed1c19558135ab1247674ecdedaf76e7c838"
+    },
+    {
+      "file": "prior-removal-desktop.jpg",
+      "bytes": 85530,
+      "sha256": "0e465719d1595f0eb255855cc96413bac90d7923b4c79fb5a1bf3afac3bbe675",
+      "htmlSha256": "52da590bad5456ebb8eff486d7607797bb843d675926ee355bdd1fa244366164"
+    }
+  ]
+}

@@ -30,12 +30,13 @@ import {
 } from "./peopleModel";
 import type { Skill } from "./peopleModel";
 import { HousingPanel, housingStageNames } from "./HousingPanel";
+import { FacilityAction } from "./FacilityAction";
 import { housingTogether } from "./housing/bridge";
 import { constructionStatus } from "./housing/constructionPresentation";
 import { constructionExitText } from "./housing/constructionTopology";
 import { gatheringPresence, gatheringStatus } from "./housing/gathering";
 import { housingStatus, nextCompletionMinutes } from "./housing/presentation";
-import { roomName } from "./house";
+import { needs, roomName } from "./house";
 import type { Need } from "./house";
 import { places } from "./world";
 import {
@@ -74,6 +75,10 @@ const groupNames = {
   field: "野外",
 };
 type ActionGroup = keyof typeof groupNames;
+type FacilitySelection = {
+  choices: Partial<Record<Need, string>>;
+  choose: (need: Need, id: string) => void;
+};
 
 function timeOfDay(time: number) {
   const hour = Math.floor((time % 1440) / 60);
@@ -192,10 +197,12 @@ function ActionPanel({
   game,
   actor,
   onGame,
+  facilitySelection,
 }: {
   game: Game;
   actor: Actor;
   onGame: (g: Game) => void;
+  facilitySelection?: FacilitySelection;
 }) {
   const [group, setGroup] = useState<ActionGroup>("need");
   const commands = options(game, actor.person.id);
@@ -245,6 +252,21 @@ function ActionPanel({
       </div>
       <div className="lf-command-list">
         {selected.map((command) => {
+          const need =
+            command.kind === "need" &&
+            needs.find((key) => key === command.target);
+          if (game.housing && actor.location === game.home && need)
+            return (
+              <FacilityAction
+                key={need}
+                game={game}
+                actor={actor}
+                command={command}
+                selectedId={facilitySelection?.choices[need] ?? ""}
+                onSelect={(id) => facilitySelection?.choose(need, id)}
+                onGame={onGame}
+              />
+            );
           const hintId =
             "lf-order-" + command.kind + "-" + (command.target ?? "");
           const materials = Object.entries(command.reserved ?? {})
@@ -328,11 +350,13 @@ export function Life({
   selected,
   onSelect,
   onGame,
+  facilitySelection,
 }: {
   game: Game;
   selected: string;
   onSelect: (id: string) => void;
   onGame: (g: Game) => void;
+  facilitySelection?: FacilitySelection;
 }) {
   const actor =
     game.actors.find((a) => a.person.id === selected) ?? game.actors[0];
@@ -580,6 +604,7 @@ export function Life({
             game={game}
             actor={actor}
             onGame={onGame}
+            facilitySelection={facilitySelection}
           />
           {status && (
             <HousingPanel

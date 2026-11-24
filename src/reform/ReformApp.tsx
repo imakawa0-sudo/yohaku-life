@@ -22,7 +22,7 @@ import { HouseEditor } from "./HouseEditor";
 import { ConstructionPanel } from "./ConstructionPanel";
 import { applyHousingHouseEdit } from "./housing/runtime";
 import { HousingUpgrade } from "./HousingPanel";
-import { type House } from "./house";
+import type { House, Need } from "./house";
 import { enableHousing, inspectOrder, order, type Game } from "./sim";
 import {
   appendSlot,
@@ -81,6 +81,19 @@ export default function ReformApp() {
   const game = slot?.game,
     actor =
       game?.actors.find((a) => a.person.id === selected) ?? game?.actors[0];
+  const slotId = slot?.id;
+  const actorId = actor?.person.id;
+  const [facilitySelection, setFacilitySelection] = useState<{
+    slotId: string | undefined;
+    actorId: string | undefined;
+    choices: Partial<Record<Need, string>>;
+  }>({ slotId, actorId, choices: {} });
+  // A different active save or resident starts with automatic choices.
+  if (
+    facilitySelection.slotId !== slotId ||
+    facilitySelection.actorId !== actorId
+  )
+    setFacilitySelection({ slotId, actorId, choices: {} });
   function show(next: View) {
     setView(next);
     setNotice("");
@@ -339,6 +352,14 @@ export default function ReformApp() {
             selected={actor.person.id}
             onSelect={setSelected}
             onGame={update}
+            facilitySelection={{
+              choices: facilitySelection.choices,
+              choose: (need, id) =>
+                setFacilitySelection((previous) => ({
+                  ...previous,
+                  choices: { ...previous.choices, [need]: id },
+                })),
+            }}
           />
         </main>
       )}
