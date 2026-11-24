@@ -1141,3 +1141,74 @@
 .lf-gathering-people small {
   color: var(--lf-soft);
 }
+
+.lf-construction {
+  --lf-line: var(--rf-line);
+  --lf-paper: var(--rf-surface);
+  --lf-soft: var(--rf-muted);
+  width: 100%;
+  min-width: 0;
+  padding: clamp(14px, 2vw, 24px);
+  overflow-wrap: anywhere;
+  margin-bottom: 12px;
+  scroll-margin-top: 7rem;
+  line-height: 1.65;
+}
+.lf-construction .lf-section-title h2 {
+  margin: 0;
+  font-size: 18px;
+}
+.lf-construction p {
+  margin: 0.45rem 0;
+}
+.lf-construction-form,
+.lf-construction-actions {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  margin-top: 0.8rem;
+}
+.lf-construction label {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+.lf-construction :is(input, select) {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.45rem 0.6rem;
+  color: inherit;
+  background: #fafbf5;
+  border: 1px solid #dbe1d0;
+  border-radius: 5px;
+}
+.lf-construction-card,
+.lf-construction-history {
+  border-top: 1px solid var(--lf-line);
+  padding-top: 0.7rem;
+  margin-top: 0.8rem;
+}
+.lf-construction-card h3 {
+  margin: 0;
+  font-size: 16px;
+}
+.lf-construction-stage {
+  color: var(--lf-soft);
+  font-weight: 600;
+}
+.lf-construction-history summary {
+  min-height: 44px;
+  padding-block: 0.6rem;
+  cursor: pointer;
+}
+.lf-construction-error {
+  color: #8b3f33;
+}
+@media (max-width: 760px) {
+  .lf-construction-form,
+  .lf-construction-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -19,6 +19,7 @@ import { Setup } from "./Setup";
 import { WorldView } from "./RegionView";
 import { places } from "./world";
 import { HouseEditor } from "./HouseEditor";
+import { ConstructionPanel } from "./ConstructionPanel";
 import { applyHousingHouseEdit } from "./housing/runtime";
 import { HousingUpgrade } from "./HousingPanel";
 import { type House } from "./house";
@@ -348,10 +349,16 @@ export default function ReformApp() {
               <p>{places(game.world).find((p) => p.id === game.home)?.name}</p>
               <h1>住まい</h1>
             </div>
-            <span>木材 {game.wood}</span>
           </div>
+          <ConstructionPanel
+            key={`construction:${slot?.id}`}
+            game={game}
+            onGame={update}
+          />
           <HouseEditor
+            key={`house-editor:${slot?.id}`}
             house={game.house}
+            allowRoomAddition={false}
             waterMinutes={
               places(game.world).find((p) => p.id === game.home)?.water ?? 0
             }

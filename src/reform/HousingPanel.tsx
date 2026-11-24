@@ -3,6 +3,7 @@ import { Footprints } from "lucide-react";
 import { cellName, roomName } from "./house";
 import { GatheringPanel } from "./GatheringPanel";
 import { housingPointLabel } from "./housing/presentation";
+import { constructionStatus } from "./housing/constructionPresentation";
 import {
   housingPoint,
   housingDoorId,
@@ -63,6 +64,8 @@ export function HousingPanel({
   const h = game.housing!;
   const id = actor.person.id;
   const gathering = !!actor.task?.spatial?.gatheringId;
+  const planId = actor.task?.spatial?.constructionId;
+  const construction = planId ? constructionStatus(game, planId) : null;
   const people = game.actors.map((a) => a.person.id);
   function moveButton(
     label: string,
@@ -146,7 +149,7 @@ export function HousingPanel({
         {!gathering && (
           <div>
             <dt>段階</dt>
-            <dd>{housingStageNames[status.phase]}</dd>
+            <dd>{construction?.phase ?? housingStageNames[status.phase]}</dd>
           </div>
         )}
         {status.destination && (
@@ -157,7 +160,7 @@ export function HousingPanel({
         )}
         {!gathering && status.useRemaining !== null && (
           <div>
-            <dt>設備の利用残り</dt>
+            <dt>{construction ? "施工の残り" : "設備の利用残り"}</dt>
             <dd>{status.useRemaining}分</dd>
           </div>
         )}

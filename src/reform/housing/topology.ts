@@ -1,3 +1,4 @@
+import type { HousingConstruction } from "./constructionTypes";
 import { furnishings, type House, type Room } from "../house";
 import { spatialWalkId } from "../spatial/route";
 import type { SpatialActor, SpatialPoint } from "../spatial/types";
@@ -26,6 +27,9 @@ export function housingDoorId(roomId: string, cell: number) {
 }
 export function housingLinkId(a: string, b: string) {
   return JSON.stringify(["link", ...[a, b].sort()]);
+}
+export function constructionSlotId(planId: string) {
+  return JSON.stringify(["construction", planId]);
 }
 export function housingSlotId(roomId: string, fixtureId: string, seat: number) {
   return JSON.stringify(["slot", roomId, fixtureId, seat]);
@@ -108,6 +112,7 @@ export function buildHousingTopology(
   controls?: HousingControls,
   positions?: Record<string, SpatialActor>,
   layoutVersion?: 2,
+  construction?: HousingConstruction,
 ): HousingTopology {
   const settings = controlsForHouse(house, controls);
   const geometry: HousingTopology["geometry"] = {
@@ -187,6 +192,20 @@ export function buildHousingTopology(
         };
       }
     }
+  }
+  for (const plan of Object.values(construction?.plans ?? {})) {
+    if (plan.status !== "planned" && plan.assignment?.kind !== "build")
+      continue;
+    if (!Object.hasOwn(settings.roomAccess, plan.neighborId)) continue;
+    const id = constructionSlotId(plan.id);
+    geometry.slots[id] = {
+      id,
+      point: { ...plan.staging },
+      allowedActorIds:
+        settings.roomAccess[plan.neighborId]?.filter((actor) =>
+          actorIds.includes(actor),
+        ) ?? null,
+    };
   }
   for (const link of house.links) {
     const [a, b] = [...link].sort();

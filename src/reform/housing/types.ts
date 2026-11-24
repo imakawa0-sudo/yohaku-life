@@ -1,3 +1,4 @@
+import type { HousingConstruction, HaulDirection } from "./constructionTypes";
 import type { FixtureKind } from "../house";
 import type {
   SpatialPoint,
@@ -13,7 +14,9 @@ export type HousingControls = {
 
 export type HousingTaskBinding = {
   orderId: string;
-  kind: "move" | "use";
+  kind: "move" | "use" | "carry";
+  constructionId?: string;
+  direction?: HaulDirection;
   gatheringId?: string;
   mealPartners?: Record<string, number>;
   socialCompany?: true;
@@ -22,6 +25,7 @@ export type HousingTaskBinding = {
 export type HousingRuntime = {
   version: 1;
   layoutVersion?: 2;
+  construction?: HousingConstruction;
   gatherings?: Record<string, HousingGathering>;
   nextGatheringId?: number;
   state: SpatialState;

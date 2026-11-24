@@ -1,0 +1,356 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "status": "Final browser save-data comparisons and storage preservation checks complete.",
+  "artifact": {
+    "productCommit": "a5a6bf2d049aa989c8e1c38ca9ce8bcd46414f59",
+    "htmlBytes": 699342,
+    "htmlSha256": "f6099941d4d50b4aec5d4c426ac67c69dc8e8cda0867a2ad0c22313fa2209ca6"
+  },
+  "scope": "Managed Chrome observations of the identified standalone HTML. Save-data comparisons use public game commands. Layout, screenshots and source/test-suite reviews are separate evidence.",
+  "counts": {
+    "normalRecordedSteps": 18,
+    "normalFullGameAndOriginMatches": 9,
+    "normalWholeEnvelopeByteIdenticalPairs": 4,
+    "normalOriginBranches": 2,
+    "controlledFullGameAndOriginMatches": 30,
+    "controlledAndOriginalWholeEnvelopeByteIdenticalPairs": 3,
+    "distinctValidatedSaveExports": 44
+  },
+  "checks": {
+    "normalFlowThroughCompletedRoomAndFixtureUse": true,
+    "normalOriginalMorningPreserved": true,
+    "normalSlotIdentityAndAppearancePreserved": true,
+    "normalOriginBranchesHaveIndependentIds": true,
+    "controlledAllRecordedStatesMatch": true,
+    "malformedImportRejected": true,
+    "malformedImportPreservedSelectedSaveBytes": true,
+    "crossTabResetConfirmedAfterVisibleStorageNotification": true
+  },
+  "storage": {
+    "legacyBytesBefore": 77936,
+    "legacyBytesAfter": 77936,
+    "legacySha256Before": "6ab258f7bcf2c569b4cc4f82bfa5eaf9438141de7015dd9efa787b167af9295e",
+    "legacySha256After": "6ab258f7bcf2c569b4cc4f82bfa5eaf9438141de7015dd9efa787b167af9295e",
+    "legacyFingerprintUnchanged": true,
+    "saveSlotsBefore": 42,
+    "saveSlotsAfter": 56,
+    "originalActiveSaveNameRestored": true,
+    "originalSaveBytesBefore": 26606,
+    "originalSaveBytesAfter": 26606,
+    "originalSaveSha256Before": "bcf84c71377ed51192e4612b2330a7d8ad7e3542a53a06a3d01f30dbfa68921c",
+    "originalSaveSha256After": "bcf84c71377ed51192e4612b2330a7d8ad7e3542a53a06a3d01f30dbfa68921c",
+    "originalSaveWholeEnvelopeUnchanged": true,
+    "currentLibraryBytesBefore": 554265,
+    "currentLibraryBytesAfter": 767345,
+    "currentLibrarySha256Before": "5567a92d7b95384ec3ec60cf135bf16e3c7061a1e8f5169effabcbfefb5cf885",
+    "currentLibrarySha256After": "36543662829d39066512d1b43d68fc436ef856a472bd867208351367956b0e0f",
+    "currentLibraryChangedAsQaSavesWereAdded": true
+  },
+  "malformedImport": {
+    "slotsBefore": 49,
+    "slotsAfter": 49,
+    "malformedSlotsCreated": 0
+  },
+  "comparisonReportSha256": {
+    "normal": "1ceb85274c6f4b71a22b0507c8830cd90dd2d30fdb19bd7d47d098cb40a50e2c",
+    "controlled": "5f6bf549c64589b4f629486165b8d39cdad1122269af1252ae291372bf98e41e"
+  },
+  "initialSaveDigest": {
+    "bytes": 30327,
+    "sha256": "eec00fc4cf6065a67607f841dd746cf373f24bf5ecc851e13e6206451195d079"
+  },
+  "normalSaveDigests": [
+    {
+      "index": 1,
+      "bytes": 31837,
+      "sha256": "0612f1201b5d171650455e28ee6b2a0881ca1b11d64916f90310355cd14131b5",
+      "canonicalGameSha256": "defe347bc2b8cd5804a54450b4e2eed8fee15f489552be2ba9af92c39b487182",
+      "canonicalOriginSha256": "8dde180016ac2f4d52fbcfce300430bd8315973409139e2af226be2ff487e596"
+    },
+    {
+      "index": 2,
+      "bytes": 32232,
+      "sha256": "35d52807b692c09de5d0da37b37f7b20d7d170d0cdb64b1064a6ab78ded18b22",
+      "canonicalGameSha256": "5729771b819cf47aa6475d37d1654a41882ca39dcec1736349f24eb0c6e17738",
+      "canonicalOriginSha256": "8dde180016ac2f4d52fbcfce300430bd8315973409139e2af226be2ff487e596"
+    },
+    {
+      "index": 3,
+      "bytes": 34880,
+      "sha256": "19b6d9bc738893e4a3cd99806711bbfb063be57cee809c725a531dd125a3bae9",
+      "canonicalGameSha256": "bcd8d7d96c7108e6aacbdcd62fe92a1f9db7c241a7c4569f4ab7375f93583794",
+      "canonicalOriginSha256": "8dde180016ac2f4d52fbcfce300430bd8315973409139e2af226be2ff487e596"
+    },
+    {
+      "index": 4,
+      "bytes": 34880,
+      "sha256": "19b6d9bc738893e4a3cd99806711bbfb063be57cee809c725a531dd125a3bae9",
+      "canonicalGameSha256": "bcd8d7d96c7108e6aacbdcd62fe92a1f9db7c241a7c4569f4ab7375f93583794",
+      "canonicalOriginSha256": "8dde180016ac2f4d52fbcfce300430bd8315973409139e2af226be2ff487e596"
+    },
+    {
+      "index": 5,
+      "bytes": 34088,
+      "sha256": "a2189eead854234a324d4c6594157ef628f1857e4036206e1f16c815532aaf7c",
+      "canonicalGameSha256": "6ee329ce45d5ec11f66c2dbd5b8cb19db5bc8337105f136dc38ef8f485da24cd",
+      "canonicalOriginSha256": "8dde180016ac2f4d52fbcfce300430bd8315973409139e2af226be2ff487e596"
+    },
+    {
+      "index": 6,
+      "bytes": 34770,
+      "sha256": "f1e1c0c19861df9ce2ef6d622d29fcada206354ea9887be71179564baee4e57d",
+      "canonicalGameSha256": "c6e5621c18cbfff239a8d17f2a766c443f93b38cd72a1fc37763ce3e69a2690d",
+      "canonicalOriginSha256": "8dde180016ac2f4d52fbcfce300430bd8315973409139e2af226be2ff487e596"
+    },
+    {
+      "index": 7,
+      "bytes": 34770,
+      "sha256": "f1e1c0c19861df9ce2ef6d622d29fcada206354ea9887be71179564baee4e57d",
+      "canonicalGameSha256": "c6e5621c18cbfff239a8d17f2a766c443f93b38cd72a1fc37763ce3e69a2690d",
+      "canonicalOriginSha256": "8dde180016ac2f4d52fbcfce300430bd8315973409139e2af226be2ff487e596"
+    },
+    {
+      "index": 8,
+      "bytes": 34770,
+      "sha256": "f1e1c0c19861df9ce2ef6d622d29fcada206354ea9887be71179564baee4e57d",
+      "canonicalGameSha256": "c6e5621c18cbfff239a8d17f2a766c443f93b38cd72a1fc37763ce3e69a2690d",
+      "canonicalOriginSha256": "8dde180016ac2f4d52fbcfce300430bd8315973409139e2af226be2ff487e596"
+    },
+    {
+      "index": 9,
+      "bytes": 34770,
+      "sha256": "f1e1c0c19861df9ce2ef6d622d29fcada206354ea9887be71179564baee4e57d",
+      "canonicalGameSha256": "c6e5621c18cbfff239a8d17f2a766c443f93b38cd72a1fc37763ce3e69a2690d",
+      "canonicalOriginSha256": "8dde180016ac2f4d52fbcfce300430bd8315973409139e2af226be2ff487e596"
+    }
+  ],
+  "originBranchDigests": [
+    {
+      "index": 1,
+      "bytes": 30338,
+      "sha256": "f89fed5fbfccae14461383f45f50f2a92c84f6c1c3d2f16df8f61197b2a457f7",
+      "canonicalGameSha256": "8dde180016ac2f4d52fbcfce300430bd8315973409139e2af226be2ff487e596",
+      "canonicalOriginSha256": "8dde180016ac2f4d52fbcfce300430bd8315973409139e2af226be2ff487e596"
+    },
+    {
+      "index": 2,
+      "bytes": 30338,
+      "sha256": "61d640f3b783f381b8747c8fbe04407b60ff1ea7c3a308fcfde1fbd7727272d8",
+      "canonicalGameSha256": "8dde180016ac2f4d52fbcfce300430bd8315973409139e2af226be2ff487e596",
+      "canonicalOriginSha256": "8dde180016ac2f4d52fbcfce300430bd8315973409139e2af226be2ff487e596"
+    }
+  ],
+  "controlledSaveDigests": [
+    {
+      "index": 1,
+      "bytes": 33801,
+      "sha256": "a3880a7f5de7b972dac9f242c4e7c5c11b7f7fdf2792a3613ccbb41c65ad4eee",
+      "canonicalGameSha256": "7c7321155d84fb4c69ae077dc26f42222487a826668fbaef040ba94e8e82443d",
+      "canonicalOriginSha256": "a51382a471b4aa9edc72fbad9c0537d65e89c61e50103bc72e2754997c440308"
+    },
+    {
+      "index": 2,
+      "bytes": 33801,
+      "sha256": "a3880a7f5de7b972dac9f242c4e7c5c11b7f7fdf2792a3613ccbb41c65ad4eee",
+      "canonicalGameSha256": "7c7321155d84fb4c69ae077dc26f42222487a826668fbaef040ba94e8e82443d",
+      "canonicalOriginSha256": "a51382a471b4aa9edc72fbad9c0537d65e89c61e50103bc72e2754997c440308"
+    },
+    {
+      "index": 3,
+      "bytes": 33801,
+      "sha256": "a3880a7f5de7b972dac9f242c4e7c5c11b7f7fdf2792a3613ccbb41c65ad4eee",
+      "canonicalGameSha256": "7c7321155d84fb4c69ae077dc26f42222487a826668fbaef040ba94e8e82443d",
+      "canonicalOriginSha256": "a51382a471b4aa9edc72fbad9c0537d65e89c61e50103bc72e2754997c440308"
+    },
+    {
+      "index": 4,
+      "bytes": 32294,
+      "sha256": "339c90d04d2ebe2b05916904ecb559306b808d4d2271ee8eba14ea8e4a868750",
+      "canonicalGameSha256": "d5851727115d0d807c63d1b892b00f110403d531cd02f7673afc0cd539c40504",
+      "canonicalOriginSha256": "a51382a471b4aa9edc72fbad9c0537d65e89c61e50103bc72e2754997c440308"
+    },
+    {
+      "index": 5,
+      "bytes": 34072,
+      "sha256": "ff8a623facfcbb418b4d347f7c8153b9a3e3e88ac23061f76d66b047c1b24876",
+      "canonicalGameSha256": "5e03d928b7efe631f5c7210a006daa1c70ec52e83619b8bf48ee183c426db989",
+      "canonicalOriginSha256": "a51382a471b4aa9edc72fbad9c0537d65e89c61e50103bc72e2754997c440308"
+    },
+    {
+      "index": 6,
+      "bytes": 34348,
+      "sha256": "c397028e065b2b3cdc94fd3a06abeca61db4e449e0778321fa905d599923a45a",
+      "canonicalGameSha256": "c10c66d0b21dad951fc7a6f5865dd82265ef8a29918e978b98c53f555d8749b0",
+      "canonicalOriginSha256": "a51382a471b4aa9edc72fbad9c0537d65e89c61e50103bc72e2754997c440308"
+    },
+    {
+      "index": 7,
+      "bytes": 33283,
+      "sha256": "ae5c7070d99de36d2897887379217da3843047fd13ee011a450b8400786dd25e",
+      "canonicalGameSha256": "51589b9dc8a41c71077b3156ab9962ccf626542d9c1cb08a2d247013d7e76af0",
+      "canonicalOriginSha256": "a51382a471b4aa9edc72fbad9c0537d65e89c61e50103bc72e2754997c440308"
+    },
+    {
+      "index": 8,
+      "bytes": 33959,
+      "sha256": "011a7d97e37c7b7c94a9e9d0acdfe8481aa836354665d2bac00212bed9886c05",
+      "canonicalGameSha256": "ca516ec8de0829103debd76c3ae9f3ecc7d170f9cc9362de2a6a93d03f8b589e",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 9,
+      "bytes": 31974,
+      "sha256": "fcf265480deba45cdf238feb39bd73920ca36d9161c4ecf9346396751e59b70a",
+      "canonicalGameSha256": "5401fa82a806782081a3a062b2336e67768cc554ea0ce46a712adaff75a12d78",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 10,
+      "bytes": 33482,
+      "sha256": "c84740018e86c2637f03bfafcb575e5dfbcd6a64a1f4ace2333b3c7559bce3a5",
+      "canonicalGameSha256": "d2739b894835e82fabe5ae4662f2aca0de094c8a92ac7a580ef6cd66cff8ce19",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 11,
+      "bytes": 31695,
+      "sha256": "8b8d5e806c1ce5826e973ce5725979895d618eb37ae9432a5a1ea98d737b98a5",
+      "canonicalGameSha256": "e5cd2e26363090e43d30a844162c9a5f1917d88098bac88667356263b337a7d6",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 12,
+      "bytes": 33839,
+      "sha256": "98bb47ff80b9abc0b49828136d1d9be80f2837bd647bccd4be7c60302e48fbf9",
+      "canonicalGameSha256": "c2edfce96c46d735614a4d690fa045c64bcd118c0ecbfa5be1f98817fa61b1ee",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 13,
+      "bytes": 32256,
+      "sha256": "2d4e66a70bfea885a594169436730dc61ef2865c90ea349a3028d0586081ec87",
+      "canonicalGameSha256": "0679170a64421579d8f10ee215029f0fefcb357c2378b4399cf5dd709f04af50",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 14,
+      "bytes": 35223,
+      "sha256": "a843f3a450b00c17560bf236c3c475efacf73be5b9bbfafa2e17a0a74f3a51e0",
+      "canonicalGameSha256": "9027bdf9c8e5e211600efc1a36c4c1d954633ad3b337c3ab35a76c020f01c263",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 15,
+      "bytes": 33967,
+      "sha256": "e38377f2c42162bbfecbe49ffd53f436a653452a8abb34ea608edadbe7f98cb8",
+      "canonicalGameSha256": "6c8e8b385de0c850cc5c06b90eb88c893501e284871c3f3fba90d3cb8b380231",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 16,
+      "bytes": 32253,
+      "sha256": "f6683f42b9915d7e2c1715fc3b87e0c3a5e7f2e49c4a51a1f0d8a555160a3c94",
+      "canonicalGameSha256": "2122febe0d437505389413f142ea495a8eba467f36a7d6939c042f25659d6ca8",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 17,
+      "bytes": 32471,
+      "sha256": "b52b22d4ddf467810c65cbae25c5d8ffb95ebf4cedeca6300270aa1a3fe070cd",
+      "canonicalGameSha256": "62d0109a03de77edc185eba382bf18d8cc2b198d5435d200024a76d0d0bf89c2",
+      "canonicalOriginSha256": "7b99a73e2c7309b732867e871ac256d73530032ce7fa3fada0eb65654618053f"
+    },
+    {
+      "index": 18,
+      "bytes": 32114,
+      "sha256": "4263a28ed062dd9135d655cff9dd8ddea9f8392b24fc4c11cf52605bede865a4",
+      "canonicalGameSha256": "6a1d4e48a836f11ee36fb8d11953c1926fe4c1576653aae2eb35a13401ce2609",
+      "canonicalOriginSha256": "7b99a73e2c7309b732867e871ac256d73530032ce7fa3fada0eb65654618053f"
+    },
+    {
+      "index": 19,
+      "bytes": 32269,
+      "sha256": "5685fa9a9e6840b1d05315e49c51f9544fa9bf2398f0f389dda4b6c143fca6af",
+      "canonicalGameSha256": "3a732daf98912d620a56a9daf3d9226d0991093bcbae4cdc36767b9147e043a2",
+      "canonicalOriginSha256": "b8f0040693bb047bbf478e7894bcb89222e7c093cb39b6f97827e0c33407b144"
+    },
+    {
+      "index": 20,
+      "bytes": 32014,
+      "sha256": "666de6448b6afa441c8f02f6d912998175b48216d747b4edd177da54e7232678",
+      "canonicalGameSha256": "69803f8e7552a1e4916a98c0f118f93bcba20e0d0b31b266c0dd5d8166eb908b",
+      "canonicalOriginSha256": "b8f0040693bb047bbf478e7894bcb89222e7c093cb39b6f97827e0c33407b144"
+    },
+    {
+      "index": 21,
+      "bytes": 33583,
+      "sha256": "762cc005afc510c1277e268ec7725cc6ed54a7fae925abd0416ab790cdf3eb57",
+      "canonicalGameSha256": "323a500eec09ed4f0aef29946d88a1a12fab16af7468f3c1c6012ab84a3b2b5a",
+      "canonicalOriginSha256": "b8f0040693bb047bbf478e7894bcb89222e7c093cb39b6f97827e0c33407b144"
+    },
+    {
+      "index": 22,
+      "bytes": 31742,
+      "sha256": "39f57a22880699cbf6b8febeffb7a0fa2a47a80093bcdfcf39d12ed90e7e2517",
+      "canonicalGameSha256": "d01839fa685eee68521e171faa2f9ffe7adffa7fdec6616b096378ca848bef01",
+      "canonicalOriginSha256": "b8f0040693bb047bbf478e7894bcb89222e7c093cb39b6f97827e0c33407b144"
+    },
+    {
+      "index": 23,
+      "bytes": 36914,
+      "sha256": "ff7ca3f0c764e1d725305b97286487d70b0f4be8ba72127eb364b97af62b83fd",
+      "canonicalGameSha256": "1d1979cd662e792f24c8584d545d05d161617730c2faf4b1f476e9d465cda4a6",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 24,
+      "bytes": 34228,
+      "sha256": "e542e588eb910b12f820f08cbd5d2efeff6a6d4cf896caa071c79e9b64c520e5",
+      "canonicalGameSha256": "969bba6f542eb8f7aa8db1dc7733b9ad5035576c5653bb8cb0d8ec08f55c43cd",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 25,
+      "bytes": 32243,
+      "sha256": "f5317a88f185a3f89e99755aa0c967552b19fe8cdb2b4473c6e9ed5e15a45345",
+      "canonicalGameSha256": "dff6d9028df1c1852cef5b25156f212276229b60b5fa17e3714ac5ea7af0c7de",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 26,
+      "bytes": 33981,
+      "sha256": "f0f48154fcb57fd8482e2a19127029ff5d9677ec12aaa54881709a2af505b9c7",
+      "canonicalGameSha256": "6c8e8b385de0c850cc5c06b90eb88c893501e284871c3f3fba90d3cb8b380231",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 27,
+      "bytes": 32267,
+      "sha256": "ea7090a21a4dce561aaed35cc7d672dd6f0bf54e1af6e1028b10486d8ff98f04",
+      "canonicalGameSha256": "2122febe0d437505389413f142ea495a8eba467f36a7d6939c042f25659d6ca8",
+      "canonicalOriginSha256": "52fb95b2b301cb0c2f0300dfa09db5d967850d1c76d482708bfb5717a08e4106"
+    },
+    {
+      "index": 28,
+      "bytes": 31893,
+      "sha256": "ca1f97c6edff2e3453c703a2fdeaf7d4243c81c946c7b4a247d595d5ba8914f4",
+      "canonicalGameSha256": "97526312b9ed4a48b42dfa79e3736536b34031a9a0aeff3e0b5dcfb4078a58f8",
+      "canonicalOriginSha256": "90ad5a0978b44481b1ddd5ae6787e3a64ca611af9eed78483138b2e64384c48d"
+    },
+    {
+      "index": 29,
+      "bytes": 32385,
+      "sha256": "0a6df3662c0d14255570dc8f34edcd79ba844faab5aeec59ff8adbae3802e549",
+      "canonicalGameSha256": "d1a27364524528051e5c224bd5f60b54c7d497d0598aac04a4a21d66bf661dad",
+      "canonicalOriginSha256": "90ad5a0978b44481b1ddd5ae6787e3a64ca611af9eed78483138b2e64384c48d"
+    },
+    {
+      "index": 30,
+      "bytes": 32027,
+      "sha256": "83eb9687fd985c2a07790c4003b46806649f41c95b7e203da71a213144ef8cbd",
+      "canonicalGameSha256": "eafa95e9414c993a301326d79bf2694847fd9e1de102fb865f6fa1eab1ab38d6",
+      "canonicalOriginSha256": "90ad5a0978b44481b1ddd5ae6787e3a64ca611af9eed78483138b2e64384c48d"
+    }
+  ]
+}

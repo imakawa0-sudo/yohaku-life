@@ -1,3 +1,5 @@
+import { refreshConstructionHandling } from "./constructionTopology";
+import { releaseRevokedConstructionWorkers } from "./constructionProgress";
 import { furnishings, type Need } from "../house";
 import type { Actor, Game, Task } from "../sim";
 import {
@@ -40,12 +42,14 @@ function geometry(g: Game, h: HousingRuntime) {
     h.controls,
     h.state.actors,
     h.layoutVersion,
+    h.construction,
   );
 }
-function rebuild(g: Game, h: HousingRuntime) {
+export function rebuildHousingGeometry(g: Game, h: HousingRuntime) {
   const topology = geometry(g, h);
   Object.assign(h.state, topology.geometry);
   h.controls = topology.controls;
+  refreshConstructionHandling(h);
 }
 export function setHousingPassage(
   g: Game,
@@ -67,7 +71,7 @@ export function setHousingPassage(
   h.controls[key] = open
     ? h.controls[key].filter((v) => v !== id)
     : [...h.controls[key], id];
-  rebuild(next, h);
+  rebuildHousingGeometry(next, h);
   return next;
 }
 export function setHousingRoomAccess(
@@ -85,7 +89,8 @@ export function setHousingRoomAccess(
     h = next.housing!;
   h.controls.roomAccess[roomId] =
     allowedActorIds === null ? null : [...allowedActorIds];
-  rebuild(next, h);
+  rebuildHousingGeometry(next, h);
+  releaseRevokedConstructionWorkers(next, g.housing);
   return next;
 }
 export function locateHousingActor(
@@ -104,7 +109,7 @@ export function locateHousingActor(
       carryAllowedActorIds: null,
     },
   };
-  rebuild(g, h);
+  rebuildHousingGeometry(g, h);
 }
 export function housingTogether(g: Game, a: Actor, b: Actor) {
   const first = g.housing?.state.actors[a.person.id]?.position;
@@ -141,7 +146,7 @@ export function housingTaskBoundary(
         },
       };
       delete h.state.actors[id];
-      rebuild(g, h);
+      rebuildHousingGeometry(g, h);
     } else if (
       a.location === g.home &&
       (event === "finish" || previous?.departurePoint)
@@ -186,6 +191,8 @@ export function housingInTransit(g: Game, id: string) {
 }
 export function spatialReasonText(reason: SpatialReason): string {
   switch (reason) {
+    case "handling-denied":
+      return "木材を扱う許可がありません。拾う部屋と届け先の利用許可を確認してください。";
     case "entry-denied":
       return "入室の許可がありません。通る部屋の利用許可を確認してください。";
     case "use-denied":
@@ -365,7 +372,9 @@ export function advanceHousingMinute(
         (e.kind === "cancelled" ||
           (binding.kind === "move"
             ? e.kind === "arrived"
-            : e.kind === "use-completed")),
+            : binding.kind === "carry"
+              ? e.kind === "delivered"
+              : e.kind === "use-completed")),
     );
     const used =
       event?.kind === "use-completed" ||
@@ -423,6 +432,6 @@ export function advanceHousingMinute(
       };
     }
   }
-  if (crossed) rebuild(g, h);
+  if (crossed) rebuildHousingGeometry(g, h);
   return result;
 }

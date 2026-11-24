@@ -105,6 +105,7 @@ function prepare(
     h.controls,
     h.state.actors,
     2,
+    h.construction,
   );
   const booked = new Set(
     Object.values(h.state.reservations)

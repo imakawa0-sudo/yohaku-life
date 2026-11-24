@@ -1,5 +1,23 @@
+import {
+  validConstructionRelations,
+  isConstructionLedger,
+} from "./constructionValidation";
+import {
+  constructionPlan,
+  unresolvedConstruction,
+} from "./constructionTopology";
 import { validGatherings } from "./gatheringValidation";
-import { furnishings, houseValue, isHouse, type House } from "../house";
+import type {
+  ConstructionResult,
+  ConstructionInspection,
+} from "./constructionTypes";
+import {
+  editHouse,
+  furnishings,
+  houseValue,
+  isHouse,
+  type House,
+} from "../house";
 import type { Actor, Game, Task } from "../sim";
 import { isSpatialState } from "../spatial/codec";
 import { isSpatialCell, sameSpatialPoint } from "../spatial/route";
@@ -222,6 +240,18 @@ function validBinding(
   id: string,
 ): boolean {
   const binding = task?.spatial;
+  if (task?.kind === "home-build")
+    return (
+      binding?.kind === "use" &&
+      order?.intent.kind === "use" &&
+      order.id === binding.orderId
+    );
+  if (task?.kind === "home-haul")
+    return (
+      binding?.kind === "carry" &&
+      order?.intent.kind === "carry" &&
+      order.id === binding.orderId
+    );
   if (binding === undefined)
     return order === null && task?.kind !== "home-move";
   if (
@@ -323,6 +353,7 @@ export function isHousingRuntime(
     !onlyFields(value, [
       "version",
       "layoutVersion",
+      "construction",
       "gatherings",
       "nextGatheringId",
       "controls",
@@ -342,12 +373,16 @@ export function isHousingRuntime(
   const located = Object.keys(state.actors);
   if (
     state.time !== game.time ||
-    Object.keys(state.items).length ||
     [
       ...located,
       ...Object.keys(unlocated),
       ...Object.keys(legacyStationPaths),
     ].some((id) => !ids.has(id))
+  )
+    return false;
+  if (
+    Object.hasOwn(value, "construction") &&
+    !isConstructionLedger(value.construction, game.time)
   )
     return false;
   const topology = buildHousingTopology(
@@ -356,6 +391,7 @@ export function isHousingRuntime(
     controls,
     state.actors,
     value.layoutVersion === 2 ? 2 : undefined,
+    value.construction as HousingRuntime["construction"],
   );
   if (
     !sameData(controls, topology.controls) ||
@@ -363,6 +399,8 @@ export function isHousingRuntime(
       sameData(state[key as keyof SpatialState], v),
     )
   )
+    return false;
+  if (!validConstructionRelations(value as unknown as HousingRuntime, game))
     return false;
   const occupied = new Set<string>();
   for (const actor of game.actors) {
@@ -393,7 +431,7 @@ export function isHousingRuntime(
       !validLegacyStationPath(actor, task, legacyStationPaths[id], topology)
     )
       return false;
-    if (task?.station !== undefined) {
+    if (task?.station !== undefined && task.kind !== "home-build") {
       const physicalSeat = task.spatial
         ? legacyHousingStation(topology.slots[task.station])
         : task.station;
@@ -485,6 +523,21 @@ function editConflict(
   after: HousingTopology,
 ): string | undefined {
   const runtime = game.housing;
+  for (const plan of Object.values(runtime?.construction?.plans ?? {})) {
+    if (
+      unresolvedConstruction(plan) &&
+      (!isFloor(after.geometry, plan.staging) ||
+        !isFloor(after.geometry, plan.source))
+    )
+      return "工事の供給口と仮置き場の床を残してください。";
+  }
+  for (const item of Object.values(runtime?.state.items ?? {})) {
+    if (
+      item.position.kind === "at" &&
+      !isFloor(after.geometry, item.position.point)
+    )
+      return "工事用木材が置かれた床は変更できません。";
+  }
   for (const actor of game.actors) {
     const id = actor.person.id;
     const task = actor.task;
@@ -517,7 +570,7 @@ function editConflict(
       !house.rooms.some((r) => r.id === actor.room)
     )
       return actor.person.name + "がいる部屋は残してください。";
-    if (!task?.station || !task.room) continue;
+    if (!task?.station || !task.room || task.kind === "home-build") continue;
     if (task.spatial) {
       const oldSlot = before.slots[task.station],
         newSlot = after.slots[task.station];
@@ -551,12 +604,25 @@ function editConflict(
   }
 }
 
-export function applyHousingHouseEdit(
+function applyHouseShape(
   game: Game,
   house: House,
-): { game: Game; error?: string } {
+  settleConstruction?: (candidate: Game) => void,
+): ConstructionResult {
   if (!isHouse(house))
     return { game, error: "入口と設備につながる間取りを確認してください。" };
+  if (
+    !settleConstruction &&
+    house.rooms.some(
+      (room) => !game.house.rooms.some((previous) => previous.id === room.id),
+    )
+  )
+    return {
+      game,
+      error: game.housing
+        ? "新しい部屋は「一室を増築する」から計画してください。"
+        : "「住居の移動」を有効にしてから、新しい部屋を増築してください。",
+    };
   const runtime = game.housing;
   const actors = runtime?.state.actors;
   const located = Object.keys(actors ?? {});
@@ -566,17 +632,20 @@ export function applyHousingHouseEdit(
     runtime?.controls,
     actors,
     runtime?.layoutVersion,
+    runtime?.construction,
   );
+  const next = structuredClone(game);
+  settleConstruction?.(next);
   const after = buildHousingTopology(
     house,
     located,
     runtime?.controls,
     actors,
     runtime?.layoutVersion,
+    next.housing?.construction,
   );
   const conflict = editConflict(game, house, before, after);
   if (conflict) return { game, error: conflict };
-  const next = structuredClone(game);
   next.house = structuredClone(house);
   if (next.housing) {
     next.housing.controls = after.controls;
@@ -587,6 +656,72 @@ export function applyHousingHouseEdit(
         error: "進行中の指示が参照する部屋や地点は変更できません。",
       };
   }
+  return { game: next };
+}
+
+export function completeRoomConstruction(
+  game: Game,
+  planId: string,
+): ConstructionResult {
+  const plan = constructionPlan(game.housing, planId);
+  if (
+    plan?.status !== "planned" ||
+    plan.workedMinutes !== plan.workMinutes ||
+    plan.assignment ||
+    plan.material?.state !== "present"
+  )
+    return {
+      game,
+      error: "木材を搬入し、施工を30分終えると完成を反映できます。",
+    };
+  const position = game.housing!.state.items[plan.material.itemId].position;
+  if (position.kind !== "at" || !sameSpatialPoint(position.point, plan.staging))
+    return { game, error: "仮置き場に工事用の木材が必要です。" };
+  if (!Number.isSafeInteger(game.house.nextId + 1))
+    return {
+      game,
+      error: "新しい部屋の番号を発行できないため、完成を反映できません。",
+    };
+  const house = editHouse(game.house, {
+    type: "room",
+    name: plan.name,
+    neighbor: plan.neighborId,
+  });
+  const result = applyHouseShape(game, house, (candidate) => {
+    const h = candidate.housing!,
+      finished = h.construction!.plans[planId];
+    const material = finished.material!;
+    delete h.state.items[material.itemId];
+    material.state = "consumed";
+    finished.status = "completed";
+    finished.roomId = house.rooms.at(-1)!.id;
+    finished.completedAt = candidate.time;
+  });
+  if (result.error) return result;
+  logHouseChange(
+    result.game,
+    "「" + plan.name + "」の増築が完成した（工事用木材6を使用）",
+  );
+  return { game: result.game, planId };
+}
+
+export function inspectConstructionCompletion(
+  game: Game,
+  planId: string,
+): ConstructionInspection {
+  const result = completeRoomConstruction(game, planId);
+  return result.error
+    ? { ok: false, minutes: null, disabled: result.error }
+    : { ok: true, minutes: 0 };
+}
+
+export function applyHousingHouseEdit(
+  game: Game,
+  house: House,
+): ConstructionResult {
+  const result = applyHouseShape(game, house);
+  if (result.error) return result;
+  const next = result.game;
   const cost = Math.max(0, houseValue(house) - houseValue(game.house));
   if (cost > game.wood)
     return {
@@ -594,11 +729,15 @@ export function applyHousingHouseEdit(
       error: `工事には木材${cost}が必要です。共同の備蓄は${game.wood}です。`,
     };
   next.wood -= cost;
+  logHouseChange(next, "住まいを整えた" + (cost ? "（木材" + cost + "）" : ""));
+  return { game: next };
+}
+
+function logHouseChange(game: Game, message: string) {
   const hour = String(Math.floor(game.time / 60) % 24).padStart(2, "0");
   const minute = String(game.time % 60).padStart(2, "0");
-  next.log = [
-    `${Math.floor(game.time / 1440) + 1}日目 ${hour}:${minute}　住まいを整えた${cost ? "（木材" + cost + "）" : ""}`,
-    ...next.log,
+  game.log = [
+    `${Math.floor(game.time / 1440) + 1}日目 ${hour}:${minute}　${message}`,
+    ...game.log,
   ].slice(0, 100);
-  return { game: next };
 }

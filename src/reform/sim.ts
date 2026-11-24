@@ -1,4 +1,10 @@
 import {
+  cancelConstructionActor,
+  finishConstructionMinute,
+  prepareConstructionMinute,
+  settleConstructionReturn,
+} from "./housing/constructionProgress";
+import {
   cancelGatheringMember,
   finishGatheringMinute,
   heldGatheringOrders,
@@ -12,7 +18,7 @@ import type {
   HousingTaskBinding,
   HousingRuntime,
 } from "./housing/types";
-import { isHousingRuntime } from "./housing/runtime";
+import { completeRoomConstruction, isHousingRuntime } from "./housing/runtime";
 import {
   advanceHousingMinute,
   cancelHousingTask,
@@ -843,6 +849,10 @@ function plan(
 function stop(g: Game, a: Actor, spatialCancelled = false): void {
   const t = a.task;
   if (!t) return;
+  if (t.spatial?.constructionId) {
+    cancelConstructionActor(g, a.person.id);
+    return;
+  }
   if (t.spatial?.gatheringId) {
     cancelGatheringMember(g, a.person.id);
     return;
@@ -918,7 +928,8 @@ export function order(
   if (a.task) stop(next, a);
   if (kind === "cancel") {
     if (a.task?.spatial) {
-      a.reason = "この区間を出ると予定を取り消し、予約を返します。";
+      if (!a.task.spatial.constructionId)
+        a.reason = "この区間を出ると予定を取り消し、予約を返します。";
       return next;
     }
     a.reason = "指示を取り消しました。次の時間進行で自分の予定を選びます。";
@@ -1607,6 +1618,7 @@ function advanceMinute(g: Game): boolean {
       }
     }
   }
+  const releasedReturns = prepareConstructionMinute(g);
   const spatialMinutes = g.housing
     ? advanceHousingMinute(g, heldGatheringOrders(g))
     : undefined;
@@ -1642,7 +1654,7 @@ function advanceMinute(g: Game): boolean {
     }
     a.memories = a.memories.filter((m) => m.until > g.time);
     a.mood = moodOf(g, a);
-    if (t && !t.spatial?.gatheringId) {
+    if (t && !t.spatial?.gatheringId && !t.spatial?.constructionId) {
       if (!spatial) t.remaining--;
       if (spatial?.terminal === "cancel") {
         stop(g, a, true);
@@ -1673,6 +1685,10 @@ function advanceMinute(g: Game): boolean {
       }
     }
   }
+  const completedPlan =
+    spatialMinutes && g.housing!.construction
+      ? finishConstructionMinute(g, spatialMinutes, releasedReturns)
+      : undefined;
   if (spatialMinutes && Object.keys(g.housing!.gatherings ?? {}).length) {
     finishGatheringMinute(g, spatialMinutes);
     for (const a of g.actors) a.mood = moodOf(g, a);
@@ -1685,6 +1701,12 @@ function advanceMinute(g: Game): boolean {
     if (a.danger && t.kind === "explore") encounter = true;
   }
   if (completed.length) for (const a of g.actors) a.mood = moodOf(g, a);
+  // Ordinary stock changes for this minute get accounted for before newly released bundles.
+  for (const { plan, worker } of releasedReturns)
+    settleConstructionReturn(g, plan, worker);
+  // Other orders may also have ended this minute. Validate only after all their Task bindings settle.
+  if (completedPlan)
+    Object.assign(g, completeRoomConstruction(g, completedPlan).game);
   return encounter;
 }
 export function advance(g: Game, minutes: number): Game {
@@ -1748,14 +1770,19 @@ function numericKeys(
 ): boolean {
   return object(value) && keys.every((key) => number(value[key], 0, max));
 }
+export function isStockQuantity(value: unknown): value is number {
+  return integer(value);
+}
 function goodStock(value: unknown): boolean {
-  return object(value) && stocks.every((k) => integer(value[k]));
+  return object(value) && stocks.every((k) => isStockQuantity(value[k]));
 }
 function hasKind(value: unknown): value is Skill {
   return skillKeys.includes(value as Skill);
 }
 const metrics: Metric[] = ["free", "work", "care", "travel", "waiting"];
 const actionKinds = [
+  "home-build",
+  "home-haul",
   "home-gather",
   "home-move",
   "need",
@@ -1897,7 +1924,12 @@ export function isGame(value: unknown): value is Game {
       (t.follower !== undefined && typeof t.follower !== "boolean")
     )
       return false;
-    if (t.kind === "home-gather" && (!value.housing || !t.spatial))
+    if (
+      (t.kind === "home-haul" ||
+        t.kind === "home-build" ||
+        t.kind === "home-gather") &&
+      (!value.housing || !t.spatial)
+    )
       return false;
     if (
       value.housing === undefined &&

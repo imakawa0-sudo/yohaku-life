@@ -43,10 +43,12 @@ export function HouseEditor({
   house,
   onChange,
   waterMinutes = 0,
+  allowRoomAddition = true,
 }: {
   house: House;
   onChange: (h: House) => void;
   waterMinutes?: number;
+  allowRoomAddition?: boolean;
 }) {
   const [selectedRoom, setRoom] = useState("living");
   const [nextRoom, setNextRoom] = useState("bedroom");
@@ -252,7 +254,7 @@ export function HouseEditor({
       <details className="yh-house-edit">
         <summary>
           <DoorOpen size={16} />
-          部屋をつなぐ・増やす
+          {allowRoomAddition ? "部屋をつなぐ・増やす" : "部屋をつなぐ"}
         </summary>
         <div className="yh-house-controls">
           <label>
@@ -279,24 +281,31 @@ export function HouseEditor({
             {connected ? "通路を取り外す" : "通路をつなぐ（木材2）"}
           </button>
         </div>
-        <div className="yh-house-controls">
-          <label>
-            {room.name}の隣に増築
-            <input
-              aria-label="新しい部屋の名前"
-              value={name}
-              maxLength={24}
-              placeholder="例　浴室"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-          <button
-            type="button"
-            onClick={() => build({ type: "room", name, neighbor: room.id })}
-          >
-            部屋を増やす（木材6）
-          </button>
-        </div>
+        {allowRoomAddition ? (
+          <div className="yh-house-controls">
+            <label>
+              {room.name}の隣に増築
+              <input
+                aria-label="新しい部屋の名前"
+                value={name}
+                maxLength={24}
+                placeholder="例　浴室"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </label>
+            <button
+              type="button"
+              onClick={() => build({ type: "room", name, neighbor: room.id })}
+            >
+              部屋を増やす（木材6）
+            </button>
+          </div>
+        ) : (
+          <p>
+            部屋を増やすときは<a href="#construction-panel">一室を増築する</a>
+            から計画します。
+          </p>
+        )}
       </details>
       <details className="yh-house-edit">
         <summary>

@@ -11,6 +11,7 @@
     "test:ui": "node scripts/verify-ui.mjs",
     "test:standalone": "node scripts/verify-reform.mjs --desktop",
     "test:ui:standalone": "node scripts/verify-reform.mjs --mobile",
+    "test:construction": "node scripts/verify-construction.mjs",
     "test:daytrip": "node scripts/verify-daytrip.mjs",
     "test:recruitment": "node scripts/verify-recruitment.mjs",
     "test:overnight": "node scripts/verify-overnight.mjs",

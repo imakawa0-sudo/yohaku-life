@@ -15,11 +15,25 @@ export function inspectHousingLayoutUpgrade(
 
   const actors = housing.state.actors;
   const ids = Object.keys(actors);
-  const before = buildHousingTopology(g.house, ids, housing.controls, actors);
-  const after = buildHousingTopology(g.house, ids, housing.controls, actors, 2);
+  const before = buildHousingTopology(
+    g.house,
+    ids,
+    housing.controls,
+    actors,
+    undefined,
+    housing.construction,
+  );
+  const after = buildHousingTopology(
+    g.house,
+    ids,
+    housing.controls,
+    actors,
+    2,
+    housing.construction,
+  );
   for (const actor of g.actors) {
     const task = actor.task;
-    if (!task?.station) continue;
+    if (!task?.station || task.kind === "home-build") continue;
     const oldSlot = task.spatial
       ? before.slots[task.station]
       : Object.values(before.slots).find(
@@ -28,7 +42,11 @@ export function inspectHousingLayoutUpgrade(
             legacyHousingStation(slot) === task.station,
         );
     const newSlot = oldSlot && after.slots[oldSlot.id];
-    if (!oldSlot || !newSlot || !sameSpatialPoint(oldSlot.point, newSlot.point)) {
+    if (
+      !oldSlot ||
+      !newSlot ||
+      !sameSpatialPoint(oldSlot.point, newSlot.point)
+    ) {
       const fixture = oldSlot ? furnishings[oldSlot.kind].name : "設備";
       return {
         ok: false,

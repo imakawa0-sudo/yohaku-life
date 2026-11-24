@@ -1,0 +1,16 @@
+{
+  "scope": "最終版のゲームタブと幅検証用タブで、取得できたコンソールの警告・エラー",
+  "gameTab": {
+    "warnings": 0,
+    "errors": 100,
+    "extensionMetadataErrors": 100
+  },
+  "widthCheckTab": {
+    "warnings": 0,
+    "errors": 31,
+    "extensionMetadataErrors": 31
+  },
+  "totalExtensionMetadataErrors": 131,
+  "observedOrigin": "全件がブラウザー拡張機能のURLに紐づく同じメタデータ取得エラー",
+  "coverage": "件数は取得したメッセージ数。ネットワークやpageerrorは計測対象外。"
+}

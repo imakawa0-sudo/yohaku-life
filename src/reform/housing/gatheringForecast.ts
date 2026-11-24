@@ -1,4 +1,5 @@
 import type { Game } from "../sim";
+import { constructionSlotId } from "./topology";
 import { advanceHousingMinute } from "./bridge";
 import {
   finishGatheringMinute,
@@ -27,6 +28,20 @@ export function nextGatheringCompletionMinutes(g: Game): number | null {
   for (const a of trial.actors)
     if (!a.task && Object.hasOwn(trial.housing.state.actors, a.person.id))
       trial.housing.state.actors[a.person.id].order = null;
+
+  // The isolated projection keeps their positions for egress permissions but
+  // no nonmember's order, carried bundle or reservation takes part in the group.
+  for (const [id, reservation] of Object.entries(
+    trial.housing.state.reservations,
+  )) {
+    if (!original.some((member) => member.order === reservation.orderId))
+      delete trial.housing.state.reservations[id];
+  }
+  for (const plan of Object.values(trial.housing.construction?.plans ?? {})) {
+    delete trial.housing.state.slots[constructionSlotId(plan.id)];
+    if (plan.material) delete trial.housing.state.items[plan.material.itemId];
+  }
+  delete trial.housing.construction;
 
   while (Number.isSafeInteger(trial.time + 1)) {
     const held = heldGatheringOrders(trial);

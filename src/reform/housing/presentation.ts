@@ -1,3 +1,5 @@
+import { constructionExitText } from "./constructionTopology";
+import { constructionTaskMinutes } from "./constructionProgress";
 import { nextGatheringCompletionMinutes } from "./gatheringForecast";
 export { nextGatheringCompletionMinutes } from "./gatheringForecast";
 import { cellName, furnishings, roomName } from "../house";
@@ -121,8 +123,33 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
       ...result,
       phase: "cancelling",
       minutes: pos.remaining,
-      detail: "この区間の終点で予約を解除し、材料を返します。",
+      detail: t.spatial.constructionId
+        ? constructionExitText(
+            h,
+            h.construction!.plans[t.spatial.constructionId],
+          )
+        : "この区間の終点で予約を解除し、材料を返します。",
     };
+  if (intent.kind === "carry") {
+    const minutes = constructionTaskMinutes(g, actorId);
+    const waiting = order.phase === "waiting";
+    return {
+      ...result,
+      phase: waiting ? "waiting" : "move",
+      minutes,
+      ...(waiting && order.waitReason ? { waitReason: order.waitReason } : {}),
+      detail:
+        waiting && order.waitReason
+          ? minutes === null
+            ? spatialReasonText(order.waitReason)
+            : "次の時間進行で運搬を再開します。"
+          : minutes === null
+            ? "通路・利用許可と担当者の状態を確認してください。"
+            : order.phase === "approach"
+              ? "工事用木材を拾いに向かっています。"
+              : "工事用木材を運んでいます。",
+    };
+  }
   const from =
     pos.kind === "transit" ? pos.step.to : pos.kind === "at" ? pos.point : null;
   // A traveller already admitted into a room will have its occupant's egress rights at landing.
@@ -148,6 +175,7 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
         h.controls,
         actors,
         h.layoutVersion,
+        h.construction,
       ).geometry,
       actors,
     };
@@ -163,14 +191,16 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
         ? "use-denied"
         : null;
   const minutes =
-    route?.ok && !reason
-      ? Math.max(
-          1,
-          route.minutes +
-            (pos.kind === "transit" ? pos.remaining : 0) +
-            order.useRemaining,
-        )
-      : null;
+    t.kind === "home-build" && (a.injury >= 70 || a.danger)
+      ? null
+      : route?.ok && !reason
+        ? Math.max(
+            1,
+            route.minutes +
+              (pos.kind === "transit" ? pos.remaining : 0) +
+              order.useRemaining,
+          )
+        : null;
   if (order.phase === "waiting") {
     const waitReason = reason ?? order.waitReason!;
     return {
@@ -189,11 +219,16 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
     ...result,
     phase,
     minutes,
-    detail: reason
-      ? spatialReasonText(reason)
-      : phase === "use"
-        ? "設備を使っています。"
-        : "目的地へ向かっています。",
+    detail:
+      t.kind === "home-build" && minutes === null && !reason
+        ? "担当者の状態を確認してください。"
+        : reason
+          ? spatialReasonText(reason)
+          : phase === "use"
+            ? t.kind === "home-build"
+              ? "増築の施工をしています。"
+              : "設備を使っています。"
+            : "目的地へ向かっています。",
   };
 }
 export function nextCompletionMinutes(g: Game): number | null {

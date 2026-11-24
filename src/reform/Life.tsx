@@ -31,6 +31,8 @@ import {
 import type { Skill } from "./peopleModel";
 import { HousingPanel, housingStageNames } from "./HousingPanel";
 import { housingTogether } from "./housing/bridge";
+import { constructionStatus } from "./housing/constructionPresentation";
+import { constructionExitText } from "./housing/constructionTopology";
 import { gatheringPresence, gatheringStatus } from "./housing/gathering";
 import { housingStatus, nextCompletionMinutes } from "./housing/presentation";
 import { roomName } from "./house";
@@ -203,6 +205,22 @@ function ActionPanel({
     !!actor.task?.spatial &&
     game.housing?.state.actors[actor.person.id]?.order?.phase ===
       "exiting-after-cancel";
+  const construction = actor.task?.spatial?.constructionId;
+  let constructionCancel: string | null = null;
+  if (construction) {
+    const h = game.housing!;
+    const plan = h.construction!.plans[construction];
+    if (cancelling) constructionCancel = constructionExitText(h, plan);
+    else {
+      const hint =
+        actor.task?.kind === "home-build"
+          ? "担当を外します。仮置きの木材と施工済みの時間は残ります。"
+          : h.state.items[plan.material!.itemId].position.kind === "carried"
+            ? "担当を外し、運んでいる木材を床へ下ろします。"
+            : "担当を外します。まだ拾っていない木材は元の床に残ります。";
+      constructionCancel = hint + "通路を移動中は今の区間の終点まで進みます。";
+    }
+  }
   const reserved = Object.entries(actor.task?.reserved ?? {})
     .filter(([, n]) => n > 0)
     .map(([key, n]) => stockNames[key as keyof typeof stockNames] + n)
@@ -279,19 +297,24 @@ function ActionPanel({
             type="button"
             data-kind="cancel"
             disabled={!!cancel.disabled || cancelling}
-            aria-describedby={reserved || cancelling ? "lf-refund" : undefined}
+            aria-describedby={
+              reserved || cancelling || constructionCancel
+                ? "lf-refund"
+                : undefined
+            }
             onClick={() =>
               onGame(order(game, actor.person.id, cancel.kind, cancel.target))
             }
           >
             {cancel.label}
           </button>
-          {(reserved || cancelling) && (
+          {(reserved || cancelling || constructionCancel) && (
             <p className="lf-note" id="lf-refund">
               {reserved && "取り置き中　" + reserved + "。"}
-              {actor.task?.spatial
-                ? "取り消すと予約を解除します。通路を移動中は、今の区間を出てから取り置きした物が戻ります。"
-                : "取り消すと取り置きした物が戻ります。"}
+              {constructionCancel ??
+                (actor.task?.spatial
+                  ? "取り消すと予約を解除します。通路を移動中は、今の区間を出てから取り置きした物が戻ります。"
+                  : "取り消すと取り置きした物が戻ります。")}
             </p>
           )}
         </>
@@ -380,15 +403,18 @@ export function Life({
           </div>
           <div className="lf-roster" role="group" aria-label="住民を選ぶ">
             {game.actors.map((a) => {
-              const location = game.housing
-                ? housingStatus(game, a.person.id).location
-                : a.location === game.home
+              const housing = game.housing && housingStatus(game, a.person.id);
+              const location =
+                housing?.location ??
+                (a.location === game.home
                   ? roomName(game.house, a.room)
                   : (locations.find((item) => item.id === a.location)?.name ??
-                    a.location);
-              const activity =
-                a.task?.label ??
-                (a.danger ? "道の人影と対峙している" : "手が空いている");
+                    a.location));
+              const construction = a.task?.spatial?.constructionId;
+              const activity = construction
+                ? constructionStatus(game, construction, housing).phase
+                : (a.task?.label ??
+                  (a.danger ? "道の人影と対峙している" : "手が空いている"));
               return (
                 <button
                   key={a.person.id}
@@ -488,7 +514,9 @@ export function Life({
                   <p>
                     {gathering?.detail ??
                       (status && actor.task?.spatial
-                        ? housingStageNames[status.phase]
+                        ? actor.task.spatial.constructionId
+                          ? status.detail
+                          : housingStageNames[status.phase]
                         : actor.reason)}
                   </p>
                 )}

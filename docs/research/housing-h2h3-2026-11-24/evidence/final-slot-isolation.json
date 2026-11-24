@@ -1,0 +1,20 @@
+{
+  "candidate": "a5a6bf2d049aa989c8e1c38ca9ce8bcd46414f59",
+  "before": {
+    "selectedRoom": "bedroom",
+    "unsavedName": "最終・切替待ち確認",
+    "neighbor": "bedroom",
+    "staging": "2"
+  },
+  "waitedFor": "別のタブで手帳が変更されました。最新の内容を確認してから、もう一度操作してください。",
+  "after": {
+    "bedroomSelected": "false",
+    "constructionPanels": 1,
+    "houseEditors": 1,
+    "livingSelected": "true",
+    "name": "",
+    "neighbor": "",
+    "staging": ""
+  },
+  "note": "First attempt read the old view before the asynchronous storage notification; separate raw observation retained. This attempt waited for the displayed change notice, without reloading the original tab."
+}
