@@ -78,6 +78,7 @@ export type ActionPreview = {
   reserved?: Partial<Stock>;
   facility?: HousingUsePreview;
 };
+export type CookingFacilitySelection = { fixtureId: string };
 export interface ActionOption extends ActionPreview {
   kind: string;
   label: string;
@@ -502,14 +503,45 @@ function preview(p: Proposal | string): ActionPreview {
     ...("task" in p && p.facility && { facility: p.facility }),
   };
 }
+const cookingRecipes = ["cook", "cook:easy", "cook:hard", "cook:master"];
+
+function cookingSelectionReason(
+  g: Game,
+  a: Actor,
+  kind: string,
+  target: string | undefined,
+  selection: CookingFacilitySelection | undefined,
+): string | undefined {
+  if (selection === undefined) return;
+  if (kind !== "work" || !cookingRecipes.includes(target!))
+    return "料理の種類を選んだ指示にのみ設備を指定できます。";
+  if (a.location !== g.home || !g.housing)
+    return "自宅で住居の移動を使う暮らしを選んでください。";
+  if (
+    !selection ||
+    typeof selection !== "object" ||
+    Array.isArray(selection) ||
+    typeof selection.fixtureId !== "string" ||
+    !selection.fixtureId
+  )
+    return "料理に使う設備を指定してください。";
+  const fixture = g.house.rooms
+    .flatMap((room) => room.fixtures)
+    .find((f) => f.id === selection.fixtureId);
+  if (!fixture) return "選んだ設備がありません。";
+  if (fixture.kind !== "hearth" && fixture.kind !== "kitchen")
+    return "料理に使える設備を選んでください。";
+}
+
 function plan(
   g: Game,
   a: Actor,
   kind: string,
   target?: string,
+  selection?: CookingFacilitySelection,
 ): Proposal | string {
   const atHome = a.location === g.home;
-  let fixtureId: string | undefined;
+  let fixtureId = selection?.fixtureId;
   if (kind === "home-use") {
     if (!atHome || !g.housing)
       return "自宅で住居の移動を使う暮らしを選んでください。";
@@ -643,15 +675,13 @@ function plan(
     if (skill === "cook") {
       if (atHome) {
         if (g.housing) {
-          if (
-            !["cook", "cook:easy", "cook:hard", "cook:master"].includes(target!)
-          )
+          if (!cookingRecipes.includes(target!))
             return "料理の種類を選んでください。";
           const reserved = reservation(g, a, t, {
             ingredients: tier === "easy" ? 2 : 3,
           });
           if (typeof reserved === "string") return reserved;
-          return planHousing(g, a, t, "hunger");
+          return planHousing(g, a, t, "hunger", 0, fixtureId);
         }
         const busy = g.actors
           .filter((b) => b !== a && b.task?.station)
@@ -940,10 +970,22 @@ export function order(
   id: string,
   kind: string,
   target?: string,
+  selection?: CookingFacilitySelection,
 ): Game {
   if (!find(g, id)) return g;
   const next = structuredClone(g);
   const a = find(next, id)!;
+  const selectionReason = cookingSelectionReason(
+    next,
+    a,
+    kind,
+    target,
+    selection,
+  );
+  if (selectionReason) {
+    notice(next, selectionReason);
+    return next;
+  }
   if (kind !== "cancel" && housingInTransit(next, id)) {
     notice(next, safeExitReason);
     return next;
@@ -959,7 +1001,7 @@ export function order(
     notice(next, a.person.name + "が予定を取り消した。");
     return next;
   }
-  const t = plan(next, a, kind, target);
+  const t = plan(next, a, kind, target, selection);
   if (typeof t === "string") {
     const unchanged = structuredClone(g);
     notice(unchanged, t);
@@ -973,16 +1015,25 @@ export function inspectOrder(
   id: string,
   kind: string,
   target?: string,
+  selection?: CookingFacilitySelection,
 ): ActionPreview {
   const current = find(g, id);
   if (!current) return { disabled: "住人が見つかりません。" };
+  const selectionReason = cookingSelectionReason(
+    g,
+    current,
+    kind,
+    target,
+    selection,
+  );
+  if (selectionReason) return { disabled: selectionReason };
   if (g.housing && kind === "cancel")
     return current.task ? {} : { disabled: "取り消す予定がありません。" };
   if (housingInTransit(g, id)) return { disabled: safeExitReason };
   const snap = current.task ? structuredClone(g) : g;
   const a = find(snap, id)!;
   if (a.task) stop(snap, a);
-  return preview(plan(snap, a, kind, target));
+  return preview(plan(snap, a, kind, target, selection));
 }
 export function options(g: Game, id: string): ActionOption[] {
   if (!find(g, id)) return [];

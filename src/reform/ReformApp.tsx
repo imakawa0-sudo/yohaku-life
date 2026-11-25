@@ -22,7 +22,8 @@ import { HouseEditor } from "./HouseEditor";
 import { ConstructionPanel } from "./ConstructionPanel";
 import { applyHousingHouseEdit } from "./housing/runtime";
 import { HousingUpgrade } from "./HousingPanel";
-import type { House, Need } from "./house";
+import type { House } from "./house";
+import type { FacilityChoiceKey } from "./FacilityAction";
 import { enableHousing, inspectOrder, order, type Game } from "./sim";
 import {
   appendSlot,
@@ -86,7 +87,7 @@ export default function ReformApp() {
   const [facilitySelection, setFacilitySelection] = useState<{
     slotId: string | undefined;
     actorId: string | undefined;
-    choices: Partial<Record<Need, string>>;
+    choices: Partial<Record<FacilityChoiceKey, string>>;
   }>({ slotId, actorId, choices: {} });
   // A different active save or resident starts with automatic choices.
   if (
@@ -354,10 +355,10 @@ export default function ReformApp() {
             onGame={update}
             facilitySelection={{
               choices: facilitySelection.choices,
-              choose: (need, id) =>
+              choose: (key, id) =>
                 setFacilitySelection((previous) => ({
                   ...previous,
-                  choices: { ...previous.choices, [need]: id },
+                  choices: { ...previous.choices, [key]: id },
                 })),
             }}
           />

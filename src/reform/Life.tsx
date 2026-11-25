@@ -31,13 +31,17 @@ import {
 import type { Skill } from "./peopleModel";
 import { HousingPanel, housingStageNames } from "./HousingPanel";
 import { BedPreferencePolicy } from "./BedPreferencePolicy";
-import { FacilityAction } from "./FacilityAction";
+import {
+  FacilityAction,
+  facilityChoiceKey,
+  type FacilityChoiceKey,
+} from "./FacilityAction";
 import { housingTogether } from "./housing/bridge";
 import { constructionStatus } from "./housing/constructionPresentation";
 import { constructionExitText } from "./housing/constructionTopology";
 import { gatheringPresence, gatheringStatus } from "./housing/gathering";
 import { housingStatus, nextCompletionMinutes } from "./housing/presentation";
-import { needs, roomName } from "./house";
+import { roomName } from "./house";
 import type { Need } from "./house";
 import { places } from "./world";
 import {
@@ -51,7 +55,7 @@ import {
   skillThreshold,
   specialize,
 } from "./sim";
-import type { Actor, Game } from "./sim";
+import type { ActionOption, Actor, Game } from "./sim";
 import "./life.css";
 
 const needNames: Record<Need, string> = {
@@ -77,8 +81,8 @@ const groupNames = {
 };
 type ActionGroup = keyof typeof groupNames;
 type FacilitySelection = {
-  choices: Partial<Record<Need, string>>;
-  choose: (need: Need, id: string) => void;
+  choices: Partial<Record<FacilityChoiceKey, string>>;
+  choose: (key: FacilityChoiceKey, id: string) => void;
 };
 
 function timeOfDay(time: number) {
@@ -194,6 +198,87 @@ function StockForm({
   );
 }
 
+export function ActionCommands({
+  game,
+  actor,
+  commands: selected,
+  group,
+  cancelling,
+  facilitySelection,
+  onGame,
+}: {
+  game: Game;
+  actor: Actor;
+  commands: ActionOption[];
+  group: ActionGroup;
+  cancelling: boolean;
+  facilitySelection?: FacilitySelection;
+  onGame: (game: Game) => void;
+}) {
+  return (
+    <div className="lf-command-list">
+      {selected.map((command) => {
+        const choiceKey = facilityChoiceKey(command);
+        if (game.housing && actor.location === game.home && choiceKey)
+          return (
+            <FacilityAction
+              key={choiceKey}
+              game={game}
+              actor={actor}
+              command={command}
+              selectedId={facilitySelection?.choices[choiceKey] ?? ""}
+              onSelect={(id) => facilitySelection?.choose(choiceKey, id)}
+              onGame={onGame}
+            />
+          );
+        const hintId =
+          "lf-order-" + command.kind + "-" + (command.target ?? "");
+        const materials = Object.entries(command.reserved ?? {})
+          .filter(([, count]) => count > 0)
+          .map(
+            ([resource, count]) =>
+              stockNames[resource as keyof typeof stockNames] + count,
+          );
+        const preview =
+          (cancelling
+            ? "取り消し中です。今の区間を出てから新しい指示を選べます。"
+            : command.disabled) ||
+          [command.minutes ? span(command.minutes) : "", ...materials]
+            .filter(Boolean)
+            .join(" · ");
+        return (
+          <div className="lf-command" key={hintId}>
+            <button
+              type="button"
+              data-kind={command.kind}
+              data-target={command.target}
+              disabled={!!command.disabled}
+              aria-describedby={preview ? hintId : undefined}
+              onClick={() =>
+                onGame(
+                  order(game, actor.person.id, command.kind, command.target),
+                )
+              }
+            >
+              {command.label}
+            </button>
+            {preview && <small id={hintId}>{preview}</small>}
+          </div>
+        );
+      })}
+      {!selected.length && (
+        <p className="lf-note">
+          {group === "relation"
+            ? "同じ場所に交流できる住民がいると、ここで相手を選べます。"
+            : group === "field"
+              ? "この場所でできる野外行動はありません。地域の画面から行き先を選べます。"
+              : "今、選べる行動はありません。"}
+        </p>
+      )}
+    </div>
+  );
+}
+
 function ActionPanel({
   game,
   actor,
@@ -251,68 +336,15 @@ function ActionPanel({
           </button>
         ))}
       </div>
-      <div className="lf-command-list">
-        {selected.map((command) => {
-          const need =
-            command.kind === "need" &&
-            needs.find((key) => key === command.target);
-          if (game.housing && actor.location === game.home && need)
-            return (
-              <FacilityAction
-                key={need}
-                game={game}
-                actor={actor}
-                command={command}
-                selectedId={facilitySelection?.choices[need] ?? ""}
-                onSelect={(id) => facilitySelection?.choose(need, id)}
-                onGame={onGame}
-              />
-            );
-          const hintId =
-            "lf-order-" + command.kind + "-" + (command.target ?? "");
-          const materials = Object.entries(command.reserved ?? {})
-            .filter(([, count]) => count > 0)
-            .map(
-              ([resource, count]) =>
-                stockNames[resource as keyof typeof stockNames] + count,
-            );
-          const preview =
-            (cancelling
-              ? "取り消し中です。今の区間を出てから新しい指示を選べます。"
-              : command.disabled) ||
-            [command.minutes ? span(command.minutes) : "", ...materials]
-              .filter(Boolean)
-              .join(" · ");
-          return (
-            <div className="lf-command" key={hintId}>
-              <button
-                type="button"
-                data-kind={command.kind}
-                data-target={command.target}
-                disabled={!!command.disabled}
-                aria-describedby={preview ? hintId : undefined}
-                onClick={() =>
-                  onGame(
-                    order(game, actor.person.id, command.kind, command.target),
-                  )
-                }
-              >
-                {command.label}
-              </button>
-              {preview && <small id={hintId}>{preview}</small>}
-            </div>
-          );
-        })}
-        {!selected.length && (
-          <p className="lf-note">
-            {group === "relation"
-              ? "同じ場所に交流できる住民がいると、ここで相手を選べます。"
-              : group === "field"
-                ? "この場所でできる野外行動はありません。地域の画面から行き先を選べます。"
-                : "今、選べる行動はありません。"}
-          </p>
-        )}
-      </div>
+      <ActionCommands
+        game={game}
+        actor={actor}
+        commands={selected}
+        group={group}
+        cancelling={cancelling}
+        facilitySelection={facilitySelection}
+        onGame={onGame}
+      />
       {cancel && (
         <>
           <button
@@ -760,7 +792,10 @@ export function Life({
               </p>
             )}
           </Fold>
-          <Fold title="暮らしと備蓄の方針" icon={<SlidersHorizontal size={18} />}>
+          <Fold
+            title="暮らしと備蓄の方針"
+            icon={<SlidersHorizontal size={18} />}
+          >
             <label className="lf-policy">
               {person.name}が優先する仕事
               <select
