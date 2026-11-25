@@ -14,7 +14,7 @@ The Sims 4・Kenshi・RimWorldと他のテキストシミュレーションか�
 - 新機能の追加前に、一連のプレイと既存の問題を確認する。
 - 変更後は必要な範囲で `npm test` と `npm run build` を実行し、実際の確認と未確認を分けて日本語で報告する。
 
-起動・操作は [README.md](README.md)、工程は [docs/ROADMAP.md](docs/ROADMAP.md)、試遊記録は [docs/PLAYTEST.md](docs/PLAYTEST.md)。
+起動・操作は [README.md](README.md)、工程は [docs/ROADMAP.md](docs/ROADMAP.md)、試遊記録は [docs/PLAYTEST.md](docs/PLAYTEST.md)。再開時の最新の到達点・未完了事項・候補は [docs/DEVELOPMENT_HANDOFF.md](docs/DEVELOPMENT_HANDOFF.md)、Context7・Docs7との役割分担は [docs/CONTEXT7_DOCS7_WORKFLOW.md](docs/CONTEXT7_DOCS7_WORKFLOW.md) を参照する。過去の完了記録と現在のコードを照合する。
 
 現行UIの仕様は [docs/UI_RESTYLE_2026-11-22.md](docs/UI_RESTYLE_2026-11-22.md) を参照する。本文はPC14px・スマートフォン13pxを基本とし、画面下の時刻を中央に大きく、右に日付・時間帯・初霜の情報を置く。時間送りは「5分・15分・1時間・次の完了・朝まで」。個別の実装では人物作成の選択肢と既存の操作を保つ。システム・4タブ・画風の変更は研究と設計に基づき検討でき、現行UIへの適合を完成像の制約にしない。
 
@@ -30,7 +30,7 @@ The Sims 4・Kenshi・RimWorldと他のテキストシミュレーションか�
 
 ## GitHubへの継続保存
 
-- ユーザーの2026年11月21日の指示により、このゲームの今後の開発成果はGitHubにも保存する。継続保存先は `https://github.com/imakawa0-sudo/yohaku-life` の非公開リポジトリ。実際の送信先は `docs/GITHUB_WORKFLOW.md` と設定済みのリモートを照合する。
+- ユーザーの2026年11月21日の指示により、このゲームの今後の開発成果はGitHubにも保存する。継続保存先は `https://github.com/imakawa0-sudo/yohaku-life`。2026年11月25日にユーザー自身が公開へ変更し、公開状態の継続を明示した。現在の公開範囲と実際の送信先は `docs/GITHUB_WORKFLOW.md`、サービスの現状、設定済みのリモートを照合する。古い非公開復旧待ちの記録を現在の指示として扱わない。
 - 依頼された変更を終え、必要な確認を済ませたら、GitHubプラグインを優先して保存する。追加・変更・削除したファイルだけを反映し、関連する変更は1つのコミットにまとめる。保存後はGitHub側のコミットと変更内容を確認し、保存した版を報告する。
 - 継続開発はGitHubの `main` を基準にする。初回復元時のローカル履歴とは異なるため、GitHub側の最新コミットにつながる形で変更を反映する。公開57までの元の59コミットは `history/sites-v57.bundle` に保持する。
 - 既存の履歴を保ち、通常の保存で履歴の書き換えや強制送信を行わない。別環境での更新がある場合は、内容を確認して統合する。

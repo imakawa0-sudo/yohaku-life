@@ -2,6 +2,8 @@
 
 開発成果のGitHubへの保存方針と引き継ぎ情報は [GitHub保存手順](docs/GITHUB_WORKFLOW.md) を参照してください。
 
+**開発を再開する方へ：** 現在の実装、保存が残る資料、次の比較候補は [最新の開発引き継ぎ](docs/DEVELOPMENT_HANDOFF.md) にまとめています。Context7で過去の資料が返った場合も、この入口と実際のmainを照合してください。[Context7・Docs7の運用](docs/CONTEXT7_DOCS7_WORKFLOW.md)
+
 The Sims 4・Kenshi・RimWorldとテキストベースのシミュレーションから学び、個人の生活、人間関係、拠点運営、生産、冒険が結び付くシミュレーションストラテジーRPGを開発しています。現在は、人物と土地をつくり、家を整えながら一日の使い方を決める日本語の試作を遊べます。名称とグラフィックは仮のもので、現在の人数・拠点数・機能を完成形の上限にはしません。
 
 [新版の単体HTML](dist/yohaku.html)と[公開53の単体HTML](public/yohaku-v53.html)をそれぞれ遊べます。保存枠は別です。
@@ -68,7 +70,7 @@ ChatGPTで制作した人物原画を、胸像48×56px・全身26×60pxのゲー
 
 `npm install` 後、`npm run dev` で起動します。`npm test` は本体テスト、`npm run build` は型検査と配布物の生成です。ビルド済みのHTMLは `npm run test:standalone`（PC）、`npm run test:ui:standalone`（スマホ幅）、`npm run test:reform:weeks`（三つの暮らしを各28日）で実操作します。旧版は `npm run test:legacy:standalone` で確認できます。[ロードマップ](docs/ROADMAP.md)・[試遊記録](docs/PLAYTEST.md)
 
-直近の家具指定は最終本体 `c3d1cbe5a5666440da4a6a275bbd144cc23537c2` で全1,040件の試験と型検査・ビルドが成功しました。最終HTMLで家具の識別、撤去、競合、通路待機・再開、食事、保存、320・390・1280pxを確認しました。書出し31件（最終版19件・前候補12件）のゲーム全体と最初の朝を照合しています。標準3脚本のChromium起動失敗と管理Chromeでの実操作は区別しています。[検証記録](docs/research/housing-room-use-2026-11-24/verification.md) ／ [保存・照合記録](docs/research/housing-room-use-2026-11-24/delivery.md)。家具指定の単体HTML検証は `npm run test:room-use` です。
+前工程の家具指定は最終本体 `c3d1cbe5a5666440da4a6a275bbd144cc23537c2` で全1,040件の試験と型検査・ビルドが成功しました。最終HTMLで家具の識別、撤去、競合、通路待機・再開、食事、保存、320・390・1280pxを確認しました。書出し31件（最終版19件・前候補12件）のゲーム全体と最初の朝を照合しています。標準3脚本のChromium起動失敗と管理Chromeでの実操作は区別しています。[検証記録](docs/research/housing-room-use-2026-11-24/verification.md) ／ [保存・照合記録](docs/research/housing-room-use-2026-11-24/delivery.md)。家具指定の単体HTML検証は `npm run test:room-use` です。
 
 前段階のH2/H3は、一室を計画して木材を運び、施工後の部屋を使う最初の試作です。検証した最終本体は `a5a6bf2d049aa989c8e1c38ca9ce8bcd46414f59`。`node --import tsx --test tests/*.test.ts` で全1024件成功、失敗・取消・スキップ・todoは0件。`npm run build` も成功し、型検査・Vite・単体HTML生成を完了。
 
