@@ -1,11 +1,6 @@
-import {
-  cellName,
-  furnishings,
-  needLabels,
-  type FixtureKind,
-  type Need,
-  type Room,
-} from "./house";
+import { facilityLabel } from "./facilityLabel";
+import { furnishings, needLabels, type Need } from "./house";
+import { getPreferredBed } from "./housing/bedPreference";
 import {
   inspectOrder,
   order,
@@ -15,18 +10,6 @@ import {
 } from "./sim";
 
 const missingFacility = "選んだ設備がありません";
-
-function facilityLabel(
-  rooms: Room[],
-  room: Room,
-  kind: FixtureKind,
-  cell: number,
-) {
-  const sameName = rooms.filter((other) => other.name === room.name);
-  const ordinal =
-    sameName.length > 1 ? `、同名の${sameName.indexOf(room) + 1}室目` : "";
-  return `${room.name}・${furnishings[kind].name}（${cellName(room, cell)}${ordinal}）`;
-}
 
 export function FacilityAction({
   game,
@@ -63,6 +46,16 @@ export function FacilityAction({
   const { disabled, facility, reserved } = preview;
   const destinationRoom =
     facility && rooms.find((room) => room.id === facility.roomId);
+  const bedPreference = selectedId ? undefined : facility?.bedPreference;
+  const fallback =
+    bedPreference?.outcome === "fallback" ? bedPreference : undefined;
+  const preferredBed =
+    fallback &&
+    fixtures.find(({ fixture }) => fixture.id === fallback.fixtureId);
+  const automaticLabel =
+    need === "energy" && getPreferredBed(game, actor.person.id)
+      ? "自動（優先する寝床を考慮）"
+      : "自動（移動と利用が短い設備）";
   const food = reserved?.food ?? 0;
   const hintId = "lf-order-need-" + need;
   const selectId = hintId + "-facility";
@@ -75,7 +68,7 @@ export function FacilityAction({
         value={selectedId}
         onChange={(event) => onSelect(event.target.value)}
       >
-        <option value="">自動（移動と利用が短い設備）</option>
+        <option value="">{automaticLabel}</option>
         {missing && <option value={selectedId}>{missingFacility}</option>}
         {fixtures.map(({ room, fixture }) => (
           <option key={fixture.id} value={fixture.id}>
@@ -108,6 +101,28 @@ export function FacilityAction({
           )}
           <br />
           {`現在の見込み　移動${facility.moveMinutes}分 ＋ 利用${facility.useMinutes}分（合計${preview.minutes}分）`}
+          {bedPreference?.outcome === "preferred" && (
+            <>
+              <br />
+              優先する寝床を使う見込みです。
+            </>
+          )}
+          {fallback && preferredBed && (
+            <>
+              <br />
+              優先する寝床　
+              {facilityLabel(
+                rooms,
+                preferredBed.room,
+                preferredBed.fixture.kind,
+                preferredBed.fixture.cell,
+              )}
+              <br />
+              {fallback.reason}
+              <br />
+              別の寝床を使う見込みです。
+            </>
+          )}
           {food > 0 && (
             <>
               <br />

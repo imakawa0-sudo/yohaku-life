@@ -1,0 +1,14 @@
+{
+  "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+  "dailyStartHash": "96a869ac66f31ae3f5cfae7605ee812f6a26141579cfad71cb6a82c292248731",
+  "dailyAfterNightHash": "9baf1239b4a921ad35d2ccd3879c32f8f1f8ec18876f56b39da6a2e9caf33819",
+  "dailyAfterNightTime": 1293,
+  "resumedMinutesToMorning": 627,
+  "morningGameHash": "b23af85ab72300b0424bf6bc5d557a5330b9dfc8eda6167c7c7ea5a63ee01bff",
+  "originMatchesObservedBaseline": true,
+  "dailyStartMatchesObservedSnapshot": true,
+  "dailyAfterNightMatchesObservedSnapshot": true,
+  "afterNightOriginMatchesInitial": true,
+  "fullGameContinuationMatchesObservedMorning": true,
+  "personalSaveUsed": false
+}

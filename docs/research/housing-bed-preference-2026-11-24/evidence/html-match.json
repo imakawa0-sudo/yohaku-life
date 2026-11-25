@@ -1,0 +1,23 @@
+{
+  "builtFrom": "fb0345df8093997acdde83ac590695e1da41ad55",
+  "verifiedCodeAndVerificationHead": "67ec59711bfbe301c0322d27d372e39a09941550",
+  "laterCommittedChangesAreResearchOrVerificationOnly": true,
+  "identical": true,
+  "artifacts": [
+    {
+      "path": "/workspace/scratch/be33734a3f5c/yohaku-life-h1a/dist/yohaku.html",
+      "bytes": 705442,
+      "sha256": "d630193048c451115c360eb1396062a171e8ecb8249a4df18ff72f62fbfe0d4b"
+    },
+    {
+      "path": "/workspace/scratch/de6592930c40/bed-preference-qa-environment/preview/dist/index.html",
+      "bytes": 705442,
+      "sha256": "d630193048c451115c360eb1396062a171e8ecb8249a4df18ff72f62fbfe0d4b"
+    },
+    {
+      "path": "/workspace/scratch/de6592930c40/yohaku-bed-preference-20261124.html",
+      "bytes": 705442,
+      "sha256": "d630193048c451115c360eb1396062a171e8ecb8249a4df18ff72f62fbfe0d4b"
+    }
+  ]
+}

@@ -1,0 +1,5277 @@
+{
+  "runContext": {
+    "date": "2026-11-24",
+    "timezone": "game minute clock / environment UTC",
+    "productLocalCommit": "367ecdd81e169857ba4d0e0227fd74c4fff788b4",
+    "productRemoteMain": "700b201e221c1e294b67bf1afd6cb4b2c8f565cd",
+    "sourceRoot": "/workspace/scratch/be33734a3f5c/yohaku-life-h1a",
+    "note": "Commit identity supplied by parent. This harness performs no git, browser, network or external-save operation."
+  },
+  "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+  "origin": {
+    "time": 480,
+    "clock": "D1 08:00",
+    "stock": {
+      "wood": 18,
+      "food": 7,
+      "ingredients": 9,
+      "coins": 8
+    },
+    "rng": 5317,
+    "actors": [
+      {
+        "id": "person-1",
+        "name": "カヤ",
+        "location": "forest",
+        "room": "living",
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "task": null,
+        "needs": {
+          "hunger": 73,
+          "bladder": 74,
+          "hygiene": 68,
+          "energy": 88,
+          "social": 61,
+          "fun": 57
+        },
+        "mood": 68,
+        "metrics": {
+          "free": 0,
+          "work": 0,
+          "care": 0,
+          "travel": 0,
+          "waiting": 0
+        },
+        "memories": [],
+        "reason": "朝を迎え、最初の予定を待っています。",
+        "cargo": {
+          "wood": 0,
+          "food": 0,
+          "ingredients": 0,
+          "coins": 0
+        }
+      },
+      {
+        "id": "person-2",
+        "name": "スイ",
+        "location": "forest",
+        "room": "living",
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "task": null,
+        "needs": {
+          "hunger": 73,
+          "bladder": 74,
+          "hygiene": 68,
+          "energy": 88,
+          "social": 61,
+          "fun": 57
+        },
+        "mood": 68,
+        "metrics": {
+          "free": 0,
+          "work": 0,
+          "care": 0,
+          "travel": 0,
+          "waiting": 0
+        },
+        "memories": [],
+        "reason": "朝を迎え、最初の予定を待っています。",
+        "cargo": {
+          "wood": 0,
+          "food": 0,
+          "ingredients": 0,
+          "coins": 0
+        }
+      }
+    ],
+    "reservations": {},
+    "construction": null,
+    "items": {}
+  },
+  "branches": {
+    "A": {
+      "control": "Common origin at 08:00. Primary shelf living cell1. Kaya hard wood until 08:36 in every branch. A/B Sui wood once then autonomous until 08:36. C Sui hauls/builds; secondary shelf placed after completion. At 08:36 Kaya first; Sui same-shelf request rejected. B/C choose second shelf. A preserves the current automatic wood task (4 minutes already used; 28 minutes remain), finishes it, and manually retries the same shelf. All actors otherwise act autonomously until next 08:00.",
+      "woodFlow": {
+        "initial": 18,
+        "furnitureCost": 4,
+        "constructionCost": 0,
+        "woodProduced": 8,
+        "final": 22,
+        "productionEvents": [
+          {
+            "clock": "D1 08:32",
+            "quantity": 2
+          },
+          {
+            "clock": "D1 09:04",
+            "quantity": 2
+          },
+          {
+            "clock": "D1 19:33",
+            "quantity": 2
+          },
+          {
+            "clock": "D2 07:53",
+            "quantity": 2
+          }
+        ]
+      },
+      "beforeRead": {
+        "time": 516,
+        "clock": "D1 08:36",
+        "stock": {
+          "wood": 16,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "rng": 5317,
+        "actors": [
+          {
+            "id": "person-1",
+            "name": "カヤ",
+            "location": "forest",
+            "room": "living",
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"living\"]",
+                "cell": 0
+              }
+            },
+            "task": {
+              "kind": "work",
+              "label": "丈夫な建具を組む",
+              "total": 39,
+              "remaining": 3,
+              "from": "forest",
+              "metric": "work",
+              "mode": "direct",
+              "target": "wood:hard",
+              "reserved": {}
+            },
+            "needs": {
+              "hunger": 68.67999999999984,
+              "bladder": 68.24000000000012,
+              "hygiene": 65.66000000000008,
+              "energy": 84.58000000000004,
+              "social": 59.5744,
+              "fun": 54.47999999999999
+            },
+            "mood": 65,
+            "metrics": {
+              "free": 0,
+              "work": 36,
+              "care": 0,
+              "travel": 0,
+              "waiting": 0
+            },
+            "memories": [],
+            "reason": "直接の指示で、丈夫な建具を組む。",
+            "cargo": {
+              "wood": 0,
+              "food": 0,
+              "ingredients": 0,
+              "coins": 0
+            }
+          },
+          {
+            "id": "person-2",
+            "name": "スイ",
+            "location": "forest",
+            "room": "living",
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"living\"]",
+                "cell": 0
+              }
+            },
+            "task": {
+              "kind": "work",
+              "label": "枝を削って木材を整える",
+              "total": 32,
+              "remaining": 28,
+              "from": "forest",
+              "metric": "free",
+              "mode": "auto",
+              "target": "wood",
+              "reserved": {}
+            },
+            "needs": {
+              "hunger": 68.67999999999984,
+              "bladder": 68.24000000000012,
+              "hygiene": 65.66000000000008,
+              "energy": 84.58000000000004,
+              "social": 59.02000000000001,
+              "fun": 64.48000000000002
+            },
+            "mood": 73,
+            "metrics": {
+              "free": 4,
+              "work": 32,
+              "care": 0,
+              "travel": 0,
+              "waiting": 0
+            },
+            "memories": [
+              {
+                "label": "好きな木工",
+                "value": 6,
+                "until": 692
+              }
+            ],
+            "reason": "好きな木工を選びました。",
+            "cargo": {
+              "wood": 0,
+              "food": 0,
+              "ingredients": 0,
+              "coins": 0
+            }
+          }
+        ],
+        "reservations": {},
+        "construction": null,
+        "items": {}
+      },
+      "geometryAtReading": [
+        {
+          "roomId": "living",
+          "roomName": "居間",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "hearth-1",
+          "kind": "hearth",
+          "name": "小さなかまど",
+          "fixtureCell": 3,
+          "fixtureCoordinate": "4列1行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 2,
+              "coordinate": "3列1行"
+            }
+          ]
+        },
+        {
+          "roomId": "living",
+          "roomName": "居間",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "bench-1",
+          "kind": "bench",
+          "name": "長椅子",
+          "fixtureCell": 5,
+          "fixtureCoordinate": "2列2行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 4,
+              "coordinate": "1列2行"
+            },
+            {
+              "seat": 1,
+              "cell": 4,
+              "coordinate": "1列2行"
+            }
+          ]
+        },
+        {
+          "roomId": "living",
+          "roomName": "居間",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "window-1",
+          "kind": "window",
+          "name": "窓辺の腰掛け",
+          "fixtureCell": 11,
+          "fixtureCoordinate": "4列3行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 10,
+              "coordinate": "3列3行"
+            }
+          ]
+        },
+        {
+          "roomId": "living",
+          "roomName": "居間",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "fixture-1",
+          "kind": "shelf",
+          "name": "本棚と読書椅子",
+          "fixtureCell": 1,
+          "fixtureCoordinate": "2列1行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 0,
+              "coordinate": "1列1行"
+            }
+          ]
+        },
+        {
+          "roomId": "bedroom",
+          "roomName": "寝室",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "mat-1",
+          "kind": "mat",
+          "name": "敷きむしろ",
+          "fixtureCell": 10,
+          "fixtureCoordinate": "3列3行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 6,
+              "coordinate": "3列2行"
+            }
+          ]
+        },
+        {
+          "roomId": "yard",
+          "roomName": "裏庭",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "latrine-1",
+          "kind": "latrine",
+          "name": "外の厠",
+          "fixtureCell": 3,
+          "fixtureCoordinate": "4列1行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 2,
+              "coordinate": "3列1行"
+            }
+          ]
+        },
+        {
+          "roomId": "yard",
+          "roomName": "裏庭",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "basin-1",
+          "kind": "basin",
+          "name": "水桶",
+          "fixtureCell": 11,
+          "fixtureCoordinate": "4列3行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 7,
+              "coordinate": "4列2行"
+            }
+          ]
+        }
+      ],
+      "reading": {
+        "kaya": {
+          "actorName": "カヤ",
+          "source": "direct",
+          "start": 516,
+          "startClock": "D1 08:36",
+          "end": 530,
+          "endClock": "D1 08:50",
+          "elapsed": 14,
+          "endKind": "completed",
+          "metrics": {
+            "free": 14,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "startPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "endPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "startNeeds": {
+            "hunger": 68.67999999999984,
+            "bladder": 68.24000000000012,
+            "hygiene": 65.66000000000008,
+            "energy": 84.58000000000004,
+            "social": 59.5744,
+            "fun": 54.47999999999999
+          },
+          "endNeeds": {
+            "hunger": 66.99999999999977,
+            "bladder": 66.00000000000017,
+            "hygiene": 64.75000000000011,
+            "energy": 83.25000000000006,
+            "social": 59.019999999999996,
+            "fun": 100
+          },
+          "memories": [
+            {
+              "label": "静かな自由時間",
+              "value": 6,
+              "until": 760
+            }
+          ],
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 14,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-1",
+              "kind": "use"
+            }
+          },
+          "bedCandidatesAtMinuteStart": null,
+          "reservationsAtMinuteStart": null
+        },
+        "sui": {
+          "actorName": "スイ",
+          "source": "direct",
+          "start": 544,
+          "startClock": "D1 09:04",
+          "end": 558,
+          "endClock": "D1 09:18",
+          "elapsed": 14,
+          "endKind": "completed",
+          "metrics": {
+            "free": 14,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "startPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "endPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "startNeeds": {
+            "hunger": 65.31999999999971,
+            "bladder": 63.76000000000022,
+            "hygiene": 63.840000000000146,
+            "energy": 81.92000000000007,
+            "social": 57.48000000000002,
+            "fun": 72.52000000000005
+          },
+          "endNeeds": {
+            "hunger": 63.639999999999674,
+            "bladder": 61.520000000000266,
+            "hygiene": 62.93000000000018,
+            "energy": 80.59000000000009,
+            "social": 56.71000000000002,
+            "fun": 100
+          },
+          "memories": [
+            {
+              "label": "好きな木工",
+              "value": 6,
+              "until": 724
+            }
+          ],
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 14,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-3",
+              "kind": "use"
+            }
+          },
+          "bedCandidatesAtMinuteStart": null,
+          "reservationsAtMinuteStart": null
+        }
+      },
+      "bothReadingsDoneAt": "D1 09:18",
+      "autoAlternativeAtRejection": {
+        "minutes": 26,
+        "reserved": {},
+        "facility": {
+          "fixtureId": "window-1",
+          "roomId": "living",
+          "fixtureKind": "window",
+          "fixtureCell": 11,
+          "moveMinutes": 4,
+          "useMinutes": 22
+        }
+      },
+      "morningStock": {
+        "wood": 22,
+        "food": 10,
+        "ingredients": 3,
+        "coins": 8
+      },
+      "morningTasks": [
+        {
+          "name": "カヤ",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 7
+            }
+          },
+          "needs": {
+            "hunger": 73.23999999999948,
+            "bladder": 52.64000000000101,
+            "hygiene": 39.465500000002116,
+            "energy": 82.17800000000025,
+            "social": 55.084800000000484,
+            "fun": 98.81000000000012
+          },
+          "metrics": {
+            "free": 725,
+            "work": 114,
+            "care": 447,
+            "travel": 154,
+            "waiting": 0
+          },
+          "task": {
+            "kind": "need",
+            "label": "水を汲んで身を清める",
+            "total": 46,
+            "remaining": 45,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "hygiene",
+            "reserved": {},
+            "station": "[\"slot\",\"yard\",\"basin-1\",0]",
+            "room": "yard",
+            "spatial": {
+              "orderId": "order-31",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "name": "スイ",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 1
+            }
+          },
+          "needs": {
+            "hunger": 73.23999999999833,
+            "bladder": 39.0400000000013,
+            "hygiene": 40.49300000000298,
+            "energy": 96.09075000000006,
+            "social": 59.10999999999972,
+            "fun": 96.77000000000129
+          },
+          "metrics": {
+            "free": 829,
+            "work": 32,
+            "care": 466,
+            "travel": 113,
+            "waiting": 0
+          },
+          "task": {
+            "kind": "need",
+            "label": "外の厠を使う",
+            "total": 15,
+            "remaining": 15,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "bladder",
+            "reserved": {},
+            "station": "[\"slot\",\"yard\",\"latrine-1\",0]",
+            "room": "yard",
+            "spatial": {
+              "orderId": "order-32",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "oneMinuteLaterStock": {
+        "wood": 22,
+        "food": 10,
+        "ingredients": 3,
+        "coins": 8
+      },
+      "orders": [
+        {
+          "sequence": 1,
+          "time": 480,
+          "clock": "D1 08:00",
+          "actorId": "person-2",
+          "kind": "work",
+          "target": "wood",
+          "label": "08:00 非増築枝のスイは木工を一回",
+          "accepted": true,
+          "preview": {
+            "minutes": 32,
+            "reserved": {}
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": false
+        },
+        {
+          "sequence": 2,
+          "time": 480,
+          "clock": "D1 08:00",
+          "actorId": "person-1",
+          "kind": "work",
+          "target": "wood:hard",
+          "label": "08:00 全枝共通のカヤの木工",
+          "accepted": true,
+          "preview": {
+            "minutes": 39,
+            "reserved": {}
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": false
+        },
+        {
+          "sequence": 3,
+          "time": 516,
+          "clock": "D1 08:36",
+          "actorId": "person-1",
+          "kind": "home-use",
+          "target": "fixture-1",
+          "label": "08:36 カヤが共通の本棚を先に指定",
+          "accepted": true,
+          "preview": {
+            "minutes": 14,
+            "reserved": {},
+            "facility": {
+              "fixtureId": "fixture-1",
+              "roomId": "living",
+              "fixtureKind": "shelf",
+              "fixtureCell": 1,
+              "moveMinutes": 0,
+              "useMinutes": 14
+            }
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": false
+        },
+        {
+          "sequence": 4,
+          "time": 516,
+          "clock": "D1 08:36",
+          "actorId": "person-2",
+          "kind": "home-use",
+          "target": "fixture-1",
+          "label": "08:36 住人をスイに切り替えて同じ本棚を指定",
+          "accepted": false,
+          "preview": {
+            "disabled": "使える設備はほかの住人が予約しています。"
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": true
+        },
+        {
+          "sequence": 5,
+          "time": 544,
+          "clock": "D1 09:04",
+          "actorId": "person-2",
+          "kind": "home-use",
+          "target": "fixture-1",
+          "label": "スイの木工完了後に本棚を再指定",
+          "accepted": true,
+          "preview": {
+            "minutes": 14,
+            "reserved": {},
+            "facility": {
+              "fixtureId": "fixture-1",
+              "roomId": "living",
+              "fixtureKind": "shelf",
+              "fixtureCell": 1,
+              "moveMinutes": 0,
+              "useMinutes": 14
+            }
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": false
+        }
+      ],
+      "nextCompletionCheck": [
+        {
+          "label": "next-completion-time-forward-from-first-reading",
+          "time": 516,
+          "clock": "D1 08:36",
+          "nextCompletionMinutes": 14,
+          "finishedActorIds": [
+            "person-1"
+          ],
+          "afterClock": "D1 08:50",
+          "readOnly": true
+        }
+      ]
+    },
+    "B": {
+      "control": "Common origin at 08:00. Primary shelf living cell1. Kaya hard wood until 08:36 in every branch. A/B Sui wood once then autonomous until 08:36. C Sui hauls/builds; secondary shelf placed after completion. At 08:36 Kaya first; Sui same-shelf request rejected. B/C choose second shelf. A preserves the current automatic wood task (4 minutes already used; 28 minutes remain), finishes it, and manually retries the same shelf. All actors otherwise act autonomously until next 08:00.",
+      "woodFlow": {
+        "initial": 18,
+        "furnitureCost": 8,
+        "constructionCost": 0,
+        "woodProduced": 4,
+        "final": 14,
+        "productionEvents": [
+          {
+            "clock": "D1 08:32",
+            "quantity": 2
+          },
+          {
+            "clock": "D1 19:02",
+            "quantity": 2
+          }
+        ]
+      },
+      "beforeRead": {
+        "time": 516,
+        "clock": "D1 08:36",
+        "stock": {
+          "wood": 12,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "rng": 5317,
+        "actors": [
+          {
+            "id": "person-1",
+            "name": "カヤ",
+            "location": "forest",
+            "room": "living",
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"living\"]",
+                "cell": 0
+              }
+            },
+            "task": {
+              "kind": "work",
+              "label": "丈夫な建具を組む",
+              "total": 39,
+              "remaining": 3,
+              "from": "forest",
+              "metric": "work",
+              "mode": "direct",
+              "target": "wood:hard",
+              "reserved": {}
+            },
+            "needs": {
+              "hunger": 68.67999999999984,
+              "bladder": 68.24000000000012,
+              "hygiene": 65.66000000000008,
+              "energy": 84.58000000000004,
+              "social": 59.5744,
+              "fun": 54.47999999999999
+            },
+            "mood": 65,
+            "metrics": {
+              "free": 0,
+              "work": 36,
+              "care": 0,
+              "travel": 0,
+              "waiting": 0
+            },
+            "memories": [],
+            "reason": "直接の指示で、丈夫な建具を組む。",
+            "cargo": {
+              "wood": 0,
+              "food": 0,
+              "ingredients": 0,
+              "coins": 0
+            }
+          },
+          {
+            "id": "person-2",
+            "name": "スイ",
+            "location": "forest",
+            "room": "living",
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"living\"]",
+                "cell": 0
+              }
+            },
+            "task": {
+              "kind": "work",
+              "label": "枝を削って木材を整える",
+              "total": 32,
+              "remaining": 28,
+              "from": "forest",
+              "metric": "free",
+              "mode": "auto",
+              "target": "wood",
+              "reserved": {}
+            },
+            "needs": {
+              "hunger": 68.67999999999984,
+              "bladder": 68.24000000000012,
+              "hygiene": 65.66000000000008,
+              "energy": 84.58000000000004,
+              "social": 59.02000000000001,
+              "fun": 64.48000000000002
+            },
+            "mood": 73,
+            "metrics": {
+              "free": 4,
+              "work": 32,
+              "care": 0,
+              "travel": 0,
+              "waiting": 0
+            },
+            "memories": [
+              {
+                "label": "好きな木工",
+                "value": 6,
+                "until": 692
+              }
+            ],
+            "reason": "好きな木工を選びました。",
+            "cargo": {
+              "wood": 0,
+              "food": 0,
+              "ingredients": 0,
+              "coins": 0
+            }
+          }
+        ],
+        "reservations": {},
+        "construction": null,
+        "items": {}
+      },
+      "geometryAtReading": [
+        {
+          "roomId": "living",
+          "roomName": "居間",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "hearth-1",
+          "kind": "hearth",
+          "name": "小さなかまど",
+          "fixtureCell": 3,
+          "fixtureCoordinate": "4列1行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 7,
+              "coordinate": "4列2行"
+            }
+          ]
+        },
+        {
+          "roomId": "living",
+          "roomName": "居間",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "bench-1",
+          "kind": "bench",
+          "name": "長椅子",
+          "fixtureCell": 5,
+          "fixtureCoordinate": "2列2行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 4,
+              "coordinate": "1列2行"
+            },
+            {
+              "seat": 1,
+              "cell": 4,
+              "coordinate": "1列2行"
+            }
+          ]
+        },
+        {
+          "roomId": "living",
+          "roomName": "居間",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "window-1",
+          "kind": "window",
+          "name": "窓辺の腰掛け",
+          "fixtureCell": 11,
+          "fixtureCoordinate": "4列3行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 10,
+              "coordinate": "3列3行"
+            }
+          ]
+        },
+        {
+          "roomId": "living",
+          "roomName": "居間",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "fixture-1",
+          "kind": "shelf",
+          "name": "本棚と読書椅子",
+          "fixtureCell": 1,
+          "fixtureCoordinate": "2列1行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 0,
+              "coordinate": "1列1行"
+            }
+          ]
+        },
+        {
+          "roomId": "living",
+          "roomName": "居間",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "fixture-2",
+          "kind": "shelf",
+          "name": "本棚と読書椅子",
+          "fixtureCell": 2,
+          "fixtureCoordinate": "3列1行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 6,
+              "coordinate": "3列2行"
+            }
+          ]
+        },
+        {
+          "roomId": "bedroom",
+          "roomName": "寝室",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "mat-1",
+          "kind": "mat",
+          "name": "敷きむしろ",
+          "fixtureCell": 10,
+          "fixtureCoordinate": "3列3行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 6,
+              "coordinate": "3列2行"
+            }
+          ]
+        },
+        {
+          "roomId": "yard",
+          "roomName": "裏庭",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "latrine-1",
+          "kind": "latrine",
+          "name": "外の厠",
+          "fixtureCell": 3,
+          "fixtureCoordinate": "4列1行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 2,
+              "coordinate": "3列1行"
+            }
+          ]
+        },
+        {
+          "roomId": "yard",
+          "roomName": "裏庭",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "basin-1",
+          "kind": "basin",
+          "name": "水桶",
+          "fixtureCell": 11,
+          "fixtureCoordinate": "4列3行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 7,
+              "coordinate": "4列2行"
+            }
+          ]
+        }
+      ],
+      "reading": {
+        "kaya": {
+          "actorName": "カヤ",
+          "source": "direct",
+          "start": 516,
+          "startClock": "D1 08:36",
+          "end": 530,
+          "endClock": "D1 08:50",
+          "elapsed": 14,
+          "endKind": "completed",
+          "metrics": {
+            "free": 14,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "startPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "endPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "startNeeds": {
+            "hunger": 68.67999999999984,
+            "bladder": 68.24000000000012,
+            "hygiene": 65.66000000000008,
+            "energy": 84.58000000000004,
+            "social": 59.5744,
+            "fun": 54.47999999999999
+          },
+          "endNeeds": {
+            "hunger": 66.99999999999977,
+            "bladder": 66.00000000000017,
+            "hygiene": 64.75000000000011,
+            "energy": 83.25000000000006,
+            "social": 59.019999999999996,
+            "fun": 100
+          },
+          "memories": [
+            {
+              "label": "静かな自由時間",
+              "value": 6,
+              "until": 760
+            }
+          ],
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 14,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-1",
+              "kind": "use"
+            }
+          },
+          "bedCandidatesAtMinuteStart": null,
+          "reservationsAtMinuteStart": null
+        },
+        "sui": {
+          "actorName": "スイ",
+          "source": "direct",
+          "start": 516,
+          "startClock": "D1 08:36",
+          "end": 535,
+          "endClock": "D1 08:55",
+          "elapsed": 19,
+          "endKind": "completed",
+          "metrics": {
+            "free": 14,
+            "work": 0,
+            "care": 0,
+            "travel": 5,
+            "waiting": 0
+          },
+          "startPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "endPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 6
+            }
+          },
+          "startNeeds": {
+            "hunger": 68.67999999999984,
+            "bladder": 68.24000000000012,
+            "hygiene": 65.66000000000008,
+            "energy": 84.58000000000004,
+            "social": 59.02000000000001,
+            "fun": 64.48000000000002
+          },
+          "endNeeds": {
+            "hunger": 66.39999999999975,
+            "bladder": 65.20000000000019,
+            "hygiene": 64.42500000000013,
+            "energy": 82.56125000000007,
+            "social": 57.975000000000016,
+            "fun": 100
+          },
+          "memories": [
+            {
+              "label": "好きな木工",
+              "value": 6,
+              "until": 692
+            }
+          ],
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 14,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-2\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-2",
+              "kind": "use"
+            }
+          },
+          "bedCandidatesAtMinuteStart": null,
+          "reservationsAtMinuteStart": null
+        }
+      },
+      "bothReadingsDoneAt": "D1 08:55",
+      "autoAlternativeAtRejection": {
+        "minutes": 19,
+        "reserved": {},
+        "facility": {
+          "fixtureId": "fixture-2",
+          "roomId": "living",
+          "fixtureKind": "shelf",
+          "fixtureCell": 2,
+          "moveMinutes": 5,
+          "useMinutes": 14
+        }
+      },
+      "morningStock": {
+        "wood": 14,
+        "food": 7,
+        "ingredients": 3,
+        "coins": 8
+      },
+      "morningTasks": [
+        {
+          "name": "カヤ",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 7
+            }
+          },
+          "needs": {
+            "hunger": 73.23999999999867,
+            "bladder": 54.08000000000098,
+            "hygiene": 40.493000000003136,
+            "energy": 83.71700000000021,
+            "social": 55.084800000000214,
+            "fun": 97.34000000000026
+          },
+          "metrics": {
+            "free": 802,
+            "work": 36,
+            "care": 446,
+            "travel": 156,
+            "waiting": 0
+          },
+          "task": {
+            "kind": "work",
+            "label": "野菜を煮て食事を作る",
+            "total": 39,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "target": "cook",
+            "reserved": {
+              "ingredients": 2
+            },
+            "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-31",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "name": "スイ",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 7
+            }
+          },
+          "needs": {
+            "hunger": 73.23999999999907,
+            "bladder": 45.44000000000116,
+            "hygiene": 39.32900000000208,
+            "energy": 92.96050000000011,
+            "social": 59.11000000000012,
+            "fun": 86.21000000000134
+          },
+          "metrics": {
+            "free": 770,
+            "work": 32,
+            "care": 494,
+            "travel": 144,
+            "waiting": 0
+          },
+          "task": {
+            "kind": "need",
+            "label": "水を汲んで身を清める",
+            "total": 46,
+            "remaining": 18,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "hygiene",
+            "reserved": {},
+            "station": "[\"slot\",\"yard\",\"basin-1\",0]",
+            "room": "yard",
+            "spatial": {
+              "orderId": "order-30",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "oneMinuteLaterStock": {
+        "wood": 14,
+        "food": 10,
+        "ingredients": 3,
+        "coins": 8
+      },
+      "orders": [
+        {
+          "sequence": 1,
+          "time": 480,
+          "clock": "D1 08:00",
+          "actorId": "person-2",
+          "kind": "work",
+          "target": "wood",
+          "label": "08:00 非増築枝のスイは木工を一回",
+          "accepted": true,
+          "preview": {
+            "minutes": 32,
+            "reserved": {}
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": false
+        },
+        {
+          "sequence": 2,
+          "time": 480,
+          "clock": "D1 08:00",
+          "actorId": "person-1",
+          "kind": "work",
+          "target": "wood:hard",
+          "label": "08:00 全枝共通のカヤの木工",
+          "accepted": true,
+          "preview": {
+            "minutes": 39,
+            "reserved": {}
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": false
+        },
+        {
+          "sequence": 3,
+          "time": 516,
+          "clock": "D1 08:36",
+          "actorId": "person-1",
+          "kind": "home-use",
+          "target": "fixture-1",
+          "label": "08:36 カヤが共通の本棚を先に指定",
+          "accepted": true,
+          "preview": {
+            "minutes": 14,
+            "reserved": {},
+            "facility": {
+              "fixtureId": "fixture-1",
+              "roomId": "living",
+              "fixtureKind": "shelf",
+              "fixtureCell": 1,
+              "moveMinutes": 0,
+              "useMinutes": 14
+            }
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": false
+        },
+        {
+          "sequence": 4,
+          "time": 516,
+          "clock": "D1 08:36",
+          "actorId": "person-2",
+          "kind": "home-use",
+          "target": "fixture-1",
+          "label": "08:36 住人をスイに切り替えて同じ本棚を指定",
+          "accepted": false,
+          "preview": {
+            "disabled": "使える設備はほかの住人が予約しています。"
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": true
+        },
+        {
+          "sequence": 5,
+          "time": 516,
+          "clock": "D1 08:36",
+          "actorId": "person-2",
+          "kind": "home-use",
+          "target": "fixture-2",
+          "label": "08:36 スイが空いている二台目の本棚を選び直す",
+          "accepted": true,
+          "preview": {
+            "minutes": 19,
+            "reserved": {},
+            "facility": {
+              "fixtureId": "fixture-2",
+              "roomId": "living",
+              "fixtureKind": "shelf",
+              "fixtureCell": 2,
+              "moveMinutes": 5,
+              "useMinutes": 14
+            }
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": false
+        }
+      ],
+      "nextCompletionCheck": [
+        {
+          "label": "next-completion-time-forward-from-first-reading",
+          "time": 516,
+          "clock": "D1 08:36",
+          "nextCompletionMinutes": 14,
+          "finishedActorIds": [
+            "person-1"
+          ],
+          "afterClock": "D1 08:50",
+          "readOnly": true
+        }
+      ]
+    },
+    "C": {
+      "control": "Common origin at 08:00. Primary shelf living cell1. Kaya hard wood until 08:36 in every branch. A/B Sui wood once then autonomous until 08:36. C Sui hauls/builds; secondary shelf placed after completion. At 08:36 Kaya first; Sui same-shelf request rejected. B/C choose second shelf. A preserves the current automatic wood task (4 minutes already used; 28 minutes remain), finishes it, and manually retries the same shelf. All actors otherwise act autonomously until next 08:00.",
+      "woodFlow": {
+        "initial": 18,
+        "furnitureCost": 8,
+        "constructionCost": 6,
+        "woodProduced": 4,
+        "final": 8,
+        "productionEvents": [
+          {
+            "clock": "D1 09:28",
+            "quantity": 2
+          },
+          {
+            "clock": "D1 19:54",
+            "quantity": 2
+          }
+        ]
+      },
+      "beforeRead": {
+        "time": 516,
+        "clock": "D1 08:36",
+        "stock": {
+          "wood": 4,
+          "food": 7,
+          "ingredients": 9,
+          "coins": 8
+        },
+        "rng": 5317,
+        "actors": [
+          {
+            "id": "person-1",
+            "name": "カヤ",
+            "location": "forest",
+            "room": "living",
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"living\"]",
+                "cell": 0
+              }
+            },
+            "task": {
+              "kind": "work",
+              "label": "丈夫な建具を組む",
+              "total": 39,
+              "remaining": 3,
+              "from": "forest",
+              "metric": "work",
+              "mode": "direct",
+              "target": "wood:hard",
+              "reserved": {}
+            },
+            "needs": {
+              "hunger": 68.67999999999984,
+              "bladder": 68.24000000000012,
+              "hygiene": 65.66000000000008,
+              "energy": 84.58000000000004,
+              "social": 59.5744,
+              "fun": 54.47999999999999
+            },
+            "mood": 62,
+            "metrics": {
+              "free": 0,
+              "work": 36,
+              "care": 0,
+              "travel": 0,
+              "waiting": 0
+            },
+            "memories": [],
+            "reason": "直接の指示で、丈夫な建具を組む。",
+            "cargo": {
+              "wood": 0,
+              "food": 0,
+              "ingredients": 0,
+              "coins": 0
+            }
+          },
+          {
+            "id": "person-2",
+            "name": "スイ",
+            "location": "forest",
+            "room": "bedroom",
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 2
+              }
+            },
+            "task": null,
+            "needs": {
+              "hunger": 68.67999999999984,
+              "bladder": 68.24000000000012,
+              "hygiene": 65.66000000000008,
+              "energy": 84.36625000000005,
+              "social": 59.02000000000001,
+              "fun": 54.47999999999999
+            },
+            "mood": 62,
+            "metrics": {
+              "free": 0,
+              "work": 30,
+              "care": 0,
+              "travel": 5,
+              "waiting": 1
+            },
+            "memories": [],
+            "reason": "施工を終えました。",
+            "cargo": {
+              "wood": 0,
+              "food": 0,
+              "ingredients": 0,
+              "coins": 0
+            }
+          }
+        ],
+        "reservations": {},
+        "construction": {
+          "version": 1,
+          "nextId": 2,
+          "plans": {
+            "construction-1": {
+              "id": "construction-1",
+              "name": "読書室",
+              "neighborId": "bedroom",
+              "source": {
+                "domainId": "[\"room\",\"living\"]",
+                "cell": 0
+              },
+              "staging": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 2
+              },
+              "createdAt": 480,
+              "requiredWood": 6,
+              "workMinutes": 30,
+              "workedMinutes": 30,
+              "status": "completed",
+              "material": {
+                "itemId": "construction-material-1",
+                "quantity": 6,
+                "state": "consumed"
+              },
+              "roomId": "room-2",
+              "completedAt": 516
+            }
+          }
+        },
+        "items": {}
+      },
+      "geometryAtReading": [
+        {
+          "roomId": "living",
+          "roomName": "居間",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "hearth-1",
+          "kind": "hearth",
+          "name": "小さなかまど",
+          "fixtureCell": 3,
+          "fixtureCoordinate": "4列1行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 2,
+              "coordinate": "3列1行"
+            }
+          ]
+        },
+        {
+          "roomId": "living",
+          "roomName": "居間",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "bench-1",
+          "kind": "bench",
+          "name": "長椅子",
+          "fixtureCell": 5,
+          "fixtureCoordinate": "2列2行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 4,
+              "coordinate": "1列2行"
+            },
+            {
+              "seat": 1,
+              "cell": 4,
+              "coordinate": "1列2行"
+            }
+          ]
+        },
+        {
+          "roomId": "living",
+          "roomName": "居間",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "window-1",
+          "kind": "window",
+          "name": "窓辺の腰掛け",
+          "fixtureCell": 11,
+          "fixtureCoordinate": "4列3行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 10,
+              "coordinate": "3列3行"
+            }
+          ]
+        },
+        {
+          "roomId": "living",
+          "roomName": "居間",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "fixture-1",
+          "kind": "shelf",
+          "name": "本棚と読書椅子",
+          "fixtureCell": 1,
+          "fixtureCoordinate": "2列1行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 0,
+              "coordinate": "1列1行"
+            }
+          ]
+        },
+        {
+          "roomId": "bedroom",
+          "roomName": "寝室",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "mat-1",
+          "kind": "mat",
+          "name": "敷きむしろ",
+          "fixtureCell": 10,
+          "fixtureCoordinate": "3列3行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 6,
+              "coordinate": "3列2行"
+            }
+          ]
+        },
+        {
+          "roomId": "yard",
+          "roomName": "裏庭",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "latrine-1",
+          "kind": "latrine",
+          "name": "外の厠",
+          "fixtureCell": 3,
+          "fixtureCoordinate": "4列1行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 2,
+              "coordinate": "3列1行"
+            }
+          ]
+        },
+        {
+          "roomId": "yard",
+          "roomName": "裏庭",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "basin-1",
+          "kind": "basin",
+          "name": "水桶",
+          "fixtureCell": 11,
+          "fixtureCoordinate": "4列3行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 7,
+              "coordinate": "4列2行"
+            }
+          ]
+        },
+        {
+          "roomId": "room-2",
+          "roomName": "読書室",
+          "width": 4,
+          "height": 3,
+          "fixtureId": "fixture-3",
+          "kind": "shelf",
+          "name": "本棚と読書椅子",
+          "fixtureCell": 2,
+          "fixtureCoordinate": "3列1行",
+          "usePoints": [
+            {
+              "seat": 0,
+              "cell": 1,
+              "coordinate": "2列1行"
+            }
+          ]
+        }
+      ],
+      "reading": {
+        "kaya": {
+          "actorName": "カヤ",
+          "source": "direct",
+          "start": 516,
+          "startClock": "D1 08:36",
+          "end": 530,
+          "endClock": "D1 08:50",
+          "elapsed": 14,
+          "endKind": "completed",
+          "metrics": {
+            "free": 14,
+            "work": 0,
+            "care": 0,
+            "travel": 0,
+            "waiting": 0
+          },
+          "startPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "endPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "startNeeds": {
+            "hunger": 68.67999999999984,
+            "bladder": 68.24000000000012,
+            "hygiene": 65.66000000000008,
+            "energy": 84.58000000000004,
+            "social": 59.5744,
+            "fun": 54.47999999999999
+          },
+          "endNeeds": {
+            "hunger": 66.99999999999977,
+            "bladder": 66.00000000000017,
+            "hygiene": 64.75000000000011,
+            "energy": 83.25000000000006,
+            "social": 59.019999999999996,
+            "fun": 100
+          },
+          "memories": [
+            {
+              "label": "静かな自由時間",
+              "value": 6,
+              "until": 760
+            }
+          ],
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 14,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-3",
+              "kind": "use"
+            }
+          },
+          "bedCandidatesAtMinuteStart": null,
+          "reservationsAtMinuteStart": null
+        },
+        "sui": {
+          "actorName": "スイ",
+          "source": "direct",
+          "start": 516,
+          "startClock": "D1 08:36",
+          "end": 536,
+          "endClock": "D1 08:56",
+          "elapsed": 20,
+          "endKind": "completed",
+          "metrics": {
+            "free": 14,
+            "work": 0,
+            "care": 0,
+            "travel": 6,
+            "waiting": 0
+          },
+          "startPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 2
+            }
+          },
+          "endPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"room-2\"]",
+              "cell": 1
+            }
+          },
+          "startNeeds": {
+            "hunger": 68.67999999999984,
+            "bladder": 68.24000000000012,
+            "hygiene": 65.66000000000008,
+            "energy": 84.36625000000005,
+            "social": 59.02000000000001,
+            "fun": 54.47999999999999
+          },
+          "endNeeds": {
+            "hunger": 66.27999999999975,
+            "bladder": 65.04000000000019,
+            "hygiene": 64.36000000000013,
+            "energy": 82.20975000000008,
+            "social": 57.920000000000016,
+            "fun": 100
+          },
+          "memories": [],
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 14,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"room-2\",\"fixture-3\",0]",
+            "room": "room-2",
+            "spatial": {
+              "orderId": "order-4",
+              "kind": "use"
+            }
+          },
+          "bedCandidatesAtMinuteStart": null,
+          "reservationsAtMinuteStart": null
+        }
+      },
+      "bothReadingsDoneAt": "D1 08:56",
+      "autoAlternativeAtRejection": {
+        "minutes": 20,
+        "reserved": {},
+        "facility": {
+          "fixtureId": "fixture-3",
+          "roomId": "room-2",
+          "fixtureKind": "shelf",
+          "fixtureCell": 2,
+          "moveMinutes": 6,
+          "useMinutes": 14
+        }
+      },
+      "morningStock": {
+        "wood": 8,
+        "food": 7,
+        "ingredients": 3,
+        "coins": 8
+      },
+      "morningTasks": [
+        {
+          "name": "カヤ",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 2
+            }
+          },
+          "needs": {
+            "hunger": 73.239999999999,
+            "bladder": 54.08000000000098,
+            "hygiene": 40.493000000003136,
+            "energy": 83.71700000000021,
+            "social": 55.084800000000214,
+            "fun": 97.34000000000026
+          },
+          "metrics": {
+            "free": 802,
+            "work": 36,
+            "care": 446,
+            "travel": 156,
+            "waiting": 0
+          },
+          "task": {
+            "kind": "work",
+            "label": "野菜を煮て食事を作る",
+            "total": 39,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "target": "cook",
+            "reserved": {
+              "ingredients": 2
+            },
+            "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-32",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "name": "スイ",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 7
+            }
+          },
+          "needs": {
+            "hunger": 73.23999999999872,
+            "bladder": 42.40000000000123,
+            "hygiene": 37.13850000000219,
+            "energy": 97.95750000000004,
+            "social": 59.110000000000106,
+            "fun": 90.62000000000091
+          },
+          "metrics": {
+            "free": 798,
+            "work": 30,
+            "care": 473,
+            "travel": 138,
+            "waiting": 1
+          },
+          "task": {
+            "kind": "need",
+            "label": "水を汲んで身を清める",
+            "total": 46,
+            "remaining": 39,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "hygiene",
+            "reserved": {},
+            "station": "[\"slot\",\"yard\",\"basin-1\",0]",
+            "room": "yard",
+            "spatial": {
+              "orderId": "order-33",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "oneMinuteLaterStock": {
+        "wood": 8,
+        "food": 10,
+        "ingredients": 3,
+        "coins": 8
+      },
+      "orders": [
+        {
+          "sequence": 1,
+          "time": 480,
+          "clock": "D1 08:00",
+          "actorId": "person-1",
+          "kind": "work",
+          "target": "wood:hard",
+          "label": "08:00 全枝共通のカヤの木工",
+          "accepted": true,
+          "preview": {
+            "minutes": 39,
+            "reserved": {}
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": false
+        },
+        {
+          "sequence": 2,
+          "time": 516,
+          "clock": "D1 08:36",
+          "actorId": "person-1",
+          "kind": "home-use",
+          "target": "fixture-1",
+          "label": "08:36 カヤが共通の本棚を先に指定",
+          "accepted": true,
+          "preview": {
+            "minutes": 14,
+            "reserved": {},
+            "facility": {
+              "fixtureId": "fixture-1",
+              "roomId": "living",
+              "fixtureKind": "shelf",
+              "fixtureCell": 1,
+              "moveMinutes": 0,
+              "useMinutes": 14
+            }
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": false
+        },
+        {
+          "sequence": 3,
+          "time": 516,
+          "clock": "D1 08:36",
+          "actorId": "person-2",
+          "kind": "home-use",
+          "target": "fixture-1",
+          "label": "08:36 住人をスイに切り替えて同じ本棚を指定",
+          "accepted": false,
+          "preview": {
+            "disabled": "使える設備はほかの住人が予約しています。"
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": true
+        },
+        {
+          "sequence": 4,
+          "time": 516,
+          "clock": "D1 08:36",
+          "actorId": "person-2",
+          "kind": "home-use",
+          "target": "fixture-3",
+          "label": "08:36 スイが空いている二台目の本棚を選び直す",
+          "accepted": true,
+          "preview": {
+            "minutes": 20,
+            "reserved": {},
+            "facility": {
+              "fixtureId": "fixture-3",
+              "roomId": "room-2",
+              "fixtureKind": "shelf",
+              "fixtureCell": 2,
+              "moveMinutes": 6,
+              "useMinutes": 14
+            }
+          },
+          "inspectionReadOnly": true,
+          "rejectionPreservedTaskAndState": false
+        }
+      ],
+      "nextCompletionCheck": [
+        {
+          "label": "next-completion-time-forward-from-first-reading",
+          "time": 516,
+          "clock": "D1 08:36",
+          "nextCompletionMinutes": 14,
+          "finishedActorIds": [
+            "person-1"
+          ],
+          "afterClock": "D1 08:50",
+          "readOnly": true
+        }
+      ]
+    }
+  },
+  "alternatives": [
+    {
+      "name": "A-explicit-wait",
+      "directedAction": {
+        "actorName": "スイ",
+        "source": "direct",
+        "start": 530,
+        "startClock": "D1 08:50",
+        "end": 544,
+        "endClock": "D1 09:04",
+        "elapsed": 14,
+        "endKind": "completed",
+        "metrics": {
+          "free": 14,
+          "work": 0,
+          "care": 0,
+          "travel": 0,
+          "waiting": 0
+        },
+        "startPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "endPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "startNeeds": {
+          "hunger": 66.99999999999977,
+          "bladder": 66.00000000000017,
+          "hygiene": 64.75000000000011,
+          "energy": 83.25000000000006,
+          "social": 58.250000000000014,
+          "fun": 63.50000000000006
+        },
+        "endNeeds": {
+          "hunger": 65.31999999999971,
+          "bladder": 63.76000000000022,
+          "hygiene": 63.840000000000146,
+          "energy": 81.92000000000007,
+          "social": 57.48000000000002,
+          "fun": 100
+        },
+        "memories": [
+          {
+            "label": "好きな木工",
+            "value": 6,
+            "until": 692
+          }
+        ],
+        "task": {
+          "kind": "need",
+          "label": "本を開いて過ごす",
+          "total": 14,
+          "remaining": 14,
+          "from": "forest",
+          "metric": "free",
+          "mode": "direct",
+          "target": "fun",
+          "reserved": {},
+          "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+          "room": "living",
+          "spatial": {
+            "orderId": "order-2",
+            "kind": "use"
+          }
+        },
+        "bedCandidatesAtMinuteStart": null,
+        "reservationsAtMinuteStart": null
+      },
+      "totalExplicitWaiting": 14,
+      "note": "Repeated explicit five-minute wait orders through public core API; no furniture queue exists, and wait is not listed in current UI options. Last wait is interrupted when the shelf becomes available."
+    },
+    {
+      "name": "A-automatic-other-furniture",
+      "directedAction": {
+        "actorName": "スイ",
+        "source": "direct",
+        "start": 516,
+        "startClock": "D1 08:36",
+        "end": 542,
+        "endClock": "D1 09:02",
+        "elapsed": 26,
+        "endKind": "completed",
+        "metrics": {
+          "free": 22,
+          "work": 0,
+          "care": 0,
+          "travel": 4,
+          "waiting": 0
+        },
+        "startPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "endPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 10
+          }
+        },
+        "startNeeds": {
+          "hunger": 68.67999999999984,
+          "bladder": 68.24000000000012,
+          "hygiene": 65.66000000000008,
+          "energy": 84.58000000000004,
+          "social": 59.02000000000001,
+          "fun": 64.48000000000002
+        },
+        "endNeeds": {
+          "hunger": 65.55999999999972,
+          "bladder": 64.08000000000021,
+          "hygiene": 63.97000000000014,
+          "energy": 81.93900000000008,
+          "social": 57.59000000000002,
+          "fun": 100
+        },
+        "memories": [
+          {
+            "label": "好きな木工",
+            "value": 6,
+            "until": 692
+          }
+        ],
+        "task": {
+          "kind": "need",
+          "label": "窓辺で景色を眺める",
+          "total": 22,
+          "remaining": 22,
+          "from": "forest",
+          "metric": "free",
+          "mode": "direct",
+          "target": "fun",
+          "reserved": {},
+          "station": "[\"slot\",\"living\",\"window-1\",0]",
+          "room": "living",
+          "spatial": {
+            "orderId": "order-2",
+            "kind": "use"
+          }
+        },
+        "bedCandidatesAtMinuteStart": null,
+        "reservationsAtMinuteStart": null
+      },
+      "totalExplicitWaiting": 0,
+      "note": "Uses the pre-existing window seat; not a second simultaneous use of the one shelf."
+    },
+    {
+      "name": "A-restart-wood-control",
+      "directedAction": {
+        "actorName": "スイ",
+        "source": "direct",
+        "start": 548,
+        "startClock": "D1 09:08",
+        "end": 562,
+        "endClock": "D1 09:22",
+        "elapsed": 14,
+        "endKind": "completed",
+        "metrics": {
+          "free": 14,
+          "work": 0,
+          "care": 0,
+          "travel": 0,
+          "waiting": 0
+        },
+        "startPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "endPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "startNeeds": {
+          "hunger": 64.83999999999969,
+          "bladder": 63.12000000000023,
+          "hygiene": 63.580000000000155,
+          "energy": 81.54000000000008,
+          "social": 57.26000000000002,
+          "fun": 72.24000000000005
+        },
+        "endNeeds": {
+          "hunger": 63.159999999999684,
+          "bladder": 60.88000000000028,
+          "hygiene": 62.670000000000186,
+          "energy": 80.2100000000001,
+          "social": 56.49000000000002,
+          "fun": 100
+        },
+        "memories": [
+          {
+            "label": "好きな木工",
+            "value": 6,
+            "until": 728
+          }
+        ],
+        "task": {
+          "kind": "need",
+          "label": "本を開いて過ごす",
+          "total": 14,
+          "remaining": 14,
+          "from": "forest",
+          "metric": "free",
+          "mode": "direct",
+          "target": "fun",
+          "reserved": {},
+          "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+          "room": "living",
+          "spatial": {
+            "orderId": "order-3",
+            "kind": "use"
+          }
+        },
+        "bedCandidatesAtMinuteStart": null,
+        "reservationsAtMinuteStart": null
+      },
+      "totalExplicitWaiting": 0,
+      "note": "Original preliminary control. It intentionally discards four elapsed minutes of automatic woodworking; the main A branch instead preserves that work."
+    }
+  ],
+  "sleepChoiceChecks": {
+    "stock": {
+      "wood": 17,
+      "food": 7,
+      "ingredients": 9,
+      "coins": 8
+    },
+    "beds": [
+      {
+        "roomId": "bedroom",
+        "roomName": "寝室",
+        "width": 4,
+        "height": 3,
+        "fixtureId": "mat-1",
+        "kind": "mat",
+        "name": "敷きむしろ",
+        "fixtureCell": 10,
+        "fixtureCoordinate": "3列3行",
+        "usePoints": [
+          {
+            "seat": 0,
+            "cell": 6,
+            "coordinate": "3列2行"
+          }
+        ]
+      },
+      {
+        "roomId": "bedroom",
+        "roomName": "寝室",
+        "width": 4,
+        "height": 3,
+        "fixtureId": "fixture-1",
+        "kind": "mat",
+        "name": "敷きむしろ",
+        "fixtureCell": 2,
+        "fixtureCoordinate": "3列1行",
+        "usePoints": [
+          {
+            "seat": 0,
+            "cell": 1,
+            "coordinate": "2列1行"
+          }
+        ]
+      }
+    ],
+    "automaticAtSamePosition": [
+      {
+        "id": "person-1",
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "preview": {
+          "minutes": 89,
+          "reserved": {},
+          "facility": {
+            "fixtureId": "fixture-1",
+            "roomId": "bedroom",
+            "fixtureKind": "mat",
+            "fixtureCell": 2,
+            "moveMinutes": 4,
+            "useMinutes": 85
+          }
+        }
+      },
+      {
+        "id": "person-2",
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 0
+          }
+        },
+        "preview": {
+          "minutes": 89,
+          "reserved": {},
+          "facility": {
+            "fixtureId": "fixture-1",
+            "roomId": "bedroom",
+            "fixtureKind": "mat",
+            "fixtureCell": 2,
+            "moveMinutes": 4,
+            "useMinutes": 85
+          }
+        }
+      }
+    ],
+    "firstKayaThenSui": {
+      "first": {
+        "minutes": 89,
+        "reserved": {},
+        "facility": {
+          "fixtureId": "fixture-1",
+          "roomId": "bedroom",
+          "fixtureKind": "mat",
+          "fixtureCell": 2,
+          "moveMinutes": 4,
+          "useMinutes": 85
+        }
+      },
+      "sameChosenRejected": {
+        "disabled": "使える設備はほかの住人が予約しています。"
+      },
+      "secondAuto": {
+        "minutes": 91,
+        "reserved": {},
+        "facility": {
+          "fixtureId": "mat-1",
+          "roomId": "bedroom",
+          "fixtureKind": "mat",
+          "fixtureCell": 10,
+          "moveMinutes": 6,
+          "useMinutes": 85
+        }
+      }
+    },
+    "firstSuiThenKaya": {
+      "first": {
+        "minutes": 89,
+        "reserved": {},
+        "facility": {
+          "fixtureId": "fixture-1",
+          "roomId": "bedroom",
+          "fixtureKind": "mat",
+          "fixtureCell": 2,
+          "moveMinutes": 4,
+          "useMinutes": 85
+        }
+      },
+      "secondAuto": {
+        "minutes": 91,
+        "reserved": {},
+        "facility": {
+          "fixtureId": "mat-1",
+          "roomId": "bedroom",
+          "fixtureKind": "mat",
+          "fixtureCell": 10,
+          "moveMinutes": 6,
+          "useMinutes": 85
+        }
+      }
+    },
+    "nearerOriginal": {
+      "time": 486,
+      "position": {
+        "kind": "at",
+        "point": {
+          "domainId": "[\"room\",\"bedroom\"]",
+          "cell": 6
+        }
+      },
+      "auto": {
+        "minutes": 85,
+        "reserved": {},
+        "facility": {
+          "fixtureId": "mat-1",
+          "roomId": "bedroom",
+          "fixtureKind": "mat",
+          "fixtureCell": 10,
+          "moveMinutes": 0,
+          "useMinutes": 85
+        }
+      },
+      "explicitOther": {
+        "minutes": 87,
+        "reserved": {},
+        "facility": {
+          "fixtureId": "fixture-1",
+          "roomId": "bedroom",
+          "fixtureKind": "mat",
+          "fixtureCell": 2,
+          "moveMinutes": 2,
+          "useMinutes": 85
+        }
+      }
+    },
+    "sameRoomRestriction": {
+      "kaya": {
+        "minutes": 89,
+        "reserved": {},
+        "facility": {
+          "fixtureId": "fixture-1",
+          "roomId": "bedroom",
+          "fixtureKind": "mat",
+          "fixtureCell": 2,
+          "moveMinutes": 4,
+          "useMinutes": 85
+        }
+      },
+      "sui": {
+        "disabled": "入室の許可がありません。通る部屋の利用許可を確認してください。"
+      },
+      "suiEach": [
+        {
+          "fixtureId": "mat-1",
+          "preview": {
+            "disabled": "入室の許可がありません。通る部屋の利用許可を確認してください。"
+          }
+        },
+        {
+          "fixtureId": "fixture-1",
+          "preview": {
+            "disabled": "入室の許可がありません。通る部屋の利用許可を確認してください。"
+          }
+        }
+      ]
+    },
+    "insideRoomRestriction": {
+      "kayaPosition": {
+        "kind": "at",
+        "point": {
+          "domainId": "[\"room\",\"bedroom\"]",
+          "cell": 6
+        }
+      },
+      "beds": [
+        {
+          "fixtureId": "mat-1",
+          "preview": {
+            "disabled": "設備を使う許可がありません。部屋の利用許可を確認してください。"
+          }
+        },
+        {
+          "fixtureId": "fixture-1",
+          "preview": {
+            "disabled": "設備を使う許可がありません。部屋の利用許可を確認してください。"
+          }
+        }
+      ]
+    },
+    "splitRoomInventory": [
+      {
+        "roomId": "living",
+        "roomName": "居間",
+        "width": 4,
+        "height": 3,
+        "fixtureId": "hearth-1",
+        "kind": "hearth",
+        "name": "小さなかまど",
+        "fixtureCell": 3,
+        "fixtureCoordinate": "4列1行",
+        "usePoints": [
+          {
+            "seat": 0,
+            "cell": 2,
+            "coordinate": "3列1行"
+          }
+        ]
+      },
+      {
+        "roomId": "living",
+        "roomName": "居間",
+        "width": 4,
+        "height": 3,
+        "fixtureId": "bench-1",
+        "kind": "bench",
+        "name": "長椅子",
+        "fixtureCell": 5,
+        "fixtureCoordinate": "2列2行",
+        "usePoints": [
+          {
+            "seat": 0,
+            "cell": 1,
+            "coordinate": "2列1行"
+          },
+          {
+            "seat": 1,
+            "cell": 1,
+            "coordinate": "2列1行"
+          }
+        ]
+      },
+      {
+        "roomId": "living",
+        "roomName": "居間",
+        "width": 4,
+        "height": 3,
+        "fixtureId": "window-1",
+        "kind": "window",
+        "name": "窓辺の腰掛け",
+        "fixtureCell": 11,
+        "fixtureCoordinate": "4列3行",
+        "usePoints": [
+          {
+            "seat": 0,
+            "cell": 7,
+            "coordinate": "4列2行"
+          }
+        ]
+      },
+      {
+        "roomId": "living",
+        "roomName": "居間",
+        "width": 4,
+        "height": 3,
+        "fixtureId": "fixture-1",
+        "kind": "mat",
+        "name": "敷きむしろ",
+        "fixtureCell": 8,
+        "fixtureCoordinate": "1列3行",
+        "usePoints": [
+          {
+            "seat": 0,
+            "cell": 4,
+            "coordinate": "1列2行"
+          }
+        ]
+      },
+      {
+        "roomId": "bedroom",
+        "roomName": "寝室",
+        "width": 4,
+        "height": 3,
+        "fixtureId": "mat-1",
+        "kind": "mat",
+        "name": "敷きむしろ",
+        "fixtureCell": 10,
+        "fixtureCoordinate": "3列3行",
+        "usePoints": [
+          {
+            "seat": 0,
+            "cell": 6,
+            "coordinate": "3列2行"
+          }
+        ]
+      },
+      {
+        "roomId": "yard",
+        "roomName": "裏庭",
+        "width": 4,
+        "height": 3,
+        "fixtureId": "latrine-1",
+        "kind": "latrine",
+        "name": "外の厠",
+        "fixtureCell": 3,
+        "fixtureCoordinate": "4列1行",
+        "usePoints": [
+          {
+            "seat": 0,
+            "cell": 2,
+            "coordinate": "3列1行"
+          }
+        ]
+      },
+      {
+        "roomId": "yard",
+        "roomName": "裏庭",
+        "width": 4,
+        "height": 3,
+        "fixtureId": "basin-1",
+        "kind": "basin",
+        "name": "水桶",
+        "fixtureCell": 11,
+        "fixtureCoordinate": "4列3行",
+        "usePoints": [
+          {
+            "seat": 0,
+            "cell": 7,
+            "coordinate": "4列2行"
+          }
+        ]
+      }
+    ],
+    "splitRestrictions": [
+      {
+        "id": "person-1",
+        "automatic": {
+          "minutes": 86,
+          "reserved": {},
+          "facility": {
+            "fixtureId": "fixture-1",
+            "roomId": "living",
+            "fixtureKind": "mat",
+            "fixtureCell": 8,
+            "moveMinutes": 1,
+            "useMinutes": 85
+          }
+        },
+        "privateBed": {
+          "minutes": 91,
+          "reserved": {},
+          "facility": {
+            "fixtureId": "mat-1",
+            "roomId": "bedroom",
+            "fixtureKind": "mat",
+            "fixtureCell": 10,
+            "moveMinutes": 6,
+            "useMinutes": 85
+          }
+        }
+      },
+      {
+        "id": "person-2",
+        "automatic": {
+          "minutes": 86,
+          "reserved": {},
+          "facility": {
+            "fixtureId": "fixture-1",
+            "roomId": "living",
+            "fixtureKind": "mat",
+            "fixtureCell": 8,
+            "moveMinutes": 1,
+            "useMinutes": 85
+          }
+        },
+        "privateBed": {
+          "disabled": "入室の許可がありません。通る部屋の利用許可を確認してください。"
+        }
+      }
+    ],
+    "interpretation": "Distance and reservation order explain these choices; different quiet/curious personalities do not change the selected equal-type bed from the same position. Room access applies to both beds in one room; it is not a bed-owner or priority field."
+  },
+  "daily": {
+    "control": "Both travel from home forest to landing at 08:00, work once, return and eat. A returning diner who encounters the occupied single hearth receives explicit five-minute waits and retries through the core API; the wait command is not exposed by current UI options. Autonomous life follows until 20:00. The currently active tasks are cancelled via public API, with transit safely completed. Kaya requests mat-1, Sui requests the same and is rejected, then takes the other mat. Autonomous life resumes through next 08:00.",
+    "caution": "This is an API scenario and UI-source reading, not an actual browser interaction. Changing active resident resets the uncommitted selector in current UI source; no UI re-selection count is claimed as a measured click count. The forced 20:00 rest starts with energy above 80; it is a controlled simultaneous-use probe, not a claim that autonomous residents would choose bed at 20:00.",
+    "beforeRest": {
+      "time": 1200,
+      "clock": "D1 20:00",
+      "stock": {
+        "wood": 23,
+        "food": 6,
+        "ingredients": 7,
+        "coins": 8
+      },
+      "rng": 5317,
+      "actors": [
+        {
+          "id": "person-1",
+          "name": "カヤ",
+          "location": "forest",
+          "room": "yard",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 2
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 86.39999999999877,
+            "bladder": 91.68000000000018,
+            "hygiene": 82.8400000000006,
+            "energy": 82.3195000000008,
+            "social": 58.04239999999999,
+            "fun": 99.72000000000003
+          },
+          "mood": 76,
+          "metrics": {
+            "free": 353,
+            "work": 39,
+            "care": 221,
+            "travel": 92,
+            "waiting": 15
+          },
+          "memories": [
+            {
+              "label": "静かな自由時間",
+              "value": 5,
+              "until": 1356
+            }
+          ],
+          "reason": "指示を取り消しました。次の時間進行で自分の予定を選びます。",
+          "cargo": {
+            "wood": 0,
+            "food": 0,
+            "ingredients": 0,
+            "coins": 0
+          }
+        },
+        {
+          "id": "person-2",
+          "name": "スイ",
+          "location": "forest",
+          "room": "yard",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 2
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 83.75999999999902,
+            "bladder": 96.00000000000009,
+            "hygiene": 87.2930000000015,
+            "energy": 81.72100000000081,
+            "social": 47.17000000000008,
+            "fun": 84.18000000000154
+          },
+          "mood": 69,
+          "metrics": {
+            "free": 361,
+            "work": 32,
+            "care": 221,
+            "travel": 106,
+            "waiting": 0
+          },
+          "memories": [],
+          "reason": "指示を取り消しました。次の時間進行で自分の予定を選びます。",
+          "cargo": {
+            "wood": 0,
+            "food": 0,
+            "ingredients": 0,
+            "coins": 0
+          }
+        }
+      ],
+      "reservations": {},
+      "construction": null,
+      "items": {}
+    },
+    "bedUses": [
+      {
+        "actorName": "カヤ",
+        "source": "automatic",
+        "start": 936,
+        "startClock": "D1 15:36",
+        "end": 1029,
+        "endClock": "D1 17:09",
+        "elapsed": 93,
+        "endKind": "completed",
+        "metrics": {
+          "free": 0,
+          "work": 0,
+          "care": 85,
+          "travel": 8,
+          "waiting": 0
+        },
+        "startPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"yard\"]",
+            "cell": 7
+          }
+        },
+        "endPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 1
+          }
+        },
+        "startNeeds": {
+          "hunger": 60.39999999999872,
+          "bladder": 69.28000000000065,
+          "hygiene": 100,
+          "energy": 41.77300000000065,
+          "social": 42.942399999999964,
+          "fun": 96.64000000000033
+        },
+        "endNeeds": {
+          "hunger": 49.23999999999896,
+          "bladder": 54.40000000000097,
+          "hygiene": 93.95500000000021,
+          "energy": 99.24850000000058,
+          "social": 39.259599999999956,
+          "fun": 90.13000000000096
+        },
+        "memories": [
+          {
+            "label": "静かな自由時間",
+            "value": 5,
+            "until": 1048
+          }
+        ],
+        "task": {
+          "kind": "need",
+          "label": "むしろに横になる",
+          "total": 85,
+          "remaining": 85,
+          "from": "forest",
+          "metric": "care",
+          "mode": "auto",
+          "target": "energy",
+          "reserved": {},
+          "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+          "room": "bedroom",
+          "spatial": {
+            "orderId": "order-9",
+            "kind": "use"
+          }
+        },
+        "bedCandidatesAtMinuteStart": [
+          {
+            "fixtureId": "mat-1",
+            "roomId": "bedroom",
+            "preview": {
+              "minutes": 95,
+              "reserved": {},
+              "facility": {
+                "fixtureId": "mat-1",
+                "roomId": "bedroom",
+                "fixtureKind": "mat",
+                "fixtureCell": 10,
+                "moveMinutes": 10,
+                "useMinutes": 85
+              }
+            }
+          },
+          {
+            "fixtureId": "fixture-1",
+            "roomId": "bedroom",
+            "preview": {
+              "minutes": 93,
+              "reserved": {},
+              "facility": {
+                "fixtureId": "fixture-1",
+                "roomId": "bedroom",
+                "fixtureKind": "mat",
+                "fixtureCell": 2,
+                "moveMinutes": 8,
+                "useMinutes": 85
+              }
+            }
+          }
+        ],
+        "reservationsAtMinuteStart": {}
+      },
+      {
+        "actorName": "スイ",
+        "source": "automatic",
+        "start": 1031,
+        "startClock": "D1 17:11",
+        "end": 1124,
+        "endClock": "D1 18:44",
+        "elapsed": 93,
+        "endKind": "completed",
+        "metrics": {
+          "free": 0,
+          "work": 0,
+          "care": 85,
+          "travel": 8,
+          "waiting": 0
+        },
+        "startPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"yard\"]",
+            "cell": 7
+          }
+        },
+        "endPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 1
+          }
+        },
+        "startNeeds": {
+          "hunger": 46.35999999999902,
+          "bladder": 59.5200000000017,
+          "hygiene": 98.27800000000111,
+          "energy": 32.149500000000785,
+          "social": 56.46500000000003,
+          "fun": 96.01000000000039
+        },
+        "endNeeds": {
+          "hunger": 35.19999999999926,
+          "bladder": 44.64000000000202,
+          "hygiene": 92.23300000000133,
+          "energy": 89.6250000000007,
+          "social": 51.35000000000006,
+          "fun": 89.50000000000102
+        },
+        "memories": [],
+        "task": {
+          "kind": "need",
+          "label": "むしろに横になる",
+          "total": 85,
+          "remaining": 85,
+          "from": "forest",
+          "metric": "care",
+          "mode": "auto",
+          "target": "energy",
+          "reserved": {},
+          "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+          "room": "bedroom",
+          "spatial": {
+            "orderId": "order-12",
+            "kind": "use"
+          }
+        },
+        "bedCandidatesAtMinuteStart": [
+          {
+            "fixtureId": "mat-1",
+            "roomId": "bedroom",
+            "preview": {
+              "minutes": 95,
+              "reserved": {},
+              "facility": {
+                "fixtureId": "mat-1",
+                "roomId": "bedroom",
+                "fixtureKind": "mat",
+                "fixtureCell": 10,
+                "moveMinutes": 10,
+                "useMinutes": 85
+              }
+            }
+          },
+          {
+            "fixtureId": "fixture-1",
+            "roomId": "bedroom",
+            "preview": {
+              "minutes": 93,
+              "reserved": {},
+              "facility": {
+                "fixtureId": "fixture-1",
+                "roomId": "bedroom",
+                "fixtureKind": "mat",
+                "fixtureCell": 2,
+                "moveMinutes": 8,
+                "useMinutes": 85
+              }
+            }
+          }
+        ],
+        "reservationsAtMinuteStart": {
+          "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"bench-1\\\",0]\"]": {
+            "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"bench-1\\\",0]\"]",
+            "targetId": "[\"slot\",\"living\",\"bench-1\",0]",
+            "actorId": "person-1",
+            "orderId": "order-11",
+            "kind": "slot"
+          }
+        }
+      },
+      {
+        "actorName": "カヤ",
+        "source": "direct",
+        "start": 1200,
+        "startClock": "D1 20:00",
+        "end": 1293,
+        "endClock": "D1 21:33",
+        "elapsed": 93,
+        "endKind": "completed",
+        "metrics": {
+          "free": 0,
+          "work": 0,
+          "care": 85,
+          "travel": 8,
+          "waiting": 0
+        },
+        "startPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"yard\"]",
+            "cell": 2
+          }
+        },
+        "endPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 6
+          }
+        },
+        "startNeeds": {
+          "hunger": 86.39999999999877,
+          "bladder": 91.68000000000018,
+          "hygiene": 82.8400000000006,
+          "energy": 82.3195000000008,
+          "social": 58.04239999999999,
+          "fun": 99.72000000000003
+        },
+        "endNeeds": {
+          "hunger": 75.23999999999835,
+          "bladder": 76.8000000000005,
+          "hygiene": 76.79500000000081,
+          "energy": 100,
+          "social": 54.35959999999998,
+          "fun": 93.21000000000066
+        },
+        "memories": [
+          {
+            "label": "静かな自由時間",
+            "value": 5,
+            "until": 1356
+          }
+        ],
+        "task": {
+          "kind": "need",
+          "label": "むしろに横になる",
+          "total": 85,
+          "remaining": 85,
+          "from": "forest",
+          "metric": "care",
+          "mode": "direct",
+          "target": "energy",
+          "reserved": {},
+          "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+          "room": "bedroom",
+          "spatial": {
+            "orderId": "order-17",
+            "kind": "use"
+          }
+        },
+        "bedCandidatesAtMinuteStart": null,
+        "reservationsAtMinuteStart": null
+      },
+      {
+        "actorName": "スイ",
+        "source": "direct",
+        "start": 1200,
+        "startClock": "D1 20:00",
+        "end": 1291,
+        "endClock": "D1 21:31",
+        "elapsed": 91,
+        "endKind": "completed",
+        "metrics": {
+          "free": 0,
+          "work": 0,
+          "care": 85,
+          "travel": 6,
+          "waiting": 0
+        },
+        "startPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"yard\"]",
+            "cell": 2
+          }
+        },
+        "endPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 1
+          }
+        },
+        "startNeeds": {
+          "hunger": 83.75999999999902,
+          "bladder": 96.00000000000009,
+          "hygiene": 87.2930000000015,
+          "energy": 81.72100000000081,
+          "social": 47.17000000000008,
+          "fun": 84.18000000000154
+        },
+        "endNeeds": {
+          "hunger": 72.83999999999861,
+          "bladder": 81.4400000000004,
+          "hygiene": 81.3780000000017,
+          "energy": 100,
+          "social": 42.165000000000106,
+          "fun": 77.81000000000216
+        },
+        "memories": [],
+        "task": {
+          "kind": "need",
+          "label": "むしろに横になる",
+          "total": 85,
+          "remaining": 85,
+          "from": "forest",
+          "metric": "care",
+          "mode": "direct",
+          "target": "energy",
+          "reserved": {},
+          "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+          "room": "bedroom",
+          "spatial": {
+            "orderId": "order-18",
+            "kind": "use"
+          }
+        },
+        "bedCandidatesAtMinuteStart": null,
+        "reservationsAtMinuteStart": null
+      },
+      {
+        "actorName": "カヤ",
+        "source": "automatic",
+        "start": 1556,
+        "startClock": "D2 01:56",
+        "end": 1647,
+        "endClock": "D2 03:27",
+        "elapsed": 91,
+        "endKind": "completed",
+        "metrics": {
+          "free": 0,
+          "work": 0,
+          "care": 85,
+          "travel": 6,
+          "waiting": 0
+        },
+        "startPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"yard\"]",
+            "cell": 2
+          }
+        },
+        "endPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 1
+          }
+        },
+        "startNeeds": {
+          "hunger": 43.67999999999836,
+          "bladder": 100,
+          "hygiene": 59.70000000000141,
+          "energy": 74.67300000000031,
+          "social": 43.94479999999996,
+          "fun": 98.39000000000016
+        },
+        "endNeeds": {
+          "hunger": 32.75999999999859,
+          "bladder": 85.44000000000031,
+          "hygiene": 53.78500000000162,
+          "energy": 100,
+          "social": 40.34119999999995,
+          "fun": 92.02000000000078
+        },
+        "memories": [
+          {
+            "label": "静かな自由時間",
+            "value": 5,
+            "until": 1693
+          }
+        ],
+        "task": {
+          "kind": "need",
+          "label": "むしろに横になる",
+          "total": 85,
+          "remaining": 85,
+          "from": "forest",
+          "metric": "care",
+          "mode": "auto",
+          "target": "energy",
+          "reserved": {},
+          "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+          "room": "bedroom",
+          "spatial": {
+            "orderId": "order-21",
+            "kind": "use"
+          }
+        },
+        "bedCandidatesAtMinuteStart": [
+          {
+            "fixtureId": "mat-1",
+            "roomId": "bedroom",
+            "preview": {
+              "minutes": 93,
+              "reserved": {},
+              "facility": {
+                "fixtureId": "mat-1",
+                "roomId": "bedroom",
+                "fixtureKind": "mat",
+                "fixtureCell": 10,
+                "moveMinutes": 8,
+                "useMinutes": 85
+              }
+            }
+          },
+          {
+            "fixtureId": "fixture-1",
+            "roomId": "bedroom",
+            "preview": {
+              "minutes": 91,
+              "reserved": {},
+              "facility": {
+                "fixtureId": "fixture-1",
+                "roomId": "bedroom",
+                "fixtureKind": "mat",
+                "fixtureCell": 2,
+                "moveMinutes": 6,
+                "useMinutes": 85
+              }
+            }
+          }
+        ],
+        "reservationsAtMinuteStart": {}
+      },
+      {
+        "actorName": "スイ",
+        "source": "automatic",
+        "start": 1610,
+        "startClock": "D2 02:50",
+        "end": 1703,
+        "endClock": "D2 04:23",
+        "elapsed": 93,
+        "endKind": "completed",
+        "metrics": {
+          "free": 0,
+          "work": 0,
+          "care": 85,
+          "travel": 8,
+          "waiting": 0
+        },
+        "startPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 2
+          }
+        },
+        "endPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 6
+          }
+        },
+        "startNeeds": {
+          "hunger": 92.23999999999883,
+          "bladder": 95.2000000000001,
+          "hygiene": 60.64300000000243,
+          "energy": 68.66900000000041,
+          "social": 50.39000000000017,
+          "fun": 96.22000000000037
+        },
+        "endNeeds": {
+          "hunger": 81.0799999999984,
+          "bladder": 80.32000000000042,
+          "hygiene": 54.59800000000264,
+          "energy": 100,
+          "social": 45.2750000000002,
+          "fun": 89.710000000001
+        },
+        "memories": [],
+        "task": {
+          "kind": "need",
+          "label": "むしろに横になる",
+          "total": 85,
+          "remaining": 85,
+          "from": "forest",
+          "metric": "care",
+          "mode": "auto",
+          "target": "energy",
+          "reserved": {},
+          "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+          "room": "bedroom",
+          "spatial": {
+            "orderId": "order-24",
+            "kind": "use"
+          }
+        },
+        "bedCandidatesAtMinuteStart": [
+          {
+            "fixtureId": "mat-1",
+            "roomId": "bedroom",
+            "preview": {
+              "minutes": 93,
+              "reserved": {},
+              "facility": {
+                "fixtureId": "mat-1",
+                "roomId": "bedroom",
+                "fixtureKind": "mat",
+                "fixtureCell": 10,
+                "moveMinutes": 8,
+                "useMinutes": 85
+              }
+            }
+          },
+          {
+            "fixtureId": "fixture-1",
+            "roomId": "bedroom",
+            "preview": {
+              "disabled": "使える設備はほかの住人が予約しています。"
+            }
+          }
+        ],
+        "reservationsAtMinuteStart": {
+          "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]": {
+            "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]",
+            "targetId": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+            "actorId": "person-1",
+            "orderId": "order-21",
+            "kind": "slot"
+          }
+        }
+      }
+    ],
+    "morningStock": {
+      "wood": 22,
+      "food": 10,
+      "ingredients": 3,
+      "coins": 8
+    },
+    "morningTasks": [
+      {
+        "name": "カヤ",
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"yard\"]",
+            "cell": 7
+          }
+        },
+        "needs": {
+          "hunger": 57.679999999997825,
+          "bladder": 41.76000000000124,
+          "hygiene": 37.81450000000212,
+          "energy": 73.21000000000035,
+          "social": 55.08479999999997,
+          "fun": 96.43000000000035
+        },
+        "metrics": {
+          "free": 689,
+          "work": 117,
+          "care": 485,
+          "travel": 134,
+          "waiting": 15
+        },
+        "task": {
+          "kind": "need",
+          "label": "水を汲んで身を清める",
+          "total": 46,
+          "remaining": 7,
+          "from": "forest",
+          "metric": "care",
+          "mode": "auto",
+          "target": "hygiene",
+          "reserved": {},
+          "station": "[\"slot\",\"yard\",\"basin-1\",0]",
+          "room": "yard",
+          "spatial": {
+            "orderId": "order-30",
+            "kind": "use"
+          }
+        }
+      },
+      {
+        "name": "スイ",
+        "position": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"living\"]",
+            "cell": 1
+          }
+        },
+        "needs": {
+          "hunger": 55.03999999999795,
+          "bladder": 45.60000000000116,
+          "hygiene": 40.493000000003136,
+          "energy": 79.08575000000026,
+          "social": 59.110000000000205,
+          "fun": 99.72000000000003
+        },
+        "metrics": {
+          "free": 791,
+          "work": 32,
+          "care": 466,
+          "travel": 151,
+          "waiting": 0
+        },
+        "task": {
+          "kind": "leisure",
+          "label": "道具を手入れして木目を眺める",
+          "total": 48,
+          "remaining": 44,
+          "from": "forest",
+          "metric": "free",
+          "mode": "auto",
+          "reserved": {}
+        }
+      }
+    ],
+    "orders": [
+      {
+        "sequence": 1,
+        "clock": "D1 08:00",
+        "actorId": "person-1",
+        "kind": "travel",
+        "target": "landing",
+        "label": "08:00 作業に出かける",
+        "accepted": true,
+        "preview": {
+          "minutes": 25,
+          "reserved": {}
+        }
+      },
+      {
+        "sequence": 2,
+        "clock": "D1 08:00",
+        "actorId": "person-2",
+        "kind": "travel",
+        "target": "landing",
+        "label": "08:00 作業に出かける",
+        "accepted": true,
+        "preview": {
+          "minutes": 25,
+          "reserved": {}
+        }
+      },
+      {
+        "sequence": 3,
+        "clock": "D1 08:25",
+        "actorId": "person-1",
+        "kind": "work",
+        "target": "wood:hard",
+        "label": "渡し場で木工",
+        "accepted": true,
+        "preview": {
+          "minutes": 39,
+          "reserved": {}
+        }
+      },
+      {
+        "sequence": 4,
+        "clock": "D1 08:25",
+        "actorId": "person-2",
+        "kind": "work",
+        "target": "wood",
+        "label": "渡し場で木工",
+        "accepted": true,
+        "preview": {
+          "minutes": 32,
+          "reserved": {}
+        }
+      },
+      {
+        "sequence": 5,
+        "clock": "D1 08:57",
+        "actorId": "person-2",
+        "kind": "return",
+        "target": null,
+        "label": "仕事を終えて家に戻る",
+        "accepted": true,
+        "preview": {
+          "minutes": 25,
+          "reserved": {}
+        }
+      },
+      {
+        "sequence": 6,
+        "clock": "D1 09:04",
+        "actorId": "person-1",
+        "kind": "return",
+        "target": null,
+        "label": "仕事を終えて家に戻る",
+        "accepted": true,
+        "preview": {
+          "minutes": 25,
+          "reserved": {}
+        }
+      },
+      {
+        "sequence": 7,
+        "clock": "D1 09:22",
+        "actorId": "person-2",
+        "kind": "need",
+        "target": "hunger",
+        "label": "帰宅後に食事",
+        "accepted": true,
+        "preview": {
+          "minutes": 22,
+          "reserved": {
+            "food": 1
+          },
+          "facility": {
+            "fixtureId": "hearth-1",
+            "roomId": "living",
+            "fixtureKind": "hearth",
+            "fixtureCell": 3,
+            "moveMinutes": 2,
+            "useMinutes": 20
+          }
+        }
+      },
+      {
+        "sequence": 8,
+        "clock": "D1 09:29",
+        "actorId": "person-1",
+        "kind": "need",
+        "target": "hunger",
+        "label": "帰宅後の食事を試みるが、先客が予約中",
+        "accepted": false,
+        "preview": {
+          "disabled": "使える設備はほかの住人が予約しています。"
+        }
+      },
+      {
+        "sequence": 9,
+        "clock": "D1 09:29",
+        "actorId": "person-1",
+        "kind": "wait",
+        "target": null,
+        "label": "研究制御: 公開本体APIで5分待機して再確認（UIの指示ではない）",
+        "accepted": true,
+        "preview": {
+          "minutes": 5,
+          "reserved": {}
+        }
+      },
+      {
+        "sequence": 10,
+        "clock": "D1 09:34",
+        "actorId": "person-1",
+        "kind": "need",
+        "target": "hunger",
+        "label": "帰宅後の食事を試みるが、先客が予約中",
+        "accepted": false,
+        "preview": {
+          "disabled": "使える設備はほかの住人が予約しています。"
+        }
+      },
+      {
+        "sequence": 11,
+        "clock": "D1 09:34",
+        "actorId": "person-1",
+        "kind": "wait",
+        "target": null,
+        "label": "研究制御: 公開本体APIで5分待機して再確認（UIの指示ではない）",
+        "accepted": true,
+        "preview": {
+          "minutes": 5,
+          "reserved": {}
+        }
+      },
+      {
+        "sequence": 12,
+        "clock": "D1 09:39",
+        "actorId": "person-1",
+        "kind": "need",
+        "target": "hunger",
+        "label": "帰宅後の食事を試みるが、先客が予約中",
+        "accepted": false,
+        "preview": {
+          "disabled": "使える設備はほかの住人が予約しています。"
+        }
+      },
+      {
+        "sequence": 13,
+        "clock": "D1 09:39",
+        "actorId": "person-1",
+        "kind": "wait",
+        "target": null,
+        "label": "研究制御: 公開本体APIで5分待機して再確認（UIの指示ではない）",
+        "accepted": true,
+        "preview": {
+          "minutes": 5,
+          "reserved": {}
+        }
+      },
+      {
+        "sequence": 14,
+        "clock": "D1 09:44",
+        "actorId": "person-1",
+        "kind": "need",
+        "target": "hunger",
+        "label": "帰宅後に食事",
+        "accepted": true,
+        "preview": {
+          "minutes": 22,
+          "reserved": {
+            "food": 1
+          },
+          "facility": {
+            "fixtureId": "hearth-1",
+            "roomId": "living",
+            "fixtureKind": "hearth",
+            "fixtureCell": 3,
+            "moveMinutes": 2,
+            "useMinutes": 20
+          }
+        }
+      },
+      {
+        "sequence": 15,
+        "clock": "D1 20:00",
+        "actorId": "person-1",
+        "kind": "cancel",
+        "target": null,
+        "label": "同じ時間帯の寝床競合を確認するため、現在の予定を取り消す",
+        "accepted": true,
+        "preview": {}
+      },
+      {
+        "sequence": 16,
+        "clock": "D1 20:00",
+        "actorId": "person-2",
+        "kind": "cancel",
+        "target": null,
+        "label": "同じ時間帯の寝床競合を確認するため、現在の予定を取り消す",
+        "accepted": true,
+        "preview": {}
+      },
+      {
+        "sequence": 17,
+        "clock": "D1 20:00",
+        "actorId": "person-1",
+        "kind": "home-use",
+        "target": "mat-1",
+        "label": "夜、カヤが元のむしろを明示指定",
+        "accepted": true,
+        "preview": {
+          "minutes": 93,
+          "reserved": {},
+          "facility": {
+            "fixtureId": "mat-1",
+            "roomId": "bedroom",
+            "fixtureKind": "mat",
+            "fixtureCell": 10,
+            "moveMinutes": 8,
+            "useMinutes": 85
+          }
+        }
+      },
+      {
+        "sequence": 18,
+        "clock": "D1 20:00",
+        "actorId": "person-2",
+        "kind": "home-use",
+        "target": "mat-1",
+        "label": "住人をスイに切り替え、同じむしろを選ぶ",
+        "accepted": false,
+        "preview": {
+          "disabled": "使える設備はほかの住人が予約しています。"
+        }
+      },
+      {
+        "sequence": 19,
+        "clock": "D1 20:00",
+        "actorId": "person-2",
+        "kind": "home-use",
+        "target": "fixture-1",
+        "label": "スイはもう一台の同じむしろを選ぶ",
+        "accepted": true,
+        "preview": {
+          "minutes": 91,
+          "reserved": {},
+          "facility": {
+            "fixtureId": "fixture-1",
+            "roomId": "bedroom",
+            "fixtureKind": "mat",
+            "fixtureCell": 2,
+            "moveMinutes": 6,
+            "useMinutes": 85
+          }
+        }
+      }
+    ]
+  },
+  "checks": {
+    "initialGameValid": true,
+    "originUnchanged": true,
+    "personalSaveUsed": false,
+    "productCodeEdited": false,
+    "browserOperated": false,
+    "explicitWaitExposedInCurrentOptions": false
+  },
+  "scope": "公開本体APIによる制御再現とUIコード読取り。製品コード変更・UI操作・個人セーブ利用なし。",
+  "checkpoints": [
+    {
+      "scenario": "A",
+      "label": "both-orders-reserved",
+      "time": 516,
+      "clock": "D1 08:36",
+      "advanceMinutes": 1,
+      "gameHash": "6d3e7d69e9a6947b3782203badfe286ca5cb22265c3de50d5ec547f793936d33",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 14,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-1",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": null,
+          "task": {
+            "kind": "work",
+            "label": "枝を削って木材を整える",
+            "total": 32,
+            "remaining": 28,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "target": "wood",
+            "reserved": {}
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"living\",\"fixture-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-1",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "A",
+      "label": "sui-reading-use",
+      "time": 545,
+      "clock": "D1 09:05",
+      "advanceMinutes": 19,
+      "gameHash": "4be7b83a45d7407daa2af597141a8d17cb87b377592cb4fb53450718f96c3917",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 2
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "work",
+            "label": "野菜を煮て食事を作る",
+            "total": 39,
+            "remaining": 30,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "target": "cook",
+            "reserved": {
+              "ingredients": 2
+            },
+            "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-2",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 13,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-3",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"hearth-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"hearth-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"living\",\"hearth-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-2",
+          "kind": "slot"
+        },
+        "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"living\",\"fixture-1\",0]",
+          "actorId": "person-2",
+          "orderId": "order-3",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "A",
+      "label": "next-morning",
+      "time": 1920,
+      "clock": "D2 08:00",
+      "advanceMinutes": 15,
+      "gameHash": "c6fc304c02c8f7aa00fbb1edce4bd548b0abc7c0c24d061434904eb6b6d53306",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 7
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "水を汲んで身を清める",
+            "total": 46,
+            "remaining": 45,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "hygiene",
+            "reserved": {},
+            "station": "[\"slot\",\"yard\",\"basin-1\",0]",
+            "room": "yard",
+            "spatial": {
+              "orderId": "order-31",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 1
+            }
+          },
+          "phase": "approach",
+          "task": {
+            "kind": "need",
+            "label": "外の厠を使う",
+            "total": 15,
+            "remaining": 15,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "bladder",
+            "reserved": {},
+            "station": "[\"slot\",\"yard\",\"latrine-1\",0]",
+            "room": "yard",
+            "spatial": {
+              "orderId": "order-32",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"basin-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"basin-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"yard\",\"basin-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-31",
+          "kind": "slot"
+        },
+        "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"latrine-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"latrine-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"yard\",\"latrine-1\",0]",
+          "actorId": "person-2",
+          "orderId": "order-32",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "B",
+      "label": "both-orders-reserved",
+      "time": 516,
+      "clock": "D1 08:36",
+      "advanceMinutes": 1,
+      "gameHash": "0eb2662a97d5416c89601625f473181544e95edc80f08cb8ecc91905200659bf",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 14,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-1",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": "approach",
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 14,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-2\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-2",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"living\",\"fixture-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-1",
+          "kind": "slot"
+        },
+        "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-2\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-2\\\",0]\"]",
+          "targetId": "[\"slot\",\"living\",\"fixture-2\",0]",
+          "actorId": "person-2",
+          "orderId": "order-2",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "B",
+      "label": "sui-reading-use",
+      "time": 522,
+      "clock": "D1 08:42",
+      "advanceMinutes": 19,
+      "gameHash": "2eddb40fbdb3bd49f30e5f505f6266aea417b1a62d8f491fb26130d441707b83",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 8,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-1",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 6
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 13,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-2\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-2",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"living\",\"fixture-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-1",
+          "kind": "slot"
+        },
+        "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-2\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-2\\\",0]\"]",
+          "targetId": "[\"slot\",\"living\",\"fixture-2\",0]",
+          "actorId": "person-2",
+          "orderId": "order-2",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "B",
+      "label": "next-morning",
+      "time": 1920,
+      "clock": "D2 08:00",
+      "advanceMinutes": 15,
+      "gameHash": "bfcc082165d45134b9572f131a910f63a8ed8a4fab91246a04a3d660bca291fe",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 7
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "work",
+            "label": "野菜を煮て食事を作る",
+            "total": 39,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "target": "cook",
+            "reserved": {
+              "ingredients": 2
+            },
+            "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-31",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 7
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "水を汲んで身を清める",
+            "total": 46,
+            "remaining": 18,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "hygiene",
+            "reserved": {},
+            "station": "[\"slot\",\"yard\",\"basin-1\",0]",
+            "room": "yard",
+            "spatial": {
+              "orderId": "order-30",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"basin-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"basin-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"yard\",\"basin-1\",0]",
+          "actorId": "person-2",
+          "orderId": "order-30",
+          "kind": "slot"
+        },
+        "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"hearth-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"hearth-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"living\",\"hearth-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-31",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "C",
+      "label": "construction-material-reserved",
+      "time": 480,
+      "clock": "D1 08:00",
+      "advanceMinutes": 1,
+      "gameHash": "438d82e31d5b17f4567c3032bea8a2c6a9fc1067a37c0a2b295d18e8d3c6cd53",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": null,
+          "task": null
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": null,
+          "task": null
+        }
+      ],
+      "reservations": {}
+    },
+    {
+      "scenario": "C",
+      "label": "construction-haul-in-transit",
+      "time": 482,
+      "clock": "D1 08:02",
+      "advanceMinutes": 9,
+      "gameHash": "d1b8f3f6148b406830035c0216f7d683821c2ae11a4453a47e5d3c3ea1bde866",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": null,
+          "task": {
+            "kind": "work",
+            "label": "丈夫な建具を組む",
+            "total": 39,
+            "remaining": 37,
+            "from": "forest",
+            "metric": "work",
+            "mode": "direct",
+            "target": "wood:hard",
+            "reserved": {}
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "transit",
+            "step": {
+              "kind": "connection",
+              "id": "[\"link\",\"bedroom\",\"living\"]",
+              "from": {
+                "domainId": "[\"room\",\"living\"]",
+                "cell": 0
+              },
+              "to": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 0
+              },
+              "minutes": 3
+            },
+            "remaining": 2
+          },
+          "phase": "carry",
+          "task": {
+            "kind": "home-haul",
+            "mode": "direct",
+            "label": "工事用木材を仮置き場へ運ぶ",
+            "total": 1,
+            "remaining": 1,
+            "reserved": {},
+            "from": "forest",
+            "metric": "travel",
+            "spatial": {
+              "kind": "carry",
+              "orderId": "order-1",
+              "constructionId": "construction-1",
+              "direction": "deliver"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"payload\",\"item\",\"construction-material-1\"]": {
+          "id": "[\"payload\",\"item\",\"construction-material-1\"]",
+          "targetId": "construction-material-1",
+          "actorId": "person-2",
+          "orderId": "order-1",
+          "kind": "payload",
+          "payloadKind": "item"
+        }
+      }
+    },
+    {
+      "scenario": "C",
+      "label": "construction-work-in-progress",
+      "time": 500,
+      "clock": "D1 08:20",
+      "advanceMinutes": 17,
+      "gameHash": "facfdcfe905b40788cb846de775f20d957868648a20ce7605f57e1ddae601e08",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": null,
+          "task": {
+            "kind": "work",
+            "label": "丈夫な建具を組む",
+            "total": 39,
+            "remaining": 19,
+            "from": "forest",
+            "metric": "work",
+            "mode": "direct",
+            "target": "wood:hard",
+            "reserved": {}
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 2
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "home-build",
+            "mode": "direct",
+            "label": "読書室を施工する",
+            "total": 30,
+            "remaining": 16,
+            "reserved": {},
+            "from": "forest",
+            "metric": "work",
+            "room": "bedroom",
+            "station": "[\"construction\",\"construction-1\"]",
+            "spatial": {
+              "kind": "use",
+              "orderId": "order-2",
+              "constructionId": "construction-1"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"construction\\\",\\\"construction-1\\\"]\"]": {
+          "id": "[\"slot\",\"[\\\"construction\\\",\\\"construction-1\\\"]\"]",
+          "targetId": "[\"construction\",\"construction-1\"]",
+          "actorId": "person-2",
+          "orderId": "order-2",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "C",
+      "label": "both-orders-reserved",
+      "time": 516,
+      "clock": "D1 08:36",
+      "advanceMinutes": 1,
+      "gameHash": "a4ff4ea9f351ff99ee75070d30608b1455767b4158db197b075c549426c5973a",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 14,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-3",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 2
+            }
+          },
+          "phase": "approach",
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 14,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"room-2\",\"fixture-3\",0]",
+            "room": "room-2",
+            "spatial": {
+              "orderId": "order-4",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"living\",\"fixture-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-3",
+          "kind": "slot"
+        },
+        "[\"slot\",\"[\\\"slot\\\",\\\"room-2\\\",\\\"fixture-3\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"room-2\\\",\\\"fixture-3\\\",0]\"]",
+          "targetId": "[\"slot\",\"room-2\",\"fixture-3\",0]",
+          "actorId": "person-2",
+          "orderId": "order-4",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "C",
+      "label": "sui-reading-movement",
+      "time": 519,
+      "clock": "D1 08:39",
+      "advanceMinutes": 20,
+      "gameHash": "2cc86a919354a58e79a037943462e860fe3a750a48f679f5b9819d7098b18af0",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 11,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-3",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "transit",
+            "step": {
+              "kind": "connection",
+              "id": "[\"link\",\"bedroom\",\"room-2\"]",
+              "from": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 0
+              },
+              "to": {
+                "domainId": "[\"room\",\"room-2\"]",
+                "cell": 0
+              },
+              "minutes": 3
+            },
+            "remaining": 2
+          },
+          "phase": "approach",
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 14,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"room-2\",\"fixture-3\",0]",
+            "room": "room-2",
+            "spatial": {
+              "orderId": "order-4",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"living\",\"fixture-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-3",
+          "kind": "slot"
+        },
+        "[\"slot\",\"[\\\"slot\\\",\\\"room-2\\\",\\\"fixture-3\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"room-2\\\",\\\"fixture-3\\\",0]\"]",
+          "targetId": "[\"slot\",\"room-2\",\"fixture-3\",0]",
+          "actorId": "person-2",
+          "orderId": "order-4",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "C",
+      "label": "sui-reading-use",
+      "time": 523,
+      "clock": "D1 08:43",
+      "advanceMinutes": 19,
+      "gameHash": "2f5c3a7748fb8256d6a177a30e9a70e41b192457bcd46dd972be43a777ec7618",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 7,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"fixture-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-3",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"room-2\"]",
+              "cell": 1
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "本を開いて過ごす",
+            "total": 14,
+            "remaining": 13,
+            "from": "forest",
+            "metric": "free",
+            "mode": "direct",
+            "target": "fun",
+            "reserved": {},
+            "station": "[\"slot\",\"room-2\",\"fixture-3\",0]",
+            "room": "room-2",
+            "spatial": {
+              "orderId": "order-4",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"fixture-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"living\",\"fixture-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-3",
+          "kind": "slot"
+        },
+        "[\"slot\",\"[\\\"slot\\\",\\\"room-2\\\",\\\"fixture-3\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"room-2\\\",\\\"fixture-3\\\",0]\"]",
+          "targetId": "[\"slot\",\"room-2\",\"fixture-3\",0]",
+          "actorId": "person-2",
+          "orderId": "order-4",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "C",
+      "label": "next-morning",
+      "time": 1920,
+      "clock": "D2 08:00",
+      "advanceMinutes": 15,
+      "gameHash": "a1c3b8a1920735b6e9465f28208181a6590646c6f1f7b326068c2b86c55f826b",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 2
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "work",
+            "label": "野菜を煮て食事を作る",
+            "total": 39,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "target": "cook",
+            "reserved": {
+              "ingredients": 2
+            },
+            "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-32",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 7
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "水を汲んで身を清める",
+            "total": 46,
+            "remaining": 39,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "hygiene",
+            "reserved": {},
+            "station": "[\"slot\",\"yard\",\"basin-1\",0]",
+            "room": "yard",
+            "spatial": {
+              "orderId": "order-33",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"hearth-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"living\\\",\\\"hearth-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"living\",\"hearth-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-32",
+          "kind": "slot"
+        },
+        "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"basin-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"basin-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"yard\",\"basin-1\",0]",
+          "actorId": "person-2",
+          "orderId": "order-33",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "daily",
+      "label": "morning-return-and-meals",
+      "time": 606,
+      "clock": "D1 10:06",
+      "advanceMinutes": 60,
+      "gameHash": "c8c3b8b9220e29be2544ca0b9ccff94047425449ef6f61393cac0be2fb033b7c",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 2
+            }
+          },
+          "phase": null,
+          "task": null
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 2
+            }
+          },
+          "phase": null,
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 26,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          }
+        }
+      ],
+      "reservations": {}
+    },
+    {
+      "scenario": "daily",
+      "label": "night-rest-reserved",
+      "time": 1200,
+      "clock": "D1 20:00",
+      "advanceMinutes": 3,
+      "gameHash": "7a94a643d5bd679813993b5e83749c87527d70e293a0898f248512941904b86c",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 2
+            }
+          },
+          "phase": "approach",
+          "task": {
+            "kind": "need",
+            "label": "むしろに横になる",
+            "total": 85,
+            "remaining": 85,
+            "from": "forest",
+            "metric": "care",
+            "mode": "direct",
+            "target": "energy",
+            "reserved": {},
+            "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+            "room": "bedroom",
+            "spatial": {
+              "orderId": "order-17",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 2
+            }
+          },
+          "phase": "approach",
+          "task": {
+            "kind": "need",
+            "label": "むしろに横になる",
+            "total": 85,
+            "remaining": 85,
+            "from": "forest",
+            "metric": "care",
+            "mode": "direct",
+            "target": "energy",
+            "reserved": {},
+            "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+            "room": "bedroom",
+            "spatial": {
+              "orderId": "order-18",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-17",
+          "kind": "slot"
+        },
+        "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+          "actorId": "person-2",
+          "orderId": "order-18",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "daily",
+      "label": "night-rest-moving",
+      "time": 1203,
+      "clock": "D1 20:03",
+      "advanceMinutes": 17,
+      "gameHash": "08d4bacd63f40758c33e3253efbadf931a5764e6525654dedb11870b63d594db",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "transit",
+            "step": {
+              "kind": "connection",
+              "id": "[\"link\",\"bedroom\",\"yard\"]",
+              "from": {
+                "domainId": "[\"room\",\"yard\"]",
+                "cell": 0
+              },
+              "to": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 0
+              },
+              "minutes": 3
+            },
+            "remaining": 2
+          },
+          "phase": "approach",
+          "task": {
+            "kind": "need",
+            "label": "むしろに横になる",
+            "total": 85,
+            "remaining": 85,
+            "from": "forest",
+            "metric": "care",
+            "mode": "direct",
+            "target": "energy",
+            "reserved": {},
+            "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+            "room": "bedroom",
+            "spatial": {
+              "orderId": "order-17",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "transit",
+            "step": {
+              "kind": "connection",
+              "id": "[\"link\",\"bedroom\",\"yard\"]",
+              "from": {
+                "domainId": "[\"room\",\"yard\"]",
+                "cell": 0
+              },
+              "to": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 0
+              },
+              "minutes": 3
+            },
+            "remaining": 2
+          },
+          "phase": "approach",
+          "task": {
+            "kind": "need",
+            "label": "むしろに横になる",
+            "total": 85,
+            "remaining": 85,
+            "from": "forest",
+            "metric": "care",
+            "mode": "direct",
+            "target": "energy",
+            "reserved": {},
+            "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+            "room": "bedroom",
+            "spatial": {
+              "orderId": "order-18",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-17",
+          "kind": "slot"
+        },
+        "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+          "actorId": "person-2",
+          "orderId": "order-18",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "daily",
+      "label": "night-rest-using",
+      "time": 1208,
+      "clock": "D1 20:08",
+      "advanceMinutes": 85,
+      "gameHash": "73f4a63a7fe85a52e3c79444fecebac930b417987b16e081677425aa8198f2f7",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 6
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "むしろに横になる",
+            "total": 85,
+            "remaining": 85,
+            "from": "forest",
+            "metric": "care",
+            "mode": "direct",
+            "target": "energy",
+            "reserved": {},
+            "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+            "room": "bedroom",
+            "spatial": {
+              "orderId": "order-17",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 1
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "むしろに横になる",
+            "total": 85,
+            "remaining": 83,
+            "from": "forest",
+            "metric": "care",
+            "mode": "direct",
+            "target": "energy",
+            "reserved": {},
+            "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+            "room": "bedroom",
+            "spatial": {
+              "orderId": "order-18",
+              "kind": "use"
+            }
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-17",
+          "kind": "slot"
+        },
+        "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+          "actorId": "person-2",
+          "orderId": "order-18",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "daily",
+      "label": "daily-next-morning",
+      "time": 1920,
+      "clock": "D2 08:00",
+      "advanceMinutes": 60,
+      "gameHash": "b23af85ab72300b0424bf6bc5d557a5330b9dfc8eda6167c7c7ea5a63ee01bff",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 7
+            }
+          },
+          "phase": "use",
+          "task": {
+            "kind": "need",
+            "label": "水を汲んで身を清める",
+            "total": 46,
+            "remaining": 7,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "hygiene",
+            "reserved": {},
+            "station": "[\"slot\",\"yard\",\"basin-1\",0]",
+            "room": "yard",
+            "spatial": {
+              "orderId": "order-30",
+              "kind": "use"
+            }
+          }
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 1
+            }
+          },
+          "phase": null,
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 44,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          }
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"basin-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"basin-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"yard\",\"basin-1\",0]",
+          "actorId": "person-1",
+          "orderId": "order-30",
+          "kind": "slot"
+        }
+      }
+    },
+    {
+      "scenario": "bed-nearness",
+      "label": "nearness-after-public-movement",
+      "time": 486,
+      "clock": "D1 08:06",
+      "advanceMinutes": 9,
+      "gameHash": "8b59327a37ff8fc32a85f217d2d82085029267c0e9ed3ccc4c1f8479f8e73141",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "reloadGameEqual": true,
+      "reloadOriginEqual": true,
+      "batchEqualsMinuteSteps": true,
+      "restoredContinuationEqual": true,
+      "positions": [
+        {
+          "id": "person-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 6
+            }
+          },
+          "phase": null,
+          "task": null
+        },
+        {
+          "id": "person-2",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 0
+            }
+          },
+          "phase": null,
+          "task": {
+            "kind": "work",
+            "label": "枝を削って木材を整える",
+            "total": 32,
+            "remaining": 26,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "target": "wood",
+            "reserved": {}
+          }
+        }
+      ],
+      "reservations": {}
+    }
+  ],
+  "checkCount": 19,
+  "allScenarioMinuteTotalsEqual1440": true
+}

@@ -1,0 +1,4337 @@
+{
+  "schema": "preferred-bed-comparison-1",
+  "status": "passed",
+  "inputPath": "/workspace/scratch/de6592930c40/housing-shared-use-comparison/generated-daily-after-night-slot.json",
+  "repoPath": "/workspace/scratch/be33734a3f5c/yohaku-life-h1a",
+  "expected": {
+    "start": "9baf1239b4a921ad35d2ccd3879c32f8f1f8ec18876f56b39da6a2e9caf33819",
+    "origin": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+    "morning": "b23af85ab72300b0424bf6bc5d557a5330b9dfc8eda6167c7c7ea5a63ee01bff",
+    "startTime": 1293,
+    "endTime": 1920
+  },
+  "branches": {
+    "none": {
+      "name": "none",
+      "configuration": {
+        "onlyPreferencesChanged": true,
+        "originalGameUnchanged": true,
+        "existingSuiFreeTaskRetained": true,
+        "startGameHash": "9baf1239b4a921ad35d2ccd3879c32f8f1f8ec18876f56b39da6a2e9caf33819",
+        "savedRoundTrip": {
+          "time": 1293,
+          "gameHash": "9baf1239b4a921ad35d2ccd3879c32f8f1f8ec18876f56b39da6a2e9caf33819",
+          "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameEqual": true,
+          "originEqual": true
+        }
+      },
+      "start": {
+        "time": 1293,
+        "clock": "D1 21:33",
+        "stock": {
+          "wood": 23,
+          "food": 6,
+          "ingredients": 7,
+          "coins": 8
+        },
+        "rng": 5317,
+        "actors": [
+          {
+            "id": "person-1",
+            "name": "カヤ",
+            "preferredBed": null,
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 6
+              }
+            },
+            "task": null,
+            "needs": {
+              "hunger": 75.23999999999835,
+              "bladder": 76.8000000000005,
+              "hygiene": 76.79500000000081,
+              "energy": 100,
+              "social": 54.35959999999998,
+              "fun": 93.21000000000066
+            },
+            "metrics": {
+              "free": 353,
+              "work": 39,
+              "care": 306,
+              "travel": 100,
+              "waiting": 15
+            },
+            "reason": "「むしろに横になる」を終えました。",
+            "memories": [
+              {
+                "label": "静かな自由時間",
+                "value": 5,
+                "until": 1356
+              }
+            ]
+          },
+          {
+            "id": "person-2",
+            "name": "スイ",
+            "preferredBed": null,
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 1
+              }
+            },
+            "task": {
+              "kind": "leisure",
+              "label": "道具を手入れして木目を眺める",
+              "total": 48,
+              "remaining": 46,
+              "from": "forest",
+              "metric": "free",
+              "mode": "auto",
+              "reserved": {}
+            },
+            "needs": {
+              "hunger": 72.5999999999986,
+              "bladder": 81.1200000000004,
+              "hygiene": 81.24800000000171,
+              "energy": 99.81,
+              "social": 42.055000000000106,
+              "fun": 77.67000000000218
+            },
+            "metrics": {
+              "free": 363,
+              "work": 32,
+              "care": 306,
+              "travel": 112,
+              "waiting": 0
+            },
+            "reason": "暮らしの用事が落ち着いたので、自由時間にします。",
+            "memories": []
+          }
+        ],
+        "reservations": {}
+      },
+      "rests": [
+        {
+          "actorId": "person-1",
+          "actorName": "カヤ",
+          "source": "autonomous",
+          "start": 1556,
+          "startClock": "D2 01:56",
+          "preferredBed": null,
+          "selectedFixture": "fixture-1",
+          "task": {
+            "kind": "need",
+            "label": "むしろに横になる",
+            "total": 85,
+            "remaining": 85,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "energy",
+            "reserved": {},
+            "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+            "room": "bedroom",
+            "spatial": {
+              "orderId": "order-21",
+              "kind": "use"
+            }
+          },
+          "orderId": "order-21",
+          "startPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 2
+            }
+          },
+          "startNeeds": {
+            "hunger": 43.67999999999836,
+            "bladder": 100,
+            "hygiene": 59.70000000000141,
+            "energy": 74.67300000000031,
+            "social": 43.94479999999996,
+            "fun": 98.39000000000016
+          },
+          "ordinaryRestPreviewAtMinuteStart": {
+            "minutes": 91,
+            "reserved": {},
+            "facility": {
+              "fixtureId": "fixture-1",
+              "roomId": "bedroom",
+              "fixtureKind": "mat",
+              "fixtureCell": 2,
+              "moveMinutes": 6,
+              "useMinutes": 85
+            }
+          },
+          "candidates": [
+            {
+              "fixtureId": "mat-1",
+              "roomId": "bedroom",
+              "fixtureCell": 10,
+              "kind": "mat",
+              "previewAtMinuteStart": {
+                "minutes": 93,
+                "reserved": {},
+                "facility": {
+                  "fixtureId": "mat-1",
+                  "roomId": "bedroom",
+                  "fixtureKind": "mat",
+                  "fixtureCell": 10,
+                  "moveMinutes": 8,
+                  "useMinutes": 85
+                }
+              },
+              "reservationOwnersAtMinuteStart": [],
+              "reservationOwnersAfterSelection": []
+            },
+            {
+              "fixtureId": "fixture-1",
+              "roomId": "bedroom",
+              "fixtureCell": 2,
+              "kind": "mat",
+              "previewAtMinuteStart": {
+                "minutes": 91,
+                "reserved": {},
+                "facility": {
+                  "fixtureId": "fixture-1",
+                  "roomId": "bedroom",
+                  "fixtureKind": "mat",
+                  "fixtureCell": 2,
+                  "moveMinutes": 6,
+                  "useMinutes": 85
+                }
+              },
+              "reservationOwnersAtMinuteStart": [],
+              "reservationOwnersAfterSelection": [
+                "person-1"
+              ]
+            }
+          ],
+          "selectionReason": {
+            "kind": "automatic-shortest-available",
+            "evidence": "No preferred bed is set; actual selected fixture and all explicit candidate previews are recorded."
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 85,
+            "travel": 6,
+            "waiting": 0
+          },
+          "segments": [
+            {
+              "metric": "travel",
+              "from": 1556,
+              "to": 1562,
+              "minutes": 6,
+              "startPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"yard\"]",
+                  "cell": 2
+                }
+              },
+              "endPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              }
+            },
+            {
+              "metric": "care",
+              "from": 1562,
+              "to": 1647,
+              "minutes": 85,
+              "startPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              },
+              "endPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              }
+            }
+          ],
+          "end": 1647,
+          "endKind": "completed",
+          "endClock": "D2 03:27",
+          "elapsed": 91,
+          "endPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 1
+            }
+          },
+          "endNeeds": {
+            "hunger": 32.75999999999859,
+            "bladder": 85.44000000000031,
+            "hygiene": 53.78500000000162,
+            "energy": 100,
+            "social": 40.34119999999995,
+            "fun": 92.02000000000078
+          },
+          "endTask": null
+        },
+        {
+          "actorId": "person-2",
+          "actorName": "スイ",
+          "source": "autonomous",
+          "start": 1610,
+          "startClock": "D2 02:50",
+          "preferredBed": null,
+          "selectedFixture": "mat-1",
+          "task": {
+            "kind": "need",
+            "label": "むしろに横になる",
+            "total": 85,
+            "remaining": 85,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "energy",
+            "reserved": {},
+            "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+            "room": "bedroom",
+            "spatial": {
+              "orderId": "order-24",
+              "kind": "use"
+            }
+          },
+          "orderId": "order-24",
+          "startPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 2
+            }
+          },
+          "startNeeds": {
+            "hunger": 92.23999999999883,
+            "bladder": 95.2000000000001,
+            "hygiene": 60.64300000000243,
+            "energy": 68.66900000000041,
+            "social": 50.39000000000017,
+            "fun": 96.22000000000037
+          },
+          "ordinaryRestPreviewAtMinuteStart": {
+            "minutes": 93,
+            "reserved": {},
+            "facility": {
+              "fixtureId": "mat-1",
+              "roomId": "bedroom",
+              "fixtureKind": "mat",
+              "fixtureCell": 10,
+              "moveMinutes": 8,
+              "useMinutes": 85
+            }
+          },
+          "candidates": [
+            {
+              "fixtureId": "mat-1",
+              "roomId": "bedroom",
+              "fixtureCell": 10,
+              "kind": "mat",
+              "previewAtMinuteStart": {
+                "minutes": 93,
+                "reserved": {},
+                "facility": {
+                  "fixtureId": "mat-1",
+                  "roomId": "bedroom",
+                  "fixtureKind": "mat",
+                  "fixtureCell": 10,
+                  "moveMinutes": 8,
+                  "useMinutes": 85
+                }
+              },
+              "reservationOwnersAtMinuteStart": [],
+              "reservationOwnersAfterSelection": [
+                "person-2"
+              ]
+            },
+            {
+              "fixtureId": "fixture-1",
+              "roomId": "bedroom",
+              "fixtureCell": 2,
+              "kind": "mat",
+              "previewAtMinuteStart": {
+                "disabled": "使える設備はほかの住人が予約しています。"
+              },
+              "reservationOwnersAtMinuteStart": [
+                "person-1"
+              ],
+              "reservationOwnersAfterSelection": [
+                "person-1"
+              ]
+            }
+          ],
+          "selectionReason": {
+            "kind": "automatic-shortest-available",
+            "evidence": "No preferred bed is set; actual selected fixture and all explicit candidate previews are recorded."
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 85,
+            "travel": 8,
+            "waiting": 0
+          },
+          "segments": [
+            {
+              "metric": "travel",
+              "from": 1610,
+              "to": 1618,
+              "minutes": 8,
+              "startPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"living\"]",
+                  "cell": 2
+                }
+              },
+              "endPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              }
+            },
+            {
+              "metric": "care",
+              "from": 1618,
+              "to": 1703,
+              "minutes": 85,
+              "startPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              },
+              "endPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              }
+            }
+          ],
+          "end": 1703,
+          "endKind": "completed",
+          "endClock": "D2 04:23",
+          "elapsed": 93,
+          "endPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 6
+            }
+          },
+          "endNeeds": {
+            "hunger": 81.0799999999984,
+            "bladder": 80.32000000000042,
+            "hygiene": 54.59800000000264,
+            "energy": 100,
+            "social": 45.2750000000002,
+            "fun": 89.710000000001
+          },
+          "endTask": null
+        }
+      ],
+      "events": [
+        {
+          "kind": "other-task-completed",
+          "time": 1339,
+          "clock": "D1 22:19",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1341,
+          "clock": "D1 22:21",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1364,
+          "clock": "D1 22:44",
+          "actorId": "person-2",
+          "task": {
+            "kind": "need",
+            "label": "長椅子で過ごす",
+            "total": 20,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "social",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"bench-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-19",
+              "kind": "use"
+            }
+          },
+          "reason": "便りを書いて過ごしました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1389,
+          "clock": "D1 23:09",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1412,
+          "clock": "D1 23:32",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1437,
+          "clock": "D1 23:57",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1460,
+          "clock": "D2 00:20",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1485,
+          "clock": "D2 00:45",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1508,
+          "clock": "D2 01:08",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1533,
+          "clock": "D2 01:33",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1556,
+          "clock": "D2 01:56",
+          "actorId": "person-1",
+          "task": {
+            "kind": "need",
+            "label": "外の厠を使う",
+            "total": 15,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "bladder",
+            "reserved": {},
+            "station": "[\"slot\",\"yard\",\"latrine-1\",0]",
+            "room": "yard",
+            "spatial": {
+              "orderId": "order-20",
+              "kind": "use"
+            }
+          },
+          "reason": "「外の厠を使う」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1556,
+          "clock": "D2 01:56",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1580,
+          "clock": "D2 02:20",
+          "actorId": "person-2",
+          "task": {
+            "kind": "need",
+            "label": "外の厠を使う",
+            "total": 15,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "bladder",
+            "reserved": {},
+            "station": "[\"slot\",\"yard\",\"latrine-1\",0]",
+            "room": "yard",
+            "spatial": {
+              "orderId": "order-22",
+              "kind": "use"
+            }
+          },
+          "reason": "「外の厠を使う」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1610,
+          "clock": "D2 02:50",
+          "actorId": "person-2",
+          "task": {
+            "kind": "need",
+            "label": "かまどで食事をとる",
+            "total": 20,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "hunger",
+            "reserved": {
+              "food": 1
+            },
+            "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-23",
+              "kind": "use"
+            }
+          },
+          "reason": "「かまどで食事をとる」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1673,
+          "clock": "D2 03:53",
+          "actorId": "person-1",
+          "task": {
+            "kind": "need",
+            "label": "かまどで食事をとる",
+            "total": 20,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "hunger",
+            "reserved": {
+              "food": 1
+            },
+            "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-25",
+              "kind": "use"
+            }
+          },
+          "reason": "「かまどで食事をとる」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1694,
+          "clock": "D2 04:14",
+          "actorId": "person-1",
+          "task": {
+            "kind": "need",
+            "label": "長椅子で過ごす",
+            "total": 20,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "social",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"bench-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-26",
+              "kind": "use"
+            }
+          },
+          "reason": "便りを書いて過ごしました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1734,
+          "clock": "D2 04:54",
+          "actorId": "person-1",
+          "task": {
+            "kind": "work",
+            "label": "野菜を煮て食事を作る",
+            "total": 39,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "work",
+            "mode": "auto",
+            "target": "cook",
+            "reserved": {
+              "ingredients": 2
+            },
+            "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-27",
+              "kind": "use"
+            }
+          },
+          "reason": "食事を3食用意した。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1751,
+          "clock": "D2 05:11",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1773,
+          "clock": "D2 05:33",
+          "actorId": "person-1",
+          "task": {
+            "kind": "work",
+            "label": "野菜を煮て食事を作る",
+            "total": 39,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "work",
+            "mode": "auto",
+            "target": "cook",
+            "reserved": {
+              "ingredients": 2
+            },
+            "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-28",
+              "kind": "use"
+            }
+          },
+          "reason": "食事を3食用意した。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1799,
+          "clock": "D2 05:59",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1821,
+          "clock": "D2 06:21",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1826,
+          "clock": "D2 06:26",
+          "actorId": "person-2",
+          "task": {
+            "kind": "need",
+            "label": "長椅子で過ごす",
+            "total": 20,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "social",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"bench-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-29",
+              "kind": "use"
+            }
+          },
+          "reason": "便りを書いて過ごしました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1869,
+          "clock": "D2 07:09",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1874,
+          "clock": "D2 07:14",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1916,
+          "clock": "D2 07:56",
+          "actorId": "person-2",
+          "task": {
+            "kind": "practice",
+            "label": "小さな木彫りをひとつ彫る",
+            "total": 42,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {
+              "wood": 1
+            }
+          },
+          "reason": "小さな木彫りをひとつ彫る時間を楽しんだ。"
+        }
+      ],
+      "end": {
+        "time": 1920,
+        "clock": "D2 08:00",
+        "stock": {
+          "wood": 22,
+          "food": 10,
+          "ingredients": 3,
+          "coins": 8
+        },
+        "rng": 5317,
+        "actors": [
+          {
+            "id": "person-1",
+            "name": "カヤ",
+            "preferredBed": null,
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"yard\"]",
+                "cell": 7
+              }
+            },
+            "task": {
+              "kind": "need",
+              "label": "水を汲んで身を清める",
+              "total": 46,
+              "remaining": 7,
+              "from": "forest",
+              "metric": "care",
+              "mode": "auto",
+              "target": "hygiene",
+              "reserved": {},
+              "station": "[\"slot\",\"yard\",\"basin-1\",0]",
+              "room": "yard",
+              "spatial": {
+                "orderId": "order-30",
+                "kind": "use"
+              }
+            },
+            "needs": {
+              "hunger": 57.679999999997825,
+              "bladder": 41.76000000000124,
+              "hygiene": 37.81450000000212,
+              "energy": 73.21000000000035,
+              "social": 55.08479999999997,
+              "fun": 96.43000000000035
+            },
+            "metrics": {
+              "free": 689,
+              "work": 117,
+              "care": 485,
+              "travel": 134,
+              "waiting": 15
+            },
+            "reason": "衛生が下がったので、体を洗う。",
+            "memories": [
+              {
+                "label": "好きな料理",
+                "value": 6,
+                "until": 1953
+              },
+              {
+                "label": "静かな自由時間",
+                "value": 5,
+                "until": 2029
+              }
+            ]
+          },
+          {
+            "id": "person-2",
+            "name": "スイ",
+            "preferredBed": null,
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"living\"]",
+                "cell": 1
+              }
+            },
+            "task": {
+              "kind": "leisure",
+              "label": "道具を手入れして木目を眺める",
+              "total": 48,
+              "remaining": 44,
+              "from": "forest",
+              "metric": "free",
+              "mode": "auto",
+              "reserved": {}
+            },
+            "needs": {
+              "hunger": 55.03999999999795,
+              "bladder": 45.60000000000116,
+              "hygiene": 40.493000000003136,
+              "energy": 79.08575000000026,
+              "social": 59.110000000000205,
+              "fun": 99.72000000000003
+            },
+            "metrics": {
+              "free": 791,
+              "work": 32,
+              "care": 466,
+              "travel": 151,
+              "waiting": 0
+            },
+            "reason": "暮らしの用事が落ち着いたので、自由時間にします。",
+            "memories": [
+              {
+                "label": "木工の小さな試作",
+                "value": 7,
+                "until": 2156
+              }
+            ]
+          }
+        ],
+        "reservations": {
+          "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"basin-1\\\",0]\"]": {
+            "id": "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"basin-1\\\",0]\"]",
+            "targetId": "[\"slot\",\"yard\",\"basin-1\",0]",
+            "actorId": "person-1",
+            "orderId": "order-30",
+            "kind": "slot"
+          }
+        }
+      },
+      "gameHash": "b23af85ab72300b0424bf6bc5d557a5330b9dfc8eda6167c7c7ea5a63ee01bff",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "singleMinuteEqualsBatch": true,
+      "reloadedContinuationEquals": true,
+      "control": "No orders are issued after the 21:33 fork. All 627 minutes are autonomous."
+    },
+    "preferred": {
+      "name": "preferred",
+      "configuration": {
+        "onlyPreferencesChanged": true,
+        "originalGameUnchanged": true,
+        "existingSuiFreeTaskRetained": true,
+        "startGameHash": "0c0be6918537bdb282336723f3fd6507811e897aa57cce688a1efc50f9a49d19",
+        "savedRoundTrip": {
+          "time": 1293,
+          "gameHash": "0c0be6918537bdb282336723f3fd6507811e897aa57cce688a1efc50f9a49d19",
+          "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+          "gameEqual": true,
+          "originEqual": true
+        }
+      },
+      "start": {
+        "time": 1293,
+        "clock": "D1 21:33",
+        "stock": {
+          "wood": 23,
+          "food": 6,
+          "ingredients": 7,
+          "coins": 8
+        },
+        "rng": 5317,
+        "actors": [
+          {
+            "id": "person-1",
+            "name": "カヤ",
+            "preferredBed": "mat-1",
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 6
+              }
+            },
+            "task": null,
+            "needs": {
+              "hunger": 75.23999999999835,
+              "bladder": 76.8000000000005,
+              "hygiene": 76.79500000000081,
+              "energy": 100,
+              "social": 54.35959999999998,
+              "fun": 93.21000000000066
+            },
+            "metrics": {
+              "free": 353,
+              "work": 39,
+              "care": 306,
+              "travel": 100,
+              "waiting": 15
+            },
+            "reason": "「むしろに横になる」を終えました。",
+            "memories": [
+              {
+                "label": "静かな自由時間",
+                "value": 5,
+                "until": 1356
+              }
+            ]
+          },
+          {
+            "id": "person-2",
+            "name": "スイ",
+            "preferredBed": "fixture-1",
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 1
+              }
+            },
+            "task": {
+              "kind": "leisure",
+              "label": "道具を手入れして木目を眺める",
+              "total": 48,
+              "remaining": 46,
+              "from": "forest",
+              "metric": "free",
+              "mode": "auto",
+              "reserved": {}
+            },
+            "needs": {
+              "hunger": 72.5999999999986,
+              "bladder": 81.1200000000004,
+              "hygiene": 81.24800000000171,
+              "energy": 99.81,
+              "social": 42.055000000000106,
+              "fun": 77.67000000000218
+            },
+            "metrics": {
+              "free": 363,
+              "work": 32,
+              "care": 306,
+              "travel": 112,
+              "waiting": 0
+            },
+            "reason": "暮らしの用事が落ち着いたので、自由時間にします。",
+            "memories": []
+          }
+        ],
+        "reservations": {}
+      },
+      "rests": [
+        {
+          "actorId": "person-1",
+          "actorName": "カヤ",
+          "source": "autonomous",
+          "start": 1556,
+          "startClock": "D2 01:56",
+          "preferredBed": "mat-1",
+          "selectedFixture": "mat-1",
+          "task": {
+            "kind": "need",
+            "label": "むしろに横になる",
+            "total": 85,
+            "remaining": 85,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "energy",
+            "reserved": {},
+            "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+            "room": "bedroom",
+            "spatial": {
+              "orderId": "order-21",
+              "kind": "use"
+            }
+          },
+          "orderId": "order-21",
+          "startPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"yard\"]",
+              "cell": 2
+            }
+          },
+          "startNeeds": {
+            "hunger": 43.67999999999836,
+            "bladder": 100,
+            "hygiene": 59.70000000000141,
+            "energy": 74.67300000000031,
+            "social": 43.94479999999996,
+            "fun": 98.39000000000016
+          },
+          "ordinaryRestPreviewAtMinuteStart": {
+            "minutes": 93,
+            "reserved": {},
+            "facility": {
+              "fixtureId": "mat-1",
+              "roomId": "bedroom",
+              "fixtureKind": "mat",
+              "fixtureCell": 10,
+              "moveMinutes": 8,
+              "useMinutes": 85,
+              "bedPreference": {
+                "fixtureId": "mat-1",
+                "outcome": "preferred"
+              }
+            }
+          },
+          "candidates": [
+            {
+              "fixtureId": "mat-1",
+              "roomId": "bedroom",
+              "fixtureCell": 10,
+              "kind": "mat",
+              "previewAtMinuteStart": {
+                "minutes": 93,
+                "reserved": {},
+                "facility": {
+                  "fixtureId": "mat-1",
+                  "roomId": "bedroom",
+                  "fixtureKind": "mat",
+                  "fixtureCell": 10,
+                  "moveMinutes": 8,
+                  "useMinutes": 85
+                }
+              },
+              "reservationOwnersAtMinuteStart": [],
+              "reservationOwnersAfterSelection": [
+                "person-1"
+              ]
+            },
+            {
+              "fixtureId": "fixture-1",
+              "roomId": "bedroom",
+              "fixtureCell": 2,
+              "kind": "mat",
+              "previewAtMinuteStart": {
+                "minutes": 91,
+                "reserved": {},
+                "facility": {
+                  "fixtureId": "fixture-1",
+                  "roomId": "bedroom",
+                  "fixtureKind": "mat",
+                  "fixtureCell": 2,
+                  "moveMinutes": 6,
+                  "useMinutes": 85
+                }
+              },
+              "reservationOwnersAtMinuteStart": [],
+              "reservationOwnersAfterSelection": []
+            }
+          ],
+          "selectionReason": {
+            "kind": "preferred-selected",
+            "evidence": "The actual task station is the configured preferred fixture."
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 85,
+            "travel": 8,
+            "waiting": 0
+          },
+          "segments": [
+            {
+              "metric": "travel",
+              "from": 1556,
+              "to": 1564,
+              "minutes": 8,
+              "startPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"yard\"]",
+                  "cell": 2
+                }
+              },
+              "endPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              }
+            },
+            {
+              "metric": "care",
+              "from": 1564,
+              "to": 1649,
+              "minutes": 85,
+              "startPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              },
+              "endPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              }
+            }
+          ],
+          "end": 1649,
+          "endKind": "completed",
+          "endClock": "D2 03:29",
+          "elapsed": 93,
+          "endPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 6
+            }
+          },
+          "endNeeds": {
+            "hunger": 32.519999999998596,
+            "bladder": 85.12000000000032,
+            "hygiene": 53.65500000000162,
+            "energy": 100,
+            "social": 40.26199999999995,
+            "fun": 91.88000000000079
+          },
+          "endTask": null
+        },
+        {
+          "actorId": "person-2",
+          "actorName": "スイ",
+          "source": "autonomous",
+          "start": 1610,
+          "startClock": "D2 02:50",
+          "preferredBed": "fixture-1",
+          "selectedFixture": "fixture-1",
+          "task": {
+            "kind": "need",
+            "label": "むしろに横になる",
+            "total": 85,
+            "remaining": 85,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "energy",
+            "reserved": {},
+            "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+            "room": "bedroom",
+            "spatial": {
+              "orderId": "order-24",
+              "kind": "use"
+            }
+          },
+          "orderId": "order-24",
+          "startPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"living\"]",
+              "cell": 2
+            }
+          },
+          "startNeeds": {
+            "hunger": 92.23999999999883,
+            "bladder": 95.2000000000001,
+            "hygiene": 60.64300000000243,
+            "energy": 68.66900000000041,
+            "social": 50.39000000000017,
+            "fun": 96.22000000000037
+          },
+          "ordinaryRestPreviewAtMinuteStart": {
+            "minutes": 91,
+            "reserved": {},
+            "facility": {
+              "fixtureId": "fixture-1",
+              "roomId": "bedroom",
+              "fixtureKind": "mat",
+              "fixtureCell": 2,
+              "moveMinutes": 6,
+              "useMinutes": 85,
+              "bedPreference": {
+                "fixtureId": "fixture-1",
+                "outcome": "preferred"
+              }
+            }
+          },
+          "candidates": [
+            {
+              "fixtureId": "mat-1",
+              "roomId": "bedroom",
+              "fixtureCell": 10,
+              "kind": "mat",
+              "previewAtMinuteStart": {
+                "disabled": "使える設備はほかの住人が予約しています。"
+              },
+              "reservationOwnersAtMinuteStart": [
+                "person-1"
+              ],
+              "reservationOwnersAfterSelection": [
+                "person-1"
+              ]
+            },
+            {
+              "fixtureId": "fixture-1",
+              "roomId": "bedroom",
+              "fixtureCell": 2,
+              "kind": "mat",
+              "previewAtMinuteStart": {
+                "minutes": 91,
+                "reserved": {},
+                "facility": {
+                  "fixtureId": "fixture-1",
+                  "roomId": "bedroom",
+                  "fixtureKind": "mat",
+                  "fixtureCell": 2,
+                  "moveMinutes": 6,
+                  "useMinutes": 85
+                }
+              },
+              "reservationOwnersAtMinuteStart": [],
+              "reservationOwnersAfterSelection": [
+                "person-2"
+              ]
+            }
+          ],
+          "selectionReason": {
+            "kind": "preferred-selected",
+            "evidence": "The actual task station is the configured preferred fixture."
+          },
+          "metrics": {
+            "free": 0,
+            "work": 0,
+            "care": 85,
+            "travel": 6,
+            "waiting": 0
+          },
+          "segments": [
+            {
+              "metric": "travel",
+              "from": 1610,
+              "to": 1616,
+              "minutes": 6,
+              "startPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"living\"]",
+                  "cell": 2
+                }
+              },
+              "endPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              }
+            },
+            {
+              "metric": "care",
+              "from": 1616,
+              "to": 1701,
+              "minutes": 85,
+              "startPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              },
+              "endPosition": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              }
+            }
+          ],
+          "end": 1701,
+          "endKind": "completed",
+          "endClock": "D2 04:21",
+          "elapsed": 91,
+          "endPosition": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 1
+            }
+          },
+          "endNeeds": {
+            "hunger": 81.31999999999842,
+            "bladder": 80.64000000000041,
+            "hygiene": 54.72800000000264,
+            "energy": 100,
+            "social": 45.3850000000002,
+            "fun": 89.85000000000099
+          },
+          "endTask": null
+        }
+      ],
+      "events": [
+        {
+          "kind": "other-task-completed",
+          "time": 1339,
+          "clock": "D1 22:19",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1341,
+          "clock": "D1 22:21",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1364,
+          "clock": "D1 22:44",
+          "actorId": "person-2",
+          "task": {
+            "kind": "need",
+            "label": "長椅子で過ごす",
+            "total": 20,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "social",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"bench-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-19",
+              "kind": "use"
+            }
+          },
+          "reason": "便りを書いて過ごしました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1389,
+          "clock": "D1 23:09",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1412,
+          "clock": "D1 23:32",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1437,
+          "clock": "D1 23:57",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1460,
+          "clock": "D2 00:20",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1485,
+          "clock": "D2 00:45",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1508,
+          "clock": "D2 01:08",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1533,
+          "clock": "D2 01:33",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1556,
+          "clock": "D2 01:56",
+          "actorId": "person-1",
+          "task": {
+            "kind": "need",
+            "label": "外の厠を使う",
+            "total": 15,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "bladder",
+            "reserved": {},
+            "station": "[\"slot\",\"yard\",\"latrine-1\",0]",
+            "room": "yard",
+            "spatial": {
+              "orderId": "order-20",
+              "kind": "use"
+            }
+          },
+          "reason": "「外の厠を使う」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1556,
+          "clock": "D2 01:56",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1580,
+          "clock": "D2 02:20",
+          "actorId": "person-2",
+          "task": {
+            "kind": "need",
+            "label": "外の厠を使う",
+            "total": 15,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "bladder",
+            "reserved": {},
+            "station": "[\"slot\",\"yard\",\"latrine-1\",0]",
+            "room": "yard",
+            "spatial": {
+              "orderId": "order-22",
+              "kind": "use"
+            }
+          },
+          "reason": "「外の厠を使う」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1610,
+          "clock": "D2 02:50",
+          "actorId": "person-2",
+          "task": {
+            "kind": "need",
+            "label": "かまどで食事をとる",
+            "total": 20,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "hunger",
+            "reserved": {
+              "food": 1
+            },
+            "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-23",
+              "kind": "use"
+            }
+          },
+          "reason": "「かまどで食事をとる」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1677,
+          "clock": "D2 03:57",
+          "actorId": "person-1",
+          "task": {
+            "kind": "need",
+            "label": "かまどで食事をとる",
+            "total": 20,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "hunger",
+            "reserved": {
+              "food": 1
+            },
+            "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-25",
+              "kind": "use"
+            }
+          },
+          "reason": "「かまどで食事をとる」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1698,
+          "clock": "D2 04:18",
+          "actorId": "person-1",
+          "task": {
+            "kind": "need",
+            "label": "長椅子で過ごす",
+            "total": 20,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "social",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"bench-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-26",
+              "kind": "use"
+            }
+          },
+          "reason": "便りを書いて過ごしました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1738,
+          "clock": "D2 04:58",
+          "actorId": "person-1",
+          "task": {
+            "kind": "work",
+            "label": "野菜を煮て食事を作る",
+            "total": 39,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "work",
+            "mode": "auto",
+            "target": "cook",
+            "reserved": {
+              "ingredients": 2
+            },
+            "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-27",
+              "kind": "use"
+            }
+          },
+          "reason": "食事を3食用意した。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1749,
+          "clock": "D2 05:09",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1777,
+          "clock": "D2 05:37",
+          "actorId": "person-1",
+          "task": {
+            "kind": "work",
+            "label": "野菜を煮て食事を作る",
+            "total": 39,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "work",
+            "mode": "auto",
+            "target": "cook",
+            "reserved": {
+              "ingredients": 2
+            },
+            "station": "[\"slot\",\"living\",\"hearth-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-28",
+              "kind": "use"
+            }
+          },
+          "reason": "食事を3食用意した。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1797,
+          "clock": "D2 05:57",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1822,
+          "clock": "D2 06:22",
+          "actorId": "person-2",
+          "task": {
+            "kind": "need",
+            "label": "長椅子で過ごす",
+            "total": 20,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "care",
+            "mode": "auto",
+            "target": "social",
+            "reserved": {},
+            "station": "[\"slot\",\"living\",\"bench-1\",0]",
+            "room": "living",
+            "spatial": {
+              "orderId": "order-29",
+              "kind": "use"
+            }
+          },
+          "reason": "便りを書いて過ごしました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1825,
+          "clock": "D2 06:25",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1870,
+          "clock": "D2 07:10",
+          "actorId": "person-2",
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「道具を手入れして木目を眺める」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1873,
+          "clock": "D2 07:13",
+          "actorId": "person-1",
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "reason": "「次に作りたい献立を考える」を終えました。"
+        },
+        {
+          "kind": "other-task-completed",
+          "time": 1912,
+          "clock": "D2 07:52",
+          "actorId": "person-2",
+          "task": {
+            "kind": "practice",
+            "label": "小さな木彫りをひとつ彫る",
+            "total": 42,
+            "remaining": 1,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {
+              "wood": 1
+            }
+          },
+          "reason": "小さな木彫りをひとつ彫る時間を楽しんだ。"
+        }
+      ],
+      "end": {
+        "time": 1920,
+        "clock": "D2 08:00",
+        "stock": {
+          "wood": 22,
+          "food": 10,
+          "ingredients": 3,
+          "coins": 8
+        },
+        "rng": 5317,
+        "actors": [
+          {
+            "id": "person-1",
+            "name": "カヤ",
+            "preferredBed": "mat-1",
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"yard\"]",
+                "cell": 7
+              }
+            },
+            "task": {
+              "kind": "need",
+              "label": "水を汲んで身を清める",
+              "total": 46,
+              "remaining": 11,
+              "from": "forest",
+              "metric": "care",
+              "mode": "auto",
+              "target": "hygiene",
+              "reserved": {},
+              "station": "[\"slot\",\"yard\",\"basin-1\",0]",
+              "room": "yard",
+              "spatial": {
+                "orderId": "order-30",
+                "kind": "use"
+              }
+            },
+            "needs": {
+              "hunger": 57.679999999997854,
+              "bladder": 41.76000000000124,
+              "hygiene": 37.63250000000213,
+              "energy": 73.31450000000035,
+              "social": 55.08479999999997,
+              "fun": 96.71000000000032
+            },
+            "metrics": {
+              "free": 689,
+              "work": 117,
+              "care": 481,
+              "travel": 138,
+              "waiting": 15
+            },
+            "reason": "衛生が下がったので、体を洗う。",
+            "memories": [
+              {
+                "label": "好きな料理",
+                "value": 6,
+                "until": 1957
+              },
+              {
+                "label": "静かな自由時間",
+                "value": 5,
+                "until": 2033
+              }
+            ]
+          },
+          {
+            "id": "person-2",
+            "name": "スイ",
+            "preferredBed": "fixture-1",
+            "position": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"living\"]",
+                "cell": 1
+              }
+            },
+            "task": {
+              "kind": "leisure",
+              "label": "道具を手入れして木目を眺める",
+              "total": 48,
+              "remaining": 40,
+              "from": "forest",
+              "metric": "free",
+              "mode": "auto",
+              "reserved": {}
+            },
+            "needs": {
+              "hunger": 55.03999999999795,
+              "bladder": 45.60000000000116,
+              "hygiene": 40.493000000003136,
+              "energy": 78.98125000000026,
+              "social": 59.11000000000018,
+              "fun": 99.44000000000005
+            },
+            "metrics": {
+              "free": 795,
+              "work": 32,
+              "care": 466,
+              "travel": 147,
+              "waiting": 0
+            },
+            "reason": "暮らしの用事が落ち着いたので、自由時間にします。",
+            "memories": [
+              {
+                "label": "木工の小さな試作",
+                "value": 7,
+                "until": 2152
+              }
+            ]
+          }
+        ],
+        "reservations": {
+          "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"basin-1\\\",0]\"]": {
+            "id": "[\"slot\",\"[\\\"slot\\\",\\\"yard\\\",\\\"basin-1\\\",0]\"]",
+            "targetId": "[\"slot\",\"yard\",\"basin-1\",0]",
+            "actorId": "person-1",
+            "orderId": "order-30",
+            "kind": "slot"
+          }
+        }
+      },
+      "gameHash": "4b9e0f9dd3660b803293b429392076a98fcb5887dad8a67c6dff007ea167fd0a",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "singleMinuteEqualsBatch": true,
+      "reloadedContinuationEquals": true,
+      "control": "No orders are issued after the 21:33 fork. All 627 minutes are autonomous."
+    }
+  },
+  "input": {
+    "start": {
+      "time": 1293,
+      "clock": "D1 21:33",
+      "stock": {
+        "wood": 23,
+        "food": 6,
+        "ingredients": 7,
+        "coins": 8
+      },
+      "rng": 5317,
+      "actors": [
+        {
+          "id": "person-1",
+          "name": "カヤ",
+          "preferredBed": null,
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 6
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 75.23999999999835,
+            "bladder": 76.8000000000005,
+            "hygiene": 76.79500000000081,
+            "energy": 100,
+            "social": 54.35959999999998,
+            "fun": 93.21000000000066
+          },
+          "metrics": {
+            "free": 353,
+            "work": 39,
+            "care": 306,
+            "travel": 100,
+            "waiting": 15
+          },
+          "reason": "「むしろに横になる」を終えました。",
+          "memories": [
+            {
+              "label": "静かな自由時間",
+              "value": 5,
+              "until": 1356
+            }
+          ]
+        },
+        {
+          "id": "person-2",
+          "name": "スイ",
+          "preferredBed": null,
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 1
+            }
+          },
+          "task": {
+            "kind": "leisure",
+            "label": "道具を手入れして木目を眺める",
+            "total": 48,
+            "remaining": 46,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "needs": {
+            "hunger": 72.5999999999986,
+            "bladder": 81.1200000000004,
+            "hygiene": 81.24800000000171,
+            "energy": 99.81,
+            "social": 42.055000000000106,
+            "fun": 77.67000000000218
+          },
+          "metrics": {
+            "free": 363,
+            "work": 32,
+            "care": 306,
+            "travel": 112,
+            "waiting": 0
+          },
+          "reason": "暮らしの用事が落ち着いたので、自由時間にします。",
+          "memories": []
+        }
+      ],
+      "reservations": {}
+    },
+    "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+    "publicPresetGameHash": "9baf1239b4a921ad35d2ccd3879c32f8f1f8ec18876f56b39da6a2e9caf33819",
+    "beds": [
+      {
+        "fixtureId": "mat-1",
+        "roomId": "bedroom",
+        "fixtureCell": 10,
+        "kind": "mat"
+      },
+      {
+        "fixtureId": "fixture-1",
+        "roomId": "bedroom",
+        "fixtureCell": 2,
+        "kind": "mat"
+      }
+    ]
+  },
+  "sharedPreference": {
+    "configuration": {
+      "onlyPreferencesChanged": true,
+      "originalGameUnchanged": true,
+      "existingSuiFreeTaskRetained": true,
+      "startGameHash": "3dafe076d79e09bd774dfff157d0c2a00339c068d636df06e412929cc682a71f",
+      "savedRoundTrip": {
+        "time": 1293,
+        "gameHash": "3dafe076d79e09bd774dfff157d0c2a00339c068d636df06e412929cc682a71f",
+        "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+        "gameEqual": true,
+        "originEqual": true
+      }
+    },
+    "orders": [
+      {
+        "time": 1293,
+        "clock": "D1 21:33",
+        "actorId": "person-1",
+        "kind": "need",
+        "target": "energy",
+        "label": "カヤが通常の休息で共通の優先寝床を予約",
+        "accepted": true,
+        "preview": {
+          "minutes": 85,
+          "reserved": {},
+          "facility": {
+            "fixtureId": "mat-1",
+            "roomId": "bedroom",
+            "fixtureKind": "mat",
+            "fixtureCell": 10,
+            "moveMinutes": 0,
+            "useMinutes": 85,
+            "bedPreference": {
+              "fixtureId": "mat-1",
+              "outcome": "preferred"
+            }
+          }
+        },
+        "before": {
+          "time": 1293,
+          "clock": "D1 21:33",
+          "stock": {
+            "wood": 23,
+            "food": 6,
+            "ingredients": 7,
+            "coins": 8
+          },
+          "rng": 5317,
+          "actors": [
+            {
+              "id": "person-1",
+              "name": "カヤ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              },
+              "task": null,
+              "needs": {
+                "hunger": 75.23999999999835,
+                "bladder": 76.8000000000005,
+                "hygiene": 76.79500000000081,
+                "energy": 100,
+                "social": 54.35959999999998,
+                "fun": 93.21000000000066
+              },
+              "metrics": {
+                "free": 353,
+                "work": 39,
+                "care": 306,
+                "travel": 100,
+                "waiting": 15
+              },
+              "reason": "「むしろに横になる」を終えました。",
+              "memories": [
+                {
+                  "label": "静かな自由時間",
+                  "value": 5,
+                  "until": 1356
+                }
+              ]
+            },
+            {
+              "id": "person-2",
+              "name": "スイ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              },
+              "task": {
+                "kind": "leisure",
+                "label": "道具を手入れして木目を眺める",
+                "total": 48,
+                "remaining": 46,
+                "from": "forest",
+                "metric": "free",
+                "mode": "auto",
+                "reserved": {}
+              },
+              "needs": {
+                "hunger": 72.5999999999986,
+                "bladder": 81.1200000000004,
+                "hygiene": 81.24800000000171,
+                "energy": 99.81,
+                "social": 42.055000000000106,
+                "fun": 77.67000000000218
+              },
+              "metrics": {
+                "free": 363,
+                "work": 32,
+                "care": 306,
+                "travel": 112,
+                "waiting": 0
+              },
+              "reason": "暮らしの用事が落ち着いたので、自由時間にします。",
+              "memories": []
+            }
+          ],
+          "reservations": {}
+        },
+        "after": {
+          "time": 1293,
+          "clock": "D1 21:33",
+          "stock": {
+            "wood": 23,
+            "food": 6,
+            "ingredients": 7,
+            "coins": 8
+          },
+          "rng": 5317,
+          "actors": [
+            {
+              "id": "person-1",
+              "name": "カヤ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              },
+              "task": {
+                "kind": "need",
+                "label": "むしろに横になる",
+                "total": 85,
+                "remaining": 85,
+                "from": "forest",
+                "metric": "care",
+                "mode": "direct",
+                "target": "energy",
+                "reserved": {},
+                "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+                "room": "bedroom",
+                "spatial": {
+                  "orderId": "order-19",
+                  "kind": "use"
+                }
+              },
+              "needs": {
+                "hunger": 75.23999999999835,
+                "bladder": 76.8000000000005,
+                "hygiene": 76.79500000000081,
+                "energy": 100,
+                "social": 54.35959999999998,
+                "fun": 93.21000000000066
+              },
+              "metrics": {
+                "free": 353,
+                "work": 39,
+                "care": 306,
+                "travel": 100,
+                "waiting": 15
+              },
+              "reason": "直接の指示で、むしろに横になる。",
+              "memories": [
+                {
+                  "label": "静かな自由時間",
+                  "value": 5,
+                  "until": 1356
+                }
+              ]
+            },
+            {
+              "id": "person-2",
+              "name": "スイ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              },
+              "task": {
+                "kind": "leisure",
+                "label": "道具を手入れして木目を眺める",
+                "total": 48,
+                "remaining": 46,
+                "from": "forest",
+                "metric": "free",
+                "mode": "auto",
+                "reserved": {}
+              },
+              "needs": {
+                "hunger": 72.5999999999986,
+                "bladder": 81.1200000000004,
+                "hygiene": 81.24800000000171,
+                "energy": 99.81,
+                "social": 42.055000000000106,
+                "fun": 77.67000000000218
+              },
+              "metrics": {
+                "free": 363,
+                "work": 32,
+                "care": 306,
+                "travel": 112,
+                "waiting": 0
+              },
+              "reason": "暮らしの用事が落ち着いたので、自由時間にします。",
+              "memories": []
+            }
+          ],
+          "reservations": {
+            "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]": {
+              "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]",
+              "targetId": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+              "actorId": "person-1",
+              "orderId": "order-19",
+              "kind": "slot"
+            }
+          }
+        }
+      },
+      {
+        "time": 1293,
+        "clock": "D1 21:33",
+        "actorId": "person-2",
+        "kind": "need",
+        "target": "energy",
+        "label": "スイの通常休息は予約中の優先寝床から別のむしろへ代替",
+        "accepted": true,
+        "preview": {
+          "minutes": 85,
+          "reserved": {},
+          "facility": {
+            "fixtureId": "fixture-1",
+            "roomId": "bedroom",
+            "fixtureKind": "mat",
+            "fixtureCell": 2,
+            "moveMinutes": 0,
+            "useMinutes": 85,
+            "bedPreference": {
+              "fixtureId": "mat-1",
+              "outcome": "fallback",
+              "reason": "使える設備はほかの住人が予約しています。"
+            }
+          }
+        },
+        "before": {
+          "time": 1293,
+          "clock": "D1 21:33",
+          "stock": {
+            "wood": 23,
+            "food": 6,
+            "ingredients": 7,
+            "coins": 8
+          },
+          "rng": 5317,
+          "actors": [
+            {
+              "id": "person-1",
+              "name": "カヤ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              },
+              "task": {
+                "kind": "need",
+                "label": "むしろに横になる",
+                "total": 85,
+                "remaining": 85,
+                "from": "forest",
+                "metric": "care",
+                "mode": "direct",
+                "target": "energy",
+                "reserved": {},
+                "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+                "room": "bedroom",
+                "spatial": {
+                  "orderId": "order-19",
+                  "kind": "use"
+                }
+              },
+              "needs": {
+                "hunger": 75.23999999999835,
+                "bladder": 76.8000000000005,
+                "hygiene": 76.79500000000081,
+                "energy": 100,
+                "social": 54.35959999999998,
+                "fun": 93.21000000000066
+              },
+              "metrics": {
+                "free": 353,
+                "work": 39,
+                "care": 306,
+                "travel": 100,
+                "waiting": 15
+              },
+              "reason": "直接の指示で、むしろに横になる。",
+              "memories": [
+                {
+                  "label": "静かな自由時間",
+                  "value": 5,
+                  "until": 1356
+                }
+              ]
+            },
+            {
+              "id": "person-2",
+              "name": "スイ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              },
+              "task": {
+                "kind": "leisure",
+                "label": "道具を手入れして木目を眺める",
+                "total": 48,
+                "remaining": 46,
+                "from": "forest",
+                "metric": "free",
+                "mode": "auto",
+                "reserved": {}
+              },
+              "needs": {
+                "hunger": 72.5999999999986,
+                "bladder": 81.1200000000004,
+                "hygiene": 81.24800000000171,
+                "energy": 99.81,
+                "social": 42.055000000000106,
+                "fun": 77.67000000000218
+              },
+              "metrics": {
+                "free": 363,
+                "work": 32,
+                "care": 306,
+                "travel": 112,
+                "waiting": 0
+              },
+              "reason": "暮らしの用事が落ち着いたので、自由時間にします。",
+              "memories": []
+            }
+          ],
+          "reservations": {
+            "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]": {
+              "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]",
+              "targetId": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+              "actorId": "person-1",
+              "orderId": "order-19",
+              "kind": "slot"
+            }
+          }
+        },
+        "after": {
+          "time": 1293,
+          "clock": "D1 21:33",
+          "stock": {
+            "wood": 23,
+            "food": 6,
+            "ingredients": 7,
+            "coins": 8
+          },
+          "rng": 5317,
+          "actors": [
+            {
+              "id": "person-1",
+              "name": "カヤ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              },
+              "task": {
+                "kind": "need",
+                "label": "むしろに横になる",
+                "total": 85,
+                "remaining": 85,
+                "from": "forest",
+                "metric": "care",
+                "mode": "direct",
+                "target": "energy",
+                "reserved": {},
+                "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+                "room": "bedroom",
+                "spatial": {
+                  "orderId": "order-19",
+                  "kind": "use"
+                }
+              },
+              "needs": {
+                "hunger": 75.23999999999835,
+                "bladder": 76.8000000000005,
+                "hygiene": 76.79500000000081,
+                "energy": 100,
+                "social": 54.35959999999998,
+                "fun": 93.21000000000066
+              },
+              "metrics": {
+                "free": 353,
+                "work": 39,
+                "care": 306,
+                "travel": 100,
+                "waiting": 15
+              },
+              "reason": "直接の指示で、むしろに横になる。",
+              "memories": [
+                {
+                  "label": "静かな自由時間",
+                  "value": 5,
+                  "until": 1356
+                }
+              ]
+            },
+            {
+              "id": "person-2",
+              "name": "スイ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              },
+              "task": {
+                "kind": "need",
+                "label": "むしろに横になる",
+                "total": 85,
+                "remaining": 85,
+                "from": "forest",
+                "metric": "care",
+                "mode": "direct",
+                "target": "energy",
+                "reserved": {},
+                "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+                "room": "bedroom",
+                "spatial": {
+                  "orderId": "order-20",
+                  "kind": "use"
+                }
+              },
+              "needs": {
+                "hunger": 72.5999999999986,
+                "bladder": 81.1200000000004,
+                "hygiene": 81.24800000000171,
+                "energy": 99.81,
+                "social": 42.055000000000106,
+                "fun": 77.67000000000218
+              },
+              "metrics": {
+                "free": 363,
+                "work": 32,
+                "care": 306,
+                "travel": 112,
+                "waiting": 0
+              },
+              "reason": "直接の指示で、むしろに横になる。",
+              "memories": []
+            }
+          ],
+          "reservations": {
+            "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]": {
+              "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]",
+              "targetId": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+              "actorId": "person-1",
+              "orderId": "order-19",
+              "kind": "slot"
+            },
+            "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]": {
+              "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]",
+              "targetId": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+              "actorId": "person-2",
+              "orderId": "order-20",
+              "kind": "slot"
+            }
+          }
+        }
+      },
+      {
+        "time": 1293,
+        "clock": "D1 21:33",
+        "actorId": "person-2",
+        "kind": "home-use",
+        "target": "mat-1",
+        "label": "一回の明示指定は、優先設定があっても予約中なら厳密に拒否",
+        "accepted": false,
+        "preview": {
+          "disabled": "使える設備はほかの住人が予約しています。"
+        },
+        "before": {
+          "time": 1293,
+          "clock": "D1 21:33",
+          "stock": {
+            "wood": 23,
+            "food": 6,
+            "ingredients": 7,
+            "coins": 8
+          },
+          "rng": 5317,
+          "actors": [
+            {
+              "id": "person-1",
+              "name": "カヤ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              },
+              "task": {
+                "kind": "need",
+                "label": "むしろに横になる",
+                "total": 85,
+                "remaining": 85,
+                "from": "forest",
+                "metric": "care",
+                "mode": "direct",
+                "target": "energy",
+                "reserved": {},
+                "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+                "room": "bedroom",
+                "spatial": {
+                  "orderId": "order-19",
+                  "kind": "use"
+                }
+              },
+              "needs": {
+                "hunger": 75.23999999999835,
+                "bladder": 76.8000000000005,
+                "hygiene": 76.79500000000081,
+                "energy": 100,
+                "social": 54.35959999999998,
+                "fun": 93.21000000000066
+              },
+              "metrics": {
+                "free": 353,
+                "work": 39,
+                "care": 306,
+                "travel": 100,
+                "waiting": 15
+              },
+              "reason": "直接の指示で、むしろに横になる。",
+              "memories": [
+                {
+                  "label": "静かな自由時間",
+                  "value": 5,
+                  "until": 1356
+                }
+              ]
+            },
+            {
+              "id": "person-2",
+              "name": "スイ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              },
+              "task": {
+                "kind": "need",
+                "label": "むしろに横になる",
+                "total": 85,
+                "remaining": 85,
+                "from": "forest",
+                "metric": "care",
+                "mode": "direct",
+                "target": "energy",
+                "reserved": {},
+                "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+                "room": "bedroom",
+                "spatial": {
+                  "orderId": "order-20",
+                  "kind": "use"
+                }
+              },
+              "needs": {
+                "hunger": 72.5999999999986,
+                "bladder": 81.1200000000004,
+                "hygiene": 81.24800000000171,
+                "energy": 99.81,
+                "social": 42.055000000000106,
+                "fun": 77.67000000000218
+              },
+              "metrics": {
+                "free": 363,
+                "work": 32,
+                "care": 306,
+                "travel": 112,
+                "waiting": 0
+              },
+              "reason": "直接の指示で、むしろに横になる。",
+              "memories": []
+            }
+          ],
+          "reservations": {
+            "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]": {
+              "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]",
+              "targetId": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+              "actorId": "person-1",
+              "orderId": "order-19",
+              "kind": "slot"
+            },
+            "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]": {
+              "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]",
+              "targetId": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+              "actorId": "person-2",
+              "orderId": "order-20",
+              "kind": "slot"
+            }
+          }
+        },
+        "after": {
+          "time": 1293,
+          "clock": "D1 21:33",
+          "stock": {
+            "wood": 23,
+            "food": 6,
+            "ingredients": 7,
+            "coins": 8
+          },
+          "rng": 5317,
+          "actors": [
+            {
+              "id": "person-1",
+              "name": "カヤ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              },
+              "task": {
+                "kind": "need",
+                "label": "むしろに横になる",
+                "total": 85,
+                "remaining": 85,
+                "from": "forest",
+                "metric": "care",
+                "mode": "direct",
+                "target": "energy",
+                "reserved": {},
+                "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+                "room": "bedroom",
+                "spatial": {
+                  "orderId": "order-19",
+                  "kind": "use"
+                }
+              },
+              "needs": {
+                "hunger": 75.23999999999835,
+                "bladder": 76.8000000000005,
+                "hygiene": 76.79500000000081,
+                "energy": 100,
+                "social": 54.35959999999998,
+                "fun": 93.21000000000066
+              },
+              "metrics": {
+                "free": 353,
+                "work": 39,
+                "care": 306,
+                "travel": 100,
+                "waiting": 15
+              },
+              "reason": "直接の指示で、むしろに横になる。",
+              "memories": [
+                {
+                  "label": "静かな自由時間",
+                  "value": 5,
+                  "until": 1356
+                }
+              ]
+            },
+            {
+              "id": "person-2",
+              "name": "スイ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              },
+              "task": {
+                "kind": "need",
+                "label": "むしろに横になる",
+                "total": 85,
+                "remaining": 85,
+                "from": "forest",
+                "metric": "care",
+                "mode": "direct",
+                "target": "energy",
+                "reserved": {},
+                "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+                "room": "bedroom",
+                "spatial": {
+                  "orderId": "order-20",
+                  "kind": "use"
+                }
+              },
+              "needs": {
+                "hunger": 72.5999999999986,
+                "bladder": 81.1200000000004,
+                "hygiene": 81.24800000000171,
+                "energy": 99.81,
+                "social": 42.055000000000106,
+                "fun": 77.67000000000218
+              },
+              "metrics": {
+                "free": 363,
+                "work": 32,
+                "care": 306,
+                "travel": 112,
+                "waiting": 0
+              },
+              "reason": "直接の指示で、むしろに横になる。",
+              "memories": []
+            }
+          ],
+          "reservations": {
+            "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]": {
+              "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]",
+              "targetId": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+              "actorId": "person-1",
+              "orderId": "order-19",
+              "kind": "slot"
+            },
+            "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]": {
+              "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]",
+              "targetId": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+              "actorId": "person-2",
+              "orderId": "order-20",
+              "kind": "slot"
+            }
+          }
+        }
+      },
+      {
+        "time": 1294,
+        "clock": "D1 21:34",
+        "actorId": "person-1",
+        "kind": "cancel",
+        "target": null,
+        "label": "優先設定は残したまま、カヤの利用予約を取り消して解放",
+        "accepted": true,
+        "preview": {},
+        "before": {
+          "time": 1294,
+          "clock": "D1 21:34",
+          "stock": {
+            "wood": 23,
+            "food": 6,
+            "ingredients": 7,
+            "coins": 8
+          },
+          "rng": 5317,
+          "actors": [
+            {
+              "id": "person-1",
+              "name": "カヤ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              },
+              "task": {
+                "kind": "need",
+                "label": "むしろに横になる",
+                "total": 85,
+                "remaining": 84,
+                "from": "forest",
+                "metric": "care",
+                "mode": "direct",
+                "target": "energy",
+                "reserved": {},
+                "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+                "room": "bedroom",
+                "spatial": {
+                  "orderId": "order-19",
+                  "kind": "use"
+                }
+              },
+              "needs": {
+                "hunger": 75.11999999999834,
+                "bladder": 76.6400000000005,
+                "hygiene": 76.73000000000081,
+                "energy": 99.9715,
+                "social": 54.31999999999998,
+                "fun": 93.14000000000067
+              },
+              "metrics": {
+                "free": 353,
+                "work": 39,
+                "care": 307,
+                "travel": 100,
+                "waiting": 15
+              },
+              "reason": "直接の指示で、むしろに横になる。",
+              "memories": [
+                {
+                  "label": "静かな自由時間",
+                  "value": 5,
+                  "until": 1356
+                }
+              ]
+            },
+            {
+              "id": "person-2",
+              "name": "スイ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              },
+              "task": {
+                "kind": "need",
+                "label": "むしろに横になる",
+                "total": 85,
+                "remaining": 84,
+                "from": "forest",
+                "metric": "care",
+                "mode": "direct",
+                "target": "energy",
+                "reserved": {},
+                "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+                "room": "bedroom",
+                "spatial": {
+                  "orderId": "order-20",
+                  "kind": "use"
+                }
+              },
+              "needs": {
+                "hunger": 72.4799999999986,
+                "bladder": 80.9600000000004,
+                "hygiene": 81.18300000000171,
+                "energy": 99.78150000000001,
+                "social": 42.00000000000011,
+                "fun": 77.60000000000218
+              },
+              "metrics": {
+                "free": 363,
+                "work": 32,
+                "care": 307,
+                "travel": 112,
+                "waiting": 0
+              },
+              "reason": "直接の指示で、むしろに横になる。",
+              "memories": []
+            }
+          ],
+          "reservations": {
+            "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]": {
+              "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]",
+              "targetId": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+              "actorId": "person-1",
+              "orderId": "order-19",
+              "kind": "slot"
+            },
+            "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]": {
+              "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]",
+              "targetId": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+              "actorId": "person-2",
+              "orderId": "order-20",
+              "kind": "slot"
+            }
+          }
+        },
+        "after": {
+          "time": 1294,
+          "clock": "D1 21:34",
+          "stock": {
+            "wood": 23,
+            "food": 6,
+            "ingredients": 7,
+            "coins": 8
+          },
+          "rng": 5317,
+          "actors": [
+            {
+              "id": "person-1",
+              "name": "カヤ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              },
+              "task": null,
+              "needs": {
+                "hunger": 75.11999999999834,
+                "bladder": 76.6400000000005,
+                "hygiene": 76.73000000000081,
+                "energy": 99.9715,
+                "social": 54.31999999999998,
+                "fun": 93.14000000000067
+              },
+              "metrics": {
+                "free": 353,
+                "work": 39,
+                "care": 307,
+                "travel": 100,
+                "waiting": 15
+              },
+              "reason": "指示を取り消しました。次の時間進行で自分の予定を選びます。",
+              "memories": [
+                {
+                  "label": "静かな自由時間",
+                  "value": 5,
+                  "until": 1356
+                }
+              ]
+            },
+            {
+              "id": "person-2",
+              "name": "スイ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              },
+              "task": {
+                "kind": "need",
+                "label": "むしろに横になる",
+                "total": 85,
+                "remaining": 84,
+                "from": "forest",
+                "metric": "care",
+                "mode": "direct",
+                "target": "energy",
+                "reserved": {},
+                "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+                "room": "bedroom",
+                "spatial": {
+                  "orderId": "order-20",
+                  "kind": "use"
+                }
+              },
+              "needs": {
+                "hunger": 72.4799999999986,
+                "bladder": 80.9600000000004,
+                "hygiene": 81.18300000000171,
+                "energy": 99.78150000000001,
+                "social": 42.00000000000011,
+                "fun": 77.60000000000218
+              },
+              "metrics": {
+                "free": 363,
+                "work": 32,
+                "care": 307,
+                "travel": 112,
+                "waiting": 0
+              },
+              "reason": "直接の指示で、むしろに横になる。",
+              "memories": []
+            }
+          ],
+          "reservations": {
+            "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]": {
+              "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]",
+              "targetId": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+              "actorId": "person-2",
+              "orderId": "order-20",
+              "kind": "slot"
+            }
+          }
+        }
+      },
+      {
+        "time": 1378,
+        "clock": "D1 22:58",
+        "actorId": "person-2",
+        "kind": "need",
+        "target": "energy",
+        "label": "予約が解放された後、次の通常休息指示で優先寝床に復帰",
+        "accepted": true,
+        "preview": {
+          "minutes": 87,
+          "reserved": {},
+          "facility": {
+            "fixtureId": "mat-1",
+            "roomId": "bedroom",
+            "fixtureKind": "mat",
+            "fixtureCell": 10,
+            "moveMinutes": 2,
+            "useMinutes": 85,
+            "bedPreference": {
+              "fixtureId": "mat-1",
+              "outcome": "preferred"
+            }
+          }
+        },
+        "before": {
+          "time": 1378,
+          "clock": "D1 22:58",
+          "stock": {
+            "wood": 23,
+            "food": 6,
+            "ingredients": 7,
+            "coins": 8
+          },
+          "rng": 5317,
+          "actors": [
+            {
+              "id": "person-1",
+              "name": "カヤ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              },
+              "task": {
+                "kind": "leisure",
+                "label": "次に作りたい献立を考える",
+                "total": 48,
+                "remaining": 12,
+                "from": "forest",
+                "metric": "free",
+                "mode": "auto",
+                "reserved": {}
+              },
+              "needs": {
+                "hunger": 65.03999999999796,
+                "bladder": 63.200000000000784,
+                "hygiene": 71.270000000001,
+                "energy": 91.9915000000001,
+                "social": 50.99359999999997,
+                "fun": 97.48000000000025
+              },
+              "metrics": {
+                "free": 437,
+                "work": 39,
+                "care": 307,
+                "travel": 100,
+                "waiting": 15
+              },
+              "reason": "暮らしの用事が落ち着いたので、自由時間にします。",
+              "memories": [
+                {
+                  "label": "静かな自由時間",
+                  "value": 5,
+                  "until": 1502
+                }
+              ]
+            },
+            {
+              "id": "person-2",
+              "name": "スイ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              },
+              "task": null,
+              "needs": {
+                "hunger": 62.399999999998315,
+                "bladder": 67.52000000000069,
+                "hygiene": 75.7230000000019,
+                "energy": 100,
+                "social": 37.38000000000013,
+                "fun": 71.72000000000276
+              },
+              "metrics": {
+                "free": 363,
+                "work": 32,
+                "care": 391,
+                "travel": 112,
+                "waiting": 0
+              },
+              "reason": "「むしろに横になる」を終えました。",
+              "memories": []
+            }
+          ],
+          "reservations": {}
+        },
+        "after": {
+          "time": 1378,
+          "clock": "D1 22:58",
+          "stock": {
+            "wood": 23,
+            "food": 6,
+            "ingredients": 7,
+            "coins": 8
+          },
+          "rng": 5317,
+          "actors": [
+            {
+              "id": "person-1",
+              "name": "カヤ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 6
+                }
+              },
+              "task": {
+                "kind": "leisure",
+                "label": "次に作りたい献立を考える",
+                "total": 48,
+                "remaining": 12,
+                "from": "forest",
+                "metric": "free",
+                "mode": "auto",
+                "reserved": {}
+              },
+              "needs": {
+                "hunger": 65.03999999999796,
+                "bladder": 63.200000000000784,
+                "hygiene": 71.270000000001,
+                "energy": 91.9915000000001,
+                "social": 50.99359999999997,
+                "fun": 97.48000000000025
+              },
+              "metrics": {
+                "free": 437,
+                "work": 39,
+                "care": 307,
+                "travel": 100,
+                "waiting": 15
+              },
+              "reason": "暮らしの用事が落ち着いたので、自由時間にします。",
+              "memories": [
+                {
+                  "label": "静かな自由時間",
+                  "value": 5,
+                  "until": 1502
+                }
+              ]
+            },
+            {
+              "id": "person-2",
+              "name": "スイ",
+              "preferredBed": "mat-1",
+              "position": {
+                "kind": "at",
+                "point": {
+                  "domainId": "[\"room\",\"bedroom\"]",
+                  "cell": 1
+                }
+              },
+              "task": {
+                "kind": "need",
+                "label": "むしろに横になる",
+                "total": 85,
+                "remaining": 85,
+                "from": "forest",
+                "metric": "care",
+                "mode": "direct",
+                "target": "energy",
+                "reserved": {},
+                "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+                "room": "bedroom",
+                "spatial": {
+                  "orderId": "order-21",
+                  "kind": "use"
+                }
+              },
+              "needs": {
+                "hunger": 62.399999999998315,
+                "bladder": 67.52000000000069,
+                "hygiene": 75.7230000000019,
+                "energy": 100,
+                "social": 37.38000000000013,
+                "fun": 71.72000000000276
+              },
+              "metrics": {
+                "free": 363,
+                "work": 32,
+                "care": 391,
+                "travel": 112,
+                "waiting": 0
+              },
+              "reason": "直接の指示で、むしろに横になる。",
+              "memories": []
+            }
+          ],
+          "reservations": {
+            "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]": {
+              "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"mat-1\\\",0]\"]",
+              "targetId": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+              "actorId": "person-2",
+              "orderId": "order-21",
+              "kind": "slot"
+            }
+          }
+        }
+      }
+    ],
+    "rests": [
+      {
+        "actorId": "person-1",
+        "actorName": "カヤ",
+        "source": "ordinary-rest-directive",
+        "start": 1293,
+        "startClock": "D1 21:33",
+        "preferredBed": "mat-1",
+        "selectedFixture": "mat-1",
+        "task": {
+          "kind": "need",
+          "label": "むしろに横になる",
+          "total": 85,
+          "remaining": 85,
+          "from": "forest",
+          "metric": "care",
+          "mode": "direct",
+          "target": "energy",
+          "reserved": {},
+          "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+          "room": "bedroom",
+          "spatial": {
+            "orderId": "order-19",
+            "kind": "use"
+          }
+        },
+        "orderId": "order-19",
+        "startPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 6
+          }
+        },
+        "startNeeds": {
+          "hunger": 75.23999999999835,
+          "bladder": 76.8000000000005,
+          "hygiene": 76.79500000000081,
+          "energy": 100,
+          "social": 54.35959999999998,
+          "fun": 93.21000000000066
+        },
+        "ordinaryRestPreviewAtMinuteStart": {
+          "minutes": 85,
+          "reserved": {},
+          "facility": {
+            "fixtureId": "mat-1",
+            "roomId": "bedroom",
+            "fixtureKind": "mat",
+            "fixtureCell": 10,
+            "moveMinutes": 0,
+            "useMinutes": 85,
+            "bedPreference": {
+              "fixtureId": "mat-1",
+              "outcome": "preferred"
+            }
+          }
+        },
+        "candidates": [
+          {
+            "fixtureId": "mat-1",
+            "roomId": "bedroom",
+            "fixtureCell": 10,
+            "kind": "mat",
+            "previewAtMinuteStart": {
+              "minutes": 85,
+              "reserved": {},
+              "facility": {
+                "fixtureId": "mat-1",
+                "roomId": "bedroom",
+                "fixtureKind": "mat",
+                "fixtureCell": 10,
+                "moveMinutes": 0,
+                "useMinutes": 85
+              }
+            },
+            "reservationOwnersAtMinuteStart": [],
+            "reservationOwnersAfterSelection": [
+              "person-1"
+            ]
+          },
+          {
+            "fixtureId": "fixture-1",
+            "roomId": "bedroom",
+            "fixtureCell": 2,
+            "kind": "mat",
+            "previewAtMinuteStart": {
+              "minutes": 87,
+              "reserved": {},
+              "facility": {
+                "fixtureId": "fixture-1",
+                "roomId": "bedroom",
+                "fixtureKind": "mat",
+                "fixtureCell": 2,
+                "moveMinutes": 2,
+                "useMinutes": 85
+              }
+            },
+            "reservationOwnersAtMinuteStart": [],
+            "reservationOwnersAfterSelection": []
+          }
+        ],
+        "selectionReason": {
+          "kind": "preferred-selected",
+          "evidence": "The actual task station is the configured preferred fixture."
+        },
+        "metrics": {
+          "free": 0,
+          "work": 0,
+          "care": 1,
+          "travel": 0,
+          "waiting": 0
+        },
+        "segments": [
+          {
+            "metric": "care",
+            "from": 1293,
+            "to": 1294,
+            "minutes": 1,
+            "startPosition": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 6
+              }
+            },
+            "endPosition": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 6
+              }
+            }
+          }
+        ],
+        "end": 1294,
+        "endKind": "directly-cancelled-or-replaced",
+        "endClock": "D1 21:34",
+        "elapsed": 1,
+        "endPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 6
+          }
+        },
+        "endNeeds": {
+          "hunger": 75.11999999999834,
+          "bladder": 76.6400000000005,
+          "hygiene": 76.73000000000081,
+          "energy": 99.9715,
+          "social": 54.31999999999998,
+          "fun": 93.14000000000067
+        },
+        "endTask": {
+          "kind": "need",
+          "label": "むしろに横になる",
+          "total": 85,
+          "remaining": 84,
+          "from": "forest",
+          "metric": "care",
+          "mode": "direct",
+          "target": "energy",
+          "reserved": {},
+          "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+          "room": "bedroom",
+          "spatial": {
+            "orderId": "order-19",
+            "kind": "use"
+          }
+        }
+      },
+      {
+        "actorId": "person-2",
+        "actorName": "スイ",
+        "source": "ordinary-rest-directive",
+        "start": 1293,
+        "startClock": "D1 21:33",
+        "preferredBed": "mat-1",
+        "selectedFixture": "fixture-1",
+        "task": {
+          "kind": "need",
+          "label": "むしろに横になる",
+          "total": 85,
+          "remaining": 85,
+          "from": "forest",
+          "metric": "care",
+          "mode": "direct",
+          "target": "energy",
+          "reserved": {},
+          "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+          "room": "bedroom",
+          "spatial": {
+            "orderId": "order-20",
+            "kind": "use"
+          }
+        },
+        "orderId": "order-20",
+        "startPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 1
+          }
+        },
+        "startNeeds": {
+          "hunger": 72.5999999999986,
+          "bladder": 81.1200000000004,
+          "hygiene": 81.24800000000171,
+          "energy": 99.81,
+          "social": 42.055000000000106,
+          "fun": 77.67000000000218
+        },
+        "ordinaryRestPreviewAtMinuteStart": {
+          "minutes": 85,
+          "reserved": {},
+          "facility": {
+            "fixtureId": "fixture-1",
+            "roomId": "bedroom",
+            "fixtureKind": "mat",
+            "fixtureCell": 2,
+            "moveMinutes": 0,
+            "useMinutes": 85,
+            "bedPreference": {
+              "fixtureId": "mat-1",
+              "outcome": "fallback",
+              "reason": "使える設備はほかの住人が予約しています。"
+            }
+          }
+        },
+        "candidates": [
+          {
+            "fixtureId": "mat-1",
+            "roomId": "bedroom",
+            "fixtureCell": 10,
+            "kind": "mat",
+            "previewAtMinuteStart": {
+              "disabled": "使える設備はほかの住人が予約しています。"
+            },
+            "reservationOwnersAtMinuteStart": [
+              "person-1"
+            ],
+            "reservationOwnersAfterSelection": [
+              "person-1"
+            ]
+          },
+          {
+            "fixtureId": "fixture-1",
+            "roomId": "bedroom",
+            "fixtureCell": 2,
+            "kind": "mat",
+            "previewAtMinuteStart": {
+              "minutes": 85,
+              "reserved": {},
+              "facility": {
+                "fixtureId": "fixture-1",
+                "roomId": "bedroom",
+                "fixtureKind": "mat",
+                "fixtureCell": 2,
+                "moveMinutes": 0,
+                "useMinutes": 85
+              }
+            },
+            "reservationOwnersAtMinuteStart": [],
+            "reservationOwnersAfterSelection": [
+              "person-2"
+            ]
+          }
+        ],
+        "selectionReason": {
+          "kind": "preferred-unavailable",
+          "evidence": "使える設備はほかの住人が予約しています。"
+        },
+        "metrics": {
+          "free": 0,
+          "work": 0,
+          "care": 85,
+          "travel": 0,
+          "waiting": 0
+        },
+        "segments": [
+          {
+            "metric": "care",
+            "from": 1293,
+            "to": 1378,
+            "minutes": 85,
+            "startPosition": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 1
+              }
+            },
+            "endPosition": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 1
+              }
+            }
+          }
+        ],
+        "end": 1378,
+        "endKind": "completed",
+        "endClock": "D1 22:58",
+        "elapsed": 85,
+        "endPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 1
+          }
+        },
+        "endNeeds": {
+          "hunger": 62.399999999998315,
+          "bladder": 67.52000000000069,
+          "hygiene": 75.7230000000019,
+          "energy": 100,
+          "social": 37.38000000000013,
+          "fun": 71.72000000000276
+        },
+        "endTask": null
+      },
+      {
+        "actorId": "person-2",
+        "actorName": "スイ",
+        "source": "ordinary-rest-directive",
+        "start": 1378,
+        "startClock": "D1 22:58",
+        "preferredBed": "mat-1",
+        "selectedFixture": "mat-1",
+        "task": {
+          "kind": "need",
+          "label": "むしろに横になる",
+          "total": 85,
+          "remaining": 85,
+          "from": "forest",
+          "metric": "care",
+          "mode": "direct",
+          "target": "energy",
+          "reserved": {},
+          "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+          "room": "bedroom",
+          "spatial": {
+            "orderId": "order-21",
+            "kind": "use"
+          }
+        },
+        "orderId": "order-21",
+        "startPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 1
+          }
+        },
+        "startNeeds": {
+          "hunger": 62.399999999998315,
+          "bladder": 67.52000000000069,
+          "hygiene": 75.7230000000019,
+          "energy": 100,
+          "social": 37.38000000000013,
+          "fun": 71.72000000000276
+        },
+        "ordinaryRestPreviewAtMinuteStart": {
+          "minutes": 87,
+          "reserved": {},
+          "facility": {
+            "fixtureId": "mat-1",
+            "roomId": "bedroom",
+            "fixtureKind": "mat",
+            "fixtureCell": 10,
+            "moveMinutes": 2,
+            "useMinutes": 85,
+            "bedPreference": {
+              "fixtureId": "mat-1",
+              "outcome": "preferred"
+            }
+          }
+        },
+        "candidates": [
+          {
+            "fixtureId": "mat-1",
+            "roomId": "bedroom",
+            "fixtureCell": 10,
+            "kind": "mat",
+            "previewAtMinuteStart": {
+              "minutes": 87,
+              "reserved": {},
+              "facility": {
+                "fixtureId": "mat-1",
+                "roomId": "bedroom",
+                "fixtureKind": "mat",
+                "fixtureCell": 10,
+                "moveMinutes": 2,
+                "useMinutes": 85
+              }
+            },
+            "reservationOwnersAtMinuteStart": [],
+            "reservationOwnersAfterSelection": [
+              "person-2"
+            ]
+          },
+          {
+            "fixtureId": "fixture-1",
+            "roomId": "bedroom",
+            "fixtureCell": 2,
+            "kind": "mat",
+            "previewAtMinuteStart": {
+              "minutes": 85,
+              "reserved": {},
+              "facility": {
+                "fixtureId": "fixture-1",
+                "roomId": "bedroom",
+                "fixtureKind": "mat",
+                "fixtureCell": 2,
+                "moveMinutes": 0,
+                "useMinutes": 85
+              }
+            },
+            "reservationOwnersAtMinuteStart": [],
+            "reservationOwnersAfterSelection": []
+          }
+        ],
+        "selectionReason": {
+          "kind": "preferred-selected",
+          "evidence": "The actual task station is the configured preferred fixture."
+        },
+        "metrics": {
+          "free": 0,
+          "work": 0,
+          "care": 85,
+          "travel": 2,
+          "waiting": 0
+        },
+        "segments": [
+          {
+            "metric": "travel",
+            "from": 1378,
+            "to": 1380,
+            "minutes": 2,
+            "startPosition": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 1
+              }
+            },
+            "endPosition": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 6
+              }
+            }
+          },
+          {
+            "metric": "care",
+            "from": 1380,
+            "to": 1465,
+            "minutes": 85,
+            "startPosition": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 6
+              }
+            },
+            "endPosition": {
+              "kind": "at",
+              "point": {
+                "domainId": "[\"room\",\"bedroom\"]",
+                "cell": 6
+              }
+            }
+          }
+        ],
+        "end": 1465,
+        "endKind": "completed",
+        "endClock": "D2 00:25",
+        "elapsed": 87,
+        "endPosition": {
+          "kind": "at",
+          "point": {
+            "domainId": "[\"room\",\"bedroom\"]",
+            "cell": 6
+          }
+        },
+        "endNeeds": {
+          "hunger": 51.95999999999854,
+          "bladder": 53.60000000000099,
+          "hygiene": 70.0680000000021,
+          "energy": 100,
+          "social": 32.595000000000155,
+          "fun": 65.63000000000335
+        },
+        "endTask": null
+      }
+    ],
+    "afterReservationRelease": {
+      "time": 1294,
+      "clock": "D1 21:34",
+      "stock": {
+        "wood": 23,
+        "food": 6,
+        "ingredients": 7,
+        "coins": 8
+      },
+      "rng": 5317,
+      "actors": [
+        {
+          "id": "person-1",
+          "name": "カヤ",
+          "preferredBed": "mat-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 6
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 75.11999999999834,
+            "bladder": 76.6400000000005,
+            "hygiene": 76.73000000000081,
+            "energy": 99.9715,
+            "social": 54.31999999999998,
+            "fun": 93.14000000000067
+          },
+          "metrics": {
+            "free": 353,
+            "work": 39,
+            "care": 307,
+            "travel": 100,
+            "waiting": 15
+          },
+          "reason": "指示を取り消しました。次の時間進行で自分の予定を選びます。",
+          "memories": [
+            {
+              "label": "静かな自由時間",
+              "value": 5,
+              "until": 1356
+            }
+          ]
+        },
+        {
+          "id": "person-2",
+          "name": "スイ",
+          "preferredBed": "mat-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 1
+            }
+          },
+          "task": {
+            "kind": "need",
+            "label": "むしろに横になる",
+            "total": 85,
+            "remaining": 84,
+            "from": "forest",
+            "metric": "care",
+            "mode": "direct",
+            "target": "energy",
+            "reserved": {},
+            "station": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+            "room": "bedroom",
+            "spatial": {
+              "orderId": "order-20",
+              "kind": "use"
+            }
+          },
+          "needs": {
+            "hunger": 72.4799999999986,
+            "bladder": 80.9600000000004,
+            "hygiene": 81.18300000000171,
+            "energy": 99.78150000000001,
+            "social": 42.00000000000011,
+            "fun": 77.60000000000218
+          },
+          "metrics": {
+            "free": 363,
+            "work": 32,
+            "care": 307,
+            "travel": 112,
+            "waiting": 0
+          },
+          "reason": "直接の指示で、むしろに横になる。",
+          "memories": []
+        }
+      ],
+      "reservations": {
+        "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]": {
+          "id": "[\"slot\",\"[\\\"slot\\\",\\\"bedroom\\\",\\\"fixture-1\\\",0]\"]",
+          "targetId": "[\"slot\",\"bedroom\",\"fixture-1\",0]",
+          "actorId": "person-2",
+          "orderId": "order-20",
+          "kind": "slot"
+        }
+      }
+    },
+    "beforeNextRest": {
+      "time": 1378,
+      "clock": "D1 22:58",
+      "stock": {
+        "wood": 23,
+        "food": 6,
+        "ingredients": 7,
+        "coins": 8
+      },
+      "rng": 5317,
+      "actors": [
+        {
+          "id": "person-1",
+          "name": "カヤ",
+          "preferredBed": "mat-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 6
+            }
+          },
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 12,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "needs": {
+            "hunger": 65.03999999999796,
+            "bladder": 63.200000000000784,
+            "hygiene": 71.270000000001,
+            "energy": 91.9915000000001,
+            "social": 50.99359999999997,
+            "fun": 97.48000000000025
+          },
+          "metrics": {
+            "free": 437,
+            "work": 39,
+            "care": 307,
+            "travel": 100,
+            "waiting": 15
+          },
+          "reason": "暮らしの用事が落ち着いたので、自由時間にします。",
+          "memories": [
+            {
+              "label": "静かな自由時間",
+              "value": 5,
+              "until": 1502
+            }
+          ]
+        },
+        {
+          "id": "person-2",
+          "name": "スイ",
+          "preferredBed": "mat-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 1
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 62.399999999998315,
+            "bladder": 67.52000000000069,
+            "hygiene": 75.7230000000019,
+            "energy": 100,
+            "social": 37.38000000000013,
+            "fun": 71.72000000000276
+          },
+          "metrics": {
+            "free": 363,
+            "work": 32,
+            "care": 391,
+            "travel": 112,
+            "waiting": 0
+          },
+          "reason": "「むしろに横になる」を終えました。",
+          "memories": []
+        }
+      ],
+      "reservations": {}
+    },
+    "nextRestPreview": {
+      "minutes": 87,
+      "reserved": {},
+      "facility": {
+        "fixtureId": "mat-1",
+        "roomId": "bedroom",
+        "fixtureKind": "mat",
+        "fixtureCell": 10,
+        "moveMinutes": 2,
+        "useMinutes": 85,
+        "bedPreference": {
+          "fixtureId": "mat-1",
+          "outcome": "preferred"
+        }
+      }
+    },
+    "reservationReleasePreservedPreferences": true,
+    "runningFallbackCompletedBeforeReturn": true,
+    "end": {
+      "time": 1465,
+      "clock": "D2 00:25",
+      "stock": {
+        "wood": 23,
+        "food": 6,
+        "ingredients": 7,
+        "coins": 8
+      },
+      "rng": 5317,
+      "actors": [
+        {
+          "id": "person-1",
+          "name": "カヤ",
+          "preferredBed": "mat-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 6
+            }
+          },
+          "task": {
+            "kind": "leisure",
+            "label": "次に作りたい献立を考える",
+            "total": 48,
+            "remaining": 21,
+            "from": "forest",
+            "metric": "free",
+            "mode": "auto",
+            "reserved": {}
+          },
+          "needs": {
+            "hunger": 54.599999999998126,
+            "bladder": 49.28000000000108,
+            "hygiene": 65.6150000000012,
+            "energy": 83.7265000000002,
+            "social": 47.548399999999965,
+            "fun": 98.11000000000018
+          },
+          "metrics": {
+            "free": 524,
+            "work": 39,
+            "care": 307,
+            "travel": 100,
+            "waiting": 15
+          },
+          "reason": "暮らしの用事が落ち着いたので、自由時間にします。",
+          "memories": [
+            {
+              "label": "静かな自由時間",
+              "value": 5,
+              "until": 1598
+            }
+          ]
+        },
+        {
+          "id": "person-2",
+          "name": "スイ",
+          "preferredBed": "mat-1",
+          "position": {
+            "kind": "at",
+            "point": {
+              "domainId": "[\"room\",\"bedroom\"]",
+              "cell": 6
+            }
+          },
+          "task": null,
+          "needs": {
+            "hunger": 51.95999999999854,
+            "bladder": 53.60000000000099,
+            "hygiene": 70.0680000000021,
+            "energy": 100,
+            "social": 32.595000000000155,
+            "fun": 65.63000000000335
+          },
+          "metrics": {
+            "free": 363,
+            "work": 32,
+            "care": 476,
+            "travel": 114,
+            "waiting": 0
+          },
+          "reason": "「むしろに横になる」を終えました。",
+          "memories": []
+        }
+      ],
+      "reservations": {}
+    },
+    "savedRoundTrip": {
+      "time": 1465,
+      "gameHash": "dbe75c6b97be25fde877bc36c68cf90d104ba56e8735c328b3151d78800fa8b8",
+      "originHash": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+      "gameEqual": true,
+      "originEqual": true
+    },
+    "control": "Both residents prefer mat-1. Public ordinary-rest orders demonstrate fallback; Kaya cancels a booking. Sui completes the existing fallback, then a new ordinary-rest directive returns to the preference. This return is not labelled autonomous."
+  },
+  "checks": {
+    "unsetBaselineHashMatches": true,
+    "onlyPreferencesDifferAtStart": true,
+    "existingSuiTaskRetained": true,
+    "originalInputUnchanged": true,
+    "originUnchanged": true,
+    "personalSaveUsed": false,
+    "productEdited": false,
+    "uiOperated": false
+  }
+}

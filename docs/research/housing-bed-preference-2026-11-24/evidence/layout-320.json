@@ -1,0 +1,237 @@
+{
+  "frameWidth": 320,
+  "documentWidth": 305,
+  "rows": [
+    {
+      "width": 267,
+      "scrollWidth": 267,
+      "text": "食事に使う設備自動（移動と利用が短い設備）居間・小さなかまど（4列1行）食事をとる居間・小さなかまど（4列1行）現在の見込み　移動2分 ＋ 利用20分（合計22分）取り置き 食事1",
+      "controls": [
+        {
+          "tag": "SELECT",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        },
+        {
+          "tag": "BUTTON",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 267,
+      "scrollWidth": 267,
+      "text": "用足しに使う設備自動（移動と利用が短い設備）裏庭・外の厠（4列1行）用を足す裏庭・外の厠（4列1行）現在の見込み　移動8分 ＋ 利用15分（合計23分）",
+      "controls": [
+        {
+          "tag": "SELECT",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        },
+        {
+          "tag": "BUTTON",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 267,
+      "scrollWidth": 267,
+      "text": "身支度に使う設備自動（移動と利用が短い設備）裏庭・水桶（4列3行）体を洗う裏庭・水桶（4列3行）現在の見込み　移動10分 ＋ 利用40分（合計50分）",
+      "controls": [
+        {
+          "tag": "SELECT",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        },
+        {
+          "tag": "BUTTON",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 267,
+      "scrollWidth": 267,
+      "text": "休息に使う設備自動（優先する寝床を考慮）居間・布張りの寝台（4列2行）東の窓辺から朝の光が差し込む静かな寝室・敷きむしろ（3列3行、同名の1室目）東の窓辺から朝の光が差し込む静かな寝室・敷きむしろ（3列3行、同名の2室目）ひと眠りする居間・布張りの寝台（4列2行）現在の見込み　移動3分 ＋ 利用55分（合計58分）優先する寝床東の窓辺から朝の光が差し込む静かな寝室・敷きむしろ（3列3行、同名の1室目）使える設備はほかの住人が予約しています。別の寝床を使う見込みです。",
+      "controls": [
+        {
+          "tag": "SELECT",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        },
+        {
+          "tag": "BUTTON",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 267,
+      "scrollWidth": 267,
+      "text": "交流に使う設備自動（移動と利用が短い設備）居間・長椅子（2列2行）人の声にふれる居間・長椅子（2列2行）現在の見込み　移動1分 ＋ 利用20分（合計21分）",
+      "controls": [
+        {
+          "tag": "SELECT",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        },
+        {
+          "tag": "BUTTON",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 267,
+      "scrollWidth": 267,
+      "text": "楽しみに使う設備自動（移動と利用が短い設備）居間・窓辺の腰掛け（4列3行）好きなことをして休む居間・窓辺の腰掛け（4列3行）現在の見込み　移動4分 ＋ 利用22分（合計26分）",
+      "controls": [
+        {
+          "tag": "SELECT",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        },
+        {
+          "tag": "BUTTON",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 129.5,
+      "scrollWidth": 130,
+      "text": "好きなことに自由時間を使う48分",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "width": 129.5,
+          "height": 59.59375,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 267,
+      "scrollWidth": 267,
+      "text": "集まりを指示する異なる住人を二人以上選んでください。",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 267,
+      "scrollWidth": 267,
+      "text": "居間の入口へ移動居間の入口　1分",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 267,
+      "scrollWidth": 267,
+      "text": "東の窓辺から朝の光が差し込む静かな寝室の入口へ移動東の窓辺から朝の光が差し込む静かな寝室の入口　3分",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "width": 267,
+          "height": 59.59375,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 267,
+      "scrollWidth": 267,
+      "text": "裏庭の入口へ移動裏庭の入口　6分",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 267,
+      "scrollWidth": 267,
+      "text": "東の窓辺から朝の光が差し込む静かな寝室の入口へ移動東の窓辺から朝の光が差し込む静かな寝室の入口　3分",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "width": 267,
+          "height": 59.59375,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 267,
+      "scrollWidth": 267,
+      "text": "検証のカヤの近くへ移動居間の入口　1分",
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "width": 267,
+          "height": 44,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 259,
+      "scrollWidth": 259,
+      "text": "検証のスイが優先する仕事本人に任せる木工料理交渉手当て",
+      "controls": [
+        {
+          "tag": "SELECT",
+          "width": 259,
+          "height": 44,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "width": 259,
+      "scrollWidth": 259,
+      "text": "検証のスイが優先する寝床未設定（使える寝床から選ぶ）居間・布張りの寝台（4列2行）東の窓辺から朝の光が差し込む静かな寝室・敷きむしろ（3列3行、同名の1室目）東の窓辺から朝の光が差し込む静かな寝室・敷きむしろ（3列3行、同名の2室目）次の休息から優先します。使えない時は別の寝床を探します。今の予定は変わりません。",
+      "controls": [
+        {
+          "tag": "SELECT",
+          "width": 259,
+          "height": 44,
+          "value": "mat-1"
+        }
+      ]
+    }
+  ]
+}

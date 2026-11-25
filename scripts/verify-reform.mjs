@@ -300,7 +300,7 @@ async function weeklyChoice(page, name, week) {
     await page.getByRole("button",{name:new RegExp(destination+"へ移動する")}).click();
     await finish(page);
   } else if (name === "木工の二人") {
-    await showSection(page,"仕事と備蓄の方針");
+    await showSection(page,"暮らしと備蓄の方針");
     await page.getByLabel(/が優先する仕事/).selectOption(week===1?"cook":week===2?"care":"wood");
     if (week === 2 && lead.person.skills.wood >= 5) {
       await work(page,"wood:master");
@@ -339,7 +339,7 @@ async function longProfile(name) {
       await tab(page, "暮らし");
       await finish(page);
     } else {
-      await showSection(page, "仕事と備蓄の方針");
+      await showSection(page, "暮らしと備蓄の方針");
       await page.getByLabel(/が優先する仕事/).selectOption(name === "市場の商人" ? "trade" : "wood");
       await work(page, name === "市場の商人" ? "trade" : "wood");
       await finish(page);

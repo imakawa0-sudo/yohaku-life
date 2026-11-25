@@ -28,6 +28,7 @@ export type HousingRuntime = {
   construction?: HousingConstruction;
   gatherings?: Record<string, HousingGathering>;
   nextGatheringId?: number;
+  preferredBeds?: Record<string, string>;
   state: SpatialState;
   unlocated: Record<
     string,
@@ -58,6 +59,9 @@ export type HousingUsePreview = {
   fixtureCell: number;
   moveMinutes: number;
   useMinutes: number;
+  bedPreference?:
+    | { fixtureId: string; outcome: "preferred" }
+    | { fixtureId: string; outcome: "fallback"; reason: string };
 };
 
 export type HousingTopology = {

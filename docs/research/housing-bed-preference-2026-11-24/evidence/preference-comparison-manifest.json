@@ -1,0 +1,90 @@
+{
+  "createdAtUtc": "2026-11-24T14:33:15.522824+00:00",
+  "productRevision": "25f41547697b80399f134f634094200a4148a785",
+  "revisionProvenance": "Reported by parent after approved core review; research performed no git operations.",
+  "status": "passed",
+  "expected": {
+    "start": "9baf1239b4a921ad35d2ccd3879c32f8f1f8ec18876f56b39da6a2e9caf33819",
+    "origin": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+    "morning": "b23af85ab72300b0424bf6bc5d557a5330b9dfc8eda6167c7c7ea5a63ee01bff",
+    "startTime": 1293,
+    "endTime": 1920
+  },
+  "actualGameSha256": {
+    "none": "b23af85ab72300b0424bf6bc5d557a5330b9dfc8eda6167c7c7ea5a63ee01bff",
+    "preferred": "4b9e0f9dd3660b803293b429392076a98fcb5887dad8a67c6dff007ea167fd0a"
+  },
+  "originSha256": {
+    "none": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491",
+    "preferred": "6fe6b179c23ad2a78bc1787517614df73e2004f9d0120599097fc7137f21d491"
+  },
+  "checks": {
+    "unsetBaselineHashMatches": true,
+    "onlyPreferencesDifferAtStart": true,
+    "existingSuiTaskRetained": true,
+    "originalInputUnchanged": true,
+    "originUnchanged": true,
+    "personalSaveUsed": false,
+    "productEdited": false,
+    "uiOperated": false
+  },
+  "artifactFileSha256Provenance": "Snapshots from the recorded run. The recorded shell wrapper predates the later usage and input validation update.",
+  "artifactFileSha256": {
+    "compare-preferred-beds.ts": "a815a7ad0b3b5dfce66641f2cb80d68ed001a1bbc399350801bbe0aae2238e9d",
+    "compare-preferred-beds.sh": "dbf5815eb82fb00b531401a0ed9733c0d1345fbd40784eb2d1e37721aeb3d1ec",
+    "generated-daily-after-night-slot.json": "5ae063c18cd9af35b173133a2f9760e4b6247fd71c2cfc1fe50989b11dc3d183",
+    "preferred-beds-ready.md": "43afab96b1f5e9c6e5c8bf0bd70fe1727e1c4e630166647bbd3ae5aeb5d087f4",
+    "preferred-beds-after-core/compare-preferred-beds.cjs": "4e07d6570f1062752b7d7d725594e1d5f4e54d0344f4881afad80f42ad5e8ff2",
+    "preferred-beds-after-core/compare-preferred-beds.json": "38c303df56afdcf5c24bbeeaf4eacbe3c07b1a1f71ab269c7bb97da99397eee9",
+    "preferred-beds-after-core/compare-preferred-beds.md": "1f4cadece7e09de9151417c457db61bcca83b43815b1052ab3d7b52fa6084d97",
+    "preferred-beds-after-core/execution-notes.md": "9a217378d118ff61f2280107620d2c417f43e0acd000f1ef53b871e10924f05e",
+    "preferred-beds-after-core/preferred-beds-none-morning-slot.json": "54b2793450fb599a8cf9e560a75d093cb40c20056da9244d2ae2652211293882",
+    "preferred-beds-after-core/preferred-beds-none.json": "6a67b429a3898ad8c69af29174874dabb49aa7005a953af442ab2c4f28e96fa0",
+    "preferred-beds-after-core/preferred-beds-preferred-morning-slot.json": "01cb365ee4fb82b92e352af42cff7d4c2e95b01b338a520c8ed776406946a63c",
+    "preferred-beds-after-core/preferred-beds-preferred.json": "bf96f89039147604d6d2f9fd29d1ac3e0d4d270f788d020d937cb686b8e754b8"
+  },
+  "coreSourceFileSha256": {
+    "src/reform/characterArt.ts": "c933a6e59de30ce0f351b8347af66a45d23fd5ccad6cf3bd9de2f6742708b40f",
+    "src/reform/handbookUi.ts": "28b1c1868854b53325593595d74a48328a29df345ab71d313cab3faef5b500c2",
+    "src/reform/house.ts": "89935c5a689b23c21b5798534a5191c5b23ed613c9eee38f37442a328d58a771",
+    "src/reform/housing/bedPreference.ts": "28e9b79c08b80ee09a3a6b8450f08f5e239398895ecd4b22fdcbe32f6ec9ed1d",
+    "src/reform/housing/bridge.ts": "cfe7e15c81a302960820a05f8636b0201afdeae4c6bc303e26164ac786454b30",
+    "src/reform/housing/construction.ts": "c94ee651fc8d74cf81f90e4b617859a37780efbd90a9eb150e6e63ccfbebbd6d",
+    "src/reform/housing/constructionPresentation.ts": "6df938f9243098488fb0b66551c11f2d237569e618bec0a2915d4752f5559222",
+    "src/reform/housing/constructionProgress.ts": "0d5802bb1f427d750e54b822aa4bf4ea0ec5554994cb279befd08f26caf20467",
+    "src/reform/housing/constructionTopology.ts": "3f7cc1e0b663f08e28eb7d31a93e632c42a451e2ee165a85c82b09b111e59d06",
+    "src/reform/housing/constructionTypes.ts": "223edbcb3ab7ce6674b0147dfcf422a08929c5794d24f9b5362b1c2b2362bbcd",
+    "src/reform/housing/constructionValidation.ts": "69f479aaca27b66264495f68f14349ade0df5dc5e29a4cd40f6d4e1df2c801a7",
+    "src/reform/housing/gathering.ts": "e4dffaa6c07a55814802bef57c1dd84fbfa5daf14879aa774d0484ba77ce1ba3",
+    "src/reform/housing/gatheringForecast.ts": "4296f709481c8c61fc8d9ce6fb8be8a519931fdb262eb1192e16c4e1f7b1e4ff",
+    "src/reform/housing/gatheringProgress.ts": "51f009636037d0704c1e022f504b77309231c1cebcfbf34475825620063f1a07",
+    "src/reform/housing/gatheringValidation.ts": "7985bb518650ae323586687bb031b3d3b6d51174e987bd209bc08edd27fbba93",
+    "src/reform/housing/layout.ts": "49800a1b886636417e37e87a947e3ae2af1617e7da9ba3a6d0429244d3f0dbc1",
+    "src/reform/housing/presentation.ts": "469e21d5ee3aa2ec41f88d5035b58db94ba5ae91c3769fdbe2d04979b4907cfc",
+    "src/reform/housing/runtime.ts": "c266fb9d65fe88d91f1bdef0ae97e44849d83f4b2c3a75613f1d6fdc567c8ef6",
+    "src/reform/housing/topology.ts": "86b3708f03934f227d8e9d50c81ae7b8b589ab1658ecde3ce28bdee94540945c",
+    "src/reform/housing/types.ts": "1823afd1691a0fc2f9649e4ce70aefbcd283e4c73a7abe25683966c9aaed2321",
+    "src/reform/library.ts": "b8241d4ecdd66f604adf2b43b8ff6d6ff82d84571aae73dcf1b338a6dee3321e",
+    "src/reform/peopleModel.ts": "a5faf455b44a757d66843f9923036d5dea793a3fcbe416123f99772bae6c777d",
+    "src/reform/pixelFigure.ts": "2e49a153ac57516b4e445e01c29e0c5dc1a088bdb8cc5f5e22c28dc34eb842fd",
+    "src/reform/sim.ts": "136ffe58daa3faae4bb5d4c80c2bdce3ae8232b63e270d104c5250e709caa689",
+    "src/reform/spatial/actions.ts": "d804ca7887047e85e97482fd9a15d1c915d83408ed650a4939f10547c2b3dd6f",
+    "src/reform/spatial/codec.ts": "31adb7fe3fc45577459a168785b29a9e56666b96648351c82539c288b3d1d81f",
+    "src/reform/spatial/legacy.ts": "645f47050beb819370e22d995cfcc21f035ec532d178e9e19de9dd0dfd09f78d",
+    "src/reform/spatial/route.ts": "8dc30a9814ca663b88fa368481922f782f8e8e886f7f6265248cd02b8db8802a",
+    "src/reform/spatial/types.ts": "102ffcd3f8f9d60b7de514dc3b8c0a85e4ccb0d7abf0272a5e84d622d3f08f6e",
+    "src/reform/world.ts": "298141a430c5ae286ca5497d1c47ce1ef80c3c355841d2daaf335b091ef37822"
+  },
+  "workingTreeUiFileObservation": {
+    "scope": "Present in the research working tree when hashes were collected, absent from productRevision, and unused by the comparison.",
+    "sourceFileSha256": {
+      "src/reform/facilityLabel.ts": "cae9cc2dd543828cf0057e7b841009aed3649cbb53fccd2585908facb131c571"
+    }
+  },
+  "independentReview": "Read-only review found no material number or interpretation errors; no additional execution.",
+  "limitations": [
+    "Public-core API reproduction; no UI operation",
+    "Two identical mats, open routes, allowed access, two residents, one overnight interval",
+    "Shared preference return uses a new ordinary-rest directive; it is not claimed as autonomous"
+  ]
+}

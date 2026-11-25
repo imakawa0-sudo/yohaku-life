@@ -1,0 +1,31 @@
+{
+  "sourceCommit": "25f41547697b80399f134f634094200a4148a785",
+  "summarySections": {
+    "allScenarioMinuteTotalsEqual1440": true,
+    "alternatives": true,
+    "branches": true,
+    "checkCount": true,
+    "checkpoints": true,
+    "checks": true,
+    "daily": true,
+    "origin": true,
+    "originHash": true,
+    "scope": true,
+    "sleepChoiceChecks": true
+  },
+  "generatedStates": {
+    "generated-origin-slot.json": {
+      "gameExact": true,
+      "originExact": true
+    },
+    "generated-daily-start-slot.json": {
+      "gameExact": true,
+      "originExact": true
+    },
+    "generated-daily-after-night-slot.json": {
+      "gameExact": true,
+      "originExact": true
+    }
+  },
+  "allEqual": true
+}

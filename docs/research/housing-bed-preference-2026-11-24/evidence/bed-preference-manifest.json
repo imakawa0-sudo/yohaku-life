@@ -1,0 +1,123 @@
+{
+  "residents": [
+    {
+      "id": "person-1",
+      "name": "検証のカヤ"
+    },
+    {
+      "id": "person-2",
+      "name": "検証のスイ"
+    }
+  ],
+  "beds": {
+    "preferred": {
+      "fixtureId": "mat-1",
+      "roomId": "bedroom",
+      "kind": "mat",
+      "cell": 10,
+      "label": "東の窓辺から朝の光が差し込む静かな寝室・敷きむしろ（3列3行、同名の1室目）",
+      "station": "[\"slot\",\"bedroom\",\"mat-1\",0]"
+    },
+    "sameName": {
+      "fixtureId": "fixture-2",
+      "roomId": "room-1",
+      "kind": "mat",
+      "cell": 10,
+      "label": "東の窓辺から朝の光が差し込む静かな寝室・敷きむしろ（3列3行、同名の2室目）",
+      "station": "[\"slot\",\"room-1\",\"fixture-2\",0]"
+    },
+    "nearby": {
+      "fixtureId": "fixture-3",
+      "roomId": "living",
+      "kind": "bed",
+      "cell": 7,
+      "label": "居間・布張りの寝台（4列2行）",
+      "station": "[\"slot\",\"living\",\"fixture-3\",0]"
+    }
+  },
+  "cases": {
+    "competition": {
+      "file": "bed-preference-input-competition.json",
+      "name": "検証・同じ寝床を優先",
+      "expected": {
+        "preferred": {
+          "fixtureId": "mat-1",
+          "roomId": "bedroom",
+          "kind": "mat",
+          "cell": 10,
+          "label": "東の窓辺から朝の光が差し込む静かな寝室・敷きむしろ（3列3行、同名の1室目）",
+          "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+          "time": "移動6分 ＋ 利用85分（合計91分）",
+          "bedPreference": {
+            "fixtureId": "mat-1",
+            "outcome": "preferred"
+          }
+        },
+        "fallback": {
+          "fixtureId": "fixture-3",
+          "roomId": "living",
+          "kind": "bed",
+          "cell": 7,
+          "label": "居間・布張りの寝台（4列2行）",
+          "station": "[\"slot\",\"living\",\"fixture-3\",0]",
+          "time": "移動3分 ＋ 利用55分（合計58分）",
+          "bedPreference": {
+            "fixtureId": "mat-1",
+            "outcome": "fallback",
+            "reason": "使える設備はほかの住人が予約しています。"
+          }
+        }
+      }
+    },
+    "inaccessible": {
+      "file": "bed-preference-input-inaccessible.json",
+      "name": "検証・通れない寝床",
+      "expected": {
+        "fallback": {
+          "fixtureId": "fixture-3",
+          "roomId": "living",
+          "kind": "bed",
+          "cell": 7,
+          "label": "居間・布張りの寝台（4列2行）",
+          "station": "[\"slot\",\"living\",\"fixture-3\",0]",
+          "time": "移動3分 ＋ 利用55分（合計58分）",
+          "bedPreference": {
+            "fixtureId": "mat-1",
+            "outcome": "fallback",
+            "reason": "目的地への通路が通れません。戸・通路の開閉と間取りを確認してください。"
+          }
+        },
+        "reopened": {
+          "fixtureId": "mat-1",
+          "roomId": "bedroom",
+          "kind": "mat",
+          "cell": 10,
+          "label": "東の窓辺から朝の光が差し込む静かな寝室・敷きむしろ（3列3行、同名の1室目）",
+          "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+          "time": "移動6分 ＋ 利用85分（合計91分）",
+          "bedPreference": {
+            "fixtureId": "mat-1",
+            "outcome": "preferred"
+          }
+        },
+        "openPassageButton": "居間と東の窓辺から朝の光が差し込む静かな寝室の通路を開ける"
+      }
+    },
+    "active": {
+      "file": "bed-preference-input-active.json",
+      "name": "検証・休息中の設定変更",
+      "expected": {
+        "station": "[\"slot\",\"bedroom\",\"mat-1\",0]",
+        "replacement": "fixture-3",
+        "clock": "08:05"
+      }
+    }
+  },
+  "copy": {
+    "blank": "未設定（使える寝床から選ぶ）",
+    "configured": "自動（優先する寝床を考慮）",
+    "unconfigured": "自動（移動と利用が短い設備）",
+    "preferred": "優先する寝床を使う見込みです。",
+    "fallback": "別の寝床を使う見込みです。"
+  }
+}

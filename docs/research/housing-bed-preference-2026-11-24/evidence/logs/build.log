@@ -1,0 +1,20 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> yohaku-life@0.1.0 build
+> tsc -b && vite build && node scripts/build-standalone.mjs
+
+vite v7.3.8 building client environment for production...
+transforming...
+✓ 1632 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.63 kB │ gzip:   0.45 kB
+dist/assets/index-MXCM2Xyf.css   42.54 kB │ gzip:   9.18 kB
+dist/assets/index-BefHwbir.js   662.51 kB │ gzip: 281.20 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.60s
+Standalone game: dist/yohaku.html

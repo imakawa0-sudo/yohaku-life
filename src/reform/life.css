@@ -603,6 +603,15 @@
   font-size: 12px;
   color: var(--lf-soft);
 }
+.lf-bed-policy {
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: 12px;
+  font-size: inherit;
+  overflow-wrap: anywhere;
+}
+.lf-bed-policy .lf-note {
+  font-size: inherit;
+}
 .lf-stock-fields {
   display: grid;
   gap: 10px;

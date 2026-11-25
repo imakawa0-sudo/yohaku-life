@@ -1,3 +1,4 @@
+import { getPreferredBed } from "./bedPreference";
 import { refreshConstructionHandling } from "./constructionTopology";
 import { releaseRevokedConstructionWorkers } from "./constructionProgress";
 import { furnishings, type Need } from "../house";
@@ -210,6 +211,17 @@ export function spatialReasonText(reason: SpatialReason): string {
   }
 }
 
+function unavailableUseReason(reasons: ReadonlySet<SpatialReason>): string {
+  for (const reason of [
+    "use-denied",
+    "entry-denied",
+    "reserved",
+    "physical-block",
+  ] as const)
+    if (reasons.has(reason)) return spatialReasonText(reason);
+  return "使える設備の使用位置がありません。家具の隣に入口から届く床が必要です。";
+}
+
 export type HousingProposal = {
   task: Task;
   minutes: number;
@@ -260,6 +272,10 @@ export function planHousing(
     );
   }
   const cooking = t.kind === "work";
+  const preferredFixtureId =
+    t.kind === "need" && need === "energy" && fixtureId === undefined
+      ? getPreferredBed(g, id)
+      : undefined;
   const { slots } = geometry(g, h);
   const legacySeats = new Set(
     g.actors
@@ -267,28 +283,36 @@ export function planHousing(
       .map((b) => b.task!.station),
   );
   const reasons = new Set<SpatialReason>();
-  let best: { slot: HousingSlot; minutes: number; use: number } | undefined;
+  const preferredReasons = new Set<SpatialReason>();
+  const recordUnavailable = (reason: SpatialReason, preferred: boolean) => {
+    reasons.add(reason);
+    if (preferred) preferredReasons.add(reason);
+  };
+  let best:
+    | { slot: HousingSlot; minutes: number; use: number; preferred: boolean }
+    | undefined;
   for (const slot of Object.values(slots)) {
     if (fixtureId !== undefined && slot.fixtureId !== fixtureId) continue;
     const f = furnishings[slot.kind];
     if (f.need !== need || (cooking && slot.seat !== 0)) continue;
+    const preferred = slot.fixtureId === preferredFixtureId;
     if (
       legacySeats.has(legacyHousingStation(slot)) ||
       Object.values(h.state.reservations).some(
         (r) => r.kind === "slot" && r.targetId === slot.id,
       )
     ) {
-      reasons.add("reserved");
+      recordUnavailable("reserved", preferred);
       continue;
     }
     const route = inspectSpatialRoute(h.state, id, position.point, slot.point);
     if (!route.ok) {
-      reasons.add(route.reason);
+      recordUnavailable(route.reason, preferred);
       continue;
     }
     const allowed = h.state.slots[slot.id].allowedActorIds;
     if (allowed !== null && !allowed.includes(id)) {
-      reasons.add("use-denied");
+      recordUnavailable("use-denied", preferred);
       continue;
     }
     const use =
@@ -296,22 +320,25 @@ export function planHousing(
     const minutes = use + route.minutes;
     if (
       !best ||
-      minutes < best.minutes ||
-      (minutes === best.minutes && slot.id < best.slot.id)
+      (preferred && !best.preferred) ||
+      (preferred === best.preferred &&
+        (minutes < best.minutes ||
+          (minutes === best.minutes && slot.id < best.slot.id)))
     )
-      best = { slot, minutes, use };
+      best = { slot, minutes, use, preferred };
   }
-  if (!best) {
-    for (const reason of [
-      "use-denied",
-      "entry-denied",
-      "reserved",
-      "physical-block",
-    ] as const)
-      if (reasons.has(reason)) return spatialReasonText(reason);
-    return "使える設備の使用位置がありません。家具の隣に入口から届く床が必要です。";
-  }
+  if (!best) return unavailableUseReason(reasons);
   const { slot, minutes, use } = best;
+  let bedPreference: HousingUsePreview["bedPreference"];
+  if (preferredFixtureId !== undefined) {
+    bedPreference = best.preferred
+      ? { fixtureId: preferredFixtureId, outcome: "preferred" }
+      : {
+          fixtureId: preferredFixtureId,
+          outcome: "fallback",
+          reason: unavailableUseReason(preferredReasons),
+        };
+  }
   t.station = slot.id;
   t.room = slot.roomId;
   t.total = t.remaining = use;
@@ -334,6 +361,7 @@ export function planHousing(
       fixtureCell: fixture.cell,
       moveMinutes: minutes - use,
       useMinutes: use,
+      ...(bedPreference && { bedPreference }),
     },
   );
 }

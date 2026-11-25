@@ -1,0 +1,138 @@
+{
+  "status": "passed",
+  "layoutMeasurementMethod": "Read-only diagnostic page measured the same final HTML in 320/390/1280px iframes; .lf-command and .lf-policy rows, with integer scrollWidth vs fractional rect-width tolerance of1px. Actual devices and Safari are not covered.",
+  "layouts": [
+    {
+      "file": "layout-320.json",
+      "bytes": 6999,
+      "sha256": "3ff2c3f5f8282decca72f373f4245a91f76fe2d648af1ec0ab75dee86ca3f70f",
+      "frameWidth": 320,
+      "documentWidth": 305,
+      "rowsMeasured": 15,
+      "controlsMeasured": 21,
+      "minimumControlHeight": 44,
+      "maximumRowRoundoff": 0.5,
+      "restSelectWidth": 267,
+      "policySelectWidth": 259,
+      "sameNameOrdinalsPresent": true,
+      "fallbackReasonPresent": true,
+      "preferenceRestoredTo": "mat-1",
+      "oneOffRestoredToAutomatic": true,
+      "status": "pass"
+    },
+    {
+      "file": "layout-390.json",
+      "bytes": 6999,
+      "sha256": "52a33106be00dc54873b031ad03968c0f3adb8c12201255f70634ee88b85c46b",
+      "frameWidth": 390,
+      "documentWidth": 375,
+      "rowsMeasured": 15,
+      "controlsMeasured": 21,
+      "minimumControlHeight": 44,
+      "maximumRowRoundoff": 0.5,
+      "restSelectWidth": 329,
+      "policySelectWidth": 321,
+      "sameNameOrdinalsPresent": true,
+      "fallbackReasonPresent": true,
+      "preferenceRestoredTo": "mat-1",
+      "oneOffRestoredToAutomatic": true,
+      "status": "pass"
+    },
+    {
+      "file": "layout-1280.json",
+      "bytes": 7042,
+      "sha256": "5ca9cb18eda7b2e1d1ac72438d4fd4bc612f8eaefd3edef069b55717e6f9ebdf",
+      "frameWidth": 1280,
+      "documentWidth": 1265,
+      "rowsMeasured": 15,
+      "controlsMeasured": 21,
+      "minimumControlHeight": 44,
+      "maximumRowRoundoff": 0.5,
+      "restSelectWidth": 370.5,
+      "policySelectWidth": 188,
+      "sameNameOrdinalsPresent": true,
+      "fallbackReasonPresent": true,
+      "preferenceRestoredTo": "mat-1",
+      "oneOffRestoredToAutomatic": true,
+      "status": "pass"
+    }
+  ],
+  "logs": {
+    "file": {
+      "file": "browser-logs.json",
+      "bytes": 75180,
+      "sha256": "d3807aa1230edaa4f1c07ee7d682c698b9d38df12f7fb2048263bb8812a2ed4e"
+    },
+    "scopes": {
+      "game": {
+        "count": 259,
+        "originCounts": {
+          "extension": 259,
+          "gamePreview": 0,
+          "otherOrUnspecified": 0
+        },
+        "levelCounts": {
+          "error": 259
+        },
+        "firstTimestamp": "2026-11-24T14:44:47.841Z",
+        "lastTimestamp": "2026-11-24T14:56:20.356Z",
+        "messageCounts": {
+          "Error sending browser metadata to extension: Object": 259
+        }
+      },
+      "helper": {
+        "count": 44,
+        "originCounts": {
+          "extension": 44,
+          "gamePreview": 0,
+          "otherOrUnspecified": 0
+        },
+        "levelCounts": {
+          "error": 44
+        },
+        "firstTimestamp": "2026-11-24T14:50:58.964Z",
+        "lastTimestamp": "2026-11-24T14:56:34.418Z",
+        "messageCounts": {
+          "Error sending browser metadata to extension: Object": 44
+        }
+      }
+    },
+    "capturedTotal": 303,
+    "gamePreviewOriginCount": 0,
+    "extensionOriginCount": 303,
+    "otherOrUnspecifiedCount": 0,
+    "limit": "This classifies the supplied captured console error/warn records. It is not an independent pageerror event, network, production-origin or full browser-history audit."
+  },
+  "screenshots": [
+    {
+      "file": "policy-1280.jpg",
+      "bytes": 129226,
+      "sha256": "19e79a1d1c435a577316908801f768e1707d236cc248c2a075b8d3f7481d248b"
+    },
+    {
+      "file": "policy-320.jpg",
+      "bytes": 50043,
+      "sha256": "7cf5dcc87ade23d3df2f2b19b8d0f2ff11758a629b3906984ea6d7eb5cb33ce9"
+    },
+    {
+      "file": "policy-390.jpg",
+      "bytes": 52683,
+      "sha256": "808d5e4263e5ef006113e3a118eb38f87fccf48652d0742f1a599f6301baeb75"
+    },
+    {
+      "file": "rest-1280.jpg",
+      "bytes": 111259,
+      "sha256": "184b58a1c5222073c462eb4576cf7c56a3602a25d93ef05e88cc49c48c36f776"
+    },
+    {
+      "file": "rest-320.jpg",
+      "bytes": 54733,
+      "sha256": "83892b47200e65f6db3708f51c8d6daf85a73f9ef65bbf114ee40aa60a39ccf6"
+    },
+    {
+      "file": "rest-390.jpg",
+      "bytes": 61065,
+      "sha256": "154fbae1855187f3e423e8e2c351b254a33c349cb49c40607092160a370c4532"
+    }
+  ]
+}

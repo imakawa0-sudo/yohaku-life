@@ -1,0 +1,112 @@
+{
+  "dateTaipei": "2026-11-25",
+  "before": {
+    "timestampUtc": "2026-11-25T01:04:18.329968+00:00",
+    "head": "f7b22df2ea03daff8920b8192cb5e5abd06727bf",
+    "status": "",
+    "htmlBytes": 705442,
+    "htmlSha256": "d630193048c451115c360eb1396062a171e8ecb8249a4df18ff72f62fbfe0d4b"
+  },
+  "after": {
+    "timestampUtc": "2026-11-25T01:05:45.256034+00:00",
+    "head": "f7b22df2ea03daff8920b8192cb5e5abd06727bf",
+    "status": "",
+    "htmlBytes": 705442,
+    "htmlSha256": "d630193048c451115c360eb1396062a171e8ecb8249a4df18ff72f62fbfe0d4b"
+  },
+  "artifactUnchanged": true,
+  "sourceHeadUnchanged": true,
+  "workingTreeClean": true,
+  "scope": "Exactly one retry of each prior blocked standard command; only supported PLAYTEST_OUTPUT changed for evidence placement. No source/config/dependency/browser/security changes and no rebuild.",
+  "runs": [
+    {
+      "name": "npm-test",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "startedUtc": "2026-11-25T01:04:50.559338+00:00",
+      "durationSeconds": 0.706,
+      "exitCode": 1,
+      "log": "/workspace/scratch/de6592930c40/bed-preference-retry-20261125/npm-test.log",
+      "outputDirectory": null,
+      "actualTestCasesExecuted": 0,
+      "failureStage": "test runner startup before cases",
+      "keyErrors": [
+        "Error: listen EPERM: operation not permitted /tmp/tsx-1000/19.pipe"
+      ],
+      "logSha256": "d6f32a200c12ab4264fe141c6186de03133cafb5ef737ebbff6efa4de3b096af",
+      "scriptReportExists": false
+    },
+    {
+      "name": "standard-pc",
+      "command": [
+        "npm",
+        "run",
+        "test:standalone"
+      ],
+      "startedUtc": "2026-11-25T01:04:51.266762+00:00",
+      "durationSeconds": 0.802,
+      "exitCode": 1,
+      "log": "/workspace/scratch/de6592930c40/bed-preference-retry-20261125/standard-pc.log",
+      "outputDirectory": "/workspace/scratch/de6592930c40/bed-preference-retry-20261125/standard-pc",
+      "actualTestCasesExecuted": 0,
+      "failureStage": "Chromium launcher before page load",
+      "keyErrors": [
+        "[pid=56][err] [56:56:1125/100452.045374:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)",
+        "[pid=56][err] [1125/100452.046308:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)",
+        "\u001b[2m  - [pid=56][err] [56:56:1125/100452.045374:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)\u001b[22m"
+      ],
+      "logSha256": "f4c213607ae1c685349fab5b8ad6dd093c042998f8775889b9f9a16cec4c7064",
+      "scriptReportExists": false
+    },
+    {
+      "name": "standard-mobile",
+      "command": [
+        "npm",
+        "run",
+        "test:ui:standalone"
+      ],
+      "startedUtc": "2026-11-25T01:04:52.068974+00:00",
+      "durationSeconds": 0.67,
+      "exitCode": 1,
+      "log": "/workspace/scratch/de6592930c40/bed-preference-retry-20261125/standard-mobile.log",
+      "outputDirectory": "/workspace/scratch/de6592930c40/bed-preference-retry-20261125/standard-mobile",
+      "actualTestCasesExecuted": 0,
+      "failureStage": "Chromium launcher before page load",
+      "keyErrors": [
+        "[pid=103][err] [103:103:1125/100452.715814:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)",
+        "[pid=103][err] [1125/100452.716058:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)",
+        "\u001b[2m  - [pid=103][err] [103:103:1125/100452.715814:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)\u001b[22m"
+      ],
+      "logSha256": "ef4750cc06a82b00e00f56a70761a6e67cd04c81934498071041837ead254297",
+      "scriptReportExists": false
+    },
+    {
+      "name": "standard-bed-preference",
+      "command": [
+        "npm",
+        "run",
+        "test:ui:bed-preference"
+      ],
+      "startedUtc": "2026-11-25T01:04:52.740013+00:00",
+      "durationSeconds": 0.926,
+      "exitCode": 1,
+      "log": "/workspace/scratch/de6592930c40/bed-preference-retry-20261125/standard-bed-preference.log",
+      "outputDirectory": "/workspace/scratch/de6592930c40/bed-preference-retry-20261125/standard-bed-preference",
+      "actualTestCasesExecuted": 0,
+      "failureStage": "Chromium launcher before page load",
+      "keyErrors": [
+        "[pid=163][err] [163:163:1125/100453.640931:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)",
+        "[pid=163][err] [1125/100453.641230:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)",
+        "\u001b[2m  - [pid=163][err] [163:163:1125/100453.640931:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)\u001b[22m"
+      ],
+      "logSha256": "da70dc0b968c9df62d3402e35ec5c9c051d7a48528a904e8f1de36b6095d87aa",
+      "scriptReportExists": true,
+      "scriptStatus": "browser-infrastructure-failure-before-page-load",
+      "scriptNormalChecks": 0,
+      "scriptControlledChecks": 0,
+      "scriptScreenshots": 0
+    }
+  ]
+}

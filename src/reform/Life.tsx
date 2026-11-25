@@ -30,6 +30,7 @@ import {
 } from "./peopleModel";
 import type { Skill } from "./peopleModel";
 import { HousingPanel, housingStageNames } from "./HousingPanel";
+import { BedPreferencePolicy } from "./BedPreferencePolicy";
 import { FacilityAction } from "./FacilityAction";
 import { housingTogether } from "./housing/bridge";
 import { constructionStatus } from "./housing/constructionPresentation";
@@ -759,7 +760,7 @@ export function Life({
               </p>
             )}
           </Fold>
-          <Fold title="仕事と備蓄の方針" icon={<SlidersHorizontal size={18} />}>
+          <Fold title="暮らしと備蓄の方針" icon={<SlidersHorizontal size={18} />}>
             <label className="lf-policy">
               {person.name}が優先する仕事
               <select
@@ -782,6 +783,7 @@ export function Life({
                 ))}
               </select>
             </label>
+            <BedPreferencePolicy game={game} actor={actor} onGame={onGame} />
             <h4 className="lf-subtitle">世帯の食事</h4>
             <StockForm
               key={game.foodTarget.low + "/" + game.foodTarget.high}

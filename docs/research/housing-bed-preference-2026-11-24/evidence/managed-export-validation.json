@@ -1,0 +1,492 @@
+{
+  "source": {
+    "repository": "/workspace/scratch/be33734a3f5c/yohaku-life-h1a",
+    "gitHead": "67ec59711bfbe301c0322d27d372e39a09941550",
+    "files": {
+      "src/reform/library.ts": {
+        "sha256": "b8241d4ecdd66f604adf2b43b8ff6d6ff82d84571aae73dcf1b338a6dee3321e"
+      },
+      "src/reform/sim.ts": {
+        "sha256": "136ffe58daa3faae4bb5d4c80c2bdce3ae8232b63e270d104c5250e709caa689"
+      },
+      "src/reform/house.ts": {
+        "sha256": "89935c5a689b23c21b5798534a5191c5b23ed613c9eee38f37442a328d58a771"
+      },
+      "src/reform/housing/runtime.ts": {
+        "sha256": "c266fb9d65fe88d91f1bdef0ae97e44849d83f4b2c3a75613f1d6fdc567c8ef6"
+      },
+      "src/reform/housing/bridge.ts": {
+        "sha256": "cfe7e15c81a302960820a05f8636b0201afdeae4c6bc303e26164ac786454b30"
+      },
+      "src/reform/housing/bedPreference.ts": {
+        "sha256": "28e9b79c08b80ee09a3a6b8450f08f5e239398895ecd4b22fdcbe32f6ec9ed1d"
+      },
+      "src/reform/housing/topology.ts": {
+        "sha256": "86b3708f03934f227d8e9d50c81ae7b8b589ab1658ecde3ce28bdee94540945c"
+      }
+    }
+  },
+  "method": "Existing public importSlot/isGame/parseLibrary validators, order/advance/house/passages replay; settings verified independently by literal map and complete non-preference Game/origin equality. No setPreferredBed import or call.",
+  "input": "/workspace/shared/bed-preference-qa",
+  "generatedAt": "2026-11-24T14:58:43.122Z",
+  "files": {
+    "active-arrived.json": {
+      "bytes": 36002,
+      "sha256": "8312ccd740281b8b813e1080687bbbfa589ca97b2a27e147680767acd2fa3576",
+      "gameSHA256": "87f8952cbab8c647e0670d29c2c0eb6be08ebd64f21bce70b8635ce5aa974f37",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "active-changed.json": {
+      "bytes": 35999,
+      "sha256": "579aae2189e9b1b57184d823544b991cfcbe3e5bfb313a7acb0b245cb1f7ebbe",
+      "gameSHA256": "2a5340220bc1c823ff6b4bf7386af890f87e97a6564c77fff5975749a7529664",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "active-cleared.json": {
+      "bytes": 35930,
+      "sha256": "55a311a11f70544d8a72dee8b86ebdebbfb725090010470c04ef43b6a82beb64",
+      "gameSHA256": "47c244e8754411b063f403b108c30b6f666b951d157ec9325a43c82be398ba25",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "active-reloaded.json": {
+      "bytes": 35930,
+      "sha256": "55a311a11f70544d8a72dee8b86ebdebbfb725090010470c04ef43b6a82beb64",
+      "gameSHA256": "47c244e8754411b063f403b108c30b6f666b951d157ec9325a43c82be398ba25",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "active-start.json": {
+      "bytes": 35995,
+      "sha256": "6d95a647dcf65eb4fb14e642e67b347ef3fe628d7647bb238e474aa11ae6afc9",
+      "gameSHA256": "0245c577ca343199ac3345841f51f8ec39b2d46b5689d9e07efa9d1ef0e241f3",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "bed-preference-input-active.json": {
+      "bytes": 35981,
+      "sha256": "25c9c462c794b74840ea8c8d7a57cc43d42030f7a18176fbb4baf69a8285a5bb",
+      "gameSHA256": "0245c577ca343199ac3345841f51f8ec39b2d46b5689d9e07efa9d1ef0e241f3",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "bed-preference-input-competition.json": {
+      "bytes": 34274,
+      "sha256": "b397b3f452f5d95679933c35485b3e2aac469f372561a10f134ea9b5a9f12d25",
+      "gameSHA256": "8f9ad82c4c436555eafec9f3e2c9944ac2c9debea1671f7d765ed157b85b041f",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "bed-preference-input-inaccessible.json": {
+      "bytes": 34301,
+      "sha256": "f9d6f8b45e5953825f3eb538baa09d4e2b03ddc882078813ab79f695f9a07148",
+      "gameSHA256": "6a0395ea7b99522356aa3641bc0686a5869f7464a34386ffcad54cecf7d21b77",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "competition-both-booked.json": {
+      "bytes": 36859,
+      "sha256": "11999a0dc1edb27099eed8f0b0b2f31393cfca255b51ecfda639b7a0355dc27c",
+      "gameSHA256": "3d0690a72821a329ad4b087bd335800c04229d94652f8583885557dde95739af",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "competition-cancelled-first.json": {
+      "bytes": 35695,
+      "sha256": "7e7bd00f0ddd7650f6b2ef8779965ab77b2525124c0d408a1d8251d47ba4c4c2",
+      "gameSHA256": "646bbae041fae953b7d04fcab45c170d227dc167f9270b62f0ca061387b82cf7",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "competition-explicit-busy.json": {
+      "bytes": 35570,
+      "sha256": "e871419d6c8837e5fb64fea8747d9561acde46779d7388d03dec1e25e14682fc",
+      "gameSHA256": "5de262dcb744aee947ab8311021640fca4bf055d96e661e8bdd731ac853dff7b",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "competition-first-booked.json": {
+      "bytes": 35570,
+      "sha256": "e871419d6c8837e5fb64fea8747d9561acde46779d7388d03dec1e25e14682fc",
+      "gameSHA256": "5de262dcb744aee947ab8311021640fca4bf055d96e661e8bdd731ac853dff7b",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "competition-progressed.json": {
+      "bytes": 36110,
+      "sha256": "a2f88c864151fccd0233a2138d9727e7d0420a4f98f4571ea1f06e6d3ded942d",
+      "gameSHA256": "dc9576119fc77afdfa31fc97855c009a2f2db3037c75a96ed50b3e2052b21a7f",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "competition-start.json": {
+      "bytes": 34285,
+      "sha256": "7ddbdfeacd8d79b62fb1ab35b16989cda9ee407a8ebd042b3c777806e352d8ca",
+      "gameSHA256": "8f9ad82c4c436555eafec9f3e2c9944ac2c9debea1671f7d765ed157b85b041f",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "existing-active-after.json": {
+      "bytes": 26606,
+      "sha256": "bcf84c71377ed51192e4612b2330a7d8ad7e3542a53a06a3d01f30dbfa68921c",
+      "gameSHA256": "b773c5fba60dcd10a910e1be037d260f9f64b8a93ec9d9c1b99e84c254862789",
+      "originSHA256": "29c4e0a6ce1049bb4a9e949f5ee373bd86ed28a5358df4596307c0d0e1e89e26",
+      "version": 2,
+      "valid": true
+    },
+    "existing-active-before.json": {
+      "bytes": 26606,
+      "sha256": "bcf84c71377ed51192e4612b2330a7d8ad7e3542a53a06a3d01f30dbfa68921c",
+      "gameSHA256": "b773c5fba60dcd10a910e1be037d260f9f64b8a93ec9d9c1b99e84c254862789",
+      "originSHA256": "29c4e0a6ce1049bb4a9e949f5ee373bd86ed28a5358df4596307c0d0e1e89e26",
+      "version": 2,
+      "valid": true
+    },
+    "inaccessible-booked.json": {
+      "bytes": 35537,
+      "sha256": "dea7e43e6a09af37591e81ca24509e2974a450f82bdccecebd766071f296c280",
+      "gameSHA256": "c79d60eff6de528fd920d5b11cc7a119126218173370d771cd630ecb9f961dd1",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "inaccessible-reopened.json": {
+      "bytes": 34252,
+      "sha256": "e92650eb24f96702f2ceb54b2fdc0379017ace2341448574d2aaac6cb8b4e8cb",
+      "gameSHA256": "2bed3a902628f2bda99a114a23de7002748b9205cb687bd603fb8d64267455da",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "inaccessible-start.json": {
+      "bytes": 34312,
+      "sha256": "015978f06be31e444e15a53c91bdb0b11637e4fec48f2dbb36f3b60dcd569879",
+      "gameSHA256": "6a0395ea7b99522356aa3641bc0686a5869f7464a34386ffcad54cecf7d21b77",
+      "originSHA256": "56f202052b129fa4d613c6296beb9c7a8bc87b3d69517bc2efc6482b75156ea6",
+      "version": 2,
+      "valid": true
+    },
+    "normal-booked.json": {
+      "bytes": 32218,
+      "sha256": "eedc3c5e65fb2b9b214a8709dae0605cc04e10ec0c57987ff6234d719929a1d9",
+      "gameSHA256": "53a2b0f66529fadeba4041baef0a8c43f44613b55d0f3c3551e99b46ef56e523",
+      "originSHA256": "486f66ab27cac7fb536152599923ad53b1934a4d02acd11da00e3980e8e9fd0a",
+      "version": 2,
+      "valid": true
+    },
+    "normal-current-branch.json": {
+      "bytes": 32634,
+      "sha256": "e6b3ab3e7030006017cd8067a8505b05ccf3411bffd1d4578e807b7dc0aa2be5",
+      "gameSHA256": "934290e108df1f17361771408d808f936a5c22346c134711bb7b35b940e400be",
+      "originSHA256": "486f66ab27cac7fb536152599923ad53b1934a4d02acd11da00e3980e8e9fd0a",
+      "version": 2,
+      "valid": true
+    },
+    "normal-furnished.json": {
+      "bytes": 30831,
+      "sha256": "6f0679b7c736f6afa2d50a9cc1bca96fb69c01369beb6020ec9a6a34a389b0cd",
+      "gameSHA256": "78e8a3ba698ba749c735f8aefdec98e9a2e4f17041bda6872df2657fba1dc4ce",
+      "originSHA256": "486f66ab27cac7fb536152599923ad53b1934a4d02acd11da00e3980e8e9fd0a",
+      "version": 2,
+      "valid": true
+    },
+    "normal-imported.json": {
+      "bytes": 32624,
+      "sha256": "60439436225b39afaf0cea9422df981a965518b31e4f9a0b63dd6c2eafce0098",
+      "gameSHA256": "934290e108df1f17361771408d808f936a5c22346c134711bb7b35b940e400be",
+      "originSHA256": "486f66ab27cac7fb536152599923ad53b1934a4d02acd11da00e3980e8e9fd0a",
+      "version": 2,
+      "valid": true
+    },
+    "normal-origin-branch.json": {
+      "bytes": 30346,
+      "sha256": "1def23811cfc57743e22f5e7a9424bb2da4057bc621ec92ed669493c1c666b9b",
+      "gameSHA256": "486f66ab27cac7fb536152599923ad53b1934a4d02acd11da00e3980e8e9fd0a",
+      "originSHA256": "486f66ab27cac7fb536152599923ad53b1934a4d02acd11da00e3980e8e9fd0a",
+      "version": 2,
+      "valid": true
+    },
+    "normal-original-slot.json": {
+      "bytes": 32622,
+      "sha256": "5b0a60fbf12a6e0d4e635fb9b2cea275b8934c3eb444495325bfc08a28c5064f",
+      "gameSHA256": "934290e108df1f17361771408d808f936a5c22346c134711bb7b35b940e400be",
+      "originSHA256": "486f66ab27cac7fb536152599923ad53b1934a4d02acd11da00e3980e8e9fd0a",
+      "version": 2,
+      "valid": true
+    },
+    "normal-preferences.json": {
+      "bytes": 30934,
+      "sha256": "d6fc6f8322de6151d287968d0ab5cd0e2547046d3d440faf38253f688e53982c",
+      "gameSHA256": "59ece014cbfb92952b47974f72e625cda227d57637f16d79663f46b74c10dbcb",
+      "originSHA256": "486f66ab27cac7fb536152599923ad53b1934a4d02acd11da00e3980e8e9fd0a",
+      "version": 2,
+      "valid": true
+    },
+    "normal-progressed.json": {
+      "bytes": 32622,
+      "sha256": "5b0a60fbf12a6e0d4e635fb9b2cea275b8934c3eb444495325bfc08a28c5064f",
+      "gameSHA256": "934290e108df1f17361771408d808f936a5c22346c134711bb7b35b940e400be",
+      "originSHA256": "486f66ab27cac7fb536152599923ad53b1934a4d02acd11da00e3980e8e9fd0a",
+      "version": 2,
+      "valid": true
+    },
+    "normal-reloaded.json": {
+      "bytes": 32622,
+      "sha256": "5b0a60fbf12a6e0d4e635fb9b2cea275b8934c3eb444495325bfc08a28c5064f",
+      "gameSHA256": "934290e108df1f17361771408d808f936a5c22346c134711bb7b35b940e400be",
+      "originSHA256": "486f66ab27cac7fb536152599923ad53b1934a4d02acd11da00e3980e8e9fd0a",
+      "version": 2,
+      "valid": true
+    },
+    "normal-start.json": {
+      "bytes": 30333,
+      "sha256": "dc04bdbff22318f668815c87dc8dcfd88c9222b721765a05e12d6557f215f38c",
+      "gameSHA256": "486f66ab27cac7fb536152599923ad53b1934a4d02acd11da00e3980e8e9fd0a",
+      "originSHA256": "486f66ab27cac7fb536152599923ad53b1934a4d02acd11da00e3980e8e9fd0a",
+      "version": 2,
+      "valid": true
+    }
+  },
+  "checks": [
+    {
+      "name": "normal creation and furniture installation",
+      "status": "pass",
+      "detail": {
+        "woodCost": 1,
+        "timeMinutes": 0,
+        "fullGameAndOriginMatch": true
+      }
+    },
+    {
+      "name": "normal preferences change only the explicit map",
+      "status": "pass",
+      "detail": {
+        "allOtherGameFieldsUnchanged": true,
+        "originUnchanged": true,
+        "expectedPreferences": {
+          "person-1": "mat-1",
+          "person-2": "fixture-1"
+        },
+        "time": 480
+      }
+    },
+    {
+      "name": "normal default rest matches public order and saved preferred station",
+      "status": "pass",
+      "detail": {
+        "fullGameAndOriginMatch": true,
+        "station": "[\"slot\",\"bedroom\",\"mat-1\",0]"
+      }
+    },
+    {
+      "name": "normal 5-minute progression equals public advance",
+      "status": "pass",
+      "detail": {
+        "fullGameAndOriginMatch": true
+      }
+    },
+    {
+      "name": "normal reload preserves exact export bytes",
+      "status": "pass",
+      "detail": {
+        "byteIdentical": true
+      }
+    },
+    {
+      "name": "normal current branch preserves current and original Game",
+      "status": "pass",
+      "detail": {
+        "newId": true,
+        "fullGameAndOriginMatch": true
+      }
+    },
+    {
+      "name": "normal origin branch restores the initial Game without preferences",
+      "status": "pass",
+      "detail": {
+        "newId": true,
+        "originalGameRestored": true
+      }
+    },
+    {
+      "name": "normal returning to original slot preserves exact export bytes",
+      "status": "pass",
+      "detail": {
+        "byteIdentical": true
+      }
+    },
+    {
+      "name": "normal import preserves current and original Game with new slot ID",
+      "status": "pass",
+      "detail": {
+        "newId": true,
+        "fullGameAndOriginMatch": true
+      }
+    },
+    {
+      "name": "controlled competition import preserves input current and origin",
+      "status": "pass",
+      "detail": {
+        "newId": true,
+        "fullGameAndOriginMatch": true
+      }
+    },
+    {
+      "name": "controlled inaccessible import preserves input current and origin",
+      "status": "pass",
+      "detail": {
+        "newId": true,
+        "fullGameAndOriginMatch": true
+      }
+    },
+    {
+      "name": "controlled active import preserves input current and origin",
+      "status": "pass",
+      "detail": {
+        "newId": true,
+        "fullGameAndOriginMatch": true
+      }
+    },
+    {
+      "name": "competition first resident reserves preferred bed",
+      "status": "pass",
+      "detail": {
+        "fullGameAndOriginMatch": true,
+        "secondFallback": "fixture-3",
+        "explicitBusyRejected": true
+      }
+    },
+    {
+      "name": "competition explicit busy preview preserves full state",
+      "status": "pass",
+      "detail": {
+        "fullGameAndOriginUnchanged": true
+      }
+    },
+    {
+      "name": "competition second resident uses fallback without changing first task",
+      "status": "pass",
+      "detail": {
+        "firstTaskUnchanged": true,
+        "secondStation": "[\"slot\",\"living\",\"fixture-3\",0]",
+        "fullGameAndOriginMatch": true
+      }
+    },
+    {
+      "name": "competition cancellation equals public cancel and retains second task",
+      "status": "pass",
+      "detail": {
+        "fullGameAndOriginMatch": true,
+        "secondTaskUnchanged": true
+      }
+    },
+    {
+      "name": "competition advances 5 minutes without replacing second reservation",
+      "status": "pass",
+      "detail": {
+        "fullGameAndOriginMatch": true,
+        "secondStationAndOrderRetained": true
+      }
+    },
+    {
+      "name": "reopening passage preserves preference and uses preferred bed",
+      "status": "pass",
+      "detail": {
+        "fullGameAndOriginMatch": true,
+        "preferenceRetained": true
+      }
+    },
+    {
+      "name": "reopened preferred bed is used by a new ordinary rest order",
+      "status": "pass",
+      "detail": {
+        "fullGameAndOriginMatch": true,
+        "preferredStationUsed": true
+      }
+    },
+    {
+      "name": "moving resident setting change is independently field-isolated",
+      "status": "pass",
+      "detail": {
+        "allOtherGameFieldsUnchanged": true,
+        "originUnchanged": true,
+        "expectedPreferences": {
+          "person-1": "fixture-3"
+        },
+        "time": 485
+      }
+    },
+    {
+      "name": "active task advances 5 minutes on original assigned bed",
+      "status": "pass",
+      "detail": {
+        "fullGameAndOriginMatch": true,
+        "stationUnchanged": true
+      }
+    },
+    {
+      "name": "sleeping resident clearing changes only setting and omits empty map",
+      "status": "pass",
+      "detail": {
+        "allOtherGameFieldsUnchanged": true,
+        "originUnchanged": true,
+        "expectedPreferences": "omitted",
+        "time": 490
+      }
+    },
+    {
+      "name": "active clearing remains identical after reload",
+      "status": "pass",
+      "detail": {
+        "byteIdentical": true
+      }
+    },
+    {
+      "name": "existing storage preserved and active slot restored",
+      "status": "pass",
+      "detail": {
+        "originalSlots": 61,
+        "finalSlots": 69,
+        "allOriginalSlotSerializedBytesIdentical": true,
+        "activeIdRestored": true,
+        "legacyRawByteIdentical": true,
+        "legacySHA256": "6ab258f7bcf2c569b4cc4f82bfa5eaf9438141de7015dd9efa787b167af9295e",
+        "beforeSHA256": "b31314368d17cc1f1bf50a22716da88294d319062679d9fd557e01ffcb6a739c",
+        "afterSHA256": "5a2bc6d4f4d9083af2a0ad09f6cce503158b432118d94872d973ce64a7063c82"
+      }
+    },
+    {
+      "name": "existing active export preserved byte for byte",
+      "status": "pass",
+      "detail": {
+        "byteIdentical": true
+      }
+    }
+  ],
+  "counts": {
+    "browserExportFiles": 26,
+    "controlledInputFiles": 3,
+    "validatedExports": 29,
+    "invalidExports": 0,
+    "pass": 25,
+    "fail": 0,
+    "pending": 0
+  },
+  "status": "passed"
+}

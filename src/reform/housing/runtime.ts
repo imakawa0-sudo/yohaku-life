@@ -1,3 +1,4 @@
+import { isBedPreferences, prunePreferredBeds } from "./bedPreference";
 import {
   validConstructionRelations,
   isConstructionLedger,
@@ -356,6 +357,7 @@ export function isHousingRuntime(
       "construction",
       "gatherings",
       "nextGatheringId",
+      "preferredBeds",
       "controls",
       "state",
       "unlocated",
@@ -363,6 +365,8 @@ export function isHousingRuntime(
     ]) ||
     value.version !== 1 ||
     (Object.hasOwn(value, "layoutVersion") && value.layoutVersion !== 2) ||
+    (Object.hasOwn(value, "preferredBeds") &&
+      !isBedPreferences(value.preferredBeds, game)) ||
     !isSpatialState(value.state) ||
     !record(value.unlocated) ||
     !record(value.legacyStationPaths) ||
@@ -650,6 +654,7 @@ function applyHouseShape(
   if (next.housing) {
     next.housing.controls = after.controls;
     Object.assign(next.housing.state, after.geometry);
+    prunePreferredBeds(next);
     if (!isHousingRuntime(next.housing, next))
       return {
         game,
