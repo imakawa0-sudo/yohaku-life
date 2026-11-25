@@ -25,7 +25,7 @@ Ruling: Reuse the already isolated worktree and apply the final delta atop fresh
 - [x] Full required tests/build and actual final-HTML browser acceptance; record limits honestly.
 - [x] Archive evidence, all six rulings and handoff with explicit delivery status.
 - [x] Notion current/results and standalone artifact delivery.
-- [ ] GitHub main delta/readback and final delivery receipt; blocked by automatic approval review pending specific confirmation.
+- [x] GitHub main delta/readback and final delivery receipt; explicit destination/scope approval received, all78 changed files read back byte-for-byte.
 
 
 ## Design, plan self-review and preflight
@@ -98,3 +98,13 @@ Ruling: Use managed Chrome with new test save slots on the existing development 
 - All four commands exited1 before test cases/page load: tsx listen EPERM and Chromium socket/ptrace EPERM respectively. Actual new test/UI checks0. These are not product failure findings or successful tests.
 - Before/after HEADf7b22df2ea03daff8920b8192cb5e5abd06727bf and clean trees match. HTML705442bytes and SHA256d630193048c451115c360eb1396062a171e8ecb8249a4df18ff72f62fbfe0d4b unchanged. Prior direct-Node1078 and managedChrome acceptance remain evidence from the earlier run.
 - Added retry summary and four original logs, preserved all six rulings. Added the retry outcome to existing Notion result32 with success response and no warnings. GitHub delivery/cleanup remain pending explicit destination/scope approval.
+
+## 2026-11-25 authorized delivery completed
+
+- User explicitly approved private imakawa0-sudo/yohaku-life main, all78 source/test/image/design/verification/delivery files, preserving existing history and privacy. The original GitHub plugin writes succeeded after that approval.
+- Fresh main700b201e221c1e294b67bf1afd6cb4b2c8f565cd/tree27f1e97385aa9fb4dcd2a6feaa05148495ecc513 and private/push properties confirmed. Applied only the78-path delta to that remote tree, preserving166 remote-only historical files.
+- Primary commitde0bb0e2c8df5ac7555518bcecf7b08af42aceea, treec2e771bcd71c50afcb1747b559e3192dfb34a248, sole parent700b201e221c1e294b67bf1afd6cb4b2c8f565cd. Verified all760 leaf paths/types/modes/blob SHAs, then updated main with expected SHA and force=false and confirmed the new ref.
+- Read all78 changed files from the saved commit. Every byte, size, SHA256 and Git blob SHA matches local564f525549bbecdcea749923b6a03194498994fe. Total1,972,675bytes;67added/11modified/0deleted. Primary readback and tree receipts retained privately.
+- Updated Notion result32/home/current03/roadmap26/candidate through14 unique exact replacements. All5 succeeded with0 warnings. Historical Nov24/Nov25 rejected attempts remain dated history; current completion and4 primary-commit evidence links are now live. Previous31's forward link remains.
+- Standard four commands remain environment-blocked before execution; prior direct-Node1078 and managedChrome acceptance are the verified product evidence. Game/build inputs and delivered HTML unchanged.
+- Final documentation save uses only five of the already-approved78 paths and records these completed outcomes. Archive this canonical ledger with all six rulings; after the documentation ref/tree/byte verification, remove only this canonical temporary SDD workspace and retain the host worktree.
