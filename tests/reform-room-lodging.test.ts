@@ -20,6 +20,7 @@ import {
   housingSlotId,
 } from "../src/reform/housing/topology";
 import { exportSlot, importSlot } from "../src/reform/library";
+import { stockLimit } from "../src/reform/mealStock";
 import { makePersona } from "../src/reform/peopleModel";
 import {
   advance,
@@ -323,6 +324,44 @@ test("normal regional homecoming returns cargo once at the common entrance befor
   assert.equal(blocked.actors[1].task, null);
   assert.equal(blocked.housing!.lodging?.phase, "occupied");
   read(blocked, origin);
+});
+
+test("homecoming leaves excess cargo with the tenant and keeps another resident's pending stock cancellation payable", () => {
+  const { game, origin } = home();
+  const lease = occupied(order(order(game, a, "recover"), c, "recover"));
+  const pref = ok(setLodgingReturn(lease, b, "room"));
+  for (const key of ["wood", "ingredients", "coins", "food"] as const) {
+    const packed = trip(pref, "pack", key);
+    const load = packed.actors[1].cargo[key];
+    const away = trip(packed, "travel", "landing");
+    const returning = order(away, b, "return");
+    const before = advance(returning, returning.actors[1].task!.remaining - 1);
+    before[key] = stockLimit - 1;
+    const quiet = order(order(before, c, "cancel"), c, "recover");
+    const reserved = order(order(quiet, a, "cancel"), a, "pack", key);
+    assert.equal(reserved.actors[0].task!.reserved[key], load);
+    const homeward = advance(read(reserved, origin), 1);
+    at(homeward, "living");
+    assert.equal(homeward.actors[1].task?.kind, "home-move");
+    assert.equal(homeward[key], stockLimit - load);
+    assert.equal(homeward.actors[1].cargo[key], load - 1);
+    const cancelled = read(order(homeward, a, "cancel"), origin);
+    assert.equal(cancelled[key], stockLimit);
+    const roomArrival = advance(order(cancelled, a, "recover"), 3);
+    at(roomArrival, room);
+    assert.equal(roomArrival.actors[1].cargo[key], load - 1);
+    assert.match(
+      inspectOrder(roomArrival, b, "unpack", key).disabled ?? "",
+      /空き/,
+    );
+    const packing = order(order(roomArrival, a, "cancel"), a, "pack", key);
+    const freed = advance(order(packing, b, "recover"), 3);
+    const ready = order(order(freed, a, "recover"), b, "cancel");
+    const emptied = trip(ready, "unpack", key);
+    assert.equal(emptied[key], stockLimit - 1, key);
+    assert.equal(emptied.actors[1].cargo[key], 0);
+    read(emptied, origin);
+  }
 });
 
 test("slot validation rejects forged parties, phase, route binding and extra access in both current and origin while unmodified legacy saves still load", () => {

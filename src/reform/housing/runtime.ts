@@ -1,3 +1,4 @@
+import { settlePackReturns } from "../packingStock";
 import { benchBoardId } from "./benchRecovery";
 import { validBenchRecovery } from "./benchRecoveryValidation";
 import { validRoomStay } from "./roomStay";
@@ -831,6 +832,7 @@ export function applyHousingHouseEdit(
       error: `工事には木材${cost}が必要です。共同の備蓄は${game.wood}です。`,
     };
   next.wood -= cost;
+  settlePackReturns(next);
   logHouseChange(next, "住まいを整えた" + (cost ? "（木材" + cost + "）" : ""));
   return { game: next };
 }

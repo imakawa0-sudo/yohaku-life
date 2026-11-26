@@ -2,21 +2,39 @@ import type { Game } from "./sim";
 
 export const stockLimit = 1_000_000_000;
 
-function reservedFor(g: Game, account: object, key: "food" | MealInput) {
+type StockKey = "wood" | "food" | MealInput;
+
+function reservedFor(g: Game, account: object, key: StockKey) {
   return g.actors.reduce((sum, a) => {
     const source = a.location === g.home ? g : a.cargo;
     return sum + (source === account ? (a.task?.reserved[key] ?? 0) : 0);
   }, 0);
 }
 
-function freeSharedShelves(g: Game) {
-  return Math.max(0, stockLimit - g.food - reservedFor(g, g, "food"));
+export function freeSharedShelves(g: Game, key: StockKey) {
+  return Math.max(0, stockLimit - g[key] - reservedFor(g, g, key));
+}
+
+/** Unloading leaves enough space for another resident to cancel a stock reservation. */
+export function sharedSpaceAfterMealReturns(g: Game, key: StockKey) {
+  const pending =
+    key === "food"
+      ? g.pendingMealReturns
+      : key === "wood"
+        ? 0
+        : g.pendingMealInputReturns?.[key];
+  return Math.max(0, freeSharedShelves(g, key) - (pending ?? 0));
+}
+
+export function unloadingSpace(g: Game, key: StockKey) {
+  const pendingPack = key === "food" ? 0 : (g.pendingPackReturns?.[key] ?? 0);
+  return Math.max(0, sharedSpaceAfterMealReturns(g, key) - pendingPack);
 }
 
 /** Food reserved for an unfinished task must still fit if that task is cancelled. */
 export function mealSpace(g: Game, account: { food: number } = g) {
   if (account !== g) return stockLimit - account.food;
-  return Math.max(0, freeSharedShelves(g) - (g.pendingMealReturns ?? 0));
+  return unloadingSpace(g, "food");
 }
 
 export function refundMeal(g: Game, count: number) {
@@ -28,7 +46,7 @@ export function refundMeal(g: Game, count: number) {
 
 export function settleMealReturns(g: Game) {
   if (!g.pendingMealReturns) return;
-  const returned = Math.min(g.pendingMealReturns, freeSharedShelves(g));
+  const returned = Math.min(g.pendingMealReturns, freeSharedShelves(g, "food"));
   g.food += returned;
   g.pendingMealReturns -= returned;
   if (g.pendingMealReturns === 0) delete g.pendingMealReturns;
