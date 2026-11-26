@@ -1,5 +1,6 @@
 import { facilityLabel } from "./facilityLabel";
 import { furnishings, needLabels, needs, type Need } from "./house";
+import { foodBundleStatus } from "./housing/foodPresentation";
 import { getPreferredBed } from "./housing/bedPreference";
 import {
   inspectOrder,
@@ -32,6 +33,8 @@ export function FacilityAction({
   actor,
   command,
   selectedId,
+  selectedBundleId = "",
+  onSelectBundle,
   onSelect,
   onGame,
 }: {
@@ -39,10 +42,19 @@ export function FacilityAction({
   actor: Actor;
   command: ActionOption;
   selectedId: string;
+  selectedBundleId?: string;
+  onSelectBundle?: (id: string) => void;
   onSelect: (id: string) => void;
   onGame: (game: Game) => void;
 }) {
   const cooking = command.kind === "work";
+  const basicCooking =
+    cooking && ["cook", "cook:easy"].includes(command.target!);
+  const bundle = basicCooking ? foodBundleStatus(game) : null;
+  const selectedBundle = basicCooking ? selectedBundleId : "";
+  const currentBundle = bundle?.state === "present" ? bundle : null;
+  const staleBundle =
+    !!selectedBundle && selectedBundle !== currentBundle?.bundleId;
   const need = command.target as Need;
   const { rooms } = game.house;
   const fixtures = rooms.flatMap((room) =>
@@ -61,13 +73,22 @@ export function FacilityAction({
   const kind = explicitNeed ? "home-use" : command.kind;
   const target = explicitNeed ? selectedId : command.target;
   const selection =
-    cooking && selectedId ? { fixtureId: selectedId } : undefined;
-  const preview = missing
-    ? { disabled: missingFacility }
-    : selectedId
-      ? inspectOrder(game, actor.person.id, kind, target, selection)
-      : command;
-  const { disabled, facility, reserved } = preview;
+    cooking && selectedId
+      ? {
+          fixtureId: selectedId,
+          ...(selectedBundle && { bundleId: selectedBundle }),
+        }
+      : undefined;
+  const preview = staleBundle
+    ? { disabled: "選んだ食材の一束がありません。" }
+    : selectedBundle && !selectedId
+      ? { disabled: "料理に使う設備を指定してください。" }
+      : missing
+        ? { disabled: missingFacility }
+        : selectedId
+          ? inspectOrder(game, actor.person.id, kind, target, selection)
+          : command;
+  const { disabled, facility, reserved, foodBundle } = preview;
   const destinationRoom =
     facility && rooms.find((room) => room.id === facility.roomId);
   const bedPreference = selectedId ? undefined : facility?.bedPreference;
@@ -87,6 +108,49 @@ export function FacilityAction({
 
   return (
     <div className="lf-command lf-facility-command">
+      {basicCooking && (
+        <fieldset className="lf-material-choice">
+          <legend>材料を選ぶ</legend>
+          <label>
+            <input
+              type="radio"
+              name={hintId + "-material"}
+              value=""
+              checked={!selectedBundle}
+              onChange={() => onSelectBundle?.("")}
+            />
+            共同備蓄（食材{game.ingredients}）
+          </label>
+          {currentBundle && (
+            <label>
+              <input
+                type="radio"
+                name={hintId + "-material"}
+                value={currentBundle.bundleId}
+                checked={selectedBundle === currentBundle.bundleId}
+                onChange={() => onSelectBundle?.(currentBundle.bundleId)}
+              />
+              野菜の一束（食材2） · {currentBundle.location} ·{" "}
+              {currentBundle.phase}
+            </label>
+          )}
+          {staleBundle && (
+            <label>
+              <input
+                type="radio"
+                name={hintId + "-material"}
+                value={selectedBundle}
+                checked={true}
+                onChange={() => onSelectBundle?.(selectedBundle)}
+              />
+              選んだ食材の一束がありません
+            </label>
+          )}
+          {!currentBundle && !staleBundle && (
+            <span>現物の一束はありません。「住まい」で取り分けられます。</span>
+          )}
+        </fieldset>
+      )}
       <label htmlFor={selectId}>
         {cooking ? command.label + "ため" : needLabels[need]}に使う設備
       </label>
@@ -95,7 +159,9 @@ export function FacilityAction({
         value={selectedId}
         onChange={(event) => onSelect(event.target.value)}
       >
-        <option value="">{automaticLabel}</option>
+        <option value="">
+          {selectedBundle ? "設備を選ぶ" : automaticLabel}
+        </option>
         {missing && <option value={selectedId}>{missingFacility}</option>}
         {fixtures.map(({ room, fixture }) => (
           <option key={fixture.id} value={fixture.id}>
@@ -129,7 +195,17 @@ export function FacilityAction({
             facility.fixtureCell,
           )}
           <br />
-          {`現在の見込み　移動${facility.moveMinutes}分 ＋ 利用${facility.useMinutes}分（合計${preview.minutes}分）`}
+          {foodBundle ? (
+            <>
+              食材の所在　{foodBundle.location}
+              <br />
+              {foodBundle.transportMinutes > 0
+                ? `食材を拾い、運ぶ見込み${foodBundle.transportMinutes}分 ＋ 料理${facility.useMinutes}分（合計${preview.minutes}分）`
+                : `食材は設備の使用床にあります（運搬不要）。本人の移動${facility.moveMinutes}分 ＋ 料理${facility.useMinutes}分（合計${preview.minutes}分）`}
+            </>
+          ) : (
+            `現在の見込み　移動${facility.moveMinutes}分 ＋ 利用${facility.useMinutes}分（合計${preview.minutes}分）`
+          )}
           {bedPreference?.outcome === "preferred" && (
             <>
               <br />

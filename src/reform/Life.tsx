@@ -38,6 +38,7 @@ import {
   type FacilityChoiceKey,
 } from "./FacilityAction";
 import { housingTogether } from "./housing/bridge";
+import { foodBundleStatus } from "./housing/foodPresentation";
 import { constructionStatus } from "./housing/constructionPresentation";
 import { constructionExitText } from "./housing/constructionTopology";
 import { gatheringPresence, gatheringStatus } from "./housing/gathering";
@@ -83,6 +84,8 @@ const groupNames = {
 type ActionGroup = keyof typeof groupNames;
 type FacilitySelection = {
   choices: Partial<Record<FacilityChoiceKey, string>>;
+  bundleId?: string;
+  chooseBundle?: (id: string) => void;
   choose: (key: FacilityChoiceKey, id: string) => void;
 };
 
@@ -228,6 +231,8 @@ export function ActionCommands({
               actor={actor}
               command={command}
               selectedId={facilitySelection?.choices[choiceKey] ?? ""}
+              selectedBundleId={facilitySelection?.bundleId}
+              onSelectBundle={facilitySelection?.chooseBundle}
               onSelect={(id) => facilitySelection?.choose(choiceKey, id)}
               onGame={onGame}
             />
@@ -315,6 +320,11 @@ function ActionPanel({
       constructionCancel = hint + "通路を移動中は今の区間の終点まで進みます。";
     }
   }
+  const foodCancel = actor.task?.spatial?.foodBundleId
+    ? cancelling
+      ? "この区間を出ると担当を解除します。一束は床に残ります。"
+      : "担当を外すと一束は床に残ります。通路途中なら区間の終点まで進みます。共同備蓄には自動で戻りません。"
+    : null;
   const reserved = Object.entries(actor.task?.reserved ?? {})
     .filter(([, n]) => n > 0)
     .map(([key, n]) => stockNames[key as keyof typeof stockNames] + n)
@@ -354,7 +364,7 @@ function ActionPanel({
             data-kind="cancel"
             disabled={!!cancel.disabled || cancelling}
             aria-describedby={
-              reserved || cancelling || constructionCancel
+              reserved || cancelling || constructionCancel || foodCancel
                 ? "lf-refund"
                 : undefined
             }
@@ -364,10 +374,11 @@ function ActionPanel({
           >
             {cancel.label}
           </button>
-          {(reserved || cancelling || constructionCancel) && (
+          {(reserved || cancelling || constructionCancel || foodCancel) && (
             <p className="lf-note" id="lf-refund">
               {reserved && "取り置き中　" + reserved + "。"}
-              {constructionCancel ??
+              {foodCancel ??
+                constructionCancel ??
                 (actor.task?.spatial
                   ? "取り消すと予約を解除します。通路を移動中は、今の区間を出てから取り置きした物が戻ります。"
                   : "取り消すと取り置きした物が戻ります。")}
@@ -412,6 +423,7 @@ export function Life({
   const hasTasks = game.actors.some((a) => a.task);
   const status = game.housing ? housingStatus(game, person.id) : null;
   const gathering = gatheringStatus(game, person.id);
+  const foodStatus = foodBundleStatus(game);
   const gatheringCompany = gathering ? gatheringPresence(game, person.id) : [];
   const locations = places(game.world);
   const place = locations.find((place) => place.id === actor.location);
@@ -472,8 +484,10 @@ export function Life({
               const construction = a.task?.spatial?.constructionId;
               const activity = construction
                 ? constructionStatus(game, construction, housing).phase
-                : (a.task?.label ??
-                  (a.danger ? "道の人影と対峙している" : "手が空いている"));
+                : a.task?.spatial?.foodBundleId
+                  ? (foodStatus?.phase ?? a.task.label)
+                  : (a.task?.label ??
+                    (a.danger ? "道の人影と対峙している" : "手が空いている"));
               return (
                 <button
                   key={a.person.id}
@@ -582,7 +596,8 @@ export function Life({
                   <p>
                     {gathering?.detail ??
                       (status && actor.task?.spatial
-                        ? actor.task.spatial.constructionId
+                        ? actor.task.spatial.constructionId ||
+                          actor.task.spatial.foodBundleId
                           ? status.detail
                           : housingStageNames[status.phase]
                         : actor.reason)}
@@ -628,6 +643,12 @@ export function Life({
                 銀貨 <b>{game.coins}</b>
               </span>
             </div>
+            {foodStatus?.state === "present" && (
+              <p className="lf-cargo">
+                共同備蓄とは別に 野菜の一束（食材2） · {foodStatus.location} ·{" "}
+                {foodStatus.phase}
+              </p>
+            )}
             {(actor.location !== game.home ||
               Object.values(actor.cargo).some((amount) => amount > 0)) && (
               <p className="lf-cargo">

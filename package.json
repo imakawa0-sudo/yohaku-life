@@ -38,7 +38,8 @@
     "test:characters": "node scripts/verify-character-art.mjs",
     "test:characters:unit": "node --import tsx --test tests/character-art.test.ts",
     "test:reform:weeks": "node scripts/verify-reform.mjs --weeks",
-    "test:legacy:standalone": "node scripts/verify-standalone.mjs && node scripts/verify-ui.mjs --standalone"
+    "test:legacy:standalone": "node scripts/verify-standalone.mjs && node scripts/verify-ui.mjs --standalone",
+    "test:food-logistics": "node scripts/verify-food-logistics.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

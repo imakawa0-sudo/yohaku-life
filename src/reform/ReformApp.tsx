@@ -20,6 +20,7 @@ import { WorldView } from "./RegionView";
 import { places } from "./world";
 import { HouseEditor } from "./HouseEditor";
 import { InsulationPanel } from "./InsulationPanel";
+import { FoodLogisticsPanel } from "./FoodLogisticsPanel";
 import { ConstructionPanel } from "./ConstructionPanel";
 import { applyHousingHouseEdit } from "./housing/runtime";
 import { HousingUpgrade } from "./HousingPanel";
@@ -89,13 +90,14 @@ export default function ReformApp() {
     slotId: string | undefined;
     actorId: string | undefined;
     choices: Partial<Record<FacilityChoiceKey, string>>;
-  }>({ slotId, actorId, choices: {} });
+    bundleId: string;
+  }>({ slotId, actorId, choices: {}, bundleId: "" });
   // A different active save or resident starts with automatic choices.
   if (
     facilitySelection.slotId !== slotId ||
     facilitySelection.actorId !== actorId
   )
-    setFacilitySelection({ slotId, actorId, choices: {} });
+    setFacilitySelection({ slotId, actorId, choices: {}, bundleId: "" });
   function show(next: View) {
     setView(next);
     setNotice("");
@@ -356,6 +358,12 @@ export default function ReformApp() {
             onGame={update}
             facilitySelection={{
               choices: facilitySelection.choices,
+              bundleId: facilitySelection.bundleId,
+              chooseBundle: (id) =>
+                setFacilitySelection((previous) => ({
+                  ...previous,
+                  bundleId: id,
+                })),
               choose: (key, id) =>
                 setFacilitySelection((previous) => ({
                   ...previous,
@@ -373,6 +381,11 @@ export default function ReformApp() {
               <h1>住まい</h1>
             </div>
           </div>
+          <FoodLogisticsPanel
+            key={`food:${slot?.id}`}
+            game={game}
+            onGame={update}
+          />
           <ConstructionPanel
             key={`construction:${slot?.id}`}
             game={game}

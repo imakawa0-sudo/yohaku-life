@@ -1,3 +1,4 @@
+import { foodTaskMinutes } from "./foodPresentation";
 import { constructionTitle } from "./constructionTypes";
 import { constructionExitText } from "./constructionTopology";
 import { constructionTaskMinutes } from "./constructionProgress";
@@ -6,11 +7,10 @@ export { nextGatheringCompletionMinutes } from "./gatheringForecast";
 import { cellName, furnishings, roomName } from "../house";
 import type { Game } from "../sim";
 import { locateSpatial } from "../spatial/actions";
-import { inspectSpatialRoute } from "../spatial/route";
-import type { SpatialPoint, SpatialState } from "../spatial/types";
+import type { SpatialPoint } from "../spatial/types";
 import { places } from "../world";
-import { spatialReasonText } from "./bridge";
-import { buildHousingTopology, housingRoomId, housingSlotId } from "./topology";
+import { inspectHousingRouteFrom, spatialReasonText } from "./bridge";
+import { housingRoomId, housingSlotId } from "./topology";
 import type { HousingStatus } from "./types";
 
 export function housingPointLabel(g: Game, point: SpatialPoint) {
@@ -124,15 +124,20 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
       ...result,
       phase: "cancelling",
       minutes: pos.remaining,
-      detail: t.spatial.constructionId
-        ? constructionExitText(
-            h,
-            h.construction!.plans[t.spatial.constructionId],
-          )
-        : "この区間の終点で予約を解除し、材料を返します。",
+      detail: t.spatial.foodBundleId
+        ? "この区間を出ると担当を解除します。一束は床に残ります。"
+        : t.spatial.constructionId
+          ? constructionExitText(
+              h,
+              h.construction!.plans[t.spatial.constructionId],
+            )
+          : "この区間の終点で予約を解除し、材料を返します。",
     };
   if (intent.kind === "carry") {
-    const minutes = constructionTaskMinutes(g, actorId);
+    const minutes = t.spatial.foodBundleId
+      ? foodTaskMinutes(g, actorId)
+      : constructionTaskMinutes(g, actorId);
+    const material = t.spatial.foodBundleId ? "食材の一束" : "工事用木材";
     const waiting = order.phase === "waiting";
     return {
       ...result,
@@ -147,42 +152,14 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
           : minutes === null
             ? "通路・利用許可と担当者の状態を確認してください。"
             : order.phase === "approach"
-              ? "工事用木材を拾いに向かっています。"
-              : "工事用木材を運んでいます。",
+              ? material + "を拾いに向かっています。"
+              : material + "を運んでいます。",
     };
   }
   const from =
     pos.kind === "transit" ? pos.step.to : pos.kind === "at" ? pos.point : null;
-  // A traveller already admitted into a room will have its occupant's egress rights at landing.
-  let graph: SpatialState = state;
-  if (
-    pos.kind === "transit" &&
-    pos.step.from.domainId !== pos.step.to.domainId &&
-    (h.controls.roomAccess[housingRoomId(pos.step.from.domainId)!] !== null ||
-      h.controls.roomAccess[housingRoomId(pos.step.to.domainId)!] !== null)
-  ) {
-    const actors = {
-      ...state.actors,
-      [actorId]: {
-        ...state.actors[actorId],
-        position: { kind: "at" as const, point: pos.step.to },
-      },
-    };
-    graph = {
-      ...state,
-      ...buildHousingTopology(
-        g.house,
-        Object.keys(actors),
-        h.controls,
-        actors,
-        h.layoutVersion,
-        h.construction,
-      ).geometry,
-      actors,
-    };
-  }
   const route = from
-    ? inspectSpatialRoute(graph, actorId, from, destination)
+    ? inspectHousingRouteFrom(g, h, actorId, from, destination)
     : null;
   const allowed = use ? state.slots[intent.slotId].allowedActorIds : null;
   const reason =
@@ -191,8 +168,9 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
       : allowed !== null && !allowed.includes(actorId)
         ? "use-denied"
         : null;
+  const requiresFitWorker = t.kind === "home-build" || !!t.spatial.foodBundleId;
   const minutes =
-    t.kind === "home-build" && (a.injury >= 70 || a.danger)
+    requiresFitWorker && (a.injury >= 70 || a.danger)
       ? null
       : route?.ok && !reason
         ? Math.max(
@@ -221,7 +199,7 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
     phase,
     minutes,
     detail:
-      t.kind === "home-build" && minutes === null && !reason
+      requiresFitWorker && minutes === null && !reason
         ? "担当者の状態を確認してください。"
         : reason
           ? spatialReasonText(reason)

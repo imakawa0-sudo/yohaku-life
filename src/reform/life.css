@@ -1248,3 +1248,26 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.lf-material-choice {
+  min-width: 0;
+  margin: 0;
+  padding: 4px 8px;
+  border: 1px solid var(--lf-line);
+  border-radius: 5px;
+}
+.lf-material-choice label {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  min-height: 44px;
+}
+.lf-material-choice input {
+  flex: 0 0 auto;
+}
+.lf-food-logistics .lf-command :is(button, small) {
+  font-size: inherit;
+}
+.lf-food-logistics .lf-housing-status {
+  margin-block: 0.5rem;
+}

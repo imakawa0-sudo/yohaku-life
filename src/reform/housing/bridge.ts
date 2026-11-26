@@ -1,3 +1,6 @@
+import { prepareFoodMinute } from "./foodProgress";
+import { foodCookingSeat, planFoodCooking } from "./foodCooking";
+import { refreshFoodHandling } from "./food";
 import { getPreferredBed } from "./bedPreference";
 import { refreshConstructionHandling } from "./constructionTopology";
 import { releaseRevokedConstructionWorkers } from "./constructionProgress";
@@ -46,11 +49,46 @@ function geometry(g: Game, h: HousingRuntime) {
     h.construction,
   );
 }
+/** Inspect a leg with the entry rights the resident will have at its starting floor. */
+export function inspectHousingRouteFrom(
+  g: Game,
+  h: HousingRuntime,
+  actorId: string,
+  from: SpatialPoint,
+  to: SpatialPoint,
+  graph = h.state,
+) {
+  const actor = graph.actors[actorId];
+  const current = housingSourcePoint(actor);
+  if (
+    current &&
+    current.domainId !== from.domainId &&
+    (h.controls.roomAccess[housingRoomId(current.domainId)!] !== null ||
+      h.controls.roomAccess[housingRoomId(from.domainId)!] !== null)
+  ) {
+    const actors = {
+      ...graph.actors,
+      [actorId]: { ...actor, position: { kind: "at" as const, point: from } },
+    };
+    const { geometry } = buildHousingTopology(
+      g.house,
+      Object.keys(actors),
+      h.controls,
+      actors,
+      h.layoutVersion,
+      h.construction,
+    );
+    // Keep the caller's physical graph (it may be checking permission independently of closures).
+    graph = { ...graph, actors, entryRules: geometry.entryRules };
+  }
+  return inspectSpatialRoute(graph, actorId, from, to);
+}
 export function rebuildHousingGeometry(g: Game, h: HousingRuntime) {
   const topology = geometry(g, h);
   Object.assign(h.state, topology.geometry);
   h.controls = topology.controls;
   refreshConstructionHandling(h);
+  refreshFoodHandling(h);
 }
 export function setHousingPassage(
   g: Game,
@@ -92,6 +130,7 @@ export function setHousingRoomAccess(
     allowedActorIds === null ? null : [...allowedActorIds];
   rebuildHousingGeometry(next, h);
   releaseRevokedConstructionWorkers(next, g.housing);
+  prepareFoodMinute(next);
   return next;
 }
 export function locateHousingActor(
@@ -193,7 +232,7 @@ export function housingInTransit(g: Game, id: string) {
 export function spatialReasonText(reason: SpatialReason): string {
   switch (reason) {
     case "handling-denied":
-      return "木材を扱う許可がありません。拾う部屋と届け先の利用許可を確認してください。";
+      return "物資を扱う許可がありません。拾う部屋と届け先の利用許可を確認してください。";
     case "entry-denied":
       return "入室の許可がありません。通る部屋の利用許可を確認してください。";
     case "use-denied":
@@ -227,6 +266,12 @@ export type HousingProposal = {
   minutes: number;
   state: SpatialState;
   facility?: HousingUsePreview;
+  foodBundle?: {
+    bundleId: string;
+    quantity: 2;
+    location: string;
+    transportMinutes: number;
+  };
 };
 function accept(
   h: HousingRuntime,
@@ -238,7 +283,12 @@ function accept(
   const result = issueSpatialOrder(h.state, intent);
   if (!result.ok) return spatialReasonText(result.reason);
   t.spatial = { orderId: result.orderId, kind: intent.kind };
-  return { task: t, minutes, state: result.state, ...(facility && { facility }) };
+  return {
+    task: t,
+    minutes,
+    state: result.state,
+    ...(facility && { facility }),
+  };
 }
 /** Planning an unknown position uses a detached trial. Only begin publishes the result. */
 export function planHousing(
@@ -248,6 +298,7 @@ export function planHousing(
   need?: Need,
   water = 0,
   fixtureId?: string,
+  bundleId?: string,
 ): HousingProposal | string {
   const id = a.person.id;
   let h = g.housing!;
@@ -282,6 +333,7 @@ export function planHousing(
       .filter((b) => b !== a && b.task?.station && !b.task.spatial)
       .map((b) => b.task!.station),
   );
+  const claimedSeat = foodCookingSeat(g);
   const reasons = new Set<SpatialReason>();
   const preferredReasons = new Set<SpatialReason>();
   const recordUnavailable = (reason: SpatialReason, preferred: boolean) => {
@@ -297,6 +349,7 @@ export function planHousing(
     if (f.need !== need || (cooking && slot.seat !== 0)) continue;
     const preferred = slot.fixtureId === preferredFixtureId;
     if (
+      slot.id === claimedSeat ||
       legacySeats.has(legacyHousingStation(slot)) ||
       Object.values(h.state.reservations).some(
         (r) => r.kind === "slot" && r.targetId === slot.id,
@@ -349,7 +402,7 @@ export function planHousing(
         : furnishings[slot.kind].use;
   const room = g.house.rooms.find((r) => r.id === slot.roomId)!;
   const fixture = room.fixtures.find((f) => f.id === slot.fixtureId)!;
-  return accept(
+  const proposal = accept(
     h,
     t,
     { kind: "use", actorId: id, slotId: slot.id, useMinutes: use },
@@ -364,6 +417,9 @@ export function planHousing(
       ...(bedPreference && { bedPreference }),
     },
   );
+  return bundleId !== undefined && typeof proposal !== "string"
+    ? planFoodCooking(g, h, a, slot, bundleId, proposal)
+    : proposal;
 }
 
 export function cancelHousingTask(g: Game, a: Actor, t: Task) {
@@ -476,4 +532,32 @@ export function advanceHousingMinute(
   }
   if (crossed) rebuildHousingGeometry(g, h);
   return result;
+}
+
+/** Project the active spatial order in isolation, including pickups and room crossings. */
+export function projectHousingOrderMinutes(
+  g: Game,
+  worker: Actor,
+): number | null {
+  const actorId = worker.person.id;
+  const h = g.housing!;
+  const trial = {
+    ...g,
+    housing: structuredClone(h),
+    actors: [structuredClone(worker)],
+  };
+  for (const other of Object.values(trial.housing.state.actors)) {
+    if (other.id !== actorId) other.order = null;
+  }
+  for (
+    let elapsed = 1;
+    Number.isSafeInteger(trial.housing.state.time + 1);
+    elapsed++
+  ) {
+    const tick = advanceHousingMinute(trial).get(actorId);
+    if (tick?.terminal) return elapsed;
+    if (trial.housing.state.actors[actorId].order?.phase === "waiting")
+      return null;
+  }
+  return null;
 }

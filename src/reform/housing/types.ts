@@ -1,3 +1,4 @@
+import type { FoodLogistics } from "./foodTypes";
 import type { HousingConstruction, HaulDirection } from "./constructionTypes";
 import type { FixtureKind } from "../house";
 import type {
@@ -15,6 +16,7 @@ export type HousingControls = {
 export type HousingTaskBinding = {
   orderId: string;
   kind: "move" | "use" | "carry";
+  foodBundleId?: string;
   constructionId?: string;
   direction?: HaulDirection;
   gatheringId?: string;
@@ -25,6 +27,7 @@ export type HousingTaskBinding = {
 export type HousingRuntime = {
   version: 1;
   layoutVersion?: 2;
+  foodLogistics?: FoodLogistics;
   construction?: HousingConstruction;
   gatherings?: Record<string, HousingGathering>;
   nextGatheringId?: number;

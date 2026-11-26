@@ -1,8 +1,7 @@
 import { isIndoorHousingRoom } from "./coldProtection";
-import { maxRoomHeight, roomWidth } from "../house";
+import { fields, integer, point, record } from "./saveFields";
 import type { Game } from "../sim";
 import { sameSpatialPoint } from "../spatial/route";
-import type { SpatialPoint } from "../spatial/types";
 import {
   constructionFloor,
   constructionHandling,
@@ -17,46 +16,6 @@ import {
 import { constructionSlotId, housingPoint } from "./topology";
 import type { HousingRuntime } from "./types";
 
-function record(value: unknown): value is Record<string, unknown> {
-  return (
-    value !== null &&
-    typeof value === "object" &&
-    (Object.getPrototypeOf(value) === Object.prototype ||
-      Object.getPrototypeOf(value) === null)
-  );
-}
-function fields(
-  value: unknown,
-  required: string[],
-  optional: string[] = [],
-): value is Record<string, unknown> {
-  return (
-    record(value) &&
-    required.every((key) => Object.hasOwn(value, key)) &&
-    Object.keys(value).every(
-      (key) => required.includes(key) || optional.includes(key),
-    )
-  );
-}
-function integer(
-  value: unknown,
-  min: number,
-  max = Number.MAX_SAFE_INTEGER,
-): value is number {
-  return (
-    typeof value === "number" &&
-    Number.isSafeInteger(value) &&
-    value >= min &&
-    value <= max
-  );
-}
-function point(value: unknown): value is SpatialPoint {
-  return (
-    fields(value, ["domainId", "cell"]) &&
-    typeof value.domainId === "string" &&
-    integer(value.cell, 0, roomWidth * maxRoomHeight - 1)
-  );
-}
 function issued(value: unknown, prefix: string, next: number) {
   if (typeof value !== "string") return false;
   const serial = Number(value.slice(prefix.length));
@@ -328,12 +287,11 @@ export function validConstructionRelations(
 ): boolean {
   const workers = g.actors.filter(
     (a) =>
-      a.task?.kind === "home-haul" ||
+      (a.task?.kind === "home-haul" && !a.task.spatial?.foodBundleId) ||
       a.task?.kind === "home-build" ||
       (a.task?.spatial && Object.hasOwn(a.task.spatial, "constructionId")),
   );
-  if (!h.construction)
-    return !workers.length && !Object.keys(h.state.items).length;
+  if (!h.construction) return !workers.length;
   const ledger = h.construction;
   const completedRoomIds: string[] = [];
   const insulated = new Set<string>();
@@ -343,7 +301,6 @@ export function validConstructionRelations(
       .map((p) => p.roomId!),
   );
   let lastEnd = 480,
-    items = 0,
     assigned = 0;
   // Records are retained and issued once. Only the latest can still hold the work site.
   for (let serial = 1; serial < ledger.nextId; serial++) {
@@ -371,13 +328,8 @@ export function validConstructionRelations(
       return false;
     lastEnd = p.completedAt ?? p.cancelledAt ?? p.createdAt;
     if (p.assignment) assigned++;
-    if (p.material?.state === "present") items++;
   }
-  if (
-    assigned !== workers.length ||
-    items !== Object.keys(h.state.items).length
-  )
-    return false;
+  if (assigned !== workers.length) return false;
   if (!completedRoomIds.length) return true;
   // Setup and older rooms predate construction. Furniture can leave gaps in the shared sequence.
   const issuedRooms = g.house.rooms

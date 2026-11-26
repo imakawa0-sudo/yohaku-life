@@ -1,3 +1,4 @@
+import { foodCookingSeat } from "./foodCooking";
 import type { Game } from "../sim";
 import { issueSpatialOrder } from "../spatial/actions";
 import { inspectSpatialRoute } from "../spatial/route";
@@ -112,6 +113,8 @@ function prepare(
       .filter((r) => r.kind === "slot")
       .map((r) => r.targetId),
   );
+  const cookingSeat = foodCookingSeat(g);
+  if (cookingSeat) booked.add(cookingSeat);
   const old = new Set(
     g.actors
       .filter((a) => a.task?.station && !a.task.spatial)

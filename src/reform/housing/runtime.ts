@@ -1,3 +1,4 @@
+import { isFoodLedger, validFoodRelations } from "./foodValidation";
 import { constructionTitle } from "./constructionTypes";
 import { isBedPreferences, prunePreferredBeds } from "./bedPreference";
 import {
@@ -242,6 +243,8 @@ function validBinding(
   id: string,
 ): boolean {
   const binding = task?.spatial;
+  // The complete bidirectional match was checked by validFoodRelations.
+  if (binding?.foodBundleId) return !!order && order.id === binding.orderId;
   if (task?.kind === "home-build")
     return (
       binding?.kind === "use" &&
@@ -356,6 +359,7 @@ export function isHousingRuntime(
       "version",
       "layoutVersion",
       "construction",
+      "foodLogistics",
       "gatherings",
       "nextGatheringId",
       "preferredBeds",
@@ -390,6 +394,11 @@ export function isHousingRuntime(
     !isConstructionLedger(value.construction, game.time)
   )
     return false;
+  if (
+    Object.hasOwn(value, "foodLogistics") &&
+    !isFoodLedger(value.foodLogistics, game.time)
+  )
+    return false;
   const topology = buildHousingTopology(
     game.house,
     located,
@@ -406,6 +415,8 @@ export function isHousingRuntime(
   )
     return false;
   if (!validConstructionRelations(value as unknown as HousingRuntime, game))
+    return false;
+  if (!validFoodRelations(value as unknown as HousingRuntime, game, topology))
     return false;
   const occupied = new Set<string>();
   for (const actor of game.actors) {
@@ -528,6 +539,13 @@ function editConflict(
   after: HousingTopology,
 ): string | undefined {
   const runtime = game.housing;
+  const bundle = runtime?.foodLogistics?.bundle;
+  if (
+    bundle?.state === "present" &&
+    (!isFloor(after.geometry, bundle.storage) ||
+      !isFloor(after.geometry, bundle.source))
+  )
+    return "食材の一束がある間は、供給口と保管先の床を残してください。";
   for (const plan of Object.values(runtime?.construction?.plans ?? {})) {
     if (
       unresolvedConstruction(plan) &&
@@ -541,7 +559,9 @@ function editConflict(
       item.position.kind === "at" &&
       !isFloor(after.geometry, item.position.point)
     )
-      return "工事用木材が置かれた床は変更できません。";
+      return bundle?.state === "present" && item.id === bundle.itemId
+        ? "食材の一束が置かれた床は変更できません。"
+        : "工事用木材が置かれた床は変更できません。";
   }
   for (const actor of game.actors) {
     const id = actor.person.id;

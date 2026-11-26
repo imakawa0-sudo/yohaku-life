@@ -1,3 +1,9 @@
+import { presentFood, refreshFoodHandling, settleFood } from "./housing/food";
+import {
+  cancelFoodActor,
+  finishFoodHaul,
+  prepareFoodMinute,
+} from "./housing/foodProgress";
 import { homeColdProtection } from "./housing/coldProtection";
 import {
   cancelConstructionActor,
@@ -78,8 +84,9 @@ export type ActionPreview = {
   minutes?: number;
   reserved?: Partial<Stock>;
   facility?: HousingUsePreview;
+  foodBundle?: HousingProposal["foodBundle"];
 };
-export type CookingFacilitySelection = { fixtureId: string };
+export type CookingFacilitySelection = { fixtureId: string; bundleId?: string };
 export interface ActionOption extends ActionPreview {
   kind: string;
   label: string;
@@ -501,6 +508,7 @@ function preview(p: Proposal | string): ActionPreview {
   return {
     minutes: "task" in p ? p.minutes : p.total,
     reserved: proposedTask(p).reserved,
+    ...("task" in p && p.foodBundle && { foodBundle: p.foodBundle }),
     ...("task" in p && p.facility && { facility: p.facility }),
   };
 }
@@ -526,6 +534,13 @@ function cookingSelectionReason(
     !selection.fixtureId
   )
     return "料理に使う設備を指定してください。";
+  if (
+    Object.hasOwn(selection, "bundleId") &&
+    (typeof selection.bundleId !== "string" ||
+      !selection.bundleId ||
+      !["cook", "cook:easy"].includes(target!))
+  )
+    return "食材の一束は基本の野菜料理で選んでください。";
   const fixture = g.house.rooms
     .flatMap((room) => room.fixtures)
     .find((f) => f.id === selection.fixtureId);
@@ -678,6 +693,16 @@ function plan(
         if (g.housing) {
           if (!cookingRecipes.includes(target!))
             return "料理の種類を選んでください。";
+          if (selection?.bundleId !== undefined)
+            return planHousing(
+              g,
+              a,
+              t,
+              "hunger",
+              0,
+              fixtureId,
+              selection.bundleId,
+            );
           const reserved = reservation(g, a, t, {
             ingredients: tier === "easy" ? 2 : 3,
           });
@@ -903,6 +928,10 @@ function plan(
 function stop(g: Game, a: Actor, spatialCancelled = false): void {
   const t = a.task;
   if (!t) return;
+  if (t.spatial?.foodBundleId) {
+    cancelFoodActor(g, a);
+    return;
+  }
   if (t.spatial?.constructionId) {
     cancelConstructionActor(g, a.person.id);
     return;
@@ -944,6 +973,14 @@ function begin(
   if ("task" in proposal) {
     g.housing!.state = proposal.state;
     delete g.housing!.unlocated[a.person.id];
+    if (proposal.foodBundle) {
+      presentFood(g.housing)!.assignment = {
+        kind: "cook",
+        actorId: a.person.id,
+        orderId: t.spatial!.orderId,
+      };
+      refreshFoodHandling(g.housing!);
+    }
   }
   if (t.partner) {
     const peer = find(g, t.partner)!;
@@ -994,7 +1031,7 @@ export function order(
   if (a.task) stop(next, a);
   if (kind === "cancel") {
     if (a.task?.spatial) {
-      if (!a.task.spatial.constructionId)
+      if (!a.task.spatial.constructionId && !a.task.spatial.foodBundleId)
         a.reason = "この区間を出ると予定を取り消し、予約を返します。";
       return next;
     }
@@ -1364,6 +1401,15 @@ function finishWork(g: Game, a: Actor, t: Task): string {
   }
   if (skill === "cook") {
     const servings = 2 + strength;
+    if (t.spatial?.foodBundleId) {
+      const bundle = presentFood(g.housing)!;
+      if (!isStockQuantity(bag.food + servings)) {
+        delete bundle.assignment;
+        refreshFoodHandling(g.housing!);
+        return "完成食を置く空きがないため、料理を中断し、一束を設備の使用床に残しました。";
+      }
+      settleFood(g, bundle, "consumed");
+    }
     bag.food += servings;
     result = "食事を" + servings + "食用意した。";
   }
@@ -1694,6 +1740,7 @@ function advanceMinute(g: Game): boolean {
     }
   }
   const releasedReturns = prepareConstructionMinute(g);
+  prepareFoodMinute(g);
   // Crossing a doorway cannot retroactively change exposure during that minute.
   const protectedActors = new Set(
     g.actors.filter((a) => homeColdProtection(g, a)).map((a) => a.person.id),
@@ -1701,6 +1748,8 @@ function advanceMinute(g: Game): boolean {
   const spatialMinutes = g.housing
     ? advanceHousingMinute(g, heldGatheringOrders(g))
     : undefined;
+  let completedFood: { a: Actor; t: Task } | undefined;
+  let returnedFood: (() => void) | undefined;
   const completed: { a: Actor; t: Task }[] = [];
   for (const a of g.actors) {
     const t = a.task;
@@ -1733,7 +1782,11 @@ function advanceMinute(g: Game): boolean {
     }
     a.memories = a.memories.filter((m) => m.until > g.time);
     a.mood = moodOf(g, a);
-    if (t && !t.spatial?.gatheringId && !t.spatial?.constructionId) {
+    if (t?.spatial?.foodBundleId && spatial) {
+      if (t.spatial.kind === "use" && spatial.terminal === "finish")
+        completedFood = { a, t };
+      else returnedFood = finishFoodHaul(g, a, spatial);
+    } else if (t && !t.spatial?.gatheringId && !t.spatial?.constructionId) {
       if (!spatial) t.remaining--;
       if (spatial?.terminal === "cancel") {
         stop(g, a, true);
@@ -1773,6 +1826,8 @@ function advanceMinute(g: Game): boolean {
     for (const a of g.actors) a.mood = moodOf(g, a);
   }
   let encounter = false;
+  // Resolve the bundle against all ordinary stock changes on this tick.
+  if (completedFood) completed.push(completedFood);
   for (const { a, t } of completed) {
     if (a.task !== t) continue;
     finish(g, a, t);
@@ -1780,6 +1835,7 @@ function advanceMinute(g: Game): boolean {
     if (a.danger && t.kind === "explore") encounter = true;
   }
   if (completed.length) for (const a of g.actors) a.mood = moodOf(g, a);
+  returnedFood?.();
   // Ordinary stock changes for this minute get accounted for before newly released bundles.
   for (const { plan, worker } of releasedReturns)
     settleConstructionReturn(g, plan, worker);

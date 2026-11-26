@@ -1,7 +1,7 @@
 import { isStockQuantity, type Actor, type Game } from "../sim";
 import { cancelSpatialOrder } from "../spatial/actions";
 import {
-  advanceHousingMinute,
+  projectHousingOrderMinutes,
   rebuildHousingGeometry,
   type HousingMinute,
 } from "./bridge";
@@ -180,23 +180,5 @@ export function constructionTaskMinutes(
     return actor.position.remaining;
   if (worker.injury >= 70 || worker.danger || !workerPermitted(h, plan))
     return null;
-  const trial = {
-    ...g,
-    housing: structuredClone(h),
-    actors: [structuredClone(worker)],
-  };
-  for (const other of Object.values(trial.housing.state.actors)) {
-    if (other.id !== actorId) other.order = null;
-  }
-  for (
-    let elapsed = 1;
-    Number.isSafeInteger(trial.housing.state.time + 1);
-    elapsed++
-  ) {
-    const tick = advanceHousingMinute(trial).get(actorId);
-    if (tick?.terminal) return elapsed;
-    if (trial.housing.state.actors[actorId].order?.phase === "waiting")
-      return null;
-  }
-  return null;
+  return projectHousingOrderMinutes(g, worker);
 }
