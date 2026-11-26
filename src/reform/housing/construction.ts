@@ -1,3 +1,4 @@
+import { isIndoorHousingRoom, isRoomInsulated } from "./coldProtection";
 import {
   cancelConstructionActor,
   settleConstructionReturn,
@@ -21,6 +22,7 @@ import {
 } from "./constructionTopology";
 import {
   constructionWood,
+  constructionTitle,
   constructionWorkMinutes,
   type ConstructionRequest,
   type ConstructionResult,
@@ -37,8 +39,22 @@ export function createRoomConstruction(
   game: Game,
   request: ConstructionRequest,
 ): ConstructionResult {
+  return createConstructionPlan(game, request);
+}
+
+export function createConstructionPlan(
+  game: Game,
+  request: ConstructionRequest,
+  kind?: "insulation",
+): ConstructionResult {
   const h = game.housing;
   if (!h) return { game, error: "先に「住居の移動」を有効にしてください。" };
+  if (kind === "insulation") {
+    if (!isIndoorHousingRoom(game, request.neighborId))
+      return { game, error: "寒さ対策をする屋内の部屋を選んでください。" };
+    if (game.insulated || isRoomInsulated(game, request.neighborId))
+      return { game, error: "この部屋の寒さ対策は済んでいます。" };
+  }
   const name = request.name.trim();
   if (!name || name.length > 24)
     return { game, error: "部屋の名前を1〜24文字で入力してください。" };
@@ -73,7 +89,8 @@ export function createRoomConstruction(
     source,
     staging,
     createdAt: game.time,
-    requiredWood: constructionWood,
+    ...(kind && { kind }),
+    requiredWood: kind === "insulation" ? 1 : constructionWood,
     workMinutes: constructionWorkMinutes,
     workedMinutes: 0,
     status: "planned",
@@ -89,15 +106,18 @@ export function reserveConstructionMaterial(
   const plan = constructionPlan(game.housing, planId);
   if (plan?.status !== "planned" || plan.material)
     return { game, error: "この工事の木材は取り置けません。" };
-  if (game.wood < constructionWood)
-    return { game, error: "取り置くには共同備蓄に木材6が必要です。" };
+  if (game.wood < plan.requiredWood)
+    return {
+      game,
+      error: `取り置くには共同備蓄に木材${plan.requiredWood}が必要です。`,
+    };
   const next = structuredClone(game),
     h = next.housing!,
     target = h.construction!.plans[planId];
   const itemId =
     "construction-material-" + planId.slice("construction-".length);
-  next.wood -= constructionWood;
-  target.material = { itemId, quantity: constructionWood, state: "present" };
+  next.wood -= plan.requiredWood;
+  target.material = { itemId, quantity: plan.requiredWood, state: "present" };
   h.state.items[itemId] = {
     id: itemId,
     position: { kind: "at", point: { ...target.source } },
@@ -236,7 +256,7 @@ export function assignConstructionBuild(
   worker.task = {
     kind: "home-build",
     mode: "direct",
-    label: plan.name + "を施工する",
+    label: constructionTitle(plan) + "を施工する",
     total: remaining,
     remaining,
     reserved: {},
@@ -246,7 +266,7 @@ export function assignConstructionBuild(
     station: slotId,
     spatial: { kind: "use", orderId, constructionId: planId },
   };
-  worker.reason = "増築の施工を担当しています。";
+  worker.reason = constructionTitle(plan) + "を担当しています。";
   return { game: next, planId };
 }
 export function inspectConstructionBuild(
@@ -308,8 +328,7 @@ export function reclaimConstructionMaterial(
   if (!isStockQuantity(game.wood + material.quantity))
     return {
       game,
-      error:
-        "備蓄に木材6を戻す空きがありません。木材を使ってからもう一度戻してください。",
+      error: `備蓄に木材${material.quantity}を戻す空きがありません。木材を使ってからもう一度戻してください。`,
     };
   const next = structuredClone(game);
   settleConstructionReturn(next, next.housing!.construction!.plans[planId]);

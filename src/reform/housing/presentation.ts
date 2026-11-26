@@ -1,3 +1,4 @@
+import { constructionTitle } from "./constructionTypes";
 import { constructionExitText } from "./constructionTopology";
 import { constructionTaskMinutes } from "./constructionProgress";
 import { nextGatheringCompletionMinutes } from "./gatheringForecast";
@@ -226,7 +227,9 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
           ? spatialReasonText(reason)
           : phase === "use"
             ? t.kind === "home-build"
-              ? "増築の施工をしています。"
+              ? constructionTitle(
+                  h.construction!.plans[t.spatial.constructionId!],
+                ) + "を進めています。"
               : "設備を使っています。"
             : "目的地へ向かっています。",
   };

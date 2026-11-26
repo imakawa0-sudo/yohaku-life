@@ -46,7 +46,7 @@ NotionとGitHubの自動同期は設定していない。Docs7の提案が、採
 現在地を尋ねる例：
 
 ```text
-yohaku-lifeのDEVELOPMENT_HANDOFF.mdを根拠に、料理設備指定までの実装済み範囲と、未採用のH5a・H6を区別して説明してほしい。
+yohaku-lifeの最新mainとDEVELOPMENT_HANDOFF.mdを根拠に、H5aの一室の寒さ対策までの実装済み範囲と、候補のH6を区別して説明してほしい。索引に新しい文書がない場合は、その限界を明示してほしい。
 ```
 
 技術APIを調べる際は、利用中のReact、TypeScriptなどを別ライブラリとして解決し、プロジェクトの依存バージョンに合う一次資料を確認する。

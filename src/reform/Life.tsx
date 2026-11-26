@@ -1,3 +1,4 @@
+import { homeColdProtection } from "./housing/coldProtection";
 import { useState } from "react";
 import {
   Backpack,
@@ -422,6 +423,7 @@ export function Life({
         ? "初霜の日"
         : `初霜から${day - place.frost}日`
     : null;
+  const protection = homeColdProtection(game, actor);
   const atHome = actor.location === game.home;
   const setting = settingFor(place, atHome, actor.room);
   const company = game.actors
@@ -549,6 +551,15 @@ export function Life({
                   </span>
                 )}
               </div>
+              {place && day >= place.frost && (
+                <p className="lf-cold-status">
+                  {protection === "whole-home"
+                    ? "寒さ対策：家全体で対策済み。寒さによる休息の追加消耗なし。"
+                    : protection === "room"
+                      ? "寒さ対策：この部屋で対策済み。寒さによる休息の追加消耗なし。"
+                      : `寒さ対策：未対策。寒さにより休息の消耗が${person.body === "cold" ? "1.6" : "1.2"}倍になります。`}
+                </p>
+              )}
               <div className="lf-task">
                 <div className="lf-task-label">
                   <strong>
@@ -627,7 +638,7 @@ export function Life({
             )}
             {game.insulated && (
               <p className="lf-cargo">
-                断熱雨戸を設置済み。霜が降りた日も家の中では冷えを防げます。
+                家全体の断熱雨戸を設置済み。自宅にいる間は寒さによる休息の追加消耗を防げます。
               </p>
             )}
           </section>

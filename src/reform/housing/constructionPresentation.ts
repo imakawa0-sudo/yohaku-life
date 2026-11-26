@@ -1,3 +1,4 @@
+export { constructionTitle } from "./constructionTypes";
 import { isStockQuantity, type Game } from "../sim";
 import { sameSpatialPoint } from "../spatial/route";
 import { locateSpatial } from "../spatial/actions";
@@ -35,12 +36,14 @@ export function constructionStatus(
     remainingMinutes: constructionWorkMinutes,
   };
   if (!plan || !h) return empty;
+  const wood = "木材" + plan.requiredWood;
+  const work = plan.kind === "insulation" ? "寒さ対策" : "増築";
   const assignment = plan.assignment;
   const worker = assignment
     ? g.actors.find((a) => a.person.id === assignment.actorId)!.person.name
     : null;
   let phase = "計画中",
-    detail = "木材6を取り置いてください。",
+    detail = wood + "を取り置いてください。",
     material = "未調達";
   if (plan.status === "cancelled") {
     phase = "取消済み";
@@ -49,11 +52,13 @@ export function constructionStatus(
   if (plan.status === "completed") {
     phase = "完成";
     detail =
-      "「" + plan.name + "」が完成しました。部屋に移動して家具を置けます。";
-    material = "木材6・増築に使用済み";
+      plan.kind === "insulation"
+        ? "この部屋の寒さ対策が完成しました。"
+        : "「" + plan.name + "」が完成しました。部屋に移動して家具を置けます。";
+    material = wood + "・" + work + "に使用済み";
   }
   if (plan.material?.state === "returned")
-    material = "木材6・共同備蓄へ返却済み";
+    material = wood + "・共同備蓄へ返却済み";
   if (plan.material?.state === "present") {
     const pos = h.state.items[plan.material.itemId].position;
     const where = locateSpatial(h.state, {
@@ -69,7 +74,8 @@ export function constructionStatus(
           ? housingPointLabel(g, where.point)
           : "";
     material =
-      "木材6・" +
+      wood +
+      "・" +
       location +
       (pos.kind === "carried" ? "（" + worker + "が運搬中）" : "");
     if (assignment) {
@@ -84,7 +90,7 @@ export function constructionStatus(
         phase = order.phase === "use" ? "施工中" : "施工場所へ移動中";
         detail =
           order.phase === "use"
-            ? "仮置き場で増築の施工をしています。"
+            ? "仮置き場で" + work + "の施工をしています。"
             : "担当者が仮置き場へ向かっています。";
       } else {
         phase = assignment.kind === "deliver" ? "搬入中" : "回収中";
@@ -97,7 +103,9 @@ export function constructionStatus(
       phase = "備蓄への返却待ち";
       detail = isStockQuantity(g.wood + plan.material.quantity)
         ? "供給口の木材を備蓄に戻せます。"
-        : "供給口に木材6が残っています。備蓄に空きができたら「供給口の木材を備蓄に戻す」を選んでください。";
+        : "供給口に" +
+          wood +
+          "が残っています。備蓄に空きができたら「供給口の木材を備蓄に戻す」を選んでください。";
     } else if (plan.status === "cancelled") {
       phase = "回収待ち";
       detail = "回収担当を選び、木材を居間の供給口へ戻してください。";
@@ -105,7 +113,7 @@ export function constructionStatus(
       phase = "完成反映待ち";
       detail =
         inspectConstructionCompletion(g, planId).disabled ??
-        "「完成を反映する」で部屋を使えるようにできます。";
+        "「完成を反映する」で工事を完了できます。";
     } else if (pos.kind === "at" && sameSpatialPoint(pos.point, plan.staging)) {
       phase = "仮置き済み";
       detail = plan.workedMinutes

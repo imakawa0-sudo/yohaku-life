@@ -14,7 +14,10 @@ import {
   releaseConstructionWorker,
   reserveConstructionMaterial,
 } from "./housing/construction";
-import { constructionStatus } from "./housing/constructionPresentation";
+import {
+  constructionStatus,
+  constructionTitle,
+} from "./housing/constructionPresentation";
 import {
   constructionFloor,
   sourceReturnMaterial,
@@ -31,9 +34,9 @@ import { housingPoint } from "./housing/topology";
 import { isStockQuantity, type Game } from "./sim";
 import { sameSpatialPoint } from "./spatial/route";
 
-type RunConstruction = (result: ConstructionResult) => Promise<boolean>;
+export type RunConstruction = (result: ConstructionResult) => Promise<boolean>;
 
-function ConstructionAction({
+export function ConstructionAction({
   label,
   disabled,
   hint,
@@ -146,7 +149,7 @@ function ConstructionAssignment({
   );
 }
 
-function ConstructionCard({
+export function ConstructionCard({
   game,
   plan,
   run,
@@ -156,6 +159,8 @@ function ConstructionCard({
   run: RunConstruction;
 }) {
   const h = game.housing!;
+  const title =
+    plan.kind === "insulation" ? constructionTitle(plan) : plan.name;
   const work = plan.assignment && housingStatus(game, plan.assignment.actorId);
   const status = constructionStatus(game, plan.id, work);
 
@@ -163,7 +168,7 @@ function ConstructionCard({
     return (
       <details className="lf-construction-history">
         <summary>
-          {plan.name}・{status.phase}
+          {title}・{status.phase}
         </summary>
         <p>{status.detail}</p>
         {plan.material && <p>{status.material}</p>}
@@ -183,8 +188,8 @@ function ConstructionCard({
       ? inspectConstructionCompletion(game, plan.id)
       : null;
   return (
-    <article className="lf-construction-card" aria-label={plan.name}>
-      <h3>{plan.name}</h3>
+    <article className="lf-construction-card" aria-label={title}>
+      <h3>{title}</h3>
       <p className="lf-construction-stage">{status.phase}</p>
       <p>{status.detail}</p>
       <dl className="lf-housing-status">
@@ -242,10 +247,10 @@ function ConstructionCard({
           />
         ) : !plan.material ? (
           <ConstructionAction
-            label="木材6を取り置く"
+            label={`木材${plan.requiredWood}を取り置く`}
             disabled={
-              game.wood < constructionWood
-                ? "共同備蓄に木材6が必要です。"
+              game.wood < plan.requiredWood
+                ? `共同備蓄に木材${plan.requiredWood}が必要です。`
                 : undefined
             }
             onClick={() => void run(reserveConstructionMaterial(game, plan.id))}
@@ -364,7 +369,7 @@ export function ConstructionPanel({
               {error}
             </p>
           )}
-          {active && (
+          {active && active.kind !== "insulation" && (
             <ConstructionCard
               key={active.id}
               game={game}
@@ -443,7 +448,10 @@ export function ConstructionPanel({
           </form>
           {plans
             .reverse()
-            .filter((plan) => !unresolvedConstruction(plan))
+            .filter(
+              (plan) =>
+                plan.kind !== "insulation" && !unresolvedConstruction(plan),
+            )
             .map((plan) => (
               <ConstructionCard
                 key={plan.id}

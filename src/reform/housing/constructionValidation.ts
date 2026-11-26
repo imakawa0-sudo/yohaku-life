@@ -1,3 +1,5 @@
+import { isIndoorHousingRoom } from "./coldProtection";
+import { maxRoomHeight, roomWidth } from "../house";
 import type { Game } from "../sim";
 import { sameSpatialPoint } from "../spatial/route";
 import type { SpatialPoint } from "../spatial/types";
@@ -52,7 +54,7 @@ function point(value: unknown): value is SpatialPoint {
   return (
     fields(value, ["domainId", "cell"]) &&
     typeof value.domainId === "string" &&
-    integer(value.cell, 0)
+    integer(value.cell, 0, roomWidth * maxRoomHeight - 1)
   );
 }
 function issued(value: unknown, prefix: string, next: number) {
@@ -81,7 +83,14 @@ function planShape(
         "workedMinutes",
         "status",
       ],
-      ["cancelledAt", "completedAt", "roomId", "material", "assignment"],
+      [
+        "kind",
+        "cancelledAt",
+        "completedAt",
+        "roomId",
+        "material",
+        "assignment",
+      ],
     ) ||
     value.id !== id ||
     !issued(id, "construction-", next) ||
@@ -97,7 +106,9 @@ function planShape(
     value.staging.domainId !== housingPoint(value.neighborId, 0).domainId ||
     sameSpatialPoint(value.source, value.staging) ||
     !integer(value.createdAt, 480, now) ||
-    value.requiredWood !== constructionWood ||
+    (Object.hasOwn(value, "kind") && value.kind !== "insulation") ||
+    value.requiredWood !==
+      (value.kind === "insulation" ? 1 : constructionWood) ||
     value.workMinutes !== constructionWorkMinutes ||
     !integer(value.workedMinutes, 0, constructionWorkMinutes) ||
     (value.workedMinutes > 0 &&
@@ -109,8 +120,10 @@ function planShape(
     (value.status === "completed"
       ? !integer(value.completedAt, value.createdAt + value.workMinutes, now) ||
         typeof value.roomId !== "string" ||
-        !/^room-[1-9]\d*$/.test(value.roomId) ||
-        value.roomId === value.neighborId ||
+        (value.kind === "insulation"
+          ? value.roomId !== value.neighborId
+          : !/^room-[1-9]\d*$/.test(value.roomId) ||
+            value.roomId === value.neighborId) ||
         value.workedMinutes !== value.workMinutes ||
         !fields(value.material, ["itemId", "quantity", "state"]) ||
         value.material.state !== "consumed"
@@ -127,7 +140,7 @@ function planShape(
       !fields(m, ["itemId", "quantity", "state"]) ||
       m.itemId !==
         "construction-material-" + id.slice("construction-".length) ||
-      m.quantity !== constructionWood ||
+      m.quantity !== value.requiredWood ||
       (m.state !== "present" &&
         !(m.state === "returned" && value.status === "cancelled") &&
         !(m.state === "consumed" && value.status === "completed"))
@@ -323,13 +336,33 @@ export function validConstructionRelations(
     return !workers.length && !Object.keys(h.state.items).length;
   const ledger = h.construction;
   const completedRoomIds: string[] = [];
+  const insulated = new Set<string>();
+  const futureRooms = new Set(
+    Object.values(ledger.plans)
+      .filter((p) => !p.kind && p.status === "completed")
+      .map((p) => p.roomId!),
+  );
   let lastEnd = 480,
     items = 0,
     assigned = 0;
   // Records are retained and issued once. Only the latest can still hold the work site.
   for (let serial = 1; serial < ledger.nextId; serial++) {
     const p = ledger.plans["construction-" + serial];
-    if (p.status === "completed") completedRoomIds.push(p.roomId!);
+    if (p.kind === "insulation") {
+      if (
+        !isIndoorHousingRoom(g, p.neighborId) ||
+        futureRooms.has(p.neighborId) ||
+        insulated.has(p.neighborId)
+      )
+        return false;
+      if (p.status === "completed") insulated.add(p.neighborId);
+    } else {
+      if (!g.house.rooms.some((room) => room.id === p.neighborId)) return false;
+      if (p.status === "completed") {
+        completedRoomIds.push(p.roomId!);
+        futureRooms.delete(p.roomId!);
+      }
+    }
     if (
       p.createdAt < lastEnd ||
       (unresolvedConstruction(p) && serial !== ledger.nextId - 1) ||

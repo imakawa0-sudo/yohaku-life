@@ -19,13 +19,14 @@ export type ConstructionInspection = {
   minutes: number | null;
 };
 export type RoomConstruction = {
+  kind?: "insulation";
   id: string;
   name: string;
   neighborId: string;
   source: SpatialPoint;
   staging: SpatialPoint;
   createdAt: number;
-  requiredWood: typeof constructionWood;
+  requiredWood: typeof constructionWood | 1;
   workMinutes: typeof constructionWorkMinutes;
   workedMinutes: number;
   status: "planned" | "cancelled" | "completed";
@@ -34,7 +35,7 @@ export type RoomConstruction = {
   cancelledAt?: number;
   material?: {
     itemId: string;
-    quantity: typeof constructionWood;
+    quantity: typeof constructionWood | 1;
     state: "present" | "returned" | "consumed";
   };
   assignment?: { actorId: string; orderId: string } & (
@@ -46,3 +47,8 @@ export type HousingConstruction = {
   nextId: number;
   plans: Record<string, RoomConstruction>;
 };
+
+export function constructionTitle(plan: RoomConstruction): string {
+  const work = plan.kind === "insulation" ? "寒さ対策" : "増築";
+  return `「${plan.name}」の${work}`;
+}

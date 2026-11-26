@@ -14,6 +14,7 @@
     "test:ui:bed-preference": "node scripts/verify-bed-preference.mjs",
     "test:ui:cooking-selection": "node scripts/verify-cooking-selection.mjs",
     "test:room-use": "node scripts/verify-room-use.mjs",
+    "test:insulation": "node scripts/verify-insulation.mjs",
     "test:construction": "node scripts/verify-construction.mjs",
     "test:daytrip": "node scripts/verify-daytrip.mjs",
     "test:recruitment": "node scripts/verify-recruitment.mjs",

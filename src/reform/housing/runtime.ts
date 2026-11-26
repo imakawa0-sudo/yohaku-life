@@ -1,3 +1,4 @@
+import { constructionTitle } from "./constructionTypes";
 import { isBedPreferences, prunePreferredBeds } from "./bedPreference";
 import {
   validConstructionRelations,
@@ -682,16 +683,19 @@ export function completeRoomConstruction(
   const position = game.housing!.state.items[plan.material.itemId].position;
   if (position.kind !== "at" || !sameSpatialPoint(position.point, plan.staging))
     return { game, error: "仮置き場に工事用の木材が必要です。" };
-  if (!Number.isSafeInteger(game.house.nextId + 1))
+  if (!plan.kind && !Number.isSafeInteger(game.house.nextId + 1))
     return {
       game,
       error: "新しい部屋の番号を発行できないため、完成を反映できません。",
     };
-  const house = editHouse(game.house, {
-    type: "room",
-    name: plan.name,
-    neighbor: plan.neighborId,
-  });
+  const house =
+    plan.kind === "insulation"
+      ? game.house
+      : editHouse(game.house, {
+          type: "room",
+          name: plan.name,
+          neighbor: plan.neighborId,
+        });
   const result = applyHouseShape(game, house, (candidate) => {
     const h = candidate.housing!,
       finished = h.construction!.plans[planId];
@@ -699,13 +703,15 @@ export function completeRoomConstruction(
     delete h.state.items[material.itemId];
     material.state = "consumed";
     finished.status = "completed";
-    finished.roomId = house.rooms.at(-1)!.id;
+    finished.roomId =
+      plan.kind === "insulation" ? plan.neighborId : house.rooms.at(-1)!.id;
     finished.completedAt = candidate.time;
   });
   if (result.error) return result;
   logHouseChange(
     result.game,
-    "「" + plan.name + "」の増築が完成した（工事用木材6を使用）",
+    constructionTitle(plan) +
+      `が完成した（工事用木材${plan.requiredWood}を使用）`,
   );
   return { game: result.game, planId };
 }

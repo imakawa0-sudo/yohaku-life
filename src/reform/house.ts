@@ -1,3 +1,6 @@
+export const roomWidth = 4;
+export const maxRoomHeight = 7;
+
 export type Need =
   "hunger" | "bladder" | "hygiene" | "energy" | "social" | "fun";
 export const needs: Need[] = [
@@ -142,7 +145,7 @@ const PASSAGE_COST = 2;
 export const fixtureKinds = Object.keys(furnishings) as FixtureKind[];
 
 function emptyRoom(id: string, name: string): Room {
-  return { id, name, width: 4, height: 3, walls: [], doors: [], fixtures: [] };
+  return { id, name, width: roomWidth, height: 3, walls: [], doors: [], fixtures: [] };
 }
 
 export function initialHouse(): House {
@@ -388,7 +391,7 @@ export function editHouse(previous: House, edit: Edit): House {
     if (edit.type === "move") place(byId(edit.room), fixture, edit.cell);
   } else if (edit.type === "expand") {
     const room = byId(edit.room);
-    if (room.height >= 7) throw Error("この部屋は最大の広さです。");
+    if (room.height >= maxRoomHeight) throw Error("この部屋は最大の広さです。");
     room.height++;
   } else {
     const room = byId(edit.room);
@@ -449,17 +452,17 @@ export function isHouse(value: unknown): value is House {
       roomIds.has(room.id) ||
       typeof room.name !== "string" ||
       !room.name.trim() ||
-      room.width !== 4 ||
+      room.width !== roomWidth ||
       typeof room.height !== "number" ||
       !Number.isInteger(room.height) ||
       room.height < 3 ||
-      room.height > 7 ||
+      room.height > maxRoomHeight ||
       !Array.isArray(room.fixtures)
     )
       return false;
     roomIds.add(room.id);
     rememberSequence(room.id);
-    const count = 4 * room.height;
+    const count = roomWidth * room.height;
     if (!cellsInBounds(room.walls, count) || !cellsInBounds(room.doors, count))
       return false;
     const used = new Set([...room.walls, ...room.doors]);

@@ -19,6 +19,7 @@ import { Setup } from "./Setup";
 import { WorldView } from "./RegionView";
 import { places } from "./world";
 import { HouseEditor } from "./HouseEditor";
+import { InsulationPanel } from "./InsulationPanel";
 import { ConstructionPanel } from "./ConstructionPanel";
 import { applyHousingHouseEdit } from "./housing/runtime";
 import { HousingUpgrade } from "./HousingPanel";
@@ -374,6 +375,11 @@ export default function ReformApp() {
           </div>
           <ConstructionPanel
             key={`construction:${slot?.id}`}
+            game={game}
+            onGame={update}
+          />
+          <InsulationPanel
+            key={`insulation:${slot?.id}`}
             game={game}
             onGame={update}
           />

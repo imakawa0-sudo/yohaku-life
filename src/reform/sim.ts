@@ -1,3 +1,4 @@
+import { homeColdProtection } from "./housing/coldProtection";
 import {
   cancelConstructionActor,
   finishConstructionMinute,
@@ -1693,6 +1694,10 @@ function advanceMinute(g: Game): boolean {
     }
   }
   const releasedReturns = prepareConstructionMinute(g);
+  // Crossing a doorway cannot retroactively change exposure during that minute.
+  const protectedActors = new Set(
+    g.actors.filter((a) => homeColdProtection(g, a)).map((a) => a.person.id),
+  );
   const spatialMinutes = g.housing
     ? advanceHousingMinute(g, heldGatheringOrders(g))
     : undefined;
@@ -1705,7 +1710,7 @@ function advanceMinute(g: Game): boolean {
     const moving = metric === "travel";
     const frost =
       day(g) >= places(g.world).find((p) => p.id === a.location)!.frost &&
-      (a.location !== g.home || !g.insulated);
+      !protectedActors.has(a.person.id);
     for (const k of needKeys) {
       let rate = decay[k];
       if (k === "energy" && moving) rate *= 1.45;
