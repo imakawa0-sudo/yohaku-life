@@ -1,4 +1,4 @@
-import { facilityLabel } from "./facilityLabel";
+import { bedChoiceLabel, facilityLabel } from "./facilityLabel";
 import {
   furnishings,
   isBasicWoodwork,
@@ -7,10 +7,7 @@ import {
   type Need,
 } from "./house";
 import { foodBundleStatus } from "./housing/foodPresentation";
-import {
-  bedProtectionLabel,
-  bedProtectionPreview,
-} from "./housing/coldProtection";
+import { bedProtectionPreview } from "./housing/coldProtection";
 import { getPreferredBed } from "./housing/bedPreference";
 import {
   inspectOrder,
@@ -190,8 +187,9 @@ export function FacilityAction({
         {missing && <option value={selectedId}>{missingFacility}</option>}
         {fixtures.map(({ room, fixture }) => (
           <option key={fixture.id} value={fixture.id}>
-            {facilityLabel(rooms, room, fixture.kind, fixture.cell)}
-            {need === "energy" && " · " + bedProtectionLabel(game, room.id)}
+            {need === "energy"
+              ? bedChoiceLabel(game, room, fixture)
+              : facilityLabel(rooms, room, fixture.kind, fixture.cell)}
           </option>
         ))}
       </select>

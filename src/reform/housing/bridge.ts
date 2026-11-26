@@ -1,7 +1,7 @@
 import { prepareFoodMinute } from "./foodProgress";
 import { foodCookingSeat, planFoodCooking } from "./foodCooking";
 import { refreshFoodHandling } from "./food";
-import { getPreferredBed } from "./bedPreference";
+import { getBedSleeper, getPreferredBed } from "./bedPreference";
 import { refreshConstructionHandling } from "./constructionTopology";
 import { releaseRevokedConstructionWorkers } from "./constructionProgress";
 import { furnishings, type Need } from "../house";
@@ -250,14 +250,21 @@ export function spatialReasonText(reason: SpatialReason): string {
   }
 }
 
-function unavailableUseReason(reasons: ReadonlySet<SpatialReason>): string {
+type UseReason = SpatialReason | "assigned-bed";
+
+function unavailableUseReason(reasons: ReadonlySet<UseReason>): string {
+  const hasAssignedBed = reasons.has("assigned-bed");
+  if (hasAssignedBed && reasons.size === 1) return "ほかの住人専用の寝床です。";
   for (const reason of [
     "use-denied",
     "entry-denied",
     "reserved",
     "physical-block",
   ] as const)
-    if (reasons.has(reason)) return spatialReasonText(reason);
+    if (reasons.has(reason)) {
+      const detail = spatialReasonText(reason);
+      return hasAssignedBed ? "ほかの住人専用の寝床があります。" + detail : detail;
+    }
   return "使える設備の使用位置がありません。家具の隣に入口から届く床が必要です。";
 }
 
@@ -334,9 +341,9 @@ export function planHousing(
       .map((b) => b.task!.station),
   );
   const claimedSeat = foodCookingSeat(g);
-  const reasons = new Set<SpatialReason>();
-  const preferredReasons = new Set<SpatialReason>();
-  const recordUnavailable = (reason: SpatialReason, preferred: boolean) => {
+  const reasons = new Set<UseReason>();
+  const preferredReasons = new Set<UseReason>();
+  const recordUnavailable = (reason: UseReason, preferred: boolean) => {
     reasons.add(reason);
     if (preferred) preferredReasons.add(reason);
   };
@@ -348,6 +355,13 @@ export function planHousing(
     const f = furnishings[slot.kind];
     if (f.need !== need || (work && slot.seat !== 0)) continue;
     const preferred = slot.fixtureId === preferredFixtureId;
+    if (need === "energy") {
+      const sleeper = getBedSleeper(g, slot.fixtureId);
+      if (sleeper !== undefined && sleeper !== id) {
+        recordUnavailable("assigned-bed", preferred);
+        continue;
+      }
+    }
     if (
       slot.id === claimedSeat ||
       legacySeats.has(legacyHousingStation(slot)) ||

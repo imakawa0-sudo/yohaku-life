@@ -503,6 +503,209 @@ async function normal(page) {
   );
 }
 
+async function savedGame(page) {
+  await settled(page);
+  return page.evaluate((key) => {
+    const book = JSON.parse(localStorage.getItem(key));
+    return book.slots.find((slot) => slot.id === book.activeId).game;
+  }, library.LIBRARY_KEY);
+}
+
+async function finishResidentTask(page, actorId) {
+  const before = await savedGame(page);
+  const task = before.actors.find((actor) => actor.person.id === actorId).task;
+  assert.ok(task);
+  for (let step = 0; step < 12; step++) {
+    await click(page, "次の行動完了まで進める");
+    const game = await savedGame(page);
+    if (!game.actors.find((actor) => actor.person.id === actorId).task)
+      return game;
+  }
+  assert.fail("指定した住人が予定を完了していません");
+}
+
+async function assignmentControls(page, resident, fixtureId) {
+  await openPolicy(page, resident);
+  const summary = page
+    .locator("summary")
+    .filter({ hasText: "寝床を使える住人" });
+  const details = summary.locator("..");
+  if (!(await details.evaluate((el) => el.open))) await summary.click();
+  await details
+    .getByRole("combobox", { name: "設定する寝床", exact: true })
+    .selectOption(fixtureId);
+  return {
+    details,
+    owner: details.getByRole("combobox", {
+      name: "利用できる住人",
+      exact: true,
+    }),
+    save: button(details, "利用設定を保存"),
+  };
+}
+
+async function sharedBedroom(page, width) {
+  await page.setViewportSize({ width, height: width === 320 ? 844 : 900 });
+  await click(page, "木工の二人");
+  await click(page, "この朝を始める");
+  const start = await savedGame(page);
+  const [first, second] = start.actors.map((a) => a.person);
+  const mat = "mat-1";
+  const roster = page.getByRole("group", { name: "住民を選ぶ" });
+  const pickResident = async (person) => {
+    await button(roster, person.name).click();
+    await settled(page);
+  };
+  await click(page, "住まい");
+  const houseEditor = page.getByRole("region", { name: "住まいの間取り" });
+  await button(houseEditor, "寝室").click();
+  for (const kind of ["bed", "shelf"]) {
+    await houseEditor
+      .getByLabel("新しく置く設備", { exact: true })
+      .selectOption(kind);
+    await button(houseEditor, "この部屋に置く").click();
+    await settled(page);
+  }
+  const furnished = await savedGame(page);
+  const room = furnished.house.rooms.find((r) => r.id === "bedroom");
+  const bed = room.fixtures.find((f) => f.kind === "bed");
+  const shelf = room.fixtures.find((f) => f.kind === "shelf");
+  assert.ok(bed && shelf);
+  const station = (fixtureId) => topology.housingSlotId(room.id, fixtureId, 0);
+  await click(page, "暮らし");
+  await pickResident(second);
+  await setBed(page, second.name, mat);
+  const baseline = await savedGame(page);
+  let policy = await assignmentControls(page, second.name, mat);
+  await expect(policy.owner).toHaveValue("");
+  await policy.owner.selectOption(first.id);
+  assert.deepEqual(await savedGame(page), baseline);
+  await policy.save.click();
+  const assigned = await savedGame(page);
+  assert.equal(assigned.time, start.time);
+  assert.equal(assigned.wood, furnished.wood);
+  assert.deepEqual(assigned.housing.controls, furnished.housing.controls);
+  await expect(policy.details.getByRole("status")).toContainText(
+    first.name + "専用",
+  );
+  await policy.owner.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  const policyBounds = await policy.details.boundingBox();
+  assert.ok(
+    policyBounds &&
+      policyBounds.x >= 0 &&
+      policyBounds.x + policyBounds.width <= width + 1,
+  );
+  assert.ok(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+    ),
+  );
+  const policyImage = resolve(output, "assigned-policy-" + width + ".png");
+  await page.screenshot({ path: policyImage });
+  report.screenshots.push({ width, path: policyImage });
+  await page.reload();
+  assert.deepEqual(await savedGame(page), assigned);
+  await click(page, "暮らし");
+  await pickResident(second);
+  await expect(restHint(page)).toContainText("ほかの住人専用の寝床です。");
+  await expect(restHint(page)).toContainText(fallbackCopy);
+  await restChoice(page).selectOption(mat);
+  await expect(restAction(page)).toBeDisabled();
+  await expect(restHint(page)).toHaveText("ほかの住人専用の寝床です。");
+  const blocked = restAction(page).locator("..");
+  await blocked.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  assert.ok(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+    ),
+  );
+  const capture = resolve(output, "assigned-unavailable-" + width + ".png");
+  await page.screenshot({ path: capture });
+  report.screenshots.push({ width, path: capture });
+  await restChoice(page).selectOption("");
+
+  // Keep the first resident in the living room while the second travels and reads.
+  await pickResident(first);
+  const commands = page.getByRole("region", { name: "行動の指示" });
+  await button(commands, "仕事").click();
+  await commands
+    .locator('button[data-kind="work"][data-target="wood"]')
+    .click();
+  await settled(page);
+  await pickResident(second);
+  await click(page, "寝室の入口へ移動");
+  const arrival = await finishResidentTask(page, second.id);
+  assert.equal(arrival.actors[1].room, room.id);
+  await button(commands, "生活").click();
+  const reading = button(commands, "好きなことをして休む");
+  await reading.locator("..").getByRole("combobox").selectOption(shelf.id);
+  await reading.click();
+  const readingStarted = await savedGame(page);
+  assert.equal(readingStarted.actors[1].task.station, station(shelf.id));
+  const read = await finishResidentTask(page, second.id);
+  assert.ok(read.actors[1].needs.fun > readingStarted.actors[1].needs.fun);
+
+  // The owner can book the mat, while the other resident books the other bed.
+  await pickResident(first);
+  await button(commands, "生活").click();
+  await restChoice(page).selectOption(mat);
+  await restAction(page).click();
+  await settled(page);
+  await pickResident(second);
+  await button(commands, "生活").click();
+  await restChoice(page).selectOption("");
+  await restAction(page).click();
+  const sleeping = await savedGame(page);
+  assert.deepEqual(
+    sleeping.actors.map((a) => a.task.station),
+    [station(mat), station(bed.id)],
+  );
+  await click(page, "5分進める");
+  const partial = await savedGame(page);
+  await page.reload();
+  assert.deepEqual(await savedGame(page), partial);
+  await click(page, "暮らし");
+  await pickResident(second);
+  for (const ownerId of [second.id, ""]) {
+    policy = await assignmentControls(page, second.name, mat);
+    const before = await savedGame(page);
+    await policy.owner.selectOption(ownerId);
+    assert.deepEqual(await savedGame(page), before);
+    await policy.save.click();
+    const after = await savedGame(page);
+    assert.deepEqual(after.actors, before.actors);
+    assert.deepEqual(after.housing.state, before.housing.state);
+    assert.equal(after.time, before.time);
+    await page.reload();
+    assert.deepEqual(await savedGame(page), after);
+    await click(page, "暮らし");
+    await pickResident(second);
+    policy = await assignmentControls(page, second.name, mat);
+    await expect(policy.owner).toHaveValue(ownerId);
+    await expect(policy.details).toContainText(
+      ownerId ? second.name + "専用" : "全員で共用",
+    );
+  }
+  await expect(
+    restChoice(page).locator('option[value="mat-1"]'),
+  ).not.toContainText("専用");
+  const cleared = await savedGame(page);
+  const finished = await finishResidentTask(page, first.id);
+  assert.equal(finished.actors[0].room, room.id);
+  assert.ok(finished.actors[0].needs.energy > cleared.actors[0].needs.energy);
+  report.normal.push({
+    width,
+    sharedBedroom: room.name,
+    owner: first.name,
+    other: second.name,
+    entrance: arrival.time,
+    readUntil: read.time,
+    beds: sleeping.actors.map((a) => a.task.station),
+    clearedAt: cleared.time,
+    finished: finished.time,
+  });
+}
+
 async function controlledStart(page, key, manifest) {
   const fixture = manifest.cases[key];
   const imported = library.importSlot(
@@ -645,6 +848,9 @@ try {
       args: ["--no-sandbox"],
     });
     report.status = "running-ui";
+    for (const width of [1280, 320]) {
+      await inContext(browser, html, (page) => sharedBedroom(page, width));
+    }
     await inContext(browser, html, normal);
     for (const run of [competition, inaccessible, active]) {
       await inContext(browser, html, (page) => run(page, manifest));
