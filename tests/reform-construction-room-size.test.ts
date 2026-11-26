@@ -7,12 +7,18 @@ import { editHouse } from "../src/reform/house";
 import {
   cancelRoomConstruction,
   createRoomConstruction,
+  inspectConstructionHaul,
+  reviseRoomConstruction,
   reclaimConstructionMaterial,
   reserveConstructionMaterial,
 } from "../src/reform/housing/construction";
 import type { ConstructionRequest } from "../src/reform/housing/constructionTypes";
 import { createRoomInsulation } from "../src/reform/housing/insulation";
 import { applyHousingHouseEdit } from "../src/reform/housing/runtime";
+import {
+  constructionSlotId,
+  housingPoint,
+} from "../src/reform/housing/topology";
 import { importSlot, exportSlot } from "../src/reform/library";
 import {
   advance,
@@ -266,4 +272,185 @@ test("the construction screen offers both sizes and displays the chosen 4×4 pla
     render(done),
     /計画時の仕様　4 × 4マス（16マス）・木材10・施工30分/,
   );
+});
+
+test("a free revision updates only the existing unpaid plan and staging slot, even with past plans and a busy resident", () => {
+  const origin = morning(9);
+  const cancelled = ok(cancelRoomConstruction(proposed(origin), planId));
+  const next = createRoomConstruction(cancelled, { ...request, height: 4 });
+  const id = next.planId!;
+  assert.notEqual(id, planId);
+  const waiting = advance(order(ok(next), two, "work", "care:hard"), 1);
+  const before = structuredClone(waiting);
+  const earlier = before.housing!.construction!.plans[id];
+  const changed = reviseRoomConstruction(waiting, id, {
+    name: "  道具部屋  ",
+    neighborId: "yard",
+    stagingCell: 2,
+  });
+  const result = ok(changed);
+  const after = result.housing!.construction!.plans[id];
+  assert.equal(after.id, earlier.id);
+  assert.equal(after.createdAt, earlier.createdAt);
+  assert.equal(after.name, "道具部屋");
+  assert.equal(after.neighborId, "yard");
+  assert.equal(Object.hasOwn(after, "height"), false);
+  assert.equal(after.requiredWood, 6);
+  assert.equal(after.workedMinutes, 0);
+  assert.equal(after.workMinutes, 30);
+  assert.deepEqual(after.source, earlier.source);
+  assert.deepEqual(after.staging, housingPoint("yard", 2));
+  assert.deepEqual(
+    result.housing!.state.slots[constructionSlotId(id)].point,
+    after.staging,
+  );
+  assert.deepEqual(
+    result.housing!.construction!.plans[planId],
+    before.housing!.construction!.plans[planId],
+  );
+  assert.equal(
+    result.housing!.construction!.nextId,
+    before.housing!.construction!.nextId,
+  );
+  for (const key of [
+    "house",
+    "actors",
+    "time",
+    "rng",
+    "ingredients",
+    "coins",
+    "food",
+    "wood",
+  ] as const)
+    assert.deepEqual(result[key], before[key]);
+  assert.deepEqual(result.housing!.state.items, before.housing!.state.items);
+  assert.deepEqual(
+    result.housing!.state.reservations,
+    before.housing!.state.reservations,
+  );
+  assert.deepEqual(waiting, before);
+  reload(result, origin);
+  const wall = (room: string) =>
+    editHouse(result.house, { type: "tile", tile: "wall", room, cell: 2 });
+  assert.ok(applyHousingHouseEdit(waiting, wall("bedroom")).error);
+  assert.equal(applyHousingHouseEdit(result, wall("bedroom")).error, undefined);
+  assert.ok(applyHousingHouseEdit(result, wall("yard")).error);
+  assert.equal(ok(reserveConstructionMaterial(result, id)).wood, 3);
+});
+
+test("a revised standard plan delivers the new wide room at the revised location and price after import", () => {
+  const origin = morning();
+  const normal = proposed(origin);
+  const replacement = {
+    name: "仕分け室",
+    height: 4,
+    neighborId: "yard",
+    stagingCell: 2,
+  } as const;
+  const revised = reload(
+    ok(reviseRoomConstruction(normal, planId, replacement)),
+    origin,
+  );
+  assert.equal(plan(revised).requiredWood, 10);
+  const reserved = ok(reserveConstructionMaterial(revised, planId));
+  assert.equal(reserved.wood, origin.wood - 10);
+  assert.equal(plan(reserved).material?.quantity, 10);
+  const deliveryMinutes = inspectConstructionHaul(
+    reserved,
+    planId,
+    one,
+    "deliver",
+  ).minutes!;
+  const delivered = advance(
+    order(hauling(reserved), two, "work", "care:hard"),
+    deliveryMinutes,
+  );
+  assert.deepEqual(bundle(delivered).position, {
+    kind: "at",
+    point: housingPoint("yard", 2),
+  });
+  const done = advance(building(delivered), 30);
+  const finished = plan(done);
+  assert.equal(finished.status, "completed");
+  assert.equal(finished.height, 4);
+  assert.equal(finished.material?.state, "consumed");
+  assert.equal(done.wood, origin.wood - 10);
+  assert.equal(done.time, origin.time + deliveryMinutes + 30);
+  const room = done.house.rooms.find((r) => r.id === finished.roomId)!;
+  assert.equal(room.name, replacement.name);
+  assert.equal(room.height, 4);
+  assert.ok(
+    done.house.links.some(
+      (pair) => pair.includes(room.id) && pair.includes("yard"),
+    ),
+  );
+  assert.equal(done.house.rooms.length, origin.house.rooms.length + 1);
+  reload(done, origin);
+});
+
+test("bad edits and revisions after material reservation, work, cancellation, completion or insulation leave every receipt intact", () => {
+  const origin = morning();
+  const states = phases(origin, 4);
+  const cancelled = ok(cancelRoomConstruction(states.pending, planId));
+  const needsReturn = ok(cancelRoomConstruction(states.staged, planId));
+  const returning = hauling(needsReturn, one, "return");
+  const insulation = ok(
+    createRoomInsulation(origin, { roomId: "bedroom", stagingCell: 2 }),
+  );
+  const badRequests = [
+    { ...request, height: 5 },
+    { ...request, width: 5 },
+    { ...request, name: " " },
+    { ...request, name: "室".repeat(25) },
+    { ...request, neighborId: "missing" },
+    { ...request, neighborId: "living", stagingCell: 0 },
+    { ...request, stagingCell: 10 },
+  ];
+  function rejects(game: Game, id: string, edit: ConstructionRequest) {
+    const before = JSON.stringify(game);
+    const result = reviseRoomConstruction(game, id, edit);
+    assert.ok(result.error);
+    assert.equal(result.game, game);
+    assert.equal(JSON.stringify(game), before);
+  }
+  for (const invalid of badRequests)
+    rejects(states.pending, planId, invalid as ConstructionRequest);
+  rejects(states.pending, "missing", request);
+  for (const game of [
+    origin,
+    states.reserved,
+    states.assigned,
+    states.carrying,
+    states.staged,
+    states.active,
+    states.last,
+    states.done,
+    cancelled,
+    needsReturn,
+    returning,
+    insulation,
+  ])
+    rejects(game, planId, request);
+});
+
+test("the construction screen offers revision only for a live unpaid room addition", () => {
+  const origin = morning();
+  const states = phases(origin);
+  const render = (game: Game) =>
+    renderToStaticMarkup(
+      createElement(ConstructionPanel, {
+        game,
+        onGame: () => assert.fail("render issued an order"),
+      }),
+    );
+  assert.match(render(states.pending), /<button[^>]*>計画を見直す<\/button>/);
+  for (const state of [
+    origin,
+    states.reserved,
+    states.active,
+    states.done,
+    ok(cancelRoomConstruction(states.pending, planId)),
+    ok(createRoomInsulation(origin, { roomId: "bedroom", stagingCell: 2 })),
+  ])
+    assert.doesNotMatch(render(state), /<button[^>]*>計画を見直す<\/button>/);
 });

@@ -346,7 +346,7 @@ async function ordinaryBuild(page) {
     "木工の二人の新規作成、計画・取り置き、カヤの実搬入、スイの実施工、4×3の完成室への移動と浴槽の使用、施工途中と完成後の書出し・再読込",
   );
 }
-async function wideWorkshop(page, width) {
+async function planLargeWorkshop(page, width, capturePlan) {
   await page.setViewportSize({ width, height: width === 320 ? 844 : 900 });
   const room = "広い木工室";
   const origin = (await startWoodworkers(page)).game;
@@ -369,11 +369,13 @@ async function wideWorkshop(page, width) {
   await expect(section).toContainText(quote);
   await destination.selectOption("bedroom");
   await site.selectOption("2");
-  await screenshot(
-    page,
-    "large-plan-" + width + ".png",
-    button(section, "計画する"),
-  );
+  if (capturePlan) {
+    await screenshot(
+      page,
+      "large-plan-" + width + ".png",
+      button(section, "計画する"),
+    );
+  }
   assert.deepEqual(await readGame(page), before);
   await click(page, "計画する", section);
   const project = card(page, room);
@@ -387,7 +389,12 @@ async function wideWorkshop(page, width) {
   await expect(reserve).toBeDisabled();
   await expect(project).toContainText("共同備蓄に木材10が必要です。");
   await expect(project).toContainText(quote);
+  return { before, editor, planned, project, quote, room };
+}
 
+async function wideWorkshop(page, width) {
+  const { before, editor, planned, project, quote, room } =
+    await planLargeWorkshop(page, width, true);
   const worker = before.actors[0].person;
   await click(page, "暮らし");
   const workPanel = page.getByRole("region", { name: "行動の指示" });
@@ -488,6 +495,116 @@ async function wideWorkshop(page, width) {
   });
 }
 
+async function reviseLargeWorkshop(page, width) {
+  const { before, editor, planned, project, room } = await planLargeWorkshop(
+    page,
+    width,
+    false,
+  );
+  const editedName = "居間に続く読書室";
+  const form = page.getByRole("form", {
+    name: "増築計画を見直す",
+    exact: true,
+  });
+  const name = form.getByRole("textbox", {
+    name: "増築する部屋の名前",
+    exact: true,
+  });
+  const size = select(form, "増築する部屋の広さ");
+  const destination = select(form, "接続先");
+  const floorChoice = select(form, "仮置き床");
+  for (const shouldSave of [false, true]) {
+    await click(page, "計画を見直す", project);
+    await expect(name).toHaveValue(room);
+    await expect(size).toHaveValue("4");
+    await expect(destination).toHaveValue("bedroom");
+    await expect(floorChoice).toHaveValue("2");
+    await expect(button(form, "変更を保存")).toBeDisabled();
+    await name.fill(editedName);
+    await size.selectOption("3");
+    await destination.selectOption("living");
+    await expect(floorChoice).toHaveValue("");
+    await expect(button(form, "変更を保存")).toBeDisabled();
+    await floorChoice.selectOption("1");
+    await expect(form).toContainText("4 × 3マス（12マス）・木材6・施工30分");
+    assert.deepEqual(await readGame(page), planned);
+    if (shouldSave) {
+      await screenshot(
+        page,
+        "revised-plan-" + width + ".png",
+        button(form, "変更を保存"),
+      );
+      await click(page, "変更を保存", form);
+    } else {
+      await click(page, "変更せず戻る", form);
+      assert.deepEqual(await readGame(page), planned);
+      await expect(button(project, "木材10を取り置く")).toBeDisabled();
+    }
+  }
+  const changed = await readSlot(page);
+  const revision = plan(changed.game);
+  assert.deepEqual(Object.keys(changed.game.housing.construction.plans), [
+    plan(planned).id,
+  ]);
+  assert.equal(revision.id, plan(planned).id);
+  assert.equal(revision.createdAt, plan(planned).createdAt);
+  assert.equal(revision.name, editedName);
+  assert.equal(revision.neighborId, "living");
+  assert.equal(revision.requiredWood, 6);
+  assert.equal(revision.height ?? 3, 3);
+  assert.deepEqual(revision.staging, housingPoint("living", 1));
+  assert.equal(changed.game.wood, 9);
+  assert.equal(changed.game.time, before.time);
+  assert.deepEqual(changed.game.house, before.house);
+  await reload(page, changed);
+  await click(page, "住まい");
+  const revisedCard = card(page, editedName);
+  await click(page, "木材6を取り置く", revisedCard);
+  const reserved = await readGame(page);
+  assert.equal(reserved.wood, 3);
+  assert.equal(plan(reserved).material.quantity, 6);
+  assert.equal(reserved.time, before.time);
+  await expect(button(revisedCard, "計画を見直す")).toHaveCount(0);
+  const worker = before.actors[0].person.id;
+  await select(revisedCard, "搬入担当").selectOption(worker);
+  await click(page, "仮置き場へ運ぶ", revisedCard);
+  const staged = await runUntil(page, (g) => !plan(g).assignment);
+  assert.deepEqual(bundle(staged).position, floor("living", 1));
+  await select(revisedCard, "施工担当").selectOption(worker);
+  await click(page, "施工する", revisedCard);
+  const built = await runUntil(page, (g) => plan(g).status === "completed");
+  const final = plan(built);
+  assert.equal(final.workedMinutes, 30);
+  assert.equal(final.material.quantity, 6);
+  assert.equal(final.material.state, "consumed");
+  const actualRoom = built.house.rooms.find((r) => r.id === final.roomId);
+  assert.deepEqual(
+    [actualRoom.name, actualRoom.width, actualRoom.height],
+    [editedName, 4, 3],
+  );
+  const links = built.house.links.filter((pair) => pair.includes(final.roomId));
+  assert.equal(links.length, 1);
+  assert.ok(links[0].includes("living"));
+  await click(page, editedName, editor);
+  await editor
+    .locator("summary")
+    .filter({ hasText: "室内のマスを編集" })
+    .click();
+  await expect(editor.locator(".yh-house-blueprint button")).toHaveCount(12);
+  await expect(button(editor, "4列3行　床")).toBeVisible();
+  await expect(button(editor, "4列4行　床")).toHaveCount(0);
+  report.normal.push({
+    width,
+    revision: revision.id,
+    initial: room,
+    revised: editedName,
+    stockAfterReservation: reserved.wood,
+    roomWidth: actualRoom.width,
+    roomHeight: actualRoom.height,
+    staging: revision.staging,
+    completedAt: built.time,
+  });
+}
 async function verifySlotIsolation(page, saved, room) {
   await click(page, "住まい");
   const { section, destination, site } = await enterPlanning(
@@ -698,6 +815,7 @@ try {
   report.launched = true;
   for (const width of [1280, 320]) {
     await inFreshContext((page) => wideWorkshop(page, width));
+    await inFreshContext((page) => reviseLargeWorkshop(page, width));
   }
   await inFreshContext(ordinaryBuild);
   await inFreshContext(ordinaryCancel);

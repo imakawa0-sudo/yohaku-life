@@ -52,6 +52,16 @@ export type HousingConstruction = {
   plans: Record<string, RoomConstruction>;
 };
 
+export function canReviseRoomConstruction(plan: RoomConstruction): boolean {
+  return (
+    plan.kind === undefined &&
+    plan.status === "planned" &&
+    !plan.material &&
+    !plan.assignment &&
+    plan.workedMinutes === 0
+  );
+}
+
 export function constructionTitle(plan: RoomConstruction): string {
   const work = plan.kind === "insulation" ? "寒さ対策" : "増築";
   return `「${plan.name}」の${work}`;
