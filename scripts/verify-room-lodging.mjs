@@ -306,123 +306,176 @@ export async function verifyRoomLodging(
     await expect(button(house, "寝室の入口へ移動")).toBeDisabled();
     await reload(gone);
 
-    if (width === 1280) {
-      // Replay the unmodified trip through a door closed by its provider before arrival.
-      await snapshot("閉じた帰宅路", away, origin);
-      await choose(owner);
-      await showSection(house, "通路と扉");
-      await house
-        .getByRole("button", {
-          name: /居間と寝室の通路を閉める|寝室と居間の通路を閉める/,
-        })
-        .click();
-      const blocked = await returnHome();
-      assert.equal(blocked.actors[1].room, "living");
-      assert.equal(blocked.actors[1].task, null);
-      assert.equal(blocked.housing.lodging.phase, "occupied");
-      await reload(blocked);
-      // Reuse actual resident, luggage, regional journey and approach; vary only the shared stock on arrival.
-      await snapshot("木材を積む前の入居者", talked, origin);
-      await packAndVisitLanding("wood");
-      await choose(resident);
-      await button(actions, "野外").click();
-      await actions.locator('button[data-kind="return"]').click();
-      let approach = await read();
-      while (
-        approach.actors[1].task?.kind === "return" &&
-        approach.actors[1].task.remaining > 5
-      ) {
-        await button(page, "5分進める").click();
-        approach = await read();
-      }
-      assert.equal(approach.actors[1].task.kind, "return");
-      assert.equal(approach.actors[1].cargo.wood, 4);
-      const limit = 1_000_000_000;
-      const nearlyFull = structuredClone(approach);
-      nearlyFull.wood = limit - 2;
-      await snapshot("共有木材に二つだけ空きがある帰路", nearlyFull, origin);
-      const partlyUnloaded = await advanceUntil(
-        (g) =>
-          g.actors[1].task?.kind === "home-move" &&
-          g.actors[1].room === "living",
-        "木材を積んだ入居者の帰宅",
-      );
-      assert.equal(partlyUnloaded.wood, limit);
-      assert.equal(partlyUnloaded.actors[1].cargo.wood, 2);
-      await reload(partlyUnloaded);
-      const atRoom = await advanceUntil(
-        (g) => !g.actors[1].task && g.actors[1].room === "bedroom",
-        "残荷を持ったまま自室へ移動",
-      );
-      assert.equal(atRoom.wood, limit);
-      assert.equal(atRoom.actors[1].cargo.wood, 2);
-      await reload(atRoom);
-      await choose(resident);
-      await button(actions, "野外").click();
-      const unload = actions.locator(
-        'button[data-kind="unpack"][data-target="wood"]',
-      );
-      await expect(unload).toBeDisabled();
-      await expect(unload).toHaveAccessibleDescription(/空き/);
-      await tab(page, "住まい");
-      await button(editor, "居間").click();
-      await editor
-        .getByLabel("新しく置く設備", { exact: true })
-        .selectOption("bath");
-      await button(editor, "この部屋に置く").click();
-      const space = await read();
-      assert.equal(space.wood, limit - 8);
-      assert.equal(space.actors[1].cargo.wood, 2);
-      await choose(resident);
-      await button(actions, "野外").click();
-      await unload.click();
-      const stowed = await advanceUntil(
-        (g) => g.actors[1].task?.kind !== "unpack",
-        "残荷二つの手動荷下ろし",
-      );
-      assert.equal(stowed.wood, space.wood + 2);
-      assert.equal(stowed.actors[1].cargo.wood, 0);
-      await reload(stowed);
-      report.checks.push(
-        "通常の地域帰宅の直前に共有木材だけを上限−2へ変更し、実際に運んだ木材4のうち2だけを荷下ろし。居室で残荷2を保持し、再読込・満杯拒否を経て、浴槽に木材8を用いてから残り2だけを手で納めた。",
-      );
-
-      const cargoNearlyFull = structuredClone(chosen);
-      cargoNearlyFull.actors[1].cargo.wood = limit - 2;
-      await snapshot(
-        "携行木材に二つだけ空きがある入居者",
-        cargoNearlyFull,
-        origin,
-      );
-      await choose(resident);
-      await button(actions, "野外").click();
-      const packing = actions.locator(
-        'button[data-kind="pack"][data-target="wood"]',
-      );
-      await expect(packing).toBeDisabled();
-      await expect(packing).toHaveAccessibleDescription(/空き/);
-      assert.deepEqual(await read(), cargoNearlyFull);
-      report.checks.push(
-        "木材4を積む前に携行分に2だけ空きがある条件も、共同備蓄を予約する前に理由を表示した。",
-      );
-
-      const hurt = structuredClone(offered);
-      hurt.actors[1].injury = 75;
-      await snapshot("重傷で承諾ができないとき", hurt, origin);
-      await choose(resident);
-      await expect(button(lodging, "受けて入居する")).toBeDisabled();
-      assert.deepEqual(await read(), hurt);
-      const old = structuredClone(origin);
-      delete old.housing;
-      await snapshot("住居の移動以前の暮らし", old, old);
-      await expect(
-        page.locator('summary[aria-label="一室の間借り"]'),
-      ).toHaveCount(0);
-      await reload(old);
-      report.checks.push(
-        "再現用の保存で、帰宅路閉鎖時は銀貨を一度下ろして玄関で停止、重傷75時は承諾不可、空間住居以前の世帯は入居情報なしで読み込めた。",
-      );
+    // Replay the unmodified trip through a door closed by its provider before arrival.
+    await snapshot("閉じた帰宅路", away, origin);
+    await choose(owner);
+    await showSection(house, "通路と扉");
+    await house
+      .getByRole("button", {
+        name: /居間と寝室の通路を閉める|寝室と居間の通路を閉める/,
+      })
+      .click();
+    const blocked = await returnHome();
+    assert.equal(blocked.actors[1].room, "living");
+    assert.equal(blocked.actors[1].task, null);
+    assert.equal(blocked.housing.lodging.phase, "occupied");
+    await reload(blocked);
+    // Reuse actual resident, luggage, regional journey and approach; vary only the shared stock on arrival.
+    await snapshot("木材を積む前の入居者", talked, origin);
+    await packAndVisitLanding("wood");
+    await choose(resident);
+    await button(actions, "野外").click();
+    await actions.locator('button[data-kind="return"]').click();
+    let approach = await read();
+    while (
+      approach.actors[1].task?.kind === "return" &&
+      approach.actors[1].task.remaining > 5
+    ) {
+      await button(page, "5分進める").click();
+      approach = await read();
     }
+    assert.equal(approach.actors[1].task.kind, "return");
+    assert.equal(approach.actors[1].cargo.wood, 4);
+    const limit = 1_000_000_000;
+    const nearlyFull = structuredClone(approach);
+    nearlyFull.wood = limit - 2;
+    await snapshot("共有木材に二つだけ空きがある帰路", nearlyFull, origin);
+    const partlyUnloaded = await advanceUntil(
+      (g) =>
+        g.actors[1].task?.kind === "home-move" && g.actors[1].room === "living",
+      "木材を積んだ入居者の帰宅",
+    );
+    assert.equal(partlyUnloaded.wood, limit);
+    assert.equal(partlyUnloaded.actors[1].cargo.wood, 2);
+    await reload(partlyUnloaded);
+    const atRoom = await advanceUntil(
+      (g) => !g.actors[1].task && g.actors[1].room === "bedroom",
+      "残荷を持ったまま自室へ移動",
+    );
+    assert.equal(atRoom.wood, limit);
+    assert.equal(atRoom.actors[1].cargo.wood, 2);
+    await reload(atRoom);
+    await choose(resident);
+    await button(actions, "野外").click();
+    const unload = actions.locator(
+      'button[data-kind="unpack"][data-target="wood"]',
+    );
+    await expect(unload).toBeDisabled();
+    await expect(unload).toHaveAccessibleDescription(/空き/);
+    await tab(page, "住まい");
+    await button(editor, "居間").click();
+    await editor
+      .getByLabel("新しく置く設備", { exact: true })
+      .selectOption("bath");
+    await button(editor, "この部屋に置く").click();
+    const space = await read();
+    assert.equal(space.wood, limit - 8);
+    assert.equal(space.actors[1].cargo.wood, 2);
+    await choose(resident);
+    await button(actions, "野外").click();
+    await unload.click();
+    const stowed = await advanceUntil(
+      (g) => g.actors[1].task?.kind !== "unpack",
+      "残荷二つの手動荷下ろし",
+    );
+    assert.equal(stowed.wood, space.wood + 2);
+    assert.equal(stowed.actors[1].cargo.wood, 0);
+    await reload(stowed);
+    report.checks.push(
+      "通常の地域帰宅の直前に共有木材だけを上限−2へ変更し、実際に運んだ木材4のうち2だけを荷下ろし。居室で残荷2を保持し、再読込・満杯拒否を経て、浴槽に木材8を用いてから残り2だけを手で納めた。",
+    );
+
+    const cargoNearlyFull = structuredClone(chosen);
+    cargoNearlyFull.actors[1].cargo.wood = limit - 2;
+    await snapshot(
+      "携行木材に二つだけ空きがある入居者",
+      cargoNearlyFull,
+      origin,
+    );
+    await choose(resident);
+    await button(actions, "野外").click();
+    const packing = actions.locator(
+      'button[data-kind="pack"][data-target="wood"]',
+    );
+    await expect(packing).toBeDisabled();
+    await expect(packing).toHaveAccessibleDescription(/空き/);
+    assert.deepEqual(await read(), cargoNearlyFull);
+    report.checks.push(
+      "木材4を積む前に携行分に2だけ空きがある条件も、共同備蓄を予約する前に理由を表示した。",
+    );
+
+    // Replay a genuine packing order from a legacy save that filled both its source and its bag.
+    await snapshot("積込を始める前の居住者", talked, origin);
+    await choose(resident);
+    await button(actions, "野外").click();
+    await packing.click();
+    const booked = await read();
+    assert.equal(booked.actors[1].task.reserved.wood, 4);
+    const doubleFull = structuredClone(booked);
+    doubleFull.wood = limit;
+    doubleFull.actors[1].cargo.wood = limit;
+    await snapshot("棚と携行が両方満杯の旧積込", doubleFull, origin);
+    await choose(resident);
+    await actions.locator('button[data-kind="cancel"]').click();
+    const deferred = await read();
+    assert.equal(deferred.wood, limit);
+    assert.equal(deferred.actors[1].cargo.wood, limit);
+    assert.deepEqual(deferred.pendingPackReturns, { wood: 4 });
+    const pendingWood = page.getByText(
+      "積み込みから共同備蓄への返却待ち · 木材 4本",
+      { exact: true },
+    );
+    await expect(pendingWood).toBeVisible();
+    await reload(deferred);
+    await expect(pendingWood).toBeVisible();
+    await pendingWood.evaluate((el) => el.scrollIntoView({ block: "center" }));
+    await screenshot(page, "lodging-wood-refund-" + width);
+
+    await choose(other);
+    await button(actions, "野外").click();
+    await packing.click();
+    const rebooked = await read();
+    assert.equal(rebooked.wood, limit);
+    assert.equal(rebooked.pendingPackReturns, undefined);
+    assert.equal(rebooked.actors[2].task.reserved.wood, 4);
+    await expect(pendingWood).toHaveCount(0);
+    await actions.locator('button[data-kind="cancel"]').click();
+    const again = await read();
+    assert.deepEqual(again.pendingPackReturns, { wood: 4 });
+    assert.equal(again.wood, limit);
+    await tab(page, "住まい");
+    await button(editor, "居間").click();
+    await editor
+      .getByLabel("新しく置く設備", { exact: true })
+      .selectOption("bath");
+    await button(editor, "この部屋に置く").click();
+    const paid = await read();
+    assert.equal(paid.wood, limit - 8 + 4);
+    assert.equal(paid.pendingPackReturns, undefined);
+    assert.equal(paid.actors[1].cargo.wood, limit);
+    await reload(paid);
+    await choose(resident);
+    await expect(pendingWood).toHaveCount(0);
+    report.checks.push(
+      "共有棚と携行の両方が満杯の旧積込保存で、木材4は取消後の返却待ち表示と再読込で保たれた。別の人の再予約と取消で量は増えず、浴槽に8を使うと4だけを一度精算した。",
+    );
+
+    const hurt = structuredClone(offered);
+    hurt.actors[1].injury = 75;
+    await snapshot("重傷で承諾ができないとき", hurt, origin);
+    await choose(resident);
+    await expect(button(lodging, "受けて入居する")).toBeDisabled();
+    assert.deepEqual(await read(), hurt);
+    const old = structuredClone(origin);
+    delete old.housing;
+    await snapshot("住居の移動以前の暮らし", old, old);
+    await expect(
+      page.locator('summary[aria-label="一室の間借り"]'),
+    ).toHaveCount(0);
+    await reload(old);
+    report.checks.push(
+      "再現用の保存で、帰宅路閉鎖時は銀貨を一度下ろして玄関で停止、重傷75時は承諾不可、空間住居以前の世帯は入居情報なしで読み込めた。",
+    );
     await checkLegacy(page);
     report.outcomes.push({
       width,
