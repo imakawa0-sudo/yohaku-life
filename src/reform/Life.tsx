@@ -33,6 +33,7 @@ import {
 import type { Skill } from "./peopleModel";
 import { HousingPanel, housingStageNames } from "./HousingPanel";
 import { invitationWithdrawalText } from "./GatheringPanel";
+import { lodgingWalkCancelText } from "./LodgingPanel";
 import { BedAccessPolicy, BedPreferencePolicy } from "./BedPreferencePolicy";
 import {
   FacilityAction,
@@ -357,6 +358,7 @@ function ActionPanel({
       : null;
   const cancelNote =
     invitationWithdrawal ??
+    lodgingWalkCancelText(game, actor) ??
     foodCancel ??
     constructionCancel ??
     recoveryCancel ??
@@ -718,6 +720,7 @@ export function Life({
               status={status}
               invitationWithdrawal={invitationWithdrawal}
               onGame={onGame}
+              onSelect={onSelect}
             />
           )}
           {hasTasks && next === null && (

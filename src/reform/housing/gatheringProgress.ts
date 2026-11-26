@@ -8,7 +8,7 @@ import {
   spatialReasonText,
   type HousingMinute,
 } from "./bridge";
-import { housingSlotId } from "./topology";
+import { effectiveRoomAccess, housingSlotId } from "./topology";
 import {
   gatheringWaitMinutes,
   type GatheringKind,
@@ -169,7 +169,7 @@ function reconcileInvitation(g: Game, group: HousingGathering) {
   const pair = group.invitation;
   if (!pair) return;
   const h = g.housing!;
-  const allowed = h.controls.roomAccess[group.roomId];
+  const allowed = effectiveRoomAccess(group.roomId, h.controls, h.lodging);
   const guest = group.members.find((m) => m.actorId === pair.guestId)!;
   const needsHost = allowed !== null && !allowed.includes(pair.guestId);
   if (

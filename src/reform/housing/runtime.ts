@@ -19,6 +19,7 @@ import {
   unresolvedConstruction,
 } from "./constructionTopology";
 import { validGatherings } from "./gatheringValidation";
+import { validLodging } from "./lodgingValidation";
 import type {
   ConstructionResult,
   ConstructionInspection,
@@ -398,6 +399,7 @@ export function isHousingRuntime(
       "foodLogistics",
       "foodSupply",
       "gatherings",
+      "lodging",
       "nextGatheringId",
       "preferredBeds",
       "bedSleepers",
@@ -441,6 +443,7 @@ export function isHousingRuntime(
     !isFoodLedger(value.foodLogistics, game.time)
   )
     return false;
+  if (!validLodging(value as unknown as HousingRuntime, game)) return false;
   if (!validGatherings(value as unknown as HousingRuntime, game)) return false;
   const topology = buildHousingTopology(
     game.house,
@@ -450,6 +453,7 @@ export function isHousingRuntime(
     value.layoutVersion === 2 ? 2 : undefined,
     value.construction as HousingRuntime["construction"],
     value.gatherings as HousingRuntime["gatherings"],
+    value.lodging as HousingRuntime["lodging"],
   );
   if (
     !sameData(controls, topology.controls) ||
@@ -720,6 +724,7 @@ function applyHouseShape(
     runtime?.layoutVersion,
     runtime?.construction,
     runtime?.gatherings,
+    runtime?.lodging,
   );
   const next = structuredClone(game);
   settleConstruction?.(next);
@@ -731,6 +736,7 @@ function applyHouseShape(
     runtime?.layoutVersion,
     next.housing?.construction,
     next.housing?.gatherings,
+    next.housing?.lodging,
   );
   const conflict = editConflict(game, house, before, after);
   if (conflict) return { game, error: conflict };

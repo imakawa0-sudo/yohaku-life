@@ -5,6 +5,7 @@ import {
   stockLimit,
   validMealReturns,
 } from "./mealStock";
+import { finishLodgingWalk, usualHomeArrival } from "./housing/lodging";
 import {
   cancelBenchActor,
   finishBenchMinute,
@@ -1020,6 +1021,7 @@ function stop(g: Game, a: Actor, spatialCancelled = false): void {
   refundReservation(g, a, t);
   a.task = null;
   housingTaskBoundary(g, a, t, "cancel");
+  finishLodgingWalk(g, a, t, true);
   if (t.partner) {
     const b = find(g, t.partner);
     if (b?.task?.partner === a.person.id) {
@@ -1812,6 +1814,8 @@ function finish(g: Game, a: Actor, t: Task) {
   }
   housingTaskBoundary(g, a, t, "finish");
   if (peer) housingTaskBoundary(g, peer, t, "finish");
+  const lodging = finishLodgingWalk(g, a, t, false) ?? usualHomeArrival(g, a, t);
+  if (lodging) result += lodging;
   a.reason = result || "「" + t.label + "」を終えました。";
   if (t.kind !== "wait")
     notice(g, a.person.name + "　" + (result || t.label + "。"));

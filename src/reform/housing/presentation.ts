@@ -124,24 +124,28 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
     destination: destinationName,
     useRemaining: use ? order.useRemaining : null,
   };
-  if (order.phase === "exiting-after-cancel" && pos.kind === "transit")
-    return {
-      ...result,
-      phase: "cancelling",
-      minutes: pos.remaining,
-      detail: t.spatial.benchRecoveryId
-        ? "現在の移動区間を出てから担当を解除します。"
-        : t.spatial.foodBundleId
-          ? "この区間を出ると担当を解除します。一束は床に残ります。"
-          : t.spatial.constructionId
-            ? constructionExitText(
-                h,
-                h.construction!.plans[t.spatial.constructionId],
-              )
-            : t.kind === "recover"
-              ? "この区間の終点で療養を取り消し、寝床の予約を解除します。"
-              : "この区間の終点で予約を解除し、材料を返します。",
-    };
+  if (order.phase === "exiting-after-cancel" && pos.kind === "transit") {
+    let detail = "この区間の終点で予約を解除し、材料を返します。";
+    if (h.lodging?.orderId === t.spatial.orderId)
+      detail =
+        h.lodging.phase === "arriving"
+          ? "この区間の終点で入居を取り消します。"
+          : "この区間の終点で退居を取り消し、引き続き居室を使います。";
+    else if (t.kind === "home-move")
+      detail = "この区間の終点で移動を取り消します。";
+    else if (t.spatial.benchRecoveryId)
+      detail = "現在の移動区間を出てから担当を解除します。";
+    else if (t.spatial.foodBundleId)
+      detail = "この区間を出ると担当を解除します。一束は床に残ります。";
+    else if (t.spatial.constructionId)
+      detail = constructionExitText(
+        h,
+        h.construction!.plans[t.spatial.constructionId],
+      );
+    else if (t.kind === "recover")
+      detail = "この区間の終点で療養を取り消し、寝床の予約を解除します。";
+    return { ...result, phase: "cancelling", minutes: pos.remaining, detail };
+  }
   if (intent.kind === "carry") {
     const minutes = t.spatial.benchRecoveryId
       ? a.injury >= 70 || a.danger

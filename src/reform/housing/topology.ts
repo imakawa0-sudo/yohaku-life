@@ -5,6 +5,7 @@ import type { SpatialActor, SpatialPoint } from "../spatial/types";
 import type {
   HousingControls,
   HousingGathering,
+  RoomLodging,
   HousingSlot,
   HousingTopology,
 } from "./types";
@@ -132,6 +133,25 @@ export function allowGatheringGuest(
   }
 }
 
+/** The permanent room users keep management authority. Occupancy grants use of this room. */
+export function effectiveRoomAccess(
+  roomId: string,
+  controls: HousingControls,
+  lodging?: RoomLodging,
+): string[] | null {
+  const allowed = Object.hasOwn(controls.roomAccess, roomId)
+    ? controls.roomAccess[roomId]
+    : [];
+  if (
+    allowed === null ||
+    lodging?.phase !== "occupied" ||
+    lodging.roomId !== roomId ||
+    allowed.includes(lodging.residentId)
+  )
+    return allowed;
+  return [...allowed, lodging.residentId].sort();
+}
+
 /** actorIds are the currently located spatial actors. Controls may also refer to unlocated residents. */
 export function buildHousingTopology(
   house: House,
@@ -141,6 +161,7 @@ export function buildHousingTopology(
   layoutVersion?: 2,
   construction?: HousingConstruction,
   gatherings?: Record<string, HousingGathering>,
+  lodging?: RoomLodging,
 ): HousingTopology {
   const settings = controlsForHouse(house, controls);
   const geometry: HousingTopology["geometry"] = {
@@ -167,8 +188,9 @@ export function buildHousingTopology(
     };
     const distances = entranceDistances(room, blockedCells);
     const allowed =
-      settings.roomAccess[room.id]?.filter((id) => actorIds.includes(id)) ??
-      null;
+      effectiveRoomAccess(room.id, settings, lodging)?.filter((id) =>
+        actorIds.includes(id),
+      ) ?? null;
     if (allowed !== null) {
       // An occupant can still walk out when permission is revoked. Transit belongs to the departure side.
       const occupants = actorIds.filter(
@@ -177,6 +199,13 @@ export function buildHousingTopology(
           Object.hasOwn(positions, id) &&
           housingSourcePoint(positions[id])?.domainId === domainId,
       );
+      // The accepted move-in needs entry, but furniture and handling wait until arrival.
+      if (
+        lodging?.phase === "arriving" &&
+        lodging.roomId === room.id &&
+        actorIds.includes(lodging.residentId)
+      )
+        occupants.push(lodging.residentId);
       const entrants = [...new Set([...allowed, ...occupants])].sort();
       for (let cell = 0; cell < distances.length; cell++) {
         if (!blockedCells.includes(cell))
@@ -230,8 +259,8 @@ export function buildHousingTopology(
       id,
       point: { ...plan.staging },
       allowedActorIds:
-        settings.roomAccess[plan.neighborId]?.filter((actor) =>
-          actorIds.includes(actor),
+        effectiveRoomAccess(plan.neighborId, settings, lodging)?.filter(
+          (actor) => actorIds.includes(actor),
         ) ?? null,
     };
   }
@@ -248,7 +277,12 @@ export function buildHousingTopology(
   }
   for (const group of Object.values(gatherings ?? {})) {
     const pair = group.invitation;
-    if (!pair || !settings.roomAccess[group.roomId]?.includes(pair.hostId))
+    if (
+      !pair ||
+      !effectiveRoomAccess(group.roomId, settings, lodging)?.includes(
+        pair.hostId,
+      )
+    )
       continue;
     const guest = group.members.find(
       (m) => m.actorId === pair.guestId && m.status === "participating",

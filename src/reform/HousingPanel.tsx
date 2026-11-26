@@ -3,6 +3,7 @@ import { Footprints } from "lucide-react";
 import { cellName, roomName } from "./house";
 import { residentLabel, roomLabel } from "./displayNames";
 import { GatheringPanel } from "./GatheringPanel";
+import { LodgingPanel } from "./LodgingPanel";
 import { housingPointLabel } from "./housing/presentation";
 import { foodBundleStatus } from "./housing/foodPresentation";
 import { constructionStatus } from "./housing/constructionPresentation";
@@ -57,12 +58,14 @@ export function HousingPanel({
   status,
   onGame,
   invitationWithdrawal,
+  onSelect,
 }: {
   game: Game;
   actor: Actor;
   status: HousingStatus;
   onGame: (g: Game) => void;
   invitationWithdrawal?: string;
+  onSelect: (id: string) => void;
 }) {
   const prefix = useId();
   const h = game.housing!;
@@ -214,6 +217,12 @@ export function HousingPanel({
         onGame={onGame}
         invitationWithdrawal={invitationWithdrawal}
       />
+      <LodgingPanel
+        game={game}
+        actor={actor}
+        onGame={onGame}
+        onSelect={onSelect}
+      />
       <details open>
         <summary>部屋へ移動</summary>
         <div className="lf-command-list">
@@ -259,6 +268,13 @@ export function HousingPanel({
         </p>
         {game.house.rooms.map((r) => {
           const allowed = h.controls.roomAccess[r.id] ?? people;
+          const tenant =
+            h.lodging?.phase === "occupied" &&
+            h.lodging.roomId === r.id &&
+            !allowed.includes(h.lodging.residentId)
+              ? game.actors.find((a) => a.person.id === h.lodging!.residentId)
+              : undefined;
+          const tenantHint = prefix + "-lodging-access";
           return (
             <fieldset key={r.id}>
               <legend>{roomLabel(game.house.rooms, r)}</legend>
@@ -267,6 +283,7 @@ export function HousingPanel({
                   <input
                     type="checkbox"
                     checked={allowed.includes(a.person.id)}
+                    aria-describedby={tenant === a ? tenantHint : undefined}
                     onChange={(e) => {
                       const ids = people.filter((person) =>
                         person === a.person.id
@@ -285,6 +302,12 @@ export function HousingPanel({
                   {residentLabel(game, a)}
                 </label>
               ))}
+              {tenant && (
+                <p className="lf-note" id={tenantHint}>
+                  {residentLabel(game, tenant)}
+                  は入居中、間借りの権利でこの部屋を利用できます。
+                </p>
+              )}
             </fieldset>
           );
         })}

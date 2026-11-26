@@ -1,6 +1,6 @@
 import type { SpatialPoint } from "../spatial/types";
 import { isSpatialCell, sameSpatialPoint } from "../spatial/route";
-import { housingRoomId } from "./topology";
+import { effectiveRoomAccess, housingRoomId } from "./topology";
 import type { HousingRuntime } from "./types";
 import type { RoomConstruction } from "./constructionTypes";
 
@@ -39,8 +39,8 @@ export function constructionHandling(
       : plan.status === "planned"
         ? plan.staging
         : plan.source;
-  const rooms = [pickup, destination].map(
-    (p) => h.controls.roomAccess[housingRoomId(p.domainId)!],
+  const rooms = [pickup, destination].map((p) =>
+    effectiveRoomAccess(housingRoomId(p.domainId)!, h.controls, h.lodging),
   );
   if (rooms.every((list) => list === null)) return null;
   return Object.keys(h.state.actors)

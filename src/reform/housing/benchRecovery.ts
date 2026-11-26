@@ -17,7 +17,12 @@ import type {
   ConstructionInspection,
 } from "./constructionTypes";
 import { applyHousingHouseEdit } from "./runtime";
-import { housingPoint, housingRoomId, housingSlotId } from "./topology";
+import {
+  effectiveRoomAccess,
+  housingPoint,
+  housingRoomId,
+  housingSlotId,
+} from "./topology";
 import type { BenchRecovery, HousingRuntime } from "./types";
 
 export const benchRecoveryMinutes = 15;
@@ -38,7 +43,7 @@ export function benchBoardHandling(
   const pickupRoom = pickup && housingRoomId(pickup.domainId);
   if (!pickupRoom) return [];
   const lists = [
-    h.controls.roomAccess[pickupRoom],
+    effectiveRoomAccess(pickupRoom, h.controls, h.lodging),
     h.controls.roomAccess.living,
   ];
   if (lists.every((ids) => ids === null)) return null;
