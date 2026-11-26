@@ -473,8 +473,239 @@ async function mobile() {
     await page.context().close();
   }
 }
-async function fieldTrip() {
-  const page=await fresh(1280);
+async function recoveryControls(page, name) {
+  await tab(page, "暮らし");
+  await button(page.getByRole("group", { name: "住民を選ぶ" }), name).click();
+  const panel = page.getByRole("region", { name: "行動の指示" });
+  await button(panel, "野外").click();
+  const command = panel.locator('button[data-kind="recover"]');
+  const row = command.locator("..");
+  return {
+    command,
+    row,
+    choice: row.getByRole("combobox", { name: "傷を休める場所", exact: true }),
+    hint: row.locator("small"),
+  };
+}
+
+async function completeOwnRecovery(page, index) {
+  for (let step = 0; step < 20; step++) {
+    await finish(page);
+    const state = await currentGame(page);
+    if (state.actors[index].task?.kind !== "recover") return state;
+  }
+  throw new Error("療養が完了しませんでした。");
+}
+
+async function useRecoveryBed(page, home, width) {
+  const person = home.actors[0].person;
+  const { command, choice, hint, row } = await recoveryControls(
+    page,
+    person.name,
+  );
+  await expect(choice).toHaveValue("");
+  await expect(hint).toContainText("移動なし · 療養65分");
+  await choice.selectOption("mat-1");
+  await expect(hint).toContainText("寝室");
+  const forecast = (await hint.innerText()).match(/移動(\d+)分 ＋ 療養65分（合計(\d+)分）/);
+  assert.ok(forecast, "寝床への移動と療養を合わせた所要時間が表示されます。");
+  const moveMinutes = Number(forecast[1]);
+  assert.ok(moveMinutes > 0);
+  assert.equal(Number(forecast[2]), moveMinutes + 65);
+  const before = await currentGame(page);
+  assert.deepEqual(before, home);
+  await row.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  await screenshot(page, "recovery-preview-" + width);
+  await command.click();
+  const ordered = await currentGame(page);
+  const station = JSON.stringify(["slot", "bedroom", "mat-1", 0]);
+  const bedHeld = (game) =>
+    Object.values(game.housing.state.reservations).some(
+      (r) => r.kind === "slot" && r.targetId === station,
+    );
+  assert.equal(ordered.time, home.time);
+  assert.equal(ordered.actors[0].task.station, station);
+  assert.ok(bedHeld(ordered));
+  await button(page, "15分進める").click();
+  const partial = await currentGame(page);
+  assert.equal(partial.actors[0].task?.kind, "recover");
+  assert.equal(partial.actors[0].task.remaining, 65 - (15 - moveMinutes));
+  assert.ok(bedHeld(partial));
+  await page.reload();
+  assert.deepEqual(await currentGame(page), partial);
+  await recoveryControls(page, person.name);
+  await page.locator('button[data-kind="cancel"]').click();
+  const cancelled = await currentGame(page);
+  assert.equal(cancelled.time, partial.time);
+  assert.equal(cancelled.actors[0].task, null);
+  assert.equal(bedHeld(cancelled), false);
+  assert.equal(cancelled.actors[0].injury, partial.actors[0].injury);
+  await recoveryControls(page, person.name);
+  await choice.selectOption("mat-1");
+  await expect(hint).toContainText("移動0分 ＋ 療養65分");
+  await command.click();
+  const restarted = await currentGame(page);
+  assert.equal(restarted.actors[0].task.station, station);
+  const done = await completeOwnRecovery(page, 0);
+  assert.equal(done.actors[0].room, "bedroom");
+  assert.equal(bedHeld(done), false);
+  assert.equal(done.time - restarted.time, 65);
+  assert.ok(done.actors[0].injury < restarted.actors[0].injury);
+  await page.reload();
+  assert.deepEqual(await currentGame(page), done);
+
+  // The living-room window is four floor steps from the link to the bedroom.
+  await recoveryControls(page, person.name);
+  const actions = page.getByRole("region", { name: "行動の指示" });
+  await button(actions, "生活").click();
+  const windowOrder = actions.locator('button[data-kind="need"][data-target="fun"]');
+  await windowOrder.locator("..").getByRole("combobox").selectOption("window-1");
+  await windowOrder.click();
+  await button(page, "15分進める").click();
+  const atWindow = await currentGame(page);
+  assert.equal(atWindow.actors[0].room, "living");
+  await page.locator('button[data-kind="cancel"]').click();
+  await recoveryControls(page, person.name);
+  await choice.selectOption("mat-1");
+  await command.click();
+  await button(page, "5分進める").click();
+  const crossing = await currentGame(page);
+  assert.equal(crossing.housing.state.actors[person.id].position.kind, "transit");
+  await page.locator('button[data-kind="cancel"]').click();
+  const leaving = await currentGame(page);
+  assert.equal(leaving.housing.state.actors[person.id].order.phase, "exiting-after-cancel");
+  const notice = page.getByRole("region", { name: "家の中の移動と設定" }).locator(".lf-note").first();
+  await expect(notice).toContainText("寝床の予約を解除");
+  await expect(notice).not.toContainText("材料");
+  await page.reload();
+  assert.deepEqual(await currentGame(page), leaving);
+  await button(page, "5分進める").click();
+  const released = await currentGame(page);
+  assert.equal(released.actors[0].injury, crossing.actors[0].injury);
+  assert.equal(bedHeld(released), false);
+  assert.equal(released.wood, crossing.wood);
+  await checkLegacy(page);
+  report.outcomes.push({
+    width,
+    journey: "峠から付き添って帰宅し、寝室で療養",
+    injuryOnReturn: home.actors[0].injury,
+    restartInjury: restarted.actors[0].injury,
+    completedInjury: done.actors[0].injury,
+    returned: home.time,
+    moveMinutes,
+    restarted: restarted.time,
+    completed: done.time,
+  });
+}
+
+async function recoveryLimits() {
+  const page = await fresh(1280);
+  try {
+    await makeStart(page, "木工の二人");
+    await enter(page);
+    const origin = await currentGame(page);
+    const [patient, helper] = origin.actors.map((a) => a.person);
+    async function importCase(name, injury, atBed = false) {
+      const game = structuredClone(origin);
+      game.actors[0].injury = injury;
+      if (atBed) {
+        const station = JSON.stringify(["slot", "bedroom", "mat-1", 0]);
+        game.actors[0].room = "bedroom";
+        game.housing.state.actors[patient.id].position = {
+          kind: "at",
+          point: game.housing.state.slots[station].point,
+        };
+      }
+      await tab(page, "手帳");
+      const data = {
+        type: "yohaku-reform-save",
+        version: 2,
+        slot: { id: "qa-" + name, name, game, origin },
+      };
+      await page.getByLabel("新版の保存ファイル").setInputFiles({
+        name: name + ".json",
+        mimeType: "application/json",
+        buffer: Buffer.from(JSON.stringify(data)),
+      });
+      await expect(
+        page.getByRole("region", { name: "行動の指示" }),
+      ).toBeVisible();
+      assert.deepEqual(await currentGame(page), game);
+    }
+    await importCase("重傷の療養", 75);
+    let controls = await recoveryControls(page, patient.name);
+    await controls.choice.selectOption("mat-1");
+    await expect(controls.command).toBeDisabled();
+    await expect(controls.hint).toContainText("重い傷");
+    await controls.choice.selectOption("");
+    await expect(controls.command).toBeEnabled();
+    await controls.command.click();
+    const inPlace = await currentGame(page);
+    assert.equal(inPlace.actors[0].task.kind, "recover");
+    assert.equal(inPlace.actors[0].task.spatial, undefined);
+    assert.equal(inPlace.actors[0].task.station, undefined);
+    await page.reload();
+    assert.deepEqual(await currentGame(page), inPlace);
+    const finished = await completeOwnRecovery(page, 0);
+    assert.equal(finished.time - inPlace.time, 65);
+    assert.ok(finished.actors[0].injury < 75);
+    await importCase("寝床の足元で重傷", 75, true);
+    controls = await recoveryControls(page, patient.name);
+    await controls.choice.selectOption("mat-1");
+    await expect(controls.hint).toContainText("移動0分 ＋ 療養65分");
+    await controls.command.click();
+    const severeAtBed = await currentGame(page);
+    assert.equal(
+      severeAtBed.actors[0].task.station,
+      JSON.stringify(["slot", "bedroom", "mat-1", 0]),
+    );
+    const restedAtBed = await completeOwnRecovery(page, 0);
+    assert.equal(restedAtBed.time - severeAtBed.time, 65);
+    assert.equal(restedAtBed.actors[0].injury, 63);
+    await importCase("共用寝床の予約", 40);
+    await button(
+      page.getByRole("group", { name: "住民を選ぶ" }),
+      helper.name,
+    ).click();
+    const actions = page.getByRole("region", { name: "行動の指示" });
+    await button(actions, "生活").click();
+    const rest = actions.locator(
+      'button[data-kind="need"][data-target="energy"]',
+    );
+    await rest.locator("..").getByRole("combobox").selectOption("mat-1");
+    await rest.click();
+    const held = await currentGame(page);
+    controls = await recoveryControls(page, patient.name);
+    await controls.choice.selectOption("mat-1");
+    await expect(controls.command).toBeDisabled();
+    await expect(controls.hint).toContainText("予約");
+    assert.deepEqual(await currentGame(page), held);
+    await importCase("専用寝床の制限", 40);
+    await showSection(page, "暮らしと備蓄の方針");
+    await showSection(page, "寝床を使える住人");
+    await page
+      .getByRole("combobox", { name: "設定する寝床", exact: true })
+      .selectOption("mat-1");
+    await page
+      .getByRole("combobox", { name: "利用できる住人", exact: true })
+      .selectOption(helper.id);
+    await button(page, "利用設定を保存").click();
+    const exclusive = await currentGame(page);
+    controls = await recoveryControls(page, patient.name);
+    await controls.choice.selectOption("mat-1");
+    await expect(controls.command).toBeDisabled();
+    await expect(controls.hint).toContainText("専用の寝床");
+    assert.deepEqual(await currentGame(page), exclusive);
+    record(
+      "人工保存4件で、重傷者のその場での療養、寝床の足元での療養、予約済みと他人専用の寝床への指示が実行できないことを確認。",
+    );
+  } finally {
+    await page.context().close();
+  }
+}
+
+async function fieldTrip(recoveryWidth) {
+  const page=await fresh(recoveryWidth ?? 1280);
   try {
     await makeStart(page,"木工の二人");
     await tab(page,"土地");
@@ -523,8 +754,17 @@ async function fieldTrip() {
     }
     assert.ok(g.actors[0].injury>0);
     const injury=g.actors[0].injury;
+    if (recoveryWidth) {
+      const field = await recoveryControls(page,g.actors[0].person.name);
+      await expect(field.choice).toHaveCount(0);
+      await expect(field.command).toBeEnabled();
+    }
     g=await action(second,"rescue",first);
     assert.ok(g.actors.every(a=>a.location===g.home));
+    if (recoveryWidth) {
+      await useRecoveryBed(page, g, recoveryWidth);
+      return;
+    }
     g=await action(second,"aid",first);
     assert.ok(g.actors[0].injury<injury);
     await page.reload();
@@ -537,6 +777,10 @@ async function fieldTrip() {
 try {
   const flags=new Set(process.argv.slice(2));
   if (flags.has("--field")) await fieldTrip();
+  if (flags.has("--recovery-bed")) {
+    for (const width of [1280,320]) await fieldTrip(width);
+    await recoveryLimits();
+  }
   if (flags.has("--narrow")) {
     const narrow=await fresh(320);
     await makeStart(narrow,"木工の二人");
