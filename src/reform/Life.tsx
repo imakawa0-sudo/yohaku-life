@@ -77,6 +77,27 @@ const stockNames = {
   wood: "木材",
   coins: "銀貨",
 };
+
+function PendingMealInputs({
+  stock,
+  destination,
+}: {
+  stock: Game["pendingMealInputReturns"];
+  destination: string;
+}) {
+  if (!stock) return null;
+  const amounts = [
+    stock.ingredients && "食材 " + stock.ingredients,
+    stock.coins && "銀貨 " + stock.coins,
+  ].filter(Boolean);
+  if (!amounts.length) return null;
+  return (
+    <p className="lf-cargo">
+      {destination}への返却待ち · {amounts.join("／")}
+    </p>
+  );
+}
+
 const groupNames = {
   need: "生活",
   work: "仕事",
@@ -682,6 +703,10 @@ export function Life({
                 共同備蓄に空きができた分から戻ります。
               </p>
             )}
+            <PendingMealInputs
+              stock={game.pendingMealInputReturns}
+              destination="共同備蓄"
+            />
             {foodStatus?.state === "present" && (
               <p className="lf-cargo">
                 共同備蓄とは別に 野菜の一束（食材2） · {foodStatus.location} ·{" "}
@@ -689,13 +714,20 @@ export function Life({
               </p>
             )}
             {(actor.location !== game.home ||
-              Object.values(actor.cargo).some((amount) => amount > 0)) && (
+              (Object.keys(stockNames) as (keyof typeof stockNames)[]).some(
+                (key) => actor.cargo[key] > 0,
+              ) ||
+              !!actor.cargo.pendingMealInputReturns) && (
               <p className="lf-cargo">
                 {person.name}の携行品 · 食事 {actor.cargo.food}／食材{" "}
                 {actor.cargo.ingredients}／木材 {actor.cargo.wood}／銀貨{" "}
                 {actor.cargo.coins}
               </p>
             )}
+            <PendingMealInputs
+              stock={actor.cargo.pendingMealInputReturns}
+              destination={person.name + "の携行品"}
+            />
             {game.insulated && (
               <p className="lf-cargo">
                 家全体の断熱雨戸を設置済み。自宅にいる間は寒さによる休息の追加消耗を防げます。
