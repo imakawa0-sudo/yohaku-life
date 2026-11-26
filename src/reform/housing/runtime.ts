@@ -1,3 +1,5 @@
+import { benchBoardId } from "./benchRecovery";
+import { validBenchRecovery } from "./benchRecoveryValidation";
 import { validRoomStay } from "./roomStay";
 import { isFoodSupply } from "./foodSupplyValidation";
 import { isFoodLedger, validFoodRelations } from "./foodValidation";
@@ -253,6 +255,8 @@ function validBinding(
   const binding = task?.spatial;
   // The complete bidirectional match was checked by validFoodRelations.
   if (binding?.foodBundleId) return !!order && order.id === binding.orderId;
+  if (task?.kind === "home-dismantle" || task?.kind === "home-salvage")
+    return !!order && order.id === binding?.orderId; // Checked by validBenchRecovery.
   if (task?.kind === "home-build")
     return (
       binding?.kind === "use" &&
@@ -377,6 +381,7 @@ export function isHousingRuntime(
       "version",
       "layoutVersion",
       "construction",
+      "benchRecovery",
       "foodLogistics",
       "foodSupply",
       "gatherings",
@@ -438,6 +443,7 @@ export function isHousingRuntime(
     )
   )
     return false;
+  if (!validBenchRecovery(value as unknown as HousingRuntime, game)) return false;
   if (!validConstructionRelations(value as unknown as HousingRuntime, game))
     return false;
   if (
@@ -594,10 +600,14 @@ function editConflict(
     if (
       item.position.kind === "at" &&
       !isFloor(after.geometry, item.position.point)
-    )
+    ) {
+      const recovery = runtime?.benchRecovery;
+      if (recovery?.phase === "board" && item.id === benchBoardId(recovery.fixtureId))
+        return "解体した板が置かれた床は変更できません。";
       return bundle?.state === "present" && item.id === bundle.itemId
         ? "食材の一束が置かれた床は変更できません。"
         : "工事用木材が置かれた床は変更できません。";
+    }
   }
   for (const actor of game.actors) {
     const id = actor.person.id;

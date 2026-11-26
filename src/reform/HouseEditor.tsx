@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { roomLabel } from "./displayNames";
 import {
   Armchair,
@@ -51,11 +51,13 @@ export function HouseEditor({
   onChange,
   waterMinutes = 0,
   allowRoomAddition = true,
+  children,
 }: {
   house: House;
   onChange: (h: House) => void | string | Promise<void | string>;
   waterMinutes?: number;
   allowRoomAddition?: boolean;
+  children?: ReactNode;
 }) {
   const [selectedRoom, setRoom] = useState("living");
   const [nextRoom, setNextRoom] = useState("bedroom");
@@ -328,6 +330,7 @@ export function HouseEditor({
           </div>
         )}
       </details>
+      {children}
       <details className="yh-house-edit">
         <summary>
           <DoorOpen size={16} />
