@@ -349,10 +349,17 @@ function ActionPanel({
     .filter(([, n]) => n > 0)
     .map(([key, n]) => stockNames[key as keyof typeof stockNames] + n)
     .join("・");
+  const recoveryCancel =
+    actor.task?.kind === "recover" && actor.task.spatial
+      ? cancelling
+        ? housingStatus(game, actor.person.id).detail
+        : "療養を取り消すと寝床の予約を解除します。移動区間の途中なら、その終点で解除します。"
+      : null;
   const cancelNote =
     invitationWithdrawal ??
     foodCancel ??
     constructionCancel ??
+    recoveryCancel ??
     ((reserved || cancelling) &&
       (actor.task?.spatial
         ? "取り消すと予約を解除します。通路を移動中は、今の区間を出てから取り置きした物が戻ります。"
