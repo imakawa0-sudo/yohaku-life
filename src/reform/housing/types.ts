@@ -48,6 +48,7 @@ export type RoomLodging = {
 
 export type HousingRuntime = {
   lodging?: RoomLodging;
+  maintenanceVisits?: Record<string, string>;
   benchRecovery?: BenchRecovery;
   version: 1;
   layoutVersion?: 2;

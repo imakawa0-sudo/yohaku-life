@@ -21,6 +21,7 @@ import {
 } from "./constructionTopology";
 import { validGatherings } from "./gatheringValidation";
 import { validLodging } from "./lodgingValidation";
+import { validMaintenanceVisits } from "./maintenanceVisit";
 import type {
   ConstructionResult,
   ConstructionInspection,
@@ -401,6 +402,7 @@ export function isHousingRuntime(
       "foodSupply",
       "gatherings",
       "lodging",
+      "maintenanceVisits",
       "nextGatheringId",
       "preferredBeds",
       "bedSleepers",
@@ -412,7 +414,8 @@ export function isHousingRuntime(
     ]) ||
     value.version !== 1 ||
     (Object.hasOwn(value, "layoutVersion") && value.layoutVersion !== 2) ||
-    (Object.hasOwn(value, "roomStay") && !validRoomStay(value.roomStay, game)) ||
+    (Object.hasOwn(value, "roomStay") &&
+      !validRoomStay(value.roomStay, game)) ||
     (Object.hasOwn(value, "bedSleepers") &&
       !isBedSleepers(value.bedSleepers, game)) ||
     (Object.hasOwn(value, "preferredBeds") &&
@@ -445,6 +448,8 @@ export function isHousingRuntime(
   )
     return false;
   if (!validLodging(value as unknown as HousingRuntime, game)) return false;
+  if (!validMaintenanceVisits(value as unknown as HousingRuntime, ids))
+    return false;
   if (!validGatherings(value as unknown as HousingRuntime, game)) return false;
   const topology = buildHousingTopology(
     game.house,
@@ -463,7 +468,8 @@ export function isHousingRuntime(
     )
   )
     return false;
-  if (!validBenchRecovery(value as unknown as HousingRuntime, game)) return false;
+  if (!validBenchRecovery(value as unknown as HousingRuntime, game))
+    return false;
   if (!validConstructionRelations(value as unknown as HousingRuntime, game))
     return false;
   if (
@@ -622,7 +628,10 @@ function editConflict(
       !isFloor(after.geometry, item.position.point)
     ) {
       const recovery = runtime?.benchRecovery;
-      if (recovery?.phase === "board" && item.id === benchBoardId(recovery.fixtureId))
+      if (
+        recovery?.phase === "board" &&
+        item.id === benchBoardId(recovery.fixtureId)
+      )
         return "解体した板が置かれた床は変更できません。";
       return bundle?.state === "present" && item.id === bundle.itemId
         ? "食材の一束が置かれた床は変更できません。"

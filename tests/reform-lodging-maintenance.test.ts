@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { editHouse, initialHouse } from "../src/reform/house";
 import { rebuildHousingGeometry } from "../src/reform/housing/bridge";
+import { startHousingGathering } from "../src/reform/housing/gathering";
 import {
   assignConstructionBuild,
   assignConstructionHaul,
@@ -513,6 +514,133 @@ test("both save positions reject a forged agreement, delegated job, loaned acces
   rejects(back, (bad) =>
     Object.assign(plan(bad).assignment!, { lodgingMaintenance: true }),
   );
+});
+
+test("a provider who physically entered for maintenance may leave or resume that job, without using an ordinary order to walk deeper into the room", () => {
+  const target = (roomId: string, cell = 0) => JSON.stringify({ roomId, cell });
+  const interior = target(room, 8);
+  const ready = reserve(accepted(planned()));
+  const start = order(deliver(ready), resident, "recover");
+  assert.equal(start.housing!.maintenanceVisits, undefined);
+  const middle = read(advance(start, 2));
+  assert.deepEqual(middle.housing!.maintenanceVisits, { [provider]: id });
+  const inside = read(advance(middle, 2));
+  const staged = read(advance(inside, 2));
+  const finished = read(advance(build(staged), 30));
+  const movingOut = ok(endLodging(order(middle, resident, "cancel"), resident));
+  const cancelledCrossing = read(advance(read(movingOut), 2));
+  for (const g of [
+    inside,
+    staged,
+    finished,
+    cancelledCrossing,
+    ok(withdrawLodgingMaintenance(middle, resident)),
+    ok(withdrawLodgingMaintenance(staged, provider)),
+  ]) {
+    const stopped = order(read(g), provider, "cancel");
+    const excluded =
+      stopped.housing!.state.actors[provider].position.kind === "transit"
+        ? advance(stopped, 2)
+        : stopped;
+    const before = read(excluded);
+    assert.match(
+      inspectOrder(before, provider, "home-move", interior).disabled ?? "",
+      /工事/,
+    );
+    const denied = order(before, provider, "home-move", interior);
+    assert.deepEqual(denied.housing, before.housing);
+    assert.deepEqual(denied.actors, before.actors);
+    deniedFurniture(before);
+    assert.equal(
+      inspectOrder(before, provider, "home-move", target(room)).disabled,
+      undefined,
+    );
+    const outside = target("living");
+    const duration = inspectOrder(
+      before,
+      provider,
+      "home-move",
+      outside,
+    ).minutes!;
+    const left = read(
+      advance(order(before, provider, "home-move", outside), duration),
+    );
+    assert.equal(left.housing!.maintenanceVisits, undefined);
+    assert.ok(inspectOrder(left, provider, "home-move", interior).disabled);
+  }
+  const rescinded = ok(withdrawLodgingMaintenance(staged, resident));
+  const retry = ok(acceptLodgingMaintenance(requested(rescinded), provider));
+  assert.ok(isRoomInsulated(advance(build(retry), 30), room));
+  const ordinary = read(
+    setHousingRoomAccess(rescinded, room, [provider, other]),
+  );
+  assert.equal(ordinary.housing!.maintenanceVisits, undefined);
+  assert.ok(inspectOrder(ordinary, provider, "home-move", interior).minutes);
+  assert.ok(inspectOrder(rescinded, other, "home-move", interior).minutes);
+  const travel = read(order(rescinded, provider, "travel", "landing"));
+  assert.deepEqual(travel.housing!.maintenanceVisits, { [provider]: id });
+  const interrupted = read(order(travel, provider, "cancel"));
+  assert.match(
+    inspectOrder(interrupted, provider, "home-move", interior).disabled ?? "",
+    /工事/,
+  );
+  const away = read(advance(travel, travel.actors[0].task!.remaining));
+  assert.equal(away.housing!.maintenanceVisits, undefined);
+});
+
+test("work-visit saves reject an unknown actor, site, public room or obsolete location", () => {
+  const inside = advance(
+    order(deliver(reserve(accepted(planned()))), resident, "recover"),
+    6,
+  );
+  for (const visits of [
+    null,
+    [],
+    {},
+    { [provider]: "missing" },
+    { missing: id },
+    { [other]: id },
+    { [resident]: id },
+  ]) {
+    const bad = Object.assign(structuredClone(inside.housing!), {
+      maintenanceVisits: visits,
+    });
+    const game = { ...inside, housing: bad };
+    for (const data of [
+      { game, origin },
+      { game: origin, origin: game },
+    ])
+      assert.throws(() =>
+        importSlot(exportSlot({ ...data, id: "bad", name: "工事の入室" })),
+      );
+  }
+});
+
+test("a guest already at a tenant's private meal keeps their own seat and movement when the maintenance worker withdraws", () => {
+  const base = order(
+    setHousingRoomAccess(reserve(accepted(planned())), room, []),
+    other,
+    "cancel",
+  );
+  const gathering = startHousingGathering(base, {
+    kind: "meal",
+    roomId: room,
+    fixtureId: "fixture-1",
+    actorIds: [resident, other],
+    invitation: { hostId: resident, guestId: other },
+  });
+  assert.equal(gathering.actors[2].task?.kind, "home-gather");
+  const withWork = read(advance(deliver(gathering), 8));
+  const mealOnly = advance(order(gathering, provider, "recover"), 8);
+  const withdrawn = read(ok(withdrawLodgingMaintenance(withWork, provider)));
+  assert.deepEqual(withdrawn.housing!.gatherings, mealOnly.housing!.gatherings);
+  assert.equal(withdrawn.food, mealOnly.food);
+  assert.deepEqual(withdrawn.housing!.maintenanceVisits, { [provider]: id });
+  const ownOrder = JSON.stringify({ roomId: room, cell: 8 });
+  const leftMeal = order(withdrawn, other, "cancel");
+  assert.ok(inspectOrder(leftMeal, other, "home-move", ownOrder).minutes);
+  assert.ok(inspectOrder(leftMeal, provider, "home-move", ownOrder).disabled);
+  assert.ok(inspectOrder(leftMeal, other, "home-use", "mat-1").disabled);
 });
 
 test("permission to leave a restricted intermediate room for wood does not authorize the return leg through it to the rented annex", () => {
