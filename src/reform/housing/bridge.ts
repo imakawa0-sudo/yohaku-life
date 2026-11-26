@@ -1,3 +1,4 @@
+import { prepareBenchMinute, refreshBenchHandling } from "./benchRecovery";
 import { prepareFoodMinute } from "./foodProgress";
 import { foodCookingSeat, planFoodCooking } from "./foodCooking";
 import { refreshFoodHandling } from "./food";
@@ -89,6 +90,7 @@ export function rebuildHousingGeometry(g: Game, h: HousingRuntime) {
   h.controls = topology.controls;
   refreshConstructionHandling(h);
   refreshFoodHandling(h);
+  refreshBenchHandling(h);
 }
 export function setHousingPassage(
   g: Game,
@@ -131,6 +133,7 @@ export function setHousingRoomAccess(
   rebuildHousingGeometry(next, h);
   releaseRevokedConstructionWorkers(next, g.housing);
   prepareFoodMinute(next);
+  prepareBenchMinute(next);
   return next;
 }
 export function locateHousingActor(

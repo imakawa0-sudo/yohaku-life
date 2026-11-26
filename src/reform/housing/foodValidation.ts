@@ -1,5 +1,6 @@
 import type { Game, Task } from "../sim";
 import { sameSpatialPoint } from "../spatial/route";
+import { benchBoardId } from "./benchRecovery";
 import { constructionFloor } from "./constructionTopology";
 import { foodHandling } from "./food";
 import {
@@ -152,6 +153,8 @@ export function validFoodRelations(
     if (expectedItems.has(b.itemId)) return false;
     expectedItems.add(b.itemId);
   }
+  if (h.benchRecovery?.phase === "board")
+    expectedItems.add(benchBoardId(h.benchRecovery.fixtureId));
   const actual = Object.keys(h.state.items);
   if (
     actual.length !== expectedItems.size ||

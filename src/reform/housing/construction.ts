@@ -181,10 +181,10 @@ export function reserveConstructionMaterial(
   return { game: next, planId };
 }
 
-const workerUnavailable =
+export const workerUnavailable =
   "自宅にいて手が空き、危険や重傷のない住人を選んでください。";
 
-function availableWorker(game: Game, actorId: string) {
+export function availableWorker(game: Game, actorId: string) {
   return game.actors.find(
     (actor) =>
       actor.person.id === actorId &&
@@ -195,7 +195,7 @@ function availableWorker(game: Game, actorId: string) {
   );
 }
 
-function workerCandidate(game: Game, actor: Actor) {
+export function workerCandidate(game: Game, actor: Actor) {
   const next = structuredClone(game),
     h = next.housing!,
     id = actor.person.id;

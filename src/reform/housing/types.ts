@@ -18,6 +18,7 @@ export type HousingTaskBinding = {
   orderId: string;
   kind: "move" | "use" | "carry";
   foodBundleId?: string;
+  benchRecoveryId?: string;
   constructionId?: string;
   direction?: HaulDirection;
   gatheringId?: string;
@@ -25,7 +26,17 @@ export type HousingTaskBinding = {
   socialCompany?: true;
 };
 
+export type BenchRecovery = {
+  version: 1;
+  fixtureId: string;
+  roomId: string;
+  cell: number;
+  phase: "dismantling" | "board";
+  assignment?: { actorId: string; orderId: string };
+};
+
 export type HousingRuntime = {
+  benchRecovery?: BenchRecovery;
   version: 1;
   layoutVersion?: 2;
   foodLogistics?: FoodLogistics;
