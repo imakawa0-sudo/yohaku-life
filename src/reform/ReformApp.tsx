@@ -221,7 +221,7 @@ export default function ReformApp() {
     const result = applyHousingHouseEdit(game, house);
     if (result.error) {
       setNotice(result.error);
-      return;
+      return result.error;
     }
     if (await update(result.game)) {
       const cost = game.wood - result.game.wood;

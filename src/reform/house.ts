@@ -369,6 +369,20 @@ function reachable(room: Room): boolean {
   const d = distances(room);
   return room.fixtures.every((f) => Number.isFinite(d[f.cell]));
 }
+function canPlace(room: Room, fixture: Fixture, cell: number): boolean {
+  return (
+    free(room, cell) &&
+    reachable({ ...room, fixtures: [...room.fixtures, { ...fixture, cell }] })
+  );
+}
+
+/** Geometry-only destinations for furniture moved in from another room. */
+export function furniturePlacementCells(room: Room, fixture: Fixture): number[] {
+  return Array.from({ length: room.width * room.height }, (_, cell) => cell).filter(
+    (cell) => canPlace(room, fixture, cell),
+  );
+}
+
 function place(room: Room, f: Fixture, preferred?: number) {
   const n = room.width * room.height;
   // Place large items near the perimeter first, keeping convenient paths through the middle.
@@ -377,10 +391,10 @@ function place(room: Room, f: Fixture, preferred?: number) {
       ? Array.from({ length: n }, (_, i) => n - 1 - i)
       : [preferred];
   for (const cell of candidates) {
-    if (!free(room, cell)) continue;
-    room.fixtures.push({ ...f, cell });
-    if (reachable(room)) return;
-    room.fixtures.pop();
+    if (canPlace(room, f, cell)) {
+      room.fixtures.push({ ...f, cell });
+      return;
+    }
   }
   throw Error("その場所には置けません。家具まで歩ける空き床を選んでください。");
 }
