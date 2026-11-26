@@ -1,5 +1,6 @@
 import { lodgingWorkGraph } from "./lodgingMaintenanceAccess";
 import { endLodgingMaintenance } from "./lodgingMaintenance";
+import { settlePackReturns } from "../packingStock";
 import { isIndoorHousingRoom, isRoomInsulated } from "./coldProtection";
 import {
   cancelConstructionActor,
@@ -173,6 +174,7 @@ export function reserveConstructionMaterial(
   const itemId =
     "construction-material-" + planId.slice("construction-".length);
   next.wood -= plan.requiredWood;
+  settlePackReturns(next);
   target.material = { itemId, quantity: plan.requiredWood, state: "present" };
   h.state.items[itemId] = {
     id: itemId,

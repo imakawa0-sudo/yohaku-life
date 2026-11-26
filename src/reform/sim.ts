@@ -6,10 +6,18 @@ import {
   settleMealReturns,
   settleMealInputReturns,
   stockLimit,
+  unloadingSpace,
   validMealReturns,
   validMealInputReturns,
   type MealInputAccount,
 } from "./mealStock";
+import {
+  refundPacking,
+  reserveForPacking,
+  settlePackReturns,
+  validPackReturns,
+  type PackReturns,
+} from "./packingStock";
 import { finishLodgingWalk, usualHomeArrival } from "./housing/lodging";
 import {
   cancelBenchActor,
@@ -170,6 +178,7 @@ export interface Actor {
 }
 export interface Game extends Stock, MealInputAccount {
   pendingMealReturns?: number;
+  pendingPackReturns?: PackReturns;
   housing?: HousingRuntime;
   version: 1;
   actors: Actor[];
@@ -186,6 +195,13 @@ export interface Game extends Stock, MealInputAccount {
 
 const zeros = (): Stock => ({ wood: 0, food: 0, ingredients: 0, coins: 0 });
 const stocks = ["wood", "food", "ingredients", "coins"] as const;
+const stockNames = {
+  wood: "木材",
+  food: "食事",
+  ingredients: "食材",
+  coins: "銀貨",
+};
+const packAmounts: Stock = { wood: 4, food: 2, ingredients: 3, coins: 4 };
 const clamp = (value: number, min = 0, max = 100) =>
   Math.max(min, Math.min(max, value));
 const round1 = (n: number) => Math.round(n * 10) / 10;
@@ -510,7 +526,15 @@ function reservation(
   cost: Partial<Stock>,
 ): Task | string {
   const bag = account(g, a);
-  if (stocks.some((k) => bag[k] < (cost[k] ?? 0)))
+  if (
+    stocks.some((k) => {
+      const packReturn =
+        t.kind === "pack" && k !== "food"
+          ? (g.pendingPackReturns?.[k] ?? 0)
+          : 0;
+      return bag[k] + packReturn < (cost[k] ?? 0);
+    })
+  )
     return "使える食材・木材・食事・銀貨が足りません。";
   t.reserved = cost;
   return t;
@@ -808,17 +832,14 @@ function plan(
     );
   if (kind === "pack" || kind === "unpack") {
     if (!atHome) return "荷物を整えるには家に戻ってください。";
-    const packAmounts: Stock = { wood: 4, food: 2, ingredients: 3, coins: 4 };
     if (!stocks.includes(target as keyof Stock))
       return "荷物を選んでください。";
     const key = target as keyof Stock;
     if (kind === "unpack" && a.cargo[key] < 1) return "荷物にありません。";
-    if (key === "food") {
-      if (kind === "unpack" && mealSpace(g) === 0)
-        return "共有備蓄に食事を下ろせる空きがありません。";
-      if (kind === "pack" && mealSpace(g, a.cargo) < packAmounts.food)
-        return "荷物に食事を積む空きがありません。";
-    }
+    if (kind === "unpack" && unloadingSpace(g, key) === 0)
+      return "共有備蓄に" + stockNames[key] + "を下ろせる空きがありません。";
+    if (kind === "pack" && stockLimit - a.cargo[key] < packAmounts[key])
+      return "荷物に" + stockNames[key] + "を積む空きがありません。";
     const t = task(
       g,
       a,
@@ -848,6 +869,8 @@ function plan(
       a.injury / 75 +
       Math.max(0, load - (a.person.body === "sturdy" ? 7 : 4)) / 14;
     const minutes = Math.max(kind === "withdraw" ? 15 : 1, distance * factor);
+    if (!integer(Math.ceil(minutes), 1))
+      return "荷物が重く、保存できる移動時間を超えます。荷物を減らしてから出発してください。";
     const name =
       places(g.world).find((p) => p.id === destination)?.name ?? "家";
     return task(
@@ -1023,8 +1046,8 @@ function stop(g: Game, a: Actor, spatialCancelled = false): void {
       return;
     }
   }
-  refundReservation(g, a, t);
   a.task = null;
+  refundReservation(g, a, t);
   housingTaskBoundary(g, a, t, "cancel");
   finishLodgingWalk(g, a, t, true);
   if (t.partner) {
@@ -1074,7 +1097,9 @@ function begin(
   const bag = account(g, a);
   for (const key of stocks) {
     const count = t.reserved[key] ?? 0;
-    if (isMealInput(t, key)) reserveMealInput(bag, key, count);
+    if (!count) continue;
+    if (t.kind === "pack" && key !== "food") reserveForPacking(g, key, count);
+    else if (isMealInput(t, key)) reserveMealInput(bag, key, count);
     else bag[key] -= count;
   }
   t.mode = auto ? "auto" : "direct";
@@ -1210,21 +1235,15 @@ export function options(g: Game, id: string): ActionOption[] {
     }
   }
   if (a.location === g.home) {
-    const amounts = {
-      wood: "木材4",
-      food: "食事2",
-      ingredients: "食材3",
-      coins: "銀貨4",
-    };
     for (const k of stocks) {
-      add("pack", amounts[k] + "を旅の荷物に積む", "field", k);
+      add(
+        "pack",
+        stockNames[k] + packAmounts[k] + "を旅の荷物に積む",
+        "field",
+        k,
+      );
       if (a.cargo[k] > 0)
-        add(
-          "unpack",
-          amounts[k].replace(/[0-9]/g, "") + "を荷物から下ろす",
-          "field",
-          k,
-        );
+        add("unpack", stockNames[k] + "を荷物から下ろす", "field", k);
     }
   } else add("return", "家に帰る", "field");
   add("explore", "道を離れて探索する", "field");
@@ -1474,23 +1493,26 @@ function refundReservation(g: Game, a: Actor, t: Task) {
     const count = t.reserved[key] ?? 0;
     if (!count) continue;
     if (key === "food" && bag === g) refundMeal(g, count);
+    else if (t.kind === "pack" && key !== "food" && bag === g)
+      refundPacking(g, key, count);
     else if (isMealInput(t, key)) refundMealInput(bag, key, count);
     else bag[key] += count;
   }
 }
 function unload(g: Game, a: Actor, key: keyof Stock) {
-  const free =
-    key === "food"
-      ? mealSpace(g)
-      : key === "ingredients" || key === "coins"
-        ? stockLimit - g[key]
-        : a.cargo[key];
-  const count = Math.min(a.cargo[key], free);
+  if (!a.cargo[key]) return "";
+  const count = Math.min(a.cargo[key], unloadingSpace(g, key));
   g[key] += count;
   a.cargo[key] -= count;
-  return key === "food" && a.cargo.food
-    ? "共有備蓄に入らない食事" + a.cargo.food + "食は荷物に残しました。"
-    : "";
+  if (!a.cargo[key]) return "";
+  const unit = { food: "食", wood: "本", coins: "枚", ingredients: "個" }[key];
+  return (
+    "共有備蓄に入らない" +
+    stockNames[key] +
+    a.cargo[key] +
+    unit +
+    "は荷物に残しました。"
+  );
 }
 function returnCargo(g: Game, a: Actor) {
   return stocks.map((key) => unload(g, a, key)).join("");
@@ -1695,9 +1717,16 @@ function finish(g: Game, a: Actor, t: Task) {
     const key = t.target as keyof Stock;
     if (t.kind === "pack") {
       const count = t.reserved[key] ?? 0;
-      if (key === "food" && mealSpace(g, a.cargo) < count) {
-        refundMeal(g, count);
-        result = "荷物に空きがないため、食事を共有備蓄に戻しました。";
+      if (stockLimit - a.cargo[key] < count) {
+        refundReservation(g, a, t);
+        const pending =
+          key === "food" ? g.pendingMealReturns : g.pendingPackReturns?.[key];
+        result =
+          "荷物に空きがありません。" +
+          stockNames[key] +
+          (pending
+            ? "は共有備蓄への返却待ちです。"
+            : "を共有備蓄に戻しました。");
       } else a.cargo[key] += count;
     } else result = unload(g, a, key);
   } else if (["travel", "return", "withdraw"].includes(t.kind)) {
@@ -1849,7 +1878,8 @@ function finish(g: Game, a: Actor, t: Task) {
   }
   housingTaskBoundary(g, a, t, "finish");
   if (peer) housingTaskBoundary(g, peer, t, "finish");
-  const lodging = finishLodgingWalk(g, a, t, false) ?? usualHomeArrival(g, a, t);
+  const lodging =
+    finishLodgingWalk(g, a, t, false) ?? usualHomeArrival(g, a, t);
   if (lodging) result += lodging;
   a.reason = result || "「" + t.label + "」を終えました。";
   if (t.kind !== "wait")
@@ -1990,6 +2020,7 @@ function advanceMinute(g: Game): boolean {
   if (completed.length) for (const a of g.actors) a.mood = moodOf(g, a);
   settleMealReturns(g);
   settleMealInputReturns(g);
+  settlePackReturns(g);
   for (const a of g.actors) settleMealInputReturns(g, a.cargo);
   returnedFood?.();
   // Ordinary stock changes for this minute get accounted for before newly released bundles.
@@ -2287,6 +2318,7 @@ export function isGame(value: unknown): value is Game {
   if (
     !validMealReturns(game) ||
     !validMealInputReturns(game) ||
+    !validPackReturns(game) ||
     !game.actors.every((a) => validMealInputReturns(game, a.cargo))
   )
     return false;

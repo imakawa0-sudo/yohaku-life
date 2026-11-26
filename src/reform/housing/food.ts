@@ -1,4 +1,5 @@
 import { settleMealInputReturns } from "../mealStock";
+import { settlePackReturns } from "../packingStock";
 import { isStockQuantity, type Game } from "../sim";
 import { issueSpatialOrder } from "../spatial/actions";
 import { sameSpatialPoint } from "../spatial/route";
@@ -113,6 +114,7 @@ export function createFoodBundle(
   refreshFoodHandling(housing);
   next.ingredients -= foodBundleQuantity;
   settleMealInputReturns(next);
+  settlePackReturns(next);
   return { game: next, bundleId: id };
 }
 
