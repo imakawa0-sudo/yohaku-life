@@ -10,7 +10,11 @@ import type { Game } from "../sim";
 import { locateSpatial } from "../spatial/actions";
 import type { SpatialPoint } from "../spatial/types";
 import { places } from "../world";
-import { inspectHousingRouteFrom, spatialReasonText } from "./bridge";
+import {
+  inspectHousingRouteFrom,
+  projectHousingOrderMinutes,
+  spatialReasonText,
+} from "./bridge";
 import { housingRoomId, housingSlotId } from "./topology";
 import type { HousingStatus } from "./types";
 
@@ -125,20 +129,30 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
       ...result,
       phase: "cancelling",
       minutes: pos.remaining,
-      detail: t.spatial.foodBundleId
-        ? "この区間を出ると担当を解除します。一束は床に残ります。"
-        : t.spatial.constructionId
-          ? constructionExitText(
-              h,
-              h.construction!.plans[t.spatial.constructionId],
-            )
-          : "この区間の終点で予約を解除し、材料を返します。",
+      detail: t.spatial.benchRecoveryId
+        ? "現在の移動区間を出てから担当を解除します。"
+        : t.spatial.foodBundleId
+          ? "この区間を出ると担当を解除します。一束は床に残ります。"
+          : t.spatial.constructionId
+            ? constructionExitText(
+                h,
+                h.construction!.plans[t.spatial.constructionId],
+              )
+            : "この区間の終点で予約を解除し、材料を返します。",
     };
   if (intent.kind === "carry") {
-    const minutes = t.spatial.foodBundleId
-      ? foodTaskMinutes(g, actorId)
-      : constructionTaskMinutes(g, actorId);
-    const material = t.spatial.foodBundleId ? "食材の一束" : "工事用木材";
+    const minutes = t.spatial.benchRecoveryId
+      ? a.injury >= 70 || a.danger
+        ? null
+        : projectHousingOrderMinutes(g, a)
+      : t.spatial.foodBundleId
+        ? foodTaskMinutes(g, actorId)
+        : constructionTaskMinutes(g, actorId);
+    const material = t.spatial.benchRecoveryId
+      ? "解体した板"
+      : t.spatial.foodBundleId
+        ? "食材の一束"
+        : "工事用木材";
     const waiting = order.phase === "waiting";
     return {
       ...result,
@@ -169,7 +183,10 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
       : allowed !== null && !allowed.includes(actorId)
         ? "use-denied"
         : null;
-  const requiresFitWorker = t.kind === "home-build" || !!t.spatial.foodBundleId;
+  const requiresFitWorker =
+    t.kind === "home-build" ||
+    !!t.spatial.foodBundleId ||
+    !!t.spatial.benchRecoveryId;
   const minutes =
     requiresFitWorker && (a.injury >= 70 || a.danger)
       ? null
@@ -209,7 +226,9 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
               ? constructionTitle(
                   h.construction!.plans[t.spatial.constructionId!],
                 ) + "を進めています。"
-              : "設備を使っています。"
+              : t.kind === "home-dismantle"
+                ? "木工台を解体しています。"
+                : "設備を使っています。"
             : "目的地へ向かっています。",
   };
 }

@@ -1,3 +1,9 @@
+import {
+  cancelBenchActor,
+  finishBenchMinute,
+  prepareBenchMinute,
+  settleBenchFinish,
+} from "./housing/benchRecovery";
 import { recordRoomStayMinute } from "./housing/roomStay";
 import { tryFoodSupply } from "./housing/foodSupply";
 import { presentFood, refreshFoodHandling, settleFood } from "./housing/food";
@@ -941,6 +947,10 @@ function plan(
 function stop(g: Game, a: Actor, spatialCancelled = false): void {
   const t = a.task;
   if (!t) return;
+  if (t.spatial?.benchRecoveryId) {
+    cancelBenchActor(g, a.person.id);
+    return;
+  }
   if (t.spatial?.foodBundleId) {
     cancelFoodActor(g, a);
     return;
@@ -1052,7 +1062,11 @@ export function order(
   if (a.task) stop(next, a);
   if (kind === "cancel") {
     if (a.task?.spatial) {
-      if (!a.task.spatial.constructionId && !a.task.spatial.foodBundleId)
+      if (
+        !a.task.spatial.constructionId &&
+        !a.task.spatial.foodBundleId &&
+        !a.task.spatial.benchRecoveryId
+      )
         a.reason = "この区間を出ると予定を取り消し、予約を返します。";
       return next;
     }
@@ -1763,6 +1777,7 @@ function advanceMinute(g: Game): boolean {
       }
     }
   }
+  prepareBenchMinute(g);
   const releasedReturns = prepareConstructionMinute(g);
   prepareFoodMinute(g);
   // Crossing a doorway cannot retroactively change exposure during that minute.
@@ -1811,7 +1826,12 @@ function advanceMinute(g: Game): boolean {
       if (t.spatial.kind === "use" && spatial.terminal === "finish")
         completedFood = { a, t };
       else returnedFood = finishFoodHaul(g, a, spatial);
-    } else if (t && !t.spatial?.gatheringId && !t.spatial?.constructionId) {
+    } else if (
+      t &&
+      !t.spatial?.gatheringId &&
+      !t.spatial?.constructionId &&
+      !t.spatial?.benchRecoveryId
+    ) {
       if (!spatial) t.remaining--;
       if (spatial?.terminal === "cancel") {
         stop(g, a, true);
@@ -1842,6 +1862,7 @@ function advanceMinute(g: Game): boolean {
       }
     }
   }
+  const completedBench = spatialMinutes && finishBenchMinute(g, spatialMinutes);
   const completedPlan =
     spatialMinutes && g.housing!.construction
       ? finishConstructionMinute(g, spatialMinutes, releasedReturns)
@@ -1867,6 +1888,7 @@ function advanceMinute(g: Game): boolean {
   // Other orders may also have ended this minute. Validate only after all their Task bindings settle.
   if (completedPlan)
     Object.assign(g, completeRoomConstruction(g, completedPlan).game);
+  if (completedBench) settleBenchFinish(g, completedBench);
   return encounter;
 }
 export function advance(g: Game, minutes: number): Game {
@@ -1941,6 +1963,8 @@ function hasKind(value: unknown): value is Skill {
 }
 const metrics: Metric[] = ["free", "work", "care", "travel", "waiting"];
 const actionKinds = [
+  "home-dismantle",
+  "home-salvage",
   "home-build",
   "home-haul",
   "home-gather",
@@ -2085,7 +2109,9 @@ export function isGame(value: unknown): value is Game {
     )
       return false;
     if (
-      (t.kind === "home-haul" ||
+      (t.kind === "home-dismantle" ||
+        t.kind === "home-salvage" ||
+        t.kind === "home-haul" ||
         t.kind === "home-build" ||
         t.kind === "home-gather") &&
       (!value.housing || !t.spatial)

@@ -18,6 +18,7 @@ import { Life } from "./Life";
 import { Setup } from "./Setup";
 import { WorldView } from "./RegionView";
 import { places } from "./world";
+import { BenchRecoveryPanel } from "./BenchRecoveryPanel";
 import { HouseEditor } from "./HouseEditor";
 import { InsulationPanel } from "./InsulationPanel";
 import { FoodLogisticsPanel } from "./FoodLogisticsPanel";
@@ -404,7 +405,9 @@ export default function ReformApp() {
               places(game.world).find((p) => p.id === game.home)?.water ?? 0
             }
             onChange={build}
-          />
+          >
+            <BenchRecoveryPanel game={game} onGame={update} />
+          </HouseEditor>
         </main>
       )}
       {activeView === "world" && game && actor && (
