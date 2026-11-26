@@ -176,7 +176,10 @@ async function saveExport(page, label) {
   const envelope = JSON.parse(json);
   assert.equal(envelope.type, "yohaku-reform-save");
   assert.ok([1, 2].includes(envelope.version));
-  assert.deepEqual(importSlot(json), before);
+  assert.deepEqual(envelope.slot, before);
+  const imported = importSlot(json);
+  assert.notEqual(imported.id, before.id);
+  assert.deepEqual(imported, { ...before, id: imported.id });
   assert.deepEqual(await readSlot(page), before);
   report.exports.push(file);
   return before;
@@ -343,6 +346,148 @@ async function ordinaryBuild(page) {
     "木工の二人の新規作成、計画・取り置き、カヤの実搬入、スイの実施工、4×3の完成室への移動と浴槽の使用、施工途中と完成後の書出し・再読込",
   );
 }
+async function wideWorkshop(page, width) {
+  await page.setViewportSize({ width, height: width === 320 ? 844 : 900 });
+  const room = "広い木工室";
+  const origin = (await startWoodworkers(page)).game;
+  await click(page, "住まい");
+  const editor = page.getByRole("region", { name: "住まいの間取り" });
+  // Invest nine wood in existing furnishings so the first large-room reservation is short by one.
+  await click(page, "裏庭", editor);
+  for (const kind of ["bath", "mat"]) {
+    await select(editor, "新しく置く設備").selectOption(kind);
+    await click(page, "この部屋に置く", editor);
+  }
+  const before = await readGame(page);
+  assert.equal(before.wood, 9);
+  const { section, destination, site } = await enterPlanning(page, room);
+  const size = select(section, "増築する部屋の広さ");
+  await expect(size).toHaveValue("3");
+  await expect(section).toContainText("4 × 3マス（12マス）・木材6・施工30分");
+  await size.selectOption("4");
+  const quote = "4 × 4マス（16マス）・木材10・施工30分";
+  await expect(section).toContainText(quote);
+  await destination.selectOption("bedroom");
+  await site.selectOption("2");
+  await screenshot(
+    page,
+    "large-plan-" + width + ".png",
+    button(section, "計画する"),
+  );
+  assert.deepEqual(await readGame(page), before);
+  await click(page, "計画する", section);
+  const project = card(page, room);
+  const planned = await readGame(page);
+  assert.equal(planned.time, origin.time);
+  assert.equal(planned.wood, before.wood);
+  assert.deepEqual(planned.house, before.house);
+  assert.equal(plan(planned).height, 4);
+  assert.equal(plan(planned).requiredWood, 10);
+  const reserve = button(project, "木材10を取り置く");
+  await expect(reserve).toBeDisabled();
+  await expect(project).toContainText("共同備蓄に木材10が必要です。");
+  await expect(project).toContainText(quote);
+
+  const worker = before.actors[0].person;
+  await click(page, "暮らし");
+  const workPanel = page.getByRole("region", { name: "行動の指示" });
+  await click(page, "仕事", workPanel);
+  await workPanel
+    .locator('button[data-kind="work"][data-target="wood"]')
+    .click();
+  await expect(page.locator(".rf-app")).toHaveAttribute("aria-busy", "false");
+  assert.equal((await readGame(page)).actors[0].task.target, "wood");
+  await runUntil(page, (g) => !g.actors[0].task);
+  const restocked = await readGame(page);
+  assert.ok(restocked.wood >= 13);
+  await click(page, "住まい");
+  await click(page, "木材10を取り置く", project);
+  const reserved = await readGame(page);
+  assert.equal(reserved.wood, restocked.wood - 10);
+  assert.equal(reserved.time, restocked.time);
+  assert.equal(plan(reserved).material.quantity, 10);
+  assert.deepEqual(bundle(reserved).position, floor("living", 0));
+  await select(project, "搬入担当").selectOption(worker.id);
+  await click(page, "仮置き場へ運ぶ", project);
+  const staged = await runUntil(page, (g) => !plan(g).assignment);
+  assert.deepEqual(bundle(staged).position, floor("bedroom", 2));
+  await select(project, "施工担当").selectOption(worker.id);
+  await click(page, "施工する", project);
+  await useClock(page, "15分進める");
+  const working = await readSlot(page);
+  assert.equal(plan(working.game).workedMinutes, 15);
+  assert.deepEqual(working.game.house, planned.house);
+  await reload(page, working);
+  await click(page, "住まい");
+  await expect(project).toContainText(quote);
+  const built = await runUntil(page, (g) => plan(g).status === "completed");
+  const completed = plan(built);
+  assert.equal(completed.workedMinutes, 30);
+  assert.equal(completed.material.state, "consumed");
+  assert.equal(completed.material.quantity, 10);
+  assert.equal(bundle(built), undefined);
+  const id = completed.roomId;
+  const added = built.house.rooms.find((r) => r.id === id);
+  assert.deepEqual([added.width, added.height], [4, 4]);
+  assert.equal(built.house.rooms.length, before.house.rooms.length + 1);
+  await click(page, room, editor);
+  await select(editor, "新しく置く設備").selectOption("workbench");
+  const tiles = editor
+    .locator("summary")
+    .filter({ hasText: "室内のマスを編集" });
+  await tiles.click();
+  await expect(editor.locator(".yh-house-blueprint button")).toHaveCount(16);
+  await click(page, "4列4行　床", editor);
+  await select(editor, "4列4行の編集").selectOption("furniture");
+  await click(page, "選んだマスに適用", editor);
+  await expect(button(editor, "4列4行　木工台")).toBeVisible();
+  await screenshot(
+    page,
+    "large-placed-" + width + ".png",
+    button(editor, "4列4行　木工台"),
+  );
+  const furnished = await readSlot(page);
+  const bench = furnished.game.house.rooms.find((r) => r.id === id).fixtures[0];
+  assert.deepEqual([bench.kind, bench.cell], ["workbench", 15]);
+  assert.equal(furnished.game.wood, built.wood - 3);
+  assert.equal(furnished.game.time, built.time);
+  await reload(page, furnished);
+  await click(page, "暮らし");
+  await click(
+    page,
+    worker.name,
+    page.getByRole("group", { name: "住民を選ぶ" }),
+  );
+  await click(page, "仕事", workPanel);
+  const wood = workPanel.locator(
+    'button[data-kind="work"][data-target="wood"]',
+  );
+  await wood.locator("..").getByRole("combobox").selectOption(bench.id);
+  await expect(wood.locator("..")).toContainText(
+    "広い木工室・木工台（4列4行）",
+  );
+  await wood.click();
+  await expect(page.locator(".rf-app")).toHaveAttribute("aria-busy", "false");
+  const atWork = await readGame(page);
+  assert.equal(
+    atWork.actors[0].task.station,
+    JSON.stringify(["slot", id, bench.id, 0]),
+  );
+  const finished = await runUntil(page, (g) => !g.actors[0].task);
+  assert.equal(finished.actors[0].room, id);
+  assert.ok(finished.wood > atWork.wood);
+  report.normal.push({
+    width,
+    room,
+    cost: 10,
+    woodBeforeReservation: restocked.wood,
+    builtAt: built.time,
+    midConstructionMinutes: 15,
+    lastCell: bench.cell,
+    lastCellWorkFinished: finished.time,
+  });
+}
+
 async function verifySlotIsolation(page, saved, room) {
   await click(page, "住まい");
   const { section, destination, site } = await enterPlanning(
@@ -440,7 +585,9 @@ async function seed(page, game, origin, label) {
     },
     [LIBRARY_KEY, data],
   );
-  await reload(page, slot);
+  // Compare the JSON representation written to storage. Fixture maps in memory
+  // can have a null prototype, which the save format does not encode.
+  await reload(page, JSON.parse(JSON.stringify(slot)));
 }
 function makeControlled() {
   return sim.enableHousing(
@@ -549,6 +696,9 @@ try {
     args: ["--no-sandbox"],
   });
   report.launched = true;
+  for (const width of [1280, 320]) {
+    await inFreshContext((page) => wideWorkshop(page, width));
+  }
   await inFreshContext(ordinaryBuild);
   await inFreshContext(ordinaryCancel);
   await inFreshContext(stockBoundary);
