@@ -441,6 +441,7 @@ export function isHousingRuntime(
     !isFoodLedger(value.foodLogistics, game.time)
   )
     return false;
+  if (!validGatherings(value as unknown as HousingRuntime, game)) return false;
   const topology = buildHousingTopology(
     game.house,
     located,
@@ -448,6 +449,7 @@ export function isHousingRuntime(
     state.actors,
     value.layoutVersion === 2 ? 2 : undefined,
     value.construction as HousingRuntime["construction"],
+    value.gatherings as HousingRuntime["gatherings"],
   );
   if (
     !sameData(controls, topology.controls) ||
@@ -503,7 +505,7 @@ export function isHousingRuntime(
       occupied.add(physicalSeat);
     }
   }
-  return validGatherings(value as unknown as HousingRuntime, game);
+  return true;
 }
 
 /** Saved links form a simple path even after a new shortcut becomes the shortest route. */
@@ -717,6 +719,7 @@ function applyHouseShape(
     actors,
     runtime?.layoutVersion,
     runtime?.construction,
+    runtime?.gatherings,
   );
   const next = structuredClone(game);
   settleConstruction?.(next);
@@ -727,6 +730,7 @@ function applyHouseShape(
     actors,
     runtime?.layoutVersion,
     next.housing?.construction,
+    next.housing?.gatherings,
   );
   const conflict = editConflict(game, house, before, after);
   if (conflict) return { game, error: conflict };

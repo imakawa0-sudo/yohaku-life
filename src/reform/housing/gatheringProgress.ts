@@ -1,8 +1,13 @@
+import { refundMeal } from "../mealStock";
 import { furnishings } from "../house";
 import type { Actor, Game } from "../sim";
 import { cancelSpatialOrder, spatialReservationId } from "../spatial/actions";
 import { sameSpatialPoint } from "../spatial/route";
-import { spatialReasonText, type HousingMinute } from "./bridge";
+import {
+  rebuildHousingGeometry,
+  spatialReasonText,
+  type HousingMinute,
+} from "./bridge";
 import { housingSlotId } from "./topology";
 import {
   gatheringWaitMinutes,
@@ -55,10 +60,20 @@ export function gatheringPresence(g: Game, actorId: string): string[] {
     .map((m) => m.actorId);
   return present.includes(actorId) ? present : [];
 }
+/** An early start dismisses absentees; the guest cannot keep a private seat if that dismisses the host. */
+function readyForStart(g: Game, group: HousingGathering) {
+  const present = group.members.filter((m) => ready(g, m));
+  const pair = group.invitation;
+  if (pair && !present.some((m) => m.actorId === pair.hostId))
+    return present.filter((m) => m.actorId !== pair.guestId);
+  return present;
+}
+
 export function inspectStartReadyGathering(g: Game, id: string) {
   const activity = g.housing?.gatherings?.[id];
-  const readyActorIds =
-    activity?.members?.filter((m) => ready(g, m)).map((m) => m.actorId) ?? [];
+  const readyActorIds = activity
+    ? readyForStart(g, activity).map((m) => m.actorId)
+    : [];
   const disabled =
     !activity || activity.startedAt !== null
       ? "集合中の予定がありません。"
@@ -130,7 +145,7 @@ function release(g: Game, member: GatheringMember, finished: boolean) {
   const actor = g.actors.find((a) => a.person.id === member.actorId)!;
   const task = actor.task;
   if (task?.spatial?.orderId !== member.orderId) return;
-  if (!finished) g.food += task.reserved.food ?? 0;
+  if (!finished) refundMeal(g, task.reserved.food ?? 0);
   actor.task = null;
   actor.reason = finished
     ? "集まりでの予定を終えました。"
@@ -149,12 +164,40 @@ function withdraw(g: Game, member: GatheringMember) {
     member.stoppedAt = null;
   } else release(g, member, false);
 }
+/** Revoke only this meeting's privilege. A newly authorized resident can continue as an ordinary member. */
+function reconcileInvitation(g: Game, group: HousingGathering) {
+  const pair = group.invitation;
+  if (!pair) return;
+  const h = g.housing!;
+  const allowed = h.controls.roomAccess[group.roomId];
+  const guest = group.members.find((m) => m.actorId === pair.guestId)!;
+  const needsHost = allowed !== null && !allowed.includes(pair.guestId);
+  if (
+    needsHost &&
+    allowed.includes(pair.hostId) &&
+    guest.status === "participating" &&
+    group.members.some(
+      (m) => m.actorId === pair.hostId && m.status === "participating",
+    )
+  )
+    return;
+  delete group.invitation;
+  if (needsHost) withdraw(g, guest);
+  rebuildHousingGeometry(g, h);
+}
+
+export function reconcileRoomInvitations(g: Game, roomId: string) {
+  for (const group of Object.values(g.housing?.gatherings ?? {}))
+    if (group.roomId === roomId && group.invitation) settle(g, group);
+}
+
 function settle(g: Game, activity: HousingGathering, early = false) {
+  reconcileInvitation(g, activity);
   const current = participating(activity);
   if (current.length < required(activity)) {
     for (const m of current) withdraw(g, m);
   } else if (activity.startedAt === null) {
-    const present = current.filter((m) => ready(g, m));
+    const present = readyForStart(g, activity);
     if (present.length === current.length) activity.startedAt = g.time;
     else if (early || g.time >= activity.deadline) {
       if (present.length >= required(activity)) activity.startedAt = g.time;
@@ -162,6 +205,7 @@ function settle(g: Game, activity: HousingGathering, early = false) {
         if (activity.startedAt === null || !present.includes(m)) withdraw(g, m);
     }
   }
+  reconcileInvitation(g, activity);
   if (
     activity.members.every(
       (m) => m.status === "left" || m.status === "completed",

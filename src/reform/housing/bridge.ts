@@ -1,3 +1,4 @@
+import { reconcileRoomInvitations } from "./gatheringProgress";
 import { prepareBenchMinute, refreshBenchHandling } from "./benchRecovery";
 import { prepareFoodMinute } from "./foodProgress";
 import { foodCookingSeat, planFoodCooking } from "./foodCooking";
@@ -48,6 +49,7 @@ function geometry(g: Game, h: HousingRuntime) {
     h.state.actors,
     h.layoutVersion,
     h.construction,
+    h.gatherings,
   );
 }
 /** Inspect a leg with the entry rights the resident will have at its starting floor. */
@@ -78,6 +80,7 @@ export function inspectHousingRouteFrom(
       actors,
       h.layoutVersion,
       h.construction,
+      h.gatherings,
     );
     // Keep the caller's physical graph (it may be checking permission independently of closures).
     graph = { ...graph, actors, entryRules: geometry.entryRules };
@@ -131,6 +134,7 @@ export function setHousingRoomAccess(
   h.controls.roomAccess[roomId] =
     allowedActorIds === null ? null : [...allowedActorIds];
   rebuildHousingGeometry(next, h);
+  reconcileRoomInvitations(next, roomId);
   releaseRevokedConstructionWorkers(next, g.housing);
   prepareFoodMinute(next);
   prepareBenchMinute(next);

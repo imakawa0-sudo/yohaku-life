@@ -1,5 +1,5 @@
 import { homeColdProtection } from "./housing/coldProtection";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Backpack,
   BedDouble,
@@ -32,6 +32,7 @@ import {
 } from "./peopleModel";
 import type { Skill } from "./peopleModel";
 import { HousingPanel, housingStageNames } from "./HousingPanel";
+import { invitationWithdrawalText } from "./GatheringPanel";
 import { BedAccessPolicy, BedPreferencePolicy } from "./BedPreferencePolicy";
 import {
   FacilityAction,
@@ -307,11 +308,13 @@ function ActionPanel({
   actor,
   onGame,
   facilitySelection,
+  invitationWithdrawal,
 }: {
   game: Game;
   actor: Actor;
   onGame: (g: Game) => void;
   facilitySelection?: FacilitySelection;
+  invitationWithdrawal?: string;
 }) {
   const [group, setGroup] = useState<ActionGroup>("need");
   const commands = options(game, actor.person.id);
@@ -346,6 +349,14 @@ function ActionPanel({
     .filter(([, n]) => n > 0)
     .map(([key, n]) => stockNames[key as keyof typeof stockNames] + n)
     .join("・");
+  const cancelNote =
+    invitationWithdrawal ??
+    foodCancel ??
+    constructionCancel ??
+    ((reserved || cancelling) &&
+      (actor.task?.spatial
+        ? "取り消すと予約を解除します。通路を移動中は、今の区間を出てから取り置きした物が戻ります。"
+        : "取り消すと取り置きした物が戻ります。"));
   return (
     <section className="lf-panel lf-orders" aria-label="行動の指示">
       <div className="lf-section-title">
@@ -380,25 +391,19 @@ function ActionPanel({
             type="button"
             data-kind="cancel"
             disabled={!!cancel.disabled || cancelling}
-            aria-describedby={
-              reserved || cancelling || constructionCancel || foodCancel
-                ? "lf-refund"
-                : undefined
-            }
+            aria-describedby={cancelNote ? "lf-refund" : undefined}
             onClick={() =>
               onGame(order(game, actor.person.id, cancel.kind, cancel.target))
             }
           >
             {cancel.label}
           </button>
-          {(reserved || cancelling || constructionCancel || foodCancel) && (
+          {cancelNote && (
             <p className="lf-note" id="lf-refund">
-              {reserved && "取り置き中　" + reserved + "。"}
-              {foodCancel ??
-                constructionCancel ??
-                (actor.task?.spatial
-                  ? "取り消すと予約を解除します。通路を移動中は、今の区間を出てから取り置きした物が戻ります。"
-                  : "取り消すと取り置きした物が戻ります。")}
+              {!invitationWithdrawal &&
+                reserved &&
+                "取り置き中　" + reserved + "。"}
+              {cancelNote}
             </p>
           )}
         </>
@@ -422,6 +427,10 @@ export function Life({
 }) {
   const actor =
     game.actors.find((a) => a.person.id === selected) ?? game.actors[0];
+  const invitationWithdrawal = useMemo(
+    () => actor && invitationWithdrawalText(game, actor),
+    [game, actor],
+  );
   if (!actor) return <p>暮らしを始める住民を作成してください。</p>;
   const person = actor.person;
   const day = Math.floor(game.time / 1440) + 1;
@@ -660,6 +669,12 @@ export function Life({
                 銀貨 <b>{game.coins}</b>
               </span>
             </div>
+            {!!game.pendingMealReturns && (
+              <p className="lf-cargo">
+                返却待ちの食事 {game.pendingMealReturns}食 ·
+                共同備蓄に空きができた分から戻ります。
+              </p>
+            )}
             {foodStatus?.state === "present" && (
               <p className="lf-cargo">
                 共同備蓄とは別に 野菜の一束（食材2） · {foodStatus.location} ·{" "}
@@ -687,12 +702,14 @@ export function Life({
             actor={actor}
             onGame={onGame}
             facilitySelection={facilitySelection}
+            invitationWithdrawal={invitationWithdrawal}
           />
           {status && (
             <HousingPanel
               game={game}
               actor={actor}
               status={status}
+              invitationWithdrawal={invitationWithdrawal}
               onGame={onGame}
             />
           )}
