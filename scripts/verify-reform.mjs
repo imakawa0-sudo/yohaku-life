@@ -788,6 +788,12 @@ try {
       });
     }
   }
+  if (flags.has("--room-lodging")) {
+    const { verifyRoomLodging } = await import("./verify-room-lodging.mjs");
+    for (const width of [1280, 320]) {
+      await verifyRoomLodging(width, { fresh, makeStart, enter, currentGame, tab, button, showSection, screenshot, checkLegacy, report });
+    }
+  }
   if (flags.has("--field")) await fieldTrip();
   if (flags.has("--recovery-bed")) {
     for (const width of [1280,320]) await fieldTrip(width);
