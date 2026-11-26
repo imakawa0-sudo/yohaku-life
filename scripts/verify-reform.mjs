@@ -792,6 +792,12 @@ try {
       });
     }
   }
+  if (flags.has("--lodging-maintenance")) {
+    const { verifyLodgingMaintenance } = await import("./verify-lodging-maintenance.mjs");
+    for (const width of [1280, 320]) {
+      await verifyLodgingMaintenance(width, { fresh, makeStart, enter, currentGame, tab, button, showSection, screenshot, checkLegacy, report });
+    }
+  }
   if (flags.has("--room-lodging")) {
     const { verifyRoomLodging } = await import("./verify-room-lodging.mjs");
     for (const width of [1280, 320]) {

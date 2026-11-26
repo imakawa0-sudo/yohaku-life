@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Snowflake } from "lucide-react";
 import { cellName, type Room } from "./house";
 import { residentLabel, roomLabel } from "./displayNames";
 import { roomStayMinutes } from "./housing/roomStay";
+import { LodgingMaintenancePanel } from "./LodgingMaintenancePanel";
 import {
   ConstructionAction,
   ConstructionCard,
@@ -19,7 +20,7 @@ import {
 } from "./housing/constructionTopology";
 import { housingPoint } from "./housing/topology";
 import { sameSpatialPoint } from "./spatial/route";
-import type { Game } from "./sim";
+import type { Actor, Game } from "./sim";
 
 function clockLabel(minutesSinceMidnight: number) {
   const hour = Math.floor(minutesSinceMidnight / 60);
@@ -107,11 +108,24 @@ function RoomStayHistory({ game, rooms }: { game: Game; rooms: Room[] }) {
 export function InsulationPanel({
   game,
   onGame,
+  actor,
+  onSelect,
+  initialRoomId,
 }: {
   game: Game;
   onGame: (game: Game) => Promise<boolean> | void;
+  actor?: Actor;
+  onSelect?: (id: string) => void;
+  initialRoomId?: string;
 }) {
-  const [roomId, setRoom] = useState("");
+  const [roomId, setRoom] = useState(initialRoomId ?? "");
+  const section = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (initialRoomId) {
+      section.current?.focus({ preventScroll: true });
+      section.current?.scrollIntoView({ block: "start" });
+    }
+  }, [initialRoomId]);
   const [stagingCell, setStaging] = useState("");
   const [error, setError] = useState("");
   const h = game.housing;
@@ -152,7 +166,12 @@ export function InsulationPanel({
     return (await onGame(result.game)) !== false;
   };
   return (
-    <section className="lf-panel lf-construction" aria-label="一室の寒さ対策">
+    <section
+      className="lf-panel lf-construction"
+      aria-label="一室の寒さ対策"
+      tabIndex={-1}
+      ref={section}
+    >
       <div className="lf-section-title">
         <Snowflake size={19} aria-hidden="true" />
         <h2>一室の寒さ対策</h2>
@@ -185,6 +204,15 @@ export function InsulationPanel({
       ) : (
         <>
           <RoomStayHistory game={game} rooms={rooms} />
+          {h.lodging?.phase === "occupied" && actor && onSelect && (
+            <LodgingMaintenancePanel
+              game={game}
+              actor={actor}
+              stay={h.lodging}
+              onGame={onGame}
+              onSelect={onSelect}
+            />
+          )}
           {error && (
             <p role="alert" className="lf-construction-error">
               {error}

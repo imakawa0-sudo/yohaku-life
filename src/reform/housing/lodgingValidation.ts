@@ -1,4 +1,5 @@
 import type { Game } from "../sim";
+import { constructionPlan } from "./constructionTopology";
 import { fields } from "./saveFields";
 import { housingPoint } from "./topology";
 import type { HousingRuntime } from "./types";
@@ -10,7 +11,7 @@ export function validLodging(h: HousingRuntime, game: Game): boolean {
     !fields(
       stay,
       ["version", "providerId", "residentId", "roomId", "phase", "returnTo"],
-      ["orderId"],
+      ["orderId", "maintenance"],
     ) ||
     stay.version !== 1 ||
     !["offered", "arriving", "occupied", "leaving"].includes(stay.phase) ||
@@ -25,6 +26,24 @@ export function validLodging(h: HousingRuntime, game: Game): boolean {
     return false;
   const resident = game.actors.find((a) => a.person.id === stay.residentId);
   if (!resident) return false;
+  if (Object.hasOwn(stay, "maintenance")) {
+    const request = stay.maintenance;
+    if (
+      stay.phase !== "occupied" ||
+      !fields(request, ["planId", "phase"]) ||
+      typeof request.planId !== "string" ||
+      (request.phase !== "requested" && request.phase !== "accepted")
+    )
+      return false;
+    const plan = constructionPlan(h, request.planId);
+    if (
+      plan?.kind !== "insulation" ||
+      plan.status !== "planned" ||
+      plan.neighborId !== stay.roomId ||
+      plan.workedMinutes >= plan.workMinutes
+    )
+      return false;
+  }
   if (stay.phase === "offered") {
     const allowed = h.controls.roomAccess[stay.roomId];
     return (

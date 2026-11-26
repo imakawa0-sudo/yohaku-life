@@ -1,6 +1,6 @@
 import { useId, useState } from "react";
 import { Hammer } from "lucide-react";
-import { roomLabel } from "./displayNames";
+import { residentLabel, roomLabel } from "./displayNames";
 import {
   cellName,
   maxRoomHeight,
@@ -94,7 +94,14 @@ function ConstructionAssignment({
 }) {
   const [actorId, setActorId] = useState("");
   const choices = game.actors.map((actor) => {
-    const { id, name } = actor.person;
+    const { id } = actor.person;
+    const stay = game.housing?.lodging;
+    const accepted =
+      stay?.maintenance?.planId === plan.id &&
+      stay.maintenance.phase === "accepted" &&
+      stay.providerId === id;
+    const name =
+      residentLabel(game, actor) + (accepted ? "（この工事の引受者）" : "");
     const preview =
       kind === "build"
         ? inspectConstructionBuild(game, plan.id, id)
@@ -210,6 +217,7 @@ export function ConstructionCard({
   const assignmentKind =
     plan.status === "cancelled" ? "return" : staging ? "build" : "deliver";
   const returnAtSource = sourceReturnMaterial(h, plan);
+  const maintenance = h.lodging?.maintenance?.planId === plan.id;
   const completion =
     plan.status === "planned" && status.remainingMinutes === 0
       ? inspectConstructionCompletion(game, plan.id)
@@ -266,6 +274,11 @@ export function ConstructionCard({
         {work ? (
           <ConstructionAction
             label="担当を外す"
+            hint={
+              plan.assignment?.lodgingMaintenance
+                ? "この工程の担当を外します。依頼の引受は続き、改めて担当を選べます。"
+                : undefined
+            }
             disabled={
               work.phase === "cancelling"
                 ? "区間の終点で担当を外れます。"
@@ -313,9 +326,10 @@ export function ConstructionCard({
           <ConstructionAction
             label="この工事を取り消す"
             hint={
-              plan.material?.state === "present"
-                ? "持ち出した木材は、取り消したあとで供給口へ運び戻せます。"
-                : undefined
+              (maintenance ? "この計画の工事依頼も終了します。" : "") +
+                (plan.material?.state === "present"
+                  ? "持ち出した木材は、取り消したあとで供給口へ運び戻せます。"
+                  : "") || undefined
             }
             onClick={() => void run(cancelRoomConstruction(game, plan.id))}
           />

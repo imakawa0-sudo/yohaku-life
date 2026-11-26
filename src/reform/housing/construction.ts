@@ -1,3 +1,5 @@
+import { lodgingWorkGraph } from "./lodgingMaintenanceAccess";
+import { endLodgingMaintenance } from "./lodgingMaintenance";
 import { settlePackReturns } from "../packingStock";
 import { isIndoorHousingRoom, isRoomInsulated } from "./coldProtection";
 import {
@@ -13,7 +15,7 @@ import {
   rebuildHousingGeometry,
   spatialReasonText,
 } from "./bridge";
-import { constructionSlotId, housingPoint } from "./topology";
+import { constructionSlotId, housingPoint, housingRoomId } from "./topology";
 import {
   constructionFloor,
   sourceReturnMaterial,
@@ -236,7 +238,8 @@ export function assignConstructionHaul(
   )
     return { game, error: "木材はすでに届け先にあるか、運搬中です。" };
   const { next, h, worker } = workerCandidate(game, actor);
-  const result = issueSpatialOrder(h.state, {
+  const workGraph = lodgingWorkGraph(h, plan, actorId, direction);
+  const result = issueSpatialOrder(workGraph ?? h.state, {
     kind: "carry",
     actorId,
     destination,
@@ -249,6 +252,7 @@ export function assignConstructionHaul(
     actorId,
     orderId,
     kind: direction,
+    ...(workGraph && { lodgingMaintenance: true }),
   };
   const label =
     direction === "deliver"
@@ -266,6 +270,19 @@ export function assignConstructionHaul(
     spatial: { kind: "carry", orderId, constructionId: planId, direction },
   };
   worker.reason = label + "よう指示されています。";
+  if (workGraph) {
+    rebuildHousingGeometry(next, h);
+    // Leaving a private room to collect the board may exhaust the worker's right to cross that room.
+    if (
+      worker.room !== housingRoomId(item.position.point.domainId) &&
+      constructionTaskMinutes(next, actorId) === null
+    )
+      return {
+        game,
+        error:
+          "木材を拾った地点から仮置き場へは通れません。途中の部屋の入室許可を確認してください。",
+      };
+  }
   return { game: next, planId };
 }
 export function assignConstructionBuild(
@@ -294,7 +311,8 @@ export function assignConstructionBuild(
   const { next, h: housing, worker } = workerCandidate(game, actor);
   const slotId = constructionSlotId(planId),
     remaining = plan.workMinutes - plan.workedMinutes;
-  const result = issueSpatialOrder(housing.state, {
+  const workGraph = lodgingWorkGraph(housing, plan, actorId, "build");
+  const result = issueSpatialOrder(workGraph ?? housing.state, {
     kind: "use",
     actorId,
     slotId,
@@ -308,6 +326,7 @@ export function assignConstructionBuild(
     actorId,
     orderId,
     startedWorkMinutes: plan.workedMinutes,
+    ...(workGraph && { lodgingMaintenance: true }),
   };
   worker.task = {
     kind: "home-build",
@@ -323,6 +342,7 @@ export function assignConstructionBuild(
     spatial: { kind: "use", orderId, constructionId: planId },
   };
   worker.reason = constructionTitle(plan) + "を担当しています。";
+  if (workGraph) rebuildHousingGeometry(next, housing);
   return { game: next, planId };
 }
 export function inspectConstructionBuild(
@@ -356,7 +376,13 @@ export function cancelRoomConstruction(
     plan = h.construction!.plans[planId];
   plan.status = "cancelled";
   plan.cancelledAt = game.time;
-  if (plan.assignment) cancelConstructionActor(next, plan.assignment.actorId);
+  if (h.lodging?.maintenance?.planId === planId) endLodgingMaintenance(next);
+  if (
+    plan.assignment &&
+    h.state.actors[plan.assignment.actorId].order?.phase !==
+      "exiting-after-cancel"
+  )
+    cancelConstructionActor(next, plan.assignment.actorId);
   settleConstructionReturn(next, plan);
   rebuildHousingGeometry(next, h);
   return { game: next, planId };

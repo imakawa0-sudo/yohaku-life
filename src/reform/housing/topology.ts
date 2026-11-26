@@ -111,8 +111,8 @@ function controlsForHouse(
   };
 }
 
-/** Apply to a detached graph: walk into the venue, use only the offered seat(s). */
-export function allowGatheringGuest(
+/** Let one visitor enter this room and use only the listed slots. */
+export function allowRoomVisit(
   geometry: HousingTopology["geometry"],
   roomId: string,
   guestId: string,
@@ -293,7 +293,7 @@ export function buildHousingTopology(
         (m) => m.actorId === pair.hostId && m.status === "participating",
       )
     )
-      allowGatheringGuest(geometry, group.roomId, pair.guestId, [guest.slotId]);
+      allowRoomVisit(geometry, group.roomId, pair.guestId, [guest.slotId]);
   }
   return { geometry, slots, controls: settings };
 }

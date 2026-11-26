@@ -1,6 +1,10 @@
 import { useId, useState } from "react";
 import { residentLabel, roomLabel } from "./displayNames";
 import {
+  LodgingMaintenancePanel,
+  maintenanceWithdrawalHint,
+} from "./LodgingMaintenancePanel";
+import {
   acceptLodging,
   declineLodging,
   endLodging,
@@ -18,6 +22,7 @@ type Props = {
   actor: Actor;
   onGame: (game: Game) => void;
   onSelect: (id: string) => void;
+  onOpenInsulation?: (roomId: string) => void;
 };
 
 const phases: Record<RoomLodging["phase"], string> = {
@@ -193,6 +198,7 @@ function ActiveLodging({
   actor,
   onGame,
   onSelect,
+  onOpenInsulation,
   stay,
 }: Props & { stay: RoomLodging }) {
   const room = game.house.rooms.find((r) => r.id === stay.roomId)!;
@@ -215,6 +221,9 @@ function ActiveLodging({
     walking || homecoming ? housingStatus(game, stay.residentId) : null;
   const cancelling = walk?.phase === "cancelling";
   const cancelHintId = useId();
+  const maintenancePlan =
+    stay.maintenance &&
+    game.housing?.construction?.plans[stay.maintenance.planId];
   return (
     <div className="lf-lodging-body">
       <dl className="lf-housing-status">
@@ -313,6 +322,16 @@ function ActiveLodging({
           は入居中、この部屋に入れます。寝床の優先・専用設定は個別の設定に従います。家計は世帯で共用します。
         </p>
       )}
+      {stay.phase === "occupied" && (
+        <LodgingMaintenancePanel
+          game={game}
+          actor={actor}
+          stay={stay}
+          onGame={onGame}
+          onSelect={onSelect}
+          onOpenInsulation={onOpenInsulation}
+        />
+      )}
       {ending && (
         <>
           <ReturnForm
@@ -331,7 +350,11 @@ function ActiveLodging({
                   ending.minutes +
                   "分歩き、居室を引き渡します。"
                 : "今いる場所で居室を引き渡します。") +
-              "退居後も同じ世帯で暮らします。"
+              "退居後も同じ世帯で暮らします。" +
+              (maintenancePlan
+                ? "退居を始めると工事の依頼も終了します。" +
+                  maintenanceWithdrawalHint(game, maintenancePlan)
+                : "")
             }
           />
         </>

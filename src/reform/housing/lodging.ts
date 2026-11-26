@@ -1,3 +1,4 @@
+import { endLodgingMaintenance } from "./lodgingMaintenance";
 import type { Actor, Game, Task } from "../sim";
 import { sameSpatialPoint } from "../spatial/route";
 import { planHousing, rebuildHousingGeometry } from "./bridge";
@@ -145,6 +146,7 @@ function changeOccupancy(
   const next = structuredClone(game),
     housing = next.housing!,
     stay = housing.lodging!;
+  if (!arriving) endLodgingMaintenance(next);
   // A resident outside the room can give it up in place, including while away.
   if (
     !arriving &&

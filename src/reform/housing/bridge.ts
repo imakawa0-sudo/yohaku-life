@@ -1,3 +1,9 @@
+import { activeLodgingWorkGraph } from "./lodgingMaintenanceAccess";
+import {
+  privateWorkFloor,
+  recordMaintenanceEntry,
+  releaseFinishedMaintenanceVisits,
+} from "./maintenanceVisit";
 import { reconcileRoomInvitations } from "./gatheringProgress";
 import { prepareBenchMinute, refreshBenchHandling } from "./benchRecovery";
 import { prepareFoodMinute } from "./foodProgress";
@@ -93,6 +99,7 @@ export function rebuildHousingGeometry(g: Game, h: HousingRuntime) {
   const topology = geometry(g, h);
   Object.assign(h.state, topology.geometry);
   h.controls = topology.controls;
+  releaseFinishedMaintenanceVisits(h);
   refreshConstructionHandling(h);
   refreshFoodHandling(h);
   refreshBenchHandling(h);
@@ -225,6 +232,7 @@ export function housingTaskBoundary(
           reason: a.location === g.home ? "legacy-unspecified" : "outside",
         },
       };
+      releaseFinishedMaintenanceVisits(h);
     }
   } else if (previous) {
     if (event === "begin" && a.location === g.home) {
@@ -280,7 +288,9 @@ function unavailableUseReason(reasons: ReadonlySet<UseReason>): string {
   ] as const)
     if (reasons.has(reason)) {
       const detail = spatialReasonText(reason);
-      return hasAssignedBed ? "ほかの住人専用の寝床があります。" + detail : detail;
+      return hasAssignedBed
+        ? "ほかの住人専用の寝床があります。" + detail
+        : detail;
     }
   return "使える設備の使用位置がありません。家具の隣に入口から届く床が必要です。";
 }
@@ -335,6 +345,8 @@ export function planHousing(
   if (t.kind === "home-move") {
     const dest = readHousingMoveTarget(t.target);
     if (!dest) return spatialReasonText("invalid-input");
+    if (privateWorkFloor(h, id, dest))
+      return "工事のために入った居室です。入口か室外への移動先を選んでください。";
     const route = inspectSpatialRoute(h.state, id, position.point, dest);
     if (!route.ok) return spatialReasonText(route.reason);
     t.total = t.remaining = Math.max(1, route.minutes);
@@ -482,8 +494,13 @@ export function advanceHousingMinute(
 ): Map<string, HousingMinute> {
   const h = g.housing!;
   const previous = h.state;
-  const { state, events } = advanceSpatialMinute(previous, heldUseOrderIds);
+  const workGraph = activeLodgingWorkGraph(h);
+  const { state, events } = advanceSpatialMinute(
+    workGraph ?? previous,
+    heldUseOrderIds,
+  );
   h.state = state;
+  if (workGraph) recordMaintenanceEntry(h);
   const result = new Map<string, HousingMinute>();
   const diners: { a: Actor; point: SpatialPoint }[] = [];
   let crossed = false;
@@ -566,7 +583,7 @@ export function advanceHousingMinute(
       };
     }
   }
-  if (crossed) rebuildHousingGeometry(g, h);
+  if (workGraph || crossed) rebuildHousingGeometry(g, h);
   return result;
 }
 
