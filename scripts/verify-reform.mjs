@@ -577,6 +577,10 @@ async function useRecoveryBed(page, home, width) {
   const notice = page.getByRole("region", { name: "家の中の移動と設定" }).locator(".lf-note").first();
   await expect(notice).toContainText("寝床の予約を解除");
   await expect(notice).not.toContainText("材料");
+  const cancel = actions.getByRole("button", { name: "現在の予定を取り消す", exact: true });
+  await expect(cancel).toHaveAccessibleDescription(/寝床.*予約.*解除/);
+  await expect(cancel).not.toHaveAccessibleDescription(/取り置きした物が戻ります|材料/);
+  await expect(actions).not.toContainText("取り置きした物が戻ります");
   await page.reload();
   assert.deepEqual(await currentGame(page), leaving);
   await button(page, "5分進める").click();

@@ -346,6 +346,13 @@ function ActionPanel({
     .filter(([, n]) => n > 0)
     .map(([key, n]) => stockNames[key as keyof typeof stockNames] + n)
     .join("・");
+  const recoveryCancel =
+    actor.task?.kind === "recover" && actor.task.spatial
+      ? cancelling
+        ? housingStatus(game, actor.person.id).detail
+        : "療養を取り消すと寝床の予約を解除します。移動区間の途中なら、その終点で解除します。"
+      : null;
+  const cancelHint = foodCancel ?? constructionCancel ?? recoveryCancel;
   return (
     <section className="lf-panel lf-orders" aria-label="行動の指示">
       <div className="lf-section-title">
@@ -381,9 +388,7 @@ function ActionPanel({
             data-kind="cancel"
             disabled={!!cancel.disabled || cancelling}
             aria-describedby={
-              reserved || cancelling || constructionCancel || foodCancel
-                ? "lf-refund"
-                : undefined
+              reserved || cancelling || cancelHint ? "lf-refund" : undefined
             }
             onClick={() =>
               onGame(order(game, actor.person.id, cancel.kind, cancel.target))
@@ -391,11 +396,10 @@ function ActionPanel({
           >
             {cancel.label}
           </button>
-          {(reserved || cancelling || constructionCancel || foodCancel) && (
+          {(reserved || cancelling || cancelHint) && (
             <p className="lf-note" id="lf-refund">
               {reserved && "取り置き中　" + reserved + "。"}
-              {foodCancel ??
-                constructionCancel ??
+              {cancelHint ??
                 (actor.task?.spatial
                   ? "取り消すと予約を解除します。通路を移動中は、今の区間を出てから取り置きした物が戻ります。"
                   : "取り消すと取り置きした物が戻ります。")}

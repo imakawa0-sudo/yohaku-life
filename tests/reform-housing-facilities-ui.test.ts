@@ -64,6 +64,30 @@ function actions(game: Game, choices: Partial<Record<Need, string>> = {}) {
   return panel;
 }
 
+test("the cancel button explains when a recovery bed is released", () => {
+  const origin = enableHousing(morning(initialHouse()), "new");
+  origin.actors[0].injury = 38;
+  const booked = order(origin, person.id, "recover", undefined, {
+    fixtureId: "mat-1",
+  });
+  const walking = advance(booked, 1);
+  const cancelling = order(walking, person.id, "cancel");
+  for (const game of [booked, walking, cancelling]) {
+    const panel = actions(game);
+    const button = panel.match(/<button[^>]*data-kind="cancel"[^>]*>/)?.[0];
+    assert.ok(button);
+    assert.match(button, /aria-describedby="lf-refund"/);
+    assert.equal(button.includes("disabled"), game === cancelling);
+    const note = panel.match(/<p[^>]*id="lf-refund">([^<]*)<\/p>/)?.[1];
+    assert.ok(note);
+    assert.match(note, /寝床の予約を解除/);
+    assert.doesNotMatch(note, /取り置き|材料/);
+    if (game === cancelling) assert.match(note, /この区間の終点で療養を取り消し/);
+  }
+  const inPlace = order(origin, person.id, "recover");
+  assert.doesNotMatch(actions(inPlace), /aria-describedby="lf-refund"/);
+});
+
 test("the six home need actions each have a labeled automatic choice", () => {
   const html = actions(enableHousing(morning(), "new"));
   const labels = [
