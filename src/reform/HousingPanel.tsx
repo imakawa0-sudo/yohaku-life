@@ -59,6 +59,7 @@ export function HousingPanel({
   onGame,
   invitationWithdrawal,
   onSelect,
+  onOpenInsulation,
 }: {
   game: Game;
   actor: Actor;
@@ -66,6 +67,7 @@ export function HousingPanel({
   onGame: (g: Game) => void;
   invitationWithdrawal?: string;
   onSelect: (id: string) => void;
+  onOpenInsulation?: (roomId: string) => void;
 }) {
   const prefix = useId();
   const h = game.housing!;
@@ -222,6 +224,7 @@ export function HousingPanel({
         actor={actor}
         onGame={onGame}
         onSelect={onSelect}
+        onOpenInsulation={onOpenInsulation}
       />
       <details open>
         <summary>部屋へ移動</summary>

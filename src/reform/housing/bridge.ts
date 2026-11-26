@@ -1,3 +1,4 @@
+import { activeLodgingWorkGraph } from "./lodgingMaintenanceAccess";
 import { reconcileRoomInvitations } from "./gatheringProgress";
 import { prepareBenchMinute, refreshBenchHandling } from "./benchRecovery";
 import { prepareFoodMinute } from "./foodProgress";
@@ -482,7 +483,11 @@ export function advanceHousingMinute(
 ): Map<string, HousingMinute> {
   const h = g.housing!;
   const previous = h.state;
-  const { state, events } = advanceSpatialMinute(previous, heldUseOrderIds);
+  const workGraph = activeLodgingWorkGraph(h);
+  const { state, events } = advanceSpatialMinute(
+    workGraph ?? previous,
+    heldUseOrderIds,
+  );
   h.state = state;
   const result = new Map<string, HousingMinute>();
   const diners: { a: Actor; point: SpatialPoint }[] = [];
@@ -566,7 +571,7 @@ export function advanceHousingMinute(
       };
     }
   }
-  if (crossed) rebuildHousingGeometry(g, h);
+  if (workGraph || crossed) rebuildHousingGeometry(g, h);
   return result;
 }
 

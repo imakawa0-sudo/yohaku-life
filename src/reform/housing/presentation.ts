@@ -177,6 +177,40 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
               : material + "を運んでいます。",
     };
   }
+  // A tenant's maintenance agreement grants this specific construction order its own access.
+  // Project that order on the same scoped graph used by the clock.
+  const construction = t.spatial.constructionId
+    ? h.construction?.plans[t.spatial.constructionId]
+    : undefined;
+  if (t.kind === "home-build" && construction?.assignment?.lodgingMaintenance) {
+    const minutes = constructionTaskMinutes(g, actorId);
+    if (order.phase === "waiting" && minutes === null && order.waitReason)
+      return {
+        ...result,
+        phase: "waiting",
+        minutes,
+        waitReason: order.waitReason,
+        detail: spatialReasonText(order.waitReason),
+      };
+    return {
+      ...result,
+      phase:
+        order.phase === "use"
+          ? "use"
+          : order.phase === "waiting"
+            ? "waiting"
+            : "move",
+      minutes,
+      detail:
+        minutes === null
+          ? "通路と担当者の状態を確認してください。"
+          : order.phase === "use"
+            ? constructionTitle(construction) + "を進めています。"
+            : order.phase === "waiting"
+              ? "次の時間進行で施工の担当を再開します。"
+              : "工事の仮置き場へ向かっています。",
+    };
+  }
   const from =
     pos.kind === "transit" ? pos.step.to : pos.kind === "at" ? pos.point : null;
   const route = from

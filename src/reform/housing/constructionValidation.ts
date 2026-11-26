@@ -1,4 +1,5 @@
 import { isIndoorHousingRoom } from "./coldProtection";
+import { constructionWorkerPermitted } from "./constructionProgress";
 import { fields, integer, point, record } from "./saveFields";
 import type { Game } from "../sim";
 import { sameSpatialPoint } from "../spatial/route";
@@ -115,14 +116,22 @@ function planShape(
     const a = value.assignment;
     if (
       !record(a) ||
-      !fields(a, [
-        "actorId",
-        "orderId",
-        "kind",
-        ...(a.kind === "build" ? ["startedWorkMinutes"] : []),
-      ]) ||
+      !fields(
+        a,
+        [
+          "actorId",
+          "orderId",
+          "kind",
+          ...(a.kind === "build" ? ["startedWorkMinutes"] : []),
+        ],
+        ["lodgingMaintenance"],
+      ) ||
       typeof a.actorId !== "string" ||
       typeof a.orderId !== "string" ||
+      (Object.hasOwn(a, "lodgingMaintenance") &&
+        (a.lodgingMaintenance !== true ||
+          value.kind !== "insulation" ||
+          a.kind === "return")) ||
       (a.kind === "build"
         ? !integer(a.startedWorkMinutes, 0, value.workedMinutes)
         : a.kind !== "deliver" && a.kind !== "return")
@@ -149,6 +158,13 @@ export function isConstructionLedger(
 
 function validAssignment(h: HousingRuntime, g: Game, plan: RoomConstruction) {
   const a = plan.assignment!;
+  const stay = h.lodging;
+  const delegated =
+    stay?.maintenance?.phase === "accepted" &&
+    stay.maintenance.planId === plan.id &&
+    stay.providerId === a.actorId &&
+    (a.kind === "deliver" || a.kind === "build");
+  if (Object.hasOwn(a, "lodgingMaintenance") !== delegated) return false;
   const task = g.actors.find((person) => person.person.id === a.actorId)?.task;
   if (a.kind === "build") {
     if (
@@ -280,6 +296,15 @@ function validPlanRelations(
   if (plan.assignment && !validAssignment(h, g, plan)) return false;
   const expected = constructionHandling(h, plan),
     actual = item.carryAllowedActorIds;
+  const worker = plan.assignment;
+  if (
+    plan.kind === "insulation" &&
+    worker &&
+    worker.kind !== "return" &&
+    h.state.actors[worker.actorId].order?.phase !== "exiting-after-cancel" &&
+    !constructionWorkerPermitted(h, plan)
+  )
+    return false;
   return expected === null
     ? actual === null
     : actual !== null &&

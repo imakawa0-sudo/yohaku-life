@@ -1,3 +1,4 @@
+import { permitsLodgingWork } from "./lodgingMaintenanceAccess";
 import { isStockQuantity, type Actor, type Game } from "../sim";
 import { cancelSpatialOrder } from "../spatial/actions";
 import {
@@ -118,7 +119,13 @@ export function finishConstructionMinute(
   return completedPlanId;
 }
 
-function workerPermitted(h: HousingRuntime, plan: RoomConstruction) {
+export function constructionWorkerPermitted(
+  h: HousingRuntime,
+  plan: RoomConstruction,
+) {
+  const assignment = plan.assignment!;
+  if (assignment.lodgingMaintenance)
+    return permitsLodgingWork(h, plan, assignment.actorId, assignment.kind);
   const allowed =
     plan.assignment!.kind === "build"
       ? h.state.slots[constructionSlotId(plan.id)].allowedActorIds
@@ -137,8 +144,8 @@ export function releaseRevokedConstructionWorkers(
     if (
       id &&
       h.state.actors[id].order?.phase !== "exiting-after-cancel" &&
-      workerPermitted(previous, plan) &&
-      !workerPermitted(h, plan)
+      constructionWorkerPermitted(previous, plan) &&
+      !constructionWorkerPermitted(h, plan)
     )
       cancelConstructionActor(g, id);
   }
@@ -155,7 +162,11 @@ export function prepareConstructionMinute(g: Game) {
     const id = assignment.actorId;
     if (h.state.actors[id].order?.phase === "exiting-after-cancel") continue;
     const actor = g.actors.find((a) => a.person.id === id)!;
-    if (actor.danger || actor.injury >= 70 || !workerPermitted(h, plan))
+    if (
+      actor.danger ||
+      actor.injury >= 70 ||
+      !constructionWorkerPermitted(h, plan)
+    )
       cancelConstructionActor(g, id, releases);
   }
   return releases;
@@ -178,7 +189,11 @@ export function constructionTaskMinutes(
     actor.position.kind === "transit"
   )
     return actor.position.remaining;
-  if (worker.injury >= 70 || worker.danger || !workerPermitted(h, plan))
+  if (
+    worker.injury >= 70 ||
+    worker.danger ||
+    !constructionWorkerPermitted(h, plan)
+  )
     return null;
   return projectHousingOrderMinutes(g, worker);
 }

@@ -80,6 +80,7 @@ export default function ReformApp() {
   );
   const [selected, setSelected] = useState(""),
     [notice, setNotice] = useState("");
+  const [insulationRoom, setInsulationRoom] = useState<string>();
   const input = useRef<HTMLInputElement>(null);
   const slot = library.slots.find((s) => s.id === library.activeId);
   const game = slot?.game,
@@ -100,6 +101,7 @@ export default function ReformApp() {
   )
     setFacilitySelection({ slotId, actorId, choices: {}, bundleId: "" });
   function show(next: View) {
+    setInsulationRoom(undefined);
     setView(next);
     setNotice("");
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -356,6 +358,10 @@ export default function ReformApp() {
             game={game}
             selected={actor.person.id}
             onSelect={setSelected}
+            onOpenInsulation={(roomId) => {
+              show("house");
+              setInsulationRoom(roomId);
+            }}
             onGame={update}
             facilitySelection={{
               choices: facilitySelection.choices,
@@ -396,6 +402,9 @@ export default function ReformApp() {
             key={`insulation:${slot?.id}`}
             game={game}
             onGame={update}
+            initialRoomId={insulationRoom}
+            actor={actor}
+            onSelect={setSelected}
           />
           <HouseEditor
             key={`house-editor:${slot?.id}`}

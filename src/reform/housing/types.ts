@@ -36,6 +36,7 @@ export type BenchRecovery = {
 };
 
 export type RoomLodging = {
+  maintenance?: { planId: string; phase: "requested" | "accepted" };
   version: 1;
   providerId: string;
   residentId: string;

@@ -11,7 +11,7 @@ import {
 } from "./bridge";
 import { inspectHousingLayoutUpgrade } from "./layout";
 import {
-  allowGatheringGuest,
+  allowRoomVisit,
   effectiveRoomAccess,
   buildHousingTopology,
   housingPoint,
@@ -184,7 +184,7 @@ function prepare(
         "入室できる住人が、その部屋に入室許可のない住人を招けます。",
       );
     // Seat matching considers all available seats. Only the chosen seat is kept after booking.
-    allowGatheringGuest(
+    allowRoomVisit(
       h.state,
       roomId,
       invitation.guestId,

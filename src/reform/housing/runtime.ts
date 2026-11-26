@@ -793,6 +793,7 @@ export function completeRoomConstruction(
     const material = finished.material!;
     delete h.state.items[material.itemId];
     material.state = "consumed";
+    if (h.lodging?.maintenance?.planId === planId) delete h.lodging.maintenance;
     finished.status = "completed";
     finished.roomId =
       plan.kind === "insulation" ? plan.neighborId : house.rooms.at(-1)!.id;

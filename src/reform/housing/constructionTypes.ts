@@ -42,9 +42,11 @@ export type RoomConstruction = {
     quantity: number;
     state: "present" | "returned" | "consumed";
   };
-  assignment?: { actorId: string; orderId: string } & (
-    { kind: HaulDirection } | { kind: "build"; startedWorkMinutes: number }
-  );
+  assignment?: {
+    actorId: string;
+    orderId: string;
+    lodgingMaintenance?: true;
+  } & ({ kind: HaulDirection } | { kind: "build"; startedWorkMinutes: number });
 };
 export type HousingConstruction = {
   version: 1;

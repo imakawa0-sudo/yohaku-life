@@ -361,6 +361,8 @@ function ActionPanel({
             : "担当を外します。まだ拾っていない木材は元の床に残ります。";
       constructionCancel = hint + "通路を移動中は今の区間の終点まで進みます。";
     }
+    if (plan.assignment?.lodgingMaintenance)
+      constructionCancel += "この工事の引受は続きます。";
   }
   const foodCancel = actor.task?.spatial?.foodBundleId
     ? cancelling
@@ -448,12 +450,14 @@ export function Life({
   onSelect,
   onGame,
   facilitySelection,
+  onOpenInsulation,
 }: {
   game: Game;
   selected: string;
   onSelect: (id: string) => void;
   onGame: (g: Game) => void;
   facilitySelection?: FacilitySelection;
+  onOpenInsulation?: (roomId: string) => void;
 }) {
   const actor =
     game.actors.find((a) => a.person.id === selected) ?? game.actors[0];
@@ -753,6 +757,7 @@ export function Life({
               invitationWithdrawal={invitationWithdrawal}
               onGame={onGame}
               onSelect={onSelect}
+              onOpenInsulation={onOpenInsulation}
             />
           )}
           {hasTasks && next === null && (
