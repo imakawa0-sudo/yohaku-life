@@ -385,8 +385,10 @@ export function planHousing(
       recordUnavailable("use-denied", preferred);
       continue;
     }
+    if (t.kind === "recover" && a.injury >= 70 && route.minutes > 0)
+      return "重い傷で寝床まで移動できません。今いる場所で療養できます。";
     const use =
-      slot.kind === "workbench"
+      slot.kind === "workbench" || t.kind === "recover"
         ? t.total
         : f.time +
           (work ? t.total - 10 : slot.kind === "basin" ? 2 * water : 0);
@@ -415,7 +417,7 @@ export function planHousing(
   t.station = slot.id;
   t.room = slot.roomId;
   t.total = t.remaining = use;
-  if (!work)
+  if (t.kind === "need")
     t.label =
       need === "social"
         ? furnishings[slot.kind].name + "で過ごす"

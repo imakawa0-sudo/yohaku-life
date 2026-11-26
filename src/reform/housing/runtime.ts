@@ -48,6 +48,7 @@ import {
   housingSourcePoint,
   legacyHousingStation,
 } from "./topology";
+import { recoveryUseMinutes } from "./types";
 import type { HousingControls, HousingRuntime, HousingTopology } from "./types";
 
 export function isRegionalHousingTask(task: Task | null): boolean {
@@ -325,6 +326,18 @@ function validBinding(
       typeof binding.gatheringId === "string"
     );
   const need = furnishings[slot.kind].need;
+  if (task.kind === "recover")
+    return (
+      (slot.kind === "mat" || slot.kind === "bed") &&
+      task.mode === "direct" &&
+      task.metric === "care" &&
+      task.total === recoveryUseMinutes &&
+      task.target === undefined &&
+      task.partner === undefined &&
+      task.follower === undefined &&
+      onlyFields(binding, ["orderId", "kind"]) &&
+      sameData(task.reserved, {})
+    );
   if (slot.kind === "workbench")
     return (
       task.kind === "work" &&

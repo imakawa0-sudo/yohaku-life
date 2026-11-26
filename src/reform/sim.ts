@@ -35,6 +35,7 @@ import {
   service,
 } from "./house";
 import type { House, Need } from "./house";
+import { recoveryUseMinutes } from "./housing/types";
 import type {
   GatheringKind,
   HousingTaskBinding,
@@ -95,7 +96,8 @@ export type ActionPreview = {
   facility?: HousingUsePreview;
   foodBundle?: HousingProposal["foodBundle"];
 };
-export type WorkFacilitySelection = { fixtureId: string; bundleId?: string };
+export type FacilitySelection = { fixtureId: string; bundleId?: string };
+export type WorkFacilitySelection = FacilitySelection;
 export type CookingFacilitySelection = WorkFacilitySelection;
 export interface ActionOption extends ActionPreview {
   kind: string;
@@ -524,23 +526,28 @@ function preview(p: Proposal | string): ActionPreview {
 }
 const cookingRecipes = ["cook", "cook:easy", "cook:hard", "cook:master"];
 
-function workFacilitySelectionReason(
+function facilitySelectionReason(
   g: Game,
   a: Actor,
   kind: string,
   target: string | undefined,
-  selection: WorkFacilitySelection | undefined,
+  selection: FacilitySelection | undefined,
 ): string | undefined {
   if (selection === undefined) return;
   const woodworking = isBasicWoodwork(target);
-  if (kind !== "work" || (!woodworking && !cookingRecipes.includes(target!)))
-    return "基本の木工か料理の指示で設備を指定できます。";
+  const recovery = kind === "recover" && target === undefined;
+  if (
+    !recovery &&
+    (kind !== "work" || (!woodworking && !cookingRecipes.includes(target!)))
+  )
+    return "基本の木工・料理・療養の指示で設備を指定できます。";
   if (a.location !== g.home || !g.housing)
     return "自宅で住居の移動を使う暮らしを選んでください。";
   if (
     !selection ||
     typeof selection !== "object" ||
     Array.isArray(selection) ||
+    (recovery && !Object.hasOwn(selection, "fixtureId")) ||
     typeof selection.fixtureId !== "string" ||
     !selection.fixtureId
   )
@@ -556,6 +563,18 @@ function workFacilitySelectionReason(
     .flatMap((room) => room.fixtures)
     .find((f) => f.id === selection.fixtureId);
   if (!fixture) return "選んだ設備がありません。";
+  if (recovery) {
+    if (fixture.kind !== "mat" && fixture.kind !== "bed")
+      return "療養には寝床を選んでください。";
+    const id = a.person.id;
+    if (a.danger || g.housing.unlocated[id]?.reason === "regional-travel")
+      return "移動や危険が落ち着いてから、自宅の寝床を選んでください。";
+    if (a.injury >= 70 && !Object.hasOwn(g.housing.state.actors, id))
+      return "重い傷で寝床まで移動できません。今いる場所で療養できます。";
+    if (Object.keys(selection).some((key) => key !== "fixtureId"))
+      return "療養に使う寝床を一つ選んでください。";
+    return;
+  }
   if (woodworking)
     return fixture.kind === "workbench"
       ? undefined
@@ -569,7 +588,7 @@ function plan(
   a: Actor,
   kind: string,
   target?: string,
-  selection?: WorkFacilitySelection,
+  selection?: FacilitySelection,
 ): Proposal | string {
   const atHome = a.location === g.home;
   let fixtureId = selection?.fixtureId;
@@ -870,8 +889,19 @@ function plan(
     };
     return task(g, a, kind, names[a.person.likes], 48, "free");
   }
-  if (kind === "recover")
-    return task(g, a, kind, "傷をいたわって休む", 65, "care");
+  if (kind === "recover") {
+    const rest = task(
+      g,
+      a,
+      kind,
+      "傷をいたわって休む",
+      recoveryUseMinutes,
+      "care",
+    );
+    return selection
+      ? planHousing(g, a, rest, "energy", 0, selection.fixtureId)
+      : rest;
+  }
   if (["talk", "argue", "court", "aid", "rescue"].includes(kind)) {
     const peer = find(g, target ?? "");
     if (!peer || peer === a || !samePlace(a, peer))
@@ -1031,12 +1061,12 @@ export function order(
   id: string,
   kind: string,
   target?: string,
-  selection?: WorkFacilitySelection,
+  selection?: FacilitySelection,
 ): Game {
   if (!find(g, id)) return g;
   const next = structuredClone(g);
   const a = find(next, id)!;
-  const selectionReason = workFacilitySelectionReason(
+  const selectionReason = facilitySelectionReason(
     next,
     a,
     kind,
@@ -1088,11 +1118,11 @@ export function inspectOrder(
   id: string,
   kind: string,
   target?: string,
-  selection?: WorkFacilitySelection,
+  selection?: FacilitySelection,
 ): ActionPreview {
   const current = find(g, id);
   if (!current) return { disabled: "住人が見つかりません。" };
-  const selectionReason = workFacilitySelectionReason(
+  const selectionReason = facilitySelectionReason(
     g,
     current,
     kind,
@@ -2124,6 +2154,7 @@ export function isGame(value: unknown): value is Game {
       return false;
     if (t.station !== undefined && t.spatial === undefined) {
       if (
+        t.kind === "recover" ||
         !short(t.station) ||
         stations.has(t.station) ||
         a.location !== value.home

@@ -138,7 +138,9 @@ export function housingStatus(g: Game, actorId: string): HousingStatus {
                 h,
                 h.construction!.plans[t.spatial.constructionId],
               )
-            : "この区間の終点で予約を解除し、材料を返します。",
+            : t.kind === "recover"
+              ? "この区間の終点で療養を取り消し、寝床の予約を解除します。"
+              : "この区間の終点で予約を解除し、材料を返します。",
     };
   if (intent.kind === "carry") {
     const minutes = t.spatial.benchRecoveryId
