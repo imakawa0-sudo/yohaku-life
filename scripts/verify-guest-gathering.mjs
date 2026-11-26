@@ -2,6 +2,24 @@
 import assert from "node:assert/strict";
 import { expect } from "@playwright/test";
 
+const stockLimit = 1_000_000_000;
+
+async function importSnapshot(page, name, game, origin, { tab, currentGame }) {
+  await tab(page, "手帳");
+  const data = {
+    type: "yohaku-reform-save",
+    version: 2,
+    slot: { id: name, name, game, origin },
+  };
+  await page.getByLabel("新版の保存ファイル").setInputFiles({
+    name: name + ".json",
+    mimeType: "application/json",
+    buffer: Buffer.from(JSON.stringify(data)),
+  });
+  await expect(page.getByRole("region", { name: "行動の指示" })).toBeVisible();
+  assert.deepEqual(await currentGame(page), game);
+}
+
 export async function verifyGuestGathering(
   width,
   {
@@ -302,6 +320,57 @@ export async function verifyGuestGathering(
     assert.equal(outside.actors[1].room, "living");
     assert.deepEqual(outside.housing.controls.roomAccess, mealPolicy);
     await expect(button(household, "寝室の入口へ移動")).toBeDisabled();
+    if (width === 1280) {
+      const full = structuredClone(issued);
+      full.food = stockLimit;
+      await importSnapshot(page, "旧版で満杯になった会食", full, origin, {
+        tab,
+        currentGame,
+      });
+      await choose(host);
+      await withdraw.click();
+      const supplies = page.getByRole("region", { name: "世帯の備蓄" });
+      await expect(supplies).toContainText("返却待ちの食事 2食");
+      await choose(other);
+      await withdraw.click();
+      const pending = await currentGame(page);
+      assert.equal(pending.food, stockLimit);
+      assert.equal(pending.pendingMealReturns, 3);
+      await expect(supplies).toContainText("返却待ちの食事 3食");
+      await page.reload();
+      assert.deepEqual(await currentGame(page), pending);
+      await expect(supplies).toContainText("返却待ちの食事 3食");
+
+      await prepareMeal();
+      await extra.check();
+      await invitation.selectOption(JSON.stringify([host.id, guest.id]));
+      await start.click();
+      const booked = await currentGame(page);
+      assert.equal(booked.food, stockLimit - 3);
+      assert.equal(booked.pendingMealReturns, 3);
+      await button(page, "5分進める").click();
+      const waiting = await currentGame(page);
+      assert.equal(groupOf(waiting).startedAt, null);
+      assert.equal(waiting.pendingMealReturns, 3);
+      assert.equal(waiting.food, stockLimit - 3);
+      await page.reload();
+      assert.deepEqual(await currentGame(page), waiting);
+      await button(page, "5分進める").click();
+      const eaten = await currentGame(page);
+      assert.ok(groupOf(eaten).members.every((m) => m.usedMinutes > 0));
+      assert.equal(eaten.food, stockLimit);
+      assert.equal(eaten.pendingMealReturns, undefined);
+      await expect(supplies).not.toContainText("返却待ちの食事");
+      await page.reload();
+      assert.deepEqual(await currentGame(page), eaten);
+      await button(page, "5分進める").click();
+      const later = await currentGame(page);
+      assert.equal(later.food, stockLimit);
+      assert.equal(later.pendingMealReturns, undefined);
+      report.checks.push(
+        "上限に達した旧会食保存で、未使用の3食が返却待ちとなり、予約・再読込・集合では減らず、実際に三人が食べると共同備蓄へ戻り一度だけ精算された。",
+      );
+    }
     await checkLegacy(page);
     report.outcomes.push({
       width,
@@ -321,5 +390,105 @@ export async function verifyGuestGathering(
     });
   } finally {
     await page.context().close();
+  }
+}
+
+// Preserve the origin, route, and job of a played save; adjust only the two
+// resource counts that an older game could fill while a task was underway.
+export async function verifyMealInputReturns({
+  fresh,
+  makeStart,
+  enter,
+  currentGame,
+  tab,
+  button,
+  checkLegacy,
+  report,
+}) {
+  for (const cargo of [false, true]) {
+    const page = await fresh(1280);
+    try {
+      await makeStart(page, cargo ? "川辺の一人旅" : "市場の商人");
+      await enter(page);
+      const origin = await currentGame(page);
+      const actions = page.getByRole("region", { name: "行動の指示" });
+      if (cargo) {
+        for (const resource of ["ingredients", "coins"]) {
+          await button(actions, "野外").click();
+          await actions
+            .locator('button[data-kind="pack"][data-target="' + resource + '"]')
+            .click();
+          await button(page, "次の行動完了まで進める").click();
+        }
+        await tab(page, "地域");
+        const town = origin.world.sites.find(
+          (site) => site.id === "village",
+        ).name;
+        await button(page, town).click();
+        await page
+          .getByRole("button", { name: new RegExp(town + "へ移動する") })
+          .click();
+        await tab(page, "暮らし");
+        await button(page, "次の行動完了まで進める").click();
+      }
+      const shopping = await currentGame(page);
+      assert.equal(shopping.actors[0].location, "village");
+      assert.equal(shopping.actors[0].task, null);
+      assert.equal(shopping.actors[0].location !== shopping.home, cargo);
+      const account = (game) => (cargo ? game.actors[0].cargo : game);
+      const destination = cargo
+        ? shopping.actors[0].person.name + "の携行品"
+        : "共同備蓄";
+      for (const input of ["ingredients", "coins"]) {
+        if (input === "coins") {
+          await importSnapshot(page, "同じ売場で買い物", shopping, origin, {
+            tab,
+            currentGame,
+          });
+        }
+        await button(actions, "仕事").click();
+        const command =
+          input === "ingredients"
+            ? 'button[data-kind="work"][data-target="cook"]'
+            : 'button[data-kind="buy"]';
+        await actions.locator(command).click();
+        const full = await currentGame(page);
+        const reserved = full.actors[0].task.reserved[input];
+        assert.ok(reserved > 0);
+        account(full).food = stockLimit;
+        account(full)[input] = stockLimit;
+        await importSnapshot(
+          page,
+          destination + "の旧上限-" + input,
+          full,
+          origin,
+          { tab, currentGame },
+        );
+        await actions
+          .getByRole("button", { name: "現在の予定を取り消す", exact: true })
+          .click();
+        const cancelled = await currentGame(page);
+        assert.equal(account(cancelled)[input], stockLimit);
+        assert.deepEqual(account(cancelled).pendingMealInputReturns, {
+          [input]: reserved,
+        });
+        const label =
+          destination +
+          "への返却待ち · " +
+          (input === "coins" ? "銀貨 " : "食材 ") +
+          reserved;
+        const note = page.getByText(label, { exact: true });
+        await expect(note).toBeVisible();
+        await page.reload();
+        assert.deepEqual(await currentGame(page), cancelled);
+        await expect(note).toBeVisible();
+        report.checks.push(
+          label + "を実際の調理・購入の取り消し後と再読込後に確認。",
+        );
+      }
+      await checkLegacy(page);
+    } finally {
+      await page.context().close();
+    }
   }
 }

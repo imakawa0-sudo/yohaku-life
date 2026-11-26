@@ -3,6 +3,7 @@ import test from "node:test";
 import { editHouse, initialHouse } from "../src/reform/house";
 import { createFoodBundle } from "../src/reform/housing/food";
 import { startHousingGathering } from "../src/reform/housing/gathering";
+import { exportSlot, importSlot } from "../src/reform/library";
 import { makePersona } from "../src/reform/peopleModel";
 import {
   advance,
@@ -170,4 +171,114 @@ test("return and rescue leave excess meals with their actual carrier and can unl
     assert.equal(retry.food, stockLimit);
     if (rescue) assert.equal(retry.actors[1].cargo.food, 3);
   }
+});
+
+test("full ingredient and coin accounts retain an interrupted cook's ingredients or buyer's money across reload and retry", () => {
+  for (const field of [false, true]) {
+    for (const input of ["ingredients", "coins"] as const) {
+      const origin = createGame(
+        people.slice(0, 1),
+        generateWorld(defaultWorldConfig()),
+        field ? "landing" : "village",
+      );
+      const actor = origin.actors[0];
+      if (field) {
+        actor.location = "village";
+        actor.room = "outdoors";
+        actor.cargo.coins = 8;
+        actor.cargo.ingredients = 8;
+      }
+      const buy = input === "coins";
+      const command = (g: typeof origin) =>
+        order(g, host, buy ? "buy" : "work", buy ? undefined : "cook");
+      const job = command(origin);
+      const t = job.actors[0].task!;
+      const promised = t.reserved[input]!;
+      assert.ok(promised > 0);
+      const source = (g: typeof job) => (field ? g.actors[0].cargo : g);
+      const bag = source(job);
+      // An older save has refilled both the space for the purchase/recipe and its refundable price/ingredients.
+      bag.food = stockLimit;
+      bag[input] = stockLimit;
+      t.remaining = 1;
+      assert.ok(isGame(job));
+      for (const end of [order(job, host, "cancel"), advance(job, 1)]) {
+        assert.ok(isGame(end));
+        const returned = source(end);
+        assert.equal(returned[input], stockLimit);
+        assert.deepEqual(returned.pendingMealInputReturns, {
+          [input]: promised,
+        });
+        const reopened = importSlot(
+          exportSlot({ id: "refund", name: "返却", game: end, origin }),
+        ).game;
+        assert.deepEqual(
+          source(reopened),
+          JSON.parse(JSON.stringify(returned)),
+        );
+        const free = source(reopened);
+        free.food -= 10;
+        const retry = command(reopened);
+        assert.equal(source(retry)[input], stockLimit);
+        assert.ok(!Object.hasOwn(source(retry), "pendingMealInputReturns"));
+        assert.deepEqual(retry.actors[0].task!.reserved[input], promised);
+        assert.deepEqual(
+          source(order(retry, host, "cancel")).pendingMealInputReturns,
+          { [input]: promised },
+        );
+        const settled = advance(retry, retry.actors[0].task!.remaining);
+        assert.ok(isGame(settled));
+        assert.ok(!Object.hasOwn(source(settled), "pendingMealInputReturns"));
+        assert.equal(source(settled)[input], stockLimit);
+        assert.ok(source(settled).food > stockLimit - 10);
+      }
+    }
+  }
+});
+
+test("an input receipt settles only on physical source release, and rejects unknown, oversized or already payable entries at both save boundaries", () => {
+  const g = home();
+  const cook = order(g, worker, "work", "cook");
+  cook.ingredients = stockLimit;
+  const held = order(cook, worker, "cancel");
+  assert.deepEqual(held.pendingMealInputReturns, { ingredients: 2 });
+  const booking = order(held, worker, "pack", "ingredients");
+  assert.equal(booking.ingredients, stockLimit - 3);
+  assert.deepEqual(booking.pendingMealInputReturns, { ingredients: 2 });
+  assert.ok(isGame(booking));
+  const undone = order(booking, worker, "cancel");
+  assert.equal(undone.ingredients, stockLimit);
+  assert.deepEqual(undone.pendingMealInputReturns, { ingredients: 2 });
+  const released = advance(
+    order(keepDinersIdle(undone), worker, "pack", "ingredients"),
+    3,
+  );
+  assert.equal(released.ingredients, stockLimit - 1);
+  assert.ok(!Object.hasOwn(released, "pendingMealInputReturns"));
+  assert.equal(released.actors[2].cargo.ingredients, 3);
+
+  for (const wrong of [
+    null,
+    [],
+    {},
+    { wood: 1 },
+    { ingredients: 0 },
+    { coins: -1 },
+    { ingredients: 1.5 },
+    { ingredients: 3 * stockLimit + 1 },
+  ]) {
+    const corrupt = Object.assign(structuredClone(held), {
+      pendingMealInputReturns: wrong,
+    });
+    for (const slot of [
+      { game: corrupt, origin: g },
+      { game: g, origin: corrupt },
+    ])
+      assert.throws(() =>
+        importSlot(exportSlot({ ...slot, id: "bad", name: "raw" })),
+      );
+  }
+  const stale = structuredClone(held);
+  stale.ingredients--;
+  assert.equal(isGame(stale), false);
 });

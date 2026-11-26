@@ -1,9 +1,14 @@
 import {
   mealSpace,
   refundMeal,
+  refundMealInput,
+  reserveMealInput,
   settleMealReturns,
+  settleMealInputReturns,
   stockLimit,
   validMealReturns,
+  validMealInputReturns,
+  type MealInputAccount,
 } from "./mealStock";
 import { finishLodgingWalk, usualHomeArrival } from "./housing/lodging";
 import {
@@ -156,14 +161,14 @@ export interface Actor {
   level: number;
   specialty: Skill | null;
   priority: Skill | null;
-  cargo: Stock;
+  cargo: Stock & MealInputAccount;
   metrics: Record<Metric, number>;
   strainUntil: number;
   nextShift: number;
   practicedOn: number;
   danger: boolean;
 }
-export interface Game extends Stock {
+export interface Game extends Stock, MealInputAccount {
   pendingMealReturns?: number;
   housing?: HousingRuntime;
   version: 1;
@@ -185,7 +190,7 @@ const clamp = (value: number, min = 0, max = 100) =>
   Math.max(min, Math.min(max, value));
 const round1 = (n: number) => Math.round(n * 10) / 10;
 const find = (g: Game, id: string) => g.actors.find((a) => a.person.id === id);
-const account = (g: Game, a: Actor): Stock =>
+const account = (g: Game, a: Actor): Stock & MealInputAccount =>
   a.location === g.home ? g : a.cargo;
 const day = (g: Game) => Math.floor(g.time / 1440) + 1;
 export function skillThreshold(level: number) {
@@ -1067,7 +1072,11 @@ function begin(
     housingTaskBoundary(g, peer, peer.task, "begin");
   }
   const bag = account(g, a);
-  for (const key of stocks) bag[key] -= t.reserved[key] ?? 0;
+  for (const key of stocks) {
+    const count = t.reserved[key] ?? 0;
+    if (isMealInput(t, key)) reserveMealInput(bag, key, count);
+    else bag[key] -= count;
+  }
   t.mode = auto ? "auto" : "direct";
   a.task = t;
   a.reason = why;
@@ -1448,17 +1457,35 @@ function selectAuto(g: Game, a: Actor) {
     return;
   tryAuto(g, a, "wait", undefined, "使える設備が空くのを待っています。");
 }
+function isMealInput(
+  t: Task,
+  key: keyof Stock,
+): key is "ingredients" | "coins" {
+  return (
+    (key === "ingredients" &&
+      t.kind === "work" &&
+      parseWork(t.target)?.skill === "cook") ||
+    (key === "coins" && t.kind === "buy")
+  );
+}
 function refundReservation(g: Game, a: Actor, t: Task) {
   const bag = account(g, a);
   for (const key of stocks) {
     const count = t.reserved[key] ?? 0;
+    if (!count) continue;
     if (key === "food" && bag === g) refundMeal(g, count);
+    else if (isMealInput(t, key)) refundMealInput(bag, key, count);
     else bag[key] += count;
   }
 }
 function unload(g: Game, a: Actor, key: keyof Stock) {
-  const count =
-    key === "food" ? Math.min(a.cargo.food, mealSpace(g)) : a.cargo[key];
+  const free =
+    key === "food"
+      ? mealSpace(g)
+      : key === "ingredients" || key === "coins"
+        ? stockLimit - g[key]
+        : a.cargo[key];
+  const count = Math.min(a.cargo[key], free);
   g[key] += count;
   a.cargo[key] -= count;
   return key === "food" && a.cargo.food
@@ -1510,7 +1537,12 @@ function finishWork(g: Game, a: Actor, t: Task): string {
       settleFood(g, bundle, "consumed");
     } else if (mealSpace(g, bag) < servings) {
       refundReservation(g, a, t);
-      return "完成食を置く空きがないため、料理を中断して食材を戻しました。";
+      return (
+        "完成食を置く空きがないため、料理を中断しました。" +
+        (bag.pendingMealInputReturns?.ingredients
+          ? "収まらない食材は返却待ちです。"
+          : "食材を戻しました。")
+      );
     }
     bag.food += servings;
     result = "食事を" + servings + "食用意した。";
@@ -1650,11 +1682,14 @@ function finish(g: Game, a: Actor, t: Task) {
       bag.food++;
       result = "食事を一食受け取った。";
     } else {
-      bag.coins += t.reserved.coins ?? 0;
+      refundReservation(g, a, t);
       result =
-        g.world.trade.stock > 0
-          ? "食事を置く空きがないため銀貨が戻った。"
-          : "売り切れのため銀貨が戻った。";
+        (g.world.trade.stock > 0
+          ? "食事を置く空きがありません。"
+          : "売り切れです。") +
+        (bag.pendingMealInputReturns?.coins
+          ? "収まらない銀貨は返却待ちです。"
+          : "銀貨が戻った。");
     }
   } else if (t.kind === "pack" || t.kind === "unpack") {
     const key = t.target as keyof Stock;
@@ -1954,6 +1989,8 @@ function advanceMinute(g: Game): boolean {
   }
   if (completed.length) for (const a of g.actors) a.mood = moodOf(g, a);
   settleMealReturns(g);
+  settleMealInputReturns(g);
+  for (const a of g.actors) settleMealInputReturns(g, a.cargo);
   returnedFood?.();
   // Ordinary stock changes for this minute get accounted for before newly released bundles.
   for (const { plan, worker } of releasedReturns)
@@ -2246,7 +2283,13 @@ export function isGame(value: unknown): value is Game {
         return false;
     }
   }
-  if (!validMealReturns(value as unknown as Game)) return false;
+  const game = value as unknown as Game;
+  if (
+    !validMealReturns(game) ||
+    !validMealInputReturns(game) ||
+    !game.actors.every((a) => validMealInputReturns(game, a.cargo))
+  )
+    return false;
   return (
     value.housing === undefined ||
     isHousingRuntime(value.housing, value as unknown as Game)
