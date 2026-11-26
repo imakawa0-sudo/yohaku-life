@@ -18,6 +18,7 @@ import type {
 import {
   editHouse,
   furnishings,
+  isBasicWoodwork,
   houseValue,
   isHouse,
   type House,
@@ -314,6 +315,16 @@ function validBinding(
       typeof binding.gatheringId === "string"
     );
   const need = furnishings[slot.kind].need;
+  if (slot.kind === "workbench")
+    return (
+      task.kind === "work" &&
+      isBasicWoodwork(task.target) &&
+      task.mode === "direct" &&
+      task.metric === "work" &&
+      slot.seat === 0 &&
+      onlyFields(binding, ["orderId", "kind"]) &&
+      sameData(task.reserved, {})
+    );
   if (task.kind === "work") {
     return (
       ["cook", "cook:easy", "cook:hard", "cook:master"].includes(

@@ -164,8 +164,8 @@ test("malformed selections, missing or noncooking equipment, and nonrecipe comma
   assertRejected(game, farther, /料理/, "need", "hunger");
   assertRejected(game, farther, /料理/, "home-use", near.fixtureId);
   assertRejected(game, farther, /料理/, "cancel");
+  assertRejected(game, farther, /木工台/, "work", "wood");
   for (const target of [
-    "wood",
     "cook:unknown",
     "cook:hard:extra",
     "cook:",

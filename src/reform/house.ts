@@ -20,6 +20,10 @@ export const needLabels: Record<Need, string> = {
   fun: "楽しみ",
 };
 
+export function isBasicWoodwork(target: string | undefined): boolean {
+  return target === "wood" || target === "wood:easy";
+}
+
 export const furnishings = {
   hearth: {
     name: "小さなかまど",
@@ -115,6 +119,14 @@ export const furnishings = {
     need: "fun",
     time: 14,
     cost: 4,
+    seats: 1,
+  },
+  workbench: {
+    name: "木工台",
+    use: "枝を削って木材を整える",
+    need: null,
+    time: 0, // The chosen job supplies its own processing time.
+    cost: 3,
     seats: 1,
   },
 } as const;

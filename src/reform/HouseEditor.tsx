@@ -7,6 +7,7 @@ import {
   DoorOpen,
   Footprints,
   Grid2X2,
+  Hammer,
   House as HouseIcon,
   Plus,
   TreePine,
@@ -35,6 +36,10 @@ const icons = {
   social: Users,
   fun: BookOpen,
 };
+function fixtureIcon(kind: FixtureKind) {
+  const need = furnishings[kind].need;
+  return need === null ? Hammer : icons[need];
+}
 const roomIcon = (id: string) =>
   id === "yard" ? TreePine : id === "bedroom" ? BedDouble : HouseIcon;
 type TileTool = "floor" | "wall" | "door" | "furniture" | "move";
@@ -160,7 +165,7 @@ export function HouseEditor({
         <div className="yh-house-furniture">
           {room.fixtures.map((f) => {
             const def = furnishings[f.kind],
-              Icon = icons[def.need];
+              Icon = fixtureIcon(f.kind);
             return (
               <button
                 key={f.id}
@@ -222,6 +227,11 @@ export function HouseEditor({
             この部屋に置く
           </button>
         </div>
+        {kind === "workbench" && (
+          <p>
+            「暮らし」で「枝を削って木材を整える」を選ぶと、この木工台を指定できます。
+          </p>
+        )}
         {fixture && (
           <div className="yh-house-controls">
             <label>
@@ -339,7 +349,7 @@ export function HouseEditor({
                   fixture: "家具",
                 }[tile];
             const Icon = f
-              ? icons[furnishings[f.kind].need]
+              ? fixtureIcon(f.kind)
               : tile === "entry" || tile === "door"
                 ? DoorOpen
                 : null;

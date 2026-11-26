@@ -1,5 +1,11 @@
 import { facilityLabel } from "./facilityLabel";
-import { furnishings, needLabels, needs, type Need } from "./house";
+import {
+  furnishings,
+  isBasicWoodwork,
+  needLabels,
+  needs,
+  type Need,
+} from "./house";
 import { foodBundleStatus } from "./housing/foodPresentation";
 import { getPreferredBed } from "./housing/bedPreference";
 import {
@@ -10,13 +16,15 @@ import {
   type Game,
 } from "./sim";
 
-export type FacilityChoiceKey = Need | "cook" | "cook:hard" | "cook:master";
+export type FacilityChoiceKey =
+  Need | "cook" | "cook:hard" | "cook:master" | "wood";
 
 export function facilityChoiceKey(
   command: ActionOption,
 ): FacilityChoiceKey | undefined {
   if (command.kind === "need")
     return needs.find((need) => need === command.target);
+  if (command.kind === "work" && isBasicWoodwork(command.target)) return "wood";
   if (
     command.kind === "work" &&
     (command.target === "cook" ||
@@ -47,7 +55,9 @@ export function FacilityAction({
   onSelect: (id: string) => void;
   onGame: (game: Game) => void;
 }) {
-  const cooking = command.kind === "work";
+  const isWork = command.kind === "work";
+  const woodworking = isWork && isBasicWoodwork(command.target);
+  const cooking = isWork && !woodworking;
   const basicCooking =
     cooking && ["cook", "cook:easy"].includes(command.target!);
   const bundle = basicCooking ? foodBundleStatus(game) : null;
@@ -62,18 +72,20 @@ export function FacilityAction({
       .filter((fixture) =>
         cooking
           ? fixture.kind === "hearth" || fixture.kind === "kitchen"
-          : furnishings[fixture.kind].need === need,
+          : woodworking
+            ? fixture.kind === "workbench"
+            : furnishings[fixture.kind].need === need,
       )
       .map((fixture) => ({ room, fixture })),
   );
   const missing =
     selectedId !== "" &&
     !fixtures.some(({ fixture }) => fixture.id === selectedId);
-  const explicitNeed = selectedId && !cooking;
+  const explicitNeed = selectedId && !isWork;
   const kind = explicitNeed ? "home-use" : command.kind;
   const target = explicitNeed ? selectedId : command.target;
   const selection =
-    cooking && selectedId
+    isWork && selectedId
       ? {
           fixtureId: selectedId,
           ...(selectedBundle && { bundleId: selectedBundle }),
@@ -101,6 +113,8 @@ export function FacilityAction({
     need === "energy" && getPreferredBed(game, actor.person.id)
       ? "自動（優先する寝床を考慮）"
       : "自動（移動と利用が短い設備）";
+  const workInPlace =
+    woodworking && !selectedId && !disabled && preview.minutes !== undefined;
   const food = reserved?.food ?? 0;
   const ingredients = reserved?.ingredients ?? 0;
   const hintId = "lf-order-" + command.kind + "-" + command.target;
@@ -152,7 +166,10 @@ export function FacilityAction({
         </fieldset>
       )}
       <label htmlFor={selectId}>
-        {cooking ? command.label + "ため" : needLabels[need]}に使う設備
+        {woodworking
+          ? "木材を整える場所"
+          : (cooking ? command.label + "ため" : needLabels[need]) +
+            "に使う設備"}
       </label>
       <select
         id={selectId}
@@ -160,7 +177,11 @@ export function FacilityAction({
         onChange={(event) => onSelect(event.target.value)}
       >
         <option value="">
-          {selectedBundle ? "設備を選ぶ" : automaticLabel}
+          {woodworking
+            ? "今いる場所で作業する"
+            : selectedBundle
+              ? "設備を選ぶ"
+              : automaticLabel}
         </option>
         {missing && <option value={selectedId}>{missingFacility}</option>}
         {fixtures.map(({ room, fixture }) => (
@@ -174,7 +195,9 @@ export function FacilityAction({
         data-kind={command.kind}
         data-target={command.target}
         disabled={!!disabled}
-        aria-describedby={disabled || destinationRoom ? hintId : undefined}
+        aria-describedby={
+          disabled || destinationRoom || workInPlace ? hintId : undefined
+        }
         onClick={() =>
           onGame(order(game, actor.person.id, kind, target, selection))
         }
@@ -185,6 +208,9 @@ export function FacilityAction({
         <small id={hintId} role="status">
           {disabled}
         </small>
+      )}
+      {workInPlace && (
+        <small id={hintId}>移動なし · 木工{preview.minutes}分</small>
       )}
       {facility && destinationRoom && (
         <small id={hintId}>
@@ -203,6 +229,8 @@ export function FacilityAction({
                 ? `食材を拾い、運ぶ見込み${foodBundle.transportMinutes}分 ＋ 料理${facility.useMinutes}分（合計${preview.minutes}分）`
                 : `食材は設備の使用床にあります（運搬不要）。本人の移動${facility.moveMinutes}分 ＋ 料理${facility.useMinutes}分（合計${preview.minutes}分）`}
             </>
+          ) : woodworking ? (
+            `移動${facility.moveMinutes}分 ＋ 木工${facility.useMinutes}分（合計${preview.minutes}分）`
           ) : (
             `現在の見込み　移動${facility.moveMinutes}分 ＋ 利用${facility.useMinutes}分（合計${preview.minutes}分）`
           )}
