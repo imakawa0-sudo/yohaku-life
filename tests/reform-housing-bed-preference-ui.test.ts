@@ -115,8 +115,8 @@ test("the household policy shows only physical beds and the selected resident's 
     ].map(([, value, selected, label]) => [value, !!selected, label]),
     [
       ["", false, "未設定（使える寝床から選ぶ）"],
-      [bed, false, bedLabel],
-      [mat, true, matLabel],
+      [bed, false, bedLabel + " · 未対策"],
+      [mat, true, matLabel + " · 未対策"],
     ],
   );
 });

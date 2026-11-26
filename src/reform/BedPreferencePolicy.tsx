@@ -1,4 +1,5 @@
 import { facilityLabel } from "./facilityLabel";
+import { bedProtectionLabel } from "./housing/coldProtection";
 import { getPreferredBed, setPreferredBed } from "./housing/bedPreference";
 import type { Actor, Game } from "./sim";
 
@@ -20,7 +21,8 @@ export function BedPreferencePolicy({
       .filter((fixture) => fixture.kind === "mat" || fixture.kind === "bed")
       .map((fixture) => (
         <option key={fixture.id} value={fixture.id}>
-          {facilityLabel(rooms, room, fixture.kind, fixture.cell)}
+          {facilityLabel(rooms, room, fixture.kind, fixture.cell)} ·{" "}
+          {bedProtectionLabel(game, room.id)}
         </option>
       )),
   );

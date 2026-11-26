@@ -1,3 +1,4 @@
+import { validRoomStay } from "./roomStay";
 import { isFoodSupply } from "./foodSupplyValidation";
 import { isFoodLedger, validFoodRelations } from "./foodValidation";
 import { constructionTitle } from "./constructionTypes";
@@ -376,6 +377,7 @@ export function isHousingRuntime(
       "gatherings",
       "nextGatheringId",
       "preferredBeds",
+      "roomStay",
       "controls",
       "state",
       "unlocated",
@@ -383,6 +385,7 @@ export function isHousingRuntime(
     ]) ||
     value.version !== 1 ||
     (Object.hasOwn(value, "layoutVersion") && value.layoutVersion !== 2) ||
+    (Object.hasOwn(value, "roomStay") && !validRoomStay(value.roomStay, game)) ||
     (Object.hasOwn(value, "preferredBeds") &&
       !isBedPreferences(value.preferredBeds, game)) ||
     !isSpatialState(value.state) ||

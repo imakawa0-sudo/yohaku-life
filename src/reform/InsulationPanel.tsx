@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Snowflake } from "lucide-react";
-import { cellName } from "./house";
+import { cellName, type Room } from "./house";
+import { residentLabel, roomLabel } from "./displayNames";
+import { roomStayMinutes } from "./housing/roomStay";
 import {
   ConstructionAction,
   ConstructionCard,
@@ -18,6 +20,89 @@ import {
 import { housingPoint } from "./housing/topology";
 import { sameSpatialPoint } from "./spatial/route";
 import type { Game } from "./sim";
+
+function clockLabel(minutesSinceMidnight: number) {
+  const hour = Math.floor(minutesSinceMidnight / 60);
+  const minute = minutesSinceMidnight % 60;
+  return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+}
+
+function RoomStayHistory({ game, rooms }: { game: Game; rooms: Room[] }) {
+  const [roomId, setRoomId] = useState("");
+  const selected = rooms.find((room) => room.id === roomId) ?? rooms[0];
+  if (!selected) return null;
+  const today = Math.floor(game.time / 1440) + 1;
+  const days = game.housing?.roomStay?.days;
+  const periods = ["昨日", "今日"].map((label, index) => {
+    const day = today - 1 + index;
+    const record = days?.find((item) => item.day === day);
+    const end = Math.min(game.time, day * 1440);
+    if (!record || end <= record.from) return { label, range: "記録なし" };
+    const midnight = (day - 1) * 1440;
+    return {
+      label,
+      record,
+      range: `${day}日目 ${clockLabel(record.from - midnight)}〜${clockLabel(end - midnight)}`,
+    };
+  });
+
+  return (
+    <details className="lf-construction-history">
+      <summary>部屋ごとの滞在時間</summary>
+      <label>
+        履歴を見る部屋
+        <select value={selected.id} onChange={(e) => setRoomId(e.target.value)}>
+          {rooms.map((room) => (
+            <option value={room.id} key={room.id}>
+              {roomLabel(game.house.rooms, room)}
+            </option>
+          ))}
+        </select>
+      </label>
+      <p>
+        時計を進めた期間のうち、住人がこの部屋で過ごした時間を表示します。裏庭・外出中・所在不明の時間は含みません。
+      </p>
+      <dl className="lf-housing-status" aria-label="記録した期間">
+        {periods.map(({ label, range }) => (
+          <div key={label}>
+            <dt>{label}</dt>
+            <dd>{range}</dd>
+          </div>
+        ))}
+      </dl>
+      <table
+        className="lf-room-stay"
+        aria-label={roomLabel(game.house.rooms, selected) + "の滞在時間"}
+      >
+        <thead>
+          <tr>
+            <th scope="col">住人</th>
+            {periods.map(({ label }) => (
+              <th key={label} scope="col">
+                {label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {game.actors.map((actor) => (
+            <tr key={actor.person.id}>
+              <th scope="row">{residentLabel(game, actor)}</th>
+              {periods.map(({ label, record }) => (
+                <td key={label}>
+                  {record
+                    ? roomStayMinutes(record, actor.person.id, selected.id) +
+                      "分"
+                    : "記録なし"}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </details>
+  );
+}
 
 export function InsulationPanel({
   game,
@@ -82,7 +167,7 @@ export function InsulationPanel({
       <dl className="lf-housing-status" aria-label="部屋の寒さ対策状況">
         {rooms.map((room) => (
           <div key={room.id}>
-            <dt>{room.name}</dt>
+            <dt>{roomLabel(game.house.rooms, room)}</dt>
             <dd>
               {game.insulated
                 ? "家全体で対策済み"
@@ -99,6 +184,7 @@ export function InsulationPanel({
         </p>
       ) : (
         <>
+          <RoomStayHistory game={game} rooms={rooms} />
           {error && (
             <p role="alert" className="lf-construction-error">
               {error}
@@ -148,7 +234,7 @@ export function InsulationPanel({
                         value={room.id}
                         disabled={isRoomInsulated(game, room.id)}
                       >
-                        {room.name}
+                        {roomLabel(game.house.rooms, room)}
                         {isRoomInsulated(game, room.id) && "・対策済み"}
                       </option>
                     ))}

@@ -1,3 +1,4 @@
+import { recordRoomStayMinute } from "./housing/roomStay";
 import { tryFoodSupply } from "./housing/foodSupply";
 import { presentFood, refreshFoodHandling, settleFood } from "./housing/food";
 import {
@@ -1765,6 +1766,7 @@ function advanceMinute(g: Game): boolean {
   const releasedReturns = prepareConstructionMinute(g);
   prepareFoodMinute(g);
   // Crossing a doorway cannot retroactively change exposure during that minute.
+  recordRoomStayMinute(g);
   const protectedActors = new Set(
     g.actors.filter((a) => homeColdProtection(g, a)).map((a) => a.person.id),
   );
