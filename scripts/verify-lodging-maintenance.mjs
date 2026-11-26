@@ -71,7 +71,7 @@ export async function verifyLodgingMaintenance(
       );
       await energy.locator("..").getByRole("combobox").selectOption("mat-1");
       await expect(energy).toBeDisabled();
-      await expect(energy.locator("..")).toContainText("許可");
+      await expect(energy.locator("..")).toContainText(/許可|専用/);
     };
     const job = (g) =>
       Object.values(g.housing.construction.plans).find(
@@ -121,6 +121,16 @@ export async function verifyLodgingMaintenance(
         .getByRole("checkbox", { name: person.name, exact: true })
         .uncheck();
     ordinaryRights(await game());
+    await showSection(page, "暮らしと備蓄の方針");
+    await showSection(page, "寝床を使える住人");
+    await page
+      .getByRole("combobox", { name: "設定する寝床", exact: true })
+      .selectOption("mat-1");
+    await page
+      .getByRole("combobox", { name: "利用できる住人", exact: true })
+      .selectOption(tenant.id);
+    await button(page, "利用設定を保存").click();
+    assert.equal((await game()).housing.bedSleepers["mat-1"], tenant.id);
     await sleepDenied();
 
     // Use the tenant's link, plan the real floor and send the request in the house view.
@@ -171,10 +181,12 @@ export async function verifyLodgingMaintenance(
     });
     const crossingSave = await save();
     await restore(crossingSave);
-    // Keep the tenant on a stationary job until the five-minute withdrawal.
+    // The tenant's real resting floor provides an ordinary movement target deeper inside the room.
     await choose(tenant);
-    await button(life, "仕事").click();
-    await life.locator('button[data-kind="work"][data-target="care"]').click();
+    await button(life, "生活").click();
+    const rest = life.locator('button[data-kind="need"][data-target="energy"]');
+    await rest.locator("..").getByRole("combobox").selectOption("mat-1");
+    await rest.click();
     const staged = await goTime();
     assert.equal(staged.time - booked.time, 6);
     assert.deepEqual(board(staged), { kind: "at", point: job(staged).staging });
@@ -212,6 +224,39 @@ export async function verifyLodgingMaintenance(
     await expect(uncommissioned).toBeDisabled();
     await expect(uncommissioned).toContainText("許可");
     await sleepDenied();
+    const stoppedSave = await save();
+    await choose(provider);
+    const interior = stopped.housing.state.actors[tenant.id].position;
+    assert.deepEqual(interior, {
+      kind: "at",
+      point:
+        stopped.housing.state.slots[
+          JSON.stringify(["slot", "bedroom", "mat-1", 0])
+        ].point,
+    });
+    assert.notDeepEqual(interior.point, job(stopped).staging);
+    assert.notEqual(interior.point.cell, 0);
+    const houseMoves = page.getByRole("region", { name: "家の中の移動と設定" });
+    await showSection(houseMoves, "住民の近くへ移動");
+    const deeper = button(houseMoves, tenant.name + "の近くへ移動");
+    await expect(deeper).toBeDisabled();
+    await expect(deeper).toHaveAccessibleDescription(/入口か室外/);
+    await snap(deeper, "restricted-floor");
+    const leave = button(houseMoves, "居間の入口へ移動");
+    await expect(leave).toBeEnabled();
+    await leave.click();
+    const outside = await goTime();
+    const exitMinutes = outside.time - stopped.time;
+    assert.equal(exitMinutes, 5);
+    assert.deepEqual(outside.housing.state.actors[provider.id].position, {
+      kind: "at",
+      point: { domainId: JSON.stringify(["room", "living"]), cell: 0 },
+    });
+    ordinaryRights(outside);
+    await expect(button(houseMoves, "寝室の入口へ移動")).toBeDisabled();
+    await expect(deeper).toBeDisabled();
+    await sleepDenied();
+    await restore(stoppedSave);
     await showDesk(tenant);
     await button(frontDesk, "提供者に工事を依頼する").click();
     await button(frontDesk, provider.name + "に切り替える").click();
@@ -300,6 +345,8 @@ export async function verifyLodgingMaintenance(
       stoppedAt: 5,
       resumedMinutes: 25,
       safeExitMinutes: 1,
+      privateRoomExitMinutes: exitMinutes,
+      privateFloorDenied: true,
       woodReturned: returned.wood - stocked.wood,
       ordinaryRoomUsers: returned.housing.controls.roomAccess.bedroom,
       saveReloaded: true,
