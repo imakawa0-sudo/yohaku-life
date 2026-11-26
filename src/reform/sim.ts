@@ -1,4 +1,16 @@
 import {
+  mealSpace,
+  refundMeal,
+  refundMealInput,
+  reserveMealInput,
+  settleMealReturns,
+  settleMealInputReturns,
+  stockLimit,
+  validMealReturns,
+  validMealInputReturns,
+  type MealInputAccount,
+} from "./mealStock";
+import {
   cancelBenchActor,
   finishBenchMinute,
   prepareBenchMinute,
@@ -148,14 +160,15 @@ export interface Actor {
   level: number;
   specialty: Skill | null;
   priority: Skill | null;
-  cargo: Stock;
+  cargo: Stock & MealInputAccount;
   metrics: Record<Metric, number>;
   strainUntil: number;
   nextShift: number;
   practicedOn: number;
   danger: boolean;
 }
-export interface Game extends Stock {
+export interface Game extends Stock, MealInputAccount {
+  pendingMealReturns?: number;
   housing?: HousingRuntime;
   version: 1;
   actors: Actor[];
@@ -176,7 +189,7 @@ const clamp = (value: number, min = 0, max = 100) =>
   Math.max(min, Math.min(max, value));
 const round1 = (n: number) => Math.round(n * 10) / 10;
 const find = (g: Game, id: string) => g.actors.find((a) => a.person.id === id);
-const account = (g: Game, a: Actor): Stock =>
+const account = (g: Game, a: Actor): Stock & MealInputAccount =>
   a.location === g.home ? g : a.cargo;
 const day = (g: Game) => Math.floor(g.time / 1440) + 1;
 export function skillThreshold(level: number) {
@@ -769,6 +782,8 @@ function plan(
     if (a.location !== "village") return "食事を買えるのは町の市場です。";
     if (g.time % 1440 < 480 || g.time % 1440 > 1065)
       return "営業時間（8〜18時）に来てください。";
+    if (mealSpace(g, account(g, a)) < 1)
+      return "食事を受け取る空きがありません。";
     const pending = g.actors.filter(
       (b) => b !== a && b.task?.kind === "buy",
     ).length;
@@ -797,6 +812,12 @@ function plan(
       return "荷物を選んでください。";
     const key = target as keyof Stock;
     if (kind === "unpack" && a.cargo[key] < 1) return "荷物にありません。";
+    if (key === "food") {
+      if (kind === "unpack" && mealSpace(g) === 0)
+        return "共有備蓄に食事を下ろせる空きがありません。";
+      if (kind === "pack" && mealSpace(g, a.cargo) < packAmounts.food)
+        return "荷物に食事を積む空きがありません。";
+    }
     const t = task(
       g,
       a,
@@ -1001,8 +1022,7 @@ function stop(g: Game, a: Actor, spatialCancelled = false): void {
       return;
     }
   }
-  const bag = account(g, a);
-  for (const key of stocks) bag[key] += t.reserved[key] ?? 0;
+  refundReservation(g, a, t);
   a.task = null;
   housingTaskBoundary(g, a, t, "cancel");
   if (t.partner) {
@@ -1050,7 +1070,11 @@ function begin(
     housingTaskBoundary(g, peer, peer.task, "begin");
   }
   const bag = account(g, a);
-  for (const key of stocks) bag[key] -= t.reserved[key] ?? 0;
+  for (const key of stocks) {
+    const count = t.reserved[key] ?? 0;
+    if (isMealInput(t, key)) reserveMealInput(bag, key, count);
+    else bag[key] -= count;
+  }
   t.mode = auto ? "auto" : "direct";
   a.task = t;
   a.reason = why;
@@ -1431,11 +1455,43 @@ function selectAuto(g: Game, a: Actor) {
     return;
   tryAuto(g, a, "wait", undefined, "使える設備が空くのを待っています。");
 }
-function returnCargo(g: Game, a: Actor) {
+function isMealInput(
+  t: Task,
+  key: keyof Stock,
+): key is "ingredients" | "coins" {
+  return (
+    (key === "ingredients" &&
+      t.kind === "work" &&
+      parseWork(t.target)?.skill === "cook") ||
+    (key === "coins" && t.kind === "buy")
+  );
+}
+function refundReservation(g: Game, a: Actor, t: Task) {
+  const bag = account(g, a);
   for (const key of stocks) {
-    g[key] += a.cargo[key];
-    a.cargo[key] = 0;
+    const count = t.reserved[key] ?? 0;
+    if (!count) continue;
+    if (key === "food" && bag === g) refundMeal(g, count);
+    else if (isMealInput(t, key)) refundMealInput(bag, key, count);
+    else bag[key] += count;
   }
+}
+function unload(g: Game, a: Actor, key: keyof Stock) {
+  const free =
+    key === "food"
+      ? mealSpace(g)
+      : key === "ingredients" || key === "coins"
+        ? stockLimit - g[key]
+        : a.cargo[key];
+  const count = Math.min(a.cargo[key], free);
+  g[key] += count;
+  a.cargo[key] -= count;
+  return key === "food" && a.cargo.food
+    ? "共有備蓄に入らない食事" + a.cargo.food + "食は荷物に残しました。"
+    : "";
+}
+function returnCargo(g: Game, a: Actor) {
+  return stocks.map((key) => unload(g, a, key)).join("");
 }
 function finishWork(g: Game, a: Actor, t: Task): string {
   const w = parseWork(t.target)!;
@@ -1471,12 +1527,20 @@ function finishWork(g: Game, a: Actor, t: Task): string {
     const servings = 2 + strength;
     if (t.spatial?.foodBundleId) {
       const bundle = presentFood(g.housing)!;
-      if (!isStockQuantity(bag.food + servings)) {
+      if (mealSpace(g, bag) < servings) {
         delete bundle.assignment;
         refreshFoodHandling(g.housing!);
         return "完成食を置く空きがないため、料理を中断し、一束を設備の使用床に残しました。";
       }
       settleFood(g, bundle, "consumed");
+    } else if (mealSpace(g, bag) < servings) {
+      refundReservation(g, a, t);
+      return (
+        "完成食を置く空きがないため、料理を中断しました。" +
+        (bag.pendingMealInputReturns?.ingredients
+          ? "収まらない食材は返却待ちです。"
+          : "食材を戻しました。")
+      );
     }
     bag.food += servings;
     result = "食事を" + servings + "食用意した。";
@@ -1611,28 +1675,36 @@ function finish(g: Game, a: Actor, t: Task) {
     bag.ingredients += amount;
     result = "食材を" + amount + "つ見つけた。";
   } else if (t.kind === "buy") {
-    if (g.world.trade.stock > 0) {
+    if (g.world.trade.stock > 0 && mealSpace(g, bag) > 0) {
       g.world.trade.stock--;
       bag.food++;
       result = "食事を一食受け取った。";
     } else {
-      bag.coins += t.reserved.coins ?? 0;
-      result = "売り切れのため銀貨が戻った。";
+      refundReservation(g, a, t);
+      result =
+        (g.world.trade.stock > 0
+          ? "食事を置く空きがありません。"
+          : "売り切れです。") +
+        (bag.pendingMealInputReturns?.coins
+          ? "収まらない銀貨は返却待ちです。"
+          : "銀貨が戻った。");
     }
   } else if (t.kind === "pack" || t.kind === "unpack") {
     const key = t.target as keyof Stock;
-    if (t.kind === "pack") a.cargo[key] += t.reserved[key] ?? 0;
-    else {
-      g[key] += a.cargo[key];
-      a.cargo[key] = 0;
-    }
+    if (t.kind === "pack") {
+      const count = t.reserved[key] ?? 0;
+      if (key === "food" && mealSpace(g, a.cargo) < count) {
+        refundMeal(g, count);
+        result = "荷物に空きがないため、食事を共有備蓄に戻しました。";
+      } else a.cargo[key] += count;
+    } else result = unload(g, a, key);
   } else if (["travel", "return", "withdraw"].includes(t.kind)) {
     a.location = t.target!;
     a.room = a.location === g.home ? "living" : "outdoors";
     a.danger = false;
     result =
       places(g.world).find((p) => p.id === a.location)!.name + "に到着した。";
-    if (a.location === g.home) returnCargo(g, a);
+    if (a.location === g.home) result += returnCargo(g, a);
     if (a.person.personality === "curious")
       memory(g, a, "外の景色を見た", 5, 180);
   } else if (t.kind === "explore") {
@@ -1691,7 +1763,8 @@ function finish(g: Game, a: Actor, t: Task) {
           p.location = g.home;
           p.room = "living";
           p.danger = false;
-          returnCargo(g, p);
+          const remaining = returnCargo(g, p);
+          if (remaining) result += p.person.name + "の" + remaining;
         }
       }
       y.trust = clamp(y.trust + 12, -100, 100);
@@ -1768,7 +1841,7 @@ function finish(g: Game, a: Actor, t: Task) {
       }
       skillGain(g, a, t.target === "bridge" ? "wood" : "trade", 4, 20);
     } else {
-      for (const k of stocks) bag[k] += t.reserved[k] ?? 0;
+      refundReservation(g, a, t);
       result = "条件が変わったため、予約を解いた。";
     }
   }
@@ -1911,6 +1984,9 @@ function advanceMinute(g: Game): boolean {
     if (a.danger && t.kind === "explore") encounter = true;
   }
   if (completed.length) for (const a of g.actors) a.mood = moodOf(g, a);
+  settleMealReturns(g);
+  settleMealInputReturns(g);
+  for (const a of g.actors) settleMealInputReturns(g, a.cargo);
   returnedFood?.();
   // Ordinary stock changes for this minute get accounted for before newly released bundles.
   for (const { plan, worker } of releasedReturns)
@@ -1983,7 +2059,7 @@ function numericKeys(
   return object(value) && keys.every((key) => number(value[key], 0, max));
 }
 export function isStockQuantity(value: unknown): value is number {
-  return integer(value);
+  return integer(value, 0, stockLimit);
 }
 function goodStock(value: unknown): boolean {
   return object(value) && stocks.every((k) => isStockQuantity(value[k]));
@@ -2203,6 +2279,13 @@ export function isGame(value: unknown): value is Game {
         return false;
     }
   }
+  const game = value as unknown as Game;
+  if (
+    !validMealReturns(game) ||
+    !validMealInputReturns(game) ||
+    !game.actors.every((a) => validMealInputReturns(game, a.cargo))
+  )
+    return false;
   return (
     value.housing === undefined ||
     isHousingRuntime(value.housing, value as unknown as Game)

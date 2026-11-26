@@ -1,6 +1,7 @@
 import { furnishings } from "../house";
 import type { Game } from "../sim";
 import { sameSpatialPoint } from "../spatial/route";
+import { fields, integer, record } from "./saveFields";
 import { housingSlotId } from "./topology";
 import {
   gatheringUseMinutes,
@@ -11,23 +12,6 @@ import {
   type HousingRuntime,
 } from "./types";
 
-const record = (v: unknown): v is Record<string, unknown> =>
-  !!v &&
-  typeof v === "object" &&
-  (Object.getPrototypeOf(v) === Object.prototype ||
-    Object.getPrototypeOf(v) === null);
-function keys(v: unknown, allowed: string[]) {
-  return (
-    record(v) &&
-    Object.keys(v).length === allowed.length &&
-    allowed.every((k) => Object.hasOwn(v, k))
-  );
-}
-function integer(v: unknown, min: number, max = Number.MAX_SAFE_INTEGER) {
-  return (
-    typeof v === "number" && Number.isSafeInteger(v) && v >= min && v <= max
-  );
-}
 function issued(id: unknown, prefix: string, next: number) {
   if (typeof id !== "string") return false;
   const n = Number(id.slice(prefix.length));
@@ -41,7 +25,7 @@ function validMember(
   seats: number,
 ) {
   if (
-    !keys(m, [
+    !fields(m, [
       "actorId",
       "slotId",
       "orderId",
@@ -89,7 +73,7 @@ function validMember(
   const order = h.state.actors[m.actorId]?.order;
   if (
     !task ||
-    !keys(task, [
+    !fields(task, [
       "kind",
       "label",
       "target",
@@ -121,7 +105,7 @@ function validMember(
     return false;
   const escrow = group.kind === "meal" && m.usedMinutes === 0;
   if (
-    !keys(task.reserved, escrow ? ["food"] : []) ||
+    !fields(task.reserved, escrow ? ["food"] : []) ||
     (escrow && task.reserved.food !== 1)
   )
     return false;
@@ -150,7 +134,7 @@ function validPairs(group: HousingGathering, now: number) {
   const minutesByPair = new Map<string, number>();
   for (const pair of group.pairs) {
     if (
-      !keys(pair, ["actorIds", "minutes"]) ||
+      !fields(pair, ["actorIds", "minutes"]) ||
       !Array.isArray(pair.actorIds) ||
       pair.actorIds.length !== 2
     )
@@ -231,8 +215,31 @@ function validPairs(group: HousingGathering, now: number) {
   );
 }
 
-// Called after the spatial codec and per-actor housing binding checks. Together
-// those already prove the actual order owns precisely its live seat reservation.
+function validInvitation(group: HousingGathering, h: HousingRuntime) {
+  if (!Object.hasOwn(group, "invitation")) return true;
+  const invitation = group.invitation;
+  if (
+    !fields(invitation, ["hostId", "guestId"]) ||
+    typeof invitation.hostId !== "string" ||
+    typeof invitation.guestId !== "string" ||
+    invitation.hostId === invitation.guestId
+  )
+    return false;
+  const allowed = h.controls.roomAccess[group.roomId];
+  return (
+    Array.isArray(allowed) &&
+    allowed.includes(invitation.hostId) &&
+    !allowed.includes(invitation.guestId) &&
+    [invitation.hostId, invitation.guestId].every((id) =>
+      group.members.some(
+        (m) => m.actorId === id && m.status === "participating",
+      ),
+    )
+  );
+}
+
+// The spatial codec has checked order/seat reservations. Verify the gathering
+// receipt before the housing topology derives temporary access from its members.
 export function validGatherings(h: HousingRuntime, g: Game) {
   const tasks = g.actors.filter((a) => a.task?.kind === "home-gather");
   if (!Object.hasOwn(h, "gatherings") && !Object.hasOwn(h, "nextGatheringId"))
@@ -247,18 +254,22 @@ export function validGatherings(h: HousingRuntime, g: Game) {
     orders = new Set<string>();
   for (const [id, group] of Object.entries(h.gatherings)) {
     if (
-      !keys(group, [
-        "id",
-        "kind",
-        "roomId",
-        "fixtureId",
-        "createdAt",
-        "deadline",
-        "startedAt",
-        "useMinutes",
-        "members",
-        "pairs",
-      ]) ||
+      !fields(
+        group,
+        [
+          "id",
+          "kind",
+          "roomId",
+          "fixtureId",
+          "createdAt",
+          "deadline",
+          "startedAt",
+          "useMinutes",
+          "members",
+          "pairs",
+        ],
+        ["invitation"],
+      ) ||
       group.id !== id ||
       !issued(id, "gathering-", h.nextGatheringId!) ||
       !["meal", "talk"].includes(group.kind) ||
@@ -304,6 +315,7 @@ export function validGatherings(h: HousingRuntime, g: Game) {
       }
     }
     if (
+      !validInvitation(group, h) ||
       !(participants + withdrawing) ||
       (participants === 1 && group.kind === "talk") ||
       (participants && group.startedAt === null && g.time >= group.deadline) ||

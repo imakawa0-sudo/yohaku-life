@@ -2,7 +2,12 @@ import type { HousingConstruction } from "./constructionTypes";
 import { furnishings, type House, type Room } from "../house";
 import { spatialWalkId } from "../spatial/route";
 import type { SpatialActor, SpatialPoint } from "../spatial/types";
-import type { HousingControls, HousingSlot, HousingTopology } from "./types";
+import type {
+  HousingControls,
+  HousingGathering,
+  HousingSlot,
+  HousingTopology,
+} from "./types";
 
 export function housingPoint(roomId: string, cell: number): SpatialPoint {
   return { domainId: JSON.stringify(["room", roomId]), cell };
@@ -105,6 +110,28 @@ function controlsForHouse(
   };
 }
 
+/** Apply to a detached graph: walk into the venue, use only the offered seat(s). */
+export function allowGatheringGuest(
+  geometry: HousingTopology["geometry"],
+  roomId: string,
+  guestId: string,
+  slotIds: string[],
+): void {
+  const domain = housingPoint(roomId, 0).domainId;
+  for (const rule of geometry.entryRules) {
+    if (
+      rule.point.domainId === domain &&
+      !rule.allowedActorIds.includes(guestId)
+    )
+      rule.allowedActorIds = [...rule.allowedActorIds, guestId].sort();
+  }
+  for (const id of slotIds) {
+    const slot = geometry.slots[id];
+    if (slot?.allowedActorIds && !slot.allowedActorIds.includes(guestId))
+      slot.allowedActorIds = [...slot.allowedActorIds, guestId].sort();
+  }
+}
+
 /** actorIds are the currently located spatial actors. Controls may also refer to unlocated residents. */
 export function buildHousingTopology(
   house: House,
@@ -113,6 +140,7 @@ export function buildHousingTopology(
   positions?: Record<string, SpatialActor>,
   layoutVersion?: 2,
   construction?: HousingConstruction,
+  gatherings?: Record<string, HousingGathering>,
 ): HousingTopology {
   const settings = controlsForHouse(house, controls);
   const geometry: HousingTopology["geometry"] = {
@@ -217,6 +245,21 @@ export function buildHousingTopology(
       minutes: 3,
       open: !settings.closedLinks.includes(id),
     };
+  }
+  for (const group of Object.values(gatherings ?? {})) {
+    const pair = group.invitation;
+    if (!pair || !settings.roomAccess[group.roomId]?.includes(pair.hostId))
+      continue;
+    const guest = group.members.find(
+      (m) => m.actorId === pair.guestId && m.status === "participating",
+    );
+    if (
+      guest &&
+      group.members.some(
+        (m) => m.actorId === pair.hostId && m.status === "participating",
+      )
+    )
+      allowGatheringGuest(geometry, group.roomId, pair.guestId, [guest.slotId]);
   }
   return { geometry, slots, controls: settings };
 }

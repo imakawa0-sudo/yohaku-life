@@ -22,6 +22,7 @@ export function inspectHousingLayoutUpgrade(
     actors,
     undefined,
     housing.construction,
+    housing.gatherings,
   );
   const after = buildHousingTopology(
     g.house,
@@ -30,6 +31,7 @@ export function inspectHousingLayoutUpgrade(
     actors,
     2,
     housing.construction,
+    housing.gatherings,
   );
   for (const actor of g.actors) {
     const task = actor.task;

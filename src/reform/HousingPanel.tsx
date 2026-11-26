@@ -56,11 +56,13 @@ export function HousingPanel({
   actor,
   status,
   onGame,
+  invitationWithdrawal,
 }: {
   game: Game;
   actor: Actor;
   status: HousingStatus;
   onGame: (g: Game) => void;
+  invitationWithdrawal?: string;
 }) {
   const prefix = useId();
   const h = game.housing!;
@@ -205,7 +207,13 @@ export function HousingPanel({
           設定や間取りを見直して時計を進めると、同じ予定を続けられるか確かめます。
         </p>
       )}
-      <GatheringPanel key={id} game={game} actorId={id} onGame={onGame} />
+      <GatheringPanel
+        key={id}
+        game={game}
+        actorId={id}
+        onGame={onGame}
+        invitationWithdrawal={invitationWithdrawal}
+      />
       <details open>
         <summary>部屋へ移動</summary>
         <div className="lf-command-list">

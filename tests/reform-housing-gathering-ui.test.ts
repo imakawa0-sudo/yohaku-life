@@ -90,6 +90,89 @@ function begin(g: Game, kind: "talk" | "meal", actorIds: string[]) {
   });
 }
 
+function invitedGathering(kind: "talk" | "meal", guestTravels = false) {
+  const game = base(3, true);
+  at(game, a, "living", 1);
+  at(game, b, guestTravels ? "bedroom" : "living", guestTravels ? 0 : 4);
+  at(game, c, "living", 6);
+  const active = startHousingGathering(
+    setHousingRoomAccess(game, "living", [a, c]),
+    {
+      kind,
+      roomId: "living",
+      fixtureId: "bench-1",
+      actorIds: [a, b, c],
+      invitation: { hostId: a, guestId: b },
+    },
+  );
+  assert.ok(active.housing!.gatherings?.["gathering-1"]?.invitation);
+  return active;
+}
+
+function sharedCancellationNote(g: Game, who: string) {
+  const html = life(g, who);
+  const notes = ["この集まりから離れる", "現在の予定を取り消す"].map(
+    (label) => {
+      const id = html.match(
+        new RegExp(
+          '<button[^>]*aria-describedby="([^"]+)"[^>]*>' + label + "</button>",
+        ),
+      )?.[1];
+      assert.ok(id, label);
+      const note = html.match(new RegExp('id="' + id + '">([^<]+)</'))?.[1];
+      assert.ok(note, label);
+      return note;
+    },
+  );
+  assert.equal(notes[0], notes[1]);
+  return notes[0];
+}
+
+test("both cancel buttons distinguish the host ending a three-person talk from the guest leaving two ordinary participants", () => {
+  const talk = invitedGathering("talk");
+  const host = sharedCancellationNote(talk, a);
+  assert.match(host, new RegExp(names[1] + "もこの集まりから離れます"));
+  assert.match(host, /この会話は終了します/);
+  assert.doesNotMatch(host, /取り置き|区間/);
+  const guest = sharedCancellationNote(talk, b);
+  assert.match(guest, /この集まりの招待はここで終わります/);
+  assert.match(guest, /残る2人の会話予定は続きます/);
+  assert.doesNotMatch(guest, /この会話は終了|取り置き/);
+  assert.equal(
+    order(talk, a, "cancel").housing!.gatherings?.["gathering-1"],
+    undefined,
+  );
+  const remaining = order(talk, b, "cancel").housing!.gatherings![
+    "gathering-1"
+  ];
+  assert.deepEqual(
+    remaining.members
+      .filter((m) => m.status === "participating")
+      .map((m) => m.actorId),
+    [a, c],
+  );
+});
+
+test("meal cancellation previews keep the third diner's seat and return only the portions still reserved by those leaving", () => {
+  const planned = invitedGathering("meal");
+  const crossing = advance(invitedGathering("meal", true), 1);
+  assert.equal(crossing.housing!.state.actors[b].position.kind, "transit");
+  const host = sharedCancellationNote(crossing, a);
+  assert.match(host, /ナギの食事予定は続きます/);
+  assert.match(host, /今の区間を出てから離れます/);
+  assert.match(host, /取り置き2食/);
+  const guest = sharedCancellationNote(crossing, b);
+  assert.match(guest, /残る2人の食事予定は続きます/);
+  assert.match(guest, /取り置き1食/);
+  const eating = advance(planned, 1);
+  const after = order(eating, a, "cancel");
+  assert.equal(after.actors[2].task?.kind, "home-gather");
+  assert.equal(after.food, eating.food);
+  const hostAfterEating = sharedCancellationNote(eating, a);
+  assert.match(hostAfterEating, /ナギの食事予定は続きます/);
+  assert.doesNotMatch(hostAfterEating, /取り置き|区間/);
+});
+
 test("the initial gathering form shows real seat capacity and disables a one-person request", () => {
   const html = panel(life(base()));
   assert.match(html, /会話/);

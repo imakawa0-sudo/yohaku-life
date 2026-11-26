@@ -1,6 +1,8 @@
 import { useId, useState } from "react";
 import { Users } from "lucide-react";
-import { cellName, furnishings, type Fixture, type Room } from "./house";
+import { residentLabel, roomLabel } from "./displayNames";
+import { facilityLabel } from "./facilityLabel";
+import { furnishings, type Fixture, type Room } from "./house";
 import {
   gatheringStatus,
   inspectHousingGathering,
@@ -21,7 +23,62 @@ type Props = {
   game: Game;
   actorId: string;
   onGame: (game: Game) => void;
+  invitationWithdrawal?: string;
 };
+
+export function invitationWithdrawalText(game: Game, actor: Actor) {
+  const id = actor.task?.spatial?.gatheringId;
+  const activity = id && game.housing?.gatherings?.[id];
+  if (!activity || !activity.invitation) return;
+  const { hostId, guestId } = activity.invitation;
+  const who = actor.person.id;
+  if (who !== hostId && who !== guestId) return;
+
+  // The real cancellation also revokes the invitation and settles the remaining seats.
+  const after = order(game, who, "cancel").housing?.gatherings?.[activity.id];
+  const continuing =
+    after?.members.filter((m) => m.status === "participating") ?? [];
+  const leaving = activity.members.filter(
+    (m) =>
+      m.status === "participating" &&
+      !continuing.some((c) => c.actorId === m.actorId),
+  );
+  const guest = game.actors.find((a) => a.person.id === guestId)!;
+  const notes = [
+    who === hostId
+      ? `招待が終わり、${residentLabel(game, guest)}もこの集まりから離れます。`
+      : "この集まりの招待はここで終わります。",
+  ];
+  const kind = activity.kind === "meal" ? "食事" : "会話";
+  if (continuing.length > 0) {
+    const remaining =
+      continuing.length === 1
+        ? residentLabel(
+            game,
+            game.actors.find((a) => a.person.id === continuing[0].actorId)!,
+          )
+        : `残る${continuing.length}人`;
+    notes.push(`${remaining}の${kind}予定は続きます。`);
+  } else {
+    notes.push(`この${kind}は終了します。`);
+  }
+  if (leaving.some((m) => housingInTransit(game, m.actorId)))
+    notes.push("通路を移動中の人は、今の区間を出てから離れます。");
+  if (activity.kind === "meal") {
+    const returned = leaving.reduce(
+      (sum, m) =>
+        sum +
+        (game.actors.find((a) => a.person.id === m.actorId)?.task?.reserved
+          .food ?? 0),
+      0,
+    );
+    if (returned)
+      notes.push(
+        `離れる人の取り置き${returned}食は、離脱時に空きがある分から備蓄に戻ります。`,
+      );
+  }
+  return notes.join("");
+}
 
 function seatLabel(room: Room, fixture: Fixture, slotId: string) {
   const item = furnishings[fixture.kind];
@@ -54,10 +111,36 @@ function GatheringSetup({ game, actorId, onGame }: Props) {
   const [kind, setKind] = useState<GatheringKind>("talk");
   const [venueId, setVenueId] = useState(venues[0]?.id ?? "");
   const [selected, setSelected] = useState<string[]>([]);
+  const [pairId, setPairId] = useState("");
   const venue = venues.find((item) => item.id === venueId);
   const actorIds = [actorId, ...selected];
+  const entry = venue && game.housing?.controls.roomAccess[venue.room.id];
+  const participants = game.actors.filter((actor) =>
+    actorIds.includes(actor.person.id),
+  );
+  const excluded = entry
+    ? participants.filter((actor) => !entry.includes(actor.person.id))
+    : [];
+  const hosts = entry
+    ? participants.filter((actor) => entry.includes(actor.person.id))
+    : [];
+  const guest = excluded.length === 1 ? excluded[0] : undefined;
+  const pairs = guest
+    ? hosts.map((host) => ({
+        id: JSON.stringify([host.person.id, guest.person.id]),
+        label: residentLabel(game, host) + " → " + residentLabel(game, guest),
+        invitation: { hostId: host.person.id, guestId: guest.person.id },
+      }))
+    : [];
+  const pair = pairs.find((p) => p.id === pairId);
   const request = venue
-    ? { kind, roomId: venue.room.id, fixtureId: venue.fixture.id, actorIds }
+    ? {
+        kind,
+        roomId: venue.room.id,
+        fixtureId: venue.fixture.id,
+        actorIds,
+        ...(pair && { invitation: pair.invitation }),
+      }
     : null;
   const preview = request ? inspectHousingGathering(game, request) : null;
   const physicalCapacity = preview?.physicalCapacity ?? null;
@@ -87,14 +170,20 @@ function GatheringSetup({ game, actorId, onGame }: Props) {
         <button
           type="button"
           aria-pressed={kind === "talk"}
-          onClick={() => setKind("talk")}
+          onClick={() => {
+            if (kind !== "talk") setPairId("");
+            setKind("talk");
+          }}
         >
           会話
         </button>
         <button
           type="button"
           aria-pressed={kind === "meal"}
-          onClick={() => setKind("meal")}
+          onClick={() => {
+            if (kind !== "meal") setPairId("");
+            setKind("meal");
+          }}
         >
           食事
         </button>
@@ -105,7 +194,10 @@ function GatheringSetup({ game, actorId, onGame }: Props) {
       <select
         id={prefix + "-venue"}
         value={venue?.id ?? ""}
-        onChange={(event) => setVenueId(event.target.value)}
+        onChange={(event) => {
+          setVenueId(event.target.value);
+          setPairId("");
+        }}
         disabled={!venues.length}
       >
         <option value="" disabled>
@@ -113,15 +205,15 @@ function GatheringSetup({ game, actorId, onGame }: Props) {
         </option>
         {venues.map(({ id, room, fixture }) => (
           <option key={id} value={id}>
-            {room.name}・{furnishings[fixture.kind].name}（
-            {cellName(room, fixture.cell)}）
+            {facilityLabel(game.house.rooms, room, fixture.kind, fixture.cell)}
           </option>
         ))}
       </select>
       <fieldset>
         <legend>参加する住民</legend>
         {game.actors.map((actor) => {
-          const { id, name } = actor.person;
+          const { id } = actor.person;
+          const name = residentLabel(game, actor);
           const current = id === actorId;
           const checked = current || selected.includes(id);
           const reason = unavailable(game, actor);
@@ -137,6 +229,13 @@ function GatheringSetup({ game, actorId, onGame }: Props) {
                 disabled={current || (!!reason && !checked)}
                 onChange={(event) => {
                   const include = event.target.checked;
+                  if (
+                    !include &&
+                    (!pair ||
+                      pair.invitation.hostId === id ||
+                      pair.invitation.guestId === id)
+                  )
+                    setPairId("");
                   setSelected((ids) =>
                     include
                       ? [...ids, id]
@@ -152,6 +251,43 @@ function GatheringSetup({ game, actorId, onGame }: Props) {
           );
         })}
       </fieldset>
+      {pairs.length > 0 ? (
+        <>
+          <label
+            className="lf-gathering-venue"
+            htmlFor={prefix + "-invitation"}
+          >
+            この集まりだけの招待
+          </label>
+          <select
+            id={prefix + "-invitation"}
+            aria-describedby={prefix + "-invite-help"}
+            value={pair?.id ?? ""}
+            onChange={(event) => setPairId(event.target.value)}
+          >
+            <option value="">招待しない</option>
+            {pairs.map((candidate) => (
+              <option key={candidate.id} value={candidate.id}>
+                {candidate.label}
+              </option>
+            ))}
+          </select>
+          <p className="lf-note" id={prefix + "-invite-help"}>
+            入室できる参加者 →
+            招く相手の順です。二人がこの集まりに参加している間だけ、相手が会場に入れます。
+          </p>
+        </>
+      ) : (
+        excluded.length > 0 && (
+          <p className="lf-note">
+            {entry?.length === 0
+              ? "この会場に入室を許可された住人がいません。"
+              : excluded.length > 1
+                ? "ふだん会場に入れない参加者を招けるのは一人までです。"
+                : "ふだん会場に入れる住人を参加者に加えると、一人を招けます。"}
+          </p>
+        )
+      )}
       <dl className="lf-housing-status">
         {preview && (
           <>
@@ -220,10 +356,10 @@ function GatheringSetup({ game, actorId, onGame }: Props) {
           {preview.assignments.map(({ actorId, slotId, minutes }) => (
             <li key={actorId}>
               <strong>
-                {
-                  game.actors.find((actor) => actor.person.id === actorId)!
-                    .person.name
-                }
+                {residentLabel(
+                  game,
+                  game.actors.find((actor) => actor.person.id === actorId)!,
+                )}
               </strong>
               <span>{seatLabel(venue.room, venue.fixture, slotId)}</span>
               <span>
@@ -252,10 +388,18 @@ function GatheringActivity({
   actorId,
   onGame,
   activity,
+  invitationWithdrawal,
 }: Props & { activity: HousingGathering }) {
   const prefix = useId();
   const room = game.house.rooms.find((item) => item.id === activity.roomId)!;
   const fixture = room.fixtures.find((item) => item.id === activity.fixtureId)!;
+  const invitation = activity.invitation;
+  const host =
+    invitation &&
+    game.actors.find((actor) => actor.person.id === invitation.hostId);
+  const guest =
+    invitation &&
+    game.actors.find((actor) => actor.person.id === invitation.guestId);
   const assembling = activity.startedAt === null;
   const ready = assembling
     ? inspectStartReadyGathering(game, activity.id)
@@ -277,8 +421,8 @@ function GatheringActivity({
   return (
     <div className="lf-gathering-activity">
       <h4>
-        {activity.kind === "talk" ? "会話" : "食事"} · {room.name}・
-        {furnishings[fixture.kind].name}
+        {activity.kind === "talk" ? "会話" : "食事"} ·{" "}
+        {roomLabel(game.house.rooms, room)}・{furnishings[fixture.kind].name}
       </h4>
       <p>
         {assembling
@@ -287,11 +431,25 @@ function GatheringActivity({
             "分"
           : "利用開始済み"}
       </p>
+      {host && guest && (
+        <dl className="lf-housing-status">
+          <div>
+            <dt>この集まりの招待</dt>
+            <dd>
+              {residentLabel(game, host)} → {residentLabel(game, guest)}
+              <br />
+              二人がこの{activity.kind === "talk" ? "会話" : "食事"}
+              に参加している間だけ有効です。
+            </dd>
+          </div>
+        </dl>
+      )}
       <ul className="lf-gathering-people" aria-label="住民ごとの席と状況">
         {activity.members.map((member) => {
-          const name = game.actors.find(
-            (actor) => actor.person.id === member.actorId,
-          )!.person.name;
+          const name = residentLabel(
+            game,
+            game.actors.find((actor) => actor.person.id === member.actorId)!,
+          );
           const live =
             member.status === "participating" ||
             member.status === "withdrawing";
@@ -341,11 +499,12 @@ function GatheringActivity({
             この集まりから離れる
           </button>
           <small id={prefix + "-leave"}>
-            {withdrawing
-              ? "今の区間を出てから離れます。"
-              : endsTalk
-                ? "残り一人になるため、この会話は終了します。"
-                : "操作中の住民の参加予定を取り消します。"}
+            {invitationWithdrawal ??
+              (withdrawing
+                ? "今の区間を出てから離れます。"
+                : endsTalk
+                  ? "残り一人になるため、この会話は終了します。"
+                  : "操作中の住民の参加予定を取り消します。")}
           </small>
         </div>
       </div>

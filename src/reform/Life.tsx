@@ -1,5 +1,5 @@
 import { homeColdProtection } from "./housing/coldProtection";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Backpack,
   BedDouble,
@@ -32,6 +32,7 @@ import {
 } from "./peopleModel";
 import type { Skill } from "./peopleModel";
 import { HousingPanel, housingStageNames } from "./HousingPanel";
+import { invitationWithdrawalText } from "./GatheringPanel";
 import { BedAccessPolicy, BedPreferencePolicy } from "./BedPreferencePolicy";
 import {
   FacilityAction,
@@ -76,6 +77,27 @@ const stockNames = {
   wood: "木材",
   coins: "銀貨",
 };
+
+function PendingMealInputs({
+  stock,
+  destination,
+}: {
+  stock: Game["pendingMealInputReturns"];
+  destination: string;
+}) {
+  if (!stock) return null;
+  const amounts = [
+    stock.ingredients && "食材 " + stock.ingredients,
+    stock.coins && "銀貨 " + stock.coins,
+  ].filter(Boolean);
+  if (!amounts.length) return null;
+  return (
+    <p className="lf-cargo">
+      {destination}への返却待ち · {amounts.join("／")}
+    </p>
+  );
+}
+
 const groupNames = {
   need: "生活",
   work: "仕事",
@@ -307,11 +329,13 @@ function ActionPanel({
   actor,
   onGame,
   facilitySelection,
+  invitationWithdrawal,
 }: {
   game: Game;
   actor: Actor;
   onGame: (g: Game) => void;
   facilitySelection?: FacilitySelection;
+  invitationWithdrawal?: string;
 }) {
   const [group, setGroup] = useState<ActionGroup>("need");
   const commands = options(game, actor.person.id);
@@ -352,7 +376,15 @@ function ActionPanel({
         ? housingStatus(game, actor.person.id).detail
         : "療養を取り消すと寝床の予約を解除します。移動区間の途中なら、その終点で解除します。"
       : null;
-  const cancelHint = foodCancel ?? constructionCancel ?? recoveryCancel;
+  const cancelNote =
+    invitationWithdrawal ??
+    foodCancel ??
+    constructionCancel ??
+    recoveryCancel ??
+    ((reserved || cancelling) &&
+      (actor.task?.spatial
+        ? "取り消すと予約を解除します。通路を移動中は、今の区間を出てから取り置きした物が戻ります。"
+        : "取り消すと取り置きした物が戻ります。"));
   return (
     <section className="lf-panel lf-orders" aria-label="行動の指示">
       <div className="lf-section-title">
@@ -387,22 +419,19 @@ function ActionPanel({
             type="button"
             data-kind="cancel"
             disabled={!!cancel.disabled || cancelling}
-            aria-describedby={
-              reserved || cancelling || cancelHint ? "lf-refund" : undefined
-            }
+            aria-describedby={cancelNote ? "lf-refund" : undefined}
             onClick={() =>
               onGame(order(game, actor.person.id, cancel.kind, cancel.target))
             }
           >
             {cancel.label}
           </button>
-          {(reserved || cancelling || cancelHint) && (
+          {cancelNote && (
             <p className="lf-note" id="lf-refund">
-              {reserved && "取り置き中　" + reserved + "。"}
-              {cancelHint ??
-                (actor.task?.spatial
-                  ? "取り消すと予約を解除します。通路を移動中は、今の区間を出てから取り置きした物が戻ります。"
-                  : "取り消すと取り置きした物が戻ります。")}
+              {!invitationWithdrawal &&
+                reserved &&
+                "取り置き中　" + reserved + "。"}
+              {cancelNote}
             </p>
           )}
         </>
@@ -426,6 +455,10 @@ export function Life({
 }) {
   const actor =
     game.actors.find((a) => a.person.id === selected) ?? game.actors[0];
+  const invitationWithdrawal = useMemo(
+    () => actor && invitationWithdrawalText(game, actor),
+    [game, actor],
+  );
   if (!actor) return <p>暮らしを始める住民を作成してください。</p>;
   const person = actor.person;
   const day = Math.floor(game.time / 1440) + 1;
@@ -664,6 +697,16 @@ export function Life({
                 銀貨 <b>{game.coins}</b>
               </span>
             </div>
+            {!!game.pendingMealReturns && (
+              <p className="lf-cargo">
+                返却待ちの食事 {game.pendingMealReturns}食 ·
+                共同備蓄に空きができた分から戻ります。
+              </p>
+            )}
+            <PendingMealInputs
+              stock={game.pendingMealInputReturns}
+              destination="共同備蓄"
+            />
             {foodStatus?.state === "present" && (
               <p className="lf-cargo">
                 共同備蓄とは別に 野菜の一束（食材2） · {foodStatus.location} ·{" "}
@@ -671,13 +714,20 @@ export function Life({
               </p>
             )}
             {(actor.location !== game.home ||
-              Object.values(actor.cargo).some((amount) => amount > 0)) && (
+              (Object.keys(stockNames) as (keyof typeof stockNames)[]).some(
+                (key) => actor.cargo[key] > 0,
+              ) ||
+              !!actor.cargo.pendingMealInputReturns) && (
               <p className="lf-cargo">
                 {person.name}の携行品 · 食事 {actor.cargo.food}／食材{" "}
                 {actor.cargo.ingredients}／木材 {actor.cargo.wood}／銀貨{" "}
                 {actor.cargo.coins}
               </p>
             )}
+            <PendingMealInputs
+              stock={actor.cargo.pendingMealInputReturns}
+              destination={person.name + "の携行品"}
+            />
             {game.insulated && (
               <p className="lf-cargo">
                 家全体の断熱雨戸を設置済み。自宅にいる間は寒さによる休息の追加消耗を防げます。
@@ -691,12 +741,14 @@ export function Life({
             actor={actor}
             onGame={onGame}
             facilitySelection={facilitySelection}
+            invitationWithdrawal={invitationWithdrawal}
           />
           {status && (
             <HousingPanel
               game={game}
               actor={actor}
               status={status}
+              invitationWithdrawal={invitationWithdrawal}
               onGame={onGame}
             />
           )}

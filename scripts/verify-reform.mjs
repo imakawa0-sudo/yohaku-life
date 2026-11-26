@@ -780,6 +780,18 @@ async function fieldTrip(recoveryWidth) {
 
 try {
   const flags=new Set(process.argv.slice(2));
+  if (flags.has("--meal-input-returns")) {
+    const { verifyMealInputReturns } = await import("./verify-guest-gathering.mjs");
+    await verifyMealInputReturns({ fresh, makeStart, enter, currentGame, tab, button, checkLegacy, report });
+  }
+  if (flags.has("--guest-gathering")) {
+    const { verifyGuestGathering } = await import("./verify-guest-gathering.mjs");
+    for (const width of [1280, 320]) {
+      await verifyGuestGathering(width, {
+        fresh, makeStart, enter, currentGame, tab, button, showSection, screenshot, checkLegacy, report,
+      });
+    }
+  }
   if (flags.has("--field")) await fieldTrip();
   if (flags.has("--recovery-bed")) {
     for (const width of [1280,320]) await fieldTrip(width);

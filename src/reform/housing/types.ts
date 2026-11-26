@@ -119,7 +119,10 @@ export type GatheringMember = {
   togetherMinutes: number;
   stoppedAt: number | null;
 };
+export type GatheringInvitation = { hostId: string; guestId: string };
+
 export type HousingGathering = {
+  invitation?: GatheringInvitation;
   id: string;
   kind: GatheringKind;
   roomId: string;

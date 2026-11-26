@@ -1,14 +1,17 @@
+import { fields } from "./saveFields";
 import { foodCookingSeat } from "./foodCooking";
 import type { Game } from "../sim";
 import { issueSpatialOrder } from "../spatial/actions";
 import { inspectSpatialRoute } from "../spatial/route";
 import {
   locateHousingActor,
+  rebuildHousingGeometry,
   safeExitReason,
   spatialReasonText,
 } from "./bridge";
 import { inspectHousingLayoutUpgrade } from "./layout";
 import {
+  allowGatheringGuest,
   buildHousingTopology,
   housingPoint,
   legacyHousingStation,
@@ -18,10 +21,12 @@ import {
   gatheringWaitMinutes,
   isGatheringVenue,
   type GatheringKind,
+  type GatheringInvitation,
   type HousingGathering,
 } from "./types";
 
 export type GatheringRequest = {
+  invitation?: GatheringInvitation;
   kind: GatheringKind;
   roomId: string;
   fixtureId: string;
@@ -107,6 +112,7 @@ function prepare(
     h.state.actors,
     2,
     h.construction,
+    h.gatherings,
   );
   const booked = new Set(
     Object.values(h.state.reservations)
@@ -154,6 +160,35 @@ function prepare(
     if (!Object.hasOwn(h.state.actors, id))
       locateHousingActor(g, h, id, housingPoint(a.room, 0));
   }
+  const hasInvitation = Object.hasOwn(request, "invitation");
+  const invitation = hasInvitation ? request.invitation : undefined;
+  if (hasInvitation) {
+    if (
+      !fields(invitation, ["hostId", "guestId"]) ||
+      invitation.hostId === invitation.guestId ||
+      !ids.includes(invitation.hostId) ||
+      !ids.includes(invitation.guestId)
+    )
+      return refuse(
+        "集まりに参加する別々の住人を、招く人と招かれる人に選んでください。",
+      );
+    const allowed = h.controls.roomAccess[roomId];
+    if (
+      !allowed ||
+      !allowed.includes(invitation.hostId) ||
+      allowed.includes(invitation.guestId)
+    )
+      return refuse(
+        "入室できる住人が、その部屋に入室許可のない住人を招けます。",
+      );
+    // Seat matching considers all available seats. Only the chosen seat is kept after booking.
+    allowGatheringGuest(
+      h.state,
+      roomId,
+      invitation.guestId,
+      free.map((s) => s.id),
+    );
+  }
   const choices: Assignment[][] = [];
   for (const id of ids) {
     const pos = h.state.actors[id].position;
@@ -191,6 +226,7 @@ function prepare(
   const serial = h.nextGatheringId ?? 1;
   const group: HousingGathering = {
     id: "gathering-" + serial,
+    ...(invitation && { invitation: { ...invitation } }),
     kind,
     roomId,
     fixtureId,
@@ -239,6 +275,7 @@ function prepare(
   }
   (h.gatherings ??= {})[group.id] = group;
   h.nextGatheringId = serial + 1;
+  if (invitation) rebuildHousingGeometry(next, h);
   return {
     inspection: {
       ok: true,
