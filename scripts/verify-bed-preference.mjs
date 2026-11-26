@@ -350,7 +350,7 @@ async function captureLayouts(page, name, beds) {
       for (const bed of [beds.preferred, beds.sameName]) {
         await expect(
           choice.locator(`option[value="${bed.fixtureId}"]`),
-        ).toHaveText(bed.label);
+        ).toHaveText(bed.label + " · 未対策");
       }
       await expect(choice).toBeEnabled();
       const box = await choice.boundingBox();

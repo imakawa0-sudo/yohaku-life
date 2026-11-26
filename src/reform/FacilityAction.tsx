@@ -7,6 +7,10 @@ import {
   type Need,
 } from "./house";
 import { foodBundleStatus } from "./housing/foodPresentation";
+import {
+  bedProtectionLabel,
+  bedProtectionPreview,
+} from "./housing/coldProtection";
 import { getPreferredBed } from "./housing/bedPreference";
 import {
   inspectOrder,
@@ -187,6 +191,7 @@ export function FacilityAction({
         {fixtures.map(({ room, fixture }) => (
           <option key={fixture.id} value={fixture.id}>
             {facilityLabel(rooms, room, fixture.kind, fixture.cell)}
+            {need === "energy" && " · " + bedProtectionLabel(game, room.id)}
           </option>
         ))}
       </select>
@@ -233,6 +238,12 @@ export function FacilityAction({
             `移動${facility.moveMinutes}分 ＋ 木工${facility.useMinutes}分（合計${preview.minutes}分）`
           ) : (
             `現在の見込み　移動${facility.moveMinutes}分 ＋ 利用${facility.useMinutes}分（合計${preview.minutes}分）`
+          )}
+          {need === "energy" && (
+            <>
+              <br />
+              {bedProtectionPreview(game, destinationRoom.id)}
+            </>
           )}
           {bedPreference?.outcome === "preferred" && (
             <>

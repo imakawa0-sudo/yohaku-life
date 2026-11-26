@@ -1239,6 +1239,19 @@
   padding-block: 0.6rem;
   cursor: pointer;
 }
+.lf-room-stay {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.lf-room-stay :is(th, td) {
+  padding: 0.3rem 0.45rem;
+  border-bottom: 1px solid var(--lf-line);
+  text-align: right;
+}
+.lf-room-stay th:first-child {
+  text-align: left;
+}
 .lf-construction-error {
   color: #8b3f33;
 }

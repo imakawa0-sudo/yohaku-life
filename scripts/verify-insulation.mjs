@@ -166,6 +166,80 @@ const until = async (page, id, done) => {
   }
   assert.fail("工事が完了しません");
 };
+async function testFrostBedPreview(page) {
+  const startTime = (await getGame(page)).time;
+  await click(page, "住まい");
+  const house = page.getByRole("region", { name: "住まいの間取り" });
+  await click(page, "居間", house);
+  await house
+    .getByRole("combobox", { name: "新しく置く設備", exact: true })
+    .selectOption("mat");
+  await click(page, "この部屋に置く", house);
+  const installed = await getGame(page);
+  const bed = installed.house.rooms
+    .find((room) => room.id === "living")
+    .fixtures.find((f) => f.kind === "mat");
+  assert.ok(bed);
+  await click(page, "暮らし");
+  const commands = page.getByRole("region", { name: "行動の指示" });
+  const roster = page.getByRole("group", { name: "住民を選ぶ" });
+  const action = button(commands, "ひと眠りする");
+  const row = action.locator("..");
+  const preview = row.locator("small");
+  const picker = row.getByRole("combobox", { name: "休息に使う設備" });
+  await click(page, "検証カヤ", roster);
+  await click(page, "生活", commands);
+  await expect(picker.locator('option[value="mat-1"]')).toHaveText(
+    /寝室.*一室対策済み/,
+  );
+  await expect(picker.locator('option[value="' + bed.id + '"]')).toHaveText(
+    /居間.*未対策/,
+  );
+  await picker.selectOption("mat-1");
+  await expect(preview).toContainText(/休息先の寒さ対策.*一室対策済み/);
+  await action.click();
+  await expect(page.locator(".rf-app")).toHaveAttribute("aria-busy", "false");
+  await click(page, "検証スイ", roster);
+  const policy = page
+    .locator("summary")
+    .filter({ hasText: "暮らしと備蓄の方針" });
+  if (!(await policy.locator("..").evaluate((el) => el.open)))
+    await policy.click();
+  const preferred = page.getByRole("combobox", {
+    name: "検証スイが優先する寝床",
+    exact: true,
+  });
+  await expect(preferred.locator('option[value="mat-1"]')).toHaveText(
+    /寝室.*一室対策済み/,
+  );
+  await expect(preferred.locator('option[value="' + bed.id + '"]')).toHaveText(
+    /居間.*未対策/,
+  );
+  await preferred.selectOption("mat-1");
+  await click(page, "生活", commands);
+  await expect(picker).toHaveValue("");
+  await expect(preview).toContainText("別の寝床を使う見込み");
+  await expect(preview).toContainText("居間");
+  await expect(preview).toContainText(/休息先の寒さ対策.*未対策/);
+  assert.equal((await getGame(page)).time, startTime);
+  for (const width of [1280, 320]) {
+    await page.setViewportSize({ width, height: width === 320 ? 844 : 900 });
+    await row.evaluate((el) => el.scrollIntoView({ block: "center" }));
+    assert.ok(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth + 1,
+      ),
+    );
+    await page.screenshot({
+      path: resolve(output, "bed-fallback-" + width + ".png"),
+    });
+  }
+  await page.setViewportSize({ width: 1280, height: 900 });
+  report.browser.push(
+    "frost: explicit protected bedroom, protected preference, occupied bed falls back to unprotected living-room mat",
+  );
+}
+
 let browser;
 try {
   browser = await chromium.launch(
@@ -289,6 +363,7 @@ try {
         ).toBeVisible();
         await click(page, "検証スイ");
         await expect(page.getByText(/寒さ対策：未対策/)).toBeVisible();
+        await testFrostBedPreview(page);
       }
       await click(page, "住まい");
       if (name === "no-wood") {

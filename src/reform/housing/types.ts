@@ -1,3 +1,4 @@
+import type { RoomStay } from "./roomStay";
 import type { FoodLogistics, FoodSupplyPolicy } from "./foodTypes";
 import type { HousingConstruction, HaulDirection } from "./constructionTypes";
 import type { FixtureKind } from "../house";
@@ -32,6 +33,7 @@ export type HousingRuntime = {
   construction?: HousingConstruction;
   gatherings?: Record<string, HousingGathering>;
   nextGatheringId?: number;
+  roomStay?: RoomStay;
   preferredBeds?: Record<string, string>;
   state: SpatialState;
   unlocated: Record<
