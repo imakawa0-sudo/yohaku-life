@@ -195,4 +195,25 @@ test("household supplies show the imported return count separately until two mea
   const settledDisplay = supplies(read(packed, origin));
   assert.match(settledDisplay, /世帯の備蓄/);
   assert.doesNotMatch(settledDisplay, /返却待ちの食事/);
+  for (const [key, label] of [
+    ["wood", "木材 4本"],
+    ["ingredients", "食材 3個"],
+    ["coins", "銀貨 4枚"],
+  ] as const) {
+    const pack = order(origin, host.id, "pack", key);
+    pack[key] = limit;
+    pack.actors[0].cargo[key] = limit;
+    const excess = read(advance(pack, 3), origin);
+    assert.ok(
+      supplies(excess).includes("積み込みから共同備蓄への返却待ち · " + label),
+    );
+    const retried = advance(
+      order(order(excess, host.id, "recover"), guest.id, "pack", key),
+      3,
+    );
+    assert.doesNotMatch(
+      supplies(read(retried, origin)),
+      /積み込みから共同備蓄への返却待ち/,
+    );
+  }
 });

@@ -128,6 +128,7 @@ export function prepareFoodMinute(g: Game) {
             h.layoutVersion,
             h.construction,
             h.gatherings,
+            h.lodging,
           ).geometry,
         }
       : h.state;

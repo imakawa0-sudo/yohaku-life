@@ -12,6 +12,7 @@ import {
 import { inspectHousingLayoutUpgrade } from "./layout";
 import {
   allowGatheringGuest,
+  effectiveRoomAccess,
   buildHousingTopology,
   housingPoint,
   legacyHousingStation,
@@ -113,6 +114,7 @@ function prepare(
     2,
     h.construction,
     h.gatherings,
+    h.lodging,
   );
   const booked = new Set(
     Object.values(h.state.reservations)
@@ -172,7 +174,7 @@ function prepare(
       return refuse(
         "集まりに参加する別々の住人を、招く人と招かれる人に選んでください。",
       );
-    const allowed = h.controls.roomAccess[roomId];
+    const allowed = effectiveRoomAccess(roomId, h.controls, h.lodging);
     if (
       !allowed ||
       !allowed.includes(invitation.hostId) ||

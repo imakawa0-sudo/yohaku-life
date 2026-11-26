@@ -1120,6 +1120,20 @@
   border-top: 1px solid var(--lf-line);
   min-width: 0;
 }
+.lf-lodging-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  overflow-wrap: anywhere;
+}
+.lf-lodging-body :is(.lf-housing-status, .lf-note) {
+  margin: 0;
+}
+.lf-lodging-body label {
+  min-height: 0;
+  margin: 0;
+}
 .lf-gathering-form,
 .lf-gathering-activity {
   display: grid;

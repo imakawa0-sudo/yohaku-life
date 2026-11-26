@@ -11,7 +11,7 @@ import {
   startReadyGathering,
 } from "./housing/gathering";
 import { housingInTransit } from "./housing/bridge";
-import { housingSlotId } from "./housing/topology";
+import { effectiveRoomAccess, housingSlotId } from "./housing/topology";
 import {
   isGatheringVenue,
   type GatheringKind,
@@ -114,7 +114,14 @@ function GatheringSetup({ game, actorId, onGame }: Props) {
   const [pairId, setPairId] = useState("");
   const venue = venues.find((item) => item.id === venueId);
   const actorIds = [actorId, ...selected];
-  const entry = venue && game.housing?.controls.roomAccess[venue.room.id];
+  const entry =
+    venue &&
+    game.housing &&
+    effectiveRoomAccess(
+      venue.room.id,
+      game.housing.controls,
+      game.housing.lodging,
+    );
   const participants = game.actors.filter((actor) =>
     actorIds.includes(actor.person.id),
   );

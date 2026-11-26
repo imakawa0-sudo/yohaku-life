@@ -2,7 +2,7 @@ import { furnishings } from "../house";
 import type { Game } from "../sim";
 import { sameSpatialPoint } from "../spatial/route";
 import { fields, integer, record } from "./saveFields";
-import { housingSlotId } from "./topology";
+import { effectiveRoomAccess, housingSlotId } from "./topology";
 import {
   gatheringUseMinutes,
   gatheringWaitMinutes,
@@ -225,7 +225,7 @@ function validInvitation(group: HousingGathering, h: HousingRuntime) {
     invitation.hostId === invitation.guestId
   )
     return false;
-  const allowed = h.controls.roomAccess[group.roomId];
+  const allowed = effectiveRoomAccess(group.roomId, h.controls, h.lodging);
   return (
     Array.isArray(allowed) &&
     allowed.includes(invitation.hostId) &&

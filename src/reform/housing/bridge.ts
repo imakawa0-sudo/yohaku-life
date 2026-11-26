@@ -50,6 +50,7 @@ function geometry(g: Game, h: HousingRuntime) {
     h.layoutVersion,
     h.construction,
     h.gatherings,
+    h.lodging,
   );
 }
 /** Inspect a leg with the entry rights the resident will have at its starting floor. */
@@ -81,6 +82,7 @@ export function inspectHousingRouteFrom(
       h.layoutVersion,
       h.construction,
       h.gatherings,
+      h.lodging,
     );
     // Keep the caller's physical graph (it may be checking permission independently of closures).
     graph = { ...graph, actors, entryRules: geometry.entryRules };
@@ -133,6 +135,14 @@ export function setHousingRoomAccess(
     h = next.housing!;
   h.controls.roomAccess[roomId] =
     allowedActorIds === null ? null : [...allowedActorIds];
+  const offer = h.lodging;
+  if (
+    offer?.phase === "offered" &&
+    offer.roomId === roomId &&
+    allowedActorIds !== null &&
+    !allowedActorIds.includes(offer.providerId)
+  )
+    delete h.lodging;
   rebuildHousingGeometry(next, h);
   reconcileRoomInvitations(next, roomId);
   releaseRevokedConstructionWorkers(next, g.housing);

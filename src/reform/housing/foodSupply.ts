@@ -175,6 +175,10 @@ export function tryFoodSupply(game: Game, actor: Actor): boolean {
   const next = candidate.game;
   const worker = next.actors.find((a) => a.person.id === policy.actorId)!;
   game.ingredients = next.ingredients;
+  for (const key of ["pendingMealInputReturns", "pendingPackReturns"] as const) {
+    if (next[key]) game[key] = next[key];
+    else delete game[key];
+  }
   h.state = next.housing!.state;
   h.unlocated = next.housing!.unlocated;
   h.foodLogistics = next.housing!.foodLogistics;

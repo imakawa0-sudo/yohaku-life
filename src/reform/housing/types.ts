@@ -35,7 +35,18 @@ export type BenchRecovery = {
   assignment?: { actorId: string; orderId: string };
 };
 
+export type RoomLodging = {
+  version: 1;
+  providerId: string;
+  residentId: string;
+  roomId: string;
+  phase: "offered" | "arriving" | "occupied" | "leaving";
+  returnTo: "entrance" | "room";
+  orderId?: string;
+};
+
 export type HousingRuntime = {
+  lodging?: RoomLodging;
   benchRecovery?: BenchRecovery;
   version: 1;
   layoutVersion?: 2;

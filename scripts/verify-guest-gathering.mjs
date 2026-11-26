@@ -475,8 +475,7 @@ export async function verifyMealInputReturns({
         const label =
           destination +
           "への返却待ち · " +
-          (input === "coins" ? "銀貨 " : "食材 ") +
-          reserved;
+          (input === "coins" ? "銀貨 " + reserved + "枚" : "食材 " + reserved + "個");
         const note = page.getByText(label, { exact: true });
         await expect(note).toBeVisible();
         await page.reload();

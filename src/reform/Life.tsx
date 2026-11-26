@@ -33,6 +33,7 @@ import {
 import type { Skill } from "./peopleModel";
 import { HousingPanel, housingStageNames } from "./HousingPanel";
 import { invitationWithdrawalText } from "./GatheringPanel";
+import { lodgingWalkCancelText } from "./LodgingPanel";
 import { BedAccessPolicy, BedPreferencePolicy } from "./BedPreferencePolicy";
 import {
   FacilityAction,
@@ -78,17 +79,18 @@ const stockNames = {
   coins: "銀貨",
 };
 
-function PendingMealInputs({
+function PendingStockReturns({
   stock,
   destination,
 }: {
-  stock: Game["pendingMealInputReturns"];
+  stock: Game["pendingPackReturns"];
   destination: string;
 }) {
   if (!stock) return null;
   const amounts = [
-    stock.ingredients && "食材 " + stock.ingredients,
-    stock.coins && "銀貨 " + stock.coins,
+    stock.wood && "木材 " + stock.wood + "本",
+    stock.ingredients && "食材 " + stock.ingredients + "個",
+    stock.coins && "銀貨 " + stock.coins + "枚",
   ].filter(Boolean);
   if (!amounts.length) return null;
   return (
@@ -378,6 +380,7 @@ function ActionPanel({
       : null;
   const cancelNote =
     invitationWithdrawal ??
+    lodgingWalkCancelText(game, actor) ??
     foodCancel ??
     constructionCancel ??
     recoveryCancel ??
@@ -703,9 +706,13 @@ export function Life({
                 共同備蓄に空きができた分から戻ります。
               </p>
             )}
-            <PendingMealInputs
+            <PendingStockReturns
               stock={game.pendingMealInputReturns}
               destination="共同備蓄"
+            />
+            <PendingStockReturns
+              stock={game.pendingPackReturns}
+              destination="積み込みから共同備蓄"
             />
             {foodStatus?.state === "present" && (
               <p className="lf-cargo">
@@ -724,7 +731,7 @@ export function Life({
                 {actor.cargo.coins}
               </p>
             )}
-            <PendingMealInputs
+            <PendingStockReturns
               stock={actor.cargo.pendingMealInputReturns}
               destination={person.name + "の携行品"}
             />
@@ -750,6 +757,7 @@ export function Life({
               status={status}
               invitationWithdrawal={invitationWithdrawal}
               onGame={onGame}
+              onSelect={onSelect}
             />
           )}
           {hasTasks && next === null && (

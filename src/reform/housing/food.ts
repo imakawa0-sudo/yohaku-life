@@ -1,4 +1,5 @@
 import { settleMealInputReturns } from "../mealStock";
+import { settlePackReturns } from "../packingStock";
 import { isStockQuantity, type Game } from "../sim";
 import { issueSpatialOrder } from "../spatial/actions";
 import { sameSpatialPoint } from "../spatial/route";
@@ -15,7 +16,7 @@ import {
   type FoodResult,
   type PresentFood,
 } from "./foodTypes";
-import { housingPoint, housingRoomId } from "./topology";
+import { effectiveRoomAccess, housingPoint, housingRoomId } from "./topology";
 import type { HousingRuntime } from "./types";
 import { foodTaskMinutes } from "./foodPresentation";
 
@@ -29,7 +30,11 @@ export function foodRoomAllows(
   point: SpatialPoint,
   id: string,
 ) {
-  const list = h.controls.roomAccess[housingRoomId(point.domainId)!];
+  const list = effectiveRoomAccess(
+    housingRoomId(point.domainId)!,
+    h.controls,
+    h.lodging,
+  );
   return list === null || list?.includes(id);
 }
 
@@ -44,7 +49,12 @@ export function foodHandling(h: HousingRuntime, b: PresentFood) {
       : [pickup];
   if (
     points.every(
-      (p) => h.controls.roomAccess[housingRoomId(p.domainId)!] === null,
+      (p) =>
+        effectiveRoomAccess(
+          housingRoomId(p.domainId)!,
+          h.controls,
+          h.lodging,
+        ) === null,
     )
   )
     return null;
@@ -104,6 +114,7 @@ export function createFoodBundle(
   refreshFoodHandling(housing);
   next.ingredients -= foodBundleQuantity;
   settleMealInputReturns(next);
+  settlePackReturns(next);
   return { game: next, bundleId: id };
 }
 
