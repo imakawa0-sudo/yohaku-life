@@ -4,6 +4,7 @@ import { constructionExitText } from "./constructionTopology";
 import { constructionTaskMinutes } from "./constructionProgress";
 import { nextGatheringCompletionMinutes } from "./gatheringForecast";
 export { nextGatheringCompletionMinutes } from "./gatheringForecast";
+import { roomLabel } from "../displayNames";
 import { cellName, furnishings, roomName } from "../house";
 import type { Game } from "../sim";
 import { locateSpatial } from "../spatial/actions";
@@ -18,7 +19,7 @@ export function housingPointLabel(g: Game, point: SpatialPoint) {
     (r) => r.id === housingRoomId(point.domainId),
   )!;
   return (
-    room.name +
+    roomLabel(g.house.rooms, room) +
     (point.cell === 0 ? "の入口" : "・" + cellName(room, point.cell))
   );
 }

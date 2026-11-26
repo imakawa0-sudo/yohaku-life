@@ -33,3 +33,15 @@ export type FoodInspection = {
   disabled?: string;
   minutes: number | null;
 };
+
+export type FoodSupplyPolicy = {
+  version: 1;
+  actorId: string;
+  storage: SpatialPoint;
+  enabled: boolean;
+};
+export type FoodSupplyInspection = {
+  state: "unset" | "paused" | "hauling" | "stocked" | "waiting" | "ready";
+  detail: string;
+  minutes: number | null;
+};

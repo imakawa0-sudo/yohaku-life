@@ -1,4 +1,4 @@
-import type { FoodLogistics } from "./foodTypes";
+import type { FoodLogistics, FoodSupplyPolicy } from "./foodTypes";
 import type { HousingConstruction, HaulDirection } from "./constructionTypes";
 import type { FixtureKind } from "../house";
 import type {
@@ -28,6 +28,7 @@ export type HousingRuntime = {
   version: 1;
   layoutVersion?: 2;
   foodLogistics?: FoodLogistics;
+  foodSupply?: FoodSupplyPolicy;
   construction?: HousingConstruction;
   gatherings?: Record<string, HousingGathering>;
   nextGatheringId?: number;

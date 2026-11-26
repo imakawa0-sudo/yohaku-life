@@ -70,7 +70,8 @@ function validAssignment(
     binding.orderId !== a.orderId ||
     !Object.hasOwn(h.state.actors, a.actorId) ||
     !fields(t.reserved, []) ||
-    t.mode !== "direct"
+    (t.mode !== "direct" &&
+      !(t.mode === "auto" && a.kind === "store" && t.kind === "home-haul"))
   )
     return false;
   const order = h.state.actors[a.actorId].order;

@@ -1,3 +1,4 @@
+import { tryFoodSupply } from "./housing/foodSupply";
 import { presentFood, refreshFoodHandling, settleFood } from "./housing/food";
 import {
   cancelFoodActor,
@@ -1028,6 +1029,14 @@ export function order(
     notice(next, safeExitReason);
     return next;
   }
+  if (
+    kind === "cancel" &&
+    a.task?.kind === "home-haul" &&
+    a.task.mode === "auto" &&
+    a.task.spatial?.foodBundleId &&
+    next.housing?.foodSupply
+  )
+    next.housing.foodSupply.enabled = false;
   if (a.task) stop(next, a);
   if (kind === "cancel") {
     if (a.task?.spatial) {
@@ -1303,6 +1312,7 @@ function selectAuto(g: Game, a: Actor) {
     tryAuto(g, a, "need", "energy", "夜のうちに体を休めます。")
   )
     return;
+  if (daytime && tryFoodSupply(g, a)) return;
   const ready = daytime && g.time >= a.nextShift;
   if (ready && a.priority && chooseShift(g, a, a.priority, true)) return;
   if (a.person.personality === "social" && a.needs.social < 65) {

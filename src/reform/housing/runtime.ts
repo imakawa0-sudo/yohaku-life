@@ -1,3 +1,4 @@
+import { isFoodSupply } from "./foodSupplyValidation";
 import { isFoodLedger, validFoodRelations } from "./foodValidation";
 import { constructionTitle } from "./constructionTypes";
 import { isBedPreferences, prunePreferredBeds } from "./bedPreference";
@@ -360,6 +361,7 @@ export function isHousingRuntime(
       "layoutVersion",
       "construction",
       "foodLogistics",
+      "foodSupply",
       "gatherings",
       "nextGatheringId",
       "preferredBeds",
@@ -415,6 +417,11 @@ export function isHousingRuntime(
   )
     return false;
   if (!validConstructionRelations(value as unknown as HousingRuntime, game))
+    return false;
+  if (
+    Object.hasOwn(value, "foodSupply") &&
+    !isFoodSupply(value.foodSupply, game, value as unknown as HousingRuntime)
+  )
     return false;
   if (!validFoodRelations(value as unknown as HousingRuntime, game, topology))
     return false;
@@ -539,6 +546,13 @@ function editConflict(
   after: HousingTopology,
 ): string | undefined {
   const runtime = game.housing;
+  const supply = runtime?.foodSupply;
+  if (
+    supply &&
+    (!isFloor(after.geometry, supply.storage) ||
+      !isFloor(after.geometry, housingPoint("living", 0)))
+  )
+    return "補充担当を設定している間は、供給口と補充先の床を残してください。";
   const bundle = runtime?.foodLogistics?.bundle;
   if (
     bundle?.state === "present" &&

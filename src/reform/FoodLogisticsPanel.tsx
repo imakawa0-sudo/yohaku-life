@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Wheat } from "lucide-react";
 import { ConstructionAction } from "./ConstructionPanel";
+import { FoodSupplyPanel } from "./FoodSupplyPanel";
 import { cellName } from "./house";
+import { residentLabel, roomLabel } from "./displayNames";
 import { constructionFloor } from "./housing/constructionTopology";
 import {
   assignFoodHaul,
@@ -88,9 +90,12 @@ export function FoodLogisticsPanel({
         label={direction === "store" ? "保管先へ運ぶ" : "供給口へ戻す"}
         disabled={disabled}
         hint={
-          preview.minutes === null
+          (preview.minutes === null
             ? "完了までの時間を見積もれません。"
-            : "完了までの目安 " + preview.minutes + "分"
+            : "完了までの目安 " + preview.minutes + "分") +
+          (direction === "return" && h?.foodSupply?.enabled
+            ? " 返却を頼むと補充方針も一時停止します。"
+            : "")
         }
         onClick={() =>
           void run(assignFoodHaul(game, bundle.id, actorId, direction))
@@ -144,7 +149,7 @@ export function FoodLogisticsPanel({
                 </div>
                 <div>
                   <dt>担当</dt>
-                  <dd>{assigned?.person.name ?? "担当なし"}</dd>
+                  <dd>{assigned ? residentLabel(game, assigned) : "担当なし"}</dd>
                 </div>
                 {assigned && (
                   <div>
@@ -172,7 +177,14 @@ export function FoodLogisticsPanel({
                         : inspectOrder(game, assigned.person.id, "cancel")
                             .disabled
                     }
-                    hint="一束は床に残ります。通路途中なら区間の終点へ進みます。共同備蓄には戻りません。"
+                    hint={
+                      "一束は床に残ります。通路途中なら区間の終点へ進みます。共同備蓄には戻りません。" +
+                      (assigned.task?.kind === "home-haul" &&
+                      assigned.task.mode === "auto" &&
+                      h.foodSupply
+                        ? "自動補充の運搬を取り消すと、補充方針も一時停止します。"
+                        : "")
+                    }
                     onClick={() =>
                       void run({
                         game: order(game, assigned.person.id, "cancel"),
@@ -204,11 +216,8 @@ export function FoodLogisticsPanel({
                         );
                         const allowed = store.ok || back.ok;
                         return (
-                          <option
-                            key={a.person.id}
-                            value={a.person.id}
-                          >
-                            {a.person.name}
+                          <option key={a.person.id} value={a.person.id}>
+                            {residentLabel(game, a)}
                             {allowed
                               ? ""
                               : "・" +
@@ -225,7 +234,12 @@ export function FoodLogisticsPanel({
                   <ConstructionAction
                     label="備蓄に戻す"
                     disabled={inspectFoodReturn(game, bundle.id).disabled}
-                    hint="供給口の一束を共同備蓄の食材2へ戻します。"
+                    hint={
+                      "供給口の一束を共同備蓄の食材2へ戻します。" +
+                      (h.foodSupply?.enabled
+                        ? "返却すると補充方針も一時停止します。"
+                        : "")
+                    }
                     onClick={() => void run(returnFoodBundle(game, bundle.id))}
                   />
                 </div>
@@ -253,7 +267,7 @@ export function FoodLogisticsPanel({
                     <option value="">部屋を選ぶ</option>
                     {game.house.rooms.map((r) => (
                       <option key={r.id} value={r.id}>
-                        {r.name}
+                        {roomLabel(game.house.rooms, r)}
                       </option>
                     ))}
                   </select>
@@ -293,6 +307,7 @@ export function FoodLogisticsPanel({
               </p>
             </>
           )}
+          <FoodSupplyPanel game={game} onGame={onGame} />
         </>
       )}
     </section>

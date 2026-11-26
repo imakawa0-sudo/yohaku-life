@@ -150,6 +150,7 @@ export function returnFoodBundle(game: Game, bundleId: string): FoodResult {
     b = presentFood(next.housing)!;
   next.ingredients += b.quantity;
   settleFood(next, b, "returned");
+  if (next.housing!.foodSupply) next.housing!.foodSupply.enabled = false;
   return { game: next, bundleId };
 }
 
@@ -240,6 +241,7 @@ export function assignFoodHaul(
   };
   worker.reason = label + "よう指示されています。";
   refreshFoodHandling(h);
+  if (direction === "return" && h.foodSupply) h.foodSupply.enabled = false;
   return { game: next, bundleId };
 }
 

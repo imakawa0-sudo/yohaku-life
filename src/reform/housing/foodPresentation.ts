@@ -1,3 +1,4 @@
+import { residentLabel } from "../displayNames";
 import type { Game } from "../sim";
 import { sameSpatialPoint } from "../spatial/route";
 import { projectHousingOrderMinutes } from "./bridge";
@@ -56,7 +57,7 @@ export function foodBundleStatus(g: Game): FoodBundleStatus | null {
     pos.kind === "at"
       ? housingPointLabel(g, pos.point)
       : actor
-        ? actor.person.name + "の手元（" + status!.location + "）"
+        ? residentLabel(g, actor) + "の手元（" + status!.location + "）"
         : "運搬中";
   let phase =
     pos.kind === "at" && sameSpatialPoint(pos.point, b.storage)
