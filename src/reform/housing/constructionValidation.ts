@@ -8,7 +8,7 @@ import {
   unresolvedConstruction,
 } from "./constructionTopology";
 import {
-  constructionWood,
+  roomConstructionWood,
   constructionWorkMinutes,
   type HousingConstruction,
   type RoomConstruction,
@@ -44,6 +44,7 @@ function planShape(
       ],
       [
         "kind",
+        "height",
         "cancelledAt",
         "completedAt",
         "roomId",
@@ -66,8 +67,12 @@ function planShape(
     sameSpatialPoint(value.source, value.staging) ||
     !integer(value.createdAt, 480, now) ||
     (Object.hasOwn(value, "kind") && value.kind !== "insulation") ||
+    (Object.hasOwn(value, "height") &&
+      (value.height !== 4 || value.kind === "insulation")) ||
     value.requiredWood !==
-      (value.kind === "insulation" ? 1 : constructionWood) ||
+      (value.kind === "insulation"
+        ? 1
+        : roomConstructionWood(value.height === 4 ? 4 : 3)) ||
     value.workMinutes !== constructionWorkMinutes ||
     !integer(value.workedMinutes, 0, constructionWorkMinutes) ||
     (value.workedMinutes > 0 &&
@@ -316,6 +321,8 @@ export function validConstructionRelations(
     } else {
       if (!g.house.rooms.some((room) => room.id === p.neighborId)) return false;
       if (p.status === "completed") {
+        const room = g.house.rooms.find((r) => r.id === p.roomId);
+        if (!room || room.height < (p.height ?? 3)) return false;
         completedRoomIds.push(p.roomId!);
         futureRooms.delete(p.roomId!);
       }

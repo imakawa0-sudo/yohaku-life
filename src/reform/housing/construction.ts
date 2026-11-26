@@ -21,7 +21,8 @@ import {
   unresolvedConstruction,
 } from "./constructionTopology";
 import {
-  constructionWood,
+  canReviseRoomConstruction,
+  roomConstructionWood,
   constructionTitle,
   constructionWorkMinutes,
   type ConstructionRequest,
@@ -42,30 +43,61 @@ export function createRoomConstruction(
   return createConstructionPlan(game, request);
 }
 
-export function createConstructionPlan(
+function constructionDetails(
   game: Game,
   request: ConstructionRequest,
   kind?: "insulation",
-): ConstructionResult {
+) {
   const h = game.housing;
-  if (!h) return { game, error: "先に「住居の移動」を有効にしてください。" };
+  if (!h) return "先に「住居の移動」を有効にしてください。";
+  if (!request || typeof request !== "object")
+    return "計画する部屋を選んでください。";
+  if (
+    "width" in request ||
+    (kind === "insulation" && "height" in request) ||
+    (request.height !== undefined &&
+      request.height !== 3 &&
+      request.height !== 4)
+  )
+    return "増築する部屋の広さを選び直してください。";
   if (kind === "insulation") {
     if (!isIndoorHousingRoom(game, request.neighborId))
-      return { game, error: "寒さ対策をする屋内の部屋を選んでください。" };
+      return "寒さ対策をする屋内の部屋を選んでください。";
     if (game.insulated || isRoomInsulated(game, request.neighborId))
-      return { game, error: "この部屋の寒さ対策は済んでいます。" };
+      return "この部屋の寒さ対策は済んでいます。";
   }
-  const name = request.name.trim();
+  const name = typeof request.name === "string" ? request.name.trim() : "";
   if (!name || name.length > 24)
-    return { game, error: "部屋の名前を1〜24文字で入力してください。" };
-  const staging = housingPoint(request.neighborId, request.stagingCell),
-    source = housingPoint("living", 0);
+    return "部屋の名前を1〜24文字で入力してください。";
+  if (typeof request.neighborId !== "string")
+    return "増築する部屋の接続先を選んでください。";
+  const staging = housingPoint(request.neighborId, request.stagingCell);
+  const source = housingPoint("living", 0);
   if (
     !constructionFloor(h, staging) ||
     !constructionFloor(h, source) ||
     sameSpatialPoint(staging, source)
   )
-    return { game, error: "供給口と異なる、歩ける仮置き場を選んでください。" };
+    return "供給口と異なる、歩ける仮置き場を選んでください。";
+  return {
+    name,
+    neighborId: request.neighborId,
+    staging,
+    source,
+    ...(request.height === 4 && { height: request.height }),
+    requiredWood:
+      kind === "insulation" ? 1 : roomConstructionWood(request.height),
+  };
+}
+
+export function createConstructionPlan(
+  game: Game,
+  request: ConstructionRequest,
+  kind?: "insulation",
+): ConstructionResult {
+  const details = constructionDetails(game, request, kind);
+  if (typeof details === "string") return { game, error: details };
+  const h = game.housing!;
   if (Object.values(h.construction?.plans ?? {}).some(unresolvedConstruction))
     return {
       game,
@@ -84,19 +116,41 @@ export function createConstructionPlan(
   ledger.nextId++;
   ledger.plans[id] = {
     id,
-    name,
-    neighborId: request.neighborId,
-    source,
-    staging,
+    ...details,
     createdAt: game.time,
     ...(kind && { kind }),
-    requiredWood: kind === "insulation" ? 1 : constructionWood,
     workMinutes: constructionWorkMinutes,
     workedMinutes: 0,
     status: "planned",
   };
   rebuildHousingGeometry(next, next.housing!);
   return { game: next, planId: id };
+}
+
+export function reviseRoomConstruction(
+  game: Game,
+  planId: string,
+  request: ConstructionRequest,
+): ConstructionResult {
+  const plan = constructionPlan(game.housing, planId);
+  if (!plan || !canReviseRoomConstruction(plan))
+    return { game, error: "木材を取り置く前の増築計画を選んでください。" };
+  const details = constructionDetails(game, request);
+  if (typeof details === "string") return { game, error: details };
+  if (
+    plan.name === details.name &&
+    plan.height === details.height &&
+    sameSpatialPoint(plan.staging, details.staging)
+  )
+    return { game, planId };
+
+  const next = structuredClone(game);
+  const h = next.housing!;
+  const revised = h.construction!.plans[planId];
+  Object.assign(revised, details);
+  if (details.height === undefined) delete revised.height;
+  rebuildHousingGeometry(next, h);
+  return { game: next, planId };
 }
 
 export function reserveConstructionMaterial(

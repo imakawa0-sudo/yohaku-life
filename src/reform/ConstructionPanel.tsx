@@ -1,6 +1,13 @@
 import { useId, useState } from "react";
 import { Hammer } from "lucide-react";
-import { cellName } from "./house";
+import { roomLabel } from "./displayNames";
+import {
+  cellName,
+  maxRoomHeight,
+  roomWidth,
+  standardRoomHeight,
+  type PlannedRoomHeight,
+} from "./house";
 import {
   assignConstructionBuild,
   assignConstructionHaul,
@@ -13,6 +20,7 @@ import {
   reclaimConstructionMaterial,
   releaseConstructionWorker,
   reserveConstructionMaterial,
+  reviseRoomConstruction,
 } from "./housing/construction";
 import {
   constructionStatus,
@@ -24,7 +32,8 @@ import {
   unresolvedConstruction,
 } from "./housing/constructionTopology";
 import {
-  constructionWood,
+  canReviseRoomConstruction,
+  roomConstructionWood,
   constructionWorkMinutes,
   type ConstructionResult,
   type RoomConstruction,
@@ -35,6 +44,14 @@ import { isStockQuantity, type Game } from "./sim";
 import { sameSpatialPoint } from "./spatial/route";
 
 export type RunConstruction = (result: ConstructionResult) => Promise<boolean>;
+
+function roomQuote(
+  height: PlannedRoomHeight,
+  wood: number,
+  minutes: number,
+): string {
+  return `${roomWidth} × ${height}マス（${roomWidth * height}マス）・木材${wood}・施工${minutes}分`;
+}
 
 export function ConstructionAction({
   label,
@@ -153,16 +170,25 @@ export function ConstructionCard({
   game,
   plan,
   run,
+  onEdit,
 }: {
   game: Game;
   plan: RoomConstruction;
   run: RunConstruction;
+  onEdit?: () => void;
 }) {
   const h = game.housing!;
   const title =
     plan.kind === "insulation" ? constructionTitle(plan) : plan.name;
   const work = plan.assignment && housingStatus(game, plan.assignment.actorId);
   const status = constructionStatus(game, plan.id, work);
+  const quote =
+    plan.kind !== "insulation" &&
+    roomQuote(
+      plan.height ?? standardRoomHeight,
+      plan.requiredWood,
+      plan.workMinutes,
+    );
 
   if (!unresolvedConstruction(plan)) {
     return (
@@ -170,6 +196,7 @@ export function ConstructionCard({
         <summary>
           {title}・{status.phase}
         </summary>
+        {quote && <p>計画時の仕様　{quote}</p>}
         <p>{status.detail}</p>
         {plan.material && <p>{status.material}</p>}
       </details>
@@ -191,6 +218,7 @@ export function ConstructionCard({
     <article className="lf-construction-card" aria-label={title}>
       <h3>{title}</h3>
       <p className="lf-construction-stage">{status.phase}</p>
+      {quote && <p>計画内容　{quote}</p>}
       <p>{status.detail}</p>
       <dl className="lf-housing-status">
         <div>
@@ -280,6 +308,7 @@ export function ConstructionCard({
             run={run}
           />
         )}
+        {onEdit && <ConstructionAction label="計画を見直す" onClick={onEdit} />}
         {plan.status === "planned" && (
           <ConstructionAction
             label="この工事を取り消す"
@@ -296,17 +325,25 @@ export function ConstructionCard({
   );
 }
 
-export function ConstructionPanel({
+function RoomPlanForm({
   game,
-  onGame,
+  plan,
+  run,
+  onClose,
 }: {
   game: Game;
-  onGame: (game: Game) => Promise<boolean> | void;
+  plan?: RoomConstruction;
+  run: RunConstruction;
+  onClose?: () => void;
 }) {
-  const [name, setName] = useState("");
-  const [neighborId, setNeighbor] = useState("");
-  const [stagingCell, setStaging] = useState("");
-  const [error, setError] = useState("");
+  const [name, setName] = useState(plan?.name ?? "");
+  const [height, setHeight] = useState<PlannedRoomHeight>(
+    plan?.height ?? standardRoomHeight,
+  );
+  const [neighborId, setNeighbor] = useState(plan?.neighborId ?? "");
+  const [stagingCell, setStaging] = useState(
+    plan ? String(plan.staging.cell) : "",
+  );
 
   const h = game.housing;
   const neighbor = game.house.rooms.find((room) => room.id === neighborId);
@@ -324,17 +361,142 @@ export function ConstructionPanel({
         })
       : [];
   const selectedCell = cells.find((cell) => String(cell) === stagingCell);
+  const unchanged =
+    plan &&
+    name.trim() === plan.name &&
+    height === (plan.height ?? standardRoomHeight) &&
+    neighborId === plan.neighborId &&
+    selectedCell === plan.staging.cell;
+  const disabled = !name.trim()
+    ? "部屋の名前を入力してください。"
+    : !neighbor
+      ? "接続先を選んでください。"
+      : selectedCell === undefined
+        ? "供給口と異なる、歩ける仮置き床を選んでください。"
+        : unchanged
+          ? "計画に変更はありません。"
+          : undefined;
+
+  return (
+    <form
+      className="lf-construction-form"
+      aria-label={plan ? "増築計画を見直す" : "増築を計画する"}
+      onSubmit={async (e) => {
+        e.preventDefault();
+        if (disabled || !neighbor || selectedCell === undefined) return;
+        const request = {
+          name,
+          height,
+          neighborId: neighbor.id,
+          stagingCell: selectedCell,
+        };
+        const result = plan
+          ? reviseRoomConstruction(game, plan.id, request)
+          : createRoomConstruction(game, request);
+        if (await run(result)) onClose?.();
+      }}
+    >
+      {plan && <h3>増築計画を見直す</h3>}
+      <label>
+        増築する部屋の名前
+        <input
+          maxLength={24}
+          autoFocus={!!plan}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </label>
+      <label>
+        増築する部屋の広さ
+        <select
+          value={height}
+          onChange={(e) =>
+            setHeight(e.target.value === "4" ? 4 : standardRoomHeight)
+          }
+        >
+          {([standardRoomHeight, 4] as const).map((rows) => (
+            <option key={rows} value={rows}>
+              {rows === standardRoomHeight ? "標準" : "広め"}（{roomWidth} ×{" "}
+              {rows}
+              ・木材{roomConstructionWood(rows)}）
+            </option>
+          ))}
+        </select>
+      </label>
+      <label>
+        接続先
+        <select
+          value={neighbor?.id ?? ""}
+          onChange={(e) => {
+            setNeighbor(e.target.value);
+            setStaging("");
+          }}
+        >
+          <option value="">部屋を選ぶ</option>
+          {game.house.rooms.map((room) => (
+            <option key={room.id} value={room.id}>
+              {roomLabel(game.house.rooms, room)}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label>
+        仮置き床
+        <select
+          disabled={!cells.length}
+          value={selectedCell ?? ""}
+          onChange={(e) => setStaging(e.target.value)}
+        >
+          <option value="">{neighbor ? "床を選ぶ" : "先に接続先を選ぶ"}</option>
+          {neighbor &&
+            cells.map((cell) => (
+              <option key={cell} value={cell}>
+                {cell === 0 ? "入口" : cellName(neighbor, cell)}
+              </option>
+            ))}
+        </select>
+      </label>
+      <div>
+        <p aria-live="polite">
+          {roomQuote(
+            height,
+            roomConstructionWood(height),
+            constructionWorkMinutes,
+          )}
+        </p>
+        <p>
+          計画は無料です。移動・搬入には別に時間がかかります。完成後も木材
+          {roomWidth}で1行ずつ、最大{maxRoomHeight}
+          行まで広げられます。
+        </p>
+      </div>
+      <ConstructionAction
+        label={plan ? "変更を保存" : "計画する"}
+        disabled={disabled}
+      />
+      {onClose && <ConstructionAction label="変更せず戻る" onClick={onClose} />}
+    </form>
+  );
+}
+
+export function ConstructionPanel({
+  game,
+  onGame,
+}: {
+  game: Game;
+  onGame: (game: Game) => Promise<boolean> | void;
+}) {
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [error, setError] = useState("");
+  const h = game.housing;
   const plans = Object.values(h?.construction?.plans ?? {});
   const active = plans.find(unresolvedConstruction);
-  const disabled = active
-    ? "先の工事を終えるか、取り消した工事の木材を回収してください。"
-    : !name.trim()
-      ? "部屋の名前を入力してください。"
-      : !neighbor
-        ? "接続先を選んでください。"
-        : selectedCell === undefined
-          ? "供給口と異なる、歩ける仮置き床を選んでください。"
-          : undefined;
+  const editing =
+    active && active.id === editingId && canReviseRoomConstruction(active);
+  function setEditing(id: string | null) {
+    setEditingId(id);
+    setError("");
+  }
 
   const run: RunConstruction = async (result) => {
     setError(result.error ?? "");
@@ -353,9 +515,6 @@ export function ConstructionPanel({
         <h2>一室を増築する</h2>
       </div>
       <p>
-        4 × 3マスの部屋・木材{constructionWood}・施工{constructionWorkMinutes}分
-      </p>
-      <p>
         自由備蓄の木材 <strong>{game.wood}</strong>
       </p>
       {!h ? (
@@ -369,83 +528,37 @@ export function ConstructionPanel({
               {error}
             </p>
           )}
-          {active && active.kind !== "insulation" && (
+          {active && !editing && active.kind !== "insulation" && (
             <ConstructionCard
               key={active.id}
               game={game}
               plan={active}
               run={run}
+              onEdit={
+                canReviseRoomConstruction(active)
+                  ? () => setEditing(active.id)
+                  : undefined
+              }
             />
           )}
-          <form
-            className="lf-construction-form"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              if (disabled || !neighbor || selectedCell === undefined) return;
-              if (
-                await run(
-                  createRoomConstruction(game, {
-                    name,
-                    neighborId: neighbor.id,
-                    stagingCell: selectedCell,
-                  }),
-                )
-              ) {
-                setName("");
-                setNeighbor("");
-                setStaging("");
-              }
-            }}
-          >
-            {!active && (
-              <>
-                <label>
-                  増築する部屋の名前
-                  <input
-                    maxLength={24}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </label>
-                <label>
-                  接続先
-                  <select
-                    value={neighbor?.id ?? ""}
-                    onChange={(e) => {
-                      setNeighbor(e.target.value);
-                      setStaging("");
-                    }}
-                  >
-                    <option value="">部屋を選ぶ</option>
-                    {game.house.rooms.map((room) => (
-                      <option key={room.id} value={room.id}>
-                        {room.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label>
-                  仮置き床
-                  <select
-                    disabled={!cells.length}
-                    value={selectedCell ?? ""}
-                    onChange={(e) => setStaging(e.target.value)}
-                  >
-                    <option value="">
-                      {neighbor ? "床を選ぶ" : "先に接続先を選ぶ"}
-                    </option>
-                    {neighbor &&
-                      cells.map((cell) => (
-                        <option key={cell} value={cell}>
-                          {cell === 0 ? "入口" : cellName(neighbor, cell)}
-                        </option>
-                      ))}
-                  </select>
-                </label>
-              </>
-            )}
-            <ConstructionAction label="計画する" disabled={disabled} />
-          </form>
+          {editing ? (
+            <RoomPlanForm
+              key={active.id}
+              game={game}
+              plan={active}
+              run={run}
+              onClose={() => setEditing(null)}
+            />
+          ) : !active ? (
+            <RoomPlanForm key="new" game={game} run={run} />
+          ) : (
+            <div className="lf-construction-form">
+              <ConstructionAction
+                label="計画する"
+                disabled="先の工事を終えるか、取り消した工事の木材を回収してください。"
+              />
+            </div>
+          )}
           {plans
             .reverse()
             .filter(
