@@ -1,4 +1,6 @@
 export const roomWidth = 4;
+export const standardRoomHeight = 3;
+export type PlannedRoomHeight = typeof standardRoomHeight | 4;
 export const maxRoomHeight = 7;
 
 export type Need =
@@ -156,8 +158,20 @@ const ROOM_COST = 4;
 const PASSAGE_COST = 2;
 export const fixtureKinds = Object.keys(furnishings) as FixtureKind[];
 
-function emptyRoom(id: string, name: string): Room {
-  return { id, name, width: roomWidth, height: 3, walls: [], doors: [], fixtures: [] };
+function emptyRoom(
+  id: string,
+  name: string,
+  height: PlannedRoomHeight = standardRoomHeight,
+): Room {
+  return {
+    id,
+    name,
+    width: roomWidth,
+    height,
+    walls: [],
+    doors: [],
+    fixtures: [],
+  };
 }
 
 export function initialHouse(): House {
@@ -188,14 +202,25 @@ export function roomName(house: House, id: string): string {
   return house.rooms.find((room) => room.id === id)?.name ?? "居間";
 }
 
+function roomShellWood(width: number, height: number): number {
+  return (
+    ROOM_COST + Math.max(0, width * height - roomWidth * standardRoomHeight)
+  );
+}
+
+export function roomConstructionWood(
+  height: PlannedRoomHeight = standardRoomHeight,
+): number {
+  return roomShellWood(roomWidth, height) + PASSAGE_COST;
+}
+
 export function houseValue(house: House): number {
   return (
     house.links.length * PASSAGE_COST +
     house.rooms.reduce(
       (total, room) =>
         total +
-        ROOM_COST +
-        Math.max(0, room.width * room.height - 12) +
+        roomShellWood(room.width, room.height) +
         room.walls.length +
         room.doors.length * 2 +
         room.fixtures.reduce((sum, f) => sum + furnishings[f.kind].cost, 0),
@@ -317,7 +342,7 @@ export function cookingStation(
 }
 
 type Edit =
-  | { type: "room"; name: string; neighbor: string }
+  | { type: "room"; name: string; neighbor: string; height?: PlannedRoomHeight }
   | { type: "link"; a: string; b: string }
   | { type: "expand"; room: string }
   | { type: "build"; room: string; kind: FixtureKind; cell?: number }
@@ -372,7 +397,13 @@ export function editHouse(previous: House, edit: Edit): House {
     const name = edit.name.trim().slice(0, 24);
     if (!name) throw Error("新しい部屋に名前をつけてください。");
     const id = `room-${house.nextId++}`;
-    house.rooms.push(emptyRoom(id, name));
+    if (
+      edit.height !== undefined &&
+      edit.height !== standardRoomHeight &&
+      edit.height !== 4
+    )
+      throw Error("増築する部屋の広さを選び直してください。");
+    house.rooms.push(emptyRoom(id, name, edit.height));
     house.links.push([edit.neighbor, id]);
   } else if (edit.type === "link") {
     byId(edit.a);

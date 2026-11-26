@@ -21,7 +21,7 @@ import {
   unresolvedConstruction,
 } from "./constructionTopology";
 import {
-  constructionWood,
+  roomConstructionWood,
   constructionTitle,
   constructionWorkMinutes,
   type ConstructionRequest,
@@ -49,13 +49,23 @@ export function createConstructionPlan(
 ): ConstructionResult {
   const h = game.housing;
   if (!h) return { game, error: "先に「住居の移動」を有効にしてください。" };
+  if (!request || typeof request !== "object")
+    return { game, error: "計画する部屋を選んでください。" };
+  if (
+    "width" in request ||
+    (kind === "insulation" && "height" in request) ||
+    (request.height !== undefined &&
+      request.height !== 3 &&
+      request.height !== 4)
+  )
+    return { game, error: "増築する部屋の広さを選び直してください。" };
   if (kind === "insulation") {
     if (!isIndoorHousingRoom(game, request.neighborId))
       return { game, error: "寒さ対策をする屋内の部屋を選んでください。" };
     if (game.insulated || isRoomInsulated(game, request.neighborId))
       return { game, error: "この部屋の寒さ対策は済んでいます。" };
   }
-  const name = request.name.trim();
+  const name = typeof request.name === "string" ? request.name.trim() : "";
   if (!name || name.length > 24)
     return { game, error: "部屋の名前を1〜24文字で入力してください。" };
   const staging = housingPoint(request.neighborId, request.stagingCell),
@@ -90,7 +100,9 @@ export function createConstructionPlan(
     staging,
     createdAt: game.time,
     ...(kind && { kind }),
-    requiredWood: kind === "insulation" ? 1 : constructionWood,
+    ...(request.height === 4 && { height: request.height }),
+    requiredWood:
+      kind === "insulation" ? 1 : roomConstructionWood(request.height),
     workMinutes: constructionWorkMinutes,
     workedMinutes: 0,
     status: "planned",

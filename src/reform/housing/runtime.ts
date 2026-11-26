@@ -743,6 +743,7 @@ export function completeRoomConstruction(
           type: "room",
           name: plan.name,
           neighbor: plan.neighborId,
+          height: plan.height,
         });
   const result = applyHouseShape(game, house, (candidate) => {
     const h = candidate.housing!,

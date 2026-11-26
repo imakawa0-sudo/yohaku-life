@@ -1,16 +1,19 @@
+import { roomConstructionWood, type PlannedRoomHeight } from "../house";
 import type { SpatialPoint } from "../spatial/types";
 import type { Game } from "../sim";
 export type ConstructionRequest = {
   name: string;
   neighborId: string;
   stagingCell: number;
+  height?: PlannedRoomHeight;
 };
 export type ConstructionResult = {
   game: Game;
   error?: string;
   planId?: string;
 };
-export const constructionWood = 6;
+export { roomConstructionWood };
+export const constructionWood = roomConstructionWood();
 export const constructionWorkMinutes = 30;
 export type HaulDirection = "deliver" | "return";
 export type ConstructionInspection = {
@@ -20,13 +23,14 @@ export type ConstructionInspection = {
 };
 export type RoomConstruction = {
   kind?: "insulation";
+  height?: 4;
   id: string;
   name: string;
   neighborId: string;
   source: SpatialPoint;
   staging: SpatialPoint;
   createdAt: number;
-  requiredWood: typeof constructionWood | 1;
+  requiredWood: number;
   workMinutes: typeof constructionWorkMinutes;
   workedMinutes: number;
   status: "planned" | "cancelled" | "completed";
@@ -35,7 +39,7 @@ export type RoomConstruction = {
   cancelledAt?: number;
   material?: {
     itemId: string;
-    quantity: typeof constructionWood | 1;
+    quantity: number;
     state: "present" | "returned" | "consumed";
   };
   assignment?: { actorId: string; orderId: string } & (

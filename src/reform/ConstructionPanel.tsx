@@ -1,6 +1,12 @@
 import { useId, useState } from "react";
 import { Hammer } from "lucide-react";
-import { cellName } from "./house";
+import {
+  cellName,
+  maxRoomHeight,
+  roomWidth,
+  standardRoomHeight,
+  type PlannedRoomHeight,
+} from "./house";
 import {
   assignConstructionBuild,
   assignConstructionHaul,
@@ -24,7 +30,7 @@ import {
   unresolvedConstruction,
 } from "./housing/constructionTopology";
 import {
-  constructionWood,
+  roomConstructionWood,
   constructionWorkMinutes,
   type ConstructionResult,
   type RoomConstruction,
@@ -35,6 +41,14 @@ import { isStockQuantity, type Game } from "./sim";
 import { sameSpatialPoint } from "./spatial/route";
 
 export type RunConstruction = (result: ConstructionResult) => Promise<boolean>;
+
+function roomQuote(
+  height: PlannedRoomHeight,
+  wood: number,
+  minutes: number,
+): string {
+  return `${roomWidth} × ${height}マス（${roomWidth * height}マス）・木材${wood}・施工${minutes}分`;
+}
 
 export function ConstructionAction({
   label,
@@ -163,6 +177,13 @@ export function ConstructionCard({
     plan.kind === "insulation" ? constructionTitle(plan) : plan.name;
   const work = plan.assignment && housingStatus(game, plan.assignment.actorId);
   const status = constructionStatus(game, plan.id, work);
+  const quote =
+    plan.kind !== "insulation" &&
+    roomQuote(
+      plan.height ?? standardRoomHeight,
+      plan.requiredWood,
+      plan.workMinutes,
+    );
 
   if (!unresolvedConstruction(plan)) {
     return (
@@ -170,6 +191,7 @@ export function ConstructionCard({
         <summary>
           {title}・{status.phase}
         </summary>
+        {quote && <p>計画時の仕様　{quote}</p>}
         <p>{status.detail}</p>
         {plan.material && <p>{status.material}</p>}
       </details>
@@ -191,6 +213,7 @@ export function ConstructionCard({
     <article className="lf-construction-card" aria-label={title}>
       <h3>{title}</h3>
       <p className="lf-construction-stage">{status.phase}</p>
+      {quote && <p>計画内容　{quote}</p>}
       <p>{status.detail}</p>
       <dl className="lf-housing-status">
         <div>
@@ -304,6 +327,7 @@ export function ConstructionPanel({
   onGame: (game: Game) => Promise<boolean> | void;
 }) {
   const [name, setName] = useState("");
+  const [height, setHeight] = useState<PlannedRoomHeight>(standardRoomHeight);
   const [neighborId, setNeighbor] = useState("");
   const [stagingCell, setStaging] = useState("");
   const [error, setError] = useState("");
@@ -353,9 +377,6 @@ export function ConstructionPanel({
         <h2>一室を増築する</h2>
       </div>
       <p>
-        4 × 3マスの部屋・木材{constructionWood}・施工{constructionWorkMinutes}分
-      </p>
-      <p>
         自由備蓄の木材 <strong>{game.wood}</strong>
       </p>
       {!h ? (
@@ -386,12 +407,14 @@ export function ConstructionPanel({
                 await run(
                   createRoomConstruction(game, {
                     name,
+                    height,
                     neighborId: neighbor.id,
                     stagingCell: selectedCell,
                   }),
                 )
               ) {
                 setName("");
+                setHeight(standardRoomHeight);
                 setNeighbor("");
                 setStaging("");
               }
@@ -406,6 +429,23 @@ export function ConstructionPanel({
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
+                </label>
+                <label>
+                  増築する部屋の広さ
+                  <select
+                    value={height}
+                    onChange={(e) =>
+                      setHeight(e.target.value === "4" ? 4 : standardRoomHeight)
+                    }
+                  >
+                    {([standardRoomHeight, 4] as const).map((rows) => (
+                      <option key={rows} value={rows}>
+                        {rows === standardRoomHeight ? "標準" : "広め"}（
+                        {roomWidth} × {rows}
+                        ・木材{roomConstructionWood(rows)}）
+                      </option>
+                    ))}
+                  </select>
                 </label>
                 <label>
                   接続先
@@ -442,6 +482,20 @@ export function ConstructionPanel({
                       ))}
                   </select>
                 </label>
+                <div>
+                  <p aria-live="polite">
+                    {roomQuote(
+                      height,
+                      roomConstructionWood(height),
+                      constructionWorkMinutes,
+                    )}
+                  </p>
+                  <p>
+                    計画は無料です。移動・搬入には別に時間がかかります。完成後も木材
+                    {roomWidth}で1行ずつ、最大{maxRoomHeight}
+                    行まで広げられます。
+                  </p>
+                </div>
               </>
             )}
             <ConstructionAction label="計画する" disabled={disabled} />
