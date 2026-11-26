@@ -235,7 +235,11 @@ export function ActionCommands({
           game.housing &&
           actor.location === game.home &&
           choiceKey &&
-          hasChoice
+          hasChoice &&
+          (choiceKey !== "recover" ||
+            (!actor.danger &&
+              game.housing.unlocated[actor.person.id]?.reason !==
+                "regional-travel"))
         )
           return (
             <FacilityAction

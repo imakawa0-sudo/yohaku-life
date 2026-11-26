@@ -121,6 +121,8 @@ export type HousingGathering = {
   pairs: { actorIds: [string, string]; minutes: number }[];
 };
 
+export const recoveryUseMinutes = 65;
+
 export const gatheringUseMinutes = 20;
 export const gatheringWaitMinutes = 15;
 
