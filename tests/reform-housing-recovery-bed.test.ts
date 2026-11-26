@@ -8,6 +8,7 @@ import {
   setBedSleeper,
   setPreferredBed,
 } from "../src/reform/housing/bedPreference";
+import { housingStatus } from "../src/reform/housing/presentation";
 import { housingLinkId, housingSlotId } from "../src/reform/housing/topology";
 import { exportSlot, importSlot } from "../src/reform/library";
 import { makePersona } from "../src/reform/peopleModel";
@@ -260,6 +261,10 @@ test("blocked routes wait, and cancelling mid-walk or near the end releases the 
     cancelling.housing!.state.actors[p].order?.phase,
     "exiting-after-cancel",
   );
+  const { detail } = housingStatus(cancelling, p);
+  assert.match(detail, /この区間の終点で療養を取り消し、寝床の予約を解除/);
+  assert.doesNotMatch(detail, /材料/);
+  assert.match(inspectOrder(cancelling, h, "home-use", mat).disabled ?? "", /予約/);
   const stopped = advance(reload(cancelling, origin), 2);
   const last = advance(active, preview(origin, mat).minutes! - 1);
   for (const g of [stopped, order(last, p, "cancel")]) {
