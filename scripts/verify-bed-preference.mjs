@@ -503,6 +503,402 @@ async function normal(page) {
   );
 }
 
+async function savedGame(page) {
+  await settled(page);
+  return page.evaluate((key) => {
+    const book = JSON.parse(localStorage.getItem(key));
+    return book.slots.find((slot) => slot.id === book.activeId).game;
+  }, library.LIBRARY_KEY);
+}
+
+async function finishResidentTask(page, actorId) {
+  const before = await savedGame(page);
+  const task = before.actors.find((actor) => actor.person.id === actorId).task;
+  assert.ok(task);
+  for (let step = 0; step < 12; step++) {
+    await click(page, "次の行動完了まで進める");
+    const game = await savedGame(page);
+    if (!game.actors.find((actor) => actor.person.id === actorId).task)
+      return game;
+  }
+  assert.fail("指定した住人が予定を完了していません");
+}
+
+async function assignmentControls(page, resident, fixtureId) {
+  await openPolicy(page, resident);
+  const summary = page
+    .locator("summary")
+    .filter({ hasText: "寝床を使える住人" });
+  const details = summary.locator("..");
+  if (!(await details.evaluate((el) => el.open))) await summary.click();
+  await details
+    .getByRole("combobox", { name: "設定する寝床", exact: true })
+    .selectOption(fixtureId);
+  return {
+    details,
+    owner: details.getByRole("combobox", {
+      name: "利用できる住人",
+      exact: true,
+    }),
+    save: button(details, "利用設定を保存"),
+  };
+}
+
+async function sharedBedroom(page, width) {
+  await page.setViewportSize({ width, height: width === 320 ? 844 : 900 });
+  await click(page, "木工の二人");
+  await click(page, "この朝を始める");
+  const start = await savedGame(page);
+  const [first, second] = start.actors.map((a) => a.person);
+  const mat = "mat-1";
+  const roster = page.getByRole("group", { name: "住民を選ぶ" });
+  const pickResident = async (person) => {
+    await button(roster, person.name).click();
+    await settled(page);
+  };
+  await click(page, "住まい");
+  const houseEditor = page.getByRole("region", { name: "住まいの間取り" });
+  await button(houseEditor, "寝室").click();
+  for (const kind of ["bed", "shelf"]) {
+    await houseEditor
+      .getByLabel("新しく置く設備", { exact: true })
+      .selectOption(kind);
+    await button(houseEditor, "この部屋に置く").click();
+    await settled(page);
+  }
+  const furnished = await savedGame(page);
+  const room = furnished.house.rooms.find((r) => r.id === "bedroom");
+  const bed = room.fixtures.find((f) => f.kind === "bed");
+  const shelf = room.fixtures.find((f) => f.kind === "shelf");
+  assert.ok(bed && shelf);
+  const station = (fixtureId) => topology.housingSlotId(room.id, fixtureId, 0);
+  await click(page, "暮らし");
+  await pickResident(second);
+  await setBed(page, second.name, mat);
+  const baseline = await savedGame(page);
+  let policy = await assignmentControls(page, second.name, mat);
+  await expect(policy.owner).toHaveValue("");
+  await policy.owner.selectOption(first.id);
+  assert.deepEqual(await savedGame(page), baseline);
+  await policy.save.click();
+  const assigned = await savedGame(page);
+  assert.equal(assigned.time, start.time);
+  assert.equal(assigned.wood, furnished.wood);
+  assert.deepEqual(assigned.housing.controls, furnished.housing.controls);
+  await expect(policy.details.getByRole("status")).toContainText(
+    first.name + "専用",
+  );
+  await policy.owner.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  const policyBounds = await policy.details.boundingBox();
+  assert.ok(
+    policyBounds &&
+      policyBounds.x >= 0 &&
+      policyBounds.x + policyBounds.width <= width + 1,
+  );
+  assert.ok(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+    ),
+  );
+  const policyImage = resolve(output, "assigned-policy-" + width + ".png");
+  await page.screenshot({ path: policyImage });
+  report.screenshots.push({ width, path: policyImage });
+  await page.reload();
+  assert.deepEqual(await savedGame(page), assigned);
+  await click(page, "暮らし");
+  await pickResident(second);
+  await expect(restHint(page)).toContainText("ほかの住人専用の寝床です。");
+  await expect(restHint(page)).toContainText(fallbackCopy);
+  await restChoice(page).selectOption(mat);
+  await expect(restAction(page)).toBeDisabled();
+  await expect(restHint(page)).toHaveText("ほかの住人専用の寝床です。");
+  const blocked = restAction(page).locator("..");
+  await blocked.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  assert.ok(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+    ),
+  );
+  const capture = resolve(output, "assigned-unavailable-" + width + ".png");
+  await page.screenshot({ path: capture });
+  report.screenshots.push({ width, path: capture });
+  await restChoice(page).selectOption("");
+
+  // Keep the first resident in the living room while the second travels and reads.
+  await pickResident(first);
+  const commands = page.getByRole("region", { name: "行動の指示" });
+  await button(commands, "仕事").click();
+  await commands
+    .locator('button[data-kind="work"][data-target="wood"]')
+    .click();
+  await settled(page);
+  await pickResident(second);
+  await click(page, "寝室の入口へ移動");
+  const arrival = await finishResidentTask(page, second.id);
+  assert.equal(arrival.actors[1].room, room.id);
+  await button(commands, "生活").click();
+  const reading = button(commands, "好きなことをして休む");
+  await reading.locator("..").getByRole("combobox").selectOption(shelf.id);
+  await reading.click();
+  const readingStarted = await savedGame(page);
+  assert.equal(readingStarted.actors[1].task.station, station(shelf.id));
+  const read = await finishResidentTask(page, second.id);
+  assert.ok(read.actors[1].needs.fun > readingStarted.actors[1].needs.fun);
+
+  // The owner can book the mat, while the other resident books the other bed.
+  await pickResident(first);
+  await button(commands, "生活").click();
+  await restChoice(page).selectOption(mat);
+  await restAction(page).click();
+  await settled(page);
+  await pickResident(second);
+  await button(commands, "生活").click();
+  await restChoice(page).selectOption("");
+  await restAction(page).click();
+  const sleeping = await savedGame(page);
+  assert.deepEqual(
+    sleeping.actors.map((a) => a.task.station),
+    [station(mat), station(bed.id)],
+  );
+  await click(page, "5分進める");
+  const partial = await savedGame(page);
+  await page.reload();
+  assert.deepEqual(await savedGame(page), partial);
+  await click(page, "暮らし");
+  await pickResident(second);
+  for (const ownerId of [second.id, ""]) {
+    policy = await assignmentControls(page, second.name, mat);
+    const before = await savedGame(page);
+    await policy.owner.selectOption(ownerId);
+    assert.deepEqual(await savedGame(page), before);
+    await policy.save.click();
+    const after = await savedGame(page);
+    assert.deepEqual(after.actors, before.actors);
+    assert.deepEqual(after.housing.state, before.housing.state);
+    assert.equal(after.time, before.time);
+    await page.reload();
+    assert.deepEqual(await savedGame(page), after);
+    await click(page, "暮らし");
+    await pickResident(second);
+    policy = await assignmentControls(page, second.name, mat);
+    await expect(policy.owner).toHaveValue(ownerId);
+    await expect(policy.details).toContainText(
+      ownerId ? second.name + "専用" : "全員で共用",
+    );
+  }
+  await expect(
+    restChoice(page).locator('option[value="mat-1"]'),
+  ).not.toContainText("専用");
+  const cleared = await savedGame(page);
+  const finished = await finishResidentTask(page, first.id);
+  assert.equal(finished.actors[0].room, room.id);
+  assert.ok(finished.actors[0].needs.energy > cleared.actors[0].needs.energy);
+  report.normal.push({
+    width,
+    sharedBedroom: room.name,
+    owner: first.name,
+    other: second.name,
+    entrance: arrival.time,
+    readUntil: read.time,
+    beds: sleeping.actors.map((a) => a.task.station),
+    clearedAt: cleared.time,
+    finished: finished.time,
+  });
+}
+
+async function relocateAssignedBed(page, width) {
+  await page.setViewportSize({ width, height: width === 320 ? 844 : 900 });
+  await click(page, "木工の二人");
+  await click(page, "この朝を始める");
+  const initial = await savedGame(page);
+  const [owner, other] = initial.actors.map((a) => a.person);
+  await click(page, "住まい");
+  const editor = page.getByRole("region", { name: "住まいの間取り" });
+  await button(editor, "居間").click();
+  await editor
+    .getByRole("combobox", { name: "新しく置く設備", exact: true })
+    .selectOption("bed");
+  await button(editor, "この部屋に置く").click();
+  const furnished = await savedGame(page);
+  const bed = furnished.house.rooms
+    .find((r) => r.id === "living")
+    .fixtures.find((f) => f.kind === "bed");
+  assert.ok(bed);
+  assert.equal(bed.cell, 10);
+  assert.equal(furnished.wood, initial.wood - house.furnishings.bed.cost);
+  await click(page, "暮らし");
+  await setBed(page, owner.name, bed.id);
+  const policy = await assignmentControls(page, owner.name, bed.id);
+  await policy.owner.selectOption(owner.id);
+  await policy.save.click();
+  await settled(page);
+  await click(page, "住まい");
+  const toRoom = editor.getByRole("combobox", {
+    name: "移設先の部屋",
+    exact: true,
+  });
+  const toCell = editor.getByRole("combobox", {
+    name: "移設先のマス",
+    exact: true,
+  });
+  const move = button(editor, "この部屋へ移す");
+  async function locate(source, destination) {
+    await button(editor, source).click();
+    await button(editor, "布張りの寝台").click();
+    await toRoom.selectOption(destination);
+  }
+  await locate("居間", "bedroom");
+  await expect(toCell).toHaveValue("");
+  await expect(toCell.locator("option:checked")).toHaveText("自動で選ぶ");
+  await move.click();
+  const automatic = await savedGame(page);
+  assert.equal(
+    automatic.house.rooms
+      .find((r) => r.id === "bedroom")
+      .fixtures.find((f) => f.id === bed.id).cell,
+    11,
+  );
+  assert.equal(automatic.wood, furnished.wood);
+  assert.equal(automatic.time, initial.time);
+
+  // Reserve the living room's automatic destination floor as actual bundle storage.
+  const food = page.getByRole("region", { name: "食材の保管と運搬" });
+  await food
+    .getByRole("combobox", { name: "保管する部屋", exact: true })
+    .selectOption("living");
+  await food
+    .getByRole("combobox", { name: "保管する床", exact: true })
+    .selectOption("10");
+  await button(food, "野菜の一束を取り分ける").click();
+  const guarded = await savedGame(page);
+  assert.equal(guarded.ingredients, initial.ingredients - 2);
+  await locate("寝室", "living");
+  const storageReason =
+    "食材の一束がある間は、供給口と保管先の床を残してください。";
+  await expect(toCell).toHaveValue("");
+  await move.click();
+  await expect(editor.getByRole("alert")).toHaveText(storageReason);
+  await expect(page.locator(".rf-notice")).toContainText(storageReason);
+  assert.deepEqual(await savedGame(page), guarded);
+  await toCell.selectOption("10");
+  await move.click();
+  await expect(editor.getByRole("alert")).toHaveText(storageReason);
+  assert.deepEqual(await savedGame(page), guarded);
+  await toCell.selectOption("7");
+  await toRoom.selectOption("yard");
+  await expect(toCell).toHaveValue("");
+  await toRoom.selectOption("living");
+  await expect(toCell).toHaveValue("");
+  await toCell.selectOption("7");
+  const imagePath = resolve(output, "target-floor-" + width + ".png");
+  await toCell.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  assert.ok(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+    ),
+  );
+  await page.screenshot({ path: imagePath });
+  report.screenshots.push({ width, path: imagePath });
+  await move.click();
+  await expect(editor.getByRole("alert")).toHaveCount(0);
+  const moved = await savedGame(page);
+  const living = moved.house.rooms.find((r) => r.id === "living");
+  assert.deepEqual(
+    living.fixtures.find((f) => f.id === bed.id),
+    { ...bed, cell: 7 },
+  );
+  assert.equal(
+    moved.house.rooms
+      .find((r) => r.id === "bedroom")
+      .fixtures.some((f) => f.id === bed.id),
+    false,
+  );
+  assert.deepEqual(moved.housing.foodLogistics, guarded.housing.foodLogistics);
+  assert.equal(preference.getBedSleeper(moved, bed.id), owner.id);
+  assert.equal(preference.getPreferredBed(moved, owner.id), bed.id);
+  assert.deepEqual(
+    [moved.time, moved.wood, moved.ingredients],
+    [guarded.time, guarded.wood, guarded.ingredients],
+  );
+  await page.reload();
+  assert.deepEqual(await savedGame(page), moved);
+  await click(page, "暮らし");
+  await expect(
+    restChoice(page).locator('option[value="' + bed.id + '"]'),
+  ).toHaveText(/居間.*4列2行.*カヤ専用/);
+  await restChoice(page).selectOption(bed.id);
+  await expect(restAction(page)).toBeEnabled();
+  await button(
+    page.getByRole("group", { name: "住民を選ぶ" }),
+    other.name,
+  ).click();
+  await restChoice(page).selectOption(bed.id);
+  await expect(restAction(page)).toBeDisabled();
+  await expect(restHint(page)).toHaveText("ほかの住人専用の寝床です。");
+
+  // In a separate imported copy, park the second resident on another candidate floor.
+  if (width === 1280) {
+    const controlled = structuredClone(guarded);
+    controlled.housing.state.actors[other.id].position = {
+      kind: "at",
+      point: topology.housingPoint("living", 7),
+    };
+    assert.ok(sim.isGame(controlled));
+    const save = library.exportSlot({
+      id: "occupied-floor",
+      name: "住人が床に立っている試験",
+      game: controlled,
+      origin: initial,
+    });
+    await click(page, "手帳");
+    await page
+      .getByLabel("新版の保存ファイル")
+      .setInputFiles({
+        name: "occupied-floor.json",
+        mimeType: "application/json",
+        buffer: Buffer.from(save),
+      });
+    await expect
+      .poll(
+        async () =>
+          (await savedGame(page)).housing.state.actors[other.id].position,
+      )
+      .toEqual(controlled.housing.state.actors[other.id].position);
+    await click(page, "住まい");
+    await locate("寝室", "living");
+    await toCell.selectOption("7");
+    await move.click();
+    await expect(editor.getByRole("alert")).toHaveText(
+      other.name + "が立っている床は変更できません。",
+    );
+    assert.deepEqual(await savedGame(page), controlled);
+    await toCell.selectOption("6");
+    await move.click();
+    const recovered = await savedGame(page);
+    assert.equal(
+      recovered.house.rooms
+        .find((r) => r.id === "living")
+        .fixtures.find((f) => f.id === bed.id).cell,
+      6,
+    );
+    assert.deepEqual(
+      recovered.housing.state.actors[other.id].position,
+      controlled.housing.state.actors[other.id].position,
+    );
+    report.controlled.push("住人が立つ床への移設拒否と別の床への再試行");
+  }
+  report.normal.push({
+    width,
+    relocation: bed.id,
+    automaticBedroomCell: 11,
+    foodStorageLivingCell: 10,
+    chosenLivingCell: 7,
+    owner: owner.name,
+    wood: moved.wood,
+    time: moved.time,
+  });
+}
+
 async function controlledStart(page, key, manifest) {
   const fixture = manifest.cases[key];
   const imported = library.importSlot(
@@ -645,6 +1041,12 @@ try {
       args: ["--no-sandbox"],
     });
     report.status = "running-ui";
+    for (const width of [1280, 320]) {
+      await inContext(browser, html, (page) => sharedBedroom(page, width));
+      await inContext(browser, html, (page) =>
+        relocateAssignedBed(page, width),
+      );
+    }
     await inContext(browser, html, normal);
     for (const run of [competition, inaccessible, active]) {
       await inContext(browser, html, (page) => run(page, manifest));

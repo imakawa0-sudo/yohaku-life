@@ -2,6 +2,7 @@ import { homeColdProtection } from "./housing/coldProtection";
 import { useState } from "react";
 import {
   Backpack,
+  BedDouble,
   BookOpen,
   ChevronDown,
   Clock3,
@@ -31,7 +32,7 @@ import {
 } from "./peopleModel";
 import type { Skill } from "./peopleModel";
 import { HousingPanel, housingStageNames } from "./HousingPanel";
-import { BedPreferencePolicy } from "./BedPreferencePolicy";
+import { BedAccessPolicy, BedPreferencePolicy } from "./BedPreferencePolicy";
 import {
   FacilityAction,
   facilityChoiceKey,
@@ -869,6 +870,11 @@ export function Life({
               game={game}
               onGame={onGame}
             />
+            {game.housing && (
+              <Fold title="寝床を使える住人" icon={<BedDouble size={18} />}>
+                <BedAccessPolicy game={game} onGame={onGame} />
+              </Fold>
+            )}
           </Fold>
           <Fold title="時間の使い方" icon={<Clock3 size={18} />}>
             <p className="lf-note">暮らしを始めてからの累計</p>

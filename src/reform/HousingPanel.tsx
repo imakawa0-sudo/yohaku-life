@@ -1,6 +1,7 @@
 import { useId } from "react";
 import { Footprints } from "lucide-react";
 import { cellName, roomName } from "./house";
+import { residentLabel, roomLabel } from "./displayNames";
 import { GatheringPanel } from "./GatheringPanel";
 import { housingPointLabel } from "./housing/presentation";
 import { foodBundleStatus } from "./housing/foodPresentation";
@@ -252,7 +253,7 @@ export function HousingPanel({
           const allowed = h.controls.roomAccess[r.id] ?? people;
           return (
             <fieldset key={r.id}>
-              <legend>{r.name}</legend>
+              <legend>{roomLabel(game.house.rooms, r)}</legend>
               {game.actors.map((a) => (
                 <label key={a.person.id}>
                   <input
@@ -273,7 +274,7 @@ export function HousingPanel({
                       );
                     }}
                   />
-                  {a.person.name}
+                  {residentLabel(game, a)}
                 </label>
               ))}
             </fieldset>

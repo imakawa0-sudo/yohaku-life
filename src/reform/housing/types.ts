@@ -35,6 +35,7 @@ export type HousingRuntime = {
   nextGatheringId?: number;
   roomStay?: RoomStay;
   preferredBeds?: Record<string, string>;
+  bedSleepers?: Record<string, string>;
   state: SpatialState;
   unlocated: Record<
     string,

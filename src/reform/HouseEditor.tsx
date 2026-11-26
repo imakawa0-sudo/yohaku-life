@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { roomLabel } from "./displayNames";
 import {
   Armchair,
   Bath,
@@ -19,6 +20,7 @@ import {
   editHouse,
   fixtureKinds,
   furnishings,
+  furniturePlacementCells,
   needLabels,
   needs,
   service,
@@ -51,7 +53,7 @@ export function HouseEditor({
   allowRoomAddition = true,
 }: {
   house: House;
-  onChange: (h: House) => void;
+  onChange: (h: House) => void | string | Promise<void | string>;
   waterMinutes?: number;
   allowRoomAddition?: boolean;
 }) {
@@ -61,6 +63,11 @@ export function HouseEditor({
   const [kind, setKind] = useState<FixtureKind>("bath");
   const [moveTo, setMoveTo] = useState("living");
   const [fixtureId, setFixture] = useState("");
+  const [destination, setDestination] = useState<{
+    roomId: string;
+    fixtureId: string;
+    cell: number;
+  } | null>(null);
   const [tool, setTool] = useState<TileTool>("wall");
   const [square, setSquare] = useState(1);
   const [error, setError] = useState("");
@@ -75,13 +82,27 @@ export function HouseEditor({
   const moveRoom =
     house.rooms.find((r) => r.id === moveTo && r.id !== room.id) ??
     otherRooms[0];
+  const moveCells = useMemo(
+    () =>
+      moveRoom && fixture ? furniturePlacementCells(moveRoom, fixture) : [],
+    [moveRoom, fixture],
+  );
+  const targetCell =
+    destination &&
+    destination.roomId === moveRoom?.id &&
+    destination.fixtureId === fixture?.id
+      ? destination.cell
+      : undefined;
+  const unavailableCell =
+    targetCell !== undefined && !moveCells.includes(targetCell);
   const cells = Array.from({ length: room.width * room.height }, (_, i) => i);
   const activeSquare = square < cells.length ? square : 1;
-  const build = (edit: Parameters<typeof editHouse>[1]) => {
+  const build = async (edit: Parameters<typeof editHouse>[1]) => {
     try {
       const next = editHouse(house, edit);
       setError("");
-      onChange(next);
+      const reason = await onChange(next);
+      if (reason) setError(reason);
     } catch (e) {
       setError(
         e instanceof Error ? e.message : "間取りを変更できませんでした。",
@@ -90,6 +111,7 @@ export function HouseEditor({
   };
   function chooseRoom(id: string) {
     setRoom(id);
+    setDestination(null);
     setSquare(1);
     setFixture("");
     setError("");
@@ -132,7 +154,7 @@ export function HouseEditor({
               onClick={() => chooseRoom(r.id)}
             >
               <Icon size={16} />
-              {r.name}
+              {roomLabel(house.rooms, r)}
             </button>
           );
         })}
@@ -175,6 +197,9 @@ export function HouseEditor({
               >
                 <Icon size={15} />
                 {def.name}
+                {room.fixtures.some(
+                  (other) => other.id !== f.id && other.kind === f.kind,
+                ) && "（" + cellName(room, f.cell) + "）"}
               </button>
             );
           })}
@@ -239,21 +264,63 @@ export function HouseEditor({
               <select
                 aria-label="移設先の部屋"
                 value={moveRoom?.id ?? ""}
-                onChange={(e) => setMoveTo(e.target.value)}
+                onChange={(e) => {
+                  setMoveTo(e.target.value);
+                  setDestination(null);
+                  setError("");
+                }}
               >
                 {otherRooms.map((r) => (
                   <option key={r.id} value={r.id}>
-                    {r.name}
+                    {roomLabel(house.rooms, r)}
                   </option>
                 ))}
               </select>
             </label>
+            <label>
+              移設先のマス
+              <select
+                value={targetCell ?? ""}
+                disabled={!moveRoom}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setDestination(
+                    value && moveRoom
+                      ? {
+                          roomId: moveRoom.id,
+                          fixtureId: fixture.id,
+                          cell: Number(value),
+                        }
+                      : null,
+                  );
+                  setError("");
+                }}
+              >
+                <option value="">自動で選ぶ</option>
+                {moveRoom && unavailableCell && targetCell !== undefined && (
+                  <option value={targetCell} disabled>
+                    {cellName(moveRoom, targetCell)}（配置不可）
+                  </option>
+                )}
+                {moveRoom &&
+                  moveCells.map((cell) => (
+                    <option key={cell} value={cell}>
+                      {cellName(moveRoom, cell)}
+                    </option>
+                  ))}
+              </select>
+            </label>
             <button
               type="button"
-              disabled={!moveRoom}
+              disabled={!moveRoom || unavailableCell}
               onClick={() =>
                 moveRoom &&
-                build({ type: "move", id: fixture.id, room: moveRoom.id })
+                build({
+                  type: "move",
+                  id: fixture.id,
+                  room: moveRoom.id,
+                  cell: targetCell,
+                })
               }
             >
               この部屋へ移す

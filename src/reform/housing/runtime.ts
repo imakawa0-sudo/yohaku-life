@@ -2,7 +2,12 @@ import { validRoomStay } from "./roomStay";
 import { isFoodSupply } from "./foodSupplyValidation";
 import { isFoodLedger, validFoodRelations } from "./foodValidation";
 import { constructionTitle } from "./constructionTypes";
-import { isBedPreferences, prunePreferredBeds } from "./bedPreference";
+import {
+  isBedPreferences,
+  isBedSleepers,
+  pruneBedSleepers,
+  prunePreferredBeds,
+} from "./bedPreference";
 import {
   validConstructionRelations,
   isConstructionLedger,
@@ -377,6 +382,7 @@ export function isHousingRuntime(
       "gatherings",
       "nextGatheringId",
       "preferredBeds",
+      "bedSleepers",
       "roomStay",
       "controls",
       "state",
@@ -386,6 +392,8 @@ export function isHousingRuntime(
     value.version !== 1 ||
     (Object.hasOwn(value, "layoutVersion") && value.layoutVersion !== 2) ||
     (Object.hasOwn(value, "roomStay") && !validRoomStay(value.roomStay, game)) ||
+    (Object.hasOwn(value, "bedSleepers") &&
+      !isBedSleepers(value.bedSleepers, game)) ||
     (Object.hasOwn(value, "preferredBeds") &&
       !isBedPreferences(value.preferredBeds, game)) ||
     !isSpatialState(value.state) ||
@@ -704,6 +712,7 @@ function applyHouseShape(
     next.housing.controls = after.controls;
     Object.assign(next.housing.state, after.geometry);
     prunePreferredBeds(next);
+    pruneBedSleepers(next);
     if (!isHousingRuntime(next.housing, next))
       return {
         game,
