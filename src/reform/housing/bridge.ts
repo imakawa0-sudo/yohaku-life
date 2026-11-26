@@ -295,7 +295,7 @@ export function planHousing(
   g: Game,
   a: Actor,
   t: Task,
-  need?: Need,
+  need?: Need | null,
   water = 0,
   fixtureId?: string,
   bundleId?: string,
@@ -322,7 +322,7 @@ export function planHousing(
       t.total,
     );
   }
-  const cooking = t.kind === "work";
+  const work = t.kind === "work";
   const preferredFixtureId =
     t.kind === "need" && need === "energy" && fixtureId === undefined
       ? getPreferredBed(g, id)
@@ -346,7 +346,7 @@ export function planHousing(
   for (const slot of Object.values(slots)) {
     if (fixtureId !== undefined && slot.fixtureId !== fixtureId) continue;
     const f = furnishings[slot.kind];
-    if (f.need !== need || (cooking && slot.seat !== 0)) continue;
+    if (f.need !== need || (work && slot.seat !== 0)) continue;
     const preferred = slot.fixtureId === preferredFixtureId;
     if (
       slot.id === claimedSeat ||
@@ -369,7 +369,10 @@ export function planHousing(
       continue;
     }
     const use =
-      f.time + (cooking ? t.total - 10 : slot.kind === "basin" ? 2 * water : 0);
+      slot.kind === "workbench"
+        ? t.total
+        : f.time +
+          (work ? t.total - 10 : slot.kind === "basin" ? 2 * water : 0);
     const minutes = use + route.minutes;
     if (
       !best ||
@@ -395,7 +398,7 @@ export function planHousing(
   t.station = slot.id;
   t.room = slot.roomId;
   t.total = t.remaining = use;
-  if (!cooking)
+  if (!work)
     t.label =
       need === "social"
         ? furnishings[slot.kind].name + "で過ごす"

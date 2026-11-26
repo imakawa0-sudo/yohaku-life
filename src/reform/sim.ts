@@ -23,6 +23,7 @@ import {
   cookingStation,
   furnishings,
   initialHouse,
+  isBasicWoodwork,
   isHouse,
   service,
 } from "./house";
@@ -87,7 +88,8 @@ export type ActionPreview = {
   facility?: HousingUsePreview;
   foodBundle?: HousingProposal["foodBundle"];
 };
-export type CookingFacilitySelection = { fixtureId: string; bundleId?: string };
+export type WorkFacilitySelection = { fixtureId: string; bundleId?: string };
+export type CookingFacilitySelection = WorkFacilitySelection;
 export interface ActionOption extends ActionPreview {
   kind: string;
   label: string;
@@ -515,16 +517,17 @@ function preview(p: Proposal | string): ActionPreview {
 }
 const cookingRecipes = ["cook", "cook:easy", "cook:hard", "cook:master"];
 
-function cookingSelectionReason(
+function workFacilitySelectionReason(
   g: Game,
   a: Actor,
   kind: string,
   target: string | undefined,
-  selection: CookingFacilitySelection | undefined,
+  selection: WorkFacilitySelection | undefined,
 ): string | undefined {
   if (selection === undefined) return;
-  if (kind !== "work" || !cookingRecipes.includes(target!))
-    return "料理の種類を選んだ指示にのみ設備を指定できます。";
+  const woodworking = isBasicWoodwork(target);
+  if (kind !== "work" || (!woodworking && !cookingRecipes.includes(target!)))
+    return "基本の木工か料理の指示で設備を指定できます。";
   if (a.location !== g.home || !g.housing)
     return "自宅で住居の移動を使う暮らしを選んでください。";
   if (
@@ -534,7 +537,7 @@ function cookingSelectionReason(
     typeof selection.fixtureId !== "string" ||
     !selection.fixtureId
   )
-    return "料理に使う設備を指定してください。";
+    return "使う設備を指定してください。";
   if (
     Object.hasOwn(selection, "bundleId") &&
     (typeof selection.bundleId !== "string" ||
@@ -546,6 +549,10 @@ function cookingSelectionReason(
     .flatMap((room) => room.fixtures)
     .find((f) => f.id === selection.fixtureId);
   if (!fixture) return "選んだ設備がありません。";
+  if (woodworking)
+    return fixture.kind === "workbench"
+      ? undefined
+      : "木工には木工台を選んでください。";
   if (fixture.kind !== "hearth" && fixture.kind !== "kitchen")
     return "料理に使える設備を選んでください。";
 }
@@ -555,7 +562,7 @@ function plan(
   a: Actor,
   kind: string,
   target?: string,
-  selection?: CookingFacilitySelection,
+  selection?: WorkFacilitySelection,
 ): Proposal | string {
   const atHome = a.location === g.home;
   let fixtureId = selection?.fixtureId;
@@ -568,7 +575,9 @@ function plan(
     if (!fixture) return "選んだ設備がありません。";
     fixtureId = fixture.id;
     kind = "need";
-    target = furnishings[fixture.kind].need;
+    const need = furnishings[fixture.kind].need;
+    if (need === null) return "木工台は基本の木工の指示で選んでください。";
+    target = need;
   }
   const stock = account(g, a);
   const place = places(g.world).find((p) => p.id === a.location)!;
@@ -689,6 +698,8 @@ function plan(
     );
     if (skill === "cook" && !atHome) minutes += place.water + 8;
     const t = task(g, a, kind, jobNames[skill][tier], minutes, "work", target);
+    if (skill === "wood" && selection)
+      return planHousing(g, a, t, null, 0, selection.fixtureId);
     if (skill === "cook") {
       if (atHome) {
         if (g.housing) {
@@ -1009,12 +1020,12 @@ export function order(
   id: string,
   kind: string,
   target?: string,
-  selection?: CookingFacilitySelection,
+  selection?: WorkFacilitySelection,
 ): Game {
   if (!find(g, id)) return g;
   const next = structuredClone(g);
   const a = find(next, id)!;
-  const selectionReason = cookingSelectionReason(
+  const selectionReason = workFacilitySelectionReason(
     next,
     a,
     kind,
@@ -1062,11 +1073,11 @@ export function inspectOrder(
   id: string,
   kind: string,
   target?: string,
-  selection?: CookingFacilitySelection,
+  selection?: WorkFacilitySelection,
 ): ActionPreview {
   const current = find(g, id);
   if (!current) return { disabled: "住人が見つかりません。" };
-  const selectionReason = cookingSelectionReason(
+  const selectionReason = workFacilitySelectionReason(
     g,
     current,
     kind,
@@ -1405,6 +1416,8 @@ function finishWork(g: Game, a: Actor, t: Task): string {
       result =
         "雨戸の断熱改修が完成した。初霜を過ぎても家で体力を消耗しにくくなった。";
     } else {
+      if (!isStockQuantity(bag.wood + yieldWood))
+        return "木材を置く空きがないため、木工を中断しました。";
       bag.wood += yieldWood;
       result = "木材" + yieldWood + "を整えた。";
     }
@@ -2091,7 +2104,11 @@ export function isGame(value: unknown): value is Game {
       const fixtureId = t.station.split("#")[0];
       if (
         !house.rooms.some(
-          (r) => r.id === t.room && r.fixtures.some((f) => f.id === fixtureId),
+          (r) =>
+            r.id === t.room &&
+            r.fixtures.some(
+              (f) => f.id === fixtureId && f.kind !== "workbench",
+            ),
         )
       )
         return false;

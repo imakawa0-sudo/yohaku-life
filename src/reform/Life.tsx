@@ -223,14 +223,26 @@ export function ActionCommands({
     <div className="lf-command-list">
       {selected.map((command) => {
         const choiceKey = facilityChoiceKey(command);
-        if (game.housing && actor.location === game.home && choiceKey)
+        const selectedId = choiceKey && facilitySelection?.choices[choiceKey];
+        const hasChoice =
+          choiceKey !== "wood" ||
+          selectedId ||
+          game.house.rooms.some((room) =>
+            room.fixtures.some((fixture) => fixture.kind === "workbench"),
+          );
+        if (
+          game.housing &&
+          actor.location === game.home &&
+          choiceKey &&
+          hasChoice
+        )
           return (
             <FacilityAction
               key={choiceKey}
               game={game}
               actor={actor}
               command={command}
-              selectedId={facilitySelection?.choices[choiceKey] ?? ""}
+              selectedId={selectedId ?? ""}
               selectedBundleId={facilitySelection?.bundleId}
               onSelectBundle={facilitySelection?.chooseBundle}
               onSelect={(id) => facilitySelection?.choose(choiceKey, id)}
